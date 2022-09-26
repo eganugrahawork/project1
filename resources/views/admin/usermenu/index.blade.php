@@ -9,12 +9,14 @@
             {{ $title }}
         </div>
         <div class="success-message" data-successmessage="{{ session('success') }}"></div>
+        <div class="fail-message" data-failmessage="{{ session('fail') }}"></div>
 
         <div class="card-body">
             <div class="py-2">
                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#storeModal">
                     Add Menu
                   </button>
+                  <a href="/admin/configuration/submenu" class="btn btn-sm btn-success">Submenues</a>
             </div>
                 <div class="table-responsive">
                     <table id="example" class="table table-bordered" style="width:100%">

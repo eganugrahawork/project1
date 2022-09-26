@@ -70,7 +70,7 @@
                     <div class="col-lg-6">
                         <select class="form-select form-select-sm"  name="id_menu" required>
                             @foreach ($menu as $m )
-                            <option value="{{ $m->id }}">{{ $m->menu }}</option>
+                                <option value="{{ $m->id }}">{{ $m->menu }}</option>
                             @endforeach
                         </select>
                     </div>

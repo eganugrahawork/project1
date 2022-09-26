@@ -55,12 +55,14 @@ Route::middleware(['auth'])->controller(UserRoleController::class)->group(functi
     Route::get('admin/configuration/userrole/delete/{id}', 'destroy');
     Route::get('admin/configuration/useraccessmenu/{id}', 'viewuseraccess')->name('viewaccess');
     Route::post('/admin/configuration/useraccessmenu/change', 'changeaccess')->name('changeaccess');
+    Route::post('/admin/configuration/useraccessmenu/updateaccess', 'updateaccess')->name('changeaccess');
 });
 //UserAccessMenu End
 
 //Users Start
 Route::middleware(['auth'])->controller(UsersController::class)->group(function(){
     Route::get('admin/users', 'index');
+    Route::get('admin/users/show/{id}', 'show');
     Route::get('admin/users/create', 'create');
     Route::post('admin/users/store', 'store');
     Route::get('admin/users/edit/{id}', 'edit');

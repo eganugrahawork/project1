@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\UserAccessMenu;
 use App\Models\UserMenu;
 use App\Models\UserRole;
-use App\Models\UserSubmenu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use PDO;
@@ -17,12 +16,7 @@ class UserRoleController extends Controller
     public function __construct()
     {
         $this->middleware(function($request, $next){
-            $submenu = UserSubmenu::where(['urlsubmenu' => '/admin/configuration/menu'])->first();
-            $id_role = auth()->user()->id_role;
-
-            $check = UserAccessMenu::where(['id_role' => $id_role, 'id_menu' => $submenu->usermenu->id])->first();
-
-            if($check){
+            if(auth()->user()->userrole->role === "Super Admin"){
                 return $next($request);
             }else{
                 return redirect('/blocked');
@@ -55,8 +49,9 @@ class UserRoleController extends Controller
     }
     public function viewuseraccess(Request $request){
         // dd($request->id);
+        $role = UserRole::where(['id' =>$request->id])->first();
         $menu = UserMenu::all();
-        return view('admin.userrole.useraccess',['title'=> 'User Access',  'menu' => $menu, 'id_role' => $request->id]);
+        return view('admin.userrole.useraccess',['title'=> 'User Access',  'menu' => $menu, 'id_role' => $request->id,'role'=> $role->role]);
 
     }
 
@@ -78,4 +73,20 @@ class UserRoleController extends Controller
 
         return ;
     }
+
+    public function updateaccess(Request $request){
+        $check = UserAccessMenu::where(['id_role' => $request->id_role, 'id_menu' =>$request->id_menu])->first();
+
+        if($check == null && $request->status = 1){
+            UserAccessMenu::create(['id_role' => $request->id_role, 'id_menu' =>$request->id_menu]);
+            return redirect()->back()->with('success', 'Access changed');
+        }elseif($check && $request->status == 0){
+            UserAccessMenu::where(['id_role' => $request->id_role, 'id_menu' => $request->id_menu])->delete();
+            return redirect()->back()->with('success', 'Access changed');
+        }else{
+            return redirect()->back()->with('fail', 'You didnt make a change !');
+        }
+
+    }
+
 }

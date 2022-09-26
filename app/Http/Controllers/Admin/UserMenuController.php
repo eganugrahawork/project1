@@ -15,13 +15,7 @@ class UserMenuController extends Controller
     public function __construct()
     {
         $this->middleware(function($request, $next){
-
-            $submenu = UserSubmenu::where(['urlsubmenu' => '/admin/configuration/menu'])->first();
-            $id_role = auth()->user()->id_role;
-
-            $check = UserAccessMenu::where(['id_role' => $id_role, 'id_menu' => $submenu->usermenu->id])->first();
-
-            if($check){
+            if(auth()->user()->userrole->role === "Super Admin"){
                 return $next($request);
             }else{
                 return redirect('/blocked');

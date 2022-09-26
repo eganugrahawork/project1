@@ -167,5 +167,10 @@ class UsersController extends Controller
         return redirect()->back()->with('success', 'User berhasil dihapus');
     }
 
+    public function show(Request $request){
+        $user = User::where(['id' => $request->id])->first();
+
+        return view('admin.users.show', ['title' => 'Profile', 'user'=> $user]);
+    }
 
 }

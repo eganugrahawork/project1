@@ -11,11 +11,16 @@
         <div class="success-message" data-successmessage="{{ session('success') }}"></div>
 
         <div class="card-body">
+            @if (auth()->user()->id_role == 1)
             <div class="py-2">
                 <a class="btn btn-sm btn-primary" href="/admin/users/create">
                     Add User
                 </a>
-            </div>
+                        <a class="btn btn-sm btn-success" href="/admin/configuration/menu">
+                            Menues Page
+                        </a>
+                    </div>
+                    @endif
                 <div class="table-responsive">
                     <table id="example" class="table table-bordered" style="width:100%">
                         <thead>
@@ -39,14 +44,20 @@
                                     </td>
                                     <td class="align-middle">{{ $usr->userdetail->nama }}</td>
                                     <td class="align-middle">{{ $usr->username }}</td>
-                                    <td class="align-middle">{{ $usr->userrole->role }}</td>
+                                    <td class="align-middle">
+                                            {{ $usr->userrole->role }}
+                                            @if (auth()->user()->userrole->role === 'Super Admin')
+                                                <a class="btn btn-sm btn-outline-warning" href="/admin/configuration/useraccessmenu/{{ $usr->id_role }}"><span data-feather="edit"></span></a>
+                                            @endif
+                                    </td>
                                     <td class="align-middle">{{ $usr->userdetail->lokasi }}</td>
                                     <td class="align-middle"></td>
                                     <td class="align-middle">
+                                        <a href="/admin/users/show/{{ $usr->id }}" class="btn btn-sm btn-primary">View</a>
+                                        @if (auth()->user()->id_role == 1)
                                         <a class="btn btn-sm btn-warning text-white" href="/admin/users/edit/{{ $usr->id }}">
                                         Edit
                                         </a>
-                                        @if (auth()->user()->id_role == 1)
                                         <a class="btn btn-sm btn-danger button-delete" href="/admin/users/delete/{{ $usr->id }}">Delete</a>
                                         @endif
                                     </td>

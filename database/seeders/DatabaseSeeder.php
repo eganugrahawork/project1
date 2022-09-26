@@ -55,38 +55,12 @@ class DatabaseSeeder extends Seeder
             'url' => '/admin/dashboard'
         ]);
         UserMenu::create([
-            'menu' => 'Configuration',
-            'icon' => 'lock',
-            'url' => '',
-            'is_submenu' => 1
-        ]);
-        UserMenu::create([
             'menu' => 'Users',
             'icon' => 'users',
             'url' => '/admin/users'
         ]);
-        UserMenu::create([
-            'menu' => 'Profile',
-            'icon' => 'user',
-            'url' => '/admin/profile'
-        ]);
 
-        UserSubmenu::create([
-            'id_menu' => 2,
-            'submenu' => 'Menu',
-            'urlsubmenu' => '/admin/configuration/menu'
-        ]);
 
-        UserSubmenu::create([
-            'id_menu' => 2,
-            'submenu' =>'Submenu',
-            'urlsubmenu'=>'/admin/configuration/submenu'
-        ]);
-        UserSubmenu::create([
-            'id_menu' => 2,
-            'submenu' =>'Role',
-            'urlsubmenu'=>'/admin/configuration/userrole'
-        ]);
 
         UserAccessMenu::create([
           'id_role' =>1,
@@ -96,34 +70,10 @@ class DatabaseSeeder extends Seeder
           'id_role' =>1,
           'id_menu' => 2,
         ]);
-        UserAccessMenu::create([
-          'id_role' =>1,
-          'id_menu' => 3,
-        ]);
-        UserAccessMenu::create([
-          'id_role' =>1,
-          'id_menu' => 4,
-        ]);
 
         UserAccessMenu::create([
           'id_role' =>2,
           'id_menu' => 1,
-        ]);
-        UserAccessMenu::create([
-          'id_role' =>2,
-          'id_menu' => 3,
-        ]);
-        UserAccessMenu::create([
-          'id_role' =>2,
-          'id_menu' => 4,
-        ]);
-        UserAccessMenu::create([
-          'id_role' =>3,
-          'id_menu' => 1,
-        ]);
-        UserAccessMenu::create([
-          'id_role' =>3,
-          'id_menu' => 4,
         ]);
 
         UserRole::create([
