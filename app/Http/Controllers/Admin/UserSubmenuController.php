@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\UserAccessMenu;
+use App\Models\UserActivity;
 use App\Models\UserMenu;
 use App\Models\UserSubmenu;
 use Illuminate\Http\Request;
@@ -31,9 +32,7 @@ class UserSubmenuController extends Controller
         $submenu = UserSubmenu::all();
         // dd($submenu);
         $menu = UserMenu::where(['is_submenu' => 1])->get();
-        if(count($menu) < 1){
-            return redirect()->back()->with('fail', 'Belum ada menu yang memiliki submenu');
-        }
+
 
         return view('admin.usersubmenu.index', ['title' => 'Configuration Submenu', 'submenu' => $submenu, 'menu'=>$menu]);
     }
@@ -56,8 +55,17 @@ class UserSubmenuController extends Controller
      */
     public function store(Request $request)
     {
+
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Submenu",
+            'aktivitas' => "Tambah",
+            'keterangan' => "Tambah Submenu  $request->submenu"
+        ]);
+
         UserSubmenu::create([
             'submenu' => $request->submenu,
+            'icon' => $request->icon,
             'id_menu' => $request->id_menu,
             'urlsubmenu' => $request->urlsubmenu
         ]);
@@ -97,11 +105,43 @@ class UserSubmenuController extends Controller
      */
     public function update(Request $request)
     {
+        $oldSubmenu = UserSubmenu::where(['id'=>$request->id])->first();
+        if($oldSubmenu->icon !== $request->icon && $oldSubmenu->submenu === $request->submenu){
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Submenu",
+            'aktivitas' => "Ubah",
+            'keterangan' => "Ubah Icon $oldSubmenu->icon menjadi $request->icon"
+        ]);
+        }elseif($oldSubmenu->submenu !== $request->submenu){
+            UserActivity::create([
+                'id_user' => auth()->user()->id,
+                'menu' => "Submenu",
+                'aktivitas' => "Ubah",
+                'keterangan' => "Ubah Submenu $oldSubmenu->submenu menjadi $request->submenu etc."
+            ]);
+        }elseif($oldSubmenu->urlsubmenu !== $request->urlsubmenu && $oldSubmenu->submenu === $request->submenu){
+            UserActivity::create([
+                'id_user' => auth()->user()->id,
+                'menu' => "Submenu",
+                'aktivitas' => "Ubah",
+                'keterangan' => "Ubah Url $oldSubmenu->urlsubmenu menjadi $request->urlsubmenu"
+            ]);
+        }elseif($oldSubmenu->id_menu !== $request->id_menu && $oldSubmenu->submenu !== $request->submenu){
+            UserActivity::create([
+                'id_user' => auth()->user()->id,
+                'menu' => "Submenu",
+                'aktivitas' => "Ubah",
+                'keterangan' => "Ubah Id_menu $oldSubmenu->id_menu menjadi $request->id_menu"
+            ]);
+        }
         UserSubmenu::where(['id' => $request->id])->update([
             'submenu' => $request->submenu,
+            'icon' => $request->icon,
             'id_menu' => $request->id_menu,
             'urlsubmenu' => $request->urlsubmenu
         ]);
+
 
         return redirect()->back()->with('success', 'Submenu diubah');
     }
@@ -114,7 +154,21 @@ class UserSubmenuController extends Controller
      */
     public function destroy(Request $request)
     {
+        $oldSubmenu = UserSubmenu::where(['id'=>$request->id])->first();
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Submenu",
+            'aktivitas' => "Hapus",
+            'keterangan' => "Hapus Submenu  $oldSubmenu->submenu"
+        ]);
         UserSubmenu::destroy(['id'=>$request->id]);
         return redirect()->back()->with('success', 'Submenu dihapus');
+    }
+
+    public function editmodal(Request $request) {
+
+       $submenu = UserSubmenu::where(['id' => $request->id])->first();
+       $menu = UserMenu::where(['is_submenu' => 1])->get();
+       return view('admin.usersubmenu.editmodal', ['submenu' => $submenu, 'menu' => $menu]);
     }
 }

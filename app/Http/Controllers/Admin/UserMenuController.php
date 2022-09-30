@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lokasi;
 use App\Models\UserAccessMenu;
+use App\Models\UserActivity;
 use App\Models\UserMenu;
+use App\Models\UserRole;
 use App\Models\UserSubmenu;
 use Illuminate\Http\Request;
 
@@ -31,7 +34,10 @@ class UserMenuController extends Controller
     public function index()
     {
         $menu = UserMenu::all();
-        return view('admin.usermenu.index', ['title'=> 'Configuration Menu', 'menu' => $menu]);
+        $lokasi = Lokasi::all();
+        $submenu = UserSubmenu::all();
+        $role = UserRole::all();
+        return view('admin.usermenu.index', ['title'=> 'Configuration Menu', 'menu' => $menu, 'submenu' => $submenu,'role'=>$role, 'lokasi'=>$lokasi]);
     }
 
     /**
@@ -51,17 +57,25 @@ class UserMenuController extends Controller
      */
     public function store(Request $request)
     {
-        $is_submenu = 0;
+        $is_submenu = null;
+        $url = $request->url;
         if($request->is_submenu){
             $is_submenu = 1;
+            $url=null;
         }
 
         $data = [
             'menu' => $request->menu,
-            'icon' => $request->icon,
-            'url' => $request->url,
+            'url' => $url,
             'is_submenu' => $is_submenu
         ];
+
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Menu",
+            'aktivitas' => "Tambah",
+            'keterangan' => "Tambah Menu  ". $request->menu
+        ]);
 
         UserMenu::create($data);
         $menu = UserMenu::latest()->first();
@@ -100,17 +114,39 @@ class UserMenuController extends Controller
      */
     public function update(Request $request)
     {
-        $is_submenu = 0;
+
         if($request->is_submenu){
-            $is_submenu = 1;
+
+            $data = [
+                'menu' => $request->menu
+            ];
+        }else{
+
+            $data = [
+                'menu' => $request->menu,
+                'url' => $request->url
+            ];
         }
 
-        $data = [
-            'menu' => $request->menu,
-            'icon' => $request->icon,
-            'url' => $request->url,
-            'is_submenu' => $is_submenu
-        ];
+        $menues=  UserMenu::where(['id'=> $request->id])->first();
+
+        if($request->url == $menues->url){
+
+            UserActivity::create([
+                'id_user' => auth()->user()->id,
+                'menu' => "Menu",
+                'aktivitas' => "Ubah",
+                'keterangan' => "Ubah Menu $menues->menu menjadi $request->menu "
+            ]);
+        }else{
+            UserActivity::create([
+                'id_user' => auth()->user()->id,
+                'menu' => "Menu",
+                'aktivitas' => "Ubah",
+                'keterangan' => "Ubah Url $menues->url menjadi $request->url "
+            ]);
+
+        }
 
         UserMenu::where(['id' => $request->id])->update($data);
         return redirect('/admin/configuration/menu')->with('success', 'Menu diubah');
@@ -124,11 +160,25 @@ class UserMenuController extends Controller
      */
     public function destroy(Request $request)
     {
+      $menues=  UserMenu::where(['id'=> $request->id])->first();
+
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Menu",
+            'aktivitas' => "Hapus",
+            'keterangan' => "Hapus Menu  ". $menues->menu
+        ]);
         UserMenu::destroy(['id' => $request->id]);
         $uam = UserAccessMenu::where(['id_menu' => $request->id])->get();
         foreach($uam as $uam){
             UserAccessMenu::destroy(['id'=> $uam->id]);
         }
         return redirect('/admin/configuration/menu')->with('success', 'Menu dihapus');
+    }
+
+    public function editmodal(Request $request){
+        $menu = UserMenu::where(['id' => $request->id])->first();
+
+        return view('admin.usermenu.editmodal', ['menu' => $menu]);
     }
 }

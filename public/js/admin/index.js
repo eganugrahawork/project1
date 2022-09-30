@@ -41,11 +41,6 @@ $('.button-delete').on('click', function(e){
         reverseButtons: true
       }).then((result) => {
         if (result.isConfirmed) {
-          swalWithBootstrapButtons.fire(
-            'Berhasil!',
-            'Data berhasil dihapus.',
-            'success'
-          )
           document.location.href = href;
         } else if (
           /* Read more about handling dismissals below */

@@ -16,7 +16,6 @@ class CreateUserMenusTable extends Migration
         Schema::create('user_menus', function (Blueprint $table) {
             $table->id();
             $table->string('menu');
-            $table->string('icon');
             $table->string('url')->nullable();
             $table->boolean('is_submenu')->nullable();
             $table->timestamps();

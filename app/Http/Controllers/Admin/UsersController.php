@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lokasi;
 use App\Models\User;
 use App\Models\UserAccessMenu;
+use App\Models\UserActivity;
 use App\Models\UserDetail;
 use App\Models\UserMenu;
 use App\Models\UserRole;
@@ -41,8 +43,9 @@ class UsersController extends Controller
         }else{
             $user = User::where('id_role', '!=', 1)->get();
         }
-
-        return view('admin.users.index', ['title' => 'Users', 'users' => $user]);
+        $role = UserRole::all();
+        $lokasi = Lokasi::all();
+        return view('admin.users.index', ['title' => 'Users', 'users' => $user, 'role' => $role, 'lokasi' => $lokasi]);
     }
 
     public function create(){
@@ -51,17 +54,7 @@ class UsersController extends Controller
     }
 
     public function store(Request $request){
-        $request->validate([
-            'nama' => 'required|min:3',
-            'email' => 'required|unique:users,email',
-            'username' => 'required|unique:users,username',
-            'alamat' => 'required|min:4',
-            'nokontak' => 'required|unique:user_details,nokontak',
-            'id_role' => 'required',
-            'lokasi' => 'required',
-            'image' => 'image|file|max:1024',
-            'password' => 'required|min:8'
-        ]);
+
 
         if($request->file('image')){
             $request->image = $request->file('image')->store('img-users');
@@ -91,6 +84,12 @@ class UsersController extends Controller
 
         User::create($users);
 
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Users",
+            'aktivitas' => "Tambah",
+            'keterangan' => "Tambah Data ". $request->email
+        ]);
         return redirect('/admin/users')->with('success', 'User Baru ditambahkan');
 
     }
@@ -103,21 +102,11 @@ class UsersController extends Controller
 
     public function update(Request $request){
         $onUser = User::where(['id' => $request->id])->first();
-        $request->validate([
-            'nama' => 'required|min:3',
-            'email' => 'required|unique:users,email,'.$onUser->id,
-            'username' => 'required|unique:users,username,'.$onUser->id,
-            'alamat' => 'required|min:4',
-            'nokontak' => 'required|unique:user_details,nokontak,'.$onUser->id_detail_user,
-            'id_role' => 'required',
-            'lokasi' => 'required',
-            'image' => 'image|file|max:1024'
-        ]);
+
 
         $image = $onUser->userdetail->image;
         $password = $onUser->password;
 
-        // dd($request);
         if($request->file('image')){
             if($request->oldimage !== 'img-users/default.png'){
                 Storage::delete($request->oldimage);
@@ -137,17 +126,25 @@ class UsersController extends Controller
             'lokasi' => $request->lokasi
         ];
 
-        UserDetail::where(['id'=> $request->id_detail_user])->update($user_detail);
+        UserDetail::where(['id'=>$onUser->id_detail_user])->update($user_detail);
 
         $users = [
             'email' => $request->email,
             'username' => $request->username,
-            'id_detail_user' => $request->id,
+            'id_detail_user' => $onUser->id_detail_user,
             'id_role' => $request->id_role,
             'password' => $password
         ];
 
         User::where(['id'=>$request->id])->update($users);
+
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Users",
+            'aktivitas' => "Ubah",
+            'keterangan' => "Ubah Data ". $request->email
+        ]);
+
 
         return redirect('/admin/users')->with('success', 'User Berhasil di Update');
 
@@ -162,8 +159,14 @@ class UsersController extends Controller
 
         UserDetail::destroy(['id' => $user->id_detail_user]);
 
-        User::destroy(['id' =>$request->id]);
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Users",
+            'aktivitas' => "Hapus",
+            'keterangan' => "Hapus Data ". $user->email
+        ]);
 
+        User::destroy(['id' =>$request->id]);
         return redirect()->back()->with('success', 'User berhasil dihapus');
     }
 
@@ -173,4 +176,34 @@ class UsersController extends Controller
         return view('admin.users.show', ['title' => 'Profile', 'user'=> $user]);
     }
 
+    public function checkusername(Request $request){
+
+        $user = User::where(['username'=> $request->value])->first();
+
+        if($user){
+            return response()->json(['success'=>false]);
+        }else{
+            return response()->json(['success'=>true]);
+        }
+
+
+    }
+    public function checkemail(Request $request){
+
+        $user = User::where(['email'=> $request->value])->first();
+
+        if($user){
+            return response()->json(['success'=>false]);
+        }else{
+            return response()->json(['success'=>true]);
+        }
+    }
+
+    public function editmodal(Request $request){
+        $user = User::where(['id' => $request->id])->first();
+        $lokasi = Lokasi::all();
+        $role = UserRole::all();
+        return view('admin.users.editmodal', ['user' => $user, 'role' => $role, 'lokasi'=>$lokasi]);
+
+    }
 }

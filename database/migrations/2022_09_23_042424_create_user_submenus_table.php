@@ -16,6 +16,7 @@ class CreateUserSubmenusTable extends Migration
         Schema::create('user_submenus', function (Blueprint $table) {
             $table->id();
             $table->integer('id_menu');
+            $table->string('icon');
             $table->string('submenu');
             $table->string('urlsubmenu');
             $table->timestamps();

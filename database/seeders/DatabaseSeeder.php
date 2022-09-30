@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Lokasi;
 use App\Models\User;
 use App\Models\UserAccessMenu;
 use App\Models\UserDetail;
@@ -39,24 +40,22 @@ class DatabaseSeeder extends Seeder
             'image' => 'img-users/default.png',
             'alamat' => 'tasik',
             'nokontak' => '08975568102',
-            'lokasi' => 'wilayah1'
+            'lokasi' => 'Wilayah Selatan'
         ]);
         UserDetail::create([
             'nama' => 'Dwi Wahyu',
             'image' => 'img-users/default.png',
             'alamat' => 'bandung',
             'nokontak' => '08975568101',
-            'lokasi' => 'wilayah2'
+            'lokasi' => 'Wilayah Utara'
         ]);
 
         UserMenu::create([
             'menu' => 'Dashboard',
-            'icon' => 'home',
             'url' => '/admin/dashboard'
         ]);
         UserMenu::create([
             'menu' => 'Users',
-            'icon' => 'users',
             'url' => '/admin/users'
         ]);
 
@@ -88,5 +87,16 @@ class DatabaseSeeder extends Seeder
             'role' => 'Staff'
         ]);
 
+        Lokasi::create([
+            'lokasi' => 'Wilayah Barat'
+        ]);
+
+        Lokasi::create([
+            'lokasi' => 'Wilayah Selatan'
+        ]);
+
+        Lokasi::create([
+            'lokasi' => 'Wilayah Utara'
+        ]);
     }
 }
