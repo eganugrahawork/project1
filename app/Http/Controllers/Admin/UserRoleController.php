@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CustomAccessBlock;
 use App\Models\User;
 use App\Models\UserAccessMenu;
+use App\Models\UserAccessSubmenu;
 use App\Models\UserActivity;
 use App\Models\UserMenu;
 use App\Models\UserRole;
@@ -93,7 +94,7 @@ class UserRoleController extends Controller
 
             UserActivity::create([
                 'id_user' => auth()->user()->id,
-                'menu' => "Role",
+                'menu' => "Access Menu",
                 'aktivitas' => "Tambah",
                 'keterangan' => "Tambah Akses Role id $request->roleId pada Menu id $request->menuId"
             ]);
@@ -101,7 +102,7 @@ class UserRoleController extends Controller
         }else{
             UserActivity::create([
                 'id_user' => auth()->user()->id,
-                'menu' => "Role",
+                'menu' => "Access Menu",
                 'aktivitas' => "Hapus",
                 'keterangan' => "Hapus Akses Role id $request->roleId pada Menu id $request->menuId"
             ]);
@@ -111,7 +112,35 @@ class UserRoleController extends Controller
         return ;
     }
 
+    public function changeaccesssubmenu(Request $request){
+        $data = [
+            "id_submenu" =>$request->submenuId,
+            "id_role" => $request->roleId
+        ];
 
+        $result = UserAccessSubmenu::where($data)->first();
+
+        if($result == false){
+
+            UserActivity::create([
+                'id_user' => auth()->user()->id,
+                'menu' => "Access Submenu",
+                'aktivitas' => "Tambah",
+                'keterangan' => "Tambah Akses Role id $request->roleId pada Submenu id $request->submenuId"
+            ]);
+            UserAccessSubmenu::create($data);
+        }else{
+            UserActivity::create([
+                'id_user' => auth()->user()->id,
+                'menu' => "Access Submenu",
+                'aktivitas' => "Hapus",
+                'keterangan' => "Hapus Akses Role id $request->roleId pada Submenu id $request->submenuId"
+            ]);
+            UserAccessSubmenu::where($data)->delete();
+        }
+
+        return ;
+    }
 
     public function editmodalaccess(Request $request){
         $menu = UserMenu::all();
@@ -181,7 +210,6 @@ class UserRoleController extends Controller
             'keterangan' => "Unhide Akses User id $request->idUser pada Menu id $request->idMenu "
         ]);
         return response()->json('success');
-
     }
 
 }

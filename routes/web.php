@@ -73,6 +73,7 @@ Route::middleware(['auth'])->controller(UserRoleController::class)->group(functi
     Route::get('admin/configuration/useraccessmenu/{id}', 'viewuseraccess')->name('viewaccess');
     Route::get('admin/configuration/useraccessmenu/editmodalaccess/{id}', 'editmodalaccess');
     Route::post('/admin/configuration/useraccessmenu/change', 'changeaccess')->name('changeaccess');
+    Route::post('/admin/configuration/useraccessmenu/changesubmenu', 'changeaccesssubmenu')->name('changeaccesssubmenu');
     Route::get('admin/configuration/useraccessmenu/editcustomaccess/{id}', 'editcustomaccess');
     Route::post('/admin/configuration/useraccessmenu/blockaccess', 'blockaccess');
     Route::post('/admin/configuration/useraccessmenu/unblockaccess', 'unblockaccess');

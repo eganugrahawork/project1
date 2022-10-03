@@ -84,7 +84,7 @@
                                             <a class="menu-link px-3" onclick="editModal({{ $cust->id }})" >Edit</a>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a href="/admin/masterdata/uom/delete/{{ $cust->id }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Delete</a>
+                                            <a href="/admin/masterdata/customer/delete/{{ $cust->id }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Delete</a>
                                         </div>
                                     </div>
                                 </td>
@@ -103,7 +103,7 @@
     <div class="modal-dialog modal-dialog-centered mw-1000px">
         <div class="modal-content">
             <div class="modal-header" id="mainmodal_header">
-                <h2 class="fw-bolder">UOM</h2>
+                <h2 class="fw-bolder">Customer</h2>
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" onclick="tutupModal()">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -133,7 +133,7 @@
             })
         }
         function editModal(id){
-            $.get("{{ url('/admin/masterdata/uom/editmodal') }}/"+id, {}, function(data, status){
+            $.get("{{ url('/admin/masterdata/customer/editmodal') }}/"+id, {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
             })

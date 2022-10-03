@@ -331,7 +331,6 @@
                                                 <h5>Menu</h5>
                                                 <div class="row">
                                                     @foreach ($getmenu as $gm )
-
                                                     <div class="d-flex align-items-center py-2 col-lg-6">
                                                         <span class="bullet bg-primary me-3"></span>{{ $gm->menu }}
                                                     </div>

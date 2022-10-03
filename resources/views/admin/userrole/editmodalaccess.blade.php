@@ -6,11 +6,10 @@
     <div class="table-responsive">
         <!--begin::Table-->
         <table class="table align-middle table-row-dashed fs-6 gy-5">
-            <!--begin::Table body-->
             <tbody class="text-gray-600 fw-bold">
                 @foreach ($menu as $m)
                 <tr>
-                    <td class="text-gray-800">{{ $m->menu }}</td>
+                    <td class="text-gray-800"> <p>{{ $m->menu }}</p>
                     <td>
                         <label class="form-check form-check-custom form-check-solid me-9">
                             <input class="form-check-input user_access" data-idrole="{{ $id_role }}" data-idmenu="{{ $m->id }}" type="checkbox" @php
@@ -18,7 +17,31 @@
                                 checkAccess($data)
                             @endphp />
                         </label>
+
                     </td>
+                    @if ($m->is_submenu ==1)
+                        @php
+                        $submenu = DB::select("select * from user_submenus where id_menu = $m->id");
+                        @endphp
+                    <td>
+                        @foreach ($submenu as $sub)
+                        <div class="row py-3">
+                            <div class="col-lg-6">
+                                {{ $sub->submenu }}
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="form-check form-check-custom form-check-solid me-9 ml-2">
+                                    <input class="form-check-input user_access_submenus" data-idrole="{{ $id_role }}" data-idsubmenu="{{ $sub->id }}" type="checkbox" @php
+                                                    $data = ['id_role' => $id_role, 'id_submenu' => $sub->id];
+                                                    checkAccessSubmenu($data)
+                                                    @endphp />
+                                    </label>
+                            </div>
+                        </div>
+                        @endforeach
+
+                    </td>
+                        @endif
                 </tr>
                 @endforeach
             </tbody>
@@ -51,10 +74,8 @@ headers: {
         buttonsStyling: false
       })
 
-
-
-    swalWithBootstrapButtons.fire({
-        title: 'Ubah Akses ?',
+      swalWithBootstrapButtons.fire({
+        title: 'Ubah Akses Menu ?',
         icon: 'question',
         showCancelButton: true,
         confirmButtonText: 'Ya Ubah!',
@@ -80,6 +101,47 @@ headers: {
         }
     })
 });
+
+$('.user_access_submenus').on('click', function(){
+    const SubmenuId = $(this).data('idsubmenu')
+    const roleId = $(this).data('idrole')
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Ubah Akses Submenu ?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Ya Ubah!',
+        cancelButtonText: 'Tidak, Batalkan!',
+        reverseButtons: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+        url: "{{ route('changeaccesssubmenu') }}",
+        type: 'post',
+        data: {
+            roleId: roleId,
+            submenuId: SubmenuId
+        },
+        success: function() {
+            Swal.fire(
+                'Success',
+                'Access Changed',
+                'success'
+            )
+        }
+        })
+        }
+    })
+
+})
 
 function closeWithReload(){
     $('#mainmodal').modal('hide')

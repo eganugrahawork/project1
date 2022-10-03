@@ -9,6 +9,7 @@ use App\Models\TypeMaterial;
 use App\Models\Uom;
 use App\Models\User;
 use App\Models\UserAccessMenu;
+use App\Models\UserAccessSubmenu;
 use App\Models\UserDetail;
 use App\Models\UserMenu;
 use App\Models\UserRole;
@@ -115,6 +116,26 @@ class DatabaseSeeder extends Seeder
           'id_menu' => 1,
         ]);
         // End User access
+
+        // User Access Submenu
+
+UserAccessSubmenu::create([
+    'id_role' => 1,
+    'id_submenu'=>1
+]);
+UserAccessSubmenu::create([
+    'id_role' => 1,
+    'id_submenu'=>2
+]);
+UserAccessSubmenu::create([
+    'id_role' => 1,
+    'id_submenu'=>3
+]);
+UserAccessSubmenu::create([
+    'id_role' => 1,
+    'id_submenu'=>4
+]);
+        // End User Access Submenu
 
         // User Role
         UserRole::create([

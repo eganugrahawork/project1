@@ -95,7 +95,7 @@ class DashboardController extends Controller
 
     public function useractivity(){
 
-        $user = UserActivity::all();
+        $user = UserActivity::orderBy('id','DESC')->get();
         return view('admin.useractivity.index', ['user' => $user]);
     }
 

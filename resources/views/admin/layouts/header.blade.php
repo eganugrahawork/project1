@@ -176,6 +176,11 @@
 
 
                             @foreach ($submenu as $sub )
+                            @php
+                                $subnya = DB::select('select * from user_access_submenus where id_submenu = '.$sub->id.' and id_role = '.auth()->user()->userrole->id);
+                            @endphp
+                            @if ($subnya)
+
                             <div class="menu-item">
                                 <a class="menu-link py-3" href="{{ $sub->urlsubmenu }}"  data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                     <span class="menu-icon">
@@ -188,6 +193,7 @@
                                     <span class="menu-title">{{ $sub->submenu }}</span>
                                 </a>
                             </div>
+                            @endif
                             @endforeach
                         </div>
                     </div>

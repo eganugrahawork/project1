@@ -12,5 +12,11 @@ function checkAccess($data){
         echo "x-circle";
     }
 }
+function checkAccessSubmenu($data){
+    $result = DB::select("select * from user_access_submenus where id_submenu = $data[id_submenu] and id_role = $data[id_role]");
 
+    if($result){
+        echo"Checked";
+    }
+}
 ?>
