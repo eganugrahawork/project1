@@ -15,7 +15,7 @@
                 </span>
                 <!--end::Svg Icon-->
             </div>
-                <img alt="Logo" src="/metronic/assets/media/logos/logo-demo11.svg" class="h-20px h-lg-30px" />
+                <h3>Loccana</h3>
         </div>
         <!--end::Header Logo-->
         <!--begin::Topbar-->

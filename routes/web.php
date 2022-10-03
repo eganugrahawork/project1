@@ -1,15 +1,18 @@
 <?php
 
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ItemsController;
+use App\Http\Controllers\Admin\LokasiController;
+use App\Http\Controllers\Admin\PrincipalController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\UoMController;
 use App\Http\Controllers\Admin\UserAccessMenuController;
 use App\Http\Controllers\Admin\UserMenuController;
 use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\UserSubmenuController;
-use App\Http\Controllers\LokasiController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -106,13 +109,58 @@ Route::middleware(['auth'])->controller(LokasiController::class)->group(function
     Route::post('admin/configuration/location/store', 'store');
     Route::post('admin/configuration/location/update', 'update');
 });
-
 // Lokasi End
 
+
+// Items start
+Route::middleware(['auth'])->controller(ItemsController::class)->group(function(){
+    Route::get('admin/masterdata/items', 'index');
+    Route::post('admin/masterdata/items/store', 'store');
+    Route::post('admin/masterdata/items/update', 'update');
+    Route::get('admin/masterdata/items/addmodal', 'addmodal');
+    Route::get('admin/masterdata/items/editmodal/{id}', 'editmodal');
+    Route::get('admin/masterdata/items/delete/{id}', 'destroy');
+
+});
+
+// Principal Start
+Route::middleware(['auth'])->controller(PrincipalController::class)->group(function(){
+    Route::get('admin/masterdata/principal', 'index');
+    Route::post('admin/masterdata/principal/store', 'store');
+    Route::post('admin/masterdata/principal/update', 'update');
+    Route::get('admin/masterdata/principal/delete/{id}', 'destroy');
+    Route::get('admin/masterdata/principal/editmodal/{id}', 'editmodal');
+    Route::get('admin/masterdata/principal/addmodal', 'addmodal');
+});
+// Principal End
+
+// UoM Start
+Route::middleware(['auth'])->controller(UoMController::class)->group(function(){
+    Route::get('admin/masterdata/uom', 'index');
+    Route::get('admin/masterdata/uom/addmodal', 'addmodal');
+    Route::get('admin/masterdata/uom/editmodal/{id}', 'editmodal');
+    Route::get('admin/masterdata/uom/delete/{id}', 'destroy');
+    Route::post('admin/masterdata/uom/store', 'store');
+    Route::post('admin/masterdata/uom/update', 'update');
+});
+//End UoM
+
+//Customer
+Route::middleware(['auth'])->controller(CustomerController::class)->group(function(){
+    Route::get('admin/masterdata/customer', 'index');
+    Route::get('admin/masterdata/customer/addmodal', 'addmodal');
+    Route::get('admin/masterdata/customer/editmodal/{id}', 'editmodal');
+    Route::get('admin/masterdata/customer/delete/{id}', 'destroy');
+    Route::post('admin/masterdata/customer/store', 'store');
+    Route::post('admin/masterdata/customer/update', 'update');
+});
+// End
 //Blocked Page Start
 Route::get('/blocked', function(){
     return view('admin.blocked');
 });
 //Blocked Page End
+
+
 
 
