@@ -6,7 +6,7 @@
 <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
     <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
         <div class="page-title d-flex flex-column me-3">
-            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">Unit of Measurenment</h1>
+            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">Chart Of Account</h1>
             <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
                 <li class="breadcrumb-item text-gray-600">
                     <a href="/admin/dashboard" class="text-gray-600 text-hover-primary">Dashboard</a>
@@ -23,29 +23,24 @@
             <div class="card-header border-0 pt-6">
                 <div class="card-title align-items-start flex-column">
                     <div class="d-flex align-items-center position-relative my-1">
-                       <h2>List UoM</h2>
+                       <h2>List COA</h2>
                     </div>
                     <div class="d-flex align-items-center position-relative my-1">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                        <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
-                                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                        <input type="text" id="searchIndukTable" class="form-control form-control-solid w-250px ps-15" placeholder="UOM Search" />
-                    </div>
+                     <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                     <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                             <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
+                             <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
+                         </svg>
+                     </span>
+                     <!--end::Svg Icon-->
+                     <input type="text" id="searchIndukTable" class="form-control form-control-solid w-250px ps-15" placeholder="COA Search" />
+                 </div>
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                        <button type="button" class="btn btn-primary me-3" onclick="addUomModal()">
-                        Add UoM</button>
-                    </div>
-                    <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
-                        <div class="fw-bolder me-5">
-                        <span class="me-2" data-kt-customer-table-select="selected_count"></span>Selected</div>
-                        <button type="button" class="btn btn-danger" data-kt-customer-table-select="delete_selected">Delete Selected</button>
+                        <button type="button" class="btn btn-primary me-3" onclick="addCoaModal()">
+                        Add Coa</button>
                     </div>
                 </div>
             </div>
@@ -55,23 +50,23 @@
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="min-w-20px">No
                             </th>
-                            <th class="min-w-125px">Nama UoM</th>
-                            <th class="min-w-125px">Simbol</th>
+                            <th class="min-w-125px">Parent</th>
+                            <th class="min-w-125px">Coa</th>
                             <th class="min-w-125px">Keterangan</th>
                             <th class="text-end min-w-70px">Action</th>
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">
-                        @foreach ($uom as $uom )
+                        @foreach ($coa as $c )
                         <tr>
                             <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
                             <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $uom->uom_name }}</a>
+                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $c->id_parent }}</a>
                             </td>
                             <td>
-                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $uom->uom_symbol }}</a>
+                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $c->coa }}</a>
                             </td>
-                            <td>{{ $uom->description }}</td>
+                            <td>{{ $c->keterangan }}</td>
                             <td class="text-end">
                                 <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
@@ -82,10 +77,10 @@
                                     </span></a>
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="editModal({{ $uom->id_uom }})" >Edit</a>
+                                            <a class="menu-link px-3" onclick="editModal({{ $c->id_coa }})" >Edit</a>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a href="/admin/masterdata/uom/delete/{{ $uom->id_uom }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Delete</a>
+                                            <a href="/admin/masterdata/coa/delete/{{ $c->id_coa }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Delete</a>
                                         </div>
                                     </div>
                                 </td>
@@ -104,7 +99,7 @@
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
             <div class="modal-header" id="mainmodal_header">
-                <h2 class="fw-bolder">UOM</h2>
+                <h2 class="fw-bolder">COA</h2>
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" onclick="tutupModal()">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -126,14 +121,14 @@
 @section('js')
 
 <script>
-        function addUomModal(){
-            $.get("{{ url('/admin/masterdata/uom/addmodal') }}", {}, function(data, status){
+        function addCoaModal(){
+            $.get("{{ url('/admin/masterdata/coa/addmodal') }}", {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
             })
         }
         function editModal(id){
-            $.get("{{ url('/admin/masterdata/uom/editmodal') }}/"+id, {}, function(data, status){
+            $.get("{{ url('/admin/masterdata/coa/editmodal') }}/"+id, {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
             })

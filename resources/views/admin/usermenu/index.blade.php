@@ -81,12 +81,22 @@
                             <div class="card">
                                 <!--begin::Header-->
                                 <div class="card-header border-0 pt-5">
-                                    <h3 class="card-title align-items-start flex-column">
+                                    <div class="card-title align-items-start flex-column">
                                         <span class="card-label fw-bolder fs-3 mb-1">Menu </span>
                                         <span class="text-muted mt-1 fw-bold fs-7"></span>
-                                    </h3>
+                                        <div class="d-flex align-items-center position-relative my-1">
+                                            <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                                            <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
+                                                    <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                            <input type="text" id="searchIndukTable" class="form-control form-control-solid w-250px ps-15" placeholder="Menu Search" />
+                                        </div>
+                                    </div>
                                     <div class="card-toolbar">
-                                        <!--begin::Menu-->
                                         <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                             <span class="svg-icon svg-icon-2">
                                                 <i class="bi bi-plus-square"></i>
@@ -94,15 +104,10 @@
                                         </button>
                                         <!--begin::Menu 1-->
                                         <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_617b94b52ee36">
-                                            <!--begin::Header-->
                                             <div class="px-7 py-5">
                                                 <div class="fs-5 text-dark fw-bolder">Add Menues</div>
                                             </div>
-                                            <!--end::Header-->
-                                            <!--begin::Menu separator-->
                                             <div class="separator border-gray-200"></div>
-                                            <!--end::Menu separator-->
-                                            <!--begin::Form-->
                                             <div class="px-7 py-5">
                                                 <form action="/admin/configuration/menu/store" method="post">
                                                     @csrf
@@ -129,7 +134,7 @@
                                     <!--begin::Table container-->
                                     <div class="table-responsive">
                                         <!--begin::Table-->
-                                        <table class="table align-middle table-row-dashed">
+                                        <table class="table align-middle table-row-dashed" id="indukTable">
                                             <!--begin::Table head-->
                                             <thead>
                                                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
@@ -181,6 +186,17 @@
                                 <div class="card-header border-0 pt-5">
                                     <h3 class="card-title align-items-start flex-column">
                                         <span class="card-label fw-bolder fs-3 mb-1">Submenu</span>
+                                        <div class="d-flex align-items-center position-relative my-1">
+											<!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+											<span class="svg-icon svg-icon-1 position-absolute ms-6">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+													<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
+													<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
+												</svg>
+											</span>
+											<!--end::Svg Icon-->
+											<input type="text" id="searchSubmenu" class="form-control form-control-solid w-250px ps-15" placeholder="Submenu Search" />
+										</div>
                                     </h3>
                                     <div class="card-toolbar">
                                         <!--begin::Menu-->
@@ -236,14 +252,14 @@
                                 </div>
                                 <div class="card-body py-3">
                                     <div class="table-responsive">
-                                        <table class="table align-middle table-row-dashed">
+                                        <table class="table align-middle table-row-dashed" id="submenuTable">
                                             <thead>
                                                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                                     <th class="min-w-50px">No</th>
-                                                    <th class="min-w-150px">Submenu</th>
-                                                    <th class="min-w-150px">Menu</th>
-                                                    <th class="min-w-125px">Url</th>
-                                                    <th class="min-w-150px">Icon</th>
+                                                    <th class="min-w-100px">Submenu</th>
+                                                    <th class="min-w-100px">Menu</th>
+                                                    <th class="min-w-100px">Url</th>
+                                                    <th class="min-w-100px">Icon</th>
                                                     <th class="text-end min-w-100px">Action</th>
                                                 </tr>
                                             </thead>
@@ -253,7 +269,7 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $sm->submenu }}</td>
                                                     <td>{{ $sm->usermenu->menu }}</td>
-                                                    <td>{{ $sm->urlsubmenu }}</td>
+                                                    <td class="text-wrap">{{ $sm->urlsubmenu }}</td>
                                                     <td>{{ $sm->icon }}</td>
                                                     <td class="text-end">
                                                         <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions <i class="bi bi-caret-down"></i></a>
@@ -394,12 +410,12 @@
                     </div>
                     <div class="card-body pt-5">
                         <div class="table-responsive">
-                            <table class="table align-middle table-row-dashed">
+                            <table class="table align-middle table-row-dashed" id="roleTable">
                                 <thead>
                                     <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-50px">No</th>
-                                        <th class="min-w-150px">Role</th>
-                                        <th class="text-end min-w-100px">Action</th>
+                                        <th class="min-w-120px">Role</th>
+                                        <th class="text-end min-w-50px">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-gray-600 fw-bold">
@@ -459,12 +475,12 @@
                     </div>
                     <div class="card-body pt-5">
                         <div class="table-responsive">
-                            <table class="table align-middle table-row-dashed">
+                            <table class="table align-middle table-row-dashed" id="regionTable">
                                 <thead>
                                     <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-50px">No</th>
-                                        <th class="min-w-150px">Region</th>
-                                        <th class="text-end min-w-100px">Action</th>
+                                        <th class="min-w-120px">Region</th>
+                                        <th class="text-end min-w-50px">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-gray-600 fw-bold">
@@ -531,7 +547,31 @@
 {{-- DataTable Start --}}
 <script>
         $(document).ready(function () {
-            $('#example').DataTable();
+         var submenuTable =  $('#submenuTable').DataTable({
+                "bLengthChange": false,
+                // "bFilter": true,
+                "bInfo": false,
+                'pageLength' : 5,
+            });
+            $('#searchSubmenu').keyup(function () {
+                submenuTable.search($(this).val()).draw()
+            });
+        });
+        $(document).ready(function () {
+            $('#roleTable').DataTable({
+                "bLengthChange": false,
+                "bFilter": true,
+                "bInfo": false,
+                'pageLength' : 5
+            });
+        });
+        $(document).ready(function () {
+            $('#regionTable').DataTable({
+                "bLengthChange": false,
+                "bFilter": true,
+                "bInfo": false,
+                'pageLength' : 5
+            });
         });
 </script>
 {{-- Datatable End --}}
@@ -586,7 +626,6 @@
     function tutupModal(){
             $('#mainmodal').modal('hide')
         }
-
 
 </script>
 {{-- Hide URL End --}}

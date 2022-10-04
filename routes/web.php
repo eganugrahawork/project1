@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\CoaController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ItemsController;
 use App\Http\Controllers\Admin\LokasiController;
+use App\Http\Controllers\Admin\PriceManagementController;
 use App\Http\Controllers\Admin\PrincipalController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UoMController;
@@ -156,6 +158,26 @@ Route::middleware(['auth'])->controller(CustomerController::class)->group(functi
     Route::post('admin/masterdata/customer/update', 'update');
 });
 // End
+
+// PriceManagement
+Route::middleware(['auth'])->controller(PriceManagementController::class)->group(function(){
+    Route::get('admin/masterdata/pricemanagement','index');
+    Route::get('admin/masterdata/pricemanagement/editmodal/{id}','editmodal');
+    Route::post('admin/masterdata/pricemanagement/update', 'update');
+});
+// End PriceManagement
+
+// Coa
+Route::middleware(['auth'])->controller(CoaController::class)->group(function(){
+    Route::get('admin/masterdata/coa', 'index');
+    Route::get('admin/masterdata/coa/addmodal', 'addmodal');
+    Route::get('admin/masterdata/coa/editmodal/{id}','editmodal');
+    Route::post('admin/masterdata/coa/store', 'store');
+    Route::post('admin/masterdata/coa/update', 'update');
+    Route::get('admin/masterdata/coa/delete/{id}', 'destroy');
+});
+
+// End Coa
 //Blocked Page Start
 Route::get('/blocked', function(){
     return view('admin.blocked');

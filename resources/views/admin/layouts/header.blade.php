@@ -2,11 +2,8 @@
 <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
     <!--begin::Container-->
     <div class="container-xxl d-flex flex-grow-1 flex-stack">
-        <!--begin::Header Logo-->
         <div class="d-flex align-items-center me-5">
-            <!--begin::Heaeder menu toggle-->
             <div class="d-lg-none btn btn-icon btn-active-color-primary w-30px h-30px ms-n2 me-3" id="kt_header_menu_toggle">
-                <!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
                 <span class="svg-icon svg-icon-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z" fill="black" />
@@ -15,10 +12,8 @@
                 </span>
                 <!--end::Svg Icon-->
             </div>
-                <h3>Loccana</h3>
+            <img alt="Logo" src="{{ asset('storage/logos/loccanalogo.png') }}" class="h-30px h-lg-40px" />
         </div>
-        <!--end::Header Logo-->
-        <!--begin::Topbar-->
         <div class="d-flex align-items-center">
             <!--begin::Topbar-->
             <div class="d-flex align-items-center flex-shrink-0">
@@ -37,17 +32,9 @@
                             <!--end::Svg Icon-->
                         </div>
                     </div>
-                    <!--end::Tablet and mobile search toggle-->
-
-
                 </div>
-                <!--end::Search-->
-                <!--begin::User-->
                 <div class="d-flex align-items-center ms-3 ms-lg-4" id="kt_header_user_menu_toggle">
-                    <!--begin::Menu- wrapper-->
-                    <!--begin::User icon(remove this button to use user avatar as menu toggle)-->
                     <div class="btn btn-icon btn-color-gray-700 btn-active-color-primary btn-outline btn-outline-secondary w-30px h-30px w-lg-40px h-lg-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-                        <!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
                         <span class="svg-icon svg-icon-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z" fill="black" />
@@ -86,14 +73,14 @@
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5">
+                        {{-- <div class="menu-item px-5">
                             <a href="../../demo11/dist/pages/projects/list.html" class="menu-link px-5">
                                 <span class="menu-text">My Projects</span>
                                 <span class="menu-badge">
                                     <span class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span>
                                 </span>
                             </a>
-                        </div>
+                        </div> --}}
                         <!--end::Menu item-->
 
                         <!--begin::Menu item-->
@@ -186,7 +173,7 @@
                                     <span class="menu-icon">
                                         <!--begin::Svg Icon | path: /icons/duotune/general/gen002.svg-->
                                         <span class="svg-icon svg-icon-2">
-                                            <i class="bi bi-arrow-up-right-square"></i>
+                                            <i class="bi bi-{{ $sub->icon }}"></i>
                                         </span>
                                         <!--end::Svg Icon-->
                                     </span>

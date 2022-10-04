@@ -78,22 +78,32 @@ class DatabaseSeeder extends Seeder
         UserSubmenu::create(['submenu'=> 'Items',
                             'urlsubmenu'=> '/admin/masterdata/items',
                             'id_menu' => 3,
-                            'icon' => 'dsa'
+                            'icon' => 'box'
         ]);
         UserSubmenu::create(['submenu'=> 'Principal',
                             'urlsubmenu'=> '/admin/masterdata/principal',
                             'id_menu' => 3,
-                            'icon' => 'dsa'
+                            'icon' => 'person-square'
         ]);
         UserSubmenu::create(['submenu'=> 'UoM',
                             'urlsubmenu'=> '/admin/masterdata/uom',
                             'id_menu' => 3,
-                            'icon' => 'dsa'
+                            'icon' => 'clipboard'
         ]);
         UserSubmenu::create(['submenu'=> 'Customer',
                             'urlsubmenu'=> '/admin/masterdata/customer',
                             'id_menu' => 3,
-                            'icon' => 'dsa'
+                            'icon' => 'bag-check'
+        ]);
+        UserSubmenu::create(['submenu'=> 'Price Management',
+                            'urlsubmenu'=> '/admin/masterdata/pricemanagement',
+                            'id_menu' => 3,
+                            'icon' => 'cash-coin'
+        ]);
+        UserSubmenu::create(['submenu'=> 'COA',
+                            'urlsubmenu'=> '/admin/masterdata/coa',
+                            'id_menu' => 3,
+                            'icon' => 'credit-card'
         ]);
         // End User Submenu
 
@@ -110,7 +120,6 @@ class DatabaseSeeder extends Seeder
           'id_role' =>1,
           'id_menu' => 3,
         ]);
-
         UserAccessMenu::create([
           'id_role' =>2,
           'id_menu' => 1,
@@ -119,22 +128,30 @@ class DatabaseSeeder extends Seeder
 
         // User Access Submenu
 
-UserAccessSubmenu::create([
-    'id_role' => 1,
-    'id_submenu'=>1
-]);
-UserAccessSubmenu::create([
-    'id_role' => 1,
-    'id_submenu'=>2
-]);
-UserAccessSubmenu::create([
-    'id_role' => 1,
-    'id_submenu'=>3
-]);
-UserAccessSubmenu::create([
-    'id_role' => 1,
-    'id_submenu'=>4
-]);
+        UserAccessSubmenu::create([
+            'id_role' => 1,
+            'id_submenu'=>1
+        ]);
+        UserAccessSubmenu::create([
+            'id_role' => 1,
+            'id_submenu'=>2
+        ]);
+        UserAccessSubmenu::create([
+            'id_role' => 1,
+            'id_submenu'=>3
+        ]);
+        UserAccessSubmenu::create([
+            'id_role' => 1,
+            'id_submenu'=>4
+        ]);
+        UserAccessSubmenu::create([
+            'id_role' => 1,
+            'id_submenu'=>5
+        ]);
+        UserAccessSubmenu::create([
+            'id_role' => 1,
+            'id_submenu'=>6
+        ]);
         // End User Access Submenu
 
         // User Role

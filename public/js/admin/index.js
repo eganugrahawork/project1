@@ -38,7 +38,7 @@ $('.button-delete').on('click', function(e){
         showCancelButton: true,
         confirmButtonText: 'Yes, hapus!',
         cancelButtonText: 'Tidak, Batalkan!',
-        reverseButtons: true
+        reverseButtons: false
       }).then((result) => {
         if (result.isConfirmed) {
           document.location.href = href;

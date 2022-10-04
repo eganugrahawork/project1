@@ -15,14 +15,15 @@
 		<meta property="og:url" content="https://keenthemes.com/metronic" />
 		<meta property="og:site_name" content="Keenthemes | Metronic" />
 		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-		<link rel="shortcut icon" href="/metronic/assets/media/logos/favicon.ico" />
+		<link rel="icon" type="image/gif" href="{{ asset('storage/logos/logoputih.png') }}"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+        <link href="/metronic/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="/metronic/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="/metronic/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="/metronic/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+        {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"> --}}
 	</head>
-	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled">
+	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled aside-enabled">
 
         <div class="d-flex flex-column flex-root">
 			<div class="page d-flex flex-row flex-column-fluid">
@@ -35,9 +36,9 @@
 
                             @include('admin.layouts.footer')
 
-                        </div>
-                    </div>
                 </div>
+            </div>
+        </div>
 
                 <script>var hostUrl = "/metronic/assets/";</script>
                 <script src="/metronic/assets/plugins/global/plugins.bundle.js"></script>
@@ -50,9 +51,22 @@
                 <script src="/js/admin/index.js"></script>
 
                 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+                <script src="/metronic/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+                {{-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> --}}
 
-                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+                <script>
+                     $(document).ready(function () {
+                      var indukTable =  $('#indukTable').DataTable({
+                            "bLengthChange": false,
+                            "bFilter": true,
+                            "bInfo": false,
+                        });
 
+                        $('#searchIndukTable').keyup(function () {
+                            indukTable.search($(this).val()).draw()
+                        });
+                    });
+                </script>
 @yield('js')
 
 </body>
