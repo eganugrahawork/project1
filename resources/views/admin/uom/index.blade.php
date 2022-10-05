@@ -66,10 +66,10 @@
                         <tr>
                             <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
                             <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $uom->uom_name }}</a>
+                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $uom->name }}</a>
                             </td>
                             <td>
-                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $uom->uom_symbol }}</a>
+                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $uom->symbol }}</a>
                             </td>
                             <td>{{ $uom->description }}</td>
                             <td class="text-end">

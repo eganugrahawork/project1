@@ -463,7 +463,7 @@
                                         @csrf
                                         <div>
                                             <label class="form-label fw-bold">Region</label>
-                                            <input type="text" class="form-control" name="lokasi" required>
+                                            <input type="text" class="form-control" name="region" required>
                                         </div>
                                         <div class="d-flex justify-content-end mt-2">
                                             <button class="btn btn-sm btn-primary">Add</button>
@@ -484,10 +484,10 @@
                                     </tr>
                                 </thead>
                                 <tbody class="text-gray-600 fw-bold">
-                                    @foreach ($lokasi as $l)
+                                    @foreach ($region as $l)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $l->lokasi }}</td>
+                                            <td>{{ $l->name }}</td>
                                             <td class="text-end">
                                                 <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions <i class="bi bi-caret-down"></i></a>
                                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">

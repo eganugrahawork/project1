@@ -69,17 +69,17 @@
                         <tr>
                             <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
                             <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->stock_code }}</a>
+                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->code }}</a>
                             </td>
                             <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->stock_name }}</a>
+                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->name }}</a>
                             </td>
                             <td>
-                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->stock_desc }}</a>
+                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->description }}</a>
                             </td>
-                            <td>{{ $item->uom->uom_name }}</td>
+                            <td>{{ $item->uom->name }}</td>
                             <td >{{ $item->unit_box }}</td>
-                            <td>{{ $item->eksternal->name_eksternal }}</td>
+                            <td>{{ $item->principal->name }}</td>
                             <td class="text-end">
                                 <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->

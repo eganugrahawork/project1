@@ -21,7 +21,7 @@ class CoaController extends Controller
         Coa::create([
             'id_parent' => $request->id_parent,
             'coa' => $request->coa,
-            'keterangan' => $request->keterangan
+            'description' => $request->description
         ]);
 
         return redirect()->back()->with('success', 'Coa ditambahkan!');
@@ -36,7 +36,7 @@ class CoaController extends Controller
         Coa::where(['id_coa'=>$request->id_coa])->update([
             'id_parent' => $request->id_parent,
             'coa' => $request->coa,
-            'keterangan' => $request->keterangan
+            'description' => $request->description
         ]);
 
         return redirect()->back()->with('success', 'Coa di Update!');

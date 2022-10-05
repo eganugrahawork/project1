@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Lokasi;
+use App\Models\Region;
 use App\Models\UserAccessMenu;
 use App\Models\UserActivity;
 use App\Models\UserMenu;
@@ -34,10 +34,10 @@ class UserMenuController extends Controller
     public function index()
     {
         $menu = UserMenu::all();
-        $lokasi = Lokasi::all();
+        $region = Region::all();
         $submenu = UserSubmenu::all();
         $role = UserRole::all();
-        return view('admin.usermenu.index', ['title'=> 'Configuration Menu', 'menu' => $menu, 'submenu' => $submenu,'role'=>$role, 'lokasi'=>$lokasi]);
+        return view('admin.usermenu.index', ['title'=> 'Configuration Menu', 'menu' => $menu, 'submenu' => $submenu,'role'=>$role, 'region'=>$region]);
     }
 
     /**

@@ -66,7 +66,7 @@
                             <td>
                                 <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $c->coa }}</a>
                             </td>
-                            <td>{{ $c->keterangan }}</td>
+                            <td>{{ $c->description }}</td>
                             <td class="text-end">
                                 <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->

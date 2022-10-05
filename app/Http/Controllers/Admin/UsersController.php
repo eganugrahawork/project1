@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Lokasi;
+use App\Models\Region;
 use App\Models\User;
 use App\Models\UserAccessMenu;
 use App\Models\UserActivity;
@@ -44,8 +44,8 @@ class UsersController extends Controller
             $user = User::where('id_role', '!=', 1)->get();
         }
         $role = UserRole::all();
-        $lokasi = Lokasi::all();
-        return view('admin.users.index', ['title' => 'Users', 'users' => $user, 'role' => $role, 'lokasi' => $lokasi]);
+        $region = Region::all();
+        return view('admin.users.index', ['title' => 'Users', 'users' => $user, 'role' => $role, 'region' => $region]);
     }
 
     public function create(){
@@ -67,7 +67,7 @@ class UsersController extends Controller
             'image'=> $request->image,
             'alamat' => $request->alamat,
             'nokontak' => $request->nokontak,
-            'lokasi' => $request->lokasi
+            'lokasi' => $request->region
         ];
 
         UserDetail::create($user_detail);
@@ -123,7 +123,7 @@ class UsersController extends Controller
             'image'=> $image,
             'alamat' => $request->alamat,
             'nokontak' => $request->nokontak,
-            'lokasi' => $request->lokasi
+            'lokasi' => $request->region
         ];
 
         UserDetail::where(['id'=>$onUser->id_detail_user])->update($user_detail);
@@ -201,9 +201,9 @@ class UsersController extends Controller
 
     public function editmodal(Request $request){
         $user = User::where(['id' => $request->id])->first();
-        $lokasi = Lokasi::all();
+        $lokasi = Region::all();
         $role = UserRole::all();
-        return view('admin.users.editmodal', ['user' => $user, 'role' => $role, 'lokasi'=>$lokasi]);
+        return view('admin.users.editmodal', ['user' => $user, 'role' => $role, 'region'=>$lokasi]);
 
     }
 }

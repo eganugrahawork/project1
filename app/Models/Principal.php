@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Coa extends Model
+class Principal extends Model
 {
-    protected $table ='coa';
-    protected $guarded=['id'];
+
+    protected $table = 'partners';
+    protected $guarded =  ['id'];
     use HasFactory;
 }

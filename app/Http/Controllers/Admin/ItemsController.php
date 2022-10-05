@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Eksternal;
+use App\Models\Items;
 use App\Models\Material;
 use App\Models\TypeMaterial;
 use App\Models\Uom;
@@ -13,8 +14,7 @@ use Illuminate\Http\Request;
 class ItemsController extends Controller
 {
     public function index(){
-
-        return view('admin.items.index', ['items' => Material::all()]);
+        return view('admin.items.index', ['items' => Items::all()]);
     }
 
     public function addmodal(){

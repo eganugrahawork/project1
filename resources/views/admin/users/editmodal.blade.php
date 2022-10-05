@@ -42,11 +42,11 @@
         </div>
         <div class="fv-row mb-7">
             <label class="required fw-bold fs-6 mb-2">Wilayah</label>
-            <select class="form-select form-select-solid" name="lokasi" required>
-                @foreach ( $lokasi as $l )
-                <option value="{{ $l->lokasi }}" @if ($user->userdetail->lokasi === $l->lokasi)
+            <select class="form-select form-select-solid" name="region" required>
+                @foreach ( $region as $l )
+                <option value="{{ $l->id }}" @if ($user->region === $l->id)
                     selected
-                @endif>{{ $l->lokasi }}</option>
+                @endif>{{ $l->name }}</option>
                 @endforeach
             </select>
         </div>

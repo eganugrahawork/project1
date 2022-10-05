@@ -92,12 +92,12 @@
                                 <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                                     <a href="#">
                                         <div class="symbol-label">
-                                            <img src="{{ asset('storage/'. $usr->userdetail->image) }}" alt="" class="w-100" />
+                                            <img src="{{ asset('storage/'. $usr->image) }}" alt="" class="w-100" />
                                         </div>
                                     </a>
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $usr->UserDetail->nama }}</a>
+                                    <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $usr->nama }}</a>
                                     <span>{{ $usr->username }}</span>
                                 </div>
                             </td>
@@ -105,7 +105,7 @@
                             <td>
                                 {{ $usr->userrole->role }}
                             </td>
-                            <td>{{ $usr->userdetail->lokasi }}</td>
+                            <td>{{ $usr->regionrelasi->name }}</td>
                             <td>{{ $usr->created_at }}</td>
                             <td class="text-end">
                                 @if (auth()->user()->userrole->role ==='Super Admin')
@@ -201,9 +201,9 @@
                         </div>
                         <div class="fv-row mb-7">
                             <label class="required fw-bold fs-6 mb-2">Wilayah</label>
-                            <select class="form-select form-select-solid" name="lokasi" required>
-                                @foreach ( $lokasi as $l )
-                                <option value="{{ $l->lokasi }}">{{ $l->lokasi }}</option>
+                            <select class="form-select form-select-solid" name="region" required>
+                                @foreach ( $region as $l )
+                                <option value="{{ $l->id }}">{{ $l->name }}</option>
                                 @endforeach
                             </select>
                         </div>
