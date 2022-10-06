@@ -105,7 +105,7 @@
                             <td>
                                 {{ $usr->userrole->role }}
                             </td>
-                            <td>{{ $usr->regionrelasi->name }}</td>
+                            <td>{{ $usr->RegionDetail->name }}</td>
                             <td>{{ $usr->created_at }}</td>
                             <td class="text-end">
                                 @if (auth()->user()->userrole->role ==='Super Admin')

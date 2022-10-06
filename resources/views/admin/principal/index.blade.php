@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="card-toolbar">
-                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                         <button type="button" class="btn btn-primary me-3" onclick="addPrincipalModal()">
                         Add Principal</button>
                     </div>
@@ -68,13 +68,13 @@
                         <tr>
                             <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
                             <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $p->kode_eksternal }}</a>
+                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $p->code }}</a>
                             </td>
                             <td>
-                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $p->name_eksternal }}</a>
+                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $p->name }}</a>
                             </td>
-                            <td>{{ $p->eksternal_address }}</td>
-                            <td data-filter="mastercard">{{ $p->phone_1 }}</td>
+                            <td>{{ $p->address }}</td>
+                            <td data-filter="mastercard">{{ $p->phone }}</td>
                             <td>{{ $p->fax }}</td>
                             <td class="text-end">
                                 <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
@@ -132,16 +132,20 @@
 
 <script>
         function addPrincipalModal(){
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/principal/addmodal') }}", {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="addPrincipalModal()">Add Principal</button>')
             })
         }
 
         function editModal(id){
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/principal/editmodal') }}/"+id, {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="addPrincipalModal()">Add Principal</button>')
             })
         }
 

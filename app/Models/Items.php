@@ -17,4 +17,8 @@ class Items extends Model
     public function Principal(){
         return $this->hasOne(Principal::class, 'id', 'partner_id');
     }
+
+    public function PriceHistory(){
+        return $this->hasOne(PriceHistory::class, 'items_id', 'id');
+    }
 }

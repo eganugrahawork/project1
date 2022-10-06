@@ -19,23 +19,23 @@ class UoMController extends Controller
     }
 
     public function store(Request $request){
-        Uom::create(['uom_name' => $request->uom_name,'uom_symbol' => $request->uom_symbol, 'description'=>$request->description]);
+        Uom::create(['name' => $request->name,'symbol' => $request->symbol, 'description'=>$request->description]);
         return redirect()->back()->with('success', 'Uom Ditambahkan');
     }
 
     public function destroy(Request $request){
         // dd($request->id);
-        Uom::where(['id_uom' => $request->id])->delete();
+        Uom::where(['id' => $request->id])->delete();
         return redirect()->back()->with('success', 'Data Uom Dihapus !');
     }
 
     public function editmodal(Request $request){
 
-        return view('admin.uom.editmodal', ['uom'=> Uom::where(['id_uom'=>$request->id])->first()]);
+        return view('admin.uom.editmodal', ['uom'=> Uom::where(['id'=>$request->id])->first()]);
     }
 
     public function update(Request $request){
-        Uom::where(['id_uom' => $request->id_uom])->update(['uom_name' => $request->uom_name,'uom_symbol' => $request->uom_symbol, 'description'=>$request->description]);
+        Uom::where(['id' => $request->id])->update(['name' => $request->name,'symbol' => $request->symbol, 'description'=>$request->description]);
         return redirect()->back()->with('success', 'Data Uom diUpdate !');
     }
 }

@@ -4,30 +4,30 @@
         <div class="col-lg-6">
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Kode Item</label>
-                <input type="text" name="stock_code" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="text" name="code" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Nama Item</label>
-                <input type="text" name="stock_name" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Deskripsi Item</label>
-                <textarea  name="stock_desc" class="form-control form-control-solid mb-3 mb-lg-0"  required></textarea>
+                <textarea  name="description" class="form-control form-control-solid mb-3 mb-lg-0"  required></textarea>
+            </div>
+            <div class="fv-row mb-7">
+                <label class="required form-label fw-bold">Satuan</label>
+                <div class="col-lg-6">
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0" name="uom_id" required>
+                        @foreach ($uom as $uom)
+                        <option value="{{ $uom->id }}">{{ $uom->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Ukuran</label>
                 <div class="col-lg-6">
                     <input type="number" name="base_qty" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
-                </div>
-            </div>
-            <div class="fv-row mb-7">
-                <label class="required form-label fw-bold">Satuan</label>
-                <div class="col-lg-6">
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0" name="unit_terkecil" required>
-                        @foreach ($uom as $uom)
-                        <option value="{{ $uom->id_uom }}">{{ $uom->uom_name }}</option>
-                        @endforeach
-                    </select>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
 
                     <select class="form-select  form-select-solid mb-3 mb-lg-0" name="type" required>
                         @foreach ($type as $type)
-                        <option value="{{ $type->id_type_material }}">{{ $type->type_material_name }}</option>
+                        <option value="{{ $type->id_type_item }}">{{ $type->type_item_name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -53,7 +53,8 @@
                 <label class="required form-label fw-bold">Pajak</label>
                 <div class="col-lg-6">
 
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0" name="pajak" required>
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0" name="vat" required>
+                        <option value="11">11%</option>
                         <option value="10">10%</option>
                         <option value="0">0%</option>
                     </select>
@@ -61,9 +62,9 @@
             </div>
             <div class="fv-row mb-7">
                 <label class="form-label fw-bold required">Principal</label>
-            <select class="form-select  form-select-solid mb-3 mb-lg-0" name="dist_id" required>
+            <select class="form-select  form-select-solid mb-3 mb-lg-0" name="partner_id" required>
                 @foreach ($principal as $p)
-                    <option value="{{ $p->id }}">{{ $p->name_eksternal }}</option>
+                    <option value="{{ $p->id }}">{{ $p->name }}</option>
                 @endforeach
             </select>
             </div>
@@ -73,7 +74,15 @@
 
 
 
-        <div class="d-flex justify-content-end">
-            <button class="btn btn-sm btn-primary">Add Items</button>
+        <div class="d-flex justify-content-end" id="loadingnya">
+            <button class="btn btn-sm btn-primary" id="btn-add">Add Items</button>
         </div>
 </form>
+
+<script>
+    $('form').submit(function(){
+    $('#btn-add').hide()
+    $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+    // $('#btn-custom').attr("disabled", 'disabled')
+})
+</script>

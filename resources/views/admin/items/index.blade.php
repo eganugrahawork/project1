@@ -38,8 +38,8 @@
                     </div>
                 </div>
                 <div class="card-toolbar">
-                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                        <button type="button" class="btn btn-primary me-3" onclick="addItemsModal()">
+                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
+                        <button type="button" class="btn btn-primary me-3" id="add-btn" onclick="addItemsModal()">
                         Add Items</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
@@ -91,10 +91,10 @@
                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a class="menu-link px-3" onclick="editModal({{ $item->id_mat }})" >Edit</a>
+                                        <a class="menu-link px-3" onclick="editModal({{ $item->id }})" >Edit</a>
                                     </div>
                                     <div class="menu-item px-3">
-                                        <a href="/admin/masterdata/items/delete/{{ $item->id_mat }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Delete</a>
+                                        <a href="/admin/masterdata/items/delete/{{ $item->id }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Delete</a>
                                     </div>
                                 </div>
                             </td>
@@ -136,20 +136,25 @@
 
 <script>
 function addItemsModal(){
+
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/items/addmodal') }}", {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
-            })
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="addItemsModal()">Add Items</button>')
+            });
 }
-function editModal(id){
-            $.get("{{ url('/admin/masterdata/items/editmodal') }}/"+id, {}, function(data, status){
-                $('#kontennya').html(data)
+            function editModal(id){
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+                $.get("{{ url('/admin/masterdata/items/editmodal') }}/"+id, {}, function(data, status){
+                    $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="addItemsModal()">Add Items</button>')
+                    $('#kontennya').html(data)
+                    $('#mainmodal').modal('toggle')
+                });
+            }
+            function tutupModal(){
                 $('#mainmodal').modal('toggle')
-            })
-        }
-function tutupModal(){
-    $('#mainmodal').modal('toggle')
-}
+            }
 </script>
 
 @endsection

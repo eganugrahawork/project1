@@ -38,9 +38,9 @@
                     </div>
                 </div>
                 <div class="card-toolbar">
-                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                         <button type="button" class="btn btn-primary me-3" onclick="addUomModal()">
-                        Add UoM</button>
+                        Add UOM</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
                         <div class="fw-bolder me-5">
@@ -82,10 +82,10 @@
                                     </span></a>
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="editModal({{ $uom->id_uom }})" >Edit</a>
+                                            <a class="menu-link px-3" onclick="editModal({{ $uom->id }})" >Edit</a>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a href="/admin/masterdata/uom/delete/{{ $uom->id_uom }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Delete</a>
+                                            <a href="/admin/masterdata/uom/delete/{{ $uom->id }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Delete</a>
                                         </div>
                                     </div>
                                 </td>
@@ -127,15 +127,19 @@
 
 <script>
         function addUomModal(){
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/uom/addmodal') }}", {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3"  onclick="addUomModal()">Add UOM</button>')
             })
         }
         function editModal(id){
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/uom/editmodal') }}/"+id, {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3"  onclick="addUomModal()">Add UOM</button>')
             })
         }
         function tutupModal(){

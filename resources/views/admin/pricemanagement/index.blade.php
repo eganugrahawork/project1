@@ -53,8 +53,9 @@
                             <th class="min-w-100px">Kode Item</th>
                             <th class="min-w-100px">Nama Item</th>
                             <th class="min-w-100px">Nama Principal</th>
-                            <th class="min-w-100px">Harga Pokok</th>
-                            <th class="min-w-100px">Harga Beli</th>
+                            <th class="min-w-100px">Top Price</th>
+                            <th class="min-w-100px">Good Sold</th>
+                            <th class="min-w-100px">Bottom Price</th>
                             <th class="min-w-100px">Status</th>
                             <th class="text-end min-w-50px">Action</th>
                         </tr>
@@ -64,14 +65,15 @@
                             <tr>
                                 <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
                                 <td>
-                                    <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->stock_code }}</a>
+                                    <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->code }}</a>
                                 </td>
                                 <td>
-                                    <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->stock_name }}</a>
+                                    <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->name }}</a>
                                 </td>
-                                <td>{{ $item->eksternal->name_eksternal }}</td>
-                                <td>{{ $item->base_price }}</td>
-                                <td>{{ $item->buy_price }}</td>
+                                <td>{{ $item->Principal->name }}</td>
+                                <td>{{ $item->PriceHistory->top_price }}</td>
+                                <td>{{ $item->PriceHistory->harga_good_sold }}</td>
+                                <td>{{ $item->PriceHistory->bottom_price }}</td>
                                 <td>idontknow</td>
                                 <td class="text-end">
                                     <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions

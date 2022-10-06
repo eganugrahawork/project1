@@ -39,7 +39,7 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                        <button type="button" class="btn btn-primary me-3" onclick="addUomModal()">
+                        <button type="button" class="btn btn-primary me-3" onclick="addCustomerModal()">
                         Add Customer</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
@@ -58,7 +58,6 @@
                             <th class="min-w-90px">Nama Customer</th>
                             <th class="min-w-90px">Wilayah</th>
                             <th class="min-w-90px">NPWP</th>
-                            <th class="min-w-90px">Nama NPWP</th>
                             <th class="min-w-90px">Alamat NPWP</th>
                             <th class="min-w-90px">Alamat Toko</th>
                             <th class="min-w-90px">Credit Limit</th>
@@ -70,14 +69,13 @@
                         <tr>
                             <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
                             <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $cust->code_cust }}</a>
+                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $cust->cust_code }}</a>
                             </td>
                             <td>
                                 <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $cust->cust_name }}</a>
                             </td>
-                            <td>{{ $cust->lokasi->lokasi }}</td>
+                            <td>{{ $cust->RegionDetail->name }}</td>
                             <td>{{ $cust->no_npwp }}</td>
-                            <td>{{ $cust->npwp_name }}</td>
                             <td>{{ $cust->npwp_address }}</td>
                             <td>{{ $cust->cust_address }}</td>
                             <td>{{ $cust->credit_limit }}</td>
@@ -136,10 +134,12 @@
 @section('js')
 
 <script>
-        function addUomModal(){
+        function addCustomerModal(){
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/customer/addmodal') }}", {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="addCustomerModal()">Add Customer</button>')
             })
         }
         function editModal(id){

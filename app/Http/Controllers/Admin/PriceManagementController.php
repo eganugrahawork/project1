@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Items;
 use App\Models\Material;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,7 @@ class PriceManagementController extends Controller
 {
     public function index(){
 
-        return view('admin.pricemanagement.index', ['items' => Material::all()]);
+        return view('admin.pricemanagement.index', ['items' => Items::all()]);
     }
 
     public function editmodal(Request $request){
