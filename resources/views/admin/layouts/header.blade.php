@@ -41,56 +41,26 @@
                                 <rect opacity="0.3" x="8" y="3" width="8" height="8" rx="4" fill="black" />
                             </svg>
                         </span>
-                        <!--end::Svg Icon-->
                     </div>
-                    <!--end::User icon-->
-                    <!--begin::Menu-->
                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
-                        <!--begin::Menu item-->
                         <div class="menu-item px-3">
                             <div class="menu-content d-flex align-items-center px-3">
-                                <!--begin::Avatar-->
                                 <div class="symbol symbol-50px me-5">
                                     <img alt="Logo" src="{{ asset('storage/'. auth()->user()->userdetail->image) }}" />
                                 </div>
-                                <!--end::Avatar-->
-                                <!--begin::Username-->
                                 <div class="d-flex flex-column">
                                     <div class="fw-bolder d-flex align-items-center fs-5">{{ auth()->user()->userdetail->nama }}
                                     <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">{{ auth()->user()->userrole->role }}</span></div>
                                     <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{ auth()->user()->email }}</a>
                                 </div>
-                                <!--end::Username-->
                             </div>
                         </div>
-                        <!--end::Menu item-->
-                        <!--begin::Menu separator-->
                         <div class="separator my-2"></div>
-                        <!--end::Menu separator-->
-                        <!--begin::Menu item-->
                         <div class="menu-item px-5">
                             <a href="/admin/myprofile" class="menu-link px-5">My Profile</a>
                         </div>
-                        <!--end::Menu item-->
-                        <!--begin::Menu item-->
-                        {{-- <div class="menu-item px-5">
-                            <a href="../../demo11/dist/pages/projects/list.html" class="menu-link px-5">
-                                <span class="menu-text">My Projects</span>
-                                <span class="menu-badge">
-                                    <span class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span>
-                                </span>
-                            </a>
-                        </div> --}}
-                        <!--end::Menu item-->
 
-                        <!--begin::Menu item-->
-
-                        <!--end::Menu item-->
-                        <!--begin::Menu separator-->
                         <div class="separator my-2"></div>
-                        <!--end::Menu separator-->
-
-                        <!--begin::Menu item-->
                         @if (auth()->user()->userrole->role === 'Super Admin')
 
                         <div class="menu-item px-5 my-1">
@@ -100,8 +70,6 @@
                             <a href="/admin/configuration/menu" class="menu-link px-5">Configuration</a>
                         </div>
                         @endif
-                        <!--end::Menu item-->
-                        <!--begin::Menu item-->
                         <div class="menu-item px-5">
                             <form  action="{{ route('logout') }}" method="POST" style="background: transparent;" >
                                 @csrf
@@ -109,24 +77,16 @@
                             </form>
 
                         </div>
-                        <!--end::Menu item-->
-                        <!--begin::Menu separator-->
                         <div class="separator my-2"></div>
                     </div>
-                    <!--end::Menu-->
-                    <!--end::Menu wrapper-->
                 </div>
                 <!--end::User -->
 
             </div>
-            <!--end::Topbar-->
         </div>
-        <!--end::Topbar-->
     </div>
     <div class="separator"></div>
-    <!--end::Separator-->
-    <!--begin::Container-->
-    <div class="header-menu-container container-xxl d-flex flex-stack h-lg-75px" id="kt_header_nav">
+    <div class="header-menu-container container-xxl d-flex flex-stack h-lg-75px bg-warna" id="kt_header_nav" >
         <!--begin::Menu wrapper-->
         <div class="header-menu flex-column flex-lg-row" data-kt-drawer="true" data-kt-drawer-name="header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_header_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
             <!--begin::Menu-->
@@ -156,7 +116,7 @@
                         @endphp
                             <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item {{ $check == true ? 'here show' : ''}} menu-lg-down-accordion me-lg-1">
                                 <span class="menu-link  py-3">
-                                    <span class="menu-title">{{ $m->menu }}</span>
+                                    <span class="menu-title text-white">{{ $m->menu }}</span>
                                     <span class="menu-arrow d-lg-none"></span>
                                 </span>
                                 <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
@@ -190,7 +150,7 @@
                     @endphp
                         <div  class="menu-item   me-lg-1">
                             <a class="menu-link {{ Request::is($str) ? 'active' : ''}} py-3" href="{{ $m->url }}">
-                                <span class="menu-title">{{ $m->menu }}</span>
+                                <span class="menu-title text-white">{{ $m->menu }}</span>
                                 <span class="menu-arrow d-lg-none"></span>
                             </a>
                         </div>

@@ -50,13 +50,13 @@
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="min-w-20px">No</th>
-                            <th class="min-w-100px">Kode Item</th>
-                            <th class="min-w-100px">Nama Item</th>
-                            <th class="min-w-100px">Nama Principal</th>
-                            <th class="min-w-100px">Top Price</th>
-                            <th class="min-w-100px">Good Sold</th>
-                            <th class="min-w-100px">Bottom Price</th>
-                            <th class="min-w-100px">Status</th>
+                            <th class="min-w-100px text-center">Kode Item</th>
+                            <th class="min-w-100px text-center">Nama Item</th>
+                            <th class="min-w-100px text-center">Nama Principal</th>
+                            <th class="min-w-100px text-center">Top Price</th>
+                            <th class="min-w-100px text-center">Good Sold</th>
+                            <th class="min-w-100px text-center">Bottom Price</th>
+                            <th class="min-w-100px text-center">Status</th>
                             <th class="text-end min-w-50px">Action</th>
                         </tr>
                     </thead>
@@ -71,10 +71,15 @@
                                     <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->name }}</a>
                                 </td>
                                 <td>{{ $item->Principal->name }}</td>
-                                <td>{{ $item->PriceHistory->top_price }}</td>
-                                <td>{{ $item->PriceHistory->harga_good_sold }}</td>
-                                <td>{{ $item->PriceHistory->bottom_price }}</td>
-                                <td>idontknow</td>
+                                <td class="text-end">@Rupiah($item->PriceHistory->top_price)</td>
+                                <td class="text-end">@Rupiah($item->PriceHistory->harga_good_sold)</td>
+                                <td class="text-end">@Rupiah($item->PriceHistory->bottom_price)</td>
+                                <td class="text-center">@if ($item->status == 1)
+                                    Ya
+                                @else
+                                    No
+                                @endif
+                                </td>
                                 <td class="text-end">
                                     <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->

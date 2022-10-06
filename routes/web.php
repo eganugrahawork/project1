@@ -4,16 +4,15 @@ use App\Http\Controllers\Admin\CoaController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ItemsController;
-use App\Http\Controllers\Admin\LokasiController;
 use App\Http\Controllers\Admin\PriceManagementController;
 use App\Http\Controllers\Admin\PrincipalController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UoMController;
-use App\Http\Controllers\Admin\UserAccessMenuController;
 use App\Http\Controllers\Admin\UserMenuController;
 use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\UserSubmenuController;
+use App\Http\Controllers\RegionController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -106,7 +105,7 @@ Route::middleware(['auth'])->controller(ProfileController::class)->group(functio
 // Profile End
 
 // Lokasi Start
-Route::middleware(['auth'])->controller(LokasiController::class)->group(function(){
+Route::middleware(['auth'])->controller(RegionController::class)->group(function(){
     Route::get('admin/configuration/location/editmodal/{id}', 'editmodal');
     Route::get('admin/configuration/location/delete/{id}', 'destroy');
     Route::post('admin/configuration/location/store', 'store');

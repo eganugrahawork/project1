@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Lokasi;
+use App\Models\Region;
 use App\Models\User;
 use App\Models\UserActivity;
 use App\Models\UserDetail;
@@ -23,8 +23,8 @@ class DashboardController extends Controller
     }
 
     public function editmyprofile(){
-        $lokasi = Lokasi::all();
-        return view('admin.myprofile.edit', ['lokasi'=>$lokasi]);
+        $region = Region::all();
+        return view('admin.myprofile.edit', ['region'=>$region]);
     }
 
     public function updateprofile(Request $request){

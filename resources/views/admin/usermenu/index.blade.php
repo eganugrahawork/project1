@@ -463,7 +463,7 @@
                                         @csrf
                                         <div>
                                             <label class="form-label fw-bold">Region</label>
-                                            <input type="text" class="form-control" name="region" required>
+                                            <input type="text" class="form-control" name="name" required>
                                         </div>
                                         <div class="d-flex justify-content-end mt-2">
                                             <button class="btn btn-sm btn-primary">Add</button>

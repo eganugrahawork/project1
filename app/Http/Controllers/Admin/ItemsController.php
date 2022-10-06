@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Eksternal;
 use App\Models\Items;
-use App\Models\Material;
 use App\Models\PriceHistory;
 use App\Models\Principal;
 use App\Models\TypeItems;
