@@ -143,9 +143,11 @@
             })
         }
         function editModal(id){
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/customer/editmodal') }}/"+id, {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="addCustomerModal()">Add Customer</button>')
             })
         }
         function tutupModal(){
