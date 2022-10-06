@@ -38,10 +38,10 @@
                     </div>
                 </div>
                 <div class="card-toolbar">
-                    {{-- <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                        <button type="button" class="btn btn-primary me-3" onclick="AddPriceModal()">
-                        Add Price</button>
-                    </div> --}}
+                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
+                        {{-- <button type="button" class="btn btn-primary me-3" onclick="AddPriceModal()">
+                        Add Price</button> --}}
+                    </div>
 
                 </div>
             </div>
@@ -85,10 +85,10 @@
                                         </span></a>
                                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                             <div class="menu-item px-3">
-                                                <a href="/admin/masterdata/pricemanagement/approve/{{ $item->id_mat }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Approve</a>
+                                                <a href="/admin/masterdata/pricemanagement/approve/{{ $item->id }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Approve</a>
                                             </div>
                                             <div class="menu-item px-3">
-                                                <a class="menu-link px-3" onclick="editModal({{ $item->id_mat }})" >Edit</a>
+                                                <a class="menu-link px-3" onclick="editModal({{ $item->id }})" >Edit</a>
                                             </div>
                                         </div>
                                     </td>
@@ -136,9 +136,11 @@
             })
         }
         function editModal(id){
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/pricemanagement/editmodal') }}/"+id, {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
+                $('#loading-add').html('')
             })
         }
         function tutupModal(){

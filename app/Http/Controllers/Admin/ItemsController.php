@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Eksternal;
 use App\Models\Items;
 use App\Models\Material;
+use App\Models\PriceHistory;
 use App\Models\Principal;
 use App\Models\TypeItems;
 use App\Models\Uom;
@@ -35,6 +36,9 @@ class ItemsController extends Controller
             'partner_id' => $request->partner_id,
             'status' => 1
         ]);
+
+        $newItem = Items::latest()->first();
+        PriceHistory::create(['items_id'=> $newItem->id]);
         return redirect()->back()->with('success', 'Data Item Ditambahkan !');
     }
 

@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="card-toolbar">
-                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                         <button type="button" class="btn btn-primary me-3" onclick="addCustomerModal()">
                         Add Customer</button>
                     </div>

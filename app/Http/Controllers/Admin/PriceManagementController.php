@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Items;
 use App\Models\Material;
+use App\Models\PriceHistory;
 use Illuminate\Http\Request;
 
 class PriceManagementController extends Controller
@@ -16,14 +17,14 @@ class PriceManagementController extends Controller
 
     public function editmodal(Request $request){
 
-        return view('admin.pricemanagement.editmodal',['item' => Material::where(['id_mat' => $request->id])->first()]);
+        return view('admin.pricemanagement.editmodal',['item' => Items::where(['id' => $request->id])->first()]);
     }
 
     public function update(Request $request){
-        Material::where(['id_mat' =>$request->id_mat])->update([
+        PriceHistory::where(['id' =>$request->id])->update([
             'top_price' => $request->top_price,
             'bottom_price' => $request->bottom_price,
-            'buy_price' => $request->buy_price
+            'harga_good_sold' => $request->harga_good_sold
         ]);
         return redirect()->back()->with('success', 'Data Item diUpdate !');
     }
