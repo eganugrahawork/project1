@@ -14,7 +14,7 @@
             <!--begin::Breadcrumb-->
             <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
                 <li class="breadcrumb-item text-gray-600">
-                    <a href="/admin/dashboard" class="text-gray-600 text-hover-primary">{{ auth()->user()->userdetail->nama }} : {{ auth()->user()->userrole->role }}</a>
+                    <a href="/admin/dashboard" class="text-gray-600 text-hover-primary">{{ auth()->user()->name }} : {{ auth()->user()->userrole->role }}</a>
                 </li>
 
             </ul>
@@ -377,7 +377,7 @@
                     <div class="card-header align-items-center border-0 mt-4">
                         <h3 class="card-title align-items-start flex-column">
                             <span class="fw-bolder mb-2 text-dark">Role</span>
-                            <span class="text-muted fw-bold fs-7">{{ auth()->user()->userdetail->nama }} : {{ auth()->user()->userrole->role }}</span>
+                            <span class="text-muted fw-bold fs-7">{{ auth()->user()->name }} : {{ auth()->user()->userrole->role }}</span>
                         </h3>
                         <div class="card-toolbar">
                             <!--begin::Menu-->
@@ -445,7 +445,7 @@
                     <div class="card-header align-items-center border-0 mt-4">
                         <h3 class="card-title align-items-start flex-column">
                             <span class="fw-bolder mb-2 text-dark">Region</span>
-                            <span class="text-muted fw-bold fs-7">{{ auth()->user()->userdetail->nama }} : {{ auth()->user()->userrole->role }}</span>
+                            <span class="text-muted fw-bold fs-7">{{ auth()->user()->name }} : {{ auth()->user()->userrole->role }}</span>
                         </h3>
                         <div class="card-toolbar">
                             <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">

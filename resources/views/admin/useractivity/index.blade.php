@@ -78,12 +78,12 @@
                                         <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                                             <a href="#">
                                                 <div class="symbol-label">
-                                                    <img src="{{ asset('storage/'. $usr->users->userdetail->image) }}"  class="w-100" />
+                                                    <img src="{{ asset('storage/'. $usr->users->image) }}"  class="w-100" />
                                                 </div>
                                             </a>
                                         </div>
                                         <div class="d-flex flex-column">
-                                            <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $usr->users->UserDetail->nama }}</a>
+                                            <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $usr->users->name }}</a>
                                             <span>{{ $usr->users->username }}</span>
                                         </div>
                                     </td>

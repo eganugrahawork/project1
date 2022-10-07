@@ -97,7 +97,7 @@
                                     </a>
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $usr->nama }}</a>
+                                    <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $usr->name }}</a>
                                     <span>{{ $usr->username }}</span>
                                 </div>
                             </td>
@@ -145,7 +145,7 @@
 {{-- Modal Add User --}}
 
 <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
+    <div class="modal-dialog modal-dialog-centered mw-1000px">
         <div class="modal-content">
             <div class="modal-header" id="kt_modal_add_user_header">
                 <h2 class="fw-bolder">Add User</h2>
@@ -162,7 +162,7 @@
                 <form id="kt_modal_add_user_form" class="form" action="/admin/users/store" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
-                        <div class="fv-row mb-7">
+                        <div class="text-center fv-row mb-7">
                             <label class="d-block fw-bold fs-6 mb-5">Image</label>
                             <div class="image-input image-input-outline" data-kt-image-input="true">
                                 <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{ url('storage/img-users/default.png') }});"></div>
@@ -179,61 +179,89 @@
                             </div>
                             <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
                         </div>
-                        <div class="fv-row mb-7">
-                            <label class="required fw-bold fs-6 mb-2">Nama</label>
-                            <input type="text" name="nama" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Nama Lengkap" required/>
-                        </div>
-                        <div class="fv-row mb-7">
-                            <label class="required fw-bold fs-6 mb-2">Email</label>
-                            <input type="email" name="email" oninput="checkEmail(this)" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" required/>
-                            <div class="form-text" style="color: red" id="demailmin"><i class="bi bi-x-circle-fill"></i> Harus Email</div>
-                            <div class="form-text" style="color: rgb(207, 207, 29)" id="demailcheck"><i class="bi bi-arrow-clockwise"></i> Sedang Memeriksa</div>
-                            <div class="form-text" style="color: red" id="demailcheckfalse"><i class="bi bi-x-circle-fill"></i> Email sudah ada</div>
-                            <div class="form-text" style="color: rgb(61, 32, 187)" id="demailchecktrue"><i class="bi bi-check2-circle"></i> Email Bisa Digunakan</div>
-                        </div>
-                        <div class="fv-row mb-7">
-                            <label class="required fw-bold fs-6 mb-2">No. Telp</label>
-                            <input type="number" name="nokontak" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="081111111111" required/>
-                        </div>
-                        <div class="fv-row mb-7">
-                            <label class="required fw-bold fs-6 mb-2">Alamat</label>
-                            <input type="text" name="alamat" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
-                        </div>
-                        <div class="fv-row mb-7">
-                            <label class="required fw-bold fs-6 mb-2">Wilayah</label>
-                            <select class="form-select form-select-solid" name="region" required>
-                                @foreach ( $region as $l )
-                                <option value="{{ $l->id }}">{{ $l->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="fv-row mb-7">
-                            <label class="required fw-bold fs-6 mb-2">Username</label>
-                            <input type="text" name="username" oninput="checkUsername(this)"  class="form-control form-control-solid mb-3 mb-lg-0"  required/>
-                            <div class="form-text" style="color: red" id="dusrmin"><i class="bi bi-x-circle-fill"></i> Minimal 4 Karakter</div>
-                            <div class="form-text" style="color: rgb(207, 207, 29)" id="dusrcheck"><i class="bi bi-arrow-clockwise"></i> Sedang Memeriksa</div>
-                            <div class="form-text" style="color: red" id="dusrcheckfalse"><i class="bi bi-x-circle-fill"></i> Username sudah ada</div>
-                            <div class="form-text" style="color: rgb(61, 32, 187)" id="dusrchecktrue"><i class="bi bi-check2-circle"></i> Bisa Digunakan</div>
-
-                        </div>
-                        <div class="fv-row mb-7">
-                            <label class="required fw-bold fs-6 mb-2">Password</label>
-                            <input type="password" name="password" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
-                        </div>
-                        <div class="mb-7">
-                            <label class="required fw-bold fs-6 mb-5">Role</label>
-                            @foreach ($role as $r )
-                            <div class="d-flex fv-row">
-                                <div class="form-check form-check-custom form-check-solid">
-                                    <input class="form-check-input me-3" name="id_role" type="radio" value="{{ $r->id }}" id="kt_modal_update_role_option_0" checked='checked' />
-                                    <label class="form-check-label" for="kt_modal_update_role_option_0">
-                                        <div class="fw-bolder text-gray-800">{{ $r->role }}</div>
-                                    </label>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-bold fs-6 mb-2">Nama</label>
+                                    <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Nama Lengkap" required/>
+                                </div>
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-bold fs-6 mb-2">Email</label>
+                                    <input type="email" name="email" oninput="checkEmail(this)" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" required/>
+                                    <div class="form-text" style="color: red" id="demailmin"><i class="bi bi-x-circle-fill"></i> Harus Email</div>
+                                    <div class="form-text" style="color: rgb(207, 207, 29)" id="demailcheck"><i class="bi bi-arrow-clockwise"></i> Sedang Memeriksa</div>
+                                    <div class="form-text" style="color: red" id="demailcheckfalse"><i class="bi bi-x-circle-fill"></i> Email sudah ada</div>
+                                    <div class="form-text" style="color: rgb(61, 32, 187)" id="demailchecktrue"><i class="bi bi-check2-circle"></i> Email Bisa Digunakan</div>
+                                </div>
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-bold fs-6 mb-2">Tempat Lahir</label>
+                                    <input type="text" name="place_of_birth" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="xxx" required/>
+                                </div>
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-bold fs-6 mb-2">Tanggal Lahir</label>
+                                    <input type="date" name="date_of_birth" class="form-control form-control-solid mb-3 mb-lg-0" required/>
+                                </div>
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-bold fs-6 mb-2">Agama</label>
+                                    <select class="form-select form-select-solid" name="religion" required>
+                                        <option value="Islam">Islam</option>
+                                        <option value="Kristen">Kristen</option>
+                                        <option value="Protestan">Protestan</option>
+                                        <option value="Hindu">Hindu</option>
+                                        <option value="Budha">Budha</option>
+                                        <option value="Ateis">Ateis</option>
+                                        <option value="Lainnya">Lainnya</option>
+                                    </select>
+                                </div>
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-bold fs-6 mb-2">No. Telp</label>
+                                    <input type="number" name="no_hp" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="08xxxx" required/>
                                 </div>
                             </div>
-                            <div class='separator separator-dashed my-5'></div>
-                            @endforeach
+                            <div class="col-lg-6">
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-bold fs-6 mb-2">Alamat</label>
+                                    <input type="text" name="address" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                                </div>
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-bold fs-6 mb-2">Wilayah</label>
+                                    <select class="form-select form-select-solid" name="region" required>
+                                        @foreach ( $region as $l )
+                                        <option value="{{ $l->id }}">{{ $l->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-bold fs-6 mb-2">Username</label>
+                                    <input type="text" name="username" oninput="checkUsername(this)"  class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                                    <div class="form-text" style="color: red" id="dusrmin"><i class="bi bi-x-circle-fill"></i> Minimal 4 Karakter</div>
+                                    <div class="form-text" style="color: rgb(207, 207, 29)" id="dusrcheck"><i class="bi bi-arrow-clockwise"></i> Sedang Memeriksa</div>
+                                    <div class="form-text" style="color: red" id="dusrcheckfalse"><i class="bi bi-x-circle-fill"></i> Username sudah ada</div>
+                                    <div class="form-text" style="color: rgb(61, 32, 187)" id="dusrchecktrue"><i class="bi bi-check2-circle"></i> Bisa Digunakan</div>
+
+                                </div>
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-bold fs-6 mb-2">Password</label>
+                                    <input type="password" name="password" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                                </div>
+                                <div class="mb-7">
+                                    <label class="required fw-bold fs-6 mb-5">Role</label>
+                                    @foreach ($role as $r )
+                                    <div class="d-flex fv-row">
+                                        <div class="form-check form-check-custom form-check-solid">
+                                            <input class="form-check-input me-3" name="id_role" type="radio" value="{{ $r->id }}" id="kt_modal_update_role_option_0" checked='checked' />
+                                            <label class="form-check-label" for="kt_modal_update_role_option_0">
+                                                <div class="fw-bolder text-gray-800">{{ $r->role }}</div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class='separator separator-dashed my-5'></div>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
+
+
                     </div>
                     <div class="text-center pt-15">
                         <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
@@ -258,7 +286,7 @@
 {{-- End Modal Add User --}}
 
 <div class="modal fade" id="mainmodal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
+    <div class="modal-dialog modal-dialog-centered mw-1000px">
         <div class="modal-content">
             <div class="modal-header" id="mainmodal_header">
                 <h2 class="fw-bolder">Users</h2>

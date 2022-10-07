@@ -1,5 +1,5 @@
 <?php
-
+// Admin
 use App\Http\Controllers\Admin\CoaController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -7,13 +7,18 @@ use App\Http\Controllers\Admin\ItemsController;
 use App\Http\Controllers\Admin\PriceManagementController;
 use App\Http\Controllers\Admin\PrincipalController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Admin\UoMController;
 use App\Http\Controllers\Admin\UserMenuController;
 use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\UserSubmenuController;
-use App\Http\Controllers\RegionController;
+// End Admin
+
+// Utils
 use Illuminate\Support\Facades\Route;
+
+// End Utils
 /*
 |--------------------------------------------------------------------------
 | Web Routes

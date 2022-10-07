@@ -11,6 +11,6 @@ class UserActivity extends Model
     use HasFactory;
 
     public function users(){
-return $this->hasOne(User::class, 'id', 'id_user');
+        return $this->hasOne(User::class, 'id', 'id_user');
     }
 }

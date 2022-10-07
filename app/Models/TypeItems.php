@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class TypeItems extends Model
 {
+    protected $guarded =['id'];
     use HasFactory;
 }

@@ -29,7 +29,7 @@
                     <!--begin: Pic-->
                     <div class="me-7 mb-4">
                         <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                            <img src="{{ asset('storage/'.auth()->user()->userdetail->image) }}" alt="image" />
+                            <img src="{{ asset('storage/'.auth()->user()->image) }}" alt="image" />
                             <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                             <div class="d-flex flex-column">
                                 <!--begin::Name-->
                                 <div class="d-flex align-items-center mb-2">
-                                    <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{ auth()->user()->userdetail->nama }}</a>
+                                    <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{ auth()->user()->name }}</a>
                                 </div>
                                 <!--end::Name-->
                                 <!--begin::Info-->
@@ -64,7 +64,7 @@
                                             <path d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z" fill="black" />
                                         </svg>
                                     </span>
-                                    {{ auth()->user()->userdetail->lokasi }}</a>
+                                    {{ auth()->user()->regiondetail->name }}</a>
                                     <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
                                     <!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
                                     <span class="svg-icon svg-icon-4 me-1">
@@ -182,7 +182,7 @@
         <div class="row mb-7">
             <label class="col-lg-4 fw-bold text-muted">Full Name</label>
             <div class="col-lg-8">
-                <span class="fw-bolder fs-6 text-gray-800">{{ auth()->user()->userdetail->nama }}</span>
+                <span class="fw-bolder fs-6 text-gray-800">{{ auth()->user()->name }}</span>
             </div>
             <!--end::Col-->
         </div>
@@ -211,7 +211,7 @@
             <!--end::Label-->
             <!--begin::Col-->
             <div class="col-lg-8 d-flex align-items-center">
-                <span class="fw-bolder fs-6 text-gray-800 me-2">{{ auth()->user()->userdetail->nokontak }}</span>
+                <span class="fw-bolder fs-6 text-gray-800 me-2">{{ auth()->user()->no_hp }}</span>
                 <span class="badge badge-success">Verified</span>
             </div>
             <!--end::Col-->
@@ -222,7 +222,7 @@
             <label class="col-lg-4 fw-bold text-muted">Region
             <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Country of origination"></i></label>
             <div class="col-lg-8">
-                <span class="fw-bolder fs-6 text-gray-800">{{ auth()->user()->userdetail->lokasi }}</span>
+                <span class="fw-bolder fs-6 text-gray-800">{{ auth()->user()->regiondetail->name }}</span>
             </div>
             <!--end::Col-->
         </div>
@@ -232,7 +232,7 @@
             <!--end::Label-->
             <!--begin::Col-->
             <div class="col-lg-8">
-                <span class="fw-bolder fs-6 text-gray-800">{{ auth()->user()->userdetail->alamat }}</span>
+                <span class="fw-bolder fs-6 text-gray-800">{{ auth()->user()->address }}</span>
             </div>
             <!--end::Col-->
         </div>
