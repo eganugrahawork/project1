@@ -40,14 +40,14 @@ Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middlewar
 Route::get('/admin/useractivity', [DashboardController::class, 'useractivity'])->middleware('auth');
 //End Dashboard
 
-// My Profile Start
-Route::middleware(['auth'])->controller(DashboardController::class)->group(function(){
-    Route::get('admin/myprofile', 'myprofile');
-    Route::get('admin/myprofile/edit', 'editmyprofile');
-    Route::post('admin/myprofile/updateprofile', 'updateprofile');
-});
 
-// End My Profile
+// Profile Start
+Route::middleware(['auth'])->controller(ProfileController::class)->group(function(){
+    Route::get('admin/myprofile', 'index');
+    Route::get('admin/myprofile/edit', 'editmyprofile');
+    Route::post('admin/myprofile/update', 'update');
+});
+// Profile End
 
 //UserMenu Start
 Route::middleware(['auth'])->controller(UserMenuController::class)->group(function(){
@@ -102,12 +102,6 @@ Route::middleware(['auth'])->controller(UsersController::class)->group(function(
 });
 //Users END
 
-// Profile Start
-Route::middleware(['auth'])->controller(ProfileController::class)->group(function(){
-    Route::get('admin/profile', 'index');
-    Route::post('admin/profile/update', 'update');
-});
-// Profile End
 
 // Lokasi Start
 Route::middleware(['auth'])->controller(RegionController::class)->group(function(){

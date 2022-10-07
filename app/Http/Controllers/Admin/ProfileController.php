@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Region;
 use App\Models\User;
-use App\Models\UserAccessMenu;
-use App\Models\UserDetail;
-use App\Models\UserMenu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -17,38 +15,31 @@ class ProfileController extends Controller
 
     public function __construct()
     {
-        $this->middleware(function($request, $next){
-            $id_menu = UserMenu::select('id')->where(['url' => '/admin/profile'])->first();
-            $id_role = auth()->user()->id_role;
 
-            $check = UserAccessMenu::where(['id_role' => $id_role, 'id_menu' => $id_menu->id])->first();
-
-            if($check){
-                return $next($request);
-            }else{
-                return redirect('/blocked');
-            }
-        });
     }
 
 
     public function index(){
-        $user = auth()->user();
+        return view('admin.myprofile.index');
+    }
 
-        return view('admin.profile.index', ['title' => 'Profile', 'user'=>$user]);
+    public function editmyprofile(){
+        $region = Region::all();
+        return view('admin.myprofile.edit', ['region'=>$region]);
     }
 
     public function update(Request $request){
 
         $onUser = User::where(['id' => $request->id])->first();
+        // dd($onUser);
         $request->validate([
-            'nama' => 'required|min:3',
+            'name' => 'required|min:3',
             'email' => 'required|unique:users,email,'.$onUser->id,
             'username' => 'required|unique:users,username,'.$onUser->id,
-            'alamat' => 'required|min:4',
-            'nokontak' => 'required|unique:user_details,nokontak,'.$onUser->id_detail_user,
+            'address' => 'required|min:4',
+            'no_hp' => 'required',
             'id_role' => 'required',
-            'lokasi' => 'required',
+            'region' => 'required',
             'image' => 'image|file|max:1024',
             'password' => 'confirmed',
             'oldpassword' => 'required|min:8'
@@ -58,7 +49,7 @@ class ProfileController extends Controller
             return redirect()->back()->with('fail', 'Password Salah');
         }
 
-        $image = $onUser->userdetail->image;
+        $image = $onUser->image;
         $password = $onUser->password;
 
         if($request->file('image')){
@@ -74,21 +65,20 @@ class ProfileController extends Controller
             $password = Hash::make($request->password);
         }
 
-        $user_detail = [
-            'nama' => $request->nama,
-            'image'=> $image,
-            'alamat' => $request->alamat,
-            'nokontak' => $request->nokontak,
-            'lokasi' => $request->lokasi
-        ];
 
-        UserDetail::where(['id'=> $request->id_detail_user])->update($user_detail);
 
         $users = [
             'email' => $request->email,
             'username' => $request->username,
-            'id_detail_user' => $request->id,
             'id_role' => $request->id_role,
+            'name' => $request->name,
+            'address' => $request->address,
+            'image' => $image,
+            'no_hp' => $request->no_hp,
+            'region' => $request->region,
+            'place_of_birth' => $request->place_of_birth,
+            'date_of_birth' => $request->date_of_birth,
+            'religion' => $request->religion,
             'password' => $password
         ];
 

@@ -23,16 +23,16 @@
         </div>
     </div>
     <div id="kt_account_profile_details" class="collapse show">
-        <form  class="form" action="/admin/myprofile/updateprofile" method="post" enctype="multipart/form-data">
+        <form  class="form" action="/admin/myprofile/update" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" value="{{ auth()->user()->id }}">
-            <input type="hidden" name="oldimage" value="{{ auth()->user()->userdetail->image }}">
+            <input type="hidden" name="oldimage" value="{{ auth()->user()->image }}">
             <div class="card-body border-top p-9">
                 <div class="row mb-6">
                     <label class="col-lg-4 col-form-label fw-bold fs-6">Image</label>
                     <div class="col-lg-8">
-                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{ url(asset('storage/'. auth()->user()->userdetail->image)) }})">
-                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{ url(asset('storage/'. auth()->user()->userdetail->image)) }})"></div>
+                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{ url(asset('storage/'. auth()->user()->image)) }})">
+                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{ url(asset('storage/'. auth()->user()->image)) }})"></div>
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change Image">
                                 <i class="bi bi-pencil-fill fs-7"></i>
                                 <input type="file" name="image" accept=".png, .jpg, .jpeg" />
@@ -57,10 +57,10 @@
                 <div class="row mb-6">
                     <label class="col-lg-4 col-form-label required fw-bold fs-6">Full Name</label>
                     <div class="col-lg-8 fv-row">
-                                <input type="text" name="nama" class="form-control form-control-lg form-control-solid @error('nama')
+                                <input type="text" name="name" class="form-control form-control-lg form-control-solid @error('name')
                                     is-invalid
-                                @enderror" value="{{ old('nama', auth()->user()->userdetail->nama) }}" />
-                                @error('nama')
+                                @enderror" value="{{ old('name', auth()->user()->name) }}" />
+                                @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -70,14 +70,8 @@
                 <div class="row mb-6">
                     <label class="col-lg-4 col-form-label required fw-bold fs-6">Username</label>
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="username" class="form-control form-control-lg form-control-solid @error('username')
-                        is-invalid
-                    @enderror" placeholder="Username" value="{{ old('username', auth()->user()->username) }}" />
-                        @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
+                        <input type="hidden" name="username" class="form-control form-control-lg form-control-solid " placeholder="Username" value="{{ old('username', auth()->user()->username) }}" />
+                        <label class="col-form-label fw-bold fs-6">{{ auth()->user()->username }}</label>
                     </div>
                 </div>
                 <div class="row mb-6">
@@ -86,10 +80,10 @@
                         <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i>
                     </label>
                     <div class="col-lg-8 fv-row">
-                        <input type="number" name="nokontak" class="form-control form-control-lg form-control-solid @error('nokontak')
+                        <input type="number" name="no_hp" class="form-control form-control-lg form-control-solid @error('no_hp')
                         is-invalid
-                    @enderror" placeholder="Phone number" value="{{  old('nokontak', auth()->user()->userdetail->nokontak)  }}" />
-                    @error('nokontak')
+                    @enderror" placeholder="Phone number" value="{{  old('no_hp', auth()->user()->no_hp)  }}" />
+                    @error('no_hp')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -105,25 +99,51 @@
                     </div>
                 </div>
                 <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">Place Birth</label>
+                    <div class="col-lg-8 fv-row">
+                        <input type="hidden" name="place_of_birth" class="form-control form-control-lg form-control-solid" value="{{ auth()->user()->place_of_birth }}" />
+                        <label class="col-form-label fw-bold fs-6">{{ auth()->user()->place_of_birth }}</label>
+                    </div>
+                </div>
+                <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">Date Birth</label>
+                    <div class="col-lg-8 fv-row">
+                        <input type="hidden" name="date_of_birth" class="form-control form-control-lg form-control-solid" value="{{ auth()->user()->date_of_birth }}" />
+                        <label class="col-form-label fw-bold fs-6">{{ auth()->user()->date_of_birth }}</label>
+                    </div>
+                </div>
+                <div class="row mb-6">
                     <label class="col-lg-4 col-form-label fw-bold fs-6">Region</label>
                     <div class="col-lg-8 fv-row">
-                        <select class="form-select form-select-solid" name="lokasi" required>
-                                @foreach ( $lokasi as $l )
-                                <option value="{{ $l->lokasi }}" @if (auth()->user()->userdetail->lokasi === $l->lokasi)
+                        <select class="form-select form-select-solid" name="region" required>
+                                @foreach ( $region as $l )
+                                <option value="{{ $l->id }}" @if (auth()->user()->id === $l->region)
                                     selected
-                                @endif>{{ $l->lokasi }}</option>
+                                @endif>{{ $l->name }}</option>
                                 @endforeach
                         </select>
-
+                    </div>
+                </div>
+                <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">Religion</label>
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" name="religion" class="form-control form-control-lg form-control-solid @error('religion')
+                        is-invalid
+                    @enderror" value="{{ old('religion', auth()->user()->religion) }}" />
+                        @error('religion')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     </div>
                 </div>
                 <div class="row mb-6">
                     <label class="col-lg-4 col-form-label fw-bold fs-6">Address</label>
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="alamat" class="form-control form-control-lg form-control-solid @error('alamat')
+                        <input type="text" name="address" class="form-control form-control-lg form-control-solid @error('address')
                         is-invalid
-                    @enderror" value="{{ old('alamat', auth()->user()->userdetail->alamat) }}" />
-                        @error('alamat')
+                    @enderror" value="{{ old('address', auth()->user()->address) }}" />
+                        @error('address')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -157,7 +177,7 @@
                     <div class="col-lg-8 fv-row">
                         <input type="password" name="oldpassword" class="form-control form-control-lg form-control-solid @error('oldpassword')
                         is-invalid
-                    @enderror" />
+                    @enderror"  required/>
                         @error('oldpassword')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -167,8 +187,7 @@
                 </div>
             </div>
             <div class="card-footer d-flex justify-content-end py-6 px-9">
-                <button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
-                <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save Changes</button>
+                <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Update Changes</button>
             </div>
         </form>
     </div>

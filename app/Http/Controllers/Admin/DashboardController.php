@@ -18,80 +18,9 @@ class DashboardController extends Controller
         return view('admin.dashboard.index', ['title' => 'Dashboard']);
     }
 
-    public function myprofile(){
-        return view('admin.myprofile.index');
-    }
-
-    public function editmyprofile(){
-        $region = Region::all();
-        return view('admin.myprofile.edit', ['region'=>$region]);
-    }
-
-    public function updateprofile(Request $request){
 
 
-        $onUser = User::where(['id' => $request->id])->first();
-        $request->validate([
-            'nama' => 'required',
-            'username' => 'required|unique:users,username,'.$onUser->id,
-            'nokontak' => 'required',
-            'lokasi' => 'required',
-            'alamat' => 'required',
-            'password' => 'confirmed',
-            'oldpassword' => 'required|min:8'
-        ]);
 
-        // dd($request);
-        $image = $onUser->userdetail->image;
-        $password = $onUser->password;
-
-        if(!password_verify($request->oldpassword, $onUser->password)){
-            return redirect('/admin/myprofile/edit')->with('fail', 'Wrong Password');
-        }
-
-        if($request->file('image')){
-            if($request->oldimage !== 'img-users/default.png'){
-                Storage::delete($request->oldimage);
-            }
-            $image = $request->file('image')->store('img-users');
-        }
-
-        if($request->password !== null){
-            $password = Hash::make($request->password);
-        }
-
-        $user_detail = [
-            'nama' => $request->nama,
-            'image'=> $image,
-            'alamat' => $request->alamat,
-            'nokontak' => $request->nokontak,
-            'lokasi' => $request->lokasi
-        ];
-
-        UserDetail::where(['id'=> $onUser->id_detail_user])->update($user_detail);
-
-        $users = [
-            'email' => $request->email,
-            'username' => $request->username,
-            'id_detail_user' => $onUser->id_detail_user,
-            'id_role' => $request->id_role,
-            'password' => $password
-        ];
-
-        User::where(['id'=>$request->id])->update($users);
-
-
-        UserActivity::create([
-            'id_user' => auth()->user()->id,
-            'menu' => "Profile",
-            'aktivitas' => "Update",
-            'keterangan' => "Update Profile ". $request->email
-        ]);
-
-
-        return redirect('/admin/myprofile')->with('success', 'User Berhasil di Update');
-
-    }
 
     public function useractivity(){
 
