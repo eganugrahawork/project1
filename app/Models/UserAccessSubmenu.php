@@ -9,4 +9,8 @@ class UserAccessSubmenu extends Model
 {
     protected $guarded =['id'];
     use HasFactory;
+
+    public function usersubmenu(){
+        return $this->hasOne(UserSubmenu::class, 'id', 'id_submenu');
+    }
 }

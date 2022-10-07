@@ -7,6 +7,9 @@
         <div class="page-title d-flex flex-column me-3">
             <h1 class="d-flex text-dark fw-bolder my-1 fs-3">Dashboard</h1>
         </div>
+        @can('create')
+        <h1>ada</h1>
+        @endcan
     </div>
 </div>
 

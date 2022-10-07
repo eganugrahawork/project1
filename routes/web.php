@@ -83,7 +83,8 @@ Route::middleware(['auth'])->controller(UserRoleController::class)->group(functi
     Route::get('admin/configuration/useraccessmenu/editcustomaccess/{id}', 'editcustomaccess');
     Route::post('/admin/configuration/useraccessmenu/blockaccess', 'blockaccess');
     Route::post('/admin/configuration/useraccessmenu/unblockaccess', 'unblockaccess');
-
+    Route::get('/admin/configuration/useraccessmenu/editpermissionmodal/{id}', 'editpermissionmodal');
+    Route::post('/admin/configuration/useraccessmenu/storepermissionmenu', 'storepermissionmenu');
 });
 //UserAccessMenu End
 

@@ -11,6 +11,7 @@ use App\Models\UserActivity;
 use App\Models\UserMenu;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use PDO;
 
@@ -212,4 +213,14 @@ class UserRoleController extends Controller
         return response()->json('success');
     }
 
+    public function editpermissionmodal(Request $request){
+        $menu = DB::select("select b.menu, b.id from user_access_menus a join user_menus b on a.id_menu = b.id where a.id_role = $request->id and b.is_submenu <> 1");
+
+        return view('admin.userrole.editpermissionmodal', ['menu'=> $menu, 'submenu' =>UserAccessSubmenu::where(['id_role' =>$request->id])->get()]);
+    }
+
+    public function storepermissionmenu(Request $request){
+        dd($request);
+        // print_r($request);die;
+    }
 }
