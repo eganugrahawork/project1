@@ -3,79 +3,70 @@
     <div class="row">
         <div class="col-lg-6">
         <div class="fv-row mb-7">
-            <input type="hidden" name="id" value="{{ $eks->id }}">
+            <input type="hidden" name="id" value="{{ $principal->id }}">
             <label class="required fw-bold fs-6 mb-2">Kode</label>
-            <input type="text" name="kode_eksternal" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $eks->kode_eksternal }}" required/>
+            <input type="text" name="code" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $principal->code }}" required/>
         </div>
         <div class="fv-row mb-7">
             <label class="required fw-bold fs-6 mb-2">Nama</label>
-            <input type="text" name="name_eksternal" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $eks->name_eksternal }}" required/>
+            <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $principal->name }}" required/>
         </div>
         <div class="fv-row mb-7">
             <label class="required fw-bold fs-6 mb-2">Email</label>
-            <input type="email" name="email" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $eks->email }}" required/>
-        </div>
-        <div class="fv-row mb-7">
-            <label class="required fw-bold fs-6 mb-2">Alamat</label>
-            <textarea  name="eksternal_address" class="form-control form-control-solid mb-3 mb-lg-0"  required>{{ $eks->eksternal_address }}</textarea>
+            <input type="email" name="email" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $principal->email }}" required/>
         </div>
         <div class="fv-row mb-7">
             <label class="required fw-bold fs-6 mb-2">No Hp</label>
-            <input type="number" name="phone_1" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $eks->phone_1 }}" required/>
+            <input type="number" name="phone" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $principal->phone }}" required/>
+        </div>
+        <div class="fv-row mb-7">
+            <label class="required fw-bold fs-6 mb-2">Fax</label>
+            <input type="text" name="fax" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $principal->fax }}"  required/>
         </div>
         </div>
         <div class="col-lg-6">
+            <div class="fv-row mb-7">
+                <label class="required fw-bold fs-6 mb-2">Alamat</label>
+                <textarea  name="address" class="form-control form-control-solid mb-3 mb-lg-0"  required>{{ $principal->address }}</textarea>
+            </div>
+            <div class="fv-row mb-7">
+                <label class="required fw-bold fs-6 mb-2">Alamat Pengiriman</label>
+                <textarea  name="ship_address" class="form-control form-control-solid mb-3 mb-lg-0"  required>{{ $principal->ship_address }}</textarea>
+            </div>
+
         <div class="fv-row mb-7">
-            <label class="required fw-bold fs-6 mb-2">Fax</label>
-            <input type="text" name="fax" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $eks->fax }}"  required/>
-        </div>
-        <div class="fv-row mb-7">
-            <label class="required fw-bold fs-6 mb-2">Bank 1</label>
+            <label class="required fw-bold fs-6 mb-2">Bank</label>
             <div class="row">
                 <div class="col-lg-4">
-                    <input type="text" name="bank1" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $eks->bank1 }}"   required/>
+                    <input type="text" name="bank_name" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $principal->bank_name }}"   required/>
                 </div>
                 <div class="col-lg-8">
-                    <input type="text" name="rek1" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $eks->rek1 }}"  required/>
+                    <input type="text" name="account_number" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $principal->account_number }}"  required/>
                 </div>
             </div>
         </div>
         <div class="fv-row mb-7">
-            <label class="fw-bold fs-6 mb-2">Bank 2</label>
-            <div class="row">
-                <div class="col-lg-4">
-                    <input type="text" name="bank2" value="{{ $eks->bank2 }}" class="form-control form-control-solid mb-3 mb-lg-0" />
-                </div>
-                <div class="col-lg-8">
-                    <input type="text" name="rek2"  value="{{ $eks->rek2 }}"class="form-control form-control-solid mb-3 mb-lg-0" />
-                </div>
-            </div>
-        </div>
-        <div class="fv-row mb-7">
-            <label class="fw-bold fs-6 mb-2">Bank 3</label>
-            <div class="row">
-                <div class="col-lg-4">
-                    <input type="text" name="bank3" value="{{ $eks->bank3 }}" class="form-control form-control-solid mb-3 mb-lg-0" />
-                </div>
-                <div class="col-lg-8">
-                    <input type="text" name="rek3"  value="{{ $eks->rek3 }}"class="form-control form-control-solid mb-3 mb-lg-0" />
-                </div>
-            </div>
-        </div>
-        <div class="fv-row mb-7">
-            <label class="form-label fw-bold required">Status Perlihat</label>
-        <select class="form-select  form-select-solid mb-3 mb-lg-0" name="sts_show" required>
-                <option value="1"  @if ($eks->sts_show == 1)
+            <label class="form-label fw-bold required">Status</label>
+        <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
+                <option value="1"  @if ($principal->status == 1)
                     selected
-                @endif>Show</option>
-                <option value="0"  @if ($eks->sts_show !== 1)
+                @endif>Ya</option>
+                <option value="0"  @if ($principal->status !== 1)
                     selected
-                @endif>Hide</option>
+                @endif>Tidak</option>
         </select>
         </div>
         </div>
     </div>
-        <div class="d-flex justify-content-end">
-            <button class="btn btn-sm btn-primary">Add Principal</button>
+        <div class="d-flex justify-content-end" id="loadingnya">
+            <button class="btn btn-sm btn-primary" id="btn-update">Update Principal</button>
         </div>
 </form>
+
+<script>
+    $('form').submit(function(){
+    $('#btn-update').hide()
+    $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+    // $('#btn-custom').attr("disabled", 'disabled')
+})
+</script>

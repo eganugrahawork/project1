@@ -38,13 +38,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $with = ['UserDetail', 'UserRole'];
+    protected $with = ['UserRole'];
 
-    public function UserDetail(){
-        return $this->hasOne(UserDetail::class, 'id', 'id_detail_user');
-    }
 
     public function UserRole(){
         return $this->hasOne(UserRole::class, 'id', 'id_role');
+    }
+    public function RegionDetail(){
+        return $this->hasOne(Region::class, 'id', 'region');
     }
 }

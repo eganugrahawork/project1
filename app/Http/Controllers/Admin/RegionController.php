@@ -4,53 +4,50 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-
-
-use App\Models\Lokasi;
+use App\Models\Region;
 use App\Models\UserActivity;
 use Illuminate\Http\Request;
-use PDO;
 
-class LokasiController extends Controller
+class RegionController extends Controller
 {
     public function store(Request $request){
         UserActivity::create([
             'id_user' => auth()->user()->id,
-            'menu' => "Lokasi",
+            'menu' => "Region",
             'aktivitas' => "Tambah",
-            'keterangan' => "Tambah Lokasi  $request->lokasi"
+            'keterangan' => "Tambah Region  $request->name"
         ]);
-        Lokasi::create(['lokasi'=> $request->lokasi]);
+        Region::create(['name'=> $request->name, 'status' => 1]);
         return redirect()->back()->with('success', 'Success adding Location');
     }
 
     public function destroy(Request $request){
-        $oldLokasi = Lokasi::where(['id'=>$request->id])->first();
+        $oldRegion = Region::where(['id'=>$request->id])->first();
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "Lokasi",
             'aktivitas' => "Hapus",
-            'keterangan' => "Hapus Lokasi $oldLokasi->lokasi"
+            'keterangan' => "Hapus Lokasi $oldRegion->name"
         ]);
-        Lokasi::destroy($request->id);
+        Region::destroy($request->id);
         return redirect('/admin/configuration/menu')->with('success', 'Location Deleted');
     }
 
     public function update(Request $request){
-        $oldLokasi = Lokasi::where(['id'=>$request->id])->first();
+        $oldRegion = Region::where(['id'=>$request->id])->first();
         UserActivity::create([
             'id_user' => auth()->user()->id,
-            'menu' => "Lokasi",
+            'menu' => "Region",
             'aktivitas' => "Ubah",
-            'keterangan' => "Ubah Lokasi $oldLokasi->lokasi menjadi $request->lokasi"
+            'keterangan' => "Ubah Region $oldRegion->name menjadi $request->name"
         ]);
-        Lokasi::where(['id'=> $request->id])->update(['lokasi' => $request->lokasi]);
+        Region::where(['id'=> $request->id])->update(['name' => $request->name]);
         return redirect()->back()->with('success', 'Location Updated');
     }
 
     public function editmodal(Request $request){
-        $lokasi = Lokasi::where(['id'=> $request->id])->first();
+        $region = Region::where(['id'=> $request->id])->first();
 
-        return view('admin.usermenu.editmodallokasi', ['lokasi'=>$lokasi]);
+        return view('admin.usermenu.editmodallokasi', ['region'=>$region]);
     }
 }

@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Eksternal;
+use App\Models\Principal;
 use Illuminate\Http\Request;
 
 class PrincipalController extends Controller
 {
     public function index(){
 
-        return view('admin.principal.index', ['principal' => Eksternal::all()]);
+        return view('admin.principal.index', ['principal' => Principal::all()]);
     }
 
     public function addmodal(){
@@ -20,52 +21,44 @@ class PrincipalController extends Controller
 
     public function store(Request $request){
 
-        Eksternal::create([
-            'kode_eksternal' => $request->kode_eksternal,
-			'name_eksternal' => $request->name_eksternal,
-			'eksternal_address' => $request->eksternal_address,
-			'phone_1' => $request->phone_1,
-			'fax' =>$request->fax,
-			'bank1' => $request->bank1,
-			'email' => $request->email,
-			'rek1' => $request->rek1,
-			'bank2' => $request->bank2,
-			'rek2' => $request->rek2,
-			'bank3' => $request->bank3,
-			'rek3' =>$request->rek3,
-			'type_eksternal' => $request->type_eksternal,
-            'sts_show' => 1
+        Principal::create([
+            'code' => $request->code,
+			'name' => $request->name,
+			'phone' => $request->phone,
+			'fax' => $request->fax,
+			'email' =>$request->email,
+			'address' => $request->address,
+			'ship_address' => $request->ship_address,
+			'bank_name' => $request->bank_name,
+			'account_number' => $request->account_number,
+            'status' => 1
         ]);
 
         return back()->with('success', 'Principal berhasil ditambahkan!');
     }
 
     public function destroy(Request $request){
-        Eksternal::where(['id'=>$request->id])->delete();
+        Principal::where(['id'=>$request->id])->delete();
         return back()->with('success', 'Principal berhasil dihapus!');
     }
 
     public function editmodal(Request $request){
 
-        return view('admin.principal.editmodal', ['eks' => Eksternal::where(['id'=> $request->id])->first()]);
+        return view('admin.principal.editmodal', ['principal' => Principal::where(['id'=> $request->id])->first()]);
     }
 
     public function update(Request $request){
-        Eksternal::where(['id' => $request->id])->update([
-            'kode_eksternal' => $request->kode_eksternal,
-			'name_eksternal' => $request->name_eksternal,
-			'eksternal_address' => $request->eksternal_address,
-			'phone_1' => $request->phone_1,
-			'fax' =>$request->fax,
-			'bank1' => $request->bank1,
-			'email' => $request->email,
-			'rek1' => $request->rek1,
-			'bank2' => $request->bank2,
-			'rek2' => $request->rek2,
-			'bank3' => $request->bank3,
-			'rek3' =>$request->rek3,
-			'type_eksternal' => $request->type_eksternal,
-            'sts_show' => $request->sts_show
+        Principal::where(['id' => $request->id])->update([
+            'code' => $request->code,
+			'name' => $request->name,
+			'phone' => $request->phone,
+			'fax' => $request->fax,
+			'email' =>$request->email,
+			'address' => $request->address,
+			'ship_address' => $request->ship_address,
+			'bank_name' => $request->bank_name,
+			'account_number' => $request->account_number,
+            'status' => $request->status
         ]);
 
         return back()->with('success', 'Principal berhasil diUpdate!');

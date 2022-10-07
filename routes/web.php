@@ -1,20 +1,24 @@
 <?php
-
+// Admin
 use App\Http\Controllers\Admin\CoaController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ItemsController;
-use App\Http\Controllers\Admin\LokasiController;
 use App\Http\Controllers\Admin\PriceManagementController;
 use App\Http\Controllers\Admin\PrincipalController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Admin\UoMController;
-use App\Http\Controllers\Admin\UserAccessMenuController;
 use App\Http\Controllers\Admin\UserMenuController;
 use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\UserSubmenuController;
+// End Admin
+
+// Utils
 use Illuminate\Support\Facades\Route;
+
+// End Utils
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,14 +40,14 @@ Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middlewar
 Route::get('/admin/useractivity', [DashboardController::class, 'useractivity'])->middleware('auth');
 //End Dashboard
 
-// My Profile Start
-Route::middleware(['auth'])->controller(DashboardController::class)->group(function(){
-    Route::get('admin/myprofile', 'myprofile');
-    Route::get('admin/myprofile/edit', 'editmyprofile');
-    Route::post('admin/myprofile/updateprofile', 'updateprofile');
-});
 
-// End My Profile
+// Profile Start
+Route::middleware(['auth'])->controller(ProfileController::class)->group(function(){
+    Route::get('admin/myprofile', 'index');
+    Route::get('admin/myprofile/edit', 'editmyprofile');
+    Route::post('admin/myprofile/update', 'update');
+});
+// Profile End
 
 //UserMenu Start
 Route::middleware(['auth'])->controller(UserMenuController::class)->group(function(){
@@ -98,15 +102,9 @@ Route::middleware(['auth'])->controller(UsersController::class)->group(function(
 });
 //Users END
 
-// Profile Start
-Route::middleware(['auth'])->controller(ProfileController::class)->group(function(){
-    Route::get('admin/profile', 'index');
-    Route::post('admin/profile/update', 'update');
-});
-// Profile End
 
 // Lokasi Start
-Route::middleware(['auth'])->controller(LokasiController::class)->group(function(){
+Route::middleware(['auth'])->controller(RegionController::class)->group(function(){
     Route::get('admin/configuration/location/editmodal/{id}', 'editmodal');
     Route::get('admin/configuration/location/delete/{id}', 'destroy');
     Route::post('admin/configuration/location/store', 'store');

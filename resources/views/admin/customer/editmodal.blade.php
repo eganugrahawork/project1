@@ -5,7 +5,7 @@
         <div class="col-lg-6">
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Kode</label>
-                <input type="text" name="code_cust" value="{{ $cust->code_cust }}" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="text" name="cust_code" value="{{ $cust->cust_code }}" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Nama</label>
@@ -19,10 +19,10 @@
                 <label class="required form-label fw-bold">Wilayah</label>
                 <div class="col-lg-6">
                     <select class="form-select  form-select-solid mb-3 mb-lg-0" name="region" required>
-                        @foreach ($wilayah as $w)
-                        <option value="{{ $w->id }}" @if ($cust->region == $w->id)
+                        @foreach ($region as $r)
+                        <option value="{{ $r->id }}" @if ($cust->region == $r->id)
                             selected
-                        @endif>{{ $w->lokasi }}</option>
+                        @endif>{{ $r->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -46,10 +46,6 @@
                 <input type="text" name="no_npwp" value="{{ $cust->no_npwp }}" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
-                <label class="required fw-bold fs-6 mb-2">Pemilik NPWP</label>
-                <input type="text" name="npwp_name" value="{{ $cust->npwp_name }}" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
-            </div>
-            <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Alamat Pemilik NPWP</label>
                 <input type="text" name="npwp_address" value="{{ $cust->npwp_address }}" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
@@ -70,20 +66,28 @@
                 <input type="text" name="credit_limit" value="{{ $cust->credit_limit }}" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
-                <label class="form-label fw-bold required">Status Perlihat</label>
-            <select class="form-select  form-select-solid mb-3 mb-lg-0" name="sts_show" required>
-                    <option value="1"  @if ($cust->sts_show == 1)
+            <label class="form-label fw-bold required">Status</label>
+            <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
+                    <option value="1"  @if ($cust->status == 1)
                         selected
-                    @endif>Show</option>
-                    <option value="0"  @if ($cust->sts_show !== 1)
+                    @endif>Ya</option>
+                    <option value="0"  @if ($cust->status !== 1)
                         selected
-                    @endif>Hide</option>
+                    @endif>Tidak</option>
             </select>
             </div>
-            <div class="d-flex justify-content-end">
-                <button class="btn btn-sm btn-primary">Update Customer</button>
+            <div class="d-flex justify-content-end" id="loadingnya">
+                <button class="btn btn-sm btn-primary" id="btn-update">Update Customer</button>
             </div>
 
     </div>
 </div>
 </form>
+
+<script>
+    $('form').submit(function(){
+    $('#btn-update').hide()
+    $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+    // $('#btn-custom').attr("disabled", 'disabled')
+})
+</script>

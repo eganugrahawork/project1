@@ -38,10 +38,10 @@
                     </div>
                 </div>
                 <div class="card-toolbar">
-                    {{-- <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                        <button type="button" class="btn btn-primary me-3" onclick="AddPriceModal()">
-                        Add Price</button>
-                    </div> --}}
+                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
+                        {{-- <button type="button" class="btn btn-primary me-3" onclick="AddPriceModal()">
+                        Add Price</button> --}}
+                    </div>
 
                 </div>
             </div>
@@ -50,12 +50,13 @@
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="min-w-20px">No</th>
-                            <th class="min-w-100px">Kode Item</th>
-                            <th class="min-w-100px">Nama Item</th>
-                            <th class="min-w-100px">Nama Principal</th>
-                            <th class="min-w-100px">Harga Pokok</th>
-                            <th class="min-w-100px">Harga Beli</th>
-                            <th class="min-w-100px">Status</th>
+                            <th class="min-w-100px text-center">Kode Item</th>
+                            <th class="min-w-100px text-center">Nama Item</th>
+                            <th class="min-w-100px text-center">Nama Principal</th>
+                            <th class="min-w-100px text-center">Top Price</th>
+                            <th class="min-w-100px text-center">Good Sold</th>
+                            <th class="min-w-100px text-center">Bottom Price</th>
+                            <th class="min-w-100px text-center">Status</th>
                             <th class="text-end min-w-50px">Action</th>
                         </tr>
                     </thead>
@@ -64,15 +65,21 @@
                             <tr>
                                 <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
                                 <td>
-                                    <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->stock_code }}</a>
+                                    <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->code }}</a>
                                 </td>
                                 <td>
-                                    <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->stock_name }}</a>
+                                    <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->name }}</a>
                                 </td>
-                                <td>{{ $item->eksternal->name_eksternal }}</td>
-                                <td>{{ $item->base_price }}</td>
-                                <td>{{ $item->buy_price }}</td>
-                                <td>idontknow</td>
+                                <td>{{ $item->Principal->name }}</td>
+                                <td class="text-end">@Rupiah($item->PriceHistory->top_price)</td>
+                                <td class="text-end">@Rupiah($item->PriceHistory->harga_good_sold)</td>
+                                <td class="text-end">@Rupiah($item->PriceHistory->bottom_price)</td>
+                                <td class="text-center">@if ($item->status == 1)
+                                    Ya
+                                @else
+                                    No
+                                @endif
+                                </td>
                                 <td class="text-end">
                                     <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
@@ -83,10 +90,10 @@
                                         </span></a>
                                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                             <div class="menu-item px-3">
-                                                <a href="/admin/masterdata/pricemanagement/approve/{{ $item->id_mat }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Approve</a>
+                                                <a href="/admin/masterdata/pricemanagement/approve/{{ $item->id }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Approve</a>
                                             </div>
                                             <div class="menu-item px-3">
-                                                <a class="menu-link px-3" onclick="editModal({{ $item->id_mat }})" >Edit</a>
+                                                <a class="menu-link px-3" onclick="editModal({{ $item->id }})" >Edit</a>
                                             </div>
                                         </div>
                                     </td>
@@ -134,9 +141,11 @@
             })
         }
         function editModal(id){
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/pricemanagement/editmodal') }}/"+id, {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
+                $('#loading-add').html('')
             })
         }
         function tutupModal(){

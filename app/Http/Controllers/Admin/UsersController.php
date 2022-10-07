@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Lokasi;
+use App\Models\Region;
 use App\Models\User;
 use App\Models\UserAccessMenu;
 use App\Models\UserActivity;
-use App\Models\UserDetail;
 use App\Models\UserMenu;
 use App\Models\UserRole;
 use GuzzleHttp\Middleware;
@@ -44,8 +43,8 @@ class UsersController extends Controller
             $user = User::where('id_role', '!=', 1)->get();
         }
         $role = UserRole::all();
-        $lokasi = Lokasi::all();
-        return view('admin.users.index', ['title' => 'Users', 'users' => $user, 'role' => $role, 'lokasi' => $lokasi]);
+        $region = Region::all();
+        return view('admin.users.index', ['title' => 'Users', 'users' => $user, 'role' => $role, 'region' => $region]);
     }
 
     public function create(){
@@ -62,24 +61,21 @@ class UsersController extends Controller
             $request->image = 'img-users/default.png';
         }
 
-        $user_detail = [
-            'nama' => $request->nama,
-            'image'=> $request->image,
-            'alamat' => $request->alamat,
-            'nokontak' => $request->nokontak,
-            'lokasi' => $request->lokasi
-        ];
-
-        UserDetail::create($user_detail);
-
-        $getidusrdetail = UserDetail::latest()->first();
 
         $users = [
             'email' => $request->email,
             'username' => $request->username,
-            'id_detail_user' => $getidusrdetail->id,
             'id_role' => $request->id_role,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'name' => $request->name,
+            'address' => $request->address,
+            'image' => $request->image,
+            'no_hp' => $request->no_hp,
+            'region' => $request->region,
+            'place_of_birth' => $request->place_of_birth,
+            'date_of_birth' => $request->date_of_birth,
+            'religion' => $request->religion
+
         ];
 
         User::create($users);
@@ -101,11 +97,8 @@ class UsersController extends Controller
     }
 
     public function update(Request $request){
-        $onUser = User::where(['id' => $request->id])->first();
-
-
-        $image = $onUser->userdetail->image;
-        $password = $onUser->password;
+        $image = $request->oldimage;
+        $password = $request->oldpassword;
 
         if($request->file('image')){
             if($request->oldimage !== 'img-users/default.png'){
@@ -118,21 +111,20 @@ class UsersController extends Controller
             $password = Hash::make($request->password);
         }
 
-        $user_detail = [
-            'nama' => $request->nama,
-            'image'=> $image,
-            'alamat' => $request->alamat,
-            'nokontak' => $request->nokontak,
-            'lokasi' => $request->lokasi
-        ];
-
-        UserDetail::where(['id'=>$onUser->id_detail_user])->update($user_detail);
 
         $users = [
             'email' => $request->email,
             'username' => $request->username,
-            'id_detail_user' => $onUser->id_detail_user,
             'id_role' => $request->id_role,
+            'password' => $password,
+            'name' => $request->name,
+            'address' => $request->address,
+            'image' => $image,
+            'no_hp' => $request->no_hp,
+            'region' => $request->region,
+            'place_of_birth' => $request->place_of_birth,
+            'date_of_birth' => $request->date_of_birth,
+            'religion' => $request->religion,
             'password' => $password
         ];
 
@@ -153,18 +145,10 @@ class UsersController extends Controller
     public function destroy(Request $request){
         $user = User::where(['id' => $request->id])->first();
 
-        if($user->userdetail->image !=='img-users/default.png'){
-            Storage::delete($user->userdetail->image);
+        if($user->image !=='img-users/default.png'){
+            Storage::delete($user->image);
         }
 
-        UserDetail::destroy(['id' => $user->id_detail_user]);
-
-        UserActivity::create([
-            'id_user' => auth()->user()->id,
-            'menu' => "Users",
-            'aktivitas' => "Hapus",
-            'keterangan' => "Hapus Data ". $user->email
-        ]);
 
         User::destroy(['id' =>$request->id]);
         return redirect()->back()->with('success', 'User berhasil dihapus');
@@ -201,9 +185,9 @@ class UsersController extends Controller
 
     public function editmodal(Request $request){
         $user = User::where(['id' => $request->id])->first();
-        $lokasi = Lokasi::all();
+        $region = Region::all();
         $role = UserRole::all();
-        return view('admin.users.editmodal', ['user' => $user, 'role' => $role, 'lokasi'=>$lokasi]);
+        return view('admin.users.editmodal', ['user' => $user, 'role' => $role, 'region'=>$region]);
 
     }
 }

@@ -10,7 +10,7 @@ class Customer extends Model
     protected $guarded=['id'];
     use HasFactory;
 
-    public function lokasi(){
-        return $this->hasOne(Lokasi::class, 'id', 'region');
+    public function RegionDetail(){
+        return $this->hasOne(Region::class, 'id', 'region');
     }
 }

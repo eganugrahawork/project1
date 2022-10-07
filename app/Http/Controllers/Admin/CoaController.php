@@ -21,7 +21,7 @@ class CoaController extends Controller
         Coa::create([
             'id_parent' => $request->id_parent,
             'coa' => $request->coa,
-            'keterangan' => $request->keterangan
+            'description' => $request->description
         ]);
 
         return redirect()->back()->with('success', 'Coa ditambahkan!');
@@ -29,21 +29,21 @@ class CoaController extends Controller
 
     public function editmodal(Request $request){
 
-        return view('admin.coa.editmodal', ['coa' => Coa::where(['id_coa' => $request->id])->first()]);
+        return view('admin.coa.editmodal', ['coa' => Coa::where(['id' => $request->id])->first()]);
     }
 
     public function update(Request $request){
-        Coa::where(['id_coa'=>$request->id_coa])->update([
+        Coa::where(['id'=>$request->id])->update([
             'id_parent' => $request->id_parent,
             'coa' => $request->coa,
-            'keterangan' => $request->keterangan
+            'description' => $request->description
         ]);
 
         return redirect()->back()->with('success', 'Coa di Update!');
     }
 
     public function destroy(Request $request){
-        Coa::where(['id_coa' => $request->id])->delete();
+        Coa::where(['id' => $request->id])->delete();
         return redirect()->back()->with('success', 'Coa di Hapus!');
 
     }
