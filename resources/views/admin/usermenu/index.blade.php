@@ -509,7 +509,7 @@
                                 <!--begin::Header-->
                                 <div class="card-header border-0 pt-5">
                                     <h3 class="card-title align-items-start flex-column">
-                                        <span class="card-label fw-bolder fs-3 mb-1">Permission Role</span>
+                                        <span class="card-label fw-bolder fs-3 mb-1">Permission Control</span>
                                     </h3>
                                     <div class="card-toolbar">
                                         <!--begin::Menu-->
@@ -541,31 +541,19 @@
                                     <div class="row">
                                     @foreach ($role as $r )
                                         <div class="col-md-4">
-                                            <div class="card card-flush h-md-100">
+                                            <div class="card card-flush h-md-100 bg-warna">
                                                 <div class="card-header">
                                                     <div class="card-title">
-                                                        <h2>{{ $r->role }}</h2>
+                                                        <h2 class="text-white">{{ $r->role }}</h2>
                                                     </div>
                                                 </div>
-                                                @php
-                                                    $getmenu = DB::select("select b.menu from user_access_menus a join user_menus b on a.id_menu = b.id where id_role=$r->id ");
-                                                @endphp
-
                                                 <div class="card-body pt-1">
                                                     <div class="d-flex flex-column text-gray-600">
-                                                <h5>Menu</h5>
-                                                <div class="row">
-                                                    @foreach ($getmenu as $gm )
-                                                    <div class="d-flex align-items-center py-2 ">
-                                                        <span class="bullet bg-primary me-3"></span>{{ $gm->menu }}
-                                                    </div>
-                                                    @endforeach
-                                                </div>
+
                                                     </div>
                                                 </div>
                                                 <div class="card-footer flex-wrap pt-0">
-
-                                                    <button type="button" class="btn btn-light btn-active-light-primary my-1" onclick="editModalPermission({{ $r->id }})">Edit Permission</button>
+                                                    <button type="button" class="btn btn-warning  my-1" onclick="editModalPermission({{ $r->id }})">Edit Permission</button>
                                                 </div>
                                             </div>
                                         </div>
