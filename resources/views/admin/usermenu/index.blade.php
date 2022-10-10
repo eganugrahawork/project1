@@ -34,37 +34,37 @@
                     <!--begin::Tabs-->
                     <ul class="nav row mb-10">
                         <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                            <a class="nav-link active btn btn-flex text-white btn-outline bg-warna btn-customnya" data-bs-toggle="tab" href="#kt_general_widget_1_1">
+                            <a class="nav-link active btn btn-flex text-white btn btn-primary" data-bs-toggle="tab" href="#kt_general_widget_1_1">
                                     <i class="bi bi-list"></i>
                                 <span class="fs-6 fw-bold">Menu Data</span>
                             </a>
                         </li>
                         <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                            <a class="nav-link btn btn-flex text-white btn-outline bg-warna btn-customnya" data-bs-toggle="tab" href="#kt_general_widget_1_5">
+                            <a class="nav-link btn btn-flex text-white btn btn-primary" data-bs-toggle="tab" href="#kt_general_widget_1_5">
                                     <i class="bi bi-diagram-3-fill"></i>
                                 <span class="fs-6 fw-bold">Submenu Data</span>
                             </a>
                         </li>
                         <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                            <a class="nav-link btn btn-flex text-white btn-outline bg-warna btn-customnya" data-bs-toggle="tab" href="#kt_general_widget_1_7">
+                            <a class="nav-link btn btn-flex text-white btn btn-primary" data-bs-toggle="tab" href="#kt_general_widget_1_7">
                                     <i class="bi bi-person-badge-fill"></i>
                                 <span class="fs-6 fw-bold">Role Data</span>
                             </a>
                         </li>
                         <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                            <a class="nav-link btn btn-flex text-white btn-outline bg-warna btn-customnya" data-bs-toggle="tab" href="#kt_general_widget_1_8">
+                            <a class="nav-link btn btn-flex text-white btn btn-primary" data-bs-toggle="tab" href="#kt_general_widget_1_8">
                                     <i class="bi bi-geo"></i>
                                 <span class="fs-6 fw-bold">Region Data</span>
                             </a>
                         </li>
                         <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                            <a class="nav-link btn btn-flex text-white btn-outline bg-warna btn-customnya" data-bs-toggle="tab" href="#kt_general_widget_1_6">
+                            <a class="nav-link btn btn-flex text-white btn btn-primary" data-bs-toggle="tab" href="#kt_general_widget_1_6">
                                     <i class="bi bi-signpost-split"></i>
                                 <span class="fs-6 fw-bold">Access Control</span>
                             </a>
                         </li>
                         <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                            <a class="nav-link btn btn-flex text-white btn-outline bg-warna btn-customnya" data-bs-toggle="tab" href="#kt_general_widget_1_9">
+                            <a class="nav-link btn btn-flex text-white btn btn-primary" data-bs-toggle="tab" href="#kt_general_widget_1_9">
                                     <i class="bi bi-signpost-split"></i>
                                 <span class="fs-6 fw-bold">Permission Control</span>
                             </a>
