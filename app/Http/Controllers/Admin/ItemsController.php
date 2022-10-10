@@ -63,7 +63,8 @@ class ItemsController extends Controller
     }
 
     public function destroy(Request $request){
-        // dd($request->id);
+
+        PriceHistory::where(['items_id' => $request->id])->delete();
         Items::where(['id' => $request->id])->delete();
         return redirect()->back()->with('success', 'Data Item Dihapus !');
     }
