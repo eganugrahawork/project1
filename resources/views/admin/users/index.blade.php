@@ -112,7 +112,7 @@
                             <td>{{ $usr->RegionDetail->name }}</td>
                             <td>{{ $usr->created_at }}</td>
                             <td class="text-end">
-                                    <a href="/admin/users/show/{{ $usr->id }}" class="btn btn-sm btn-primary"><i class="bi bi-info-circle"></i></a>
+                                    <a href="/admin/users/show/{{ $usr->id }}" class="btn btn-sm btn-success"><i class="bi bi-info-circle"></i></a>
                                 @can('edit', [0, '/admin/users'])
                                     <a onclick="editModal({{ $usr->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
                                 @endcan
