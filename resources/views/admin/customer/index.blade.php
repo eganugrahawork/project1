@@ -17,9 +17,9 @@
 </div>
 
 
-<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl bg-warna py-4">
     <div class="content flex-row-fluid" id="kt_content">
-        <div class="card">
+        <div class="card bg-white">
             <div class="card-header border-0 pt-6">
                 <div class="card-title align-items-start flex-column">
                     <div class="d-flex align-items-center position-relative my-1">
@@ -39,13 +39,11 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
-                        <button type="button" class="btn btn-primary me-3" onclick="addCustomerModal()">
-                        Add Customer</button>
-                    </div>
-                    <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
-                        <div class="fw-bolder me-5">
-                        <span class="me-2" data-kt-customer-table-select="selected_count"></span>Selected</div>
-                        <button type="button" class="btn btn-danger" data-kt-customer-table-select="delete_selected">Delete Selected</button>
+                        @can('create',[1, '/admin/masterdata/customer'])
+
+                            <button type="button" class="btn btn-primary me-3" onclick="addCustomerModal()">
+                            Add Customer</button>
+                        @endcan
                     </div>
                 </div>
             </div>
@@ -95,6 +93,13 @@
                                             <a href="/admin/masterdata/customer/delete/{{ $cust->id }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Delete</a>
                                         </div>
                                     </div>
+
+                                    @can('edit', [1, '/admin/masterdata/customer'])
+                                    <a onclick="editModal({{ $cust->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                    @endcan
+                                    @can('delete', [1, '/admin/masterdata/customer'])
+                                        <a href="/admin/masterdata/customer/delete/{{ $cust->id }}" class="btn btn-sm btn-danger button-delete" ><i class="bi bi-trash"></i></a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

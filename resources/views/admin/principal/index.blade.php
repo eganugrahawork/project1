@@ -17,9 +17,9 @@
 </div>
 
 
-<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl bg-warna py-4">
     <div class="content flex-row-fluid" id="kt_content">
-        <div class="card">
+        <div class="card bg-white">
             <div class="card-header border-0 pt-6">
                 <div class="card-title align-items-start flex-column">
                     <div class="d-flex align-items-center position-relative my-1">
@@ -39,13 +39,10 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
-                        <button type="button" class="btn btn-primary me-3" onclick="addPrincipalModal()">
-                        Add Principal</button>
-                    </div>
-                    <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
-                        <div class="fw-bolder me-5">
-                        <span class="me-2" data-kt-customer-table-select="selected_count"></span>Selected</div>
-                        <button type="button" class="btn btn-danger" data-kt-customer-table-select="delete_selected">Delete Selected</button>
+                        @can('create', [1, '/admin/masterdata/principal'])
+                            <button type="button" class="btn btn-primary me-3" onclick="addPrincipalModal()">
+                            Add Principal</button>
+                        @endcan
                     </div>
                 </div>
             </div>
@@ -77,23 +74,13 @@
                             <td data-filter="mastercard">{{ $p->phone }}</td>
                             <td>{{ $p->fax }}</td>
                             <td class="text-end">
-                                <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                    <span class="svg-icon svg-icon-5 m-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-                                        </svg>
-                                    </span></a>
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="editModal({{ $p->id }})" >Edit</a>
-                                        </div>
-                                        <div class="menu-item px-3">
-                                            <a href="/admin/masterdata/principal/delete/{{ $p->id }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
+                                    @can('edit', [1, '/admin/masterdata/principal'])
+                                    <a onclick="editModal({{ $p->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                    @endcan
+                                    @can('delete', [1, '/admin/masterdata/principal'])
+                                        <a href="/admin/masterdata/principal/delete/{{ $p->id }}" class="btn btn-sm btn-danger button-delete" ><i class="bi bi-trash"></i></a>
+                                    @endcan
+                            </td>
                             </tr>
                             @endforeach
                         </tbody>
