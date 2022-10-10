@@ -11,3 +11,7 @@
     justify-content: center;
   }
 
+  .btn-customnya:hover{
+    transform: translateY(-7px);
+  }
+

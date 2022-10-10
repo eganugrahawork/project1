@@ -82,7 +82,7 @@
                                 </td>
                                 <td class="text-end">
                                         @can('create', [1, '/admin/masterdata/pricemanagement'])
-                                        <a href="" class="btn btn-sm btn-danger" ><i class="bi bi-check-square"></i></a>
+                                        <a href="" class="btn btn-sm btn-primary" ><i class="bi bi-check-square"></i></a>
                                         @endcan
                                         @can('edit', [1, '/admin/masterdata/pricemanagement'])
                                         <a onclick="editModal({{ $item->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
