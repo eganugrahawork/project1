@@ -15,11 +15,10 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('code_cust');
+            $table->string('cust_code');
             $table->string('cust_name');
             $table->integer('region');
             $table->string('no_npwp');
-            $table->string('npwp_name');
             $table->string('npwp_address');
             $table->string('cust_address');
             $table->string('district');
@@ -29,9 +28,9 @@ class CreateCustomersTable extends Migration
             $table->string('email');
             $table->string('contact_person');
             $table->double('credit_limit');
-            $table->integer('status_credit');
-            $table->double('sisa_credit')->nullable();
-            $table->integer('sts_show');
+            $table->integer('credit_status');
+            $table->double('credit_left')->nullable();
+            $table->integer('status');
             $table->timestamps();
         });
     }

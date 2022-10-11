@@ -14,10 +14,11 @@ class CreateCoasTable extends Migration
     public function up()
     {
         Schema::create('coas', function (Blueprint $table) {
-            $table->id('id_coa');
+            $table->id('id');
             $table->integer('id_parent');
             $table->string('coa');
-            $table->string('keterangan');
+            $table->string('description');
+            $table->integer('status');
             $table->timestamps();
         });
     }
