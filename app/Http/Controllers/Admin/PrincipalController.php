@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Eksternal;
 use App\Models\Principal;
+use App\Models\UserActivity;
 use Illuminate\Http\Request;
 
 class PrincipalController extends Controller
@@ -34,10 +35,23 @@ class PrincipalController extends Controller
             'status' => 1
         ]);
 
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Principal",
+            'aktivitas' => "Tambah",
+            'keterangan' => "Tambah Principal ". $request->name
+        ]);
         return back()->with('success', 'Principal berhasil ditambahkan!');
     }
 
     public function destroy(Request $request){
+        $principalnya = Principal::where(['id' =>$request->id])->first();
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Principal",
+            'aktivitas' => "Hapus",
+            'keterangan' => "Hapus Principal ". $principalnya->name
+        ]);
         Principal::where(['id'=>$request->id])->delete();
         return back()->with('success', 'Principal berhasil dihapus!');
     }
@@ -60,7 +74,12 @@ class PrincipalController extends Controller
 			'account_number' => $request->account_number,
             'status' => $request->status
         ]);
-
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Principal",
+            'aktivitas' => "Update",
+            'keterangan' => "Update Principal ". $request->name
+        ]);
         return back()->with('success', 'Principal berhasil diUpdate!');
     }
 }

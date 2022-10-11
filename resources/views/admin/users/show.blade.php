@@ -80,12 +80,8 @@
                             <!--end::User-->
 
                         </div>
-                        <!--end::Title-->
-                        <!--begin::Stats-->
                         <div class="d-flex flex-wrap flex-stack">
-                            <!--begin::Wrapper-->
                             <div class="d-flex flex-column flex-grow-1 pe-8">
-                                <!--begin::Stats-->
                                 <div class="d-flex flex-wrap">
                                     <!--begin::Stat-->
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">

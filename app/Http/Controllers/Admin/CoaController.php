@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Coa;
+use App\Models\UserActivity;
 use Illuminate\Http\Request;
 
 class CoaController extends Controller
@@ -24,6 +25,13 @@ class CoaController extends Controller
             'description' => $request->description
         ]);
 
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "COA",
+            'aktivitas' => "Tambah",
+            'keterangan' => "Tambah COA ". $request->coa
+        ]);
+
         return redirect()->back()->with('success', 'Coa ditambahkan!');
     }
 
@@ -38,11 +46,24 @@ class CoaController extends Controller
             'coa' => $request->coa,
             'description' => $request->description
         ]);
-
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "COA",
+            'aktivitas' => "Ubah",
+            'keterangan' => "Ubah COA ". $request->coa
+        ]);
         return redirect()->back()->with('success', 'Coa di Update!');
     }
 
     public function destroy(Request $request){
+       $coa = Coa::where(['id' => $request->id])->first();
+       UserActivity::create([
+           'id_user' => auth()->user()->id,
+           'menu' => "COA",
+           'aktivitas' => "Hapus",
+           'keterangan' => "Hapus COA ". $coa->coa
+        ]);
+
         Coa::where(['id' => $request->id])->delete();
         return redirect()->back()->with('success', 'Coa di Hapus!');
 

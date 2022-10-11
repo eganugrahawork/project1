@@ -37,19 +37,10 @@ class UsersController extends Controller
 
 
     public function index(){
-        if(auth()->user()->id_role == 1){
-            $user = User::all();
-        }else{
-            $user = User::where('id_role', '!=', 1)->get();
-        }
+        $user = User::all();
         $role = UserRole::all();
         $region = Region::all();
         return view('admin.users.index', ['title' => 'Users', 'users' => $user, 'role' => $role, 'region' => $region]);
-    }
-
-    public function create(){
-        $role = UserRole::where('id', '!=', 1)->get();
-        return view('admin.users.create', ['title'=> 'Create Users', 'role' =>$role ]);
     }
 
     public function store(Request $request){
@@ -92,7 +83,7 @@ class UsersController extends Controller
 
     public function edit(Request $request){
         $user = User::where(['id' =>$request->id])->first();
-        $role = UserRole::where('id', '!=', 1)->get();
+        $role = UserRole::all();
         return view('admin.users.edit', ['title' => 'Edit User', 'user' => $user, 'role' => $role]);
     }
 
@@ -150,6 +141,12 @@ class UsersController extends Controller
         }
 
 
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Users",
+            'aktivitas' => "Hapus",
+            'keterangan' => "Hapus Users ". $user->email
+        ]);
         User::destroy(['id' =>$request->id]);
         return redirect()->back()->with('success', 'User berhasil dihapus');
     }

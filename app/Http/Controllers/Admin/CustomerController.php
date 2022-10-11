@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Region;
+use App\Models\UserActivity;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -38,6 +39,13 @@ class CustomerController extends Controller
             'credit_status' => 1,
             'credit_left' => null
         ]);
+
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Customer",
+            'aktivitas' => "Tambah",
+            'keterangan' => "Tambah Customer ". $request->cust_name
+         ]);
         return redirect()->back()->with('success', 'Data Customer di Tambahkan !');
     }
 
@@ -65,10 +73,25 @@ class CustomerController extends Controller
             'status' => $request->status
         ]);
 
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Customer",
+            'aktivitas' => "Ubah",
+            'keterangan' => "Ubah Customer ". $request->cust_name
+         ]);
         return redirect()->back()->with('success', 'Data Customer di Update !');
     }
 
     public function destroy(Request $request){
+        $cust = Customer::where(['id'=>$request->id])->first();
+
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Customer",
+            'aktivitas' => "Hapus",
+            'keterangan' => "Hapus Customer ". $cust->cust_name
+         ]);
+
         Customer::where(['id'=>$request->id])->delete();
         return redirect()->back()->with('success', 'Data Customer di Hapus !');
     }

@@ -196,7 +196,8 @@
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fw-bold fs-6 mb-2">Agama</label>
-                                    <select class="form-select form-select-solid" name="religion" required>
+                                    <select class="form-select" data-control="select2" data-placeholder="Select an option" name="religion" required>
+                                        <option></option>
                                         <option value="Islam">Islam</option>
                                         <option value="Kristen">Kristen</option>
                                         <option value="Protestan">Protestan</option>
@@ -205,6 +206,7 @@
                                         <option value="Ateis">Ateis</option>
                                         <option value="Lainnya">Lainnya</option>
                                     </select>
+
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fw-bold fs-6 mb-2">No. Telp</label>
