@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Items;
-use App\Models\Material;
 use App\Models\PriceHistory;
+use App\Models\UserActivity;
 use Illuminate\Http\Request;
 
 class PriceManagementController extends Controller
@@ -26,6 +26,13 @@ class PriceManagementController extends Controller
             'bottom_price' => $request->bottom_price,
             'harga_good_sold' => $request->harga_good_sold
         ]);
+
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Price Management",
+            'aktivitas' => "Price Edit",
+            'keterangan' => "Price Edit Price Management ". $request->id
+         ]);
         return redirect()->back()->with('success', 'Data Item diUpdate !');
     }
 }

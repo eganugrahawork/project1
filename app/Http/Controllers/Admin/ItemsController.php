@@ -9,6 +9,7 @@ use App\Models\PriceHistory;
 use App\Models\Principal;
 use App\Models\TypeItems;
 use App\Models\Uom;
+use App\Models\UserActivity;
 use Illuminate\Http\Request;
 
 class ItemsController extends Controller
@@ -37,6 +38,13 @@ class ItemsController extends Controller
 
         $newItem = Items::latest()->first();
         PriceHistory::create(['items_id'=> $newItem->id]);
+
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Items",
+            'aktivitas' => "Tambah",
+            'keterangan' => "Tambah items ". $request->name
+        ]);
         return redirect()->back()->with('success', 'Data Item Ditambahkan !');
     }
 
@@ -59,11 +67,26 @@ class ItemsController extends Controller
             'partner_id' => $request->partner_id,
             'status' => $request->status
         ]);
+
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Items",
+            'aktivitas' => "Ubah",
+            'keterangan' => "Ubah items ". $request->name
+        ]);
         return redirect()->back()->with('success', 'Data Item diUpdate !');
     }
 
     public function destroy(Request $request){
-        // dd($request->id);
+        $items = Items::where(['id' => $request->id])->first();
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Items",
+            'aktivitas' => "Hapus",
+            'keterangan' => "Hapus items ". $items->name
+        ]);
+
+        PriceHistory::where(['items_id' => $request->id])->delete();
         Items::where(['id' => $request->id])->delete();
         return redirect()->back()->with('success', 'Data Item Dihapus !');
     }

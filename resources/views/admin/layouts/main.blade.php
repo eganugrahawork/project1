@@ -17,6 +17,7 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
         <link href="/metronic/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="/metronic/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 		<link href="/metronic/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="/metronic/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
         {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"> --}}
@@ -39,6 +40,8 @@
             </div>
         </div>
 
+                <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
                 <script>var hostUrl = "/metronic/assets/";</script>
                 <script src="/metronic/assets/plugins/global/plugins.bundle.js"></script>
                 <script src="/metronic/assets/js/scripts.bundle.js"></script>
@@ -46,10 +49,11 @@
                 <script src="/metronic/assets/js/custom/widgets.js"></script>
                 <script src="/metronic/assets/js/custom/apps/chat/chat.js"></script>
                 <script src="/metronic/assets/js/custom/modals/create-app.js"></script>
+                {{-- <script src="/metronic/src/js/layout/app.js"></script> --}}
                 <script src="/metronic/assets/js/custom/modals/upgrade-plan.js"></script>
                 <script src="/js/admin/index.js"></script>
 
-                <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
                 <script src="/metronic/assets/plugins/custom/datatables/datatables.bundle.js"></script>
                 {{-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> --}}
 

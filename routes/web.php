@@ -80,10 +80,13 @@ Route::middleware(['auth'])->controller(UserRoleController::class)->group(functi
     Route::get('admin/configuration/useraccessmenu/editmodalaccess/{id}', 'editmodalaccess');
     Route::post('/admin/configuration/useraccessmenu/change', 'changeaccess')->name('changeaccess');
     Route::post('/admin/configuration/useraccessmenu/changesubmenu', 'changeaccesssubmenu')->name('changeaccesssubmenu');
+    Route::post('/admin/configuration/useraccessmenu/permissionmenu', 'permissionmenu')->name('permissionmenu');
+    Route::post('/admin/configuration/useraccessmenu/permissionsubmenu', 'permissionsubmenu')->name('permissionsubmenu');
     Route::get('admin/configuration/useraccessmenu/editcustomaccess/{id}', 'editcustomaccess');
     Route::post('/admin/configuration/useraccessmenu/blockaccess', 'blockaccess');
     Route::post('/admin/configuration/useraccessmenu/unblockaccess', 'unblockaccess');
-
+    Route::get('/admin/configuration/useraccessmenu/editpermissionmodal/{id}', 'editpermissionmodal');
+    Route::post('/admin/configuration/useraccessmenu/storepermissionmenu', 'storepermissionmenu');
 });
 //UserAccessMenu End
 

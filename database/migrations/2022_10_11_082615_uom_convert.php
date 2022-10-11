@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypeMaterialsTable extends Migration
+class UomConvert extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateTypeMaterialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('type_materials', function (Blueprint $table) {
-            $table->id('id_type_material');
-            $table->string('type_material_name');
-            $table->string('type_material_description');
+        Schema::create('uom_convert', function (Blueprint $table) {
+            $table->id();
+            $table->integer('uom_id');
+            $table->integer('uom_parent_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateTypeMaterialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type_materials');
+        Schema::dropIfExists('uom_convert');
     }
 }

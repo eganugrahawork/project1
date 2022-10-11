@@ -34,65 +34,39 @@
                     <!--begin::Tabs-->
                     <ul class="nav row mb-10">
                         <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                            <a class="nav-link active btn btn-flex btn-color-gray-400 btn-outline btn-outline-default btn-active-primary d-flex flex-grow-1 flex-column flex-center py-5 h-1250px h-lg-175px" data-bs-toggle="tab" href="#kt_general_widget_1_1">
-                                <!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
-                                <span class="svg-icon svg-icon-3x mb-5 mx-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="5" y="5" width="5" height="5" rx="1" fill="#000000" />
-                                            <rect x="14" y="5" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                            <rect x="5" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                            <rect x="14" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                        </g>
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->
-                                <span class="fs-6 fw-bold">Menu
-                                <br />Data</span>
+                            <a class="nav-link active btn btn-flex text-white btn btn-primary" data-bs-toggle="tab" href="#kt_general_widget_1_1">
+                                    <i class="bi bi-list"></i>
+                                <span class="fs-6 fw-bold">Menu Data</span>
                             </a>
                         </li>
                         <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                            <a class="nav-link btn btn-flex btn-color-gray-400 btn-outline btn-outline-default btn-active-primary d-flex flex-grow-1 flex-column flex-center py-5 h-1250px h-lg-175px" data-bs-toggle="tab" href="#kt_general_widget_1_5">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
-                                <span class="svg-icon svg-icon-3x mb-5 mx-0">
+                            <a class="nav-link btn btn-flex text-white btn btn-primary" data-bs-toggle="tab" href="#kt_general_widget_1_5">
                                     <i class="bi bi-diagram-3-fill"></i>
-                                </span>
-                                <!--end::Svg Icon-->
-                                <span class="fs-6 fw-bold">Submenu
-                                <br />Data</span>
+                                <span class="fs-6 fw-bold">Submenu Data</span>
                             </a>
                         </li>
                         <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                            <a class="nav-link btn btn-flex btn-color-gray-400 btn-outline btn-outline-default btn-active-primary d-flex flex-grow-1 flex-column flex-center py-5 h-1250px h-lg-175px" data-bs-toggle="tab" href="#kt_general_widget_1_7">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
-                                <span class="svg-icon svg-icon-3x mb-5 mx-0">
+                            <a class="nav-link btn btn-flex text-white btn btn-primary" data-bs-toggle="tab" href="#kt_general_widget_1_7">
                                     <i class="bi bi-person-badge-fill"></i>
-                                </span>
-                                <!--end::Svg Icon-->
-                                <span class="fs-6 fw-bold">Role
-                                <br />Data</span>
+                                <span class="fs-6 fw-bold">Role Data</span>
                             </a>
                         </li>
                         <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                            <a class="nav-link btn btn-flex btn-color-gray-400 btn-outline btn-outline-default btn-active-primary d-flex flex-grow-1 flex-column flex-center py-5 h-1250px h-lg-175px" data-bs-toggle="tab" href="#kt_general_widget_1_8">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
-                                <span class="svg-icon svg-icon-3x mb-5 mx-0">
+                            <a class="nav-link btn btn-flex text-white btn btn-primary" data-bs-toggle="tab" href="#kt_general_widget_1_8">
                                     <i class="bi bi-geo"></i>
-                                </span>
-                                <!--end::Svg Icon-->
-                                <span class="fs-6 fw-bold">Region
-                                <br />Data</span>
+                                <span class="fs-6 fw-bold">Region Data</span>
                             </a>
                         </li>
                         <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                            <a class="nav-link btn btn-flex btn-color-gray-400 btn-outline btn-outline-default btn-active-primary d-flex flex-grow-1 flex-column flex-center py-5 h-1250px h-lg-175px" data-bs-toggle="tab" href="#kt_general_widget_1_6">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
-                                <span class="svg-icon svg-icon-3x mb-5 mx-0">
+                            <a class="nav-link btn btn-flex text-white btn btn-primary" data-bs-toggle="tab" href="#kt_general_widget_1_6">
                                     <i class="bi bi-signpost-split"></i>
-                                </span>
-                                <!--end::Svg Icon-->
-                                <span class="fs-6 fw-bold">Access
-                                <br />Control</span>
+                                <span class="fs-6 fw-bold">Access Control</span>
+                            </a>
+                        </li>
+                        <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
+                            <a class="nav-link btn btn-flex text-white btn btn-primary" data-bs-toggle="tab" href="#kt_general_widget_1_9">
+                                    <i class="bi bi-signpost-split"></i>
+                                <span class="fs-6 fw-bold">Permission Control</span>
                             </a>
                         </li>
                     </ul>
@@ -180,15 +154,8 @@
                                                     @endif
                                                 </td>
                                                     <td class="text-end">
-                                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions <i class="bi bi-caret-down"></i></a>
-                                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                                            <div class="menu-item px-3">
-                                                                <a class="menu-link px-3" onclick="editModalMenu({{ $m->id }})" >Edit</a>
-                                                            </div>
-                                                            <div class="menu-item px-3">
-                                                                <a href="/admin/configuration/menu/delete/{{ $m->id }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Delete</a>
-                                                            </div>
-                                                        </div>
+                                                                <a class="btn btn-sm btn-warning" onclick="editModalMenu({{ $m->id }})" ><i class="bi bi-pencil-square"></i></a>
+                                                                <a href="/admin/configuration/menu/delete/{{ $m->id }}" class="btn btn-sm btn-danger button-delete"><i class="bi bi-trash"></i></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -296,15 +263,9 @@
                                                     <td class="text-wrap">{{ $sm->urlsubmenu }}</td>
                                                     <td>{{ $sm->icon }}</td>
                                                     <td class="text-end">
-                                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions <i class="bi bi-caret-down"></i></a>
-                                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                                            <div class="menu-item px-3">
-                                                                <a class="menu-link px-3" onclick="editModalSubmenu({{ $sm->id }})" >Edit</a>
-                                                            </div>
-                                                            <div class="menu-item px-3">
-                                                                <a href="/admin/configuration/submenu/delete/{{ $sm->id }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Delete</a>
-                                                            </div>
-                                                        </div>
+
+                                                                <a class="btn btn-sm btn-warning" onclick="editModalSubmenu({{ $sm->id }})" ><i class="bi bi-pencil-square"></i></a>
+                                                                <a href="/admin/configuration/submenu/delete/{{ $sm->id }}" class="btn btn-sm btn-danger button-delete" data-kt-users-table-filter="delete_row"><i class="bi bi-trash"></i></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -390,10 +351,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="kt_general_widget_1_7">
-                            <!--begin::Tables Widget 1-->
-                            <div class="d-flex justify-content-center">
-                            <div class="card col-lg-6">
-                                <!--begin::Header-->
+                            <div class="card">
                                 <div class="card-header border-0 pt-5">
                                     <h3 class="card-title align-items-start flex-column">
                                         <span class="card-label fw-bolder fs-3 mb-1">Role</span>
@@ -455,15 +413,8 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $r->role }}</td>
                                                     <td class="text-end">
-                                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions <i class="bi bi-caret-down"></i></a>
-                                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                                            <div class="menu-item px-3">
-                                                                <a class="menu-link px-3" onclick="editModalRole({{ $r->id }})" >Edit</a>
-                                                            </div>
-                                                            <div class="menu-item px-3">
-                                                                <a href="/admin/configuration/userrole/delete/{{ $r->id }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Delete</a>
-                                                            </div>
-                                                        </div>
+                                                        <a class="btn btn-sm btn-warning" onclick="editModalRole({{ $r->id }})" ><i class="bi bi-pencil-square"></i></a>
+                                                        <a href="/admin/configuration/userrole/delete/{{ $r->id }}" class="btn btn-sm btn-danger button-delete"><i class="bi bi-trash"></i></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -473,11 +424,9 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
                         <div class="tab-pane fade" id="kt_general_widget_1_8">
                             <!--begin::Tables Widget 1-->
-                            <div class="d-flex justify-content-center">
-                            <div class="card col-lg-6">
+                            <div class="card">
                                 <!--begin::Header-->
                                 <div class="card-header border-0 pt-5">
                                     <h3 class="card-title align-items-start flex-column">
@@ -543,15 +492,8 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $r->name }}</td>
                                                     <td class="text-end">
-                                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions <i class="bi bi-caret-down"></i></a>
-                                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                                            <div class="menu-item px-3">
-                                                                <a class="menu-link px-3" onclick="editModalLocation({{ $r->id }})" >Edit</a>
-                                                            </div>
-                                                            <div class="menu-item px-3">
-                                                                <a href="/admin/configuration/location/delete/{{ $r->id }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Delete</a>
-                                                            </div>
-                                                        </div>
+                                                                <a class="btn btn-sm btn-warning" onclick="editModalLocation({{ $r->id }})" ><i class="bi bi-pencil-square"></i></a>
+                                                                <a href="/admin/configuration/location/delete/{{ $r->id }}" class="btn btn-sm btn-danger button-delete"><i class="bi bi-trash"></i></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -561,7 +503,65 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="tab-pane fade" id="kt_general_widget_1_9">
+                            <!--begin::Tables Widget 1-->
+                            <div class="card">
+                                <!--begin::Header-->
+                                <div class="card-header border-0 pt-5">
+                                    <h3 class="card-title align-items-start flex-column">
+                                        <span class="card-label fw-bolder fs-3 mb-1">Permission Control</span>
+                                    </h3>
+                                    <div class="card-toolbar">
+                                        <!--begin::Menu-->
+                                        <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                            <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
+                                            <span class="svg-icon svg-icon-2">
+                                                <i class="bi bi-info-circle"></i>
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                        </button>
+                                        <!--begin::Menu 1-->
+                                        <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_617b94b537c9a">
+                                            <!--begin::Header-->
+                                            <div class="px-7 py-5">
+                                                <div class="fs-5 text-dark fw-bolder">Information <i class="bi bi-info-circle"></i> </div>
+                                            </div>
+                                            <!--end::Header-->
+                                            <!--begin::Menu separator-->
+                                            <div class="separator border-gray-200"></div>
+                                            <!--end::Menu separator-->
+                                            <!--begin::Form-->
+                                            <div class="px-7 py-5">
+                                               <p>This page for set the access any role to menu</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body py-3">
+                                    <div class="row">
+                                    @foreach ($role as $r )
+                                        <div class="col-md-4">
+                                            <div class="card card-flush h-md-100 bg-warna">
+                                                <div class="card-header">
+                                                    <div class="card-title">
+                                                        <h2 class="text-white">{{ $r->role }}</h2>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body pt-1">
+                                                    <div class="d-flex flex-column text-gray-600">
+
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer flex-wrap pt-0">
+                                                    <button type="button" class="btn btn-warning  my-1" onclick="editModalPermission({{ $r->id }})">Edit Permission</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -712,6 +712,12 @@
             $.get("{{ url('/admin/configuration/location/editmodal') }}/"+id, {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('show')
+            })
+        }
+        function editModalPermission(id){
+            $.get("{{ url('/admin/configuration/useraccessmenu/editpermissionmodal') }}/"+id, {}, function(data, status){
+                $('#contentAccess').html(data)
+                $('#accessModal').modal('show')
             })
         }
 

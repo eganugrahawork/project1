@@ -80,12 +80,8 @@
                             <!--end::User-->
 
                         </div>
-                        <!--end::Title-->
-                        <!--begin::Stats-->
                         <div class="d-flex flex-wrap flex-stack">
-                            <!--begin::Wrapper-->
                             <div class="d-flex flex-column flex-grow-1 pe-8">
-                                <!--begin::Stats-->
                                 <div class="d-flex flex-wrap">
                                     <!--begin::Stat-->
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
@@ -168,85 +164,88 @@
                 </div>
             </div>
         </div>
+
+        <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+            <div class="card-header cursor-pointer">
+                <div class="card-title m-0">
+                    <h3 class="fw-bolder m-0">Profile Details</h3>
+                </div>
+            </div>
+            <div class="card-body p-9">
+                <div class="row mb-7">
+                    <label class="col-lg-4 fw-bold text-muted">Full Name</label>
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-gray-800">{{ $user->name }}</span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-bold text-muted">Username</label>
+                    <div class="col-lg-8 fv-row">
+                        <span class="fw-bold text-gray-800 fs-6">{{ $user->username }}</span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-bold text-muted">Email</label>
+                    <div class="col-lg-8">
+                        <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">{{ $user->email }}</a>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--begin::Input group-->
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-bold text-muted">Contact Phone
+                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i></label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 d-flex align-items-center">
+                        <span class="fw-bolder fs-6 text-gray-800 me-2">{{ $user->no_hp }}</span>
+                        <span class="badge badge-success">Verified</span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--begin::Input group-->
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-bold text-muted">Region
+                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Country of origination"></i></label>
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-gray-800">{{ $user->regiondetail->name }}</span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-bold text-muted">Address</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-gray-800">{{ $user->address }}</span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <div class="row mb-10">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-bold text-muted">Role</label>
+                    <div class="col-lg-8">
+                        <span class="fw-bold fs-6 text-gray-800">{{ $user->userrole->role }}</span>
+                    </div>
+                </div>
+
+                <!--end::Notice-->
+            </div>
+            <!--end::Card body-->
+        </div>
+
     </div>
 </div>
 
-<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
-    <div class="card-header cursor-pointer">
-        <div class="card-title m-0">
-            <h3 class="fw-bolder m-0">Profile Details</h3>
-        </div>
-    </div>
-    <div class="card-body p-9">
-        <div class="row mb-7">
-            <label class="col-lg-4 fw-bold text-muted">Full Name</label>
-            <div class="col-lg-8">
-                <span class="fw-bolder fs-6 text-gray-800">{{ $user->name }}</span>
-            </div>
-            <!--end::Col-->
-        </div>
-        <div class="row mb-7">
-            <!--begin::Label-->
-            <label class="col-lg-4 fw-bold text-muted">Username</label>
-            <div class="col-lg-8 fv-row">
-                <span class="fw-bold text-gray-800 fs-6">{{ $user->username }}</span>
-            </div>
-            <!--end::Col-->
-        </div>
-        <!--end::Input group-->
-        <div class="row mb-7">
-            <!--begin::Label-->
-            <label class="col-lg-4 fw-bold text-muted">Email</label>
-            <div class="col-lg-8">
-                <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">{{ $user->email }}</a>
-            </div>
-            <!--end::Col-->
-        </div>
-        <!--begin::Input group-->
-        <div class="row mb-7">
-            <!--begin::Label-->
-            <label class="col-lg-4 fw-bold text-muted">Contact Phone
-            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i></label>
-            <!--end::Label-->
-            <!--begin::Col-->
-            <div class="col-lg-8 d-flex align-items-center">
-                <span class="fw-bolder fs-6 text-gray-800 me-2">{{ $user->no_hp }}</span>
-                <span class="badge badge-success">Verified</span>
-            </div>
-            <!--end::Col-->
-        </div>
-        <!--begin::Input group-->
-        <div class="row mb-7">
-            <!--begin::Label-->
-            <label class="col-lg-4 fw-bold text-muted">Region
-            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Country of origination"></i></label>
-            <div class="col-lg-8">
-                <span class="fw-bolder fs-6 text-gray-800">{{ $user->regiondetail->name }}</span>
-            </div>
-            <!--end::Col-->
-        </div>
-        <div class="row mb-7">
-            <!--begin::Label-->
-            <label class="col-lg-4 fw-bold text-muted">Address</label>
-            <!--end::Label-->
-            <!--begin::Col-->
-            <div class="col-lg-8">
-                <span class="fw-bolder fs-6 text-gray-800">{{ $user->address }}</span>
-            </div>
-            <!--end::Col-->
-        </div>
-        <div class="row mb-10">
-            <!--begin::Label-->
-            <label class="col-lg-4 fw-bold text-muted">Role</label>
-            <div class="col-lg-8">
-                <span class="fw-bold fs-6 text-gray-800">{{ $user->userrole->role }}</span>
-            </div>
-        </div>
 
-        <!--end::Notice-->
-    </div>
-    <!--end::Card body-->
-</div>
 
 @endsection
 

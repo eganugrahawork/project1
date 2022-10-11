@@ -27,11 +27,11 @@
     <!--end::Container-->
 </div>
 
-<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl bg-warna py-4">
     <!--begin::Post-->
     <div class="content flex-row-fluid" id="kt_content">
         <!--begin::Card-->
-        <div class="card">
+        <div class="card bg-white">
             <!--begin::Card header-->
             <div class="card-header border-0 pt-6">
                 <!--begin::Card title-->
@@ -49,23 +49,27 @@
                         <input type="text" id="searchIndukTable" class="form-control form-control-solid w-250px ps-15" placeholder="User Search" />
                     </div>
                 </div>
-                @if  (auth()->user()->userrole->role ==='Super Admin')
-                    <div class="card-toolbar">
+                <div class="card-toolbar">
 
-                        <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                    <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                            @if  (auth()->user()->userrole->role ==='Super Admin')
                             <a class="btn btn-light-primary me-3" href="/admin/configuration/menu">
                             <span class="svg-icon svg-icon-2">
                                 <i class="bi bi-menu-button-wide"></i>
                             </span>
                            Configuration</a>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-                                <span class="svg-icon svg-icon-2">
-                                    <i class="bi bi-plus-square"></i>
+                           @endif
+
+                           @can('create', [0, '/admin/users'])
+
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                               <span class="svg-icon svg-icon-2">
+                                   <i class="bi bi-plus-square"></i>
                                 </span>
                                 Add User</button>
+                                @endcan
                             </div>
                     </div>
-                @endif
             </div>
             <div class="card-body pt-0">
                 <!--begin::Table-->
@@ -108,24 +112,13 @@
                             <td>{{ $usr->RegionDetail->name }}</td>
                             <td>{{ $usr->created_at }}</td>
                             <td class="text-end">
-                                @if (auth()->user()->userrole->role ==='Super Admin')
-                                    <button class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions <i class="bi bi-caret-down"></i></button>
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                        <div class="menu-item px-3">
-                                            <a href="/admin/users/show/{{ $usr->id }}" class="menu-link px-3">View</a>
-                                        </div>
-                                        <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="editModal({{ $usr->id }})" >Edit</a>
-                                        </div>
-                                        <div class="menu-item px-3">
-                                            <a href="/admin/users/delete/{{ $usr->id }}" class="menu-link px-3 button-delete" data-kt-users-table-filter="delete_row">Delete</a>
-                                        </div>
-                                    </div>
-                                @else
-                                <a href="/admin/users/show/{{ $usr->id }}" class="btn btn-light btn-active-light-primary btn-sm">View</a>
-
-                                @endif
-
+                                    <a href="/admin/users/show/{{ $usr->id }}" class="btn btn-sm btn-success"><i class="bi bi-info-circle"></i></a>
+                                @can('edit', [0, '/admin/users'])
+                                    <a onclick="editModal({{ $usr->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                @endcan
+                                @can('delete', [0, '/admin/users'])
+                                    <a href="/admin/users/delete/{{ $usr->id }}" class="btn btn-sm btn-danger button-delete" data-kt-users-table-filter="delete_row"><i class="bi bi-trash"></i></a>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach
@@ -203,7 +196,8 @@
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fw-bold fs-6 mb-2">Agama</label>
-                                    <select class="form-select form-select-solid" name="religion" required>
+                                    <select class="form-select" data-control="select2" data-placeholder="Select an option" name="religion" required>
+                                        <option></option>
                                         <option value="Islam">Islam</option>
                                         <option value="Kristen">Kristen</option>
                                         <option value="Protestan">Protestan</option>
@@ -212,6 +206,7 @@
                                         <option value="Ateis">Ateis</option>
                                         <option value="Lainnya">Lainnya</option>
                                     </select>
+
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fw-bold fs-6 mb-2">No. Telp</label>

@@ -19,4 +19,53 @@ function checkAccessSubmenu($data){
         echo"Checked";
     }
 }
+
+function checkPermissionMenuCreate($data){
+    $result = DB::select("select * from crud_permission where id_role = $data[id_role] and id_menu = $data[id_menu] and created = 1");
+
+    if($result){
+        echo"Checked";
+    }
+}
+
+function checkPermissionMenuEdit($data){
+    $result = DB::select("select * from crud_permission where id_role = $data[id_role] and id_menu = $data[id_menu] and edit = 1");
+
+    if($result){
+        echo"Checked";
+    }
+}
+
+function checkPermissionMenuDelete($data){
+    $result = DB::select("select * from crud_permission where id_role = $data[id_role] and id_menu = $data[id_menu] and deleted = 1");
+
+    if($result){
+        echo"Checked";
+    }
+}
+
+function checkPermissionSubmenuCreate($data){
+    $result = DB::select("select * from crud_permission where id_role = $data[id_role] and id_submenu = $data[id_submenu] and created = 1");
+
+    if($result){
+        echo"Checked";
+    }
+}
+
+function checkPermissionSubmenuEdit($data){
+    $result = DB::select("select * from crud_permission where id_role = $data[id_role] and id_submenu = $data[id_submenu] and edit = 1");
+
+    if($result){
+        echo"Checked";
+    }
+}
+function checkPermissionSubmenuDelete($data){
+    $result = DB::select("select * from crud_permission where id_role = $data[id_role] and id_submenu = $data[id_submenu] and deleted = 1");
+
+    if($result){
+        echo"Checked";
+    }
+}
+
+
 ?>

@@ -14,10 +14,11 @@ class CreateUomsTable extends Migration
     public function up()
     {
         Schema::create('uoms', function (Blueprint $table) {
-            $table->id('id_uom');
-            $table->string('uom_name');
-            $table->string('uom_symbol');
+            $table->id('id');
+            $table->string('name');
+            $table->string('symbol');
             $table->string('description');
+            $table->integer('status');
             $table->timestamps();
         });
     }

@@ -18,10 +18,6 @@ class DashboardController extends Controller
         return view('admin.dashboard.index', ['title' => 'Dashboard']);
     }
 
-
-
-
-
     public function useractivity(){
 
         $user = UserActivity::orderBy('id','DESC')->get();
