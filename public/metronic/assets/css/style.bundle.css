@@ -574,7 +574,7 @@ progress {
     max-width: 960px;
   }
 }
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
   .container,
   .container-lg,
   .container-md,
@@ -592,7 +592,7 @@ progress {
   .container-xxl {
     max-width: 1320px;
   }
-}
+} */
 .row {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
@@ -48796,6 +48796,7 @@ body {
 .aside-menu .menu-item .menu-icon {
   justify-content: flex-start;
 }
+
 @media (min-width: 992px) {
   .content {
     padding: 0 0 15px 0;
