@@ -21,7 +21,12 @@ class PriceManagementController extends Controller
     }
 
     public function update(Request $request){
-        PriceHistory::where(['id' =>$request->id])->update([
+        Items::where(['id' => $request->id])->update([
+            'top_price' => $request->top_price,
+            'bottom_price' => $request->bottom_price
+            // 'harga_good_sold' => $request->harga_good_sold
+        ]);
+        PriceHistory::where(['items_id' =>$request->id])->update([
             'top_price' => $request->top_price,
             'bottom_price' => $request->bottom_price,
             'harga_good_sold' => $request->harga_good_sold

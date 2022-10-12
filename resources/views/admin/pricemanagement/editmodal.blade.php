@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="fv-row mb-7">
-                <input type="hidden" name="id" value="{{ $item->pricehistory->id }}">
+                <input type="hidden" name="id" value="{{ $item->id }}">
 
                 <label class="required fw-bold fs-6 mb-2">Kode Item</label>
                 <input type="text" name="code" disabled class="form-control form-control-white mb-3 mb-lg-0" value="{{ $item->code }}" required/>
