@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUomTable extends Migration
+class TypeItems extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateUomTable extends Migration
      */
     public function up()
     {
-        Schema::create('uom', function (Blueprint $table) {
-            $table->id('id');
-            $table->string('name');
-            $table->string('symbol');
-            $table->string('description');
+        Schema::create('type_items', function (Blueprint $table) {
+            $table->id('id_type_item');
+            $table->string('type_item_name');
+            $table->string('type_item_description')->nullable();
+            $table->integer('vat')->nullable();
             $table->integer('status')->nullable();
+            $table->integer('id_coa');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateUomTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('uoms');
+        Schema::dropIfExists('type_items');
     }
 }

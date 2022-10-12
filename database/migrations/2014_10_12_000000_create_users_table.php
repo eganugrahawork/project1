@@ -29,8 +29,9 @@ class CreateUsersTable extends Migration
             $table->string('token')->nullable();
             $table->integer('email_status')->nullable();
             $table->string('email_code')->nullable();
-            $table->integer('sms_status')->unique();
-            $table->string('sms_code')->unique();
+            $table->integer('sms_status')->nullable()->unique();
+            $table->string('sms_code')->nullable()->unique();
+            $table->integer('region');
             $table->integer('id_role');
             $table->rememberToken();
             $table->timestamps();

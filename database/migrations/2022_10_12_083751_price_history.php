@@ -16,11 +16,11 @@ class PriceHistory extends Migration
         Schema::create('price_history', function (Blueprint $table) {
             $table->id();
             $table->integer('items_id');
-            $table->double('top_price');
-            $table->double('bottom_price');
-            $table->double('harga_good_sold');
-            $table->timestamps('aproval_date');
-            $table->timestamps('aproval_at');
+            $table->double('top_price')->nullable();
+            $table->double('bottom_price')->nullable();
+            $table->double('harga_good_sold')->nullable();
+            $table->dateTime('aproval_date')->nullable();
+            $table->dateTime('aproval_at')->nullable();
             $table->timestamps();
         });
     }

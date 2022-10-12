@@ -26,11 +26,11 @@ class CreateCustomersTable extends Migration
             $table->string('group');
             $table->string('phone');
             $table->string('email');
-            $table->string('contact_person');
-            $table->double('credit_limit');
-            $table->integer('credit_status');
+            $table->string('contact_person')->nullable();
+            $table->double('credit_limit')->nullable();
+            $table->integer('credit_status')->nullable();
             $table->double('credit_left')->nullable();
-            $table->integer('status');
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

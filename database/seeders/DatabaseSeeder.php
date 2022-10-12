@@ -2,15 +2,15 @@
 
 namespace Database\Seeders;
 
-use App\Models\Eksternal;
-use App\Models\Lokasi;
-use App\Models\Material;
-use App\Models\TypeMaterial;
+use App\Models\Items;
+use App\Models\PriceHistory;
+use App\Models\Principal;
+use App\Models\Region;
+use App\Models\TypeItems;
 use App\Models\Uom;
 use App\Models\User;
 use App\Models\UserAccessMenu;
 use App\Models\UserAccessSubmenu;
-use App\Models\UserDetail;
 use App\Models\UserMenu;
 use App\Models\UserRole;
 use App\Models\UserSubmenu;
@@ -27,37 +27,29 @@ class DatabaseSeeder extends Seeder
     {
         // User
         User::create([
-            'username' => 'eganugrahaid',
-            'email' => 'nugrahaega261@gmail.com',
-            'id_detail_user' => 1,
+            'username' => 'superadmin',
+            'email' => 'superadmin@gmail.com',
             'id_role' => 1,
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
+            'name' => 'Super Admin',
+            'image' => 'img-users/default.png',
+            'address' => 'tasik',
+            'no_hp' => '08975568102',
+            'region' => '1'
         ]);
         User::create([
-            'username' => 'dwiwahyu',
-            'email' => 'dwiwahyu@gmail.com',
-            'id_detail_user' => 2,
+            'username' => 'admin',
+            'email' => 'admin@gmail.com',
             'id_role' => 2,
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
+            'name' => 'Super Admin',
+            'image' => 'img-users/default.png',
+            'address' => 'tasik',
+            'no_hp' => '08975568102',
+            'region' => '1'
         ]);
         // End User
 
-        // User Detail
-        UserDetail::create([
-            'nama' => 'Ega Nugraha',
-            'image' => 'img-users/default.png',
-            'alamat' => 'tasik',
-            'nokontak' => '08975568102',
-            'lokasi' => 'Wilayah Selatan'
-        ]);
-        UserDetail::create([
-            'nama' => 'Dwi Wahyu',
-            'image' => 'img-users/default.png',
-            'alamat' => 'bandung',
-            'nokontak' => '08975568101',
-            'lokasi' => 'Wilayah Utara'
-        ]);
-        // End UserDetail
 
         // User Menu
         UserMenu::create([
@@ -169,71 +161,78 @@ class DatabaseSeeder extends Seeder
         // End User Role
 
         // Lokasi
-        Lokasi::create([
-            'lokasi' => 'Wilayah Barat'
+        Region::create([
+            'name' => 'Wilayah Barat'
         ]);
 
-        Lokasi::create([
-            'lokasi' => 'Wilayah Selatan'
+        Region::create([
+            'name' => 'Wilayah Selatan'
         ]);
 
-        Lokasi::create([
-            'lokasi' => 'Wilayah Utara'
+        Region::create([
+            'name' => 'Wilayah Utara'
         ]);
         // End Lokasi
 
-        // TypeMaterial
-        TypeMaterial::create([
-            'type_material_name' => 'Pestisida',
-            'type_material_description' => 'Pestisida',
+        // TypeItem
+        TypeItems::create([
+            'type_item_name' => 'Pestisida',
+            'type_item_description' => 'Pestisida',
+            'vat' => 10,
+            'status' => 0,
+            'id_coa' => 123
         ]);
-        TypeMaterial::create([
-            'type_material_name' => 'Non Pestisida',
-            'type_material_description' => 'Non Pestisida',
+        TypeItems::create([
+            'type_item_name' => 'Non Pestisida',
+            'type_item_description' => 'Non Pestisida',
+            'vat' => 10,
+            'status' => 0,
+            'id_coa' => 123
         ]);
         // End Type Material
-
         // UoM
             Uom::create([
-                'uom_name'=> 'Kilogram',
-                'uom_symbol'=> 'kg',
+                'name'=> 'Kilogram',
+                'symbol'=> 'kg',
                 'description'=> 'Satuan Berat'
             ]);
             Uom::create([
-                'uom_name'=> 'Gram',
-                'uom_symbol'=> 'gr',
+                'name'=> 'Gram',
+                'symbol'=> 'gr',
                 'description'=> 'Satuan Berat Kecil'
             ]);
             Uom::create([
-                'uom_name'=> 'Liter',
-                'uom_symbol'=> 'lt',
+                'name'=> 'Liter',
+                'symbol'=> 'lt',
                 'description'=> 'Satuan Liter'
             ]);
         // End Uom
 
-        //Principal
-            Eksternal::create([
-                'kode_eksternal' => "212003",
-                'name_eksternal' => "PT. AGROKIMINDO",
-                'eksternal_address' => "Jl. Raden Saleh No.6, Jakarta",
-                'phone_1' => "021-31927418",
-                'sts_show'=>1
+        //partners
+            Principal::create([
+                'code' => "212003",
+                'name' => "PT. AGROKIMINDO",
+                'address' => "Jl. Raden Saleh No.6, Jakarta",
+                'phone' => "021-31927418",
+                'status'=>1
             ]);
-        // End Principal
+        // End partners
 
         // Items
-            Material::create([
-                'stock_code' => "BAI0101",
-                'stock_name' => "Acrobat 50 WP",
-                'stock_desc' => "Acrobat 50 WP",
+            Items::create([
+                'code' => "BAI0101",
+                'name' => "Acrobat 50 WP",
+                'description' => "Acrobat 50 WP",
                 'base_qty' => 10,
-                'unit_terkecil' => 2,
+                'uom_id' => 2,
                 'unit_box' => 320,
                 'type' => 1,
-                'pajak' => 10,
-                'dist_id' => 1,
-                'sts_show' => 1
+                'vat' => 10,
+                'partner_id' => 1,
+                'status' => 1
             ]);
+
+            PriceHistory::create(['items_id'=>1]);
         // End Items
     }
 }

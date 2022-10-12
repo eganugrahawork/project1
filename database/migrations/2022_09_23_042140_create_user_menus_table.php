@@ -17,7 +17,7 @@ class CreateUserMenusTable extends Migration
             $table->id();
             $table->string('menu');
             $table->string('url')->nullable();
-            $table->boolean('is_submenu')->nullable();
+            $table->boolean('is_submenu')->default('0');
             $table->timestamps();
         });
     }

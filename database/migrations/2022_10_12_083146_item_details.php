@@ -19,7 +19,7 @@ class ItemDetails extends Migration
             $table->integer('purchase_order_detail_receive_id');
             $table->integer('qty');
             $table->integer('qty_big');
-            $table->timestamps('date_insert');
+            // $table->timestamps('date_insert');
             $table->double('buy_price');
             $table->double('qty_sol');
             $table->double('qty_sol_big');

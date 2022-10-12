@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCoasTable extends Migration
+class CreateCoaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateCoasTable extends Migration
      */
     public function up()
     {
-        Schema::create('coas', function (Blueprint $table) {
+        Schema::create('coa', function (Blueprint $table) {
             $table->id('id');
             $table->integer('id_parent');
             $table->string('coa');
             $table->string('description');
-            $table->integer('status');
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

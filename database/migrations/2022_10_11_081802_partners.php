@@ -22,7 +22,7 @@ class Partners extends Migration
             $table->string('fax')->nullable();
             $table->string('email')->nullable();
             $table->string('address')->nullable();
-            $table->string('ship_addreess')->nullable();
+            $table->string('ship_address')->nullable();
             $table->string('bank_name')->nullable();
             $table->integer('account_number')->nullable();
             $table->integer('status')->nullable();

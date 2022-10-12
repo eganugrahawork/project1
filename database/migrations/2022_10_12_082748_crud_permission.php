@@ -16,11 +16,11 @@ class CrudPermission extends Migration
         Schema::create('crud_permission', function (Blueprint $table) {
             $table->id();
             $table->integer('id_role');
-            $table->integer('id_menu');
-            $table->integer('id_submenu');
-            $table->integer('created');
-            $table->integer('edit');
-            $table->integer('deleted');
+            $table->integer('id_menu')->default('0');
+            $table->integer('id_submenu')->default('0');
+            $table->integer('created')->default('0');
+            $table->integer('edit')->default('0');
+            $table->integer('deleted')->default('0');
             $table->timestamps();
         });
     }
