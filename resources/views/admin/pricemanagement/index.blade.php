@@ -71,9 +71,9 @@
                                     <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->name }}</a>
                                 </td>
                                 <td>{{ $item->Principal->name }}</td>
-                                <td class="text-end">@Rupiah($item->PriceHistory->top_price)</td>
-                                <td class="text-end">@Rupiah($item->PriceHistory->harga_good_sold)</td>
-                                <td class="text-end">@Rupiah($item->PriceHistory->bottom_price)</td>
+                                <td class="text-end">@Rupiah($item->top_price)</td>
+                                <td class="text-end">@Rupiah($item->harga_good_sold)</td>
+                                <td class="text-end">@Rupiah($item->bottom_price)</td>
                                 <td class="text-center">@if ($item->status == 1)
                                     Ya
                                 @else

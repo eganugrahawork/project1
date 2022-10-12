@@ -16,15 +16,15 @@
         <div class="col-lg-6">
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Harga Atas</label>
-                <input type="number" name="top_price" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $item->pricehistory->top_price }}" required/>
+                <input type="number" name="top_price" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $item->top_price }}" required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Harga Bawah</label>
-                <input type="number" name="bottom_price" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $item->pricehistory->bottom_price }}" required/>
+                <input type="number" name="bottom_price" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $item->bottom_price }}" required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Harga Good Sold</label>
-                <input type="text" name="harga_good_sold" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $item->pricehistory->harga_good_sold }}"/>
+                <input type="text" name="harga_good_sold" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $item->harga_good_sold }}"/>
             </div>
         </div>
     </div>
