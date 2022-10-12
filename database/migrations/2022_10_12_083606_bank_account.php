@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUomsTable extends Migration
+class BankAccount extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateUomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('uoms', function (Blueprint $table) {
-            $table->id('id');
+        Schema::create('bank_accounts', function (Blueprint $table) {
+            $table->id();
+            $table->integer('partner_id');
             $table->string('name');
-            $table->string('symbol');
+            $table->string('account_number');
             $table->string('description');
             $table->integer('status');
             $table->timestamps();
@@ -30,6 +31,6 @@ class CreateUomsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('uoms');
+        Schema::dropIfExists('bank_accounts');
     }
 }

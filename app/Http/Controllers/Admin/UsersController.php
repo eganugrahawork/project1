@@ -37,7 +37,7 @@ class UsersController extends Controller
 
 
     public function index(){
-        $user = User::all();
+        $user = User::with(['UserRole', 'RegionDetail'])->get();
         $role = UserRole::all();
         $region = Region::all();
         return view('admin.users.index', ['title' => 'Users', 'users' => $user, 'role' => $role, 'region' => $region]);

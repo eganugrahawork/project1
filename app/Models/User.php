@@ -38,7 +38,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $with = ['UserRole'];
+    // protected $with = ['UserRole'];
 
 
     public function UserRole(){
