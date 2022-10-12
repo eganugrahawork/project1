@@ -30084,8 +30084,8 @@ a:hover {
   color: #5e6278;
 }
 .menu-title-gray-700 .menu-item .menu-link .menu-title {
-  /* color: #5e6278; */
-  color: #fff;
+  color: #5e6278;
+  /* color: #fff; */
 }
 .menu-title-gray-700 .menu-item .menu-link .active .menu-title {
     color: #5e6278;
