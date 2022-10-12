@@ -111,19 +111,23 @@
                                 $subnya = DB::select('select * from user_access_submenus where id_submenu = '.$sub->id.' and id_role = '.auth()->user()->userrole->id);
                             @endphp
                             @if ($subnya)
-
-                            <div class="menu-item">
-                                <a class="menu-link py-3" href="{{ $sub->urlsubmenu }}"  data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                                    <span class="menu-icon">
-                                        <!--begin::Svg Icon | path: /icons/duotune/general/gen002.svg-->
-                                        <span class="svg-icon svg-icon-2">
-                                            <i class="bi bi-{{ $sub->icon }}"></i>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                    </span>
-                                    <span class="menu-title text-gray-700">{{ $sub->submenu }}</span>
-                                </a>
-                            </div>
+                                    @php
+                                           $customaccesssubmenu = DB::select('select * from custom_access_blocks where id_user = '. auth()->user()->id.' and  id_submenu = '.$sub->id);
+                                    @endphp
+                                    @if ($customaccesssubmenu == null)
+                                        <div class="menu-item">
+                                            <a class="menu-link py-3" href="{{ $sub->urlsubmenu }}"  data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                                <span class="menu-icon">
+                                                    <!--begin::Svg Icon | path: /icons/duotune/general/gen002.svg-->
+                                                    <span class="svg-icon svg-icon-2">
+                                                        <i class="bi bi-{{ $sub->icon }}"></i>
+                                                    </span>
+                                                    <!--end::Svg Icon-->
+                                                </span>
+                                                <span class="menu-title text-gray-700">{{ $sub->submenu }}</span>
+                                            </a>
+                                        </div>
+                                    @endif
                             @endif
                             @endforeach
                         </div>

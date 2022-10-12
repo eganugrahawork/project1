@@ -16,7 +16,8 @@ class CreateCustomAccessBlocksTable extends Migration
         Schema::create('custom_access_blocks', function (Blueprint $table) {
             $table->id();
             $table->integer('id_user');
-            $table->integer('id_menu');
+            $table->integer('id_menu')->nullable();
+            $table->integer('id_submenu')->nullable();
             $table->timestamps();
         });
     }

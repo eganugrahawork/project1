@@ -66,17 +66,17 @@
                                                 <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                                                     <a href="../../demo11/dist/apps/user-management/users/view.html">
                                                         <div class="symbol-label">
-                                                            <img src="{{ asset('storage/'.$usr->userdetail->image) }}" class="w-100" />
+                                                            <img src="{{ asset('storage/'.$usr->image) }}" class="w-100" />
                                                         </div>
                                                     </a>
                                                 </div>
                                                 <div class="d-flex flex-column">
-                                                    <a href="" class="text-gray-800 text-hover-primary mb-1">{{ $usr->userdetail->nama }}</a>
+                                                    <a href="" class="text-gray-800 text-hover-primary mb-1">{{ $usr->name }}</a>
                                                     <span>{{ $usr->username }}</span>
                                                 </div>
                                             </td>
                                             <td>{{ $usr->email }}</td>
-                                            <td>{{ $usr->userdetail->lokasi }}</td>
+                                            <td>{{ $usr->regiondetail->name }}</td>
                                             <td class="text-end">
                                                 <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                                                 <span class="svg-icon svg-icon-5 m-0">
@@ -87,7 +87,8 @@
                                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                     <div class="menu-item px-3">
 
-                                                        <a onclick="editCustomAccess({{ $usr->id }})" class="menu-link px-3" >Edit</a>
+                                                        <a onclick="editCustomAccess({{ $usr->id }})" class="menu-link px-3" >Edit Menu Access</a>
+                                                        <a onclick="editCustomAccessSubmenu({{ $usr->id }})" class="menu-link px-3" >Edit submenu Access</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -141,6 +142,12 @@
 <script>
     function editCustomAccess(id){
             $.get("{{ url('/admin/configuration/useraccessmenu/editcustomaccess') }}/"+id, {}, function(data, status){
+                $('#kontennya').html(data)
+                $('#mainmodal').modal('show')
+            })
+    }
+    function editCustomAccessSubmenu(id){
+            $.get("{{ url('/admin/configuration/useraccessmenu/editcustomaccesssubmenu') }}/"+id, {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('show')
             })

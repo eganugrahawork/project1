@@ -1,18 +1,17 @@
 <div class="fv-row">
-
     <div class="table-responsive">
         <table class="table align-middle table-row-dashed fs-6 gy-5">
-            <td><label class="fs-5 fw-bolder form-label mb-2">Menu </label></td>
+            <td><label class="fs-5 fw-bolder form-label mb-2">Submenu </label></td>
             <td><label class="fs-5 fw-bolder form-label mb-2">Accessed</label></td>
             <td><label class="fs-5 fw-bolder form-label mb-2">Action</label></td>
             <tbody class="text-gray-600 fw-bold">
-                @foreach ($useraccess as $ua)
+                @foreach ($useraccesssubmenu as $uas)
                 @php
-                $checkblock = DB::select("select * from custom_access_blocks where id_user = $user->id and id_menu = $ua->id_menu");
-                $data  = ['id_user' => $user->id, 'id_menu'=> $ua->id_menu];
+                $checkblock = DB::select("select * from custom_access_blocks where id_user = $user->id and id_submenu = $uas->id_submenu");
+                $data  = ['id_user' => $user->id, 'id_submenu'=> $uas->id_submenu];
                 @endphp
                 <tr>
-                    <td class="text-gray-800">{{ $ua->usermenu->menu }}</td>
+                    <td class="text-gray-800">{{ $uas->usersubmenu->submenu }}</td>
                     <td class="text-gray-800">@if($checkblock == null)
                         Diizinkan
                     @else
@@ -20,9 +19,9 @@
                     @endif</td>
                 <td>
                     @if($checkblock == null)
-                    <a onclick="blockAccess({{ $ua->id_menu }}, {{ $user->id }})" class="btn btn-sm btn-danger">Hide</a>
+                    <a onclick="blockAccess({{$uas->id_submenu }}, {{ $user->id }})" class="btn btn-sm btn-danger">Hide</a>
                     @else
-                    <button onclick="unBlockAccess({{ $ua->id_menu }}, {{ $user->id }})" data-iduser="{{ $user->id }}" data-idmenu="{{ $ua->id_menu }}" class="btn btn-sm btn-primary">Unhide</button>
+                    <button onclick="unBlockAccess({{$uas->id_submenu }}, {{ $user->id }})" data-iduser="{{ $user->id }}" data-idsubmenu="{{$uas->id_submenu }}" class="btn btn-sm btn-primary">Unhide</button>
                     @endif
                 </td>
                 </tr>
@@ -46,7 +45,7 @@
             $('#mainmodal').modal('hide')
     }
 
-    function blockAccess(idMenu, idUser){
+    function blockAccess(idSubmenu, idUser){
 
         $.ajaxSetup({
             headers: {
@@ -72,11 +71,11 @@
       }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "{{ url('/admin/configuration/useraccessmenu/blockaccess') }}",
+                url: "{{ url('/admin/configuration/useraccessmenu/blockaccesssubmenu') }}",
                 type: 'post',
                 data: {
                     idUser: idUser,
-                    idMenu: idMenu
+                    idSubmenu: idSubmenu
                 },
                 success: function() {
                     swalWithBootstrapButtons.fire(
@@ -103,7 +102,7 @@
       })
     }
 
-    function unBlockAccess(idMenu, idUser){
+    function unBlockAccess(idSubmenu, idUser){
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -128,11 +127,11 @@
       }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "{{ url('/admin/configuration/useraccessmenu/unblockaccess') }}",
+                url: "{{ url('/admin/configuration/useraccessmenu/unblockaccesssubmenu') }}",
                 type: 'post',
                 data: {
                     idUser: idUser,
-                    idMenu: idMenu
+                    idSubmenu: idSubmenu
                 },
                 success: function() {
                     swalWithBootstrapButtons.fire(

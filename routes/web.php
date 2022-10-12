@@ -41,6 +41,14 @@ Route::get('/admin/useractivity', [DashboardController::class, 'useractivity'])-
 //End Dashboard
 
 
+// GET IP menggunakan package geoip yang sudah diinstal barangkali dibutuhkan
+// Route::get('/ip', function(){
+//     $checkLocation = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
+//     return $checkLocation->toArray();
+// });
+// END GET API
+
+
 // Profile Start
 Route::middleware(['auth'])->controller(ProfileController::class)->group(function(){
     Route::get('admin/myprofile', 'index');
@@ -83,8 +91,11 @@ Route::middleware(['auth'])->controller(UserRoleController::class)->group(functi
     Route::post('/admin/configuration/useraccessmenu/permissionmenu', 'permissionmenu')->name('permissionmenu');
     Route::post('/admin/configuration/useraccessmenu/permissionsubmenu', 'permissionsubmenu')->name('permissionsubmenu');
     Route::get('admin/configuration/useraccessmenu/editcustomaccess/{id}', 'editcustomaccess');
+    Route::get('admin/configuration/useraccessmenu/editcustomaccesssubmenu/{id}', 'editcustomaccesssubmenu');
     Route::post('/admin/configuration/useraccessmenu/blockaccess', 'blockaccess');
     Route::post('/admin/configuration/useraccessmenu/unblockaccess', 'unblockaccess');
+    Route::post('/admin/configuration/useraccessmenu/blockaccesssubmenu', 'blockaccesssubmenu');
+    Route::post('/admin/configuration/useraccessmenu/unblockaccesssubmenu', 'unblockaccesssubmenu');
     Route::get('/admin/configuration/useraccessmenu/editpermissionmodal/{id}', 'editpermissionmodal');
     Route::post('/admin/configuration/useraccessmenu/storepermissionmenu', 'storepermissionmenu');
 });

@@ -176,6 +176,13 @@ class UserRoleController extends Controller
 
     }
 
+    public function editcustomaccesssubmenu(Request $request){
+        $user= User::where(['id' => $request->id])->first();
+        $uaccess = UserAccessSubmenu::where(['id_role' => $user->id_role])->get();
+
+       return view('admin.userrole.editcustomaccesssubmenu', ['user' => $user, 'useraccesssubmenu' => $uaccess ]);
+    }
+
     // public function updateaccess(Request $request){
     //     $check = UserAccessMenu::where(['id_role' => $request->id_role, 'id_menu' =>$request->id_menu])->first();
 
@@ -210,6 +217,30 @@ class UserRoleController extends Controller
             'menu' => "Role",
             'aktivitas' => "Unhide",
             'keterangan' => "Unhide Akses User id $request->idUser pada Menu id $request->idMenu "
+        ]);
+        return response()->json('success');
+    }
+
+    public function blockaccesssubmenu(Request $request){
+        CustomAccessBlock::create(['id_user' => $request->idUser, 'id_submenu' => $request->idSubmenu]);
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Role",
+            'aktivitas' => "Hide",
+            'keterangan' => "Hide Akses User id $request->idUser pada Submenu id $request->idSubmenu "
+        ]);
+        return response()->json('success');
+
+    }
+
+    public function unblockaccesssubmenu(Request $request){
+
+        CustomAccessBlock::where(['id_user' => $request->idUser, 'id_submenu' => $request->idSubmenu])->delete();
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Role",
+            'aktivitas' => "Unhide",
+            'keterangan' => "Unhide Akses User id $request->idUser pada Submenu id $request->idSubmenu "
         ]);
         return response()->json('success');
     }
@@ -333,4 +364,6 @@ class UserRoleController extends Controller
         }
 
     }
+
+
 }
