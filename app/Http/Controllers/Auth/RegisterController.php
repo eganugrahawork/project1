@@ -115,6 +115,7 @@ class RegisterController extends Controller
             'email' => $data->email,
             'name' => $data->name,
             'address' => $data->address,
+            'id_role' => 1,
             'image' => "img-users/default.png",
             'no_hp' => $data->no_hp,
             'type_user_id' => $data->type_user_id,
