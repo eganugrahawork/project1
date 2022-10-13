@@ -4,11 +4,11 @@
         <div class="col-lg-6">
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Kode Item</label>
-                <input type="text" name="code" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="text" name="stock_code" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Nama Item</label>
-                <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="text" name="stock_name" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Deskripsi Item</label>

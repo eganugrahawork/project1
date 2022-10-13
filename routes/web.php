@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\UserMenuController;
 use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\UserSubmenuController;
+use App\Http\Controllers\Auth\RegisterController;
 // End Admin
 
 // Utils
@@ -32,6 +33,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
+
+Route::post('/register/create', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 
 Auth::routes();
 

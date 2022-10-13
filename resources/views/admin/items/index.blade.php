@@ -66,17 +66,17 @@
                         <tr>
                             <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
                             <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->code }}</a>
+                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->stock_code }}</a>
                             </td>
                             <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->name }}</a>
+                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->stock_name }}</a>
                             </td>
                             <td>
                                 <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->description }}</a>
                             </td>
-                            <td>{{ $item->uom->name }}</td>
+                            <td>{{ $item->uom_id }}</td>
                             <td >{{ $item->unit_box }}</td>
-                            <td>{{ $item->principal->name }}</td>
+                            <td>{{ $item->partner_id }}</td>
                             <td class="text-end">
                                 @can('edit', [1, '/admin/masterdata/items'])
                                     <a onclick="editModal({{ $item->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
