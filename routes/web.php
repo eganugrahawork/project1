@@ -34,7 +34,9 @@ Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
+Route::post('/register/update', [RegisterController::class, 'update'])->middleware('guest')->name('register');
 Route::post('/register/create', [RegisterController::class, 'create'])->middleware('guest')->name('register');
+Route::get('/register_verify', [RegisterController::class, 'register_verify']);
 
 Auth::routes();
 

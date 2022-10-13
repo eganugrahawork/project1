@@ -19,30 +19,19 @@
                                 <span class="stepper-number">1</span>
                             </div>
                             <div class="stepper-label">
-                                <h3 class="stepper-title">Account Type</h3>
-                                <div class="stepper-desc fw-bold">Setup Your Account Details</div>
+                                <h3 class="stepper-title">Account Details</h3>
+                                <div class="stepper-desc fw-bold">Your Account Details</div>
                             </div>
                         </div>
                         <div class="stepper-item" data-kt-stepper-element="nav">
                             <div class="stepper-line w-40px"></div>
                             <div class="stepper-icon w-40px h-40px">
                                 <i class="stepper-check fas fa-check"></i>
-                                <span class="stepper-number">3</span>
+                                <span class="stepper-number">2</span>
                             </div>
                             <div class="stepper-label">
-                                <h3 class="stepper-title">Account Profile</h3>
-                                <div class="stepper-desc fw-bold">Your Profile Related Info</div>
-                            </div>
-                        </div>
-                        <div class="stepper-item" data-kt-stepper-element="nav">
-                            <div class="stepper-line w-40px"></div>
-                            <div class="stepper-icon w-40px h-40px">
-                                <i class="stepper-check fas fa-check"></i>
-                                <span class="stepper-number">4</span>
-                            </div>
-                            <div class="stepper-label">
-                                <h3 class="stepper-title">Confirmation Register</h3>
-                                <div class="stepper-desc fw-bold">End Registration Section</div>
+                                <h3 class="stepper-title">Make a Password</h3>
+                                <div class="stepper-desc fw-bold">Complete Registration</div>
                             </div>
                         </div>
                     </div>
@@ -55,7 +44,7 @@
         <div class="d-flex flex-column flex-lg-row-fluid py-10">
             <div class="d-flex flex-center flex-column flex-column-fluid">
                 <div class="w-lg-700px p-10 p-lg-15 mx-auto">
-                    <form class="my-auto pb-5" method="POST" action="/register/create" id="kt_create_account_form">
+                    <form class="my-auto pb-5" method="POST" action="/register/update" id="kt_create_account_form">
                         <div class="current" data-kt-stepper-element="content">
                             @csrf
                             <div class="w-100">
@@ -69,10 +58,10 @@
                                     <!--begin::Row-->
                                     <div class="row">
                                         <!--begin::Col-->
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-12">
                                             <!--begin::Option-->
-                                            <input type="hidden" name="type_user_id" value="1">
-                                            <input type="radio" class="btn-check" name="type_account_id" value="1" checked="checked" id="kt_create_account_form_account_type_personal" />
+                                            <input type="hidden" name="id" value="{{ $user->id }}">
+                                            <input type="hidden" name="email" value="{{ $user->email }}">
                                             <label class="btn btn-outline btn-outline-dashed btn-outline-default p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
                                                 <span class="svg-icon svg-icon-3x me-5">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -81,29 +70,8 @@
                                                     </svg>
                                                 </span>
                                                 <span class="d-block fw-bold text-start">
-                                                    <span class="text-dark fw-bolder d-block fs-4 mb-2">Personal Account</span>
-                                                    <span class="text-muted fw-bold fs-6">If you need more info, please check it out</span>
-                                                </span>
-                                                <!--end::Info-->
-                                            </label>
-                                            <!--end::Option-->
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <!--begin::Option-->
-                                            <input type="radio" class="btn-check" name="type_account_id" value="2" id="kt_create_account_form_account_type_corporate" />
-                                            <label class="btn btn-outline btn-outline-dashed btn-outline-default p-7 d-flex align-items-center" for="kt_create_account_form_account_type_corporate">
-                                                <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
-                                                <span class="svg-icon svg-icon-3x me-5">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path opacity="0.3" d="M20 15H4C2.9 15 2 14.1 2 13V7C2 6.4 2.4 6 3 6H21C21.6 6 22 6.4 22 7V13C22 14.1 21.1 15 20 15ZM13 12H11C10.5 12 10 12.4 10 13V16C10 16.5 10.4 17 11 17H13C13.6 17 14 16.6 14 16V13C14 12.4 13.6 12 13 12Z" fill="black" />
-                                                        <path d="M14 6V5H10V6H8V5C8 3.9 8.9 3 10 3H14C15.1 3 16 3.9 16 5V6H14ZM20 15H14V16C14 16.6 13.5 17 13 17H11C10.5 17 10 16.6 10 16V15H4C3.6 15 3.3 14.9 3 14.7V18C3 19.1 3.9 20 5 20H19C20.1 20 21 19.1 21 18V14.7C20.7 14.9 20.4 15 20 15Z" fill="black" />
-                                                    </svg>
-                                                </span>
-
-                                                <span class="d-block fw-bold text-start">
-                                                    <span class="text-dark fw-bolder d-block fs-4 mb-2">Corporate Account</span>
-                                                    <span class="text-muted fw-bold fs-6">Create corporate account to mane users</span>
+                                                    <span class="text-dark fw-bolder d-block fs-4 mb-2">Your Username</span>
+                                                    <span class="text-muted fw-bold fs-6">{{ $user->username }}</span>
                                                 </span>
                                             </label>
                                         </div>
@@ -116,57 +84,22 @@
                         <div class="" data-kt-stepper-element="content">
                             <div class="w-100">
                                 <div class="pb-10 pb-lg-12">
-                                    <h2 class="fw-bolder text-dark">Profile Details</h2>
+                                    <h2 class="fw-bolder text-dark">Set Your Password</h2>
                                     <div class="text-muted fw-bold fs-6">If you need more info, please check out
                                     <a  class="link-primary fw-bolder">Help Page</a>.</div>
                                 </div>
                                 <div class="fv-row mb-10">
-                                    <label class="form-label required">Full Name</label>
-                                    <input name="name" class="form-control form-control-lg form-control-solid" placeholder="Type your full name" required/>
+                                    <label class="form-label required">Password</label>
+                                    <input name="password" id="password" class="form-control form-control-lg form-control-solid" type="password" required/>
+                                    <span id="minpass"></span>
+
                                 </div>
                                 <div class="fv-row mb-10">
-                                    <label class="d-flex align-items-center form-label">
-                                        <span class="required">Address</span>
-                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="&lt;div class='p-4 rounded bg-light'&gt; &lt;div class='d-flex flex-stack text-muted mb-4'&gt; &lt;i class='fas fa-university fs-3 me-3'&gt;&lt;/i&gt; &lt;div class='fw-bold'&gt;INCBANK **** 1245 STATEMENT&lt;/div&gt; &lt;/div&gt; &lt;div class='d-flex flex-stack fw-bold text-gray-600'&gt; &lt;div&gt;Amount&lt;/div&gt; &lt;div&gt;Transaction&lt;/div&gt; &lt;/div&gt; &lt;div class='separator separator-dashed my-2'&gt;&lt;/div&gt; &lt;div class='d-flex flex-stack text-dark fw-bolder mb-2'&gt; &lt;div&gt;USD345.00&lt;/div&gt; &lt;div&gt;KEENTHEMES*&lt;/div&gt; &lt;/div&gt; &lt;div class='d-flex flex-stack text-muted mb-2'&gt; &lt;div&gt;USD75.00&lt;/div&gt; &lt;div&gt;Hosting fee&lt;/div&gt; &lt;/div&gt; &lt;div class='d-flex flex-stack text-muted'&gt; &lt;div&gt;USD3,950.00&lt;/div&gt; &lt;div&gt;Payrol&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;"></i>
-                                    </label>
-                                    <textarea name="address" class="form-control form-control-lg form-control-solid" placeholder="Type your address" rows="3" required></textarea>
+                                    <label class="form-label required">Repeat Password</label>
+                                    <input name="confirm_password" id="confirm_password" class="form-control form-control-lg form-control-solid" type="password" required/>
+                                    <span id='message'></span>
                                 </div>
-                                <div class="fv-row mb-10">
-                                    <label class="fs-6 fw-bold form-label required">Contact Email</label>
-                                    <input name="email" type="email" class="form-control form-control-lg form-control-solid" required placeholder="Type your email"/>
-                                </div>
-                                <div class="fv-row mb-0">
-                                    <label class="fs-6 fw-bold form-label required">Phone Contact</label>
-                                    <input name="no_hp" type="number" class="form-control form-control-lg form-control-solid" required placeholder="Type your email"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="" data-kt-stepper-element="content">
-                            <div class="w-100">
-                                <div class="pb-8 pb-lg-10">
-                                    <h2 class="fw-bolder text-dark">Your Are Done!</h2>
-                                    <div class="text-muted fw-bold fs-6">If you need more info, please
-                                    <a href="../../demo11/dist/authentication/sign-in/basic.html" class="link-primary fw-bolder">Sign In</a>.</div>
-                                </div>
-                                <div class="mb-0">
-                                    <div class="fs-6 text-gray-600 mb-5">Writing headlines for blog posts is as much an art as it is a science and probably warrants its own post, but for all advise is with what works for your great &amp; amazing audience.</div>
-                                    <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
-                                        <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black" />
-                                                <rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="black" />
-                                                <rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="black" />
-                                            </svg>
-                                        </span>
-                                        <div class="d-flex flex-stack flex-grow-1">
-                                            <div class="fw-bold">
-                                                <h4 class="text-gray-900 fw-bolder">We need your attention!</h4>
-                                                <div class="fs-6 text-gray-700">To start using great tools, please, please
-                                                <a href="#" class="fw-bolder">Create Team Platform</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                         <div class="d-flex flex-stack pt-15">
@@ -180,7 +113,7 @@
                                 </span>Previous</button>
                             </div>
                             <div>
-                                <button type="submit" class="btn btn-lg btn-primary" data-kt-stepper-action="submit">
+                                <button type="submit" class="btn btn-lg btn-primary" id="btn-submitnya" data-kt-stepper-action="submit">
                                     <span class="indicator-label">Submit
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                                         <span class="svg-icon svg-icon-4 ms-2">
@@ -215,4 +148,34 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+<script>
+    $('#btn-submitnya').prop('disabled', true);
+    $('#confirm_password').on('keyup', function () {
+        if ($('#password').val() == $('#confirm_password').val()) {
+            $('#message').html('Matching').css('color', 'green');
+            $('#btn-submitnya').prop("disabled", false);
+        } else{
+
+            $('#message').html('Not Matching').css('color', 'red');
+            $('#btn-submitnya').prop('disabled', true);
+        }
+
+    });
+
+var minLength = 8;
+
+$("#password").on("keydown keyup change", function(){
+    var value = $(this).val();
+    if (value.length < minLength){
+        $("#minpass").text("Text is short");
+    }
+    else{
+        $("#minpass").text("Text is valid");
+    }
+});
+</script>
 @endsection
+
