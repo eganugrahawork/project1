@@ -17,7 +17,7 @@
                 <li class="breadcrumb-item text-gray-600">
                     <a href="/admin/dashboard" class="text-gray-600 text-hover-primary">Admin</a>
                 </li>
-                <li class="breadcrumb-item text-gray-600">Users</li>
+                <li class="breadcrumb-item text-gray-600">UsersSSSS</li>
 
             </ul>
             <!--end::Breadcrumb-->
