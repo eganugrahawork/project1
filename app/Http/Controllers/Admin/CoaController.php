@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Coa;
 use App\Models\UserActivity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CoaController extends Controller
 {
     public function index(){
-        return view('admin.coa.index', ['coa'=>Coa::all()]);
+        return view('admin.coa.index', ['coa'=>DB::select('call sp_list_coa()')]);
     }
 
     public function addmodal(){
@@ -19,11 +20,18 @@ class CoaController extends Controller
 
 
     public function store(Request $request){
-        Coa::create([
-            'id_parent' => $request->id_parent,
-            'coa' => $request->coa,
-            'description' => $request->description
-        ]);
+        // Coa::create([
+        //     'id_parent' => $request->id_parent,
+        //     'coa' => $request->coa,
+        //     'description' => $request->description
+        // ]);
+
+        DB::select("call sp_insert_coa(
+            $request->id_parent,
+            '$request->coa',
+            '$request->description',
+            $request->status
+        )");
 
         UserActivity::create([
             'id_user' => auth()->user()->id,
@@ -41,11 +49,18 @@ class CoaController extends Controller
     }
 
     public function update(Request $request){
-        Coa::where(['id'=>$request->id])->update([
-            'id_parent' => $request->id_parent,
-            'coa' => $request->coa,
-            'description' => $request->description
-        ]);
+        // Coa::where(['id'=>$request->id])->update([
+        //     'id_parent' => $request->id_parent,
+        //     'coa' => $request->coa,
+        //     'description' => $request->description
+        // ]);
+
+        DB::select("call sp_update_coa(
+            $request->id,
+            '$request->coa',
+            '$request->description',
+            $request->status
+        )");
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "COA",
@@ -64,7 +79,10 @@ class CoaController extends Controller
            'keterangan' => "Hapus COA ". $coa->coa
         ]);
 
-        Coa::where(['id' => $request->id])->delete();
+        // Coa::where(['id' => $request->id])->delete();
+        DB::select("call sp_delete_coa(
+            $request->id
+        )");
         return redirect()->back()->with('success', 'Coa di Hapus!');
 
     }

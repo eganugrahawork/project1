@@ -27,7 +27,7 @@ class UoMController extends Controller
             '$request->name',
             '$request->symbol',
             '$request->description',
-            1
+            $request->status
         )");
         UserActivity::create([
             'id_user' => auth()->user()->id,
@@ -41,13 +41,18 @@ class UoMController extends Controller
     public function destroy(Request $request){
         // dd($request->id);
        $uom = Uom::where(['id' => $request->id])->first();
+
+
        UserActivity::create([
         'id_user' => auth()->user()->id,
         'menu' => "UOM",
         'aktivitas' => "Hapus",
         'keterangan' => "Hapus UOM ". $uom->name
         ]);
-        Uom::where(['id' => $request->id])->delete();
+
+        DB::select("Call sp_delete_uom(
+            $request->id
+        )");
         return redirect()->back()->with('success', 'Data Uom Dihapus !');
     }
 
@@ -57,7 +62,16 @@ class UoMController extends Controller
     }
 
     public function update(Request $request){
-        Uom::where(['id' => $request->id])->update(['name' => $request->name,'symbol' => $request->symbol, 'description'=>$request->description]);
+        // Uom::where(['id' => $request->id])->update(['name' => $request->name,'symbol' => $request->symbol, 'description'=>$request->description]);
+
+        DB::select("Call sp_update_uom(
+            $request->id,
+           '$request->name',
+           '$request->symbol',
+           '$request->description',
+           $request->status
+       )");
+
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "UOM",

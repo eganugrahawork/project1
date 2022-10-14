@@ -53,6 +53,14 @@
                 </div>
             </div>
         </div>
+        <div class="fv-row mb-7">
+            <label class="required form-label fw-bold">Status</label>
+                <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
+                    <option value="1">Ya</option>
+                    <option value="0">Tidak</option>
+                </select>
+        </div>
+
 
     </div>
 </div>
