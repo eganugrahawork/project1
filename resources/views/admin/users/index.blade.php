@@ -80,11 +80,11 @@
                         <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
 
                             <th class="min-w-50px">No</th>
-                            <th class="min-w-125px">User</th>
-                            <th class="min-w-125px">Email</th>
-                            <th class="min-w-125px">Role</th>
-                            <th class="min-w-125px">Region</th>
-                            <th class="min-w-125px">Created at</th>
+                            <th class="min-w-80px">User</th>
+                            <th class="min-w-80px">Email</th>
+                            <th class="min-w-80px">Role</th>
+                            <th class="min-w-80px">Region</th>
+                            <th class="min-w-80px">Created at</th>
                             <th class="text-end min-w-100px">Actions</th>
                         </tr>
                     </thead>
@@ -105,7 +105,7 @@
                                     <span>{{ $usr->username }}</span>
                                 </div>
                             </td>
-                            <td>{{ $usr->email }}</td>
+                            <td >{{ $usr->email }}</td>
                             <td>
                                 {{ $usr->userrole->role }}
                             </td>
