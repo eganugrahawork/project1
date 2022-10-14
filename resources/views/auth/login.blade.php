@@ -42,6 +42,13 @@
           <button type="submit" class="btn-custom btn-animenya" id="btn-custom" >Sign in</button>
           <div id="loadingnya"></div>
         </form>
+
+        <div class="d-flex justify-content-end">
+            <a href="/forgot-password" class="text-decoration-none">Forgot Password ?</a>
+        </div>
+        <div class="d-flex justify-content-end">
+            <a href="/register" class="text-decoration-none">Create Account ?</a>
+        </div>
       </div>
 
       {{-- <script src="/js/admin/index.js"></script> --}}

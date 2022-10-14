@@ -8,11 +8,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Uom;
 use App\Models\UserActivity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UoMController extends Controller
 {
     public function index(){
-        return view('admin.uom.index', ['uom'=> Uom::all()]);
+        return view('admin.uom.index', ['uom'=> DB::select('Call sp_list_uom()')]);
     }
 
     public function addmodal(){
@@ -20,8 +21,14 @@ class UoMController extends Controller
     }
 
     public function store(Request $request){
-        Uom::create(['name' => $request->name,'symbol' => $request->symbol, 'description'=>$request->description]);
+        // Uom::create(['name' => $request->name,'symbol' => $request->symbol, 'description'=>$request->description]);
 
+        DB::select("Call sp_insert_uom(
+            '$request->name',
+            '$request->symbol',
+            '$request->description',
+            1
+        )");
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "UOM",

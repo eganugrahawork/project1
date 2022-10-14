@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CoaController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ItemsController;
+use App\Http\Controllers\Admin\PartnersController;
 use App\Http\Controllers\Admin\PriceManagementController;
 use App\Http\Controllers\Admin\PrincipalController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Admin\UserMenuController;
 use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\UserSubmenuController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 // End Admin
 
@@ -34,9 +36,22 @@ Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
-Route::post('/register/update', [RegisterController::class, 'update'])->middleware('guest')->name('register');
-Route::post('/register/create', [RegisterController::class, 'create'])->middleware('guest')->name('register');
-Route::get('/register_verify', [RegisterController::class, 'register_verify']);
+Route::middleware(['guest'])->controller(RegisterController::class)->group(function(){
+
+    Route::post('/register/update', 'update');
+    Route::post('/register/create', 'create');
+    Route::get('/register_verify', 'register_verify');
+
+});
+
+Route::middleware(['guest'])->controller(ForgotPasswordController::class)->group(function(){
+    Route::get('/forgot-password', 'show');
+    Route::post('/forgot-password/sendemail', 'sendemail');
+    Route::post('/forgot-password/checkemail', 'checkemail');
+    Route::get('/reset-password', 'reset_password');
+    Route::post('/reset-password/submit', 'reset_password_submit');
+});
+
 
 Auth::routes();
 
@@ -153,6 +168,18 @@ Route::middleware(['auth'])->controller(PrincipalController::class)->group(funct
     Route::get('admin/masterdata/principal/addmodal', 'addmodal');
 });
 // Principal End
+
+// Partners Start
+Route::middleware(['auth'])->controller(PartnersController::class)->group(function(){
+    Route::get('admin/masterdata/partners', 'index');
+    Route::post('admin/masterdata/partners/store', 'store');
+    Route::post('admin/masterdata/partners/update', 'update');
+    Route::get('admin/masterdata/partners/delete/{id}', 'destroy');
+    Route::get('admin/masterdata/partners/editmodal/{id}', 'editmodal');
+    Route::get('admin/masterdata/partners/addmodal', 'addmodal');
+});
+// Principal End
+
 
 // UoM Start
 Route::middleware(['auth'])->controller(UoMController::class)->group(function(){
