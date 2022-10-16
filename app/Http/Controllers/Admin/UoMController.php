@@ -27,10 +27,10 @@ class UoMController extends Controller
         return  Datatables::of(DB::select('Call sp_list_uom()'))
         ->addColumn('action', function($model){
             $action = "";
-            if(Gate::allows('edit', [0, '/admin/users'])){
+            if(Gate::allows('edit', [1, '/admin/masterdata/uom'])){
                 $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
             }
-            if(Gate::allows('delete', [0, '/admin/users'])){
+            if(Gate::allows('delete', [1, '/admin/masterdata/uom'])){
                 $action .= " <a href='/admin/masterdata/uom/delete/$model->id' class='btn btn-sm btn-danger' id='deleteuom'><i class='bi bi-trash'></i></a>";
             }
             return $action;
@@ -61,7 +61,7 @@ class UoMController extends Controller
 
     NotifEvent::dispatch(auth()->user()->name .' menambahkan Uom '. $request->name);
 
-        return redirect()->back()->with('success', 'Uom Ditambahkan');
+        return response()->json(['success'=> 'Uom Ditambahkan']);
     }
 
     public function destroy(Request $request){
@@ -79,7 +79,7 @@ class UoMController extends Controller
         DB::select("Call sp_delete_uom(
             $request->id
         )");
-        return redirect()->back()->with('success', 'Data Uom Dihapus !');
+        return response()->json(['success' => 'Uom berhasil dihapus']);
     }
 
     public function editmodal(Request $request){
@@ -106,6 +106,6 @@ class UoMController extends Controller
          ]);
 
          NotifEvent::dispatch(auth()->user()->name .' mengedit Uom '. $request->name);
-        return redirect()->back()->with('success', 'Data Uom diUpdate !');
+         return response()->json(['success'=> "Uom $request->name DiUpdate"]);
     }
 }

@@ -133,6 +133,8 @@
         function tutupModal(){
         $('#mainmodal').modal('toggle')
         }
+
+
 </script>
 
 @endsection

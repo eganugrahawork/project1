@@ -14,6 +14,9 @@
 		<meta property="og:site_name" content="Keenthemes | Metronic" />
 		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
 		<link rel="icon" type="image/gif" href="{{ asset('storage/logos/logoputih.png') }}"/>
+
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
         <link href="/metronic/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="/metronic/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
@@ -24,6 +27,7 @@
         {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"> --}}
         <link rel="stylesheet" href="/css/admin/index.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	</head>
 	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled aside-enabled">
 
@@ -44,7 +48,6 @@
 
 
 
-                <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
                 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
                 <script>var hostUrl = "/metronic/assets/";</script>
                 <script src="/metronic/assets/plugins/global/plugins.bundle.js"></script>
@@ -58,7 +61,8 @@
                 <script src="/metronic/assets/js/custom/modals/upgrade-plan.js"></script>
                 <script src="/js/admin/index.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"></script>
+
+                {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script> --}}
 
                 <script src="/metronic/assets/plugins/custom/datatables/datatables.bundle.js"></script>
 
@@ -147,10 +151,10 @@
                      <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
                      <script>
                         // Enable pusher logging - don't include this in production
-                        Pusher.logToConsole = true;
+                        // Pusher.logToConsole = true;
 
-                        var pusher = new Pusher('f1c28ce6820d384625ee', {
-                            cluster: 'ap1'
+                        var pusher = new Pusher('2fb2f36b07796a95452d', {
+                            cluster: 'ap3'
                         });
 
                         var channel = pusher.subscribe('notification');
@@ -161,7 +165,6 @@
                      {{-- End Pusher --}}
                 @endif
                 {{-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> --}}
-
 
                 <script>
                      $(document).ready(function () {

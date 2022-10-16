@@ -115,10 +115,9 @@
         $('#mainmodal').modal('toggle')
         }
 
-        $(document).ready(function(){
 
 
-              var tableUom=  $('#uomTable').DataTable({
+        var tableUom=  $('#uomTable').DataTable({
                     serverside : true,
                     processing : true,
                     ajax : {
@@ -135,51 +134,172 @@
                     "bLengthChange": false,
                     "bFilter": true,
                     "bInfo": false
-                });
+        });
 
-                $('#searchUomTable').keyup(function () {
-                            tableUom.search($(this).val()).draw()
-                        });
+        $('#searchUomTable').keyup(function () {
+                tableUom.search($(this).val()).draw()
+        });
 
+
+
+        $(document).on('click', '#deleteuom', function(e){
+            e.preventDefault();
+
+            const href = $(this).attr('href');
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Hapus data ini ?',
+                text: "Data tidak bisa dikembalikan!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, hapus!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                reverseButtons: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type:"GET",
+                        url: href,
+                        success:function(response){
+                            Swal.fire(
+                                'Success',
+                                response.success,
+                                'success'
+                            )
+                            tableUom.ajax.reload(null, false);
+                        }
+                    })
+                // document.location.href = href;
+
+
+                } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+                ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Data anda masih aman :)',
+                    'success'
+                )
+                }
+            })
+        })
+
+        // $("#add-form").validate({
+        //     rules: {
+        //         // simple rule, converted to {required:true}
+        //         name: "required",
+        //         // compound rule
+        //         symbol: {
+        //         required: true
+        //         },
+        //         description: {
+        //             required:true
+        //         }
+        //     },
+        //     message: {
+        //         name:{
+        //             required: "nama tidak boleh kosong"
+        //         },
+        //         symbol:{
+        //             required: "symbol tidak boleh kosong"
+        //         },
+        //         description:{
+        //             required: "description tidak boleh kosong"
+        //         }
+        //     }
+        // });
+
+
+        $(document).on('submit', '#add-form', function(e){
+            e.preventDefault();
+
+            if($('#name').val().length < 1 ||  $('#symbol').val() < 1 || $('#description').val() < 1){
+                Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Data tidak boleh ada yang kosong'
+            })
+            }else{
+            $('#btn-add').hide()
+            $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            var data = {
+                'name': $('#name').val(),
+                'symbol': $('#symbol').val(),
+                'description': $('#description').val(),
+                'status': $('#status').val()
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('/admin/masterdata/uom/store') }}",
+                data: data,
+                dataType: 'json',
+                success:function(response){
+                    Swal.fire(
+                        'Success',
+                        response.success,
+                        'success'
+                    )
+                    $('#mainmodal').modal('toggle');
+                    tableUom.ajax.reload(null, false);
+                }
+            })
+        }
+        })
+
+        $(document).on('submit', '#update-form', function(e){
+            e.preventDefault();
+
+
+            $('#btn-update').hide()
+            $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            var data = {
+                'id': $('#id').val(),
+                'name': $('#name').val(),
+                'symbol': $('#symbol').val(),
+                'description': $('#description').val(),
+                'status': $('#status').val()
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('/admin/masterdata/uom/update') }}",
+                data: data,
+                dataType: 'json',
+                success:function(response){
+                    Swal.fire(
+                        'Success',
+                        response.success,
+                        'success'
+                    )
+                    $('#mainmodal').modal('toggle');
+                    tableUom.ajax.reload(null, false);
+                }
+            })
         })
 
 
-        $('#deleteuom').on('click', function(e){
-    e.preventDefault();
-
-    const href = $(this).attr('href');
-
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-      })
-
-      swalWithBootstrapButtons.fire({
-        title: 'Hapus data ini ?',
-        text: "Data tidak bisa dikembalikan!",
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, hapus!',
-        cancelButtonText: 'Tidak, Batalkan!',
-        reverseButtons: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          document.location.href = href;
-        } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalWithBootstrapButtons.fire(
-            'Cancelled',
-            'Data anda masih aman :)',
-            'success'
-          )
-        }
-      })
-})
 </script>
 
 @endsection
