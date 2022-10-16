@@ -9,11 +9,33 @@ use App\Models\Uom;
 use App\Models\UserActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Yajra\DataTables\DataTables;
 
 class UoMController extends Controller
 {
+    // public function index(){
+    //     return view('admin.uom.index', ['uom'=> DB::select('Call sp_list_uom()')]);
+    // }
     public function index(){
-        return view('admin.uom.index', ['uom'=> DB::select('Call sp_list_uom()')]);
+
+        return view('admin.uom.indexserverside');
+    }
+
+    public function list(){
+        // $uom= DB::select('Call sp_list_uom()');
+        return  Datatables::of(DB::select('Call sp_list_uom()'))
+        ->addColumn('action', function($model){
+            $action = "";
+            if(Gate::allows('edit', [0, '/admin/users'])){
+                $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
+            }
+            if(Gate::allows('delete', [0, '/admin/users'])){
+                $action .= " <a href='/admin/users/delete/$model->id' class='btn btn-sm btn-danger button-delete' data-kt-users-table-filter='delete_row'><i class='bi bi-trash'></i></a>";
+            }
+            return $action;
+        })
+        ->make(true);
     }
 
     public function addmodal(){

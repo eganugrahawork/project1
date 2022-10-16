@@ -184,6 +184,7 @@ Route::middleware(['auth'])->controller(PartnersController::class)->group(functi
 // UoM Start
 Route::middleware(['auth'])->controller(UoMController::class)->group(function(){
     Route::get('admin/masterdata/uom', 'index');
+    Route::get('admin/masterdata/uom/list', 'list');
     Route::get('admin/masterdata/uom/addmodal', 'addmodal');
     Route::get('admin/masterdata/uom/editmodal/{id}', 'editmodal');
     Route::get('admin/masterdata/uom/delete/{id}', 'destroy');
