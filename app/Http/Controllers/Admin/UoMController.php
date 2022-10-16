@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-
+use App\Events\NotifEvent;
 use App\Http\Controllers\Controller;
 
 use App\Models\Uom;
@@ -31,7 +31,7 @@ class UoMController extends Controller
                 $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
             }
             if(Gate::allows('delete', [0, '/admin/users'])){
-                $action .= " <a href='/admin/users/delete/$model->id' class='btn btn-sm btn-danger button-delete' data-kt-users-table-filter='delete_row'><i class='bi bi-trash'></i></a>";
+                $action .= " <a href='/admin/masterdata/uom/delete/$model->id' class='btn btn-sm btn-danger' id='deleteuom'><i class='bi bi-trash'></i></a>";
             }
             return $action;
         })
@@ -45,6 +45,7 @@ class UoMController extends Controller
     public function store(Request $request){
         // Uom::create(['name' => $request->name,'symbol' => $request->symbol, 'description'=>$request->description]);
 
+
         DB::select("Call sp_insert_uom(
             '$request->name',
             '$request->symbol',
@@ -57,6 +58,9 @@ class UoMController extends Controller
             'aktivitas' => "Tambah",
             'keterangan' => "Tambah UOM ". $request->name
          ]);
+
+    NotifEvent::dispatch(auth()->user()->name .' menambahkan Uom '. $request->name);
+
         return redirect()->back()->with('success', 'Uom Ditambahkan');
     }
 
@@ -71,7 +75,7 @@ class UoMController extends Controller
         'aktivitas' => "Hapus",
         'keterangan' => "Hapus UOM ". $uom->name
         ]);
-
+        NotifEvent::dispatch(auth()->user()->name .' menghapus Uom '. $uom->name);
         DB::select("Call sp_delete_uom(
             $request->id
         )");
@@ -100,6 +104,8 @@ class UoMController extends Controller
             'aktivitas' => "Ubah",
             'keterangan' => "Ubah UOM ". $request->name
          ]);
+
+         NotifEvent::dispatch(auth()->user()->name .' mengedit Uom '. $request->name);
         return redirect()->back()->with('success', 'Data Uom diUpdate !');
     }
 }

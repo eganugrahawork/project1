@@ -23,6 +23,7 @@
         {{-- <link rel="stylesheet" href="/metronic/assets/css/darkmode.bundle.css"> --}}
         {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"> --}}
         <link rel="stylesheet" href="/css/admin/index.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 	</head>
 	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled aside-enabled">
 
@@ -42,55 +43,6 @@
         </div>
 
 
-        @if (auth()->user()->userrole->role == 'Super Admin')
-                <div id="kt_drawer_chat" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="chat" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'300px', 'md': '500px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_drawer_chat_toggle" data-kt-drawer-close="#kt_drawer_chat_close">
-                    <!--begin::Messenger-->
-                    <div class="card w-100 rounded-0 border-0" id="kt_drawer_chat_messenger">
-                        <!--begin::Card header-->
-                        <div class="card-header pe-5" id="kt_drawer_chat_messenger_header">
-                            <!--begin::Title-->
-                            <div class="card-title">
-                                <!--begin::User-->
-                                <div class="d-flex justify-content-center flex-column me-3">
-                                    <a href="#" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">Online Users</a>
-                                    <!--begin::Info-->
-                                    <div class="mb-0 lh-1">
-                                        <span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
-                                        <span class="fs-7 fw-bold text-muted">Active</span>
-                                    </div>
-                                    <!--end::Info-->
-                                </div>
-                                <!--end::User-->
-                            </div>
-
-                        </div>
-                        <div class="card-body" id="kt_drawer_chat_messenger_body">
-                            <div class="scroll-y me-n5 pe-5" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_drawer_chat_messenger_header, #kt_drawer_chat_messenger_footer" data-kt-scroll-wrappers="#kt_drawer_chat_messenger_body" data-kt-scroll-offset="0px">
-
-                                @php
-                                $uonline = DB::select('select * from users where status_access = 1');
-                             @endphp
-                                @foreach ($uonline as $uo)
-                                    <div class="d-flex justify-content-start mb-10">
-                                        <div class="d-flex flex-column align-items-start">
-                                            <div class="d-flex align-items-center mb-2">
-                                                <div class="symbol symbol-35px symbol-circle">
-                                                    <img alt="Pic" src="{{ asset('storage/' . $uo->image) }}" />
-                                                </div>
-                                                <div class="ms-3">
-                                                    <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1">{{ $uo->name }}</a>
-                                                    <span class="text-muted fs-7 mb-1">{{ $uo->username }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
-
 
                 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
                 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -100,15 +52,116 @@
                 <script src="/metronic/assets/js/scripts.bundle.js"></script>
                 <script src="/metronic/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
                 <script src="/metronic/assets/js/custom/widgets.js"></script>
-                <script src="/metronic/assets/js/custom/apps/chat/chat.js"></script>
+                {{-- <script src="/metronic/assets/js/custom/apps/chat/chat.js"></script> --}}
                 <script src="/metronic/assets/js/custom/modals/create-app.js"></script>
 
                 <script src="/metronic/assets/js/custom/modals/upgrade-plan.js"></script>
                 <script src="/js/admin/index.js"></script>
-
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"></script>
 
                 <script src="/metronic/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+
+            @if (auth()->user()->userrole->role == 'Super Admin')
+            <div id="kt_drawer_chat" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="chat" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'300px', 'md': '500px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_drawer_chat_toggle" data-kt-drawer-close="#kt_drawer_chat_close">
+                <!--begin::Messenger-->
+                <div class="card w-100 rounded-0 border-0" id="kt_drawer_chat_messenger">
+                    <!--begin::Card header-->
+                    <div class="card-header pe-5" id="kt_drawer_chat_messenger_header">
+                        <!--begin::Title-->
+                        <div class="card-title">
+                            <!--begin::User-->
+                            <div class="d-flex justify-content-center flex-column me-3">
+                                <a href="#" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">Online Users</a>
+                                <!--begin::Info-->
+                                <div class="mb-0 lh-1">
+                                    <span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
+                                    <span class="fs-7 fw-bold text-muted">Active</span>
+                                </div>
+                                <!--end::Info-->
+                            </div>
+                            <!--end::User-->
+                        </div>
+
+                    </div>
+                    <div class="card-body" id="kt_drawer_chat_messenger_body">
+                        <div class="scroll-y me-n5 pe-5" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_drawer_chat_messenger_header, #kt_drawer_chat_messenger_footer" data-kt-scroll-wrappers="#kt_drawer_chat_messenger_body" data-kt-scroll-offset="0px">
+
+                         @php
+                            $uonline = DB::select('select * from users where status_access = 1');
+                         @endphp
+                            @foreach ($uonline as $uo)
+                                <div class="d-flex justify-content-start mb-10">
+                                    <div class="d-flex flex-column align-items-start">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <div class="symbol symbol-35px symbol-circle">
+                                                <img alt="Pic" src="{{ asset('storage/' . $uo->image) }}" />
+                                            </div>
+                                            <div class="ms-3">
+                                                <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1">{{ $uo->name }}</a>
+                                                <span class="text-muted fs-7 mb-1">{{ $uo->username }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+                {{-- <div id="viewonline">
+
+                </div> --}}
+
+                {{-- <script>
+                    $('#checkonline').on('click', function(){
+                        $.get("{{ url('/admin/checkonline') }}", {}, function(data, status){
+                            $('#viewonline').html(data)
+                        })
+                    })
+                </script> --}}
+
+                <script>
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": true,
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                    </script>
+                    {{-- Pusher --}}
+                     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+                     <script>
+                        // Enable pusher logging - don't include this in production
+                        Pusher.logToConsole = true;
+
+                        var pusher = new Pusher('f1c28ce6820d384625ee', {
+                            cluster: 'ap1'
+                        });
+
+                        var channel = pusher.subscribe('notification');
+                        channel.bind('notif', function(data) {
+                            toastr["info"](data.message, "Pemberitahuan")
+                        });
+                     </script>
+                     {{-- End Pusher --}}
+                @endif
                 {{-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> --}}
+
 
                 <script>
                      $(document).ready(function () {

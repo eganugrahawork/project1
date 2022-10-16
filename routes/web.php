@@ -57,6 +57,7 @@ Auth::routes();
 
 //Dashboard
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/admin/checkonline', [DashboardController::class, 'checkonline'])->middleware('auth');
 Route::get('/admin/useractivity', [DashboardController::class, 'useractivity'])->middleware('auth');
 //End Dashboard
 

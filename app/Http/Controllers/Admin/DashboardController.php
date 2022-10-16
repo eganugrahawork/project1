@@ -24,4 +24,8 @@ class DashboardController extends Controller
         return view('admin.useractivity.index', ['user' => $user]);
     }
 
+    public function checkonline(){
+
+        return view('admin.layouts.viewonline');
+    }
 }
