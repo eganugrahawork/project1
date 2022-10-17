@@ -25,7 +25,7 @@ class CoaController extends Controller
         //     'coa' => $request->coa,
         //     'description' => $request->description
         // ]);
-
+// dd($request);
         DB::select("call sp_insert_coa(
             $request->id_parent,
             '$request->coa',

@@ -1,169 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Email Verified</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <style>
-       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css");
-*{
-  margin:0;
-  padding:0;
-  font-family: "Poppins", sans-serif;
-  box-sizing:border-box;
-}
-body{
-  color:rgb(255,255,255);
-  background-color:#1c1c25;
-  font-size:1rem;
-}
-section{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  padding:2.5rem;
-}
-.card{
-  position:relative;
-}
-.face::before,
-.face::after,
-.card::before,
-.card::after{
-  content:"";
-  position:absolute;
-  width:170px;
-  height:170px;
-  border-radius:50%;
-  z-index:-2;
-  display:block;
-}
-.face::before,
-.card::before{
-  bottom:75%;
-  left:65%;
-  background: linear-gradient(#f00, #f0f);
-  animation:movepink 30s ease-in-out infinite;
-  -moz-animation:movepink 30s ease-in-out infinite;
-  -webkit-animation:movepink 30s ease-in-out infinite;
-}
-.face::after,
-.card::after{
-  top:75%;
-  right:65%;
-  background:linear-gradient(rgb(0,152,240), rgb(4,87,211));
-  animation:moveblue 30s ease-in-out infinite;
-  -moz-animation:moveblue 30s ease-in-out infinite;
-  -webkit-animation:moveblue 30s ease-in-out infinite;
-}
-
-.face::before,
-.face::after{
-  filter:blur(6px);
-  z-index:-1;
-}
-.face-inner::before{
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0px;
-  bottom: 0;
-  right: 0;
-  box-shadow: inset 0 0 0 175px rgba(255,255,255,0.1);
-  filter: blur(20px);
-  z-index:-1;
-}
-.face{
-  width:250px;
-  height:auto;
-  border-radius:20px;
-  box-shadow:0 15px 35px rgba(0,0,0,0.5);
-  background-color:rgba(255,255,255,0.05);
-  border:0.1px solid rgba(255,255,255,0.425);
-  position:relative;
-  overflow:hidden;
-  z-index:1;
-  background-color:#1c1c25;
-}
-.face-inner{
-  padding:1.25rem;
-}
-
-.btn{
-  display:block;
-  width:auto;
-  padding:12px 20px;
-  border-radius:20px;
-  box-shadow:0 15px 35px rgba(0,0,0,0.5);
-  background-color:rgba(255,255,255,0.5);
-  text-align:center;
-  margin:30px auto 0;
-  cursor:pointer;
-}
-.face h3{
-  font-weight:300;
-  font-size:20px;
-  text-align:center;
-}
-.face h4{
-  font-weight:600;
-  text-align:center;
-  letter-spacing:1px;
-}
-.icon-content{
-  display:flex;
-  justify-content:space-around;
-  margin:1.25rem auto;
-}
-.icon-content i{
-  font-size:16px;
-}
-.icon-inner{
-  text-align:center;
-}
-h4{
-  font-weight:400;
-  letter-spacing:0.5px;
-}
-a{
-  color:currentColor;
-}
-p{
-  display:inline-block;
-}
-@-webkit-keyframes moveblue{
-  0% {top: 75%; right:65%;}
-  50% {top: 30%;right:70%;}
-  100% {top: 75%;right:65%;}
-}
-@-webkit-keyframes movepink{
-  0% {bottom: 75%; left:65%;}
-  50% {bottom: 50%;left:70%;}
-  100% {bottom: 75%;left:65%;}
-}
-</style>
-</head>
-<body>
-    <section>
-        <div class="card">
-          <div class="face">
-            <div class=face-inner>
-              <h3 style=" color:rgb(255,255,255);">Loccana</h3>
-              <h4 style=" color:rgb(255,255,255);">{{ $data['title'] }}</h4>
-              <div class="icon-content">
-                <p style="color:rgb(255,255,255);">{{ $data['body'] }}</p>
-              </div>
-              <a href="{{ $data['url'] }}" class="btn" style="color:rgb(255,255,255);">
-                <p style="color:rgb(255,255,255);">Verify</p>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </body>
-</html>
+<style>html,body { padding: 0; margin:0; }</style>
+<div style="font-family:Arial,Helvetica,sans-serif; line-height: 1.5; font-weight: normal; font-size: 15px; color: #2F3044; min-height: 100%; margin:0; padding:0; width:100%; background-color:#edf2f7">
+	<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;margin:0 auto; padding:0; max-width:600px">
+		<tbody>
+			<tr>
+				<td align="center" valign="center" style="text-align:center; padding: 40px">
+					<a href="" rel="noopener" target="_blank">
+						<img alt="Logo" src="../../assets/media/logos/logo-1.svg" class="h-45px" />
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<td align="left" valign="center">
+					<div style="text-align:left; margin: 0 20px; padding: 40px; background-color:#ffffff; border-radius: 6px">
+						<!--begin:Email content-->
+						<div style="padding-bottom: 30px; font-size: 17px;">
+							<strong>{{ $data['title'] }}</strong>
+						</div>
+						<div style="padding-bottom: 30px">To activate your account, please click on the button below to verify your email address. Once activated, you’ll have full access to our free and premium products.</div>
+						<div style="padding-bottom: 40px; text-align:center;">
+							<a href="{{ $data['url'] }}" rel="noopener" style="text-decoration:none;display:inline-block;text-align:center;padding:0.75575rem 1.3rem;font-size:0.925rem;line-height:1.5;border-radius:0.35rem;color:#ffffff;background-color:#50CD89;border:0px;margin-right:0.75rem!important;font-weight:600!important;outline:none!important;vertical-align:middle" target="_blank">Activate Account</a>
+						</div>
+						<div style="padding-bottom: 30px">This password email link will expire in 24 Hours. If you did not request a email, no further action is required.</div>
+						<div style="border-bottom: 1px solid #eeeeee; margin: 15px 0"></div>
+						<div style="padding-bottom: 50px; word-wrap: break-all;">
+							<p style="margin-bottom: 10px;">Button not working? Try pasting this URL into your browser:</p>
+							<a href="{{ $data['url'] }}" rel="noopener" target="_blank" style="text-decoration:none;color: #50CD89">{{ $data['url'] }}</a>
+						</div>
+						<!--end:Email content-->
+						<div style="padding-bottom: 10px">
+						<br>Loccana Team.
+						<tr>
+							<td align="center" valign="center" style="font-size: 13px; text-align:center;padding: 20px; color: #6d6e7c;">
+								<p>Floor 5, 450 Avenue of the Red Field, SF, 10050, USA.</p>
+								<p>Copyright ©
+								<a href="" rel="noopener" target="_blank">Loccana</a>.</p>
+							</td>
+						</tr></br></div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

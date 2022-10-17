@@ -47,7 +47,7 @@ class PartnersController extends Controller
             '$request->ship_address',
             '$request->bank_name',
             '$request->account_number',
-            '$request->status',
+            $request->status
         )");
 
         UserActivity::create([
