@@ -195,7 +195,7 @@
         $(document).on('submit', '#add-form', function(e){
             e.preventDefault();
 
-            if($('#id_parent').val().length < 1 ||  $('#coa').val() < 1 || $('#description').val() < 1){
+            if($('#id_parent').val().length < 1 ||  $('#coa').val().length < 1 || $('#description').val().length < 1){
                 Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -210,7 +210,6 @@
                 'description': $('#description').val(),
                 'status': $('#status').val()
             }
-            console.log(data);
 
             $.ajaxSetup({
                 headers: {

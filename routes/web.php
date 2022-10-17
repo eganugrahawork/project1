@@ -173,6 +173,7 @@ Route::middleware(['auth'])->controller(PrincipalController::class)->group(funct
 // Partners Start
 Route::middleware(['auth'])->controller(PartnersController::class)->group(function(){
     Route::get('admin/masterdata/partners', 'index');
+    Route::get('admin/masterdata/partners/list', 'list');
     Route::post('admin/masterdata/partners/store', 'store');
     Route::post('admin/masterdata/partners/update', 'update');
     Route::get('admin/masterdata/partners/delete/{id}', 'destroy');

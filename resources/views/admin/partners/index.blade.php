@@ -34,7 +34,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <input type="text" id="searchIndukTable" class="form-control form-control-solid w-250px ps-15" placeholder="partners Search" />
+                        <input type="text" id="searchPartnerTable" class="form-control form-control-solid w-250px ps-15" placeholder="Search..." />
                     </div>
                 </div>
                 <div class="card-toolbar">
@@ -47,11 +47,10 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="indukTable">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="partnerTable">
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                            <th class="min-w-20px">No
-                            </th>
+                            <th class="min-w-20px">No</th>
                             <th class="min-w-125px">Kode partners</th>
                             <th class="min-w-125px">Nama</th>
                             <th class="min-w-125px">Alamat</th>
@@ -61,7 +60,7 @@
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">
-                        @foreach ($partners as $p )
+                        {{-- @foreach ($partners as $p )
                         <tr>
                             <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
                             <td>
@@ -82,7 +81,7 @@
                                     @endcan
                             </td>
                             </tr>
-                            @endforeach
+                            @endforeach --}}
                         </tbody>
                 </table>
             </div>
@@ -137,8 +136,184 @@
         }
 
         function tutupModal(){
-    $('#mainmodal').modal('toggle')
-}
+            $('#mainmodal').modal('toggle')
+        }
+
+        var partnerTable = $('#partnerTable').DataTable({
+                serverside : true,
+                    processing : true,
+                    ajax : {
+                        url : "{{ url('/admin/masterdata/partners/list') }}"
+                    },
+                    columns:
+                    [
+                        {data: 'id', name: 'id'},
+                        {data: 'code', name: 'code'},
+                        {data: 'name', name: 'name'},
+                        {data: 'address', name: 'address'},
+                        {data: 'phone', name: 'phone'},
+                        {data: 'fax', name: 'fax'},
+                        {data: 'action', name: 'action'}
+                    ],
+                    "bLengthChange": false,
+                    "bFilter": true,
+                    "bInfo": false
+        });
+
+        $('#searchPartnerTable').keyup(function () {
+                partnerTable.search($(this).val()).draw()
+        });
+
+
+        $(document).on('click', '#deletepartners', function(e){
+            e.preventDefault();
+
+
+            const href = $(this).attr('href');
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Hapus data ini ?',
+                text: "Data tidak bisa dikembalikan!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, hapus!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                reverseButtons: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+                    $.ajax({
+                        type:"GET",
+                        url: href,
+                        success:function(response){
+                            Swal.fire(
+                                'Success',
+                                response.success,
+                                'success'
+                            )
+                            partnerTable.ajax.reload(null, false);
+                            $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="addpartnersModal()">Add Partners</button>')
+                        }
+                    })
+
+                } else if (
+
+                result.dismiss === Swal.DismissReason.cancel
+                ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Data anda masih aman :)',
+                    'success'
+                )
+                }
+            })
+        });
+
+
+        $(document).on('submit', '#add-form', function(e){
+            e.preventDefault();
+
+            if($('#code').val().length < 1 ||  $('#name').val().length < 1 || $('#email').val().length < 1){
+                Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Data tidak boleh ada yang kosong'
+            })
+            }else{
+            $('#btn-add').hide()
+            $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            var data = {
+                'code': $('#code').val(),
+                'name': $('#name').val(),
+                'email': $('#email').val(),
+                'partner_type': $('#partner_type').val(),
+                'phone': $('#phone').val(),
+                'fax': $('#fax').val(),
+                'address': $('#address').val(),
+                'ship_address': $('#ship_address').val(),
+                'bank_name': $('#bank_name').val(),
+                'account_number': $('#account_number').val(),
+                'status': $('#status').val()
+            }
+            // console.log(data);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('/admin/masterdata/partners/store') }}",
+                data: data,
+                dataType: 'json',
+                success:function(response){
+                    Swal.fire(
+                        'Success',
+                        response.success,
+                        'success'
+                    )
+                    $('#mainmodal').modal('toggle');
+                    partnerTable.ajax.reload(null, false);
+                }
+            })
+        }
+        });
+
+
+        $(document).on('submit', '#update-form', function(e){
+            e.preventDefault();
+
+
+            $('#btn-update').hide()
+            $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            var data = {
+                'id': $('#id').val(),
+                'code': $('#code').val(),
+                'name': $('#name').val(),
+                'email': $('#email').val(),
+                'partner_type': $('#partner_type').val(),
+                'phone': $('#phone').val(),
+                'fax': $('#fax').val(),
+                'address': $('#address').val(),
+                'ship_address': $('#ship_address').val(),
+                'bank_name': $('#bank_name').val(),
+                'account_number': $('#account_number').val(),
+                'status': $('#status').val()
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('/admin/masterdata/partners/update') }}",
+                data: data,
+                dataType: 'json',
+                success:function(response){
+                    Swal.fire(
+                        'Success',
+                        response.success,
+                        'success'
+                    )
+                    $('#mainmodal').modal('toggle');
+                    partnerTable.ajax.reload(null, false);
+                }
+            })
+        })
+
 </script>
 
 @endsection

@@ -2,17 +2,35 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\NotifEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Partners;
 use App\Models\PartnerType;
 use App\Models\UserActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Yajra\DataTables\DataTables;
 
 class PartnersController extends Controller
 {
     public function index(){
-        return view('admin.partners.index', ['partners' => DB::select('Call sp_list_partners()')]);
+        return view('admin.partners.index');
+    }
+
+    public function list(){
+        return  Datatables::of(DB::select('Call sp_list_partners()'))
+        ->addColumn('action', function($model){
+            $action = "";
+            if(Gate::allows('edit', [1, '/admin/masterdata/partners'])){
+                $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
+            }
+            if(Gate::allows('delete', [1, '/admin/masterdata/partners'])){
+                $action .= " <a href='/admin/masterdata/partners/delete/$model->id' class='btn btn-sm btn-danger' id='deletepartners'><i class='bi bi-trash'></i></a>";
+            }
+            return $action;
+        })
+        ->make(true);
     }
 
     public function addmodal(){
@@ -20,21 +38,6 @@ class PartnersController extends Controller
     }
 
     public function store(Request $request){
-
-
-        // Partners::create([
-        //     'code' => $request->code,
-        // 	'name' => $request->name,
-        // 	'partner_type' => $request->partner_type,
-        // 	'phone' => $request->phone,
-        // 	'fax' => $request->fax,
-        // 	'email' =>$request->email,
-        // 	'address' => $request->address,
-        // 	'ship_address' => $request->ship_address,
-        // 	'bank_name' => $request->bank_name,
-        // 	'account_number' => $request->account_number,
-        //     'status' => 1
-        // ]);
 
         DB::select("call sp_insert_partners(
             '$request->code',
@@ -56,7 +59,10 @@ class PartnersController extends Controller
             'aktivitas' => "Tambah",
             'keterangan' => "Tambah Partners ". $request->name
         ]);
-        return back()->with('success', 'Partners berhasil ditambahkan!');
+
+        NotifEvent::dispatch(auth()->user()->name .' menambahkan Partners '. $request->name);
+
+        return response()->json(['success'=> 'Partner Ditambahkan']);
     }
 
     public function destroy(Request $request){
@@ -67,11 +73,15 @@ class PartnersController extends Controller
             'aktivitas' => "Hapus",
             'keterangan' => "Hapus Partners ". $partnernya->name
         ]);
-        // Partners::where(['id'=>$request->id])->delete();
+
+
         DB::select("call sp_delete_partners(
             $request->id
         )");
-        return back()->with('success', 'Partners berhasil dihapus!');
+
+        NotifEvent::dispatch(auth()->user()->name .' menghapus Partners '. $partnernya->name);
+
+        return response()->json(['success'=> 'Partner Berhasil Dihapus']);
     }
 
     public function editmodal(Request $request){
@@ -80,19 +90,7 @@ class PartnersController extends Controller
     }
 
     public function update(Request $request){
-        // Partners::where(['id' => $request->id])->update([
-        //     'code' => $request->code,
-		// 	'name' => $request->name,
-		// 	'phone' => $request->phone,
-		// 	'fax' => $request->fax,
-        //     'partner_type' => $request->partner_type,
-		// 	'email' =>$request->email,
-		// 	'address' => $request->address,
-		// 	'ship_address' => $request->ship_address,
-		// 	'bank_name' => $request->bank_name,
-		// 	'account_number' => $request->account_number,
-        //     'status' => $request->status
-        // ]);
+
 
         DB::select("call sp_update_partners(
             $request->id,
@@ -114,6 +112,9 @@ class PartnersController extends Controller
             'aktivitas' => "Update",
             'keterangan' => "Update Partners ". $request->name
         ]);
-        return back()->with('success', 'Partners berhasil diUpdate!');
+
+        NotifEvent::dispatch(auth()->user()->name .' merubah Partner menjadi '. $request->name);
+
+        return response()->json(['success'=> 'Partner diupdate']);
     }
 }
