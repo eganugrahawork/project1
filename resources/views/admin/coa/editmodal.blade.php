@@ -1,21 +1,21 @@
-<form id="kt_modal_add_user_form" class="form" action="/admin/masterdata/coa/update" method="post">
-    @csrf
-<input type="hidden" name="id" value="{{ $coa->id }}">
+<form id="update-form" >
+    {{-- @csrf --}}
+<input type="hidden" name="id" id="id" value="{{ $coa->id }}">
         <div class="fv-row mb-7">
             <label class="required fw-bold fs-6 mb-2">Parent</label>
-            <input type="number" name="id_parent" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $coa->id_parent }}" required readonly/>
+            <input type="number" name="id_parent" id="id_parent" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $coa->id_parent }}" required readonly/>
         </div>
         <div class="fv-row mb-7">
             <label class="required fw-bold fs-6 mb-2">COA</label>
-            <input type="text" name="coa" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $coa->coa }}" required/>
+            <input type="text" name="coa" id="coa" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $coa->coa }}" required/>
         </div>
         <div class="fv-row mb-7">
             <label class="required fw-bold fs-6 mb-2">Keterangan</label>
-            <input type="text" name="description" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $coa->description }}" required/>
+            <input type="text" name="description" id="description" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $coa->description }}" required/>
         </div>
         <div class="fv-row mb-7">
             <label class="required form-label fw-bold">Status</label>
-                <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
+                <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" id="status" required>
                     <option value="1" {{ $coa->status == 1 ? 'selected' : ''; }}>Ya</option>
                     <option value="0" {{ $coa->status == 0 ? 'selected' : ''; }}>Tidak</option>
                 </select>

@@ -216,6 +216,7 @@ Route::middleware(['auth'])->controller(PriceManagementController::class)->group
 // Coa
 Route::middleware(['auth'])->controller(CoaController::class)->group(function(){
     Route::get('admin/masterdata/coa', 'index');
+    Route::get('admin/masterdata/coa/list', 'list');
     Route::get('admin/masterdata/coa/addmodal', 'addmodal');
     Route::get('admin/masterdata/coa/editmodal/{id}','editmodal');
     Route::post('admin/masterdata/coa/store', 'store');

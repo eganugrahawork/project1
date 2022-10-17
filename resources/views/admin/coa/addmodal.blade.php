@@ -1,20 +1,20 @@
-<form id="kt_modal_add_user_form" class="form" action="/admin/masterdata/coa/store" method="post">
-    @csrf
+<form id="add-form" >
+    {{-- @csrf --}}
         <div class="fv-row mb-7">
             <label class="required fw-bold fs-6 mb-2">Parent</label>
-            <input type="number" name="id_parent" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+            <input type="number" name="id_parent" id="id_parent" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
         </div>
         <div class="fv-row mb-7">
             <label class="required fw-bold fs-6 mb-2">COA</label>
-            <input type="text" name="coa" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+            <input type="text" name="coa" id="coa" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
         </div>
         <div class="fv-row mb-7">
             <label class="required fw-bold fs-6 mb-2">Keterangan</label>
-            <input type="text" name="description" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+            <input type="text" name="description" id="description" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
         </div>
         <div class="fv-row mb-7">
             <label class="required form-label fw-bold">Status</label>
-                <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
+                <select class="form-select  form-select-solid mb-3 mb-lg-0" id="status" name="status" required>
                     <option value="1">Ya</option>
                     <option value="0">Tidak</option>
                 </select>
@@ -24,11 +24,3 @@
             <button class="btn btn-sm btn-primary" id="btn-add">Add Coa</button>
         </div>
 </form>
-
-<script>
-    $('form').submit(function(){
-    $('#btn-add').hide()
-    $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-    // $('#btn-custom').attr("disabled", 'disabled')
-})
-</script>

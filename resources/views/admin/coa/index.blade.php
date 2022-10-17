@@ -34,7 +34,7 @@
                          </svg>
                      </span>
                      <!--end::Svg Icon-->
-                     <input type="text" id="searchIndukTable" class="form-control form-control-solid w-250px ps-15" placeholder="COA Search" />
+                     <input type="text" id="searchCoaTable" class="form-control form-control-solid w-250px ps-15" placeholder="Search..." />
                  </div>
                 </div>
                 <div class="card-toolbar">
@@ -47,39 +47,21 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="indukTable">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="coaTable">
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="min-w-20px">No
                             </th>
                             <th class="min-w-125px">Parent</th>
                             <th class="min-w-125px">Coa</th>
-                            <th class="min-w-125px">Keterangan</th>
+                            <th class="min-w-125px">Description</th>
+                            <th class="min-w-125px">Statues</th>
                             <th class="text-end min-w-70px">Action</th>
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">
-                        @foreach ($coa as $c )
-                        <tr>
-                            <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
-                            <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $c->id_parent }}</a>
-                            </td>
-                            <td>
-                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $c->coa }}</a>
-                            </td>
-                            <td>{{ $c->description }}</td>
-                            <td class="text-end">
-                                    @can('edit', [1, '/admin/masterdata/coa'])
-                                    <a onclick="editModal({{ $c->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                                    @endcan
-                                    @can('delete', [1, '/admin/masterdata/coa'])
-                                        <a href="/admin/masterdata/coa/delete/{{ $c->id }}" class="btn btn-sm btn-danger button-delete" ><i class="bi bi-trash"></i></a>
-                                    @endcan
-                            </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
+
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -133,6 +115,164 @@
         function tutupModal(){
         $('#mainmodal').modal('toggle')
         }
+
+        var coaTable = $('#coaTable').DataTable({
+            serverside : true,
+                    processing : true,
+                    ajax : {
+                        url : "{{ url('/admin/masterdata/coa/list') }}"
+                    },
+                    columns:
+                    [
+                        {data: 'id', name: 'id'},
+                        {data: 'id_parent', name: 'id_parent'},
+                        {data: 'coa', name: 'coa'},
+                        {data: 'description', name: 'description'},
+                        {data: 'status', name: 'status'},
+                        {data: 'action', name: 'action'}
+                    ],
+                    "bLengthChange": false,
+                    "bFilter": true,
+                    "bInfo": false
+        });
+
+        $('#searchCoaTable').keyup(function () {
+                coaTable.search($(this).val()).draw()
+        });
+
+        $(document).on('click', '#deletecoa', function(e){
+            e.preventDefault();
+
+
+            const href = $(this).attr('href');
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Hapus data ini ?',
+                text: "Data tidak bisa dikembalikan!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, hapus!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                reverseButtons: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+                    $.ajax({
+                        type:"GET",
+                        url: href,
+                        success:function(response){
+                            Swal.fire(
+                                'Success',
+                                response.success,
+                                'success'
+                            )
+                            coaTable.ajax.reload(null, false);
+                            $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="addCoaModal()">Add COA</button>')
+                        }
+                    })
+
+                } else if (
+
+                result.dismiss === Swal.DismissReason.cancel
+                ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Data anda masih aman :)',
+                    'success'
+                )
+                }
+            })
+        });
+
+        $(document).on('submit', '#add-form', function(e){
+            e.preventDefault();
+
+            if($('#id_parent').val().length < 1 ||  $('#coa').val() < 1 || $('#description').val() < 1){
+                Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Data tidak boleh ada yang kosong'
+            })
+            }else{
+            $('#btn-add').hide()
+            $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            var data = {
+                'id_parent': $('#id_parent').val(),
+                'coa': $('#coa').val(),
+                'description': $('#description').val(),
+                'status': $('#status').val()
+            }
+            console.log(data);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('/admin/masterdata/coa/store') }}",
+                data: data,
+                dataType: 'json',
+                success:function(response){
+                    Swal.fire(
+                        'Success',
+                        response.success,
+                        'success'
+                    )
+                    $('#mainmodal').modal('toggle');
+                    coaTable.ajax.reload(null, false);
+                }
+            })
+        }
+        });
+
+
+        $(document).on('submit', '#update-form', function(e){
+            e.preventDefault();
+
+
+            $('#btn-update').hide()
+            $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            var data = {
+                'id': $('#id').val(),
+                'id_parent': $('#id_parent').val(),
+                'coa': $('#coa').val(),
+                'description': $('#description').val(),
+                'status': $('#status').val()
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('/admin/masterdata/coa/update') }}",
+                data: data,
+                dataType: 'json',
+                success:function(response){
+                    Swal.fire(
+                        'Success',
+                        response.success,
+                        'success'
+                    )
+                    $('#mainmodal').modal('toggle');
+                    coaTable.ajax.reload(null, false);
+                }
+            })
+        })
 </script>
 
 @endsection

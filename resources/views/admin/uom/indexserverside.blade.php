@@ -193,32 +193,6 @@
             })
         })
 
-        // $("#add-form").validate({
-        //     rules: {
-        //         // simple rule, converted to {required:true}
-        //         name: "required",
-        //         // compound rule
-        //         symbol: {
-        //         required: true
-        //         },
-        //         description: {
-        //             required:true
-        //         }
-        //     },
-        //     message: {
-        //         name:{
-        //             required: "nama tidak boleh kosong"
-        //         },
-        //         symbol:{
-        //             required: "symbol tidak boleh kosong"
-        //         },
-        //         description:{
-        //             required: "description tidak boleh kosong"
-        //         }
-        //     }
-        // });
-
-
         $(document).on('submit', '#add-form', function(e){
             e.preventDefault();
 
