@@ -43,7 +43,7 @@
           <div id="loadingnya"></div>
         </form>
 
-        <div class="d-flex justify-content-center mt-2">
+        <div class="d-flex justify-content-center mt-4">
             <p class="text-white">Do not Have Account ? <a href="/register" class="text-decoration-none">Create Account ?</a></p>
         </div>
         <div class="d-flex justify-content-center">

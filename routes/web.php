@@ -180,6 +180,12 @@ Route::middleware(['auth'])->controller(PartnersController::class)->group(functi
     Route::get('admin/masterdata/partners/delete/{id}', 'destroy');
     Route::get('admin/masterdata/partners/editmodal/{id}', 'editmodal');
     Route::get('admin/masterdata/partners/addmodal', 'addmodal');
+    Route::get('admin/masterdata/partners/listtypeofpartners', 'listtypeofpartners');
+    Route::get('admin/masterdata/partners/addtypepartnermodal', 'addtypepartnermodal');
+    Route::post('admin/masterdata/partners/storetypepartners', 'storetypepartners');
+    Route::get('admin/masterdata/partners/edittypepartnermodal/{id}', 'edittypepartnermodal');
+    Route::post('admin/masterdata/partners/updatetypepartners', 'updatetypepartners');
+    Route::get('admin/masterdata/partners/destroytypepartners/{id}', 'destroytypepartners');
 });
 // Principal End
 

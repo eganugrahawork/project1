@@ -33,6 +33,7 @@ class PartnersController extends Controller
         ->make(true);
     }
 
+
     public function addmodal(){
         return view('admin.partners.addmodal', ['partner_type' => PartnerType::all()]);
     }
@@ -117,4 +118,48 @@ class PartnersController extends Controller
 
         return response()->json(['success'=> 'Partner diupdate']);
     }
+
+
+    public function listtypeofpartners(){
+        return  Datatables::of(DB::select('Call sp_list_partner_types()'))->addIndexColumn()
+        ->addColumn('action', function($model){
+            $action = "";
+            if(Gate::allows('edit', [1, '/admin/masterdata/partners'])){
+                $action .= "<a onclick='editModalType($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
+            }
+            if(Gate::allows('delete', [1, '/admin/masterdata/partners'])){
+                $action .= " <a href='/admin/masterdata/partners/destroytypepartners/$model->id' class='btn btn-sm btn-danger' id='deletepartnerstype'><i class='bi bi-trash'></i></a>";
+            }
+            return $action;
+        })
+        ->make(true);
+    }
+
+    public function addtypepartnermodal(){
+        return view('admin.partners.addtypepartnermodal');
+    }
+
+    public function storetypepartners(Request $request){
+        DB::select("call sp_insert_partner_types('$request->name', $request->status)");
+
+        return response()->json(['success' => 'Type Partner Added']);
+    }
+
+    public function edittypepartnermodal(Request $request){
+        return view('admin.partners.edittypepartnermodal', ['tp' =>  PartnerType::where(['id' => $request->id])->first()]);
+    }
+
+    public function updatetypepartners(Request $request){
+        DB::select("call sp_update_partner_types($request->id,'$request->name', $request->status)");
+
+        return response()->json(['success', 'Type Partner has Edited']);
+    }
+
+    public function destroytypepartners(Request $request){
+        DB::select("call sp_delete_partner_types($request->id)");
+
+        return response()->json(['success', 'Type Parter Deleted']);
+    }
+
+
 }

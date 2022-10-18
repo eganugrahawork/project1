@@ -60,29 +60,7 @@
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">
-                        {{-- @foreach ($partners as $p )
-                        <tr>
-                            <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
-                            <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $p->code }}</a>
-                            </td>
-                            <td>
-                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $p->name }}</a>
-                            </td>
-                            <td>{{ $p->address }}</td>
-                            <td data-filter="mastercard">{{ $p->phone }}</td>
-                            <td>{{ $p->fax }}</td>
-                            <td class="text-end">
-                                    @can('edit', [1, '/admin/masterdata/partners'])
-                                    <a onclick="editModal({{ $p->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                                    @endcan
-                                    @can('delete', [1, '/admin/masterdata/partners'])
-                                        <a href="/admin/masterdata/partners/delete/{{ $p->id }}" class="btn btn-sm btn-danger button-delete" ><i class="bi bi-trash"></i></a>
-                                    @endcan
-                            </td>
-                            </tr>
-                            @endforeach --}}
-                        </tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -112,6 +90,73 @@
 </div>
 {{-- End Main Modal --}}
 
+{{-- typepartnermodal Modal --}}
+<div class="modal fade" id="typepartnermodal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-400px">
+        <div class="modal-content">
+            <div class="modal-header" id="typepartnermodal_header">
+                <h2 class="fw-bolder">Partners Type</h2>
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" onclick="tutupModalType()">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="kontentypepartnermodal">
+            </div>
+        </div>
+    </div>
+</div>
+{{-- End typepartnermodal Modal --}}
+
+<button id="kt_explore_toggle" class="explore-toggle btn btn-sm bg-body btn-color-gray-700 btn-active-primary shadow-sm position-fixed px-5 fw-bolder zindex-2 top-50 mt-10 end-0 transform-90 fs-6 rounded-top-0" title="Explore Metronic" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-trigger="hover">
+    <span id="kt_explore_toggle_label">Type Of Partners</span>
+</button>
+
+<div id="kt_explore" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="explore" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'350px', 'lg': '475px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_explore_toggle" data-kt-drawer-close="#kt_explore_close">
+    <div class="card shadow-none rounded-0 w-100">
+        <div class="card-header" id="kt_explore_header">
+            <h3 class="card-title fw-bolder text-gray-700">Configuration Partners</h3>
+            <div class="card-toolbar">
+                <button type="button" class="btn btn-sm btn-icon btn-active-light-primary me-n5" id="kt_explore_close">
+                    <span class="svg-icon svg-icon-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                        </svg>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <div class="card-body" id="kt_explore_body">
+            <div id="kt_explore_scroll" class="scroll-y me-n5 pe-5" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-wrappers="#kt_explore_body" data-kt-scroll-dependencies="#kt_explore_header" data-kt-scroll-offset="5px">
+                <div class="mb-0">
+                    <div id="loadtypepartner" class="d-flex justify-content-end py-2">
+                        <button class="btn btn-sm btn-primary" id="addpartnerstype">Add Type Partners</button>
+                    </div>
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="typeofpartner">
+                        <thead>
+                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                <th class="min-w-20px">No</th>
+                                <th class="min-w-80px">Name</th>
+                                <th class="min-w-20px">Status</th>
+                                <th class="text-end min-w-70px">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="fw-bold text-gray-600">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @endsection
 
 @section('js')
@@ -135,8 +180,12 @@
             })
         }
 
+
         function tutupModal(){
             $('#mainmodal').modal('toggle')
+        }
+        function tutupModalType(){
+            $('#typepartnermodal').modal('toggle')
         }
 
         var partnerTable = $('#partnerTable').DataTable({
@@ -317,6 +366,172 @@
             })
         })
 
+        $(document).on('click', '#kt_explore_toggle', function(){
+           typeofpartner();
+        })
+
+        function typeofpartner(){
+            var typeofpartner = $('#typeofpartner').DataTable({
+                serverside : true,
+                    processing : true,
+                    pageLength : 5,
+                    ajax : {
+                        url : "{{ url('/admin/masterdata/partners/listtypeofpartners') }}"
+                    },
+                    columns:
+                    [
+                        {
+                            data: 'DT_RowIndex',
+                            searchable: false
+                        },
+                        {data: 'name', name: 'name'},
+                        {data: 'status', name: 'status'},
+                        {data: 'action', name: 'action'},
+                    ],
+                    "bLengthChange": false,
+                    "bFilter": true,
+                    "bInfo": false
+            });
+        }
+
+        $(document).on('click','#addpartnerstype', function(){
+            $('#loadtypepartner').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/masterdata/partners/addtypepartnermodal') }}", {}, function(data, status){
+                $('#kontentypepartnermodal').html(data)
+                $('#typepartnermodal').modal('toggle')
+                $('#loadtypepartner').html('<button class="btn btn-sm btn-primary" id="addpartnerstype">Add Type Partners</button>')
+            })
+        })
+
+
+        $(document).on('submit', '#addtypepartner-form', function(e){
+            e.preventDefault();
+
+            $('#btn-add-type').hide()
+            $('#loadingnya-type').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            var data = {
+                'name': $('#name').val(),
+                'status': $('#status').val()
+            }
+            // console.log(data);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('/admin/masterdata/partners/storetypepartners') }}",
+                data: data,
+                dataType: 'json',
+                success:function(response){
+                    Swal.fire(
+                        'Success',
+                        response.success,
+                        'success'
+                    )
+                    location.reload();
+
+                }
+            })
+        });
+
+        function editModalType(id){
+            $('#loadtypepartner').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/masterdata/partners/edittypepartnermodal') }}/"+id, {}, function(data, status){
+                $('#kontentypepartnermodal').html(data)
+                $('#typepartnermodal').modal('toggle')
+                $('#loadtypepartner').html('<button class="btn btn-sm btn-primary" id="addpartnerstype">Add Type Partners</button>')
+            })
+        }
+
+        $(document).on('submit', '#updatetypepartner-form', function(e){
+            e.preventDefault();
+
+
+            $('#btn-updatetypepartner').hide()
+            $('#loadingnyaupdatetypepartner').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            var data = {
+                'id': $('#id').val(),
+                'name': $('#name').val(),
+                'status': $('#status').val()
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('/admin/masterdata/partners/updatetypepartners') }}",
+                data: data,
+                dataType: 'json',
+                success:function(response){
+                    Swal.fire(
+                        'Success',
+                        response.success,
+                        'success'
+                    )
+                    location.reload();
+                }
+            })
+        })
+
+
+        $(document).on('click', '#deletepartnerstype', function(e){
+            e.preventDefault();
+
+
+            const href = $(this).attr('href');
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Hapus data ini ?',
+                text: "Data tidak bisa dikembalikan!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, hapus!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                reverseButtons: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#loadtypepartner').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+                    $.ajax({
+                        type:"GET",
+                        url: href,
+                        success:function(response){
+                            Swal.fire(
+                                'Success',
+                                response.success,
+                                'success'
+                            )
+                            location.reload();
+                        }
+                    })
+
+                } else if (
+
+                result.dismiss === Swal.DismissReason.cancel
+                ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Data anda masih aman :)',
+                    'success'
+                )
+                }
+            })
+        });
 </script>
 
 @endsection

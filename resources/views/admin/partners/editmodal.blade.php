@@ -69,7 +69,7 @@
         </div>
     </div>
         <div class="d-flex justify-content-end" id="loadingnya">
-            <button class="btn btn-sm btn-primary" id="btn-update">Update partners</button>
+            <button class="btn btn-sm btn-primary" id="btn-update">Update Partners</button>
         </div>
 </form>
 

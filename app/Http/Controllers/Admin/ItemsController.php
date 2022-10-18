@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\NotifEvent;
 use App\Http\Controllers\Controller;
 
 use App\Models\Items;
@@ -43,15 +44,32 @@ class ItemsController extends Controller
         $request->base_qty,
         $request->uom_id,
         $request->unit_box,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         $request->partner_id,
+        0,
+        0,
         $request->vat,
         1)");
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "Items",
             'aktivitas' => "Tambah",
-            'keterangan' => "Tambah items ". $request->name
+            'keterangan' => "Tambah items ". $request->stock_name
         ]);
+        NotifEvent::dispatch(auth()->user()->name .' menambahkan Items '. $request->stock_name);
         return redirect()->back()->with('success', 'Data Item Ditambahkan !');
     }
 
@@ -62,19 +80,6 @@ class ItemsController extends Controller
     }
 
     public function update(Request $request){
-        // Items::where(['id' =>$request->id])->update([
-        //     'code' => $request->code,
-        //     'name' => $request->name,
-        //     'description' => $request->description,
-        //     'base_qty' => $request->base_qty,
-        //     'uom_id' => $request->uom_id,
-        //     'unit_box' => $request->unit_box,
-        //     'type' => $request->type,
-        //     'vat' => $request->vat,
-        //     'partner_id' => $request->partner_id,
-        //     'status' => $request->status
-        // ]);
-
         DB::select("CALL sp_update_items($request->id, '".$request->stock_code."',
         '".$request->stock_name."',
         '".$request->description."',
@@ -89,8 +94,9 @@ class ItemsController extends Controller
             'id_user' => auth()->user()->id,
             'menu' => "Items",
             'aktivitas' => "Ubah",
-            'keterangan' => "Ubah items ". $request->name
+            'keterangan' => "Ubah items ". $request->stock_name
         ]);
+        NotifEvent::dispatch(auth()->user()->name .' mengubah Items menjadi '. $request->stock_name);
         return redirect()->back()->with('success', 'Data Item diUpdate !');
     }
 
@@ -101,10 +107,10 @@ class ItemsController extends Controller
             'id_user' => auth()->user()->id,
             'menu' => "Items",
             'aktivitas' => "Hapus",
-            'keterangan' => "Hapus items ". $items->name
+            'keterangan' => "Hapus items ". $items->stock_name
         ]);
+        NotifEvent::dispatch(auth()->user()->name .' menghapus Items  '. $items->stock_name);
         DB::select("CALL sp_delete_items($request->id)");
-        // Items::where(['id' => $request->id])->delete();
         return redirect()->back()->with('success', 'Data Item Dihapus !');
     }
 }

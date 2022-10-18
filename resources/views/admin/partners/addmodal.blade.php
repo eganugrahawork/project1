@@ -66,6 +66,6 @@
 </div>
 
         <div class="d-flex justify-content-end" id="loadingnya">
-            <button class="btn btn-sm btn-primary" id="btn-add">Add Principal</button>
+            <button class="btn btn-sm btn-primary" id="btn-add">Add Partner</button>
         </div>
     </form>
