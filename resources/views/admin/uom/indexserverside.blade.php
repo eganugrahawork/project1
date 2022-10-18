@@ -125,7 +125,10 @@
                     },
                     columns:
                     [
-                        {data: 'id', name: 'id'},
+                        {
+                            data: 'DT_RowIndex',
+                            searchable: false
+                        },
                         {data: 'name', name: 'name'},
                         {data: 'symbol', name: 'symbol'},
                         {data: 'description' ,name: 'description'},

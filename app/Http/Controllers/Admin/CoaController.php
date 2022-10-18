@@ -18,7 +18,7 @@ class CoaController extends Controller
         return view('admin.coa.index');
     }
     public function list(){
-        return  Datatables::of(DB::select('Call sp_list_coa()'))
+        return  Datatables::of(DB::select('Call sp_list_coa()'))->addIndexColumn()
         ->addColumn('action', function($model){
             $action = "";
             if(Gate::allows('edit', [1, '/admin/masterdata/coa'])){

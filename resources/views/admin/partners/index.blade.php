@@ -147,7 +147,10 @@
                     },
                     columns:
                     [
-                        {data: 'id', name: 'id'},
+                        {
+                            data: 'DT_RowIndex',
+                            searchable: false
+                        },
                         {data: 'code', name: 'code'},
                         {data: 'name', name: 'name'},
                         {data: 'address', name: 'address'},

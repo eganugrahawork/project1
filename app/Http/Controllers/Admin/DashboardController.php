@@ -8,8 +8,10 @@ use App\Models\User;
 use App\Models\UserActivity;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\DataTables;
 
 class DashboardController extends Controller
 {
@@ -20,8 +22,15 @@ class DashboardController extends Controller
 
     public function useractivity(){
 
-        $user = UserActivity::orderBy('id','DESC')->get();
-        return view('admin.useractivity.index', ['user' => $user]);
+
+        return view('admin.useractivity.index');
+    }
+    public function listuseractivity(){
+
+        $activity = DB::select('SELECT a.created_at, a.menu, a.aktivitas, a.keterangan, b.email FROM user_activities a JOIN users b ON a.id_user = b.id');
+
+        // dd($activity);
+        return  Datatables::of($activity)->addIndexColumn()->make(true);
     }
 
     public function checkonline(){

@@ -124,7 +124,10 @@
                     },
                     columns:
                     [
-                        {data: 'id', name: 'id'},
+                        {
+                    data: 'DT_RowIndex',
+                    searchable: false
+                },
                         {data: 'id_parent', name: 'id_parent'},
                         {data: 'coa', name: 'coa'},
                         {data: 'description', name: 'description'},

@@ -7,6 +7,7 @@ use App\Mail\RegisterMail;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\UserDetail;
+use App\Models\UserRole;
 use App\Models\UserToken;
 use Carbon\Carbon;
 // use DateTime;
@@ -90,7 +91,10 @@ class RegisterController extends Controller
     }
 
     public function ConfirmMailRegistration($data){
-
+        $usr = User::where(['email' => $data->email])->first();
+        if($usr){
+            return redirect('/login')->with('fail', 'Email Already registered');
+        }
         $token = rand(112389231321, 152389231321);
         $details = [
             'title' => "Confirm Registration Loccana",
@@ -110,13 +114,14 @@ class RegisterController extends Controller
 
     public function createUser($data){
         UserToken::create(['email'=> $data->email, 'token' => $data->token]);
+        $role = UserRole::where(['role' => 'Demo'])->first();
         return User::create([
             'username' => $data->username,
             'email' => $data->email,
             'name' => $data->name,
             'address' => $data->address,
             'region' => 9,
-            'id_role' => 1,
+            'id_role' => $role->id,
             'image' => "img-users/default.png",
             'no_hp' => $data->no_hp,
             'type_user_id' => $data->type_user_id,
@@ -152,6 +157,18 @@ class RegisterController extends Controller
         UserToken::where(['email' => $request->email])->delete();
         User::where(['email' => $request->email])->update(['password' => Hash::make($request->password), 'is_active' => 1]);
         return redirect('/login')->with('success', 'Your Account Already to User');
+    }
+
+    public function checkemail(Request $request){
+        // dd( $request->value);
+        $usr = User::where(['email' => $request->value])->first();
+
+        if($usr){
+            return response()->json(['success' => false]);
+        }else{
+            return response()->json(['success' => true]);
+
+        }
     }
 
 }

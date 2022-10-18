@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CrudPermission;
 use App\Models\Region;
 use App\Models\UserAccessMenu;
 use App\Models\UserActivity;
@@ -10,6 +11,7 @@ use App\Models\UserMenu;
 use App\Models\UserRole;
 use App\Models\UserSubmenu;
 use Illuminate\Http\Request;
+
 
 class UserMenuController extends Controller
 {
@@ -170,8 +172,13 @@ class UserMenuController extends Controller
         ]);
         UserMenu::destroy(['id' => $request->id]);
         $uam = UserAccessMenu::where(['id_menu' => $request->id])->get();
+       $crud =  CrudPermission::where('id_menu', $request->id)->get();
         foreach($uam as $uam){
             UserAccessMenu::destroy(['id'=> $uam->id]);
+        }
+
+        foreach ($crud as $crud){
+            CrudPermission::destroy(['id' => $crud->id]);
         }
         return redirect('/admin/configuration/menu')->with('success', 'Menu dihapus');
     }

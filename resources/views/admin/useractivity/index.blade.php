@@ -49,14 +49,14 @@
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
-                            <input type="text" id="searchIndukTable" class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
+                            <input type="text" id="searchActivityTable" class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
                         </div>
                     </div>
                 @endif
             </div>
             <div class="card-body pt-0">
                 <!--begin::Table-->
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="indukTable">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="activityTable">
                     <!--begin::Table head-->
                     <thead>
                         <!--begin::Table row-->
@@ -71,7 +71,7 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 fw-bold">
-                            @foreach ($user as $usr)
+                            {{-- @foreach ($user as $usr)
                                 <tr >
                                     <td class="d-flex align-items-center">{{ $loop->iteration }}</td>
                                     <td>
@@ -92,7 +92,7 @@
                                     <td>{{ $usr->keterangan }}</td>
                                     <td>{{ $usr->created_at }}</td>
                                 </tr>
-                            @endforeach
+                            @endforeach --}}
                     </tbody>
                     <!--end::Table body-->
                 </table>
@@ -139,6 +139,34 @@
 
 @section('js')
 
+<script>
+    var activityTable = $('#activityTable').DataTable({
+                serverside : true,
+                    processing : true,
+                    ajax : {
+                        url : "{{ url('/admin/listuseractivity') }}"
+                    },
+                    columns:
+                    [
+                        {
+                            data: 'DT_RowIndex',
+                            searchable: false
+                        },
+                        {data: 'email', name: 'email'},
+                        {data: 'menu', name: 'menu'},
+                        {data: 'aktivitas', name: 'aktivitas'},
+                        {data: 'keterangan', name: 'keterangan'},
+                        {data: 'created_at', name: 'created_at'}
+                    ],
+                    "bLengthChange": false,
+                    "bFilter": true,
+                    "bInfo": false
+        });
+
+        $('#searchActivityTable').keyup(function () {
+            activityTable.search($(this).val()).draw()
+        });
+</script>
 
 <script src="/metronic/assets/js/custom/apps/user-management/users/list/add.js"></script>
 @endsection

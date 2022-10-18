@@ -133,11 +133,15 @@
                                 </div>
                                 <div class="fv-row mb-10">
                                     <label class="fs-6 fw-bold form-label required">Contact Email</label>
-                                    <input name="email" type="email" class="form-control form-control-lg form-control-solid" required placeholder="Type your email"/>
+                                    <input name="email" oninput="checkEmail(this)" type="email" class="form-control form-control-lg form-control-solid" required placeholder="Type your email"/>
+                                    <div class="form-text" style="color: red" id="demailmin"><i class="bi bi-x-circle-fill"></i> Harus Email</div>
+                                    <div class="form-text" style="color: rgb(207, 207, 29)" id="demailcheck"><i class="bi bi-arrow-clockwise"></i> Sedang Memeriksa</div>
+                                    <div class="form-text" style="color: red" id="demailcheckfalse"><i class="bi bi-x-circle-fill"></i> Email sudah ada</div>
+                                    <div class="form-text" style="color: rgb(61, 32, 187)" id="demailchecktrue"><i class="bi bi-check2-circle"></i> Email Bisa Digunakan</div>
                                 </div>
                                 <div class="fv-row mb-0">
                                     <label class="fs-6 fw-bold form-label required">Phone Contact</label>
-                                    <input name="no_hp" type="number" class="form-control form-control-lg form-control-solid" required placeholder="Type your email"/>
+                                    <input name="no_hp" type="number" class="form-control form-control-lg form-control-solid" required placeholder="Type your phone number"/>
                                 </div>
                             </div>
                         </div>
@@ -179,7 +183,7 @@
                                     </svg>
                                 </span>Previous</button>
                             </div>
-                            <div>
+                            <div id="continuebtn">
                                 <button type="submit" class="btn btn-lg btn-primary" data-kt-stepper-action="submit">
                                     <span class="indicator-label">Submit
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
@@ -193,7 +197,7 @@
                                         <span class="indicator-progress">Please wait...
                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </button>
-                                <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue
+                                <button type="button" class="btn btn-lg btn-primary"  data-kt-stepper-action="next">Continue
                                 <span class="svg-icon svg-icon-4 ms-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
@@ -215,4 +219,65 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+
+<script>
+
+ $("#demailmin").hide()
+ $("#demailcheck").hide()
+ $("#demailcheckfalse").hide()
+ $("#demailchecktrue").hide()
+    function checkEmail(e){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+                });
+            let valuenya = e.value;
+            let sendData = {
+                'value' : valuenya
+            };
+
+            if(valuenya.indexOf('@') <1){
+                $("#demailchecktrue").hide()
+                $("#demailcheck").hide()
+                $("#demailcheckfalse").hide()
+                $("#demailmin").show()
+                $("#continuebtn").hide()
+
+            }
+
+            if(valuenya.indexOf('@') >= 1){
+                $("#demailmin").hide()
+                $("#demailcheck").show()
+
+                var APP_URL = {!! json_encode(url('/checkemail')) !!}
+
+                jQuery.ajax({
+                    type: "POST",
+                    url: APP_URL,
+                    data: sendData,
+                    cache: false,
+                    success: function(response) {
+                    if (response.success == true) {
+                        $("#demailcheck").hide()
+                        $("#demailcheckfalse").hide()
+                        $("#demailchecktrue").show()
+                        $("#continuebtn").show()
+
+                    } else {
+                        $("#demailchecktrue").hide()
+                        $("#demailcheck").hide()
+                        $("#demailcheckfalse").show()
+                        $("#continuebtn").hide()
+                    }
+                }
+            });
+
+            }
+
+        }
+</script>
 @endsection

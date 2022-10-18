@@ -1,0 +1,22 @@
+
+  [41;1m Exception [49;22m
+
+[39;1m  Property [id] does not exist on this collection instance.[39;22m
+
+  at [32mC:\Users\hpswa\Documents\Revamp\revamp\vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php[39m:[32m969[39m
+    965▕      */
+    966▕     public function __get($key)
+    967▕     {
+    968▕         if (! in_array($key, static::$proxies)) {
+  ➜ 969▕             throw new Exception("Property [{$key}] does not exist on this collection instance.");
+    970▕         }
+    971▕ 
+    972▕         return new HigherOrderCollectionProxy($this, $key);
+    973▕     }
+
+  [33m1   [39m[39;1mC:\Users\hpswa\Documents\Revamp\revamp\app\Console\Commands\OptimizeUser.php[39;22m:[39;1m44[39;22m
+  [37m    Illuminate\Support\Collection::__get("id")[39m
+
+  [33m2   [39m[39;1mC:\Users\hpswa\Documents\Revamp\revamp\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php[39;22m:[39;1m36[39;22m
+  [37m    App\Console\Commands\OptimizeUser::handle()[39m
+adaadaadaada

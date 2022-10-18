@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserActivity extends Model
 {
     protected $guarded = ['id'];
+    protected $with = ['users'];
     use HasFactory;
 
     public function users(){

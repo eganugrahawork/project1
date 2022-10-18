@@ -37,11 +37,10 @@ Route::get('/', function () {
 })->middleware('guest');
 
 Route::middleware(['guest'])->controller(RegisterController::class)->group(function(){
-
     Route::post('/register/update', 'update');
     Route::post('/register/create', 'create');
     Route::get('/register_verify', 'register_verify');
-
+    Route::post('/checkemail', 'checkemail');
 });
 
 Route::middleware(['guest'])->controller(ForgotPasswordController::class)->group(function(){
@@ -59,6 +58,7 @@ Auth::routes();
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 Route::get('/admin/checkonline', [DashboardController::class, 'checkonline'])->middleware('auth');
 Route::get('/admin/useractivity', [DashboardController::class, 'useractivity'])->middleware('auth');
+Route::get('/admin/listuseractivity', [DashboardController::class, 'listuseractivity'])->middleware('auth');
 //End Dashboard
 
 
