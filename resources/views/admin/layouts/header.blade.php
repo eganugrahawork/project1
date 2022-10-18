@@ -161,14 +161,22 @@
 									</div> --}}
 									<!--end::Theme mode-->
             @if (auth()->user()->userrole->role == 'Super Admin')
-            <div class="d-flex align-items-center ms-3 ms-lg-4">
-                <div id="kt_drawer_chat_toggle" class="btn btn-icon btn-active-color-primary btn-outline btn-outline-secondary w-30px h-30px w-lg-40px h-lg-40px" >
-                    <span class="svg-icon svg-icon-1">
-                        <i class="bi bi-emoji-smile"></i>
-                    </span>
+                <div class="d-flex align-items-center ms-3 ms-lg-4">
+                    <div id="kt_drawer_chat_toggle" class="btn btn-icon btn-active-color-primary btn-outline btn-outline-secondary w-30px h-30px w-lg-40px h-lg-40px" >
+                        <span class="svg-icon svg-icon-1">
+                            <i class="bi bi-emoji-smile"></i>
+                        </span>
+                    </div>
                 </div>
-            </div>
+                <div class="d-flex align-items-center ms-3 ms-lg-4">
+                    <div class="btn btn-icon btn-active-color-primary btn-outline btn-outline-secondary w-30px h-30px w-lg-40px h-lg-40px notify" >
+                        <span class="svg-icon svg-icon-1">
+                            <i class="bi bi-bell"></i><span class="badgenotify">0</span>
+                        </span>
+                    </div>
+                </div>
             @endif
+
         </div>
 
     </div>

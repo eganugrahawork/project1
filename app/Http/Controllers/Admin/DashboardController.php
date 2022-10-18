@@ -37,4 +37,8 @@ class DashboardController extends Controller
 
         return view('admin.layouts.viewonline');
     }
+
+    public function checknotification(){
+      return response()->json(UserActivity::count());
+    }
 }

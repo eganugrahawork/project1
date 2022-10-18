@@ -59,6 +59,7 @@ Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middlewar
 Route::get('/admin/checkonline', [DashboardController::class, 'checkonline'])->middleware('auth');
 Route::get('/admin/useractivity', [DashboardController::class, 'useractivity'])->middleware('auth');
 Route::get('/admin/listuseractivity', [DashboardController::class, 'listuseractivity'])->middleware('auth');
+Route::get('/admin/checknotification', [DashboardController::class, 'checknotification'])->middleware('auth');
 //End Dashboard
 
 

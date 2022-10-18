@@ -128,6 +128,7 @@
                     })
                 </script> --}}
 
+                {{-- Toastr --}}
                 <script>
                     toastr.options = {
                         "closeButton": true,
@@ -147,11 +148,15 @@
                         "hideMethod": "fadeOut"
                     }
                     </script>
+                    {{-- End Toastr --}}
+
                     {{-- Pusher --}}
                      <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
                      <script>
-                        // Enable pusher logging - don't include this in production
-                        // Pusher.logToConsole = true;
+                        var notif = $.get("{{ url('/admin/checknotification') }}", {}, function(data){
+                                $('.badgenotify').html(data);
+                             })
+
 
                         var pusher = new Pusher('2fb2f36b07796a95452d', {
                             cluster: 'ap3'
@@ -159,10 +164,12 @@
 
                         var channel = pusher.subscribe('notification');
                         channel.bind('notif', function(data) {
-                            toastr["info"](data.message, "Pemberitahuan")
+                            toastr["info"](data.message, "Pemberitahuan");
+                            notif.ajax.reload();
                         });
                      </script>
                      {{-- End Pusher --}}
+
                 @endif
                 {{-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> --}}
 
