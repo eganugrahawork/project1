@@ -43,11 +43,11 @@
           <div id="loadingnya"></div>
         </form>
 
-        <div class="d-flex justify-content-end">
-            <a href="/forgot-password" class="text-decoration-none">Forgot Password ?</a>
+        <div class="d-flex justify-content-center mt-2">
+            <p class="text-white">Do not Have Account ? <a href="/register" class="text-decoration-none">Create Account ?</a></p>
         </div>
-        <div class="d-flex justify-content-end">
-            <a href="/register" class="text-decoration-none">Create Account ?</a>
+        <div class="d-flex justify-content-center">
+            <a href="/forgot-password" class="text-decoration-none"> Forgot Password ?</a>
         </div>
       </div>
 

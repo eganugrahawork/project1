@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-150px min-h-lg-300px" style="background-image: url(assets/media/illustrations/sketchy-1/16.png"></div>
+                <div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-150px min-h-lg-300px" style="background-image: url(/metronic/assets/media/illustrations/sketchy-1/16.png)"></div>
                 <!--end::Illustration-->
             </div>
             <!--end::Wrapper-->
@@ -71,7 +71,6 @@
                                         <!--begin::Col-->
                                         <div class="col-lg-6">
                                             <!--begin::Option-->
-                                            <input type="hidden" name="type_user_id" value="1">
                                             <input type="radio" class="btn-check" name="type_account_id" value="1" checked="checked" id="kt_create_account_form_account_type_personal" />
                                             <label class="btn btn-outline btn-outline-dashed btn-outline-default p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
                                                 <span class="svg-icon svg-icon-3x me-5">

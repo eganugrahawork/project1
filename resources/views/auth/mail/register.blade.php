@@ -5,7 +5,7 @@
 			<tr>
 				<td align="center" valign="center" style="text-align:center; padding: 40px">
 					<a href="" rel="noopener" target="_blank">
-						<img alt="Logo" src="../../assets/media/logos/logo-1.svg" class="h-45px" />
+						<img alt="Logo" src="https://i.ibb.co/171x3Lh/loccanalogo.png" class="h-45px" width="50%" />
 					</a>
 				</td>
 			</tr>
@@ -16,7 +16,7 @@
 						<div style="padding-bottom: 30px; font-size: 17px;">
 							<strong>{{ $data['title'] }}</strong>
 						</div>
-						<div style="padding-bottom: 30px">To activate your account, please click on the button below to verify your email address. Once activated, you’ll have full access to our free and premium products.</div>
+						<div style="padding-bottom: 30px">To activate your account, please click on the button below to verify your email address. Once activated, you’ll have full access to our free and premium products. <p>Your Username : {{ $data['username'] }}</p></div>
 						<div style="padding-bottom: 40px; text-align:center;">
 							<a href="{{ $data['url'] }}" rel="noopener" style="text-decoration:none;display:inline-block;text-align:center;padding:0.75575rem 1.3rem;font-size:0.925rem;line-height:1.5;border-radius:0.35rem;color:#ffffff;background-color:#50CD89;border:0px;margin-right:0.75rem!important;font-weight:600!important;outline:none!important;vertical-align:middle" target="_blank">Activate Account</a>
 						</div>

@@ -96,16 +96,18 @@ class RegisterController extends Controller
             return redirect('/login')->with('fail', 'Email Already registered');
         }
         $token = rand(112389231321, 152389231321);
+        $data['token'] = $token;
+        $data['username'] = 'demo-'.substr($data->email, 0, strrpos($data->email, '@'));
         $details = [
             'title' => "Confirm Registration Loccana",
             'body' => 'Account for '.$data->name,
-            'url' => url('/register_verify?email='.$data->email.'&token='.$token)
+            'url' => url('/register_verify?email='.$data->email.'&token='.$token),
+            'username' => $data['username']
 
         ];
 
         Mail::to($data->email)->send(new RegisterMail($details));
-        $data['token'] = $token;
-        $data['username'] = 'demo-'.substr($data->email, 0, strrpos($data->email, '@'));
+
         $this->createUser($data);
 
         // dd($token);
@@ -124,7 +126,6 @@ class RegisterController extends Controller
             'id_role' => $role->id,
             'image' => "img-users/default.png",
             'no_hp' => $data->no_hp,
-            'type_user_id' => $data->type_user_id,
             'type_account_id' => $data->type_account_id,
             'is_active' => 0
         ]);
