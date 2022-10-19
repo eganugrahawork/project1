@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Region;
+use App\Models\Test;
 use App\Models\User;
 use App\Models\UserActivity;
 use App\Models\UserDetail;
@@ -26,7 +27,6 @@ class DashboardController extends Controller
         return view('admin.useractivity.index');
     }
     public function listuseractivity(){
-
         $activity = DB::select('SELECT a.created_at, a.menu, a.aktivitas, a.keterangan, b.email FROM user_activities a JOIN users b ON a.id_user = b.id');
 
         // dd($activity);

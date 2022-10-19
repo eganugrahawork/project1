@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Menu;
+use App\Models\MenuAccess;
 use App\Models\Region;
 use App\Models\User;
 use App\Models\UserAccessMenu;
@@ -22,10 +24,10 @@ class UsersController extends Controller
     {
 
         $this->middleware(function($request, $next){
-            $id_menu = UserMenu::select('id')->where(['url' => '/admin/users'])->first();
-            $id_role = auth()->user()->id_role;
+            $menu_id = Menu::select('id')->where(['url' => '/admin/users'])->first();
+            $role_id = auth()->user()->role_id;
 
-            $check = UserAccessMenu::where(['id_role' => $id_role, 'id_menu' => $id_menu->id])->first();
+            $check = MenuAccess::where(['role_id' => $role_id, 'menu_id' => $menu_id->id])->first();
 
             if($check){
                 return $next($request);

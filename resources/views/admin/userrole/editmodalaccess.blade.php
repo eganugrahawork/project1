@@ -25,7 +25,7 @@
                     @if ($submenu)
 
                     <td>
-                        @foreach ($submenu as $sub)
+                        {{-- @foreach ($submenu as $sub)
                         <div class="row py-3">
                             <div class="col-lg-6">
                                 {{ $sub->name }}
@@ -39,7 +39,7 @@
                                     </label>
                             </div>
                         </div>
-                        @endforeach
+                        @endforeach --}}
 
                     </td>
                         @endif
