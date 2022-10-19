@@ -119,6 +119,9 @@ class PartnersController extends Controller
         return response()->json(['success'=> 'Partner diupdate']);
     }
 
+    public function typeofpartner(){
+        return view('admin.partners.typepartners');
+    }
 
     public function listtypeofpartners(){
         return  Datatables::of(DB::select('Call sp_list_partner_types()'))->addIndexColumn()
