@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\DB;
 
 function checkAccess($data){
 
-    $result = DB::select("select * from user_access_menus where id_menu = $data[id_menu] AND id_role = $data[id_role]");
+    $result = DB::select("select * from menu_access where menu_id = $data[menu_id] AND role_id = $data[role_id]");
 
     if($result){
         echo "Checked";

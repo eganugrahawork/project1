@@ -110,7 +110,6 @@ Route::middleware(['auth'])->controller(UserRoleController::class)->group(functi
     Route::get('admin/configuration/useraccessmenu/{id}', 'viewuseraccess')->name('viewaccess');
     Route::get('admin/configuration/useraccessmenu/editmodalaccess/{id}', 'editmodalaccess');
     Route::post('/admin/configuration/useraccessmenu/change', 'changeaccess')->name('changeaccess');
-    Route::post('/admin/configuration/useraccessmenu/changesubmenu', 'changeaccesssubmenu')->name('changeaccesssubmenu');
     Route::post('/admin/configuration/useraccessmenu/permissionmenu', 'permissionmenu')->name('permissionmenu');
     Route::post('/admin/configuration/useraccessmenu/permissionsubmenu', 'permissionsubmenu')->name('permissionsubmenu');
     Route::get('admin/configuration/useraccessmenu/editcustomaccess/{id}', 'editcustomaccess');
