@@ -185,31 +185,78 @@
         <!--begin::Menu wrapper-->
         <div class="header-menu flex-column flex-lg-row" data-kt-drawer="true" data-kt-drawer-name="header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_header_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
             <!--begin::Menu-->
-            <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch flex-grow-1" id="kt_header_menu" data-kt-menu="true">
-                {{-- @php
-                    $menu = DB::select('select * from menu_test');
-                @endphp
+            <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch flex-grow-1" id="#kt_header_menu" data-kt-menu="true">
 
-                @foreach ($menu as $m)
-                    @if ($m->parent == 0)
-                        <div id="{{ $m->id }}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
-                            <a class="menu-link py-3" href="{{ $m->url }}">
-                            <span class="menu-title">{{ $m->name }}</span>
-                            <span class="menu-arrow d-lg-none"></span>
+                    @php
+                        $roleId = auth()->user()->id_role;
+                        $menu = DB::select("select b.id, b.menu,  b.url, b.is_submenu from user_access_menus a join user_menus b on a.id_menu = b.id where a.id_role = $roleId");
+                    @endphp
+
+                @foreach ($menu as $m )
+                    @php
+                        $str = substr($m->url, 1);
+                        $customaccess = DB::select('select * from custom_access_blocks where id_user = '. auth()->user()->id.' and  id_menu = '.$m->id);
+                    @endphp
+
+                    @if ($customaccess)
+
+                    @else
+
+                    @if ($m->is_submenu == true)
+                        @php
+                            $submenu = DB::select("select * from user_submenus where id_menu = $m->id");
+                            $reqLink = Request::fullUrl();
+                            $namaMenu = strtolower($m->menu);
+                            $check = strpos($reqLink, $namaMenu);
+                        @endphp
+                            <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item {{ $check == true ? 'here show' : ''}} menu-lg-down-accordion me-lg-1">
+                                <span class="menu-link  py-3">
+                                    <span class="menu-title">{{ $m->menu }}</span>
+                                    <span class="menu-arrow d-lg-none"></span>
+                                </span>
+                                <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
+
+
+                            @foreach ($submenu as $sub )
+                            @php
+                                $subnya = DB::select('select * from user_access_submenus where id_submenu = '.$sub->id.' and id_role = '.auth()->user()->userrole->id);
+                            @endphp
+                            @if ($subnya)
+                                    @php
+                                           $customaccesssubmenu = DB::select('select * from custom_access_blocks where id_user = '. auth()->user()->id.' and  id_submenu = '.$sub->id);
+                                    @endphp
+                                    @if ($customaccesssubmenu == null)
+                                        <div class="menu-item">
+                                            <a class="menu-link py-3" href="{{ $sub->urlsubmenu }}"  data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                                <span class="menu-icon">
+                                                    <!--begin::Svg Icon | path: /icons/duotune/general/gen002.svg-->
+                                                    <span class="svg-icon svg-icon-2">
+                                                        <i class="bi bi-{{ $sub->icon }}"></i>
+                                                    </span>
+                                                    <!--end::Svg Icon-->
+                                                </span>
+                                                <span class="menu-title text-gray-700">{{ $sub->submenu }}</span>
+                                            </a>
+                                        </div>
+                                    @endif
+                            @endif
+                            @endforeach
+                        </div>
+                    </div>
+                @else
+                    @php
+                        $str = substr($m->url, 1);
+                    @endphp
+                        <div  class="menu-item   me-lg-1">
+                            <a class="menu-link  {{ Request::is($str) ? 'active' : ''}} py-3" data-bs-toggle="tooltip" data-bs-trigger="hover" href="{{ $m->url }}">
+                                <span class="menu-title">{{ $m->menu }}</span>
+                                <span class="menu-arrow d-lg-none"></span>
                             </a>
                         </div>
-                    @else
-                    <div data-kt-menu-trigger="click" id="'.$menu['items'][$itemId]['id'].'" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
-                        <a class="menu-link py-3" href="' . base_url() . $menu['items'][$itemId]['url'] . '">
-                          <span class="menu-title">' . $menu['items'][$itemId]['nama_menu'] . '</span>
-                          <span class="menu-arrow d-lg-none"></span>
-                        </a>
-                        <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
-                          <div class="menu-item">';
-                            $html .= $this->_build_menu($itemId, $menu);
-                            $html .= '</div></div></div>
-                    @endif
-                @endforeach --}}
+                @endif
+                @endif
+                @endforeach
+
             </div>
             <!--end::Menu-->
 

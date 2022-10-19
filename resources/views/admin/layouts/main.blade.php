@@ -186,6 +186,24 @@
                         });
                     });
                 </script>
+
+                {{-- Menu --}}
+                <script>
+                        var loadingMenu = "<button class='btn btn-primary' type='button' disabled><span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Loading...</button>"
+
+                        $('#kt_header_menu').html(loadingMenu)
+
+                        menu();
+                    function menu(){
+                        $.get("{{ url('/admin/loadmenu/0') }}/"+{{ auth()->user()->id_role }}, {}, function(data, status){
+                            $('#kt_header_menu').html(data)
+                        })
+                    }
+
+                </script>
+
+
+                {{-- End Menu --}}
 @yield('js')
 
 </body>
