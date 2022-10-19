@@ -21,10 +21,10 @@ class CoaController extends Controller
         return  Datatables::of(DB::select('Call sp_list_coa()'))->addIndexColumn()
         ->addColumn('action', function($model){
             $action = "";
-            if(Gate::allows('edit', [1, '/admin/masterdata/coa'])){
+            if(Gate::allows('edit', ['/admin/masterdata/coa'])){
                 $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
             }
-            if(Gate::allows('delete', [1, '/admin/masterdata/coa'])){
+            if(Gate::allows('delete', ['/admin/masterdata/coa'])){
                 $action .= " <a href='/admin/masterdata/coa/delete/$model->id' class='btn btn-sm btn-danger' id='deletecoa'><i class='bi bi-trash'></i></a>";
             }
             return $action;

@@ -42,7 +42,7 @@ class User extends Authenticatable
 
 
     public function UserRole(){
-        return $this->hasOne(UserRole::class, 'id', 'id_role');
+        return $this->hasOne(UserRole::class, 'id', 'role_id');
     }
     public function RegionDetail(){
         return $this->hasOne(Region::class, 'id', 'region');

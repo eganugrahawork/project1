@@ -39,7 +39,7 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
-                        @can('create', [1, '/admin/masterdata/coa'])
+                        @can('create', ['/admin/masterdata/coa'])
                             <button type="button" class="btn btn-primary me-3" onclick="addCoaModal()">
                             Add Coa</button>
                         @endcan

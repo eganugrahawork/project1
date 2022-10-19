@@ -195,7 +195,7 @@
 
                         menu();
                     function menu(){
-                        $.get("{{ url('/admin/loadmenu/0') }}/"+{{ auth()->user()->id_role }}, {}, function(data, status){
+                        $.get("{{ url('/admin/loadmenu/0') }}/"+{{ auth()->user()->role_id }}, {}, function(data, status){
                             $('#kt_header_menu').html(data)
                         })
                     }

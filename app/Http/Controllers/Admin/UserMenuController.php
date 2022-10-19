@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CrudPermission;
+use App\Models\Menu;
 use App\Models\Region;
 use App\Models\UserAccessMenu;
 use App\Models\UserActivity;
@@ -35,7 +36,7 @@ class UserMenuController extends Controller
      */
     public function index()
     {
-        $menu = UserMenu::all();
+        $menu = Menu::all();
         $region = Region::all();
         $submenu = UserSubmenu::all();
         $role = UserRole::all();

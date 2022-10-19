@@ -101,7 +101,7 @@ class DashboardController extends Controller
                     }
 
                 }
-                $html .= '</div>';
+                $html .= '</div></div>';
             }else{
                 $html .= "<div data-kt-menu-placement='bottom-start' class='menu-item menu-lg-down-accordion me-lg-1'>
                 <a class='menu-link py-3' href='$mn->url'>

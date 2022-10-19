@@ -4,13 +4,13 @@ use App\Http\Controllers\Admin\CoaController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ItemsController;
+use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PartnersController;
 use App\Http\Controllers\Admin\PriceManagementController;
 use App\Http\Controllers\Admin\PrincipalController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Admin\UoMController;
-use App\Http\Controllers\Admin\UserMenuController;
 use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\UserSubmenuController;
@@ -81,7 +81,7 @@ Route::middleware(['auth'])->controller(ProfileController::class)->group(functio
 // Profile End
 
 //UserMenu Start
-Route::middleware(['auth'])->controller(UserMenuController::class)->group(function(){
+Route::middleware(['auth'])->controller(MenuController::class)->group(function(){
     Route::get('admin/configuration/menu',  'index');
     Route::post('admin/configuration/menu/store', 'store');
     Route::post('admin/configuration/menu/update', 'update');

@@ -5,6 +5,7 @@ namespace App\Providers;
 // use App\Models\User;
 
 use App\Models\CrudPermission;
+use App\Models\Menu;
 use App\Models\User;
 use App\Models\UserMenu;
 use App\Models\UserSubmenu;
@@ -34,69 +35,39 @@ class AppServiceProvider extends ServiceProvider
     {
         Blade::directive('Rupiah', function ( $expression ) { return "Rp. <?php echo number_format($expression,0,',','.'); ?>"; });
 
-        Gate::define('create', function(User $user, $is_submenu, $url){
-            // dd($id_role_user);
-            if($is_submenu == 1){
-                $idnya = UserSubmenu::where(['urlsubmenu' => $url])->pluck('id')->first();
-                $isAvailable = null;
-                if($idnya){
-                    $isAvailable = CrudPermission::where(['id_submenu' => $idnya,'id_role' => $user->id_role, 'created'=>1])->first();
-                }
+        Gate::define('create', function(User $user,  $url){
 
-                return $isAvailable;
-            }else{
-                $idnya = UserMenu::where(['url' => $url])->pluck('id')->first();
+                $idnya = Menu::where(['url' => $url])->pluck('id')->first();
 
                 $isAvailable =null;
                 if($idnya){
-                    $isAvailable= CrudPermission::where(['id_menu'=>$idnya,'id_role'=>$user->id_role, 'created' => 1])->first();
+                    $isAvailable= CrudPermission::where(['menu_id'=>$idnya,'role_id'=> $user->role_id, 'created' => 1])->first();
                 }
                 return $isAvailable;
-            }
+
 
         });
 
-        Gate::define('edit', function(User $user, $is_submenu, $url){
-            // dd($id_role_user);
-            if($is_submenu == 1){
-                $idnya = UserSubmenu::where(['urlsubmenu' => $url])->pluck('id')->first();
-                $isAvailable = null;
-                if($idnya){
-                    $isAvailable = CrudPermission::where(['id_submenu' => $idnya,'id_role' => $user->id_role, 'edit'=>1])->first();
-                }
+        Gate::define('edit', function(User $user, $url){
 
-                return $isAvailable;
-            }else{
-                $idnya = UserMenu::where(['url' => $url])->pluck('id')->first();
+                $idnya = Menu::where(['url' => $url])->pluck('id')->first();
 
                 $isAvailable =null;
                 if($idnya){
-                    $isAvailable= CrudPermission::where(['id_menu'=>$idnya,'id_role'=>$user->id_role, 'edit' => 1])->first();
+                    $isAvailable= CrudPermission::where(['menu_id'=>$idnya,'role_id'=>$user->role_id, 'edit' => 1])->first();
                 }
                 return $isAvailable;
-            }
 
         });
-        Gate::define('delete', function(User $user, $is_submenu, $url){
-            // dd($id_role_user);
-            if($is_submenu == 1){
-                $idnya = UserSubmenu::where(['urlsubmenu' => $url])->pluck('id')->first();
-                $isAvailable = null;
-                if($idnya){
-                    $isAvailable = CrudPermission::where(['id_submenu' => $idnya,'id_role' => $user->id_role, 'deleted'=>1])->first();
-                }
+        Gate::define('delete', function(User $user, $url){
 
-                return $isAvailable;
-            }else{
-                $idnya = UserMenu::where(['url' => $url])->pluck('id')->first();
+                $idnya = Menu::where(['url' => $url])->pluck('id')->first();
 
                 $isAvailable =null;
                 if($idnya){
-                    $isAvailable= CrudPermission::where(['id_menu'=>$idnya,'id_role'=>$user->id_role, 'deleted' => 1])->first();
+                    $isAvailable= CrudPermission::where(['menu_id'=>$idnya,'role_id'=>$user->role_id, 'deleted' => 1])->first();
                 }
                 return $isAvailable;
-            }
-
         });
 
 
