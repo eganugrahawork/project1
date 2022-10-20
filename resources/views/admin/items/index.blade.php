@@ -121,7 +121,6 @@
 
 <script>
 function addItemsModal(){
-
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/items/addmodal') }}", {}, function(data, status){
                 $('#kontennya').html(data)

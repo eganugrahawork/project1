@@ -5,26 +5,25 @@
         <div class="col-lg-6">
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Kode Item</label>
-                <input type="text" name="stock_code" class="form-control form-control-solid mb-3 mb-lg-0"  value="{{ $item->stock_code }}" required/>
+                <input type="text" name="item_code" class="form-control form-control-solid mb-3 mb-lg-0"  value="{{ $item->item_code }}" required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Nama Item</label>
-                <input type="text" name="stock_name" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $item->stock_name }}" required/>
+                <input type="text" name="item_name" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $item->item_name }}" required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Deskripsi Item</label>
-                <textarea  name="description" class="form-control form-control-solid mb-3 mb-lg-0"  required>{{ $item->description }}</textarea>
+                <textarea  name="item_description" class="form-control form-control-solid mb-3 mb-lg-0"  required>{{ $item->item_description }}</textarea>
             </div>
-            <div class="fv-row mb-7">
+            {{-- <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Ukuran</label>
                 <div class="col-lg-6">
                     <input type="number" name="base_qty" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $item->base_qty }}" required/>
                 </div>
-            </div>
+            </div> --}}
             <div class="fv-row mb-7">
-                <label class="required form-label fw-bold">Satuan</label>
+                <label class="required form-label fw-bold">Units</label>
                 <div class="col-lg-6">
-
                     <select class="form-select  form-select-solid mb-3 mb-lg-0" name="uom_id" required>
                         @foreach ($uom as $uom)
                         <option value="{{ $uom->id }}" @if ($item->uom_id == $uom->id)
@@ -36,29 +35,27 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="fv-row mb-7">
+            {{-- <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Unit per Box</label>
                 <div class="col-lg-6">
                     <input type="number" name="unit_box" value="{{ $item->unit_box }}" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
                 </div>
-            </div>
+            </div> --}}
             <div class="fv-row mb-7">
-                <label class="required form-label fw-bold">Tipe Barang</label>
+                <label class="required form-label fw-bold">Item Type</label>
                 <div class="col-lg-6">
-
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0" name="type" required>
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0" name="type_id" required>
                         @foreach ($type as $type)
-                        <option value="{{ $type->id_type_item }}" @if ($type->id_type_item == $item->type)
+                        <option value="{{ $type->id }}" @if ($type->id == $item->type_id)
                             selected
-                        @endif>{{ $type->type_item_name }}</option>
+                        @endif>{{ $type->name_type }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
             <div class="fv-row mb-7">
-                <label class="required form-label fw-bold">Pajak</label>
+                <label class="required form-label fw-bold">Vat</label>
                 <div class="col-lg-6">
-
                     <select class="form-select  form-select-solid mb-3 mb-lg-0" name="vat" required>
                         <option value="11" @if ($item->vat == 11)
                             selected
@@ -73,9 +70,9 @@
                 </div>
             </div>
             <div class="fv-row mb-7">
-                <label class="form-label fw-bold required">Principal</label>
+                <label class="form-label fw-bold required">Partner</label>
             <select class="form-select  form-select-solid mb-3 mb-lg-0" name="partner_id" required>
-                @foreach ($principal as $p)
+                @foreach ($partner as $p)
                     <option value="{{ $p->id }}"  @if ($item->partner_id == $p->id)
                         selected
                     @endif>{{ $p->name }}</option>
@@ -83,7 +80,7 @@
             </select>
             </div>
             <div class="fv-row mb-7">
-                <label class="form-label fw-bold required">Status Item</label>
+                <label class="form-label fw-bold required">Status</label>
                 <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
                         <option value="0"  @if ($item->status ==0 || $item->status == null)
                             selected
@@ -91,7 +88,7 @@
                         <option value="1"  @if ($item->status == 1)
                             selected
                         @endif>Tidak Dijual</option>
-                        <option value="1"  @if ($item->status == 2)
+                        <option value="2"  @if ($item->status == 2)
                             selected
                         @endif>Limit</option>
                 </select>
