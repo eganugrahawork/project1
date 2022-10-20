@@ -8,15 +8,10 @@ use App\Models\CustomAccessBlock;
 use App\Models\Menu;
 use App\Models\MenuAccess;
 use App\Models\User;
-use App\Models\UserAccessMenu;
-use App\Models\UserAccessSubmenu;
 use App\Models\UserActivity;
-use App\Models\UserMenu;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
-use PDO;
 
 class UserRoleController extends Controller
 {
@@ -59,7 +54,6 @@ class UserRoleController extends Controller
         ]);
         UserRole::where(['id'=>$request->id])->update(['role' => $request->role]);
 
-
         return redirect()->back()->with('success', 'Role diubah!');
 
     }
@@ -79,8 +73,8 @@ class UserRoleController extends Controller
     public function viewuseraccess(Request $request){
         // dd($request->id);
         $role = UserRole::where(['id' =>$request->id])->first();
-        $menu = UserMenu::all();
-        return view('admin.userrole.useraccess',['title'=> 'User Access',  'menu' => $menu, 'id_role' => $request->id,'role'=> $role->role]);
+        $menu = Menu::all();
+        return view('admin.userrole.useraccess',['title'=> 'User Access',  'menu' => $menu, 'role_id' => $request->id,'role'=> $role->role]);
 
     }
 
@@ -135,45 +129,24 @@ class UserRoleController extends Controller
 
     public function viewrole(Request $request) {
         $role = UserRole::where(['id' => $request->id])->first();
-        $menuRole = UserAccessMenu::where(['id_role' => $request->id])->get();
+        $menuRole = MenuAccess::where(['role_id' => $request->id])->get();
 
-        $user = User::where(['id_role' => $request->id])->get();
+        $user = User::where(['role_id' => $request->id])->get();
 
         return view('admin.userrole.viewrole', ['role' => $role, 'menurole'=> $menuRole, 'user' => $user]);
     }
 
     public function editcustomaccess(Request $request){
        $user= User::where(['id' => $request->id])->first();
-       $uaccess = UserAccessMenu::where(['id_role' => $user->id_role])->get();
+       $uaccess = MenuAccess::where(['role_id' => $user->role_id])->get();
 
        return view('admin.userrole.editcustomaccess', ['user' => $user, 'useraccess' => $uaccess ]);
 
     }
 
-    public function editcustomaccesssubmenu(Request $request){
-        $user= User::where(['id' => $request->id])->first();
-        $uaccess = UserAccessSubmenu::where(['id_role' => $user->id_role])->get();
-
-       return view('admin.userrole.editcustomaccesssubmenu', ['user' => $user, 'useraccesssubmenu' => $uaccess ]);
-    }
-
-    // public function updateaccess(Request $request){
-    //     $check = UserAccessMenu::where(['id_role' => $request->id_role, 'id_menu' =>$request->id_menu])->first();
-
-    //     if($check == null && $request->status = 1){
-    //         UserAccessMenu::create(['id_role' => $request->id_role, 'id_menu' =>$request->id_menu]);
-    //         return redirect()->back()->with('success', 'Access changed');
-    //     }elseif($check && $request->status == 0){
-    //         UserAccessMenu::where(['id_role' => $request->id_role, 'id_menu' => $request->id_menu])->delete();
-    //         return redirect()->back()->with('success', 'Access changed');
-    //     }else{
-    //         return redirect()->back()->with('fail', 'You didnt make a change !');
-    //     }
-
-    // }
 
     public function blockaccess(Request $request){
-        CustomAccessBlock::create(['id_user' => $request->idUser, 'id_menu' => $request->idMenu]);
+        CustomAccessBlock::create(['user_id' => $request->idUser, 'menu_id' => $request->idMenu]);
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "Role",
@@ -185,7 +158,7 @@ class UserRoleController extends Controller
     }
     public function unblockaccess(Request $request){
 
-        CustomAccessBlock::where(['id_user' => $request->idUser, 'id_menu' => $request->idMenu])->delete();
+        CustomAccessBlock::where(['user_id' => $request->idUser, 'menu_id' => $request->idMenu])->delete();
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "Role",
@@ -195,149 +168,63 @@ class UserRoleController extends Controller
         return response()->json('success');
     }
 
-    public function blockaccesssubmenu(Request $request){
-        CustomAccessBlock::create(['id_user' => $request->idUser, 'id_submenu' => $request->idSubmenu]);
-        UserActivity::create([
-            'id_user' => auth()->user()->id,
-            'menu' => "Role",
-            'aktivitas' => "Hide",
-            'keterangan' => "Hide Akses User id $request->idUser pada Submenu id $request->idSubmenu "
-        ]);
-        return response()->json('success');
-
-    }
-
-    public function unblockaccesssubmenu(Request $request){
-
-        CustomAccessBlock::where(['id_user' => $request->idUser, 'id_submenu' => $request->idSubmenu])->delete();
-        UserActivity::create([
-            'id_user' => auth()->user()->id,
-            'menu' => "Role",
-            'aktivitas' => "Unhide",
-            'keterangan' => "Unhide Akses User id $request->idUser pada Submenu id $request->idSubmenu "
-        ]);
-        return response()->json('success');
-    }
-
     public function editpermissionmodal(Request $request){
-        $menu = DB::select("select b.menu, b.id from user_access_menus a join user_menus b on a.id_menu = b.id where a.id_role = $request->id and b.is_submenu <> 1");
+        $menu = DB::select("select b.name, b.id from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->id");
 
-        return view('admin.userrole.editpermissionmodal', ['menu'=> $menu, 'submenu' =>UserAccessSubmenu::where(['id_role' =>$request->id])->get(),'id_role' => $request->id]);
-    }
-
-    public function storepermissionmenu(Request $request){
-        dd($request);
-        // print_r($request);die;
+        return view('admin.userrole.editpermissionmodal', ['menu'=> $menu, 'role_id' => $request->id]);
     }
 
     public function permissionmenu(Request $request){
         if($request->permission === "create"){
-            $isAvailable = CrudPermission::where(['id_role' => $request->roleId, 'id_menu'=>$request->menuId])->first();
+            $isAvailable = CrudPermission::where(['role_id' => $request->roleId, 'menu_id'=>$request->menuId])->first();
             // dd($isAvailable);
             if($isAvailable){
                 if($isAvailable->created == 1){
-                    CrudPermission::where(['id_role' => $request->roleId, 'id_menu'=>$request->menuId])->update(['created' => 0]);
+                    CrudPermission::where(['role_id' => $request->roleId, 'menu_id'=>$request->menuId])->update(['created' => 0]);
                     return response()->json('success');
                 }else{
-                    CrudPermission::where(['id_role' => $request->roleId, 'id_menu'=>$request->menuId])->update(['created' => 1]);
+                    CrudPermission::where(['role_id' => $request->roleId, 'menu_id'=>$request->menuId])->update(['created' => 1]);
                     return response()->json('success');
                 }
             }else{
-                CrudPermission::create(['id_role' => $request->roleId, 'id_menu' =>$request->menuId, 'created' =>1]);
+                CrudPermission::create(['role_id' => $request->roleId, 'menu_id' =>$request->menuId, 'created' =>1]);
                 return response()->json('success');
             }
         }
 
         if($request->permission === "edit"){
-            $isAvailable = CrudPermission::where(['id_role' => $request->roleId, 'id_menu'=>$request->menuId])->first();
+            $isAvailable = CrudPermission::where(['role_id' => $request->roleId, 'menu_id'=>$request->menuId])->first();
             // dd($isAvailable);
             if($isAvailable){
                 if($isAvailable->edit == 1){
-                    CrudPermission::where(['id_role' => $request->roleId, 'id_menu'=>$request->menuId])->update(['edit' => 0]);
+                    CrudPermission::where(['role_id' => $request->roleId, 'menu_id'=>$request->menuId])->update(['edit' => 0]);
                     return response()->json('success');
                 }else{
-                    CrudPermission::where(['id_role' => $request->roleId, 'id_menu'=>$request->menuId])->update(['edit' => 1]);
+                    CrudPermission::where(['role_id' => $request->roleId, 'menu_id'=>$request->menuId])->update(['edit' => 1]);
                     return response()->json('success');
                 }
             }else{
-                CrudPermission::create(['id_role' => $request->roleId, 'id_menu' =>$request->menuId, 'edit' =>1]);
+                CrudPermission::create(['role_id' => $request->roleId, 'menu_id' =>$request->menuId, 'edit' =>1]);
                 return response()->json('success');
             }
         }
 
         if($request->permission === "delete"){
-            $isAvailable = CrudPermission::where(['id_role' => $request->roleId, 'id_menu'=>$request->menuId])->first();
+            $isAvailable = CrudPermission::where(['role_id' => $request->roleId, 'menu_id'=>$request->menuId])->first();
             // dd($isAvailable);
             if($isAvailable){
                 if($isAvailable->deleted == 1){
-                    CrudPermission::where(['id_role' => $request->roleId, 'id_menu'=>$request->menuId])->update(['deleted' => 0]);
+                    CrudPermission::where(['role_id' => $request->roleId, 'menu_id'=>$request->menuId])->update(['deleted' => 0]);
                     return response()->json('success');
                 }else{
-                    CrudPermission::where(['id_role' => $request->roleId, 'id_menu'=>$request->menuId])->update(['deleted' => 1]);
+                    CrudPermission::where(['role_id' => $request->roleId, 'menu_id'=>$request->menuId])->update(['deleted' => 1]);
                     return response()->json('success');
                 }
             }else{
-                CrudPermission::create(['id_role' => $request->roleId, 'id_menu' =>$request->menuId, 'deleted' =>1]);
+                CrudPermission::create(['role_id' => $request->roleId, 'menu_id' =>$request->menuId, 'deleted' =>1]);
                 return response()->json('success');
             }
         }
     }
-
-    public function permissionsubmenu(Request $request){
-        if($request->permission === "create"){
-            $isAvailable = CrudPermission::where(['id_role' => $request->roleId, 'id_submenu'=>$request->submenuId])->first();
-            // dd($isAvailable);
-            if($isAvailable){
-                if($isAvailable->created == 1){
-                    CrudPermission::where(['id_role' => $request->roleId, 'id_submenu'=>$request->submenuId])->update(['created' => 0]);
-                    return response()->json('success');
-                }else{
-                    CrudPermission::where(['id_role' => $request->roleId, 'id_submenu'=>$request->submenuId])->update(['created' => 1]);
-                    return response()->json('success');
-                }
-            }else{
-                CrudPermission::create(['id_role' => $request->roleId, 'id_submenu' =>$request->submenuId, 'created' =>1]);
-                return response()->json('success');
-            }
-        }
-
-
-        if($request->permission === "edit"){
-            $isAvailable = CrudPermission::where(['id_role' => $request->roleId, 'id_submenu'=>$request->submenuId])->first();
-            // dd($isAvailable);
-            if($isAvailable){
-                if($isAvailable->edit == 1){
-                    CrudPermission::where(['id_role' => $request->roleId, 'id_submenu'=>$request->submenuId])->update(['edit' => 0]);
-                    return response()->json('success');
-                }else{
-                    CrudPermission::where(['id_role' => $request->roleId, 'id_submenu'=>$request->submenuId])->update(['edit' => 1]);
-                    return response()->json('success');
-                }
-            }else{
-                CrudPermission::create(['id_role' => $request->roleId, 'id_submenu' =>$request->submenuId, 'edit' =>1]);
-                return response()->json('success');
-            }
-        }
-
-
-        if($request->permission === "delete"){
-            $isAvailable = CrudPermission::where(['id_role' => $request->roleId, 'id_submenu'=>$request->submenuId])->first();
-            // dd($isAvailable);
-            if($isAvailable){
-                if($isAvailable->deleted == 1){
-                    CrudPermission::where(['id_role' => $request->roleId, 'id_submenu'=>$request->submenuId])->update(['deleted' => 0]);
-                    return response()->json('success');
-                }else{
-                    CrudPermission::where(['id_role' => $request->roleId, 'id_submenu'=>$request->submenuId])->update(['deleted' => 1]);
-                    return response()->json('success');
-                }
-            }else{
-                CrudPermission::create(['id_role' => $request->roleId, 'id_submenu' =>$request->submenuId, 'deleted' =>1]);
-                return response()->json('success');
-            }
-        }
-
-    }
-
 
 }

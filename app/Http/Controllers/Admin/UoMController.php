@@ -19,7 +19,7 @@ class UoMController extends Controller
     // }
     public function index(){
 
-        return view('admin.uom.indexserverside');
+        return view('admin.uom.index');
     }
 
     public function list(){
@@ -27,10 +27,10 @@ class UoMController extends Controller
         return  Datatables::of(DB::select('Call sp_list_uom()'))->addIndexColumn()
         ->addColumn('action', function($model){
             $action = "";
-            if(Gate::allows('edit', [1, '/admin/masterdata/uom'])){
+            if(Gate::allows('edit', ['/admin/masterdata/uom'])){
                 $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
             }
-            if(Gate::allows('delete', [1, '/admin/masterdata/uom'])){
+            if(Gate::allows('delete', ['/admin/masterdata/uom'])){
                 $action .= " <a href='/admin/masterdata/uom/delete/$model->id' class='btn btn-sm btn-danger' id='deleteuom'><i class='bi bi-trash'></i></a>";
             }
             return $action;

@@ -31,7 +31,7 @@
                                 @foreach ($menurole as $mr)
 
                                     <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>{{ $mr->usermenu->menu }}</div>
+                                    <span class="bullet bg-primary me-3"></span>{{ $mr->menu->name}}</div>
                                 @endforeach
                             </div>
                         </div>
@@ -88,7 +88,6 @@
                                                     <div class="menu-item px-3">
 
                                                         <a onclick="editCustomAccess({{ $usr->id }})" class="menu-link px-3" >Edit Menu Access</a>
-                                                        <a onclick="editCustomAccessSubmenu({{ $usr->id }})" class="menu-link px-3" >Edit submenu Access</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -142,12 +141,6 @@
 <script>
     function editCustomAccess(id){
             $.get("{{ url('/admin/configuration/useraccessmenu/editcustomaccess') }}/"+id, {}, function(data, status){
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('show')
-            })
-    }
-    function editCustomAccessSubmenu(id){
-            $.get("{{ url('/admin/configuration/useraccessmenu/editcustomaccesssubmenu') }}/"+id, {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('show')
             })

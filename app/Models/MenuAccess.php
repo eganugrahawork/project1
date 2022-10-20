@@ -10,4 +10,8 @@ class MenuAccess extends Model
     protected $table='menu_access';
     protected $guarded = ['id'];
     use HasFactory;
+
+    public function menu(){
+        return $this->hasOne(Menu::class, 'id', 'menu_id');
+    }
 }

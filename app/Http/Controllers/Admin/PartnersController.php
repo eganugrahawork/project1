@@ -22,10 +22,10 @@ class PartnersController extends Controller
         return  Datatables::of(DB::select('Call sp_list_partners()'))->addIndexColumn()
         ->addColumn('action', function($model){
             $action = "";
-            if(Gate::allows('edit', [1, '/admin/masterdata/partners'])){
+            if(Gate::allows('edit', ['/admin/masterdata/partners'])){
                 $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
             }
-            if(Gate::allows('delete', [1, '/admin/masterdata/partners'])){
+            if(Gate::allows('delete', ['/admin/masterdata/partners'])){
                 $action .= " <a href='/admin/masterdata/partners/delete/$model->id' class='btn btn-sm btn-danger' id='deletepartners'><i class='bi bi-trash'></i></a>";
             }
             return $action;
@@ -127,10 +127,10 @@ class PartnersController extends Controller
         return  Datatables::of(DB::select('Call sp_list_partner_types()'))->addIndexColumn()
         ->addColumn('action', function($model){
             $action = "";
-            if(Gate::allows('edit', [1, '/admin/masterdata/partners'])){
+            if(Gate::allows('edit', ['/admin/masterdata/typeofpartner'])){
                 $action .= "<a onclick='editModalType($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
             }
-            if(Gate::allows('delete', [1, '/admin/masterdata/partners'])){
+            if(Gate::allows('delete', ['/admin/masterdata/typeofpartner'])){
                 $action .= " <a href='/admin/masterdata/partners/destroytypepartners/$model->id' class='btn btn-sm btn-danger' id='deletepartnerstype'><i class='bi bi-trash'></i></a>";
             }
             return $action;

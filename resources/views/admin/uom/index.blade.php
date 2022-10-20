@@ -34,12 +34,12 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <input type="text" id="searchIndukTable" class="form-control form-control-solid w-250px ps-15" placeholder="UOM Search" />
+                        <input type="text" id="searchUomTable" class="form-control form-control-solid w-250px ps-15" placeholder="UOM Search" />
                     </div>
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
-                        @can('create', [1, '/admin/masterdata/uom'])
+                        @can('create', ['/admin/masterdata/uom'])
                             <button type="button" class="btn btn-primary me-3" onclick="addUomModal()">
                             Add UOM</button>
                         @endcan
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="indukTable">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="uomTable">
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="min-w-20px">No
@@ -59,27 +59,8 @@
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">
-                        @foreach ($uom as $uom )
-                        <tr>
-                            <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
-                            <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $uom->name }}</a>
-                            </td>
-                            <td>
-                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $uom->symbol }}</a>
-                            </td>
-                            <td>{{ $uom->description }}</td>
-                            <td class="text-end">
-                                    @can('edit', [1, '/admin/masterdata/uom'])
-                                    <a onclick="editModal({{ $uom->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                                    @endcan
-                                    @can('delete', [1, '/admin/masterdata/uom'])
-                                        <a href="/admin/masterdata/uom/delete/{{ $uom->id }}" class="btn btn-sm btn-danger button-delete" ><i class="bi bi-trash"></i></a>
-                                    @endcan
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
+
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -133,6 +114,167 @@
         function tutupModal(){
         $('#mainmodal').modal('toggle')
         }
+
+
+
+        var tableUom=  $('#uomTable').DataTable({
+                    serverside : true,
+                    processing : true,
+                    ajax : {
+                        url : "{{ url('/admin/masterdata/uom/list') }}"
+                    },
+                    columns:
+                    [
+                        {
+                            data: 'DT_RowIndex',
+                            searchable: false
+                        },
+                        {data: 'name', name: 'name'},
+                        {data: 'symbol', name: 'symbol'},
+                        {data: 'description' ,name: 'description'},
+                        {data: 'action' ,name: 'action'},
+                    ],
+                    "bLengthChange": false,
+                    "bFilter": true,
+                    "bInfo": false
+        });
+
+        $('#searchUomTable').keyup(function () {
+                tableUom.search($(this).val()).draw()
+        });
+
+
+
+        $(document).on('click', '#deleteuom', function(e){
+            e.preventDefault();
+
+            const href = $(this).attr('href');
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Hapus data ini ?',
+                text: "Data tidak bisa dikembalikan!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, hapus!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                reverseButtons: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type:"GET",
+                        url: href,
+                        success:function(response){
+                            Swal.fire(
+                                'Success',
+                                response.success,
+                                'success'
+                            )
+                            tableUom.ajax.reload(null, false);
+                        }
+                    })
+                // document.location.href = href;
+
+
+                } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+                ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Data anda masih aman :)',
+                    'success'
+                )
+                }
+            })
+        })
+
+        $(document).on('submit', '#add-form', function(e){
+            e.preventDefault();
+
+            if($('#name').val().length < 1 ||  $('#symbol').val() < 1 || $('#description').val() < 1){
+                Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Data tidak boleh ada yang kosong'
+            })
+            }else{
+            $('#btn-add').hide()
+            $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            var data = {
+                'name': $('#name').val(),
+                'symbol': $('#symbol').val(),
+                'description': $('#description').val(),
+                'status': $('#status').val()
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('/admin/masterdata/uom/store') }}",
+                data: data,
+                dataType: 'json',
+                success:function(response){
+                    Swal.fire(
+                        'Success',
+                        response.success,
+                        'success'
+                    )
+                    $('#mainmodal').modal('toggle');
+                    tableUom.ajax.reload(null, false);
+                }
+            })
+        }
+        })
+
+        $(document).on('submit', '#update-form', function(e){
+            e.preventDefault();
+
+
+            $('#btn-update').hide()
+            $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            var data = {
+                'id': $('#id').val(),
+                'name': $('#name').val(),
+                'symbol': $('#symbol').val(),
+                'description': $('#description').val(),
+                'status': $('#status').val()
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('/admin/masterdata/uom/update') }}",
+                data: data,
+                dataType: 'json',
+                success:function(response){
+                    Swal.fire(
+                        'Success',
+                        response.success,
+                        'success'
+                    )
+                    $('#mainmodal').modal('toggle');
+                    tableUom.ajax.reload(null, false);
+                }
+            })
+        })
 
 
 </script>

@@ -60,7 +60,7 @@
                            Configuration</a>
                            @endif
 
-                           @can('create', [0, '/admin/users'])
+                           @can('create', ['/admin/users'])
 
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                <span class="svg-icon svg-icon-2">
@@ -113,10 +113,10 @@
                             <td>{{ $usr->created_at }}</td>
                             <td class="text-end">
                                     <a href="/admin/users/show/{{ $usr->id }}" class="btn btn-sm btn-success"><i class="bi bi-info-circle"></i></a>
-                                @can('edit', [0, '/admin/users'])
+                                @can('edit', ['/admin/users'])
                                     <a onclick="editModal({{ $usr->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
                                 @endcan
-                                @can('delete', [0, '/admin/users'])
+                                @can('delete', ['/admin/users'])
                                     <a href="/admin/users/delete/{{ $usr->id }}" class="btn btn-sm btn-danger button-delete" data-kt-users-table-filter="delete_row"><i class="bi bi-trash"></i></a>
                                 @endcan
                             </td>

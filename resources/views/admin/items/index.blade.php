@@ -39,7 +39,7 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
-                        @can('create', [1, '/admin/masterdata/items'])
+                        @can('create', ['/admin/masterdata/items'])
                             <button type="button" class="btn btn-primary me-3" id="add-btn" onclick="addItemsModal()">
                             Add Items</button>
                         @endcan
@@ -56,7 +56,6 @@
                             <th class="min-w-125px">Nama Items</th>
                             <th class="min-w-125px">Deskripsi</th>
                             <th class="min-w-125px">UOM</th>
-                            <th class="min-w-125px">Unit Box</th>
                             <th class="min-w-70px">Principal</th>
                             <th class="text-end min-w-70px">Action</th>
                         </tr>
@@ -66,22 +65,21 @@
                         <tr>
                             <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
                             <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->stock_code }}</a>
+                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->item_code }}</a>
                             </td>
                             <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->stock_name }}</a>
+                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->item_name }}</a>
                             </td>
                             <td>
-                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->description }}</a>
+                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->item_description }}</a>
                             </td>
                             <td>{{ $item->uom_id }}</td>
-                            <td >{{ $item->unit_box }}</td>
                             <td>{{ $item->partner_id }}</td>
                             <td class="text-end">
-                                @can('edit', [1, '/admin/masterdata/items'])
+                                @can('edit', ['/admin/masterdata/items'])
                                     <a onclick="editModal({{ $item->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
                                 @endcan
-                                @can('delete', [1, '/admin/masterdata/items'])
+                                @can('delete', ['/admin/masterdata/items'])
                                     <a href="/admin/masterdata/items/delete/{{ $item->id }}" class="btn btn-sm btn-danger button-delete" ><i class="bi bi-trash"></i></a>
                                 @endcan
                             </td>

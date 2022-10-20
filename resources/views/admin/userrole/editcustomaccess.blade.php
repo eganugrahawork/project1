@@ -8,11 +8,11 @@
             <tbody class="text-gray-600 fw-bold">
                 @foreach ($useraccess as $ua)
                 @php
-                $checkblock = DB::select("select * from custom_access_blocks where id_user = $user->id and id_menu = $ua->id_menu");
-                $data  = ['id_user' => $user->id, 'id_menu'=> $ua->id_menu];
+                $checkblock = DB::select("select * from custom_access_blocks where user_id = $user->id and menu_id = $ua->menu_id");
+                $data  = ['user_id' => $user->id, 'menu_id'=> $ua->menu_id];
                 @endphp
                 <tr>
-                    <td class="text-gray-800">{{ $ua->usermenu->menu }}</td>
+                    <td class="text-gray-800">{{ $ua->menu->name }}</td>
                     <td class="text-gray-800">@if($checkblock == null)
                         Diizinkan
                     @else
@@ -20,9 +20,9 @@
                     @endif</td>
                 <td>
                     @if($checkblock == null)
-                    <a onclick="blockAccess({{ $ua->id_menu }}, {{ $user->id }})" class="btn btn-sm btn-danger">Hide</a>
+                    <a onclick="blockAccess({{ $ua->menu_id }}, {{ $user->id }})" class="btn btn-sm btn-danger">Hide</a>
                     @else
-                    <button onclick="unBlockAccess({{ $ua->id_menu }}, {{ $user->id }})" data-iduser="{{ $user->id }}" data-idmenu="{{ $ua->id_menu }}" class="btn btn-sm btn-primary">Unhide</button>
+                    <button onclick="unBlockAccess({{ $ua->menu_id }}, {{ $user->id }})" data-iduser="{{ $user->id }}" data-idmenu="{{ $ua->menu_id }}" class="btn btn-sm btn-primary">Unhide</button>
                     @endif
                 </td>
                 </tr>

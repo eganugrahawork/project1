@@ -25,21 +25,58 @@
                     @if ($submenu)
 
                     <td>
-                        {{-- @foreach ($submenu as $sub)
-                        <div class="row py-3">
-                            <div class="col-lg-6">
-                                {{ $sub->name }}
+                        @foreach ($submenu as $sub)
+                            @php
+                                $subonsubmenu = DB::select("select * from menus where parent = $sub->id");
+                            @endphp
+
+                            @if ($subonsubmenu)
+                            <div class="row py-3">
+                                <div class="col-lg-3 mt-2">
+                                    {{ $sub->name }}
+                                </div>
+                                <div class="col-lg-3 mt-2">
+                                    <label class="form-check form-check-custom form-check-solid me-9 ml-2">
+                                        <input class="form-check-input user_access" data-idrole="{{ $role_id }}" data-idmenu="{{ $sub->id }}" type="checkbox" @php
+                                                        $data = ['role_id' => $role_id, 'menu_id' => $sub->id];
+                                                        checkAccess($data)
+                                                        @endphp />
+                                        </label>
+                                </div>
+
+                                    @foreach ($subonsubmenu as $sosm)
+                                    <div class="col-lg-3 mt-2">
+                                        {{ $sosm->name }}
+                                    </div>
+                                    <div class="col-lg-3 mt-2">
+                                        <label class="form-check form-check-custom form-check-solid me-9 ml-2">
+                                            <input class="form-check-input user_access" data-idrole="{{ $role_id }}" data-idmenu="{{ $sosm->id }}" type="checkbox" @php
+                                                            $data = ['role_id' => $role_id, 'menu_id' => $sosm->id];
+                                                            checkAccess($data)
+                                                            @endphp />
+                                            </label>
+                                    </div>
+                                    <div class="col-lg-3 mt-2"></div>
+                                    <div class="col-lg-3 mt-2"></div>
+                                    @endforeach
+                                </div>
+                            @else
+
+                            <div class="row py-3">
+                                <div class="col-lg-3">
+                                    {{ $sub->name }}
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="form-check form-check-custom form-check-solid me-9 ml-2">
+                                        <input class="form-check-input user_access" data-idrole="{{ $role_id }}" data-idmenu="{{ $sub->id }}" type="checkbox" @php
+                                                        $data = ['role_id' => $role_id, 'menu_id' => $sub->id];
+                                                        checkAccess($data)
+                                                        @endphp />
+                                        </label>
+                                </div>
                             </div>
-                            <div class="col-lg-6">
-                                <label class="form-check form-check-custom form-check-solid me-9 ml-2">
-                                    <input class="form-check-input user_access" data-idrole="{{ $role_id }}" data-idmenu="{{ $sub->id }}" type="checkbox" @php
-                                                    $data = ['role_id' => $role_id, 'menu_id' => $sub->id];
-                                                    checkAccess($data)
-                                                    @endphp />
-                                    </label>
-                            </div>
-                        </div>
-                        @endforeach --}}
+                            @endif
+                        @endforeach
 
                     </td>
                         @endif
@@ -99,6 +136,8 @@ headers: {
             )
         }
         })
+        }else{
+            $('#accessModal').modal('toggle');
         }
     })
 });

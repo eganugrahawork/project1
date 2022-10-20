@@ -80,7 +80,7 @@ Route::middleware(['auth'])->controller(ProfileController::class)->group(functio
 });
 // Profile End
 
-//UserMenu Start
+//Menu Start
 Route::middleware(['auth'])->controller(MenuController::class)->group(function(){
     Route::get('admin/configuration/menu',  'index');
     Route::post('admin/configuration/menu/store', 'store');
@@ -88,17 +88,8 @@ Route::middleware(['auth'])->controller(MenuController::class)->group(function()
     Route::get('admin/configuration/menu/editmodal/{id}', 'editmodal');
     Route::get('admin/configuration/menu/delete/{id}', 'destroy');
 });
-//End UserMenu
+//End Menu
 
-//UserSubmenu Start
-Route::middleware(['auth'])->controller(UserSubmenuController::class)->group(function(){
-    Route::get('admin/configuration/submenu', 'index');
-    Route::post('/admin/configuration/submenu/store', 'store');
-    Route::post('/admin/configuration/submenu/update', 'update');
-    Route::get('/admin/configuration/submenu/delete/{id}', 'destroy');
-    Route::get('/admin/configuration/submenu/editmodal/{id}', 'editmodal');
-});
-//UserSubmenu End
 
 //UserAccessMenu Start
 Route::middleware(['auth'])->controller(UserRoleController::class)->group(function(){
@@ -111,15 +102,10 @@ Route::middleware(['auth'])->controller(UserRoleController::class)->group(functi
     Route::get('admin/configuration/useraccessmenu/editmodalaccess/{id}', 'editmodalaccess');
     Route::post('/admin/configuration/useraccessmenu/change', 'changeaccess')->name('changeaccess');
     Route::post('/admin/configuration/useraccessmenu/permissionmenu', 'permissionmenu')->name('permissionmenu');
-    Route::post('/admin/configuration/useraccessmenu/permissionsubmenu', 'permissionsubmenu')->name('permissionsubmenu');
     Route::get('admin/configuration/useraccessmenu/editcustomaccess/{id}', 'editcustomaccess');
-    Route::get('admin/configuration/useraccessmenu/editcustomaccesssubmenu/{id}', 'editcustomaccesssubmenu');
     Route::post('/admin/configuration/useraccessmenu/blockaccess', 'blockaccess');
     Route::post('/admin/configuration/useraccessmenu/unblockaccess', 'unblockaccess');
-    Route::post('/admin/configuration/useraccessmenu/blockaccesssubmenu', 'blockaccesssubmenu');
-    Route::post('/admin/configuration/useraccessmenu/unblockaccesssubmenu', 'unblockaccesssubmenu');
     Route::get('/admin/configuration/useraccessmenu/editpermissionmodal/{id}', 'editpermissionmodal');
-    Route::post('/admin/configuration/useraccessmenu/storepermissionmenu', 'storepermissionmenu');
 });
 //UserAccessMenu End
 

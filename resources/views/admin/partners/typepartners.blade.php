@@ -39,7 +39,7 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loadtypepartner">
-                        @can('create', [1, '/admin/masterdata/partners'])
+                        @can('create', ['/admin/masterdata/typeofpartner'])
                             <button type="button" class="btn btn-primary me-3" onclick="addModal()">
                             Add Type Partners</button>
                         @endcan
