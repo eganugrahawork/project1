@@ -144,6 +144,18 @@ Route::middleware(['auth'])->controller(ItemsController::class)->group(function(
     Route::get('admin/masterdata/items/editmodal/{id}', 'editmodal');
     Route::get('admin/masterdata/items/delete/{id}', 'destroy');
     Route::get('admin/masterdata/typeitems', 'typeitems');
+    Route::get('/admin/masterdata/typeitems/addmodal', 'typeitemsaddmodal');
+    Route::get('/admin/masterdata/typeitems/editmodal/{id}', 'typeitemseditmodal');
+    Route::post('/admin/masterdata/typeitems/store', 'typeitemsstore');
+    Route::post('/admin/masterdata/typeitems/update', 'typeitemsupdate');
+    Route::get('/admin/masterdata/typeitems/delete/{id}', 'typeitemsdelete');
+    Route::get('/admin/masterdata/itemprice', 'itemprice');
+    Route::get('/admin/masterdata/itemprice/addmodal', 'addModalItemPrice');
+    Route::get('/admin/masterdata/itemprice/getdetailitem/{id}', 'getdetailitem');
+    Route::post('/admin/masterdata/itemprice/store', 'storeitemprice');
+    Route::get('/admin/masterdata/itemprice/editmodal/{id}', 'editmodalitemprice');
+    Route::post('/admin/masterdata/itemprice/update', 'updateitemprice');
+
 
 });
 

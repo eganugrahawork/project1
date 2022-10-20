@@ -14,9 +14,9 @@ class Items extends Model
     public function Uom(){
         return $this->hasOne(Uom::class, 'id', 'uom_id');
     }
-    // public function Principal(){
-    //     return $this->hasOne(Principal::class, 'id', 'partner_id');
-    // }
+    public function Partner(){
+        return $this->hasOne(Partners::class, 'id', 'partner_id');
+    }
 
     // public function PriceHistory(){
     //     return $this->hasOne(PriceHistory::class, 'items_id', 'id');

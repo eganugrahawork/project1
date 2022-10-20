@@ -6,7 +6,7 @@
 <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
     <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
         <div class="page-title d-flex flex-column me-3">
-            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">Type Items</h1>
+            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">Item Price</h1>
             <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
                 <li class="breadcrumb-item text-gray-600">
                     <a href="/admin/dashboard" class="text-gray-600 text-hover-primary">Dashboard</a>
@@ -23,7 +23,7 @@
             <div class="card-header border-0 pt-6">
                 <div class="card-title align-items-start flex-column">
                     <div class="d-flex align-items-center position-relative my-1">
-                       <h2>Type Items</h2>
+                       <h2>Item Price</h2>
                     </div>
                     <div class="d-flex align-items-center position-relative my-1">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
@@ -34,56 +34,54 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <input type="text" id="searchIndukTable" class="form-control form-control-solid w-250px ps-15" placeholder="Items Search" />
+                        <input type="text" id="searchIndukTable" class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
                     </div>
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
-                        @can('create', ['/admin/masterdata/typeitems'])
-                            <button type="button" class="btn btn-primary me-3" id="add-btn" onclick="addtypeitemsModal()">
-                            Add Type Items</button>
+                        @can('edit', ['/admin/masterdata/itemprice'])
+                        <button type="button" class="btn btn-primary me-3" onclick="AddPriceModal()">
+                        Add Price</button>
                         @endcan
                     </div>
+
                 </div>
             </div>
             <div class="card-body pt-0">
                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="indukTable">
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                            <th class="min-w-20px">No
-                            </th>
-                            <th class="min-w-125px">Type Code</th>
-                            <th class="min-w-125px">Name Type</th>
-                            <th class="min-w-125px">Description</th>
-                            <th class="min-w-70px">Status</th>
-                            <th class="text-end min-w-70px">Action</th>
+                            <th class="min-w-20px">No</th>
+                            <th class="min-w-70px ">Item Code</th>
+                            <th class="min-w-70px ">Item Name</th>
+                            <th class="min-w-70px ">Partner Name</th>
+                            <th class="min-w-70px ">Top Price</th>
+                            <th class="min-w-70px ">Base Price</th>
+                            <th class="min-w-70px ">Bottom Price</th>
+                            <th class="min-w-70px ">Status</th>
+                            <th class="text-end min-w-50px">Action</th>
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">
-                        @foreach ($itemtype as $item)
-                        <tr>
-                            <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
-                            <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->type_code }}</a>
-                            </td>
-                            <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->name_type }}</a>
-                            </td>
-                            <td>
-                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->description }}</a>
-                            </td>
-                            <td>
-                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->status }}</a>
-                            </td>
-                            <td class="text-end">
-                                @can('edit', ['/admin/masterdata/typeitems'])
-                                    <a onclick="editModal({{ $item->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+                        @foreach ($itemprice as $ip)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $ip->item->item_code }}</td>
+                                <td>{{ $ip->item->item_name }}</td>
+                                <td>{{ $ip->item->partner->name }}</td>
+                                <td>{{ $ip->top_price }}</td>
+                                <td>{{ $ip->base_price }}</td>
+                                <td>{{ $ip->bottom_price }}</td>
+                                <td>{{ $ip->status }}</td>
+                                <td>
+                                    @can('edit', ['/admin/masterdata/itemprice'])
+                                    <a onclick="editModal({{ $ip->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
                                 @endcan
-                                @can('delete', ['/admin/masterdata/typeitems'])
-                                    <a href="/admin/masterdata/typeitems/delete/{{ $item->id }}" class="btn btn-sm btn-danger button-delete" ><i class="bi bi-trash"></i></a>
+                                @can('delete', ['/admin/masterdata/itemprice'])
+                                    <a href="/admin/masterdata/itemprice/delete/{{ $ip->id }}" class="btn btn-sm btn-danger button-delete" ><i class="bi bi-trash"></i></a>
                                 @endcan
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -95,10 +93,10 @@
 
 {{-- Main Modal --}}
 <div class="modal fade" id="mainmodal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-500px">
+    <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
             <div class="modal-header" id="mainmodal_header">
-                <h2 class="fw-bolder">Items</h2>
+                <h2 class="fw-bolder">Item Price</h2>
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" onclick="tutupModal()">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -120,25 +118,26 @@
 @section('js')
 
 <script>
-function addtypeitemsModal(){
+        function AddPriceModal(){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/masterdata/typeitems/addmodal') }}", {}, function(data, status){
+            $.get("{{ url('/admin/masterdata/itemprice/addmodal') }}", {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="addtypeitemsModal()">Add typeitems</button>')
-            });
-}
-            function editModal(id){
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="AddPriceModal()">Add Price</button>')
+            })
+        }
+        function editModal(id){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-                $.get("{{ url('/admin/masterdata/typeitems/editmodal') }}/"+id, {}, function(data, status){
-                    $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="addtypeitemsModal()">Add typeitems</button>')
-                    $('#kontennya').html(data)
-                    $('#mainmodal').modal('toggle')
-                });
-            }
-            function tutupModal(){
+            $.get("{{ url('/admin/masterdata/itemprice/editmodal') }}/"+id, {}, function(data, status){
+                $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
-            }
+                $('#loading-add').html('')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="AddPriceModal()">Add Price</button>')
+            })
+        }
+        function tutupModal(){
+        $('#mainmodal').modal('toggle')
+        }
 </script>
 
 @endsection
