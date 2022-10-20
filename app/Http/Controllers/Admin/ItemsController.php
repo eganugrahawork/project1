@@ -140,6 +140,10 @@ class ItemsController extends Controller
 
         return view('admin.items.itemprice.index', ['itemprice' => ItemPrice::all()]);
     }
+    public function itemqty(){
+
+        return view('admin.items.itemqty.index', ['itemqty' => ItemQty::all()]);
+    }
 
     public function addModalItemPrice(){
         // $items = DB::select("SELECT a.id, CONCAT_WS(" - ",a.`item_code`,a.`item_name`,b.`name`) itemnya FROM items a JOIN uom b ON a.uom_id = b.id JOIN partners c ON a.partner_id = c.id");

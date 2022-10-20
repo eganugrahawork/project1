@@ -10,4 +10,8 @@ class ItemQty extends Model
     protected $table = 'item_qty';
     protected $guarded = ['id'];
     use HasFactory;
+
+    public function item(){
+        return $this->hasOne(Items::class, 'id', 'item_id');
+    }
 }
