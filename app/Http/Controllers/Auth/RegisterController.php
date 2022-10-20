@@ -60,7 +60,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'username' => ['required', 'string', 'max:255', 'unique:users,username'],
-            'id_role' => ['required', 'integer'],
+            'role_id' => ['required', 'integer'],
             'alamat' => ['required', 'string'],
             'nokontak' => ['required', 'string', 'unique:user_details,nokontak'],
             'lokasi' => ['required', 'string'],
@@ -77,17 +77,7 @@ class RegisterController extends Controller
     protected function create(Request $request)
     {
         return $this->ConfirmMailRegistration($request);
-    //    dd($request);
 
-
-
-        // return User::create([
-        //     'username' => strtolower($data['username']),
-        //     'email' => $data['email'],
-        //     'id_detail_user' => $detailUser['id'],
-        //     'id_role' => $data['id_role'],
-        //     'password' => Hash::make($data['password']),
-        // ]);
     }
 
     public function ConfirmMailRegistration($data){
@@ -123,7 +113,7 @@ class RegisterController extends Controller
             'name' => $data->name,
             'address' => $data->address,
             'region' => 9,
-            'id_role' => $role->id,
+            'role_id' => $role->id,
             'image' => "img-users/default.png",
             'no_hp' => $data->no_hp,
             'type_account_id' => $data->type_account_id,

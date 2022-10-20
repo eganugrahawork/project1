@@ -105,7 +105,7 @@
                     @foreach ($role as $r )
                     <div class="d-flex fv-row">
                         <div class="form-check form-check-custom form-check-solid">
-                            <input class="form-check-input me-3" name="id_role" type="radio" value="{{ $r->id }}" id="kt_modal_update_role_option_0" @if ($r->id == $user->id_role)
+                            <input class="form-check-input me-3" name="role_id" type="radio" value="{{ $r->id }}" id="kt_modal_update_role_option_0" @if ($r->id == $user->role_id)
                             checked='checked'
                             @endif  />
                             <label class="form-check-label" for="kt_modal_update_role_option_0">

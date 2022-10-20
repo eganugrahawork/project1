@@ -58,7 +58,7 @@ class UsersController extends Controller
         $users = [
             'email' => $request->email,
             'username' => $request->username,
-            'id_role' => $request->id_role,
+            'role_id' => $request->role_id,
             'password' => Hash::make($request->password),
             'name' => $request->name,
             'address' => $request->address,
@@ -108,7 +108,7 @@ class UsersController extends Controller
         $users = [
             'email' => $request->email,
             'username' => $request->username,
-            'id_role' => $request->id_role,
+            'role_id' => $request->role_id,
             'password' => $password,
             'name' => $request->name,
             'address' => $request->address,
