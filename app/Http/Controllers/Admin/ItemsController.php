@@ -92,4 +92,8 @@ class ItemsController extends Controller
         DB::select("CALL sp_delete_items($request->id)");
         return redirect()->back()->with('success', 'Data Item Dihapus !');
     }
+
+    public function typeitems(){
+        return view('admin.items.typeitems');
+    }
 }
