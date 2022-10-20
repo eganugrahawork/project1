@@ -52,11 +52,11 @@
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="min-w-20px">No
                             </th>
-                            <th class="min-w-125px">Kode Items</th>
-                            <th class="min-w-125px">Nama Items</th>
-                            <th class="min-w-125px">Deskripsi</th>
-                            <th class="min-w-125px">UOM</th>
-                            <th class="min-w-70px">Principal</th>
+                            <th class="min-w-125px">Items Code</th>
+                            <th class="min-w-125px">Items Name</th>
+                            <th class="min-w-125px">Description</th>
+                            <th class="min-w-125px">Unit</th>
+                            <th class="min-w-70px">Partner</th>
                             <th class="text-end min-w-70px">Action</th>
                         </tr>
                     </thead>
@@ -73,8 +73,8 @@
                             <td>
                                 <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->item_description }}</a>
                             </td>
-                            <td>{{ $item->uom_id }}</td>
-                            <td>{{ $item->partner_id }}</td>
+                            <td>{{ $item->uom_name }}</td>
+                            <td>{{ $item->partner_name }}</td>
                             <td class="text-end">
                                 @can('edit', ['/admin/masterdata/items'])
                                     <a onclick="editModal({{ $item->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>

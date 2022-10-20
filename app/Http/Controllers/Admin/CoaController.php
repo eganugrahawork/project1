@@ -33,7 +33,8 @@ class CoaController extends Controller
     }
 
     public function addmodal(){
-        return view('admin.coa.addmodal');
+
+        return view('admin.coa.addmodal', ['coa' =>DB::select('Call sp_list_coa()') ]);
     }
 
 
@@ -59,7 +60,7 @@ class CoaController extends Controller
 
     public function editmodal(Request $request){
 
-        return view('admin.coa.editmodal', ['coa' => Coa::where(['id' => $request->id])->first()]);
+        return view('admin.coa.editmodal', ['coa' => Coa::where(['id' => $request->id])->first(), 'parentcoa' => Coa::all()]);
     }
 
     public function update(Request $request){

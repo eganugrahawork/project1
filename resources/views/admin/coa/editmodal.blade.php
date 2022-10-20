@@ -2,8 +2,13 @@
     {{-- @csrf --}}
 <input type="hidden" name="id" id="id" value="{{ $coa->id }}">
         <div class="fv-row mb-7">
-            <label class="required fw-bold fs-6 mb-2">Parent</label>
-            <input type="number" name="id_parent" id="id_parent" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $coa->id_parent }}" required readonly/>
+            <label class="required form-label fw-bold">Parent</label>
+                <select class="form-select  form-select-solid mb-3 mb-lg-0" id="id_parent" name="id_parent" disabled required>
+                    <option value="0" {{ $coa->id_parent == 0 ? 'selected' : '' }}>Main Parent</option>
+                    @foreach ($parentcoa as $pc)
+                        <option value="{{ $pc->id }}" {{ $coa->id_parent == $pc->id ? 'selected' : '' }}>{{ $pc->coa }}</option>
+                    @endforeach
+                </select>
         </div>
         <div class="fv-row mb-7">
             <label class="required fw-bold fs-6 mb-2">COA</label>

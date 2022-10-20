@@ -143,6 +143,7 @@ Route::middleware(['auth'])->controller(ItemsController::class)->group(function(
     Route::get('admin/masterdata/items/addmodal', 'addmodal');
     Route::get('admin/masterdata/items/editmodal/{id}', 'editmodal');
     Route::get('admin/masterdata/items/delete/{id}', 'destroy');
+    Route::get('admin/masterdata/typeitems', 'typeitems');
 
 });
 
