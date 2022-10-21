@@ -73,7 +73,7 @@
 
 {{-- Main Modal --}}
 <div class="modal fade" id="mainmodal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
+    <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header" id="mainmodal_header">
                 <h2 class="fw-bolder">Item Price</h2>
@@ -103,7 +103,7 @@
             $.get("{{ url('/admin/procurement/purchase-order/addmodal') }}", {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addQtyModal()">Add Price</button>')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
             })
         }
         function editModal(id){
@@ -112,7 +112,7 @@
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
                 $('#loading-add').html('')
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addQtyModal()">Add Price</button>')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
             })
         }
         function tutupModal(){

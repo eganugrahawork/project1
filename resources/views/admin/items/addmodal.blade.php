@@ -41,8 +41,8 @@
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Item Type</label>
                 <div class="col-lg-6">
-
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0" name="type_id" required>
+                    <select class="form-select form-select-solid" name="type_id" required>
+                        <option></option>
                         @foreach ($type as $type)
                         <option value="{{ $type->id }}">{{ $type->name_type }}</option>
                         @endforeach
@@ -61,7 +61,8 @@
             </div>
             <div class="fv-row mb-7">
                 <label class="form-label fw-bold required">Partners</label>
-            <select class="form-select  form-select-solid mb-3 mb-lg-0" name="partner_id" required>
+            <select class="form-select form-select-solid mb-3 mb-lg-0" name="partner_id" required>
+                <option></option>
                 @foreach ($partner as $p)
                     <option value="{{ $p->id }}">{{ $p->name }}</option>
                 @endforeach

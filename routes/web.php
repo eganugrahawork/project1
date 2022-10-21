@@ -238,6 +238,8 @@ Route::middleware(['auth'])->controller(CoaController::class)->group(function(){
 Route::middleware(['auth'])->controller(PurchaseOrderController::class)->group(function(){
     Route::get('/admin/procurement/purchase-order', 'index');
     Route::get('/admin/procurement/purchase-order/addmodal', 'addmodal');
+    Route::get('/admin/procurement/purchase-order/getitem/{id}', 'getitem');
+    Route::get('/admin/procurement/purchase-order/addnewitemrow/{id}', 'addnewitemrow');
     Route::get('/admin/procurement/purchase-order/editmodal/{id}', 'editmodal');
 });
 //End Purchase Order
