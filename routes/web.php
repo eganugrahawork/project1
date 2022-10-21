@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PartnersController;
 use App\Http\Controllers\Admin\PriceManagementController;
 use App\Http\Controllers\Admin\PrincipalController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\PurchaseOrderController;
 use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Admin\UoMController;
 use App\Http\Controllers\Admin\UserRoleController;
@@ -230,8 +231,17 @@ Route::middleware(['auth'])->controller(CoaController::class)->group(function(){
     Route::post('admin/masterdata/coa/update', 'update');
     Route::get('admin/masterdata/coa/delete/{id}', 'destroy');
 });
-
 // End Coa
+
+
+// Purchase Order
+Route::middleware(['auth'])->controller(PurchaseOrderController::class)->group(function(){
+    Route::get('/admin/procurement/purchase-order', 'index');
+    Route::get('/admin/procurement/purchase-order/addmodal', 'addmodal');
+    Route::get('/admin/procurement/purchase-order/editmodal/{id}', 'editmodal');
+});
+//End Purchase Order
+
 //Blocked Page Start
 Route::get('/blocked', function(){
     return view('admin.blocked');
