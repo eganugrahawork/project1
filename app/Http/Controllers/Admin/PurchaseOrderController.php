@@ -50,15 +50,16 @@ class PurchaseOrderController extends Controller
     public function getbaseqty(Request $request){
         $itemprice = ItemPrice::where(['item_id' => $request->id, 'status' => 1])->first();
         $itemqty = ItemQty::where(['item_id' => $request->id, 'status' => 1])->first();
-        $pricing  = " <div class='fv-row mb-7 col-lg-2'>
+        $pricing  = " <div class='fv-row mb-7 col-lg-2' id='price_parent'>
         <label class='required fw-bold fs-6 mb-2'>Price</label>
-        <input type='number' name='price[]' class='form-control form-control-solid mb-3 mb-lg-0' value='$itemprice->base_price' required/>
-    </div>";
+        <input type='number' name='price[]' id='price' onkeyup='hitungByPrice(this)' class='form-control form-control-solid mb-3 mb-lg-0' placeholder='$itemprice->base_price' required/>
+        <p id='notifprice'>Tulis Kembali harga untuk konfirmasi</p>
+        </div>";
         return response()->json(['base_qty' => $itemqty->base_qty, 'pricing' => $pricing ]);
     }
 
     public function addnewitemrow(Request $request){
-        $html = " <div class='row'> <div class='fv-row mb-7 col-lg-5'>
+        $html = " <div class='row'> <div class='fv-row mb-7 col-lg-3'>
         <label class='required form-label fw-bold'>Item</label>
         <select class='form-select  form-select-solid mb-3 mb-lg-0' id='item_id' name='item_id[]' onchange='getBaseQty(this)' required>";
 
@@ -78,15 +79,16 @@ class PurchaseOrderController extends Controller
 
                         <div class='fv-row mb-7 col-lg-1'>
                         <label class='required fw-bold fs-6 mb-2'>Qty</label>
-                        <input type='number' name='qty[]' class='form-control form-control-solid mb-3 mb-lg-0'  required/>
+                        <input type='number' name='qty[]' id='qty' onkeyup='hitungByQty(this)'  class='form-control form-control-solid mb-3 mb-lg-0'  required/>
                         </div>
                         <div class='fv-row mb-7 col-lg-1'>
-                            <label class='required fw-bold fs-6 mb-2'>Diskon</label>
-                            <input type='number' name='discount[]' class='form-control form-control-solid mb-3 mb-lg-0'  required/>
+                            <label class='required fw-bold fs-6 mb-2'>Discount</label>
+                            <input type='number' name='discount[]' id='discount'  onkeyup='hitungByDiscount(this)' class='form-control form-control-solid mb-3 mb-lg-0'  required/>
                         </div>
-                        <div class='fv-row mb-7 col-lg-1'>
+                        <div class='fv-row mb-7 col-lg-2'>
                         <label class='required fw-bold fs-6 mb-2'>Total</label>
-                        <input type='number' name='total[]' class='form-control form-control-solid mb-3 mb-lg-0'  required/>
+                        <input type='number' name='total[]' id='total' readonly class='form-control form-control-solid mb-3 mb-lg-0 totalnya'  required/>
+                        <input type='hidden' name='getdiscountperitem[]' id='getdiscountperitem' readonly class='form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem'  required/>
                         </div>
                         <div class='fv-row mb-7 col-lg-1'>
                         <label class='fw-bold fs-6 mb-2'>Remove</label>
@@ -99,4 +101,5 @@ class PurchaseOrderController extends Controller
     public function store(Request $request){
         dd($request);
     }
+
 }

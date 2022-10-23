@@ -35,7 +35,7 @@
         <div class="col-lg-6">
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Vat/PPN</label>
-                <input type="number" name="ppn" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="number" name="ppn" id="ppn" value="11" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Currency</label>
@@ -81,7 +81,7 @@
             <h1>Items</h1>
             <hr>
         <div class="row" >
-            <div class="fv-row mb-7 col-lg-5">
+            <div class="fv-row mb-7 col-lg-3">
                 <label class="required form-label fw-bold">Item</label>
                 <select class="form-select  form-select-solid mb-3 mb-lg-0" id="item_id" name="item_id[]" onchange="getBaseQty(this)" required>
                         <option>Choose Partner First</option>
@@ -90,15 +90,16 @@
 
             <div class="fv-row mb-7 col-lg-1">
                 <label class="required fw-bold fs-6 mb-2">Qty</label>
-                <input type="number" name="qty[]" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="number" name="qty[]" id="qty" value="0" onkeyup="hitungByQty(this)" class="form-control form-control-solid mb-3 mb-lg-0 "  required/>
             </div>
             <div class="fv-row mb-7 col-lg-1">
                 <label class="required fw-bold fs-6 mb-2">Diskon</label>
-                <input type="number" name="discount[]" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="number" name="discount[]" id="discount" value="0" onkeyup="hitungByDiscount(this)" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
-            <div class="fv-row mb-7 col-lg-1">
+            <div class="fv-row mb-7 col-lg-2">
                 <label class="required fw-bold fs-6 mb-2">Total</label>
-                <input type="number" name="total[]" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="number" name="total[]" id="total" readonly class="form-control form-control-solid mb-3 mb-lg-0 totalnya"  required/>
+                <input type="hidden" name="getdiscountperitem[]" value="0" id="getdiscountperitem" readonly class="form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem"  required/>
             </div>
             <div class="fv-row mb-7 col-lg-1">
 
@@ -112,33 +113,33 @@
     <hr>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
-            <div class="col-lg-4">Subtotal</div>
-            <div class="col-lg-4"></div>
+            <div class="col-lg-6">Subtotal</div>
+            <div class="col-lg-6"><input type="text" name="subtotal" id="subtotal" class="form-control form-control-white"></div>
         </div>
     </div>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
-            <div class="col-lg-4">Diskon</div>
-            <div class="col-lg-4"></div>
+            <div class="col-lg-6">Discount</div>
+            <div class="col-lg-6"><input type="text" name="totaldiscount" id="totaldiscount" class="form-control form-control-white"></div>
         </div>
     </div>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
-            <div class="col-lg-4">Taxable</div>
-            <div class="col-lg-4"></div>
+            <div class="col-lg-6">Taxable</div>
+            <div class="col-lg-6"><input type="text" name="taxable" id="taxable" class="form-control form-control-white"></div>
         </div>
     </div>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
-            <div class="col-lg-4">Vat/PPn</div>
-            <div class="col-lg-4"></div>
+            <div class="col-lg-6">Vat/PPn</div>
+            <div class="col-lg-6"><input type="text" name="totalppn" id="totalppn" class="form-control form-control-white"></div>
         </div>
     </div>
     <hr>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
-            <div class="col-lg-4">Grand Total</div>
-            <div class="col-lg-4"></div>
+            <div class="col-lg-6">Grand Total</div>
+            <div class="col-lg-6"><input type="text" name="grandtotal" id="grandtotal" class="form-control form-control-white"></div>
         </div>
     </div>
     <hr>
@@ -148,10 +149,14 @@
         </div>
 </form>
 <script>
+
+
+
     $('form').submit(function(){
     $('#btn-add').hide()
     $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
     })
+
 
     $('#partner_id').on('change', function(){
         $('#item_id').html("<option>Loading....</option>")
@@ -161,6 +166,7 @@
                 $('#phone').val(data.phone)
                 $('#fax').val(data.fax)
                 $('#base_qty_parent').remove()
+                $('#price_parent').remove()
             })
     })
 
@@ -183,6 +189,89 @@
     }
 
     function removeItemRow(e){
-$(e).parent().parent().remove()
+        $(e).parent().parent().remove()
     }
+
+    function hitungByDiscount(e){
+        let qty = $(e).parent().parent().find('#qty').val();
+        let discount = e.value;
+        let price =  $(e).parent().parent().find('#price').val();
+        if(typeof price == "undefined"){
+            price =0;
+        }
+        let total = (parseFloat(qty) * parseFloat(price)) - ((parseFloat(qty) * parseFloat(price)) * (parseFloat(discount) / 100));
+        $(e).parent().parent().find('#total').val(total);
+        let getdiscountperitem =((parseFloat(qty) * parseFloat(price)) * (parseFloat(discount) / 100));
+        $(e).parent().parent().find('#total').val(total);
+        $(e).parent().parent().find('#getdiscountperitem').val(getdiscountperitem);
+        sumAll()
+    }
+    function hitungByQty(e){
+        let qty =  e.value;
+        let discount = $(e).parent().parent().find('#discount').val();
+        let price =  $(e).parent().parent().find('#price').val();
+        if(typeof price == "undefined"){
+            price =0;
+        }
+        let getdiscountperitem =((parseFloat(qty) * parseFloat(price)) * (parseFloat(discount) / 100));
+        let total = (parseFloat(qty) * parseFloat(price)) - ((parseFloat(qty) * parseFloat(price)) * (parseFloat(discount) / 100));
+        $(e).parent().parent().find('#total').val(total);
+        $(e).parent().parent().find('#getdiscountperitem').val(getdiscountperitem);
+        sumAll()
+    }
+    function hitungByPrice(e){
+        // if(e.value.length >0){
+        //     $(e).closest('#notifprice').hide()
+        // }
+        let qty = $(e).parent().parent().find('#qty').val();
+        let discount = $(e).parent().parent().find('#discount').val();
+        let price = e.value;
+        if(typeof price == "undefined"){
+            price =0;
+        }
+        let getdiscountperitem =((parseFloat(qty) * parseFloat(price)) * (parseFloat(discount) / 100));
+        let total = (parseFloat(qty) * parseFloat(price)) - ((parseFloat(qty) * parseFloat(price)) * (parseFloat(discount) / 100));
+        $(e).parent().parent().find('#total').val(total);
+        $(e).parent().parent().find('#getdiscountperitem').val(getdiscountperitem);
+
+        sumAll()
+    }
+
+    function sumAll(){
+        let taxable = 0;
+        let totalppn = 0;
+        let totaldiscount = 0;
+        let subtotal = 0;
+        let grandtotal = 0;
+        if($('.totalnya').length > 1){
+            $('.totalnya').each(function(){
+                taxable += parseFloat($(this).val());
+            });
+        }else{
+            taxable = $('.totalnya').val()
+        }
+
+        if($('.getdiscountperitem').length > 1){
+            $('.getdiscountperitem').each(function(){
+                totaldiscount += parseFloat($(this).val());
+            });
+        }else{
+            totaldiscount = $('.getdiscountperitem').val()
+        }
+
+        subtotal = taxable + totaldiscount;
+
+        $('#subtotal').val(subtotal);
+
+       totalppn = parseFloat($('#ppn').val() * taxable /100);
+
+       grandtotal = taxable +totalppn;
+
+       $('#grandtotal').val(grandtotal);
+
+         $('#totalppn').val(totalppn);
+         $('#totaldiscount').val(totaldiscount);
+         $('#taxable').val(taxable);
+    }
+
 </script>
