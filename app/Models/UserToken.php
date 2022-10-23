@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserToken extends Model
 {
+    protected $connection = 'masterdata';
     protected $table = 'user_token';
     protected $guarded = ['id'];
     use HasFactory;

@@ -19,7 +19,7 @@ class ItemsController extends Controller
 {
     public function index(){
 
-        return view('admin.items.index', ['items' => DB::select("CALL sp_list_items()")]);
+        return view('admin.items.index', ['items' => DB::connection('masterdata')->select("CALL sp_list_items()")]);
     }
 
     public function addmodal(){
@@ -90,7 +90,7 @@ class ItemsController extends Controller
             'keterangan' => "Hapus items ". $items->item_name
         ]);
         NotifEvent::dispatch(auth()->user()->name .' menghapus Items  '. $items->item_name);
-        DB::select("CALL sp_delete_items($request->id)");
+        DB::connection('masterdata')->select("CALL sp_delete_items($request->id)");
         return redirect()->back()->with('success', 'Data Item Dihapus !');
     }
 
@@ -146,13 +146,13 @@ class ItemsController extends Controller
     }
 
     public function addModalItemPrice(){
-        // $items = DB::select("SELECT a.id, CONCAT_WS(" - ",a.`item_code`,a.`item_name`,b.`name`) itemnya FROM items a JOIN uom b ON a.uom_id = b.id JOIN partners c ON a.partner_id = c.id");
+        // $items = DB::connection('masterdata')->select("SELECT a.id, CONCAT_WS(" - ",a.`item_code`,a.`item_name`,b.`name`) itemnya FROM items a JOIN uom b ON a.uom_id = b.id JOIN partners c ON a.partner_id = c.id");
         $items=Items::all();
         return view('admin.items.itemprice.addmodal', ['items' =>$items]);
     }
 
     public function getdetailitem(Request $request){
-    //    $itemss = DB::select("select b.name , c.name  from items a join uom b on a.uom_id = b.id join partners c on a.partner_id = c.id where a.id = $request->id");
+    //    $itemss = DB::connection('masterdata')->select("select b.name , c.name  from items a join uom b on a.uom_id = b.id join partners c on a.partner_id = c.id where a.id = $request->id");
         $itemss = Items::where(['id' => $request->id])->first();
         // dd($itemss);
         // $item = json_decode($itemss, true);

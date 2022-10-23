@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserActivity extends Model
 {
+    protected $connection = 'masterdata';
     protected $guarded = ['id'];
     protected $with = ['users'];
     use HasFactory;

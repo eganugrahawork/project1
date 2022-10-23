@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MenuAccess extends Model
 {
+    protected $connection = 'masterdata';
     protected $table='menu_access';
     protected $guarded = ['id'];
     use HasFactory;

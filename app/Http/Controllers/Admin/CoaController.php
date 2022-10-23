@@ -18,7 +18,7 @@ class CoaController extends Controller
         return view('admin.coa.index');
     }
     public function list(){
-        return  Datatables::of(DB::select('Call sp_list_coa()'))->addIndexColumn()
+        return  Datatables::of(DB::connection('masterdata')->select('Call sp_list_coa()'))->addIndexColumn()
         ->addColumn('action', function($model){
             $action = "";
             if(Gate::allows('edit', ['/admin/masterdata/coa'])){
@@ -34,13 +34,13 @@ class CoaController extends Controller
 
     public function addmodal(){
 
-        return view('admin.coa.addmodal', ['coa' =>DB::select('Call sp_list_coa()') ]);
+        return view('admin.coa.addmodal', ['coa' =>DB::connection('masterdata')->select('Call sp_list_coa()') ]);
     }
 
 
     public function store(Request $request){
 
-        DB::select("call sp_insert_coa(
+        DB::connection('masterdata')->select("call sp_insert_coa(
             $request->id_parent,
             '$request->coa',
             '$request->description',
@@ -65,7 +65,7 @@ class CoaController extends Controller
 
     public function update(Request $request){
 
-        DB::select("call sp_update_coa(
+        DB::connection('masterdata')->select("call sp_update_coa(
             $request->id,
             '$request->coa',
             '$request->description',
@@ -91,7 +91,7 @@ class CoaController extends Controller
            'keterangan' => "Hapus COA ". $coa->coa
         ]);
 
-        DB::select("call sp_delete_coa(
+        DB::connection('masterdata')->select("call sp_delete_coa(
             $request->id
         )");
 

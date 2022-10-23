@@ -27,7 +27,7 @@ class DashboardController extends Controller
         return view('admin.useractivity.index');
     }
     public function listuseractivity(){
-        $activity = DB::select('SELECT a.created_at, a.menu, a.aktivitas, a.keterangan, b.email FROM user_activities a JOIN users b ON a.id_user = b.id');
+        $activity = DB::connection('masterdata')->select('SELECT a.created_at, a.menu, a.aktivitas, a.keterangan, b.email FROM user_activities a JOIN users b ON a.id_user = b.id');
 
         // dd($activity);
         return  Datatables::of($activity)->addIndexColumn()->make(true);
@@ -44,11 +44,11 @@ class DashboardController extends Controller
 
     public function loadmenu(Request $request){
         // dd($request->role_id);
-        $menu = DB::select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $request->parent");
+        $menu = DB::connection('masterdata')->select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $request->parent");
         // dd($request->parent);
         $html = '';
         foreach ($menu as $mn){
-            $submenu = DB::select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $mn->id");
+            $submenu = DB::connection('masterdata')->select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $mn->id");
             if($submenu){
                 $html .= "<div data-kt-menu-trigger='click' data-kt-menu-placement='bottom-start' class='menu-item menu-lg-down-accordion me-lg-1'>
                 <span class='menu-link  py-3'>
@@ -61,7 +61,7 @@ class DashboardController extends Controller
 
                 foreach($submenu as $sm){
                     $tandapetik = '"';
-                    $subOnSubmenu = DB::select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $sm->id");
+                    $subOnSubmenu = DB::connection('masterdata')->select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $sm->id");
 
                     if($subOnSubmenu){
                         $html .= "<div data-kt-menu-trigger=". $tandapetik . "{default:'click', lg: 'hover'}". $tandapetik." data-kt-menu-placement='right-start' class='menu-item menu-lg-down-accordion'>

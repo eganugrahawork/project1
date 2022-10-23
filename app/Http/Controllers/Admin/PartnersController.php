@@ -19,7 +19,7 @@ class PartnersController extends Controller
     }
 
     public function list(){
-        return  Datatables::of(DB::select('Call sp_list_partners()'))->addIndexColumn()
+        return  Datatables::of(DB::connection('masterdata')->select('Call sp_list_partners()'))->addIndexColumn()
         ->addColumn('action', function($model){
             $action = "";
             if(Gate::allows('edit', ['/admin/masterdata/partners'])){
@@ -40,7 +40,7 @@ class PartnersController extends Controller
 
     public function store(Request $request){
 
-        DB::select("call sp_insert_partners(
+        DB::connection('masterdata')->select("call sp_insert_partners(
             '$request->code',
             '$request->name',
             $request->partner_type,
@@ -76,7 +76,7 @@ class PartnersController extends Controller
         ]);
 
 
-        DB::select("call sp_delete_partners(
+        DB::connection('masterdata')->select("call sp_delete_partners(
             $request->id
         )");
 
@@ -93,7 +93,7 @@ class PartnersController extends Controller
     public function update(Request $request){
 
 
-        DB::select("call sp_update_partners(
+        DB::connection('masterdata')->select("call sp_update_partners(
             $request->id,
             '$request->code',
             '$request->name',
@@ -124,7 +124,7 @@ class PartnersController extends Controller
     }
 
     public function listtypeofpartners(){
-        return  Datatables::of(DB::select('Call sp_list_partner_types()'))->addIndexColumn()
+        return  Datatables::of(DB::connection('masterdata')->select('Call sp_list_partner_types()'))->addIndexColumn()
         ->addColumn('action', function($model){
             $action = "";
             if(Gate::allows('edit', ['/admin/masterdata/typeofpartner'])){
@@ -143,7 +143,7 @@ class PartnersController extends Controller
     }
 
     public function storetypepartners(Request $request){
-        DB::select("call sp_insert_partner_types('$request->name', $request->status)");
+        DB::connection('masterdata')->select("call sp_insert_partner_types('$request->name', $request->status)");
 
         return response()->json(['success' => 'Type Partner Added']);
     }
@@ -153,13 +153,13 @@ class PartnersController extends Controller
     }
 
     public function updatetypepartners(Request $request){
-        DB::select("call sp_update_partner_types($request->id,'$request->name', $request->status)");
+        DB::connection('masterdata')->select("call sp_update_partner_types($request->id,'$request->name', $request->status)");
 
         return response()->json(['success', 'Type Partner has Edited']);
     }
 
     public function destroytypepartners(Request $request){
-        DB::select("call sp_delete_partner_types($request->id)");
+        DB::connection('masterdata')->select("call sp_delete_partner_types($request->id)");
 
         return response()->json(['success', 'Type Parter Deleted']);
     }

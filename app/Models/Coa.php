@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coa extends Model
 {
+    protected $connection = 'masterdata';
     protected $table ='coa';
     protected $guarded=['id'];
     use HasFactory;

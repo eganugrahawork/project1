@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PartnerType extends Model
 {
+    protected $connection = 'masterdata';
     protected $table = 'partner_types';
     protected $guarded = ['id'];
     use HasFactory;

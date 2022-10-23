@@ -15,7 +15,7 @@ use Yajra\DataTables\DataTables;
 class UoMController extends Controller
 {
     // public function index(){
-    //     return view('admin.uom.index', ['uom'=> DB::select('Call sp_list_uom()')]);
+    //     return view('admin.uom.index', ['uom'=> DB::connection('masterdata')->select('Call sp_list_uom()')]);
     // }
     public function index(){
 
@@ -23,8 +23,8 @@ class UoMController extends Controller
     }
 
     public function list(){
-        // $uom= DB::select('Call sp_list_uom()');
-        return  Datatables::of(DB::select('Call sp_list_uom()'))->addIndexColumn()
+        // $uom= DB::connection('masterdata')->select('Call sp_list_uom()');
+        return  Datatables::of(DB::connection('masterdata')->select('Call sp_list_uom()'))->addIndexColumn()
         ->addColumn('action', function($model){
             $action = "";
             if(Gate::allows('edit', ['/admin/masterdata/uom'])){
@@ -46,7 +46,7 @@ class UoMController extends Controller
         // Uom::create(['name' => $request->name,'symbol' => $request->symbol, 'description'=>$request->description]);
 
 
-        DB::select("Call sp_insert_uom(
+        DB::connection('masterdata')->select("Call sp_insert_uom(
             '$request->name',
             '$request->symbol',
             '$request->description',
@@ -76,7 +76,7 @@ class UoMController extends Controller
         'keterangan' => "Hapus UOM ". $uom->name
         ]);
         NotifEvent::dispatch(auth()->user()->name .' menghapus Uom '. $uom->name);
-        DB::select("Call sp_delete_uom(
+        DB::connection('masterdata')->select("Call sp_delete_uom(
             $request->id
         )");
         return response()->json(['success' => 'Uom berhasil dihapus']);
@@ -90,7 +90,7 @@ class UoMController extends Controller
     public function update(Request $request){
         // Uom::where(['id' => $request->id])->update(['name' => $request->name,'symbol' => $request->symbol, 'description'=>$request->description]);
 
-        DB::select("Call sp_update_uom(
+        DB::connection('masterdata')->select("Call sp_update_uom(
             $request->id,
            '$request->name',
            '$request->symbol',

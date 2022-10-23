@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Model
 {
+    protected $connection = 'masterdata';
     protected $table = 'menus';
     protected $guarded = ['id'];
     use HasFactory;

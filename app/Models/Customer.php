@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
+    protected $connection = 'masterdata';
     protected $guarded=['id'];
     use HasFactory;
 

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ItemPrice extends Model
 {
+    protected $connection = 'masterdata';
     protected $table='item_price';
     protected $guarded = ['id'];
     use HasFactory;

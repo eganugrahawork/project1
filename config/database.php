@@ -43,15 +43,15 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
-        'mysql' => [
+        'masterdata' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
+            'host' => env('DB_HOST_MASTERDATA', '127.0.0.1'),
+            'port' => env('DB_PORT_MASTERDATA', '3306'),
+            'database' => env('DB_DATABASE_MASTERDATA', 'forge'),
+            'username' => env('DB_USERNAME_MASTERDATA', 'forge'),
+            'password' => env('DB_PASSWORD_MASTERDATA', ''),
+            'unix_socket' => env('DB_SOCKET_MASTERDATA', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',

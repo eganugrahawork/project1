@@ -169,7 +169,7 @@ class UserRoleController extends Controller
     }
 
     public function editpermissionmodal(Request $request){
-        $menu = DB::select("select b.name, b.id from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->id");
+        $menu = DB::connection('masterdata')->select("select b.name, b.id from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->id");
 
         return view('admin.userrole.editpermissionmodal', ['menu'=> $menu, 'role_id' => $request->id]);
     }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Items extends Model
 {
+    protected $connection = 'masterdata';
     protected $table = 'items';
     protected $guarded = ['id'];
     use HasFactory;
