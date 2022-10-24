@@ -39,6 +39,7 @@ class PurchaseOrderController extends Controller
     }
 
     public function addmodal(){
+
         $code = 'R'. date('Y') .'0001';
 
         return view('admin.procurement.purchaseorder.addmodal', ['code' => $code, 'partner'=>Partners::all(), 'currency' => Currency::all()]);
