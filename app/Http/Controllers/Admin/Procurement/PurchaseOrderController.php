@@ -153,10 +153,13 @@ class PurchaseOrderController extends Controller
                     '$price',
                     '$skrg',
                     'Ega'
-
                     )");
                 }
         }else{
+
+            $item_id = $request->item_id[0];
+            $qty = $request->qty[0];
+            $price = $request->price[0];
             DB::connection('procurement')->select("call sp_insert_po_items(
                 '$request->code',
                 '$request->order_date',
@@ -168,9 +171,9 @@ class PurchaseOrderController extends Controller
                 1,
                 '$request->currency_id',
                 1,
-                '$request->item_id[0]',
-                '$request->qty[0]',
-                '$request->price[0]',
+                '$item_id',
+                '$qty',
+                '$price',
                 '$skrg',
                 'Ega'
                 )");
