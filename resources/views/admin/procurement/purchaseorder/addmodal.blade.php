@@ -65,20 +65,8 @@
                     </select>
             </div>
             <div class="fv-row mb-7">
-                <label class="fw-bold fs-6 mb-2">Delivery Date</label>
-                <input type="datetime-local" name="delivery_date" id="delivery_date" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
-            </div>
-            <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Description</label>
                 <textarea type="text" name="description" id="description" class="form-control form-control-solid mb-3 mb-lg-0"  required></textarea>
-            </div>
-            <div class="fv-row mb-7">
-                <label class="required form-label fw-bold">Status</label>
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="status" id="status" required>
-                        <option>Choose Status</option>
-                        <option value="1">Yes</option>
-                        <option value="0">Not</option>
-                    </select>
             </div>
         </div>
         <div class="col-lg-12"id="itemsAddList">

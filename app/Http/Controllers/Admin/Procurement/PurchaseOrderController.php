@@ -136,7 +136,6 @@ class PurchaseOrderController extends Controller
         DB::connection('procurement')->select("call sp_insert_po_items(
             '$request->code',
             '$request->order_date',
-            '$request->delivery_date',
             '$request->term_of_payment',
             '$request->description',
             '$request->rate',
@@ -148,9 +147,6 @@ class PurchaseOrderController extends Controller
             '$request->item_id',
             '$request->qty',
             '$request->price',
-            '$approved_date',
-            '$request->approved_by',
-            '$request->p_notes',
         )");
         return redirect('/admin/procurement/purchase-order')->with(['success'=> 'Purchase Order Added']);
     }
