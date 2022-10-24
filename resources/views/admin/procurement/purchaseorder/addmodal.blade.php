@@ -90,7 +90,7 @@
             <div class="fv-row mb-7 col-lg-2">
                 <label class="required fw-bold fs-6 mb-2">Total</label>
                 <input type="number" name="total[]" id="total" readonly class="form-control form-control-solid mb-3 mb-lg-0 totalnya"  required/>
-                <input type="text" name="getdiscountperitem[]" value="0" id="getdiscountperitem" readonly class="form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem"  required/>
+                <input type="hidden" name="getdiscountperitem[]" value="0" id="getdiscountperitem" readonly class="form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem"  required/>
             </div>
             <div class="fv-row mb-7 col-lg-1">
 
