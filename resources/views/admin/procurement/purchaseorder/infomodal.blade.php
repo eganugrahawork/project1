@@ -1,30 +1,30 @@
-<form id="add-form" class="form" action="/admin/procurement/purchase-order/update" method="post">
+<form id="add-form" class="form" action="/admin/procurement/purchase-order/store" method="post">
     @csrf
+
     <div class="row">
         <div class="col-lg-6">
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Po Code</label>
-                <input type="text" id="code" name="code" value="{{ $ponya[0]->code }}" readonly class="form-control form-control-white mb-3 mb-lg-0"  required/>
+                <input type="text" id="code" name="code" value="{{ $info[0]->code }}" readonly class="form-control form-control-white mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Order Date</label>
-                <input type="datetime-local" name="order_date" id="order_date" value="{{ $ponya[0]->order_date }}" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="datetime-local" name="order_date" id="order_date" readonly value="{{ $info[0]->order_date }}" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Partners</label>
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" id="partner_id" name="partner_id" required>
-                        @foreach ($partner as $besti)
-                            <option value="{{ $besti->id }}" {{ $besti->id == $ponya[0]->partner_id ? 'selected' : '' }}>{{ $besti->name }}</option>
-                        @endforeach
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" disabled id="partner_id" name="partner_id" required>
+                        <option value="{{ $info[0]->partner_id }}">{{ $info[0]->partner_id }}</option>
+
                     </select>
             </div>
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Address</label>
-                <textarea type="text" name="address" id="address" readonly class="form-control form-control-solid mb-3 mb-lg-0"></textarea>
+                <textarea type="text" name="address" id="address" readonly class="form-control form-control-solid mb-3 mb-lg-0"  ></textarea>
             </div>
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Phone Number</label>
-                <input type="text" name="phone" id="phone" readonly class="form-control form-control-solid mb-3 mb-lg-0" required/>
+                <input type="text" name="phone" id="phone" readonly class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Fax</label>
@@ -34,73 +34,61 @@
         <div class="col-lg-6">
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Vat/PPN</label>
-                <input type="number" name="ppn" id="ppn" onkeyup='sumAll()' value="{{ $ponya[0]->ppn }}" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="number" name="ppn" id="ppn"  value="{{ $info[0]->ppn }}" class="form-control form-control-solid mb-3 mb-lg-0" disabled required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Currency</label>
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0" onchange="getRate(this.value)" name="currency_id" id="currency_id" required>
-                        <option>Choose The Currency</option>
-                        @foreach ($currency as $currency)
-                        <option value="{{ $currency->id }}" {{ $currency->id == $ponya[0]->currency_id }}>{{ $currency->name }}</option>
-
-                        @endforeach
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0" disabled name="currency_id" id="currency_id" required>
+                        <option value="{{ $info[0]->currency_id }}">{{ $info[0]->currency_id }}</option>
                     </select>
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Rate</label>
-                <input type="number" name="rate" id="rate" value="{{ $ponya[0]->rate }}" readonly class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="number" name="rate" id="rate"  value="{{ $info[0]->rate }}" disabled readonly class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Term of Payment</label>
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="term_of_payment" id="term_of_payment" required>
-                        <option value="Cash" {{ $ponya[0]->term_of_payment === 'Cash' ? 'selected' : '' }}>Cash</option>
-					    <option value="15" {{ $ponya[0]->term_of_payment === '15' ? 'selected' : '' }}>15 Hari</option>
-						<option value="30" {{ $ponya[0]->term_of_payment === '30' ? 'selected' : '' }}>30 Hari</option>
-						<option value="45" {{ $ponya[0]->term_of_payment === '45' ? 'selected' : '' }}>45 Hari</option>
-						<option value="60" {{ $ponya[0]->term_of_payment === '60' ? 'selected' : '' }}>60 Hari</option>
-						<option value="90" {{ $ponya[0]->term_of_payment === '90' ? 'selected' : '' }}>90 Hari</option>
-						<option value="other" {{ $ponya[0]->term_of_payment === 'other' ? 'selected' : '' }}>Lainnya</option>
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" readonly name="term_of_payment" id="term_of_payment" required>
+                        <option value="{{ $info[0]->term_of_payment }}">{{ $info[0]->term_of_payment }}</option>
                     </select>
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Description</label>
-                <textarea type="text" name="description" id="description" value="{{ $ponya[0]->description }}" class="form-control form-control-solid mb-3 mb-lg-0"  required></textarea>
+                <textarea type="text" name="description" id="description" class="form-control form-control-solid mb-3 mb-lg-0" readonly required>{{ $info[0]->description }}</textarea>
             </div>
         </div>
         <div class="col-lg-12"id="itemsAddList">
             <h1>Items</h1>
             <hr>
             @foreach ($items as $item)
-        <div class="row" >
-            <div class="fv-row mb-7 col-lg-3">
-                <label class="required form-label fw-bold">Item</label>
-                <select class="form-select  form-select-solid mb-3 mb-lg-0 item_id select-2" id="item_id" name="item_id[]" onchange="getBaseQty(this)" required>
-                        <option>Choose Partner First</option>
-                </select>
+            <div class="row" >
+                <div class="fv-row mb-7 col-lg-3">
+                    <label class="required form-label fw-bold">Item</label>
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0 item_id select-2" id="item_id" value="{{ $item->item_id }}" disabled name="item_id[]" onchange="getBaseQty(this)" required>
+                            <option>{{ $item->item_id }}</option>
+                    </select>
+                </div>
+                <div class="fv-row mb-7 col-lg-2">
+                    <label class="required fw-bold fs-6 mb-2">Price</label>
+                    <input type="text" name="price[]" id="price" value="{{ $item->unit_price }}" disabled onkeyup="hitungByQty(this)" class="form-control form-control-solid mb-3 mb-lg-0 qty"  required/>
+                </div>
+                <div class="fv-row mb-7 col-lg-2">
+                    <label class="required fw-bold fs-6 mb-2">Qty</label>
+                    <input type="text" name="qty[]" id="qty" value="{{ $item->qty }}" disabled onkeyup="hitungByQty(this)" class="form-control form-control-solid mb-3 mb-lg-0 qty"  required/>
+                </div>
+                <div class="fv-row mb-7 col-lg-2">
+                    <label class="required fw-bold fs-6 mb-2">Diskon</label>
+                    <input type="text" name="discount[]" id="discount" value="0" disabled onkeyup="hitungByDiscount(this)" class="form-control form-control-solid mb-3 mb-lg-0 discount"  required/>
+                </div>
+                <div class="fv-row mb-7 col-lg-3">
+                    <label class="required fw-bold fs-6 mb-2">Total</label>
+                    <input type="text" name="total[]" id="total" value="{{ $item->total_price }}" readonly class="form-control form-control-solid mb-3 mb-lg-0 totalnya"  required/>
+                    <input type="hidden" name="getdiscountperitem[]" value="0" id="getdiscountperitem" readonly class="form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem"  required/>
+                </div>
             </div>
+            @endforeach
+        </div>
 
-            <div class="fv-row mb-7 col-lg-1">
-                <label class="required fw-bold fs-6 mb-2">Qty</label>
-                <input type="number" name="qty[]" id="qty" value="0" onkeyup="hitungByQty(this)" class="form-control form-control-solid mb-3 mb-lg-0 qty"  required/>
-            </div>
-            <div class="fv-row mb-7 col-lg-1">
-                <label class="required fw-bold fs-6 mb-2">Diskon</label>
-                <input type="number" name="discount[]" id="discount" value="0" onkeyup="hitungByDiscount(this)" class="form-control form-control-solid mb-3 mb-lg-0 discount"  required/>
-            </div>
-            <div class="fv-row mb-7 col-lg-2">
-                <label class="required fw-bold fs-6 mb-2">Total</label>
-                <input type="number" name="total[]" id="total" readonly class="form-control form-control-solid mb-3 mb-lg-0 totalnya"  required/>
-                <input type="hidden" name="getdiscountperitem[]" value="0" id="getdiscountperitem" readonly class="form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem"  required/>
-            </div>
-            <div class="fv-row mb-7 col-lg-1">
-
-            </div>
-        </div>
-        @endforeach
-        </div>
-        <div class="d-flex justify-content-end py-2">
-            <button class="btn btn-sm btn-primary" type="button" onclick="addNewItemRow()">+</button>
-        </div>
     </div>
     <hr>
     <div class="d-flex justify-content-end py-2">
@@ -136,9 +124,9 @@
     </div>
     <hr>
 
-        <div class="d-flex justify-content-end" id="loadingnya">
+        {{-- <div class="d-flex justify-content-end" id="loadingnya">
             <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Add Purchase Order</button>
-        </div>
+        </div> --}}
 </form>
 
 <script>

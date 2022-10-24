@@ -237,6 +237,7 @@ Route::middleware(['auth'])->controller(PurchaseOrderController::class)->group(f
     Route::get('/admin/procurement/purchase-order/getbaseqty/{id}', 'getbaseqty');
     Route::get('/admin/procurement/purchase-order/addnewitemrow/{id}', 'addnewitemrow');
     Route::get('/admin/procurement/purchase-order/editmodal/{id}', 'editmodal');
+    Route::get('/admin/procurement/purchase-order/infomodal/{id}', 'infomodal');
     Route::get('/admin/procurement/purchase-order/delete/{id}', 'destroy');
     Route::post('/admin/procurement/purchase-order/store', 'store');
 });

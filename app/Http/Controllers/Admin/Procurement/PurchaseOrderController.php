@@ -9,6 +9,7 @@ use App\Models\ItemPrice;
 use App\Models\ItemQty;
 use App\Models\Items;
 use App\Models\Partners;
+use App\Models\PurchaseOrder;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,36 +20,59 @@ use PDO;
 class PurchaseOrderController extends Controller
 {
     public function index(){
-        // dd(DB::connection('procurement')->select('select * from purchase_orders'));
+
         return view('admin.procurement.purchaseorder.index');
     }
 
     public function list(){
-
-        return Datatables::of(DB::connection('procurement')->select('Call sp_list_po()'))->addIndexColumn()
+        // (DB::connection('procurement')->select('Call sp_list_po()')
+        return Datatables::of(DB::connection('procurement')->select('select * from purchase_orders'))->addIndexColumn()
         ->addColumn('action', function($model){
             $action = "";
-            if(Gate::allows('edit', ['/admin/procurement/purchase-order'])){
-                $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
-            }
-            if(Gate::allows('delete', ['/admin/procurement/purchase-order'])){
-                $action .= " <a href='/admin/procurement/purchase-order/delete/$model->id' class='btn btn-sm btn-danger' id='deletepo'><i class='bi bi-trash'></i></a>";
+            $action = "<a onclick='infoModal($model->id)' class='btn btn-sm btn-info'><i class='bi bi-info-square'></i></a>";
+
+            if($model->status == 0){
+                if(Gate::allows('edit', ['/admin/procurement/purchase-order'])){
+                    $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
+                }
+                if(Gate::allows('delete', ['/admin/procurement/purchase-order'])){
+                    $action .= " <a href='/admin/procurement/purchase-order/delete/$model->id' class='btn btn-sm btn-danger' id='deletepo'><i class='bi bi-trash'></i></a>";
+                }
             }
             return $action;
-        })->make(true);
+        })->addColumn('statues', function($model){
+            $statues = "";
+
+            if($model->status == 0){
+                $statues .= "<a onclick='approveModal($model->id)' class='btn btn-sm btn-danger'><i class='bi bi-patch-check'></i> Not Confirm</a>";
+            }else{
+                $statues .= "<a class='btn btn-sm btn-primary'><i class='bi bi-patch-check'></i> Confirmed</a>";
+            }
+            return $statues;
+        })->rawColumns(['action', 'statues'])->make(true);
     }
 
     public function addmodal(){
 
-        $code = 'R'. date('Y') .'0001';
+        $po = PurchaseOrder::latest()->first();
+        $unik =  $po->id +1;
+        $code = 'R'. date('md') .'220'. $unik;
 
         return view('admin.procurement.purchaseorder.addmodal', ['code' => $code, 'partner'=>Partners::all(), 'currency' => Currency::all()]);
     }
     public function editmodal(Request $request){
-        dd($request->id);
-        $code = 'R'. date('Y') .'0001';
 
-        return view('admin.procurement.purchaseorder.editmodal', ['code' => $code, 'partner'=>Partners::all(), 'currency' => Currency::all()]);
+        $ponya = DB::connection('procurement')->select("call sp_search_id($request->id)");
+        $id = $ponya[0]->id;
+        $items = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $id ");
+        return view('admin.procurement.purchaseorder.editmodal', ['partner'=>Partners::all(), 'currency' => Currency::all(),'ponya' => $ponya, 'items' => $items]);
+    }
+
+    public function infomodal(Request $request){
+        $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
+        $id = $info[0]->id;
+        $items = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $id ");
+        return view('admin.procurement.purchaseorder.infomodal', ['info'=> $info, 'items' => $items]);
     }
 
     public function destroy(Request $request){
@@ -132,53 +156,53 @@ class PurchaseOrderController extends Controller
 
     public function store(Request $request){
 
-        $skrg = Carbon::now();
+        DB::connection('procurement')->select("call sp_insert_po(
+            '$request->code',
+            '$request->order_date',
+            '$request->term_of_payment',
+            '$request->description',
+            $request->grandtotal,
+            '$request->rate',
+            '$request->ppn',
+            '$request->partner_id',
+            '$request->currency_id'
+            )");
+
+           $polast = PurchaseOrder::latest()->first();
+            $creating = auth()->user()->username;
         if(count($request->item_id) > 1){
-            for($i =0; $i < count($request->item_id); $i++){
-                $item_id = $request->item_id[$i];
-                $qty = $request->qty[$i];
-                $price = $request->price[$i];
-                DB::connection('procurement')->select("call sp_insert_po_items(
-                    '$request->code',
-                    '$request->order_date',
-                    '$request->term_of_payment',
-                    '$request->description',
-                    '$request->rate',
-                    '$request->ppn',
-                    '$request->partner_id',
-                    1,
-                    '$request->currency_id',
-                    1,
-                    '$item_id',
-                    '$qty',
-                    '$price',
-                    '$skrg',
-                    'Ega'
+                for($i =0; $i < count($request->item_id); $i++){
+                    $item_id = $request->item_id[$i];
+                    $qty = $request->qty[$i];
+                    $price = $request->price[$i];
+                    $total = $request->total[$i];
+
+
+                    DB::connection('procurement')->select("call sp_insert_po_items(
+                        $polast->id,
+                        $item_id,
+                        '$qty',
+                        '$price',
+                        '$total',
+                        '$creating'
                     )");
                 }
-        }else{
 
+        }else{
             $item_id = $request->item_id[0];
             $qty = $request->qty[0];
             $price = $request->price[0];
+            $total = $request->total[0];
+
             DB::connection('procurement')->select("call sp_insert_po_items(
-                '$request->code',
-                '$request->order_date',
-                '$request->term_of_payment',
-                '$request->description',
-                '$request->rate',
-                '$request->ppn',
-                '$request->partner_id',
-                1,
-                '$request->currency_id',
-                1,
-                '$item_id',
+                $polast->id,
+                $item_id,
                 '$qty',
                 '$price',
-                '$skrg',
-                'Ega'
-                )");
-            }
+                '$total',
+                '$creating'
+            )");
+        }
 
 
         return redirect('/admin/procurement/purchase-order')->with(['success'=> 'Purchase Order Added']);
