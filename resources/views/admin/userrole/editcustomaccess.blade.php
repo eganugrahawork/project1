@@ -8,7 +8,7 @@
             <tbody class="text-gray-600 fw-bold">
                 @foreach ($useraccess as $ua)
                 @php
-                $checkblock = DB::select("select * from custom_access_blocks where user_id = $user->id and menu_id = $ua->menu_id");
+                $checkblock = DB::connection('masterdata')->select("select * from custom_access_blocks where user_id = $user->id and menu_id = $ua->menu_id");
                 $data  = ['user_id' => $user->id, 'menu_id'=> $ua->menu_id];
                 @endphp
                 <tr>

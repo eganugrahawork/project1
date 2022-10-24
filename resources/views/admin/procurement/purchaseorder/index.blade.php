@@ -34,12 +34,12 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <input type="text" id="searchIndukTable" class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
+                        <input type="text" id="searchTablePo" class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
                     </div>
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
-                        @can('edit', ['/admin/procurement/purchase-order'])
+                        @can('create', ['/admin/procurement/purchase-order'])
                         <button type="button" class="btn btn-primary me-3" onclick="addPoModal()">
                         Add Purchase Order</button>
                         @endcan
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="indukTable">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="tablePo">
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="min-w-20px">No</th>
@@ -76,7 +76,7 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header" id="mainmodal_header">
-                <h2 class="fw-bolder">Item Price</h2>
+                <h2 class="fw-bolder">Purchase Order</h2>
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" onclick="tutupModal()">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -118,6 +118,121 @@
         function tutupModal(){
         $('#mainmodal').modal('toggle')
         }
+
+        var tablePo =  $('#tablePo').DataTable({
+            serverside : true,
+            processing : true,
+            ajax : {
+                    url : "{{ url('/admin/procurement/purchase-order/list') }}"
+                    },
+                    columns:
+                    [
+                    {
+                    data: 'DT_RowIndex',
+                    searchable: false
+                },
+                    {data: 'code', name: 'code'},
+                    {data: 'partner_id', name: 'partner_id'},
+                    {data: 'order_date', name: 'order_date'},
+                    {data: 'price', name: 'price', render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )},
+                    {data: 'delivery_date', name: 'delivery_date'},
+                    {data: 'status', name: 'status'},
+                    {data: 'action', name: 'action'}
+                    ],
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false
+        });
+
+        $('#searchTablePo').keyup(function () {
+                tablePo.search($(this).val()).draw()
+        });
+
+    //     $(document).on('submit', '#add-form', function(e){
+    //         e.preventDefault();
+
+    //         let action = $('#add-form').attr('action');
+    //         // console.log(action);
+
+    // //         const swalWithBootstrapButtons = Swal.mixin({
+    // //     customClass: {
+    // //       confirmButton: 'btn btn-success',
+    // //       cancelButton: 'btn btn-danger'
+    // //     },
+    // //     buttonsStyling: false
+    // //   })
+    // //         swalWithBootstrapButtons.fire({
+    // //         title: 'Confirm your data ?',
+    // //         text: "You can edit this data in list if you have wrong ",
+    // //         icon: 'question',
+    // //         showCancelButton: true,
+    // //         confirmButtonText: 'Confirm',
+    // //         cancelButtonText: 'Cancell',
+    // //         reverseButtons: false
+    // //     }).then((result) => {
+    // //         if (result.isConfirmed) {
+    // //         document.location.href = action;
+    // //         } else if (
+    // //         /* Read more about handling dismissals below */
+    // //         result.dismiss === Swal.DismissReason.cancel
+    // //         ) {
+    // //         swalWithBootstrapButtons.fire(
+    // //             'Cancelled',
+    // //             'Data not saved)',
+    // //             'success'
+    // //         )
+    // //         }
+    // //     })
+    //         // $('#btn-add').hide()
+    //         // $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+    //         // var data = {
+    //         //     'code': $('#code').val(),
+    //         //     'order_date': $('#order_date').val(),
+    //         //     'partner_id': $('#partner_id').val(),
+    //         //     'address': $('#address').val(),
+    //         //     'phone': $('#phone').val(),
+    //         //     'fax': $('#fax').val(),
+    //         //     'ppn': $('#ppn').val(),
+    //         //     'currency_id': $('#currency_id').val(),
+    //         //     'rate': $('#rate').val(),
+    //         //     'term_of_payment': $('#term_of_payment').val(),
+    //         //     'delivery_date': $('#delivery_date').val(),
+    //         //     'description': $('#description').val(),
+    //         //     'status': $('#status').val(),
+    //         //     'item_id': $('.item_id').val(),
+    //         //     'price': $('.price').val(),
+    //         //     'qty': $('.qty').val(),
+    //         //     'discount': $('.discount').val(),
+    //         //     'total': $('.totalnya').val(),
+    //         //     'subtotal': $('#subtotal').val(),
+    //         //     'totaldiscount': $('#totaldiscount').val(),
+    //         //     'taxable': $('#taxable').val(),
+    //         //     'totalppn': $('#totalppn').val(),
+    //         //     'grandtotal': $('#grandtotal').val()
+    //         // }
+
+    //         // $.ajaxSetup({
+    //         //     headers: {
+    //         //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         //     }
+    //         // });
+
+    //         // $.ajax({
+    //         //     type: "POST",
+    //         //     url: "{{ url('/admin/procurement/purchase-order/store') }}",
+    //         //     data: data,
+    //         //     dataType: 'json',
+    //         //     success:function(response){
+    //         //         Swal.fire(
+    //         //             'Success',
+    //         //             response.success,
+    //         //             'success'
+    //         //         )
+    //         //         $('#mainmodal').modal('toggle');
+    //         //         coaTable.ajax.reload(null, false);
+    //         //     }
+    //         // })
+    //     });
 </script>
 
 @endsection

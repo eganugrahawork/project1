@@ -24,7 +24,6 @@
 		<link href="/metronic/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="/metronic/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
         {{-- <link rel="stylesheet" href="/metronic/assets/css/darkmode.bundle.css"> --}}
-        {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"> --}}
         <link rel="stylesheet" href="/css/admin/index.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -89,26 +88,8 @@
 
                     </div>
                     <div class="card-body" id="kt_drawer_chat_messenger_body">
-                        <div class="scroll-y me-n5 pe-5" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_drawer_chat_messenger_header, #kt_drawer_chat_messenger_footer" data-kt-scroll-wrappers="#kt_drawer_chat_messenger_body" data-kt-scroll-offset="0px">
+                        <div class="scroll-y me-n5 pe-5" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_drawer_chat_messenger_header, #kt_drawer_chat_messenger_footer" data-kt-scroll-wrappers="#kt_drawer_chat_messenger_body" data-kt-scroll-offset="0px" id="listuseronline">
 
-                         @php
-                            $uonline = DB::connection('masterdata')->select('select * from users where status_access = 1');
-                         @endphp
-                            @foreach ($uonline as $uo)
-                                <div class="d-flex justify-content-start mb-10">
-                                    <div class="d-flex flex-column align-items-start">
-                                        <div class="d-flex align-items-center mb-2">
-                                            <div class="symbol symbol-35px symbol-circle">
-                                                <img alt="Pic" src="{{ asset('storage/' . $uo->image) }}" />
-                                            </div>
-                                            <div class="ms-3">
-                                                <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1">{{ $uo->name }}</a>
-                                                <span class="text-muted fs-7 mb-1">{{ $uo->username }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -149,6 +130,14 @@
                     }
                     </script>
                     {{-- End Toastr --}}
+
+                    <script>
+                        $('#kt_drawer_chat_toggle').on('click', function(){
+                            $.get("{{ url('/admin/listuseronline') }}", {}, function(data){
+                                $('#listuseronline').html(data);
+                             })
+                        })
+                    </script>
 
                     {{-- Pusher --}}
                      <script src="https://js.pusher.com/7.2/pusher.min.js"></script>

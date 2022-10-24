@@ -7,17 +7,19 @@ use App\Http\Controllers\Admin\ItemsController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PartnersController;
 use App\Http\Controllers\Admin\PriceManagementController;
-use App\Http\Controllers\Admin\PrincipalController;
+use App\Http\Controllers\Admin\Procurement\ItemsReceiptController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\PurchaseOrderController;
 use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Admin\UoMController;
 use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\Admin\UserSubmenuController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 // End Admin
+// Start Procurement
+use App\Http\Controllers\Admin\Procurement\PurchaseOrderController;
+// End Procurement
+
 
 // Utils
 use Illuminate\Support\Facades\Route;
@@ -62,6 +64,7 @@ Route::get('/admin/checkonline', [DashboardController::class, 'checkonline'])->m
 Route::get('/admin/useractivity', [DashboardController::class, 'useractivity'])->middleware('auth');
 Route::get('/admin/listuseractivity', [DashboardController::class, 'listuseractivity'])->middleware('auth');
 Route::get('/admin/checknotification', [DashboardController::class, 'checknotification'])->middleware('auth');
+Route::get('/admin/listuseronline ', [DashboardController::class, 'listuseronline'])->middleware(['auth']);
 //End Dashboard
 
 
@@ -159,16 +162,6 @@ Route::middleware(['auth'])->controller(ItemsController::class)->group(function(
     Route::post('/admin/masterdata/itemprice/update', 'updateitemprice');
 });
 
-// Principal Start
-Route::middleware(['auth'])->controller(PrincipalController::class)->group(function(){
-    Route::get('admin/masterdata/principal', 'index');
-    Route::post('admin/masterdata/principal/store', 'store');
-    Route::post('admin/masterdata/principal/update', 'update');
-    Route::get('admin/masterdata/principal/delete/{id}', 'destroy');
-    Route::get('admin/masterdata/principal/editmodal/{id}', 'editmodal');
-    Route::get('admin/masterdata/principal/addmodal', 'addmodal');
-});
-// Principal End
 
 // Partners Start
 Route::middleware(['auth'])->controller(PartnersController::class)->group(function(){
@@ -237,6 +230,7 @@ Route::middleware(['auth'])->controller(CoaController::class)->group(function(){
 // Purchase Order
 Route::middleware(['auth'])->controller(PurchaseOrderController::class)->group(function(){
     Route::get('/admin/procurement/purchase-order', 'index');
+    Route::get('/admin/procurement/purchase-order/list', 'list');
     Route::get('/admin/procurement/purchase-order/addmodal', 'addmodal');
     Route::get('/admin/procurement/purchase-order/getitem/{id}', 'getitem');
     Route::get('/admin/procurement/purchase-order/getcurrency/{id}', 'getcurrency');
@@ -246,6 +240,14 @@ Route::middleware(['auth'])->controller(PurchaseOrderController::class)->group(f
     Route::post('/admin/procurement/purchase-order/store', 'store');
 });
 //End Purchase Order
+
+// Items Receipt
+Route::middleware('auth')->controller(ItemsReceiptController::class)->group(function(){
+    Route::get('/admin/procurement/items-receipt', 'index');
+    Route::get('/admin/procurement/items-receipt/addmodal', 'addmodal');
+});
+
+// End Items Receipt
 
 //Blocked Page Start
 Route::get('/blocked', function(){

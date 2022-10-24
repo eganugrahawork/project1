@@ -42,6 +42,11 @@ class DashboardController extends Controller
       return response()->json(UserActivity::count());
     }
 
+    public function listuseronline(){
+        $uonline = DB::connection('masterdata')->select('select * from users where status_access = 1');
+        return view('admin.layouts.listuseronline', ['uonline' => $uonline]);
+    }
+
     public function loadmenu(Request $request){
         // dd($request->role_id);
         $menu = DB::connection('masterdata')->select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $request->parent");

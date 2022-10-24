@@ -23,7 +23,7 @@
             <div class="card-header border-0 pt-6">
                 <div class="card-title align-items-start flex-column">
                     <div class="d-flex align-items-center position-relative my-1">
-                       <h2>List Partners</h2>
+                       <h2>Type Partners</h2>
                     </div>
                     <div class="d-flex align-items-center position-relative my-1">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->

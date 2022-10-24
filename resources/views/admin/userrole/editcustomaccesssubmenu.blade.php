@@ -7,7 +7,7 @@
             <tbody class="text-gray-600 fw-bold">
                 @foreach ($useraccesssubmenu as $uas)
                 @php
-                $checkblock = DB::select("select * from custom_access_blocks where id_user = $user->id and id_submenu = $uas->id_submenu");
+                $checkblock = DB::connection('masterdata')->select("select * from custom_access_blocks where id_user = $user->id and id_submenu = $uas->id_submenu");
                 $data  = ['id_user' => $user->id, 'id_submenu'=> $uas->id_submenu];
                 @endphp
                 <tr>

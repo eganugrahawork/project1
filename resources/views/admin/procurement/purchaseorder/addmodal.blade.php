@@ -1,4 +1,4 @@
-<form id="kt_modal_add_user_form" class="form" action="/admin/procurement/purchase-order/store" method="post">
+<form id="add-form" class="form" action="/admin/procurement/purchase-order/store" method="post">
     @csrf
     <div class="row">
         <div class="col-lg-6">
@@ -8,11 +8,11 @@
             </div>
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Order Date</label>
-                <input type="date" name="order_date" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="datetime-local" name="order_date" id="order_date" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Partners</label>
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0" id="partner_id" name="partner_id" required>
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" id="partner_id" name="partner_id" required>
                         <option>Choose The Partner</option>
                         @foreach ($partner as $besti)
                             <option value="{{ $besti->id }}">{{ $besti->name }}</option>
@@ -35,11 +35,11 @@
         <div class="col-lg-6">
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Vat/PPN</label>
-                <input type="number" name="ppn" id="ppn" value="11" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="number" name="ppn" id="ppn" onkeyup='sumAll()' value="11" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Currency</label>
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0" onchange="getRate(this.value)" name="currency_id" required>
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0" onchange="getRate(this.value)" name="currency_id" id="currency_id" required>
                         <option>Choose The Currency</option>
                         @foreach ($currency as $currency)
                         <option value="{{ $currency->id }}">{{ $currency->name }}</option>
@@ -53,7 +53,7 @@
             </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Term of Payment</label>
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0" name="term_of_payment" required>
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="term_of_payment" id="term_of_payment" required>
                         <option>Choose a Term</option>
                         <option value="Cash">Cash</option>
 					    <option value="15">15 Hari</option>
@@ -65,12 +65,16 @@
                     </select>
             </div>
             <div class="fv-row mb-7">
+                <label class="fw-bold fs-6 mb-2">Delivery Date</label>
+                <input type="datetime-local" name="delivery_date" id="delivery_date" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+            </div>
+            <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Description</label>
-                <textarea type="text" name="description" class="form-control form-control-solid mb-3 mb-lg-0"  required></textarea>
+                <textarea type="text" name="description" id="description" class="form-control form-control-solid mb-3 mb-lg-0"  required></textarea>
             </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Status</label>
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="status" id="status" required>
                         <option>Choose Status</option>
                         <option value="1">Yes</option>
                         <option value="0">Not</option>
@@ -83,18 +87,18 @@
         <div class="row" >
             <div class="fv-row mb-7 col-lg-3">
                 <label class="required form-label fw-bold">Item</label>
-                <select class="form-select  form-select-solid mb-3 mb-lg-0" id="item_id" name="item_id[]" onchange="getBaseQty(this)" required>
+                <select class="form-select  form-select-solid mb-3 mb-lg-0 item_id select-2" id="item_id" name="item_id[]" onchange="getBaseQty(this)" required>
                         <option>Choose Partner First</option>
                 </select>
             </div>
 
             <div class="fv-row mb-7 col-lg-1">
                 <label class="required fw-bold fs-6 mb-2">Qty</label>
-                <input type="number" name="qty[]" id="qty" value="0" onkeyup="hitungByQty(this)" class="form-control form-control-solid mb-3 mb-lg-0 "  required/>
+                <input type="number" name="qty[]" id="qty" value="0" onkeyup="hitungByQty(this)" class="form-control form-control-solid mb-3 mb-lg-0 qty"  required/>
             </div>
             <div class="fv-row mb-7 col-lg-1">
                 <label class="required fw-bold fs-6 mb-2">Diskon</label>
-                <input type="number" name="discount[]" id="discount" value="0" onkeyup="hitungByDiscount(this)" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="number" name="discount[]" id="discount" value="0" onkeyup="hitungByDiscount(this)" class="form-control form-control-solid mb-3 mb-lg-0 discount"  required/>
             </div>
             <div class="fv-row mb-7 col-lg-2">
                 <label class="required fw-bold fs-6 mb-2">Total</label>
@@ -148,14 +152,22 @@
             <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Add Purchase Order</button>
         </div>
 </form>
+
 <script>
+     $(document).ready(function() {
+            $('.select-2').select2({
+                dropdownParent: $('#mainmodal')
+            });
+
+    });
+</script>
 
 
-
-    $('form').submit(function(){
-    $('#btn-add').hide()
-    $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-    })
+<script>
+    // $('form').submit(function(){
+    // $('#btn-add').hide()
+    // $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+    // })
 
 
     $('#partner_id').on('change', function(){
@@ -172,7 +184,9 @@
 
     function getBaseQty(e){
         $.get("{{ url('/admin/procurement/purchase-order/getbaseqty') }}/"+e.value, {}, function(data){
-            $(e).parent().after("<div class='fv-row mb-7 col-lg-1' id='base_qty_parent'><label class='fw-bold fs-6 mb-2'>Base Qty</label><input type='number' name='base_qty' class='form-control form-control-white mb-3 mb-lg-0' value='"+data.base_qty+"' readonly/></div>"+data.pricing)
+            $(e).parent().parent().find('#price_parent').remove();
+            $(e).parent().parent().find('#base_qty_parent').remove();
+            $(e).parent().after("<div class='fv-row mb-7 col-lg-1' id='base_qty_parent'><label class='fw-bold fs-6 mb-2'>Base Qty</label><input type='number' name='base_qty' id='base_qyu' class='form-control form-control-white mb-3 mb-lg-0' value='"+data.base_qty+"' readonly/></div>"+data.pricing)
             })
     }
 
@@ -185,6 +199,9 @@
     function addNewItemRow(){
             $.get("{{ url('/admin/procurement/purchase-order/addnewitemrow') }}/"+$('#partner_id').val(), {}, function(data){
                 $('#itemsAddList').append(data.html)
+                $('.select-2').select2({
+                    dropdownParent: $('#mainmodal')
+                });
             })
     }
 
@@ -235,6 +252,7 @@
         $(e).parent().parent().find('#getdiscountperitem').val(getdiscountperitem);
 
         sumAll()
+
     }
 
     function sumAll(){

@@ -65,7 +65,7 @@
 <!-- Modal -->
 @foreach ($menu as $m)
 @php
-    $status = DB::select("select * from user_access_menus where id_role = $id_role and id_menu = $m->id");
+    $status = DB::connection('masterdata')->select("select * from user_access_menus where id_role = $id_role and id_menu = $m->id");
 @endphp
 <div class="modal fade" id="accessModal{{ $m->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="accessModal{{ $m->id }}Label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

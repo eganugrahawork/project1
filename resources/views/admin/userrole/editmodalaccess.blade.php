@@ -20,14 +20,14 @@
 
                     </td>
                     @php
-                        $submenu = DB::select("select * from menus where parent = $m->id");
+                        $submenu = DB::connection('masterdata')->select("select * from menus where parent = $m->id");
                     @endphp
                     @if ($submenu)
 
                     <td>
                         @foreach ($submenu as $sub)
                             @php
-                                $subonsubmenu = DB::select("select * from menus where parent = $sub->id");
+                                $subonsubmenu = DB::connection('masterdata')->select("select * from menus where parent = $sub->id");
                             @endphp
 
                             @if ($subonsubmenu)

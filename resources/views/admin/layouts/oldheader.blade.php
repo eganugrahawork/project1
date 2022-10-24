@@ -189,13 +189,13 @@
 
                     @php
                         $roleId = auth()->user()->id_role;
-                        $menu = DB::select("select b.id, b.menu,  b.url, b.is_submenu from user_access_menus a join user_menus b on a.id_menu = b.id where a.id_role = $roleId");
+                        $menu = DB::connection('masterdata')->select("select b.id, b.menu,  b.url, b.is_submenu from user_access_menus a join user_menus b on a.id_menu = b.id where a.id_role = $roleId");
                     @endphp
 
                 @foreach ($menu as $m )
                     @php
                         $str = substr($m->url, 1);
-                        $customaccess = DB::select('select * from custom_access_blocks where id_user = '. auth()->user()->id.' and  id_menu = '.$m->id);
+                        $customaccess = DB::connection('masterdata')->select('select * from custom_access_blocks where id_user = '. auth()->user()->id.' and  id_menu = '.$m->id);
                     @endphp
 
                     @if ($customaccess)
@@ -204,7 +204,7 @@
 
                     @if ($m->is_submenu == true)
                         @php
-                            $submenu = DB::select("select * from user_submenus where id_menu = $m->id");
+                            $submenu = DB::connection('masterdata')->select("select * from user_submenus where id_menu = $m->id");
                             $reqLink = Request::fullUrl();
                             $namaMenu = strtolower($m->menu);
                             $check = strpos($reqLink, $namaMenu);
@@ -219,11 +219,11 @@
 
                             @foreach ($submenu as $sub )
                             @php
-                                $subnya = DB::select('select * from user_access_submenus where id_submenu = '.$sub->id.' and id_role = '.auth()->user()->userrole->id);
+                                $subnya = DB::connection('masterdata')->select('select * from user_access_submenus where id_submenu = '.$sub->id.' and id_role = '.auth()->user()->userrole->id);
                             @endphp
                             @if ($subnya)
                                     @php
-                                           $customaccesssubmenu = DB::select('select * from custom_access_blocks where id_user = '. auth()->user()->id.' and  id_submenu = '.$sub->id);
+                                           $customaccesssubmenu = DB::connection('masterdata')->select('select * from custom_access_blocks where id_user = '. auth()->user()->id.' and  id_submenu = '.$sub->id);
                                     @endphp
                                     @if ($customaccesssubmenu == null)
                                         <div class="menu-item">

@@ -221,8 +221,8 @@
                                                     </div>
                                                 </div>
                                                 @php
-                                                    $getmenu = DB::select("select b.name from menu_access a join menus b on a.menu_id = b.id where role_id=$r->id ");
-                                                    $getUser = DB::select("select username from users where role_id = $r->id");
+                                                    $getmenu = DB::connection('masterdata')->select("select b.name from menu_access a join menus b on a.menu_id = b.id where role_id=$r->id ");
+                                                    $getUser = DB::connection('masterdata')->select("select username from users where role_id = $r->id");
                                                     $jmlUser = count($getUser)
                                                 @endphp
 

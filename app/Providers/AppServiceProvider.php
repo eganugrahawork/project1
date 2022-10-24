@@ -6,12 +6,16 @@ namespace App\Providers;
 
 use App\Models\CrudPermission;
 use App\Models\Menu;
+use App\Models\MenuAccess;
 use App\Models\User;
 use App\Models\UserMenu;
 use App\Models\UserSubmenu;
+use Closure;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Gate;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

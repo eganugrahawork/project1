@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Procurement;
 
 use App\Http\Controllers\Controller;
 use App\Models\Currency;
@@ -9,19 +9,39 @@ use App\Models\ItemPrice;
 use App\Models\ItemQty;
 use App\Models\Items;
 use App\Models\Partners;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Yajra\DataTables\DataTables;
 use PDO;
 
 class PurchaseOrderController extends Controller
 {
     public function index(){
-        return view('admin.purchaseorder.index');
+        // dd(DB::connection('procurement')->select('select * from purchase_orders'));
+        return view('admin.procurement.purchaseorder.index');
+    }
+
+    public function list(){
+
+        return Datatables::of(DB::connection('procurement')->select('Call sp_list_po()'))->addIndexColumn()
+        ->addColumn('action', function($model){
+            $action = "";
+            if(Gate::allows('edit', ['/admin/procurement/purchase-order'])){
+                $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
+            }
+            if(Gate::allows('delete', ['/admin/procurement/purchase-order'])){
+                $action .= " <a href='/admin/procurement/purchase-order/delete/$model->id' class='btn btn-sm btn-danger' id='deletecoa'><i class='bi bi-trash'></i></a>";
+            }
+            return $action;
+        })->make(true);
     }
 
     public function addmodal(){
         $code = 'R'. date('Y') .'0001';
 
-        return view('admin.purchaseorder.addmodal', ['code' => $code, 'partner'=>Partners::all(), 'currency' => Currency::all()]);
+        return view('admin.procurement.purchaseorder.addmodal', ['code' => $code, 'partner'=>Partners::all(), 'currency' => Currency::all()]);
     }
 
     public function getitem(Request $request){
@@ -61,7 +81,7 @@ class PurchaseOrderController extends Controller
     public function addnewitemrow(Request $request){
         $html = " <div class='row'> <div class='fv-row mb-7 col-lg-3'>
         <label class='required form-label fw-bold'>Item</label>
-        <select class='form-select  form-select-solid mb-3 mb-lg-0' id='item_id' name='item_id[]' onchange='getBaseQty(this)' required>";
+        <select class='form-select form-select-solid mb-3 mb-lg-0 select-2' id='item_id' name='item_id[]' onchange='getBaseQty(this)' required>";
 
         $items = Items::where(['partner_id' => $request->id])->get();
         if(count($items) > 0){
@@ -99,7 +119,29 @@ class PurchaseOrderController extends Controller
     }
 
     public function store(Request $request){
+
         dd($request);
+        $approved_date = Carbon::now();
+        DB::connection('procurement')->select("call sp_insert_po_items(
+            '$request->code',
+            '$request->order_date',
+            '$request->delivery_date',
+            '$request->term_of_payment',
+            '$request->description',
+            '$request->rate',
+            '$request->ppn',
+            '$request->partner_id',
+            '$request->coa_id',
+            '$request->currency_id',
+            '$request->status',
+            '$request->item_id',
+            '$request->qty',
+            '$request->price',
+            '$approved_date',
+            '$request->approved_by',
+            '$request->p_notes',
+        )");
+        return redirect('/admin/procurement/purchase-order')->with(['success'=> 'Purchase Order Added']);
     }
 
 }
