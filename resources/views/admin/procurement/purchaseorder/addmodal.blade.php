@@ -270,7 +270,7 @@
 
        totalppn = parseFloat($('#ppn').val() * taxable /100);
 
-       grandtotal = taxable +totalppn;
+       grandtotal = parseFloat(taxable) +parseFloat(totalppn);
 
        $('#grandtotal').val(grandtotal);
 
