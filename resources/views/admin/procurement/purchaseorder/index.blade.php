@@ -56,7 +56,7 @@
                             <th class="min-w-70px ">Partner Name</th>
                             <th class="min-w-70px ">Date PO</th>
                             <th class="min-w-70px ">Total</th>
-                            <th class="min-w-70px ">Due Date</th>
+                            {{-- <th class="min-w-70px ">Due Date</th> --}}
                             <th class="min-w-70px ">Status</th>
                             <th class="text-end min-w-50px">Action</th>
                         </tr>
@@ -135,7 +135,7 @@
                     {data: 'partner_id', name: 'partner_id'},
                     {data: 'order_date', name: 'order_date'},
                     {data: 'price', name: 'price', render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )},
-                    {data: 'delivery_date', name: 'delivery_date'},
+                    // {data: 'due_date', name: 'delivery_date'},
                     {data: 'status', name: 'status'},
                     {data: 'action', name: 'action'}
                     ],

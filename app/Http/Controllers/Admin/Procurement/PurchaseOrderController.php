@@ -131,23 +131,52 @@ class PurchaseOrderController extends Controller
 
     public function store(Request $request){
 
-        dd($request);
-        $approved_date = Carbon::now();
-        DB::connection('procurement')->select("call sp_insert_po_items(
-            '$request->code',
-            '$request->order_date',
-            '$request->term_of_payment',
-            '$request->description',
-            '$request->rate',
-            '$request->ppn',
-            '$request->partner_id',
-            '$request->coa_id',
-            '$request->currency_id',
-            '$request->status',
-            '$request->item_id',
-            '$request->qty',
-            '$request->price',
-        )");
+        $skrg = Carbon::now();
+        if(count($request->item_id) > 1){
+            for($i =0; $i < count($request->item_id); $i++){
+                $item_id = $request->item_id[$i];
+                $qty = $request->qty[$i];
+                $price = $request->price[$i];
+                DB::connection('procurement')->select("call sp_insert_po_items(
+                    '$request->code',
+                    '$request->order_date',
+                    '$request->term_of_payment',
+                    '$request->description',
+                    '$request->rate',
+                    '$request->ppn',
+                    '$request->partner_id',
+                    1,
+                    '$request->currency_id',
+                    1,
+                    '$item_id',
+                    '$qty',
+                    '$price',
+                    '$skrg',
+                    'Ega'
+
+                    )");
+                }
+        }else{
+            DB::connection('procurement')->select("call sp_insert_po_items(
+                '$request->code',
+                '$request->order_date',
+                '$request->term_of_payment',
+                '$request->description',
+                '$request->rate',
+                '$request->ppn',
+                '$request->partner_id',
+                1,
+                '$request->currency_id',
+                1,
+                '$request->item_id[0]',
+                '$request->qty[0]',
+                '$request->price[0]',
+                '$skrg',
+                'Ega'
+                )");
+            }
+
+
         return redirect('/admin/procurement/purchase-order')->with(['success'=> 'Purchase Order Added']);
     }
 

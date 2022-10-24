@@ -54,7 +54,6 @@
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Term of Payment</label>
                     <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="term_of_payment" id="term_of_payment" required>
-                        <option>Choose a Term</option>
                         <option value="Cash">Cash</option>
 					    <option value="15">15 Hari</option>
 						<option value="30">30 Hari</option>
