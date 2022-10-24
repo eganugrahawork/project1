@@ -148,91 +148,57 @@
                 tablePo.search($(this).val()).draw()
         });
 
-    //     $(document).on('submit', '#add-form', function(e){
-    //         e.preventDefault();
 
-    //         let action = $('#add-form').attr('action');
-    //         // console.log(action);
+        $(document).on('click', '#deletepo', function(e){
+            e.preventDefault();
+            const href = $(this).attr('href');
 
-    // //         const swalWithBootstrapButtons = Swal.mixin({
-    // //     customClass: {
-    // //       confirmButton: 'btn btn-success',
-    // //       cancelButton: 'btn btn-danger'
-    // //     },
-    // //     buttonsStyling: false
-    // //   })
-    // //         swalWithBootstrapButtons.fire({
-    // //         title: 'Confirm your data ?',
-    // //         text: "You can edit this data in list if you have wrong ",
-    // //         icon: 'question',
-    // //         showCancelButton: true,
-    // //         confirmButtonText: 'Confirm',
-    // //         cancelButtonText: 'Cancell',
-    // //         reverseButtons: false
-    // //     }).then((result) => {
-    // //         if (result.isConfirmed) {
-    // //         document.location.href = action;
-    // //         } else if (
-    // //         /* Read more about handling dismissals below */
-    // //         result.dismiss === Swal.DismissReason.cancel
-    // //         ) {
-    // //         swalWithBootstrapButtons.fire(
-    // //             'Cancelled',
-    // //             'Data not saved)',
-    // //             'success'
-    // //         )
-    // //         }
-    // //     })
-    //         // $('#btn-add').hide()
-    //         // $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-    //         // var data = {
-    //         //     'code': $('#code').val(),
-    //         //     'order_date': $('#order_date').val(),
-    //         //     'partner_id': $('#partner_id').val(),
-    //         //     'address': $('#address').val(),
-    //         //     'phone': $('#phone').val(),
-    //         //     'fax': $('#fax').val(),
-    //         //     'ppn': $('#ppn').val(),
-    //         //     'currency_id': $('#currency_id').val(),
-    //         //     'rate': $('#rate').val(),
-    //         //     'term_of_payment': $('#term_of_payment').val(),
-    //         //     'delivery_date': $('#delivery_date').val(),
-    //         //     'description': $('#description').val(),
-    //         //     'status': $('#status').val(),
-    //         //     'item_id': $('.item_id').val(),
-    //         //     'price': $('.price').val(),
-    //         //     'qty': $('.qty').val(),
-    //         //     'discount': $('.discount').val(),
-    //         //     'total': $('.totalnya').val(),
-    //         //     'subtotal': $('#subtotal').val(),
-    //         //     'totaldiscount': $('#totaldiscount').val(),
-    //         //     'taxable': $('#taxable').val(),
-    //         //     'totalppn': $('#totalppn').val(),
-    //         //     'grandtotal': $('#grandtotal').val()
-    //         // }
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
 
-    //         // $.ajaxSetup({
-    //         //     headers: {
-    //         //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         //     }
-    //         // });
+            swalWithBootstrapButtons.fire({
+                title: 'Hapus data ini ?',
+                text: "Data tidak bisa dikembalikan!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, hapus!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                reverseButtons: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+                    $.ajax({
+                        type:"GET",
+                        url: href,
+                        success:function(response){
+                            Swal.fire(
+                                'Success',
+                                response.success,
+                                'success'
+                            )
+                            tablePo.ajax.reload(null, false);
+                            $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
+                        }
+                    })
 
-    //         // $.ajax({
-    //         //     type: "POST",
-    //         //     url: "{{ url('/admin/procurement/purchase-order/store') }}",
-    //         //     data: data,
-    //         //     dataType: 'json',
-    //         //     success:function(response){
-    //         //         Swal.fire(
-    //         //             'Success',
-    //         //             response.success,
-    //         //             'success'
-    //         //         )
-    //         //         $('#mainmodal').modal('toggle');
-    //         //         coaTable.ajax.reload(null, false);
-    //         //     }
-    //         // })
-    //     });
+                } else if (
+
+                result.dismiss === Swal.DismissReason.cancel
+                ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Data anda masih aman :)',
+                    'success'
+                )
+                }
+            })
+        });
+
 </script>
 
 @endsection

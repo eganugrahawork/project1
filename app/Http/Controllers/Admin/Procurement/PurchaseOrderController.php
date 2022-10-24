@@ -32,7 +32,7 @@ class PurchaseOrderController extends Controller
                 $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
             }
             if(Gate::allows('delete', ['/admin/procurement/purchase-order'])){
-                $action .= " <a href='/admin/procurement/purchase-order/delete/$model->id' class='btn btn-sm btn-danger' id='deletecoa'><i class='bi bi-trash'></i></a>";
+                $action .= " <a href='/admin/procurement/purchase-order/delete/$model->id' class='btn btn-sm btn-danger' id='deletepo'><i class='bi bi-trash'></i></a>";
             }
             return $action;
         })->make(true);
@@ -42,6 +42,17 @@ class PurchaseOrderController extends Controller
         $code = 'R'. date('Y') .'0001';
 
         return view('admin.procurement.purchaseorder.addmodal', ['code' => $code, 'partner'=>Partners::all(), 'currency' => Currency::all()]);
+    }
+    public function editmodal(Request $request){
+        dd($request->id);
+        $code = 'R'. date('Y') .'0001';
+
+        return view('admin.procurement.purchaseorder.editmodal', ['code' => $code, 'partner'=>Partners::all(), 'currency' => Currency::all()]);
+    }
+
+    public function destroy(Request $request){
+        DB::connection('procurement')->select("call sp_delete_po_items($request->id)");
+        return response()->json(['success'=> 'Data Deleted']);
     }
 
     public function getitem(Request $request){
