@@ -23,7 +23,6 @@ class DashboardController extends Controller
 
     public function useractivity(){
 
-
         return view('admin.useractivity.index');
     }
     public function listuseractivity(){

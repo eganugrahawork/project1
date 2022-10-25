@@ -28,8 +28,16 @@ class CoaController extends Controller
                 $action .= " <a href='/admin/masterdata/coa/delete/$model->id' class='btn btn-sm btn-danger' id='deletecoa'><i class='bi bi-trash'></i></a>";
             }
             return $action;
-        })
-        ->make(true);
+        })->addColumn('parent', function($model){
+            if($model->id_parent == 0){
+                $parent = 'Main Parent';
+            }else{
+                $coa = Coa::where(['id' => $model->id_parent])->first();
+                $parent =  $coa->coa.'-'.$coa->description;
+            }
+            return $parent;
+
+        })->make(true);
     }
 
     public function addmodal(){
