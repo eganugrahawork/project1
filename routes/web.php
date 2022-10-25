@@ -58,9 +58,9 @@ Route::middleware(['guest'])->controller(ForgotPasswordController::class)->group
 Auth::routes();
 
 //Dashboard
+// Route::get('/admin/checkonline', [DashboardController::class, 'checkonline'])->middleware('auth');
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 Route::get('/admin/loadmenu/{parent}/{role_id}', [DashboardController::class, 'loadmenu'])->middleware('auth');
-Route::get('/admin/checkonline', [DashboardController::class, 'checkonline'])->middleware('auth');
 Route::get('/admin/useractivity', [DashboardController::class, 'useractivity'])->middleware('auth');
 Route::get('/admin/listuseractivity', [DashboardController::class, 'listuseractivity'])->middleware('auth');
 Route::get('/admin/checknotification', [DashboardController::class, 'checknotification'])->middleware('auth');

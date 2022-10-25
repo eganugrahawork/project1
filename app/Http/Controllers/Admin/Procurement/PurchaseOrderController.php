@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Procurement;
 
+use App\Events\NotifEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Currency;
 use App\Models\CurrencyHistory;
@@ -11,6 +12,7 @@ use App\Models\Items;
 use App\Models\Partners;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderItems;
+use App\Models\UserActivity;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -65,6 +67,7 @@ class PurchaseOrderController extends Controller
 
         return view('admin.procurement.purchaseorder.addmodal', ['code' => $code, 'partner'=>Partners::all(), 'currency' => Currency::all()]);
     }
+
     public function editmodal(Request $request){
 
         $ponya = DB::connection('procurement')->select("call sp_search_id($request->id)");
@@ -75,7 +78,7 @@ class PurchaseOrderController extends Controller
     public function infomodal(Request $request){
         // dd($request->id);
         $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
-        // dd($info);
+        // dd($info[0]->code);
         $items = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $request->id ");
         return view('admin.procurement.purchaseorder.infomodal', ['info'=> $info, 'items' => $items]);
     }
@@ -83,19 +86,37 @@ class PurchaseOrderController extends Controller
     public function aprovedmodal(Request $request){
         $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
         $items = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $request->id ");
+
+
         return view('admin.procurement.purchaseorder.aprovedmodal', ['info'=> $info, 'items' => $items, 'id_po' => $request->id]);
     }
 
     public function approve(Request $request){
         $user_approving = auth()->user()->username;
+        $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
 
         DB::connection('procurement')->select("call sp_approve_po($request->id, '$user_approving')");
-
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Approved PO",
+            'aktivitas' => "Approved PO",
+            'keterangan' => "Approved PO ". $info[0]->code
+        ]);
+        NotifEvent::dispatch(auth()->user()->name .' Approved PO '. $info[0]->code);
         return response()->json(['success'=> 'Data Approved']);
     }
 
     public function destroy(Request $request){
+        $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
         DB::connection('procurement')->select("call sp_delete_po_items($request->id)");
+
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Delete PO",
+            'aktivitas' => "Delete PO",
+            'keterangan' => "Delete PO ". $info[0]->code
+        ]);
+        NotifEvent::dispatch(auth()->user()->name .' Delete PO '. $info[0]->code);
         return response()->json(['success'=> 'Data Deleted']);
     }
 
@@ -230,6 +251,13 @@ class PurchaseOrderController extends Controller
             )");
         }
 
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Added PO",
+            'aktivitas' => "Added PO",
+            'keterangan' => "Added PO ". $request->code
+        ]);
+        NotifEvent::dispatch(auth()->user()->name .' Added PO '. $request->code);
 
         return redirect('/admin/procurement/purchase-order')->with(['success'=> 'Purchase Order Added']);
     }
@@ -289,6 +317,13 @@ class PurchaseOrderController extends Controller
             }
 
         }
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Edit PO",
+            'aktivitas' => "Edit PO",
+            'keterangan' => "Edit PO ". $request->code
+        ]);
+        NotifEvent::dispatch(auth()->user()->name .' Edit PO '. $request->code);
 
         return redirect('/admin/procurement/purchase-order')->with(['success'=> 'Purchase Order Edited']);
     }

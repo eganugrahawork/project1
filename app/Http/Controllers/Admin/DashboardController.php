@@ -33,10 +33,6 @@ class DashboardController extends Controller
         return  Datatables::of($activity)->addIndexColumn()->make(true);
     }
 
-    public function checkonline(){
-
-        return view('admin.layouts.viewonline');
-    }
 
     public function checknotification(){
       return response()->json(UserActivity::count());

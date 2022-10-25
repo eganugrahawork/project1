@@ -119,6 +119,14 @@ class ItemsController extends Controller
             'status' => $request->status
         ]);
 
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Type Items",
+            'aktivitas' => "Tambah",
+            'keterangan' => "Tambah Type items ". $request->name_type
+        ]);
+        NotifEvent::dispatch(auth()->user()->name .' Tambah Type Items  '. $request->name_type);
+
         return redirect()->back()->with(['success' => 'Type Items added']);
     }
 
@@ -129,14 +137,26 @@ class ItemsController extends Controller
             'description' => $request->description,
             'status' => $request->status
         ]);
-
-        return redirect()->back()->with(['success' => 'Type Items edited']);
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Type Items",
+            'aktivitas' => "Update",
+            'keterangan' => "Update Type items ". $request->name_type
+        ]);
+        NotifEvent::dispatch(auth()->user()->name .' Update Type Items  '. $request->name_type);
+        return redirect('/admin/masterdata/typeitems')->with(['success' => 'Type Items edited']);
     }
 
     public function typeitemsdelete(Request $request){
         TypeItems::where(['id' => $request->id])->delete();
-
-        return redirect()->back()->with(['success' => 'Type Items Deleted']);
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Type Items",
+            'aktivitas' => "Hapus",
+            'keterangan' => "Hapus Type items dengan id ". $request->id
+        ]);
+        NotifEvent::dispatch(auth()->user()->name .' Hapus Type Items dengan id  '. $request->id);
+        return redirect('/admin/masterdata/typeitems')->with(['success' => 'Type Items Deleted']);
     }
 
     public function itemprice(){

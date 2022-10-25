@@ -145,6 +145,14 @@ class PartnersController extends Controller
     public function storetypepartners(Request $request){
         DB::connection('masterdata')->select("call sp_insert_partner_types('$request->name', $request->status)");
 
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Type Partners",
+            'aktivitas' => "Tambah",
+            'keterangan' => "Tambah Type Partners ". $request->name
+        ]);
+
+        NotifEvent::dispatch(auth()->user()->name .' menambahkan Type Partner '. $request->name);
         return response()->json(['success' => 'Type Partner Added']);
     }
 
@@ -154,12 +162,27 @@ class PartnersController extends Controller
 
     public function updatetypepartners(Request $request){
         DB::connection('masterdata')->select("call sp_update_partner_types($request->id,'$request->name', $request->status)");
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Type Partners",
+            'aktivitas' => "Update",
+            'keterangan' => "Update Type Partners ". $request->name
+        ]);
 
+        NotifEvent::dispatch(auth()->user()->name .' Update Type Partner '. $request->name);
         return response()->json(['success', 'Type Partner has Edited']);
     }
 
     public function destroytypepartners(Request $request){
         DB::connection('masterdata')->select("call sp_delete_partner_types($request->id)");
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Type Partners",
+            'aktivitas' => "Hapus",
+            'keterangan' => "Hapus Type Partners dengan id ". $request->id
+        ]);
+
+        NotifEvent::dispatch(auth()->user()->name .' Hapus Type Partner Menjadi '. $request->id);
 
         return response()->json(['success', 'Type Parter Deleted']);
     }

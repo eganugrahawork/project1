@@ -163,18 +163,12 @@
             @if (auth()->user()->userrole->role == 'Super Admin')
                 <div class="d-flex align-items-center ms-3 ms-lg-4">
                     <div id="kt_drawer_chat_toggle" class="btn btn-icon btn-active-color-primary btn-outline btn-outline-secondary w-30px h-30px w-lg-40px h-lg-40px" >
-                        <span class="svg-icon svg-icon-1">
-                            <i class="bi bi-emoji-smile"></i>
+                        <span class="svg-icon svg-icon-1 ">
+                            <i class="bi bi-pin-map"></i>
                         </span>
                     </div>
                 </div>
-                <div class="d-flex align-items-center ms-3 ms-lg-4">
-                    <div class="btn btn-icon btn-active-color-primary btn-outline btn-outline-secondary w-30px h-30px w-lg-40px h-lg-40px notify" >
-                        <span class="svg-icon svg-icon-1">
-                            <i class="bi bi-bell"></i><span class="badgenotify">0</span>
-                        </span>
-                    </div>
-                </div>
+
             @endif
 
         </div>
@@ -182,40 +176,11 @@
     </div>
     <div class="separator"></div>
     <div class="header-menu-container container-xxl d-flex flex-stack h-lg-75px bg-warna" id="kt_header_nav" >
-        <!--begin::Menu wrapper-->
         <div class="header-menu flex-column flex-lg-row" data-kt-drawer="true" data-kt-drawer-name="header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_header_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
-            <!--begin::Menu-->
             <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch flex-grow-1" id="kt_header_menu" data-kt-menu="true">
-                {{-- @php
-                    $menu = DB::connection('masterdata')->select('select * from menu_test');
-                @endphp
 
-                @foreach ($menu as $m)
-                    @if ($m->parent == 0)
-                        <div id="{{ $m->id }}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
-                            <a class="menu-link py-3" href="{{ $m->url }}">
-                            <span class="menu-title">{{ $m->name }}</span>
-                            <span class="menu-arrow d-lg-none"></span>
-                            </a>
-                        </div>
-                    @else
-                    <div data-kt-menu-trigger="click" id="'.$menu['items'][$itemId]['id'].'" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
-                        <a class="menu-link py-3" href="' . base_url() . $menu['items'][$itemId]['url'] . '">
-                          <span class="menu-title">' . $menu['items'][$itemId]['nama_menu'] . '</span>
-                          <span class="menu-arrow d-lg-none"></span>
-                        </a>
-                        <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
-                          <div class="menu-item">';
-                            $html .= $this->_build_menu($itemId, $menu);
-                            $html .= '</div></div></div>
-                    @endif
-                @endforeach --}}
             </div>
-            <!--end::Menu-->
-
         </div>
-        <!--end::Menu wrapper-->
     </div>
-    <!--end::Container-->
 </div>
 <!--end::Header-->
