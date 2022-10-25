@@ -10,6 +10,7 @@ use App\Models\ItemQty;
 use App\Models\Items;
 use App\Models\Partners;
 use App\Models\PurchaseOrder;
+use App\Models\PurchaseOrderItems;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,26 +26,26 @@ class PurchaseOrderController extends Controller
     }
 
     public function list(){
-        // (DB::connection('procurement')->select('Call sp_list_po()')
-        return Datatables::of(DB::connection('procurement')->select('select * from purchase_orders'))->addIndexColumn()
+        // dd(DB::connection('procurement')->select('Call sp_list_po()'));
+        return Datatables::of(DB::connection('procurement')->select('Call sp_list_po()'))->addIndexColumn()
         ->addColumn('action', function($model){
             $action = "";
-            $action = "<a onclick='infoModal($model->id)' class='btn btn-sm btn-info'><i class='bi bi-info-square'></i></a>";
+            $action = "<a onclick='infoModal($model->id_ponya)' class='btn btn-sm btn-info'><i class='bi bi-info-square'></i></a>";
 
-            if($model->status == 0){
+            if($model->po_status == 0 || $model->po_status !=1){
                 if(Gate::allows('edit', ['/admin/procurement/purchase-order'])){
-                    $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
+                    $action .= "<a onclick='editModal($model->id_ponya)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
                 }
                 if(Gate::allows('delete', ['/admin/procurement/purchase-order'])){
-                    $action .= " <a href='/admin/procurement/purchase-order/delete/$model->id' class='btn btn-sm btn-danger' id='deletepo'><i class='bi bi-trash'></i></a>";
+                    $action .= " <a href='/admin/procurement/purchase-order/delete/$model->id_ponya' class='btn btn-sm btn-danger' id='deletepo'><i class='bi bi-trash'></i></a>";
                 }
             }
             return $action;
         })->addColumn('statues', function($model){
             $statues = "";
 
-            if($model->status == 0){
-                $statues .= "<a onclick='approveModal($model->id)' class='btn btn-sm btn-danger'><i class='bi bi-patch-check'></i> Not Confirm</a>";
+            if($model->po_status == 0 || $model->po_status !=1){
+                $statues .= "<a onclick='approveModal($model->id_ponya)' class='btn btn-sm btn-danger'><i class='bi bi-patch-check'></i> Confirm Here</a>";
             }else{
                 $statues .= "<a class='btn btn-sm btn-primary'><i class='bi bi-patch-check'></i> Confirmed</a>";
             }
@@ -55,7 +56,11 @@ class PurchaseOrderController extends Controller
     public function addmodal(){
 
         $po = PurchaseOrder::latest()->first();
-        $unik =  $po->id +1;
+        if($po){
+          $unik =  $po->id +1;
+        }else{
+            $unik = 1;
+        }
         $code = 'R'. date('md') .'220'. $unik;
 
         return view('admin.procurement.purchaseorder.addmodal', ['code' => $code, 'partner'=>Partners::all(), 'currency' => Currency::all()]);
@@ -63,16 +68,30 @@ class PurchaseOrderController extends Controller
     public function editmodal(Request $request){
 
         $ponya = DB::connection('procurement')->select("call sp_search_id($request->id)");
-        $id = $ponya[0]->id;
-        $items = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $id ");
-        return view('admin.procurement.purchaseorder.editmodal', ['partner'=>Partners::all(), 'currency' => Currency::all(),'ponya' => $ponya, 'items' => $items]);
+        $s_item = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $request->id");
+        return view('admin.procurement.purchaseorder.editmodal', ['partner'=>Partners::all(), 'currency' => Currency::all(),'ponya' => $ponya, 's_item' => $s_item, 'items'=>Items::all()]);
     }
 
     public function infomodal(Request $request){
+        // dd($request->id);
         $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
-        $id = $info[0]->id;
-        $items = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $id ");
+        // dd($info);
+        $items = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $request->id ");
         return view('admin.procurement.purchaseorder.infomodal', ['info'=> $info, 'items' => $items]);
+    }
+
+    public function aprovedmodal(Request $request){
+        $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
+        $items = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $request->id ");
+        return view('admin.procurement.purchaseorder.aprovedmodal', ['info'=> $info, 'items' => $items, 'id_po' => $request->id]);
+    }
+
+    public function approve(Request $request){
+        $user_approving = auth()->user()->username;
+
+        DB::connection('procurement')->select("call sp_approve_po($request->id, '$user_approving')");
+
+        return response()->json(['success'=> 'Data Approved']);
     }
 
     public function destroy(Request $request){
@@ -175,14 +194,17 @@ class PurchaseOrderController extends Controller
                     $item_id = $request->item_id[$i];
                     $qty = $request->qty[$i];
                     $price = $request->price[$i];
+                    $total_discount = $request->getdiscountperitem[$i];
+                    $discount = $request->discount[$i];
                     $total = $request->total[$i];
-
 
                     DB::connection('procurement')->select("call sp_insert_po_items(
                         $polast->id,
                         $item_id,
                         '$qty',
                         '$price',
+                        '$discount',
+                        '$total_discount',
                         '$total',
                         '$creating'
                     )");
@@ -192,6 +214,8 @@ class PurchaseOrderController extends Controller
             $item_id = $request->item_id[0];
             $qty = $request->qty[0];
             $price = $request->price[0];
+            $discount = $request->discount[0];
+            $total_discount = $request->getdiscountperitem[0];
             $total = $request->total[0];
 
             DB::connection('procurement')->select("call sp_insert_po_items(
@@ -199,6 +223,8 @@ class PurchaseOrderController extends Controller
                 $item_id,
                 '$qty',
                 '$price',
+                '$discount',
+                '$total_discount',
                 '$total',
                 '$creating'
             )");
@@ -206,6 +232,65 @@ class PurchaseOrderController extends Controller
 
 
         return redirect('/admin/procurement/purchase-order')->with(['success'=> 'Purchase Order Added']);
+    }
+
+    public function update(Request $request){
+
+        if($request->idonpoitems){
+            PurchaseOrderItems::where(['purchase_order_id' => $request->id_po])->whereNotIn('id', $request->idonpoitems)->delete();
+
+            PurchaseOrder::where(['id' => $request->id_po])->update(['order_date' => $request->order_date, 'ppn' => $request->ppn, 'currency_id' => $request->currency_id, 'rate' => $request->rate, 'term_of_payment' => $request->term_of_payment, 'description' => $request->description, 'total_po' => $request->grandtotal]);
+            for($i = 0; $i < count($request->idonpoitems); $i++){
+                PurchaseOrderItems::where(['id' => $request->idonpoitems[$i]])->update([
+                    'item_id' => $request->item_id[$i],
+                    'unit_price' => $request->price[$i],
+                    'qty' => $request->qty[$i],
+                    'discount' => $request->discount[$i],
+                    'total_discount' => $request->getdiscountperitem[$i],
+                    'total_price' => $request->total[$i]
+                ]);
+            }
+
+            if(count($request->item_id) > count($request->idonpoitems)){
+                // dd($request->id_po);
+                for($i = count($request->idonpoitems); $i < count($request->item_id); $i++){
+                    PurchaseOrderItems::create([
+                        'purchase_order_id' => $request->id_po,
+                        'item_id' => $request->item_id[$i],
+                        'unit_price' => $request->price[$i],
+                        'qty' => $request->qty[$i],
+                        'discount' => $request->discount[$i],
+                        'total_discount' => $request->getdiscountperitem[$i],
+                        'total_price' => $request->total[$i]
+                    ]);
+                }
+            }
+        }else{
+
+            if($request->item_id){
+                PurchaseOrder::where(['id' => $request->id_po])->update(['order_date' => $request->order_date, 'ppn' => $request->ppn, 'currency_id' => $request->currency_id, 'rate' => $request->rate, 'term_of_payment' => $request->term_of_payment, 'description' => $request->description, 'total_po' => $request->grandtotal]);
+                PurchaseOrderItems::where(['purchase_order_id' => $request->id_po])->delete();
+
+                for($i = 0; $i < count($request->item_id); $i++){
+
+                    PurchaseOrderItems::create([
+                        'purchase_order_id' => $request->id_po,
+                        'item_id' => $request->item_id[$i],
+                        'unit_price' => $request->price[$i],
+                        'qty' => $request->qty[$i],
+                        'discount' => $request->discount[$i],
+                        'total_discount' => $request->getdiscountperitem[$i],
+                        'total_price' => $request->total[$i]
+                    ]);
+                 }
+
+            }else{
+                return redirect('/admin/procurement/purchase-order')->with(['fail'=> 'Purchase Order Fail to Edit, The Items Cannot Null']);
+            }
+
+        }
+
+        return redirect('/admin/procurement/purchase-order')->with(['success'=> 'Purchase Order Edited']);
     }
 
 }

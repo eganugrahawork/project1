@@ -40,6 +40,9 @@ class ItemsController extends Controller
 
         Items::create($data);
 
+        $itemnya = Items::latest()->first();
+        ItemPrice::create(['item_id' => $itemnya->id, 'status' => 1]);
+        ItemQty::create(['item_id' => $itemnya->id, 'status' => 1]);
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "Items",

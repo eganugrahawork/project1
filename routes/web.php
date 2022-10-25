@@ -238,8 +238,11 @@ Route::middleware(['auth'])->controller(PurchaseOrderController::class)->group(f
     Route::get('/admin/procurement/purchase-order/addnewitemrow/{id}', 'addnewitemrow');
     Route::get('/admin/procurement/purchase-order/editmodal/{id}', 'editmodal');
     Route::get('/admin/procurement/purchase-order/infomodal/{id}', 'infomodal');
+    Route::get('/admin/procurement/purchase-order/aprovedmodal/{id}', 'aprovedmodal');
+    Route::get('/admin/procurement/purchase-order/approve/{id}', 'approve');
     Route::get('/admin/procurement/purchase-order/delete/{id}', 'destroy');
     Route::post('/admin/procurement/purchase-order/store', 'store');
+    Route::post('/admin/procurement/purchase-order/update', 'update');
 });
 //End Purchase Order
 

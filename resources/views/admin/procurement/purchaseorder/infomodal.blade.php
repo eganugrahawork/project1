@@ -1,7 +1,8 @@
-<form id="add-form" class="form" action="/admin/procurement/purchase-order/store" method="post">
-    @csrf
-
-    <div class="row">
+<div class="d-flex justify-content-center py-4">
+    <h3>{{ $info[0]->status !== 1 ? 'Not Approved' : 'Already Approve' }}</h3>
+</div>
+<hr>
+   <div class="row">
         <div class="col-lg-6">
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Po Code</label>
@@ -64,26 +65,26 @@
             <div class="row" >
                 <div class="fv-row mb-7 col-lg-3">
                     <label class="required form-label fw-bold">Item</label>
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0 item_id select-2" id="item_id" value="{{ $item->item_id }}" disabled name="item_id[]" onchange="getBaseQty(this)" required>
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0 item_id select-2" id="item_id" value="{{ $item->item_id }}" disabled name="item_id[]"  required>
                             <option>{{ $item->item_id }}</option>
                     </select>
                 </div>
                 <div class="fv-row mb-7 col-lg-2">
                     <label class="required fw-bold fs-6 mb-2">Price</label>
-                    <input type="text" name="price[]" id="price" value="{{ $item->unit_price }}" disabled onkeyup="hitungByQty(this)" class="form-control form-control-solid mb-3 mb-lg-0 qty"  required/>
+                    <input type="text" name="price[]" id="price" value="{{ $item->unit_price }}" disabled class="form-control form-control-solid mb-3 mb-lg-0 qty"  required/>
                 </div>
                 <div class="fv-row mb-7 col-lg-2">
                     <label class="required fw-bold fs-6 mb-2">Qty</label>
-                    <input type="text" name="qty[]" id="qty" value="{{ $item->qty }}" disabled onkeyup="hitungByQty(this)" class="form-control form-control-solid mb-3 mb-lg-0 qty"  required/>
+                    <input type="text" name="qty[]" id="qty" value="{{ $item->qty }}" disabled class="form-control form-control-solid mb-3 mb-lg-0 qty"  required/>
                 </div>
                 <div class="fv-row mb-7 col-lg-2">
                     <label class="required fw-bold fs-6 mb-2">Diskon</label>
-                    <input type="text" name="discount[]" id="discount" value="0" disabled onkeyup="hitungByDiscount(this)" class="form-control form-control-solid mb-3 mb-lg-0 discount"  required/>
+                    <input type="text" name="discount[]" id="discount" value="{{ $item->discount }}" disabled class="form-control form-control-solid mb-3 mb-lg-0 discount"  required/>
                 </div>
                 <div class="fv-row mb-7 col-lg-3">
                     <label class="required fw-bold fs-6 mb-2">Total</label>
                     <input type="text" name="total[]" id="total" value="{{ $item->total_price }}" readonly class="form-control form-control-solid mb-3 mb-lg-0 totalnya"  required/>
-                    <input type="hidden" name="getdiscountperitem[]" value="0" id="getdiscountperitem" readonly class="form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem"  required/>
+                    <input type="hidden" name="getdiscountperitem[]" value="{{ $item->total_discount }}" id="getdiscountperitem"  readonly class="form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem"  required/>
                 </div>
             </div>
             @endforeach
@@ -94,149 +95,49 @@
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Subtotal</div>
-            <div class="col-lg-6"><input type="text" name="subtotal" id="subtotal" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" readonly name="subtotal" id="subtotal" class="form-control form-control-white"></div>
         </div>
     </div>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Discount</div>
-            <div class="col-lg-6"><input type="text" name="totaldiscount" id="totaldiscount" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" readonly name="totaldiscount" id="totaldiscount" class="form-control form-control-white"></div>
         </div>
     </div>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Taxable</div>
-            <div class="col-lg-6"><input type="text" name="taxable" id="taxable" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" readonly name="taxable" id="taxable" class="form-control form-control-white"></div>
         </div>
     </div>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Vat/PPn</div>
-            <div class="col-lg-6"><input type="text" name="totalppn" id="totalppn" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" readonly name="totalppn" id="totalppn" class="form-control form-control-white"></div>
         </div>
     </div>
     <hr>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Grand Total</div>
-            <div class="col-lg-6"><input type="text" name="grandtotal" id="grandtotal" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" readonly name="grandtotal" id="grandtotal" class="form-control form-control-white"></div>
         </div>
     </div>
     <hr>
 
-        {{-- <div class="d-flex justify-content-end" id="loadingnya">
-            <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Add Purchase Order</button>
-        </div> --}}
-</form>
+        <div class="d-flex justify-content-end" id="loadingnya">
+            <button class="btn btn-sm btn-primary" type="button" id="btn-close">Close</button>
+        </div>
 
-<script>
-     $(document).ready(function() {
-            $('.select-2').select2({
-                dropdownParent: $('#mainmodal')
-            });
-
-    });
-</script>
 
 
 <script>
-    // $('form').submit(function(){
-    // $('#btn-add').hide()
-    // $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-    // })
 
-
-    $('#partner_id').on('change', function(){
-        $('#item_id').html("<option>Loading....</option>")
-        $.get("{{ url('/admin/procurement/purchase-order/getitem') }}/"+$('#partner_id').val(), {}, function(data){
-                $('#item_id').html(data.html)
-                $('#address').val(data.address)
-                $('#phone').val(data.phone)
-                $('#fax').val(data.fax)
-                $('#base_qty_parent').remove()
-                $('#price_parent').remove()
-            })
-    })
-
-    function getBaseQty(e){
-        $.get("{{ url('/admin/procurement/purchase-order/getbaseqty') }}/"+e.value, {}, function(data){
-            $(e).parent().parent().find('#price_parent').remove();
-            $(e).parent().parent().find('#base_qty_parent').remove();
-            $(e).parent().after("<div class='fv-row mb-7 col-lg-1' id='base_qty_parent'><label class='fw-bold fs-6 mb-2'>Base Qty</label><input type='number' name='base_qty' id='base_qyu' class='form-control form-control-white mb-3 mb-lg-0' value='"+data.base_qty+"' readonly/></div>"+data.pricing)
-            })
-    }
-
-    function getRate(e){
-        $.get("{{ url('/admin/procurement/purchase-order/getcurrency') }}/"+e, {}, function(data){
-                $('#rate').val(data.rate)
-            })
-    }
-
-    function addNewItemRow(){
-            $.get("{{ url('/admin/procurement/purchase-order/addnewitemrow') }}/"+$('#partner_id').val(), {}, function(data){
-                $('#itemsAddList').append(data.html)
-                $('.select-2').select2({
-                    dropdownParent: $('#mainmodal')
-                });
-            })
-    }
-
-    function removeItemRow(e){
-        $(e).parent().parent().remove()
-    }
-
-    function hitungByDiscount(e){
-        let qty = $(e).parent().parent().find('#qty').val();
-        let discount = e.value;
-        let price =  $(e).parent().parent().find('#price').val();
-        if(typeof price == "undefined"){
-            price =0;
-        }
-        let total = (parseFloat(qty) * parseFloat(price)) - ((parseFloat(qty) * parseFloat(price)) * (parseFloat(discount) / 100));
-        $(e).parent().parent().find('#total').val(total);
-        let getdiscountperitem =((parseFloat(qty) * parseFloat(price)) * (parseFloat(discount) / 100));
-        $(e).parent().parent().find('#total').val(total);
-        $(e).parent().parent().find('#getdiscountperitem').val(getdiscountperitem);
-        sumAll()
-    }
-    function hitungByQty(e){
-        let qty =  e.value;
-        let discount = $(e).parent().parent().find('#discount').val();
-        let price =  $(e).parent().parent().find('#price').val();
-        if(typeof price == "undefined"){
-            price =0;
-        }
-        let getdiscountperitem =((parseFloat(qty) * parseFloat(price)) * (parseFloat(discount) / 100));
-        let total = (parseFloat(qty) * parseFloat(price)) - ((parseFloat(qty) * parseFloat(price)) * (parseFloat(discount) / 100));
-        $(e).parent().parent().find('#total').val(total);
-        $(e).parent().parent().find('#getdiscountperitem').val(getdiscountperitem);
-        sumAll()
-    }
-    function hitungByPrice(e){
-        // if(e.value.length >0){
-        //     $(e).closest('#notifprice').hide()
-        // }
-        let qty = $(e).parent().parent().find('#qty').val();
-        let discount = $(e).parent().parent().find('#discount').val();
-        let price = e.value;
-        if(typeof price == "undefined"){
-            price =0;
-        }
-        let getdiscountperitem =((parseFloat(qty) * parseFloat(price)) * (parseFloat(discount) / 100));
-        let total = (parseFloat(qty) * parseFloat(price)) - ((parseFloat(qty) * parseFloat(price)) * (parseFloat(discount) / 100));
-        $(e).parent().parent().find('#total').val(total);
-        $(e).parent().parent().find('#getdiscountperitem').val(getdiscountperitem);
-
-        sumAll()
-
-    }
-
-    function sumAll(){
-        let taxable = 0;
-        let totalppn = 0;
-        let totaldiscount = 0;
-        let subtotal = 0;
-        let grandtotal = 0;
+        var taxable = 0;
+        var totalppn = 0;
+        var totaldiscount = 0;
+        var subtotal = 0;
+        var grandtotal = 0;
         if($('.totalnya').length > 1){
             $('.totalnya').each(function(){
                 taxable += parseFloat($(this).val());
@@ -257,15 +158,17 @@
 
         $('#subtotal').val(subtotal);
 
-       totalppn = parseFloat($('#ppn').val() * taxable /100);
+        totalppn = parseFloat($('#ppn').val() * taxable /100);
 
-       grandtotal = parseFloat(taxable) +parseFloat(totalppn);
+        grandtotal = parseFloat(taxable) +parseFloat(totalppn);
 
-       $('#grandtotal').val(grandtotal);
+        $('#grandtotal').val(grandtotal);
 
-         $('#totalppn').val(totalppn);
-         $('#totaldiscount').val(totaldiscount);
-         $('#taxable').val(taxable);
-    }
+            $('#totalppn').val(totalppn);
+            $('#totaldiscount').val(totaldiscount);
+            $('#taxable').val(taxable);
 
+        $('#btn-close').on('click', function(){
+            $('#mainmodal').modal('toggle');
+        })
 </script>

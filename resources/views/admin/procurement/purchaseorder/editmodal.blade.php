@@ -1,5 +1,7 @@
 <form id="add-form" class="form" action="/admin/procurement/purchase-order/update" method="post">
     @csrf
+    <input type="hidden" name="id_po" value="{{ $ponya[0]->id_ponya }}">
+
     <div class="row">
         <div class="col-lg-6">
             <div class="fv-row mb-7">
@@ -38,10 +40,9 @@
             </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Currency</label>
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0" onchange="getRate(this.value)" name="currency_id" id="currency_id" required>
-                        <option>Choose The Currency</option>
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" onchange="getRate(this.value)" name="currency_id" id="currency_id" required>
                         @foreach ($currency as $currency)
-                        <option value="{{ $currency->id }}" {{ $currency->id == $ponya[0]->currency_id }}>{{ $currency->name }}</option>
+                        <option value="{{ $currency->id }}" {{ $currency->id == $ponya[0]->currency_id ? 'selected' : '' }}>{{ $currency->name }}</option>
 
                         @endforeach
                     </select>
@@ -64,36 +65,49 @@
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Description</label>
-                <textarea type="text" name="description" id="description" value="{{ $ponya[0]->description }}" class="form-control form-control-solid mb-3 mb-lg-0"  required></textarea>
+                <textarea type="text" name="description" id="description"  class="form-control form-control-solid mb-3 mb-lg-0"  required>{{ $ponya[0]->description }}</textarea>
             </div>
         </div>
         <div class="col-lg-12"id="itemsAddList">
             <h1>Items</h1>
             <hr>
-            @foreach ($items as $item)
-        <div class="row" >
-            <div class="fv-row mb-7 col-lg-3">
+
+            @foreach ($s_item as $s_item)
+            <div class="row" >
+                <input type="hidden" name="idonpoitems[]" value="{{ $s_item->id }}">
+                <div class="fv-row mb-7 col-lg-3">
                 <label class="required form-label fw-bold">Item</label>
-                <select class="form-select  form-select-solid mb-3 mb-lg-0 item_id select-2" id="item_id" name="item_id[]" onchange="getBaseQty(this)" required>
-                        <option>Choose Partner First</option>
+                <select class="form-select  form-select-solid mb-3 mb-lg-0 item_id select-2" id="item_id" name="item_id[]" readonly onchange="getBaseQty(this)" required>
+                    @foreach ($items as $listitem)
+                    <option value="{{ $listitem->id }}" {{ $s_item->item_id == $listitem->id ? 'selected' : '' }}>{{ $listitem->item_name }}</option>
+                    @endforeach
                 </select>
             </div>
-
+            <div class='fv-row mb-7 col-lg-1' id='base_qty_parent'>
+                <label class='fw-bold fs-6 mb-2'>Base Qty</label>
+                <input type='number' name='base_qty' id='base_qty' class='form-control form-control-white mb-3 mb-lg-0' value='' readonly/>
+            </div>
+            <div class='fv-row mb-7 col-lg-2' id='price_parent'>
+                <label class='required fw-bold fs-6 mb-2'>Price</label>
+                <input type='number' name='price[]' id='price' onkeyup='hitungByPrice(this)' value="{{ $s_item->unit_price }}" class='form-control form-control-solid mb-3 mb-lg-0' placeholder='$itemprice->base_price' required/>
+                <p id='notifprice'>Tulis Kembali harga untuk konfirmasi</p>
+            </div>
             <div class="fv-row mb-7 col-lg-1">
                 <label class="required fw-bold fs-6 mb-2">Qty</label>
-                <input type="number" name="qty[]" id="qty" value="0" onkeyup="hitungByQty(this)" class="form-control form-control-solid mb-3 mb-lg-0 qty"  required/>
+                <input type="number" name="qty[]" id="qty" value="{{ $s_item->qty }}" onkeyup="hitungByQty(this)" class="form-control form-control-solid mb-3 mb-lg-0 qty"  required/>
             </div>
             <div class="fv-row mb-7 col-lg-1">
                 <label class="required fw-bold fs-6 mb-2">Diskon</label>
-                <input type="number" name="discount[]" id="discount" value="0" onkeyup="hitungByDiscount(this)" class="form-control form-control-solid mb-3 mb-lg-0 discount"  required/>
+                <input type="number" name="discount[]" id="discount" value="{{ $s_item->discount }}" onkeyup="hitungByDiscount(this)" class="form-control form-control-solid mb-3 mb-lg-0 discount"  required/>
             </div>
             <div class="fv-row mb-7 col-lg-2">
                 <label class="required fw-bold fs-6 mb-2">Total</label>
-                <input type="number" name="total[]" id="total" readonly class="form-control form-control-solid mb-3 mb-lg-0 totalnya"  required/>
-                <input type="hidden" name="getdiscountperitem[]" value="0" id="getdiscountperitem" readonly class="form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem"  required/>
+                <input type="number" name="total[]" id="total" value="{{ $s_item->total_price }}" readonly class="form-control form-control-solid mb-3 mb-lg-0 totalnya"  required/>
+                <input type="hidden" name="getdiscountperitem[]" value="{{ $s_item->total_discount }}" id="getdiscountperitem" readonly class="form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem"  required/>
             </div>
             <div class="fv-row mb-7 col-lg-1">
-
+                <label class='fw-bold fs-6 mb-2'>Remove</label>
+                <button class='btn btn-sm btn-warning' type='button' onclick='removeItemRow(this)'>-</button>
             </div>
         </div>
         @endforeach
@@ -106,38 +120,38 @@
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Subtotal</div>
-            <div class="col-lg-6"><input type="text" name="subtotal" id="subtotal" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" name="subtotal" readonly id="subtotal" class="form-control form-control-white"></div>
         </div>
     </div>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Discount</div>
-            <div class="col-lg-6"><input type="text" name="totaldiscount" id="totaldiscount" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" name="totaldiscount" readonly id="totaldiscount" class="form-control form-control-white"></div>
         </div>
     </div>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Taxable</div>
-            <div class="col-lg-6"><input type="text" name="taxable" id="taxable" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" name="taxable" readonly id="taxable" class="form-control form-control-white"></div>
         </div>
     </div>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Vat/PPn</div>
-            <div class="col-lg-6"><input type="text" name="totalppn" id="totalppn" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" name="totalppn" readonly id="totalppn" class="form-control form-control-white"></div>
         </div>
     </div>
     <hr>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Grand Total</div>
-            <div class="col-lg-6"><input type="text" name="grandtotal" id="grandtotal" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" name="grandtotal" readonly id="grandtotal" class="form-control form-control-white"></div>
         </div>
     </div>
     <hr>
 
         <div class="d-flex justify-content-end" id="loadingnya">
-            <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Add Purchase Order</button>
+            <button class="btn btn-sm btn-primary" type="submit" id="btn-update">Update Purchase Order</button>
         </div>
 </form>
 
@@ -157,6 +171,7 @@
     // $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
     // })
 
+    sumAll()
 
     $('#partner_id').on('change', function(){
         $('#item_id').html("<option>Loading....</option>")
@@ -195,6 +210,7 @@
 
     function removeItemRow(e){
         $(e).parent().parent().remove()
+        sumAll()
     }
 
     function hitungByDiscount(e){

@@ -124,6 +124,15 @@
                 $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
             })
         }
+        function approveModal(id){
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/procurement/purchase-order/aprovedmodal') }}/"+id, {}, function(data, status){
+                $('#kontennya').html(data)
+                $('#mainmodal').modal('toggle')
+                $('#loading-add').html('')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
+            })
+        }
         function tutupModal(){
         $('#mainmodal').modal('toggle')
         }
@@ -140,8 +149,8 @@
                     data: 'DT_RowIndex',
                     searchable: false
                 },
-                    {data: 'code', name: 'code'},
-                    {data: 'partner_id', name: 'partner_id'},
+                    {data: 'po_code', name: 'po_code'},
+                    {data: 'name', name: 'name'},
                     {data: 'order_date', name: 'order_date'},
                     {data: 'total_po', name: 'total_po', render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )},
                     // {data: 'due_date', name: 'delivery_date'},

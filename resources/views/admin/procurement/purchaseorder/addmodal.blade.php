@@ -42,14 +42,13 @@
                     <select class="form-select  form-select-solid mb-3 mb-lg-0" onchange="getRate(this.value)" name="currency_id" id="currency_id" required>
                         <option>Choose The Currency</option>
                         @foreach ($currency as $currency)
-                        <option value="{{ $currency->id }}">{{ $currency->name }}</option>
-
+                        <option value="{{ $currency->id }}" {{ $currency->id == 3 ? 'selected' : '' }}>{{ $currency->name }}</option>
                         @endforeach
                     </select>
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Rate</label>
-                <input type="number" name="rate" id="rate" readonly class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="number" name="rate" id="rate" value="1" readonly class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Term of Payment</label>
@@ -105,32 +104,32 @@
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Subtotal</div>
-            <div class="col-lg-6"><input type="text" name="subtotal" id="subtotal" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" readonly name="subtotal" id="subtotal" class="form-control form-control-white"></div>
         </div>
     </div>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Discount</div>
-            <div class="col-lg-6"><input type="text" name="totaldiscount" id="totaldiscount" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" readonly name="totaldiscount" id="totaldiscount" class="form-control form-control-white"></div>
         </div>
     </div>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Taxable</div>
-            <div class="col-lg-6"><input type="text" name="taxable" id="taxable" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" readonly name="taxable" id="taxable" class="form-control form-control-white"></div>
         </div>
     </div>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Vat/PPn</div>
-            <div class="col-lg-6"><input type="text" name="totalppn" id="totalppn" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" readonly name="totalppn" id="totalppn" class="form-control form-control-white"></div>
         </div>
     </div>
     <hr>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Grand Total</div>
-            <div class="col-lg-6"><input type="text" name="grandtotal" id="grandtotal" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" readonly name="grandtotal" id="grandtotal" class="form-control form-control-white"></div>
         </div>
     </div>
     <hr>
@@ -159,6 +158,7 @@
 
     $('#partner_id').on('change', function(){
         $('#item_id').html("<option>Loading....</option>")
+
         $.get("{{ url('/admin/procurement/purchase-order/getitem') }}/"+$('#partner_id').val(), {}, function(data){
                 $('#item_id').html(data.html)
                 $('#address').val(data.address)
@@ -194,6 +194,7 @@
 
     function removeItemRow(e){
         $(e).parent().parent().remove()
+        sumAll()
     }
 
     function hitungByDiscount(e){
