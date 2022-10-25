@@ -32,6 +32,10 @@ class DashboardController extends Controller
         return  Datatables::of($activity)->addIndexColumn()->make(true);
     }
 
+    public function listnotification(){
+        $activity = DB::connection('masterdata')->select('SELECT a.created_at, a.menu, a.aktivitas, a.keterangan, b.email, b.username, b.image FROM user_activities a JOIN users b ON a.id_user = b.id ORDER BY a.id DESC');
+        return view('admin.layouts.listnotification', ['activity' => $activity]);
+    }
 
     public function checknotification(){
       return response()->json(UserActivity::count());

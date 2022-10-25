@@ -111,7 +111,7 @@
 
                     <div class="card-body" id="kt_explore_body">
                         <div id="kt_explore_scroll" class="scroll-y me-n5 pe-5" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-wrappers="#kt_explore_body" data-kt-scroll-dependencies="#kt_explore_header" data-kt-scroll-offset="5px">
-                            <div class="mb-0">
+                            <div class="mb-0" id="notificationList">
 
                             </div>
                         </div>
@@ -147,6 +147,12 @@
                             $.get("{{ url('/admin/listuseronline') }}", {}, function(data){
                                 $('#listuseronline').html(data);
                              })
+                        })
+
+                        $('#kt_explore_toggle').on('click', function(){
+                            $.get("{{ url('/admin/listnotification') }}", {}, function(data){
+                                $('#notificationList').html(data);
+                            })
                         })
                     </script>
 
