@@ -68,23 +68,8 @@
             @if (auth()->user()->userrole->role == 'Super Admin')
             <div id="kt_drawer_chat" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="chat" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'300px', 'md': '500px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_drawer_chat_toggle" data-kt-drawer-close="#kt_drawer_chat_close">
                 <div class="card w-100 rounded-0 border-0" id="kt_drawer_chat_messenger">
-                    <div class="card-header pe-5" id="kt_drawer_chat_messenger_header">
-                        <div class="card-title">
-                            <div class="d-flex justify-content-center flex-column me-3">
-                                <a href="#" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">Online Users</a>
-                                <div class="mb-0 lh-1">
-                                    <span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
-                                    <span class="fs-7 fw-bold text-muted">Active</span>
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
-                    <div class="card-body" id="kt_drawer_chat_messenger_body">
-                        <div class="scroll-y me-n5 pe-5" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_drawer_chat_messenger_header, #kt_drawer_chat_messenger_footer" data-kt-scroll-wrappers="#kt_drawer_chat_messenger_body" data-kt-scroll-offset="0px" id="listuseronline">
 
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -145,7 +130,7 @@
                     <script>
                         $('#kt_drawer_chat_toggle').on('click', function(){
                             $.get("{{ url('/admin/listuseronline') }}", {}, function(data){
-                                $('#listuseronline').html(data);
+                                $('#kt_drawer_chat_messenger').html(data);
                              })
                         })
 
@@ -154,6 +139,12 @@
                                 $('#notificationList').html(data);
                             })
                         })
+
+                        function openChat(id){
+                            $.get("{{ url('/admin/openchat') }}/"+id, {}, function(data){
+                                $('#kt_drawer_chat_messenger').html(data);
+                             })
+                        }
                     </script>
 
                     {{-- Pusher --}}

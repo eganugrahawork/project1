@@ -25,10 +25,10 @@ class DashboardController extends Controller
 
         return view('admin.useractivity.index');
     }
+
     public function listuseractivity(){
         $activity = DB::connection('masterdata')->select('SELECT a.created_at, a.menu, a.aktivitas, a.keterangan, b.email FROM user_activities a JOIN users b ON a.id_user = b.id');
 
-        // dd($activity);
         return  Datatables::of($activity)->addIndexColumn()->make(true);
     }
 
@@ -44,6 +44,11 @@ class DashboardController extends Controller
     public function listuseronline(){
         $uonline = DB::connection('masterdata')->select('select * from users where status_access = 1');
         return view('admin.layouts.listuseronline', ['uonline' => $uonline]);
+    }
+
+    public function openchat(Request $request){
+        $user = User::where(['id'=>$request->id])->first();
+        return view('admin.layouts.chatroom', ['user' => $user]);
     }
 
     public function loadmenu(Request $request){

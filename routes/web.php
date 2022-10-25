@@ -66,6 +66,7 @@ Route::get('/admin/listuseractivity', [DashboardController::class, 'listuseracti
 Route::get('/admin/checknotification', [DashboardController::class, 'checknotification'])->middleware('auth');
 Route::get('/admin/listuseronline', [DashboardController::class, 'listuseronline'])->middleware(['auth']);
 Route::get('/admin/listnotification ', [DashboardController::class, 'listnotification'])->middleware(['auth']);
+Route::get('/admin/openchat/{id} ', [DashboardController::class, 'openchat'])->middleware(['auth']);
 //End Dashboard
 
 
