@@ -2,7 +2,7 @@
     {{-- @csrf --}}
         <div class="fv-row mb-7">
             <label class="required form-label fw-bold">Parent</label>
-                <select class="form-select  form-select-solid mb-3 mb-lg-0" id="id_parent" name="id_parent" required>
+                <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" id="id_parent" name="id_parent" required>
                     <option value="0">Main Parent</option>
                     @foreach ($coa as $coa)
                         <option value="{{ $coa->id }}">{{ $coa->coa }}</option>
@@ -29,3 +29,13 @@
             <button class="btn btn-sm btn-primary" id="btn-add">Add Coa</button>
         </div>
 </form>
+
+<script>
+    $(document).ready(function() {
+           $('.select-2').select2({
+               dropdownParent: $('#mainmodal')
+           });
+
+   });
+</script>
+

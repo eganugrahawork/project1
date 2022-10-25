@@ -17,7 +17,7 @@
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Units</label>
                 <div class="col-lg-6">
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0" name="uom_id" required>
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="uom_id" required>
                         @foreach ($uom as $uom)
                         <option value="{{ $uom->id }}">{{ $uom->name }}</option>
                         @endforeach
@@ -41,8 +41,7 @@
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Item Type</label>
                 <div class="col-lg-6">
-                    <select class="form-select form-select-solid" name="type_id" required>
-                        <option></option>
+                    <select class="form-select form-select-solid select-2" name="type_id" required>
                         @foreach ($type as $type)
                         <option value="{{ $type->id }}">{{ $type->name_type }}</option>
                         @endforeach
@@ -61,8 +60,7 @@
             </div>
             <div class="fv-row mb-7">
                 <label class="form-label fw-bold required">Partners</label>
-            <select class="form-select form-select-solid mb-3 mb-lg-0" name="partner_id" required>
-                <option></option>
+            <select class="form-select form-select-solid mb-3 mb-lg-0 select-2" name="partner_id" required>
                 @foreach ($partner as $p)
                     <option value="{{ $p->id }}">{{ $p->name }}</option>
                 @endforeach
@@ -89,6 +87,14 @@
         </div>
 </form>
 
+<script>
+    $(document).ready(function() {
+           $('.select-2').select2({
+               dropdownParent: $('#mainmodal')
+           });
+
+   });
+</script>
 <script>
     $('form').submit(function(){
     $('#btn-add').hide()

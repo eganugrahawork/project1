@@ -3,7 +3,7 @@
 <input type="hidden" name="id" id="id" value="{{ $coa->id }}">
         <div class="fv-row mb-7">
             <label class="required form-label fw-bold">Parent</label>
-                <select class="form-select  form-select-solid mb-3 mb-lg-0" id="id_parent" name="id_parent" disabled required>
+                <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" id="id_parent" name="id_parent" disabled required>
                     <option value="0" {{ $coa->id_parent == 0 ? 'selected' : '' }}>Main Parent</option>
                     @foreach ($parentcoa as $pc)
                         <option value="{{ $pc->id }}" {{ $coa->id_parent == $pc->id ? 'selected' : '' }}>{{ $pc->coa }}</option>
@@ -29,6 +29,16 @@
             <button class="btn btn-sm btn-primary" id="btn-update">Update Coa</button>
         </div>
 </form>
+
+<script>
+    $(document).ready(function() {
+           $('.select-2').select2({
+               dropdownParent: $('#mainmodal')
+           });
+
+   });
+</script>
+
 <script>
     $('form').submit(function(){
     $('#btn-update').hide()

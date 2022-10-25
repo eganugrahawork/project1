@@ -67,7 +67,8 @@ class UsersController extends Controller
             'region' => $request->region,
             'place_of_birth' => $request->place_of_birth,
             'date_of_birth' => $request->date_of_birth,
-            'religion' => $request->religion
+            'religion' => $request->religion,
+            'is_active' => 1,
 
         ];
 
