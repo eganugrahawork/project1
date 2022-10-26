@@ -80,7 +80,7 @@
                         </select>
                     </div>
                     <div class="col-lg-2">
-                        <button onclick="getallitem(this)" type="button" class="btn btn-sm btn-success">All</button>
+                        <button onclick="getallitem(this)" type="button" class="btn btn-sm btn-primary">All</button>
                     </div>
                 </div>
             </div>
@@ -142,7 +142,7 @@
     <hr>
 
         <div class="d-flex justify-content-end" id="loadingnya">
-            <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Add Purchase Order</button>
+            <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Save</button>
         </div>
 </form>
 

@@ -70,13 +70,14 @@ class PurchaseOrderController extends Controller
 
     public function editmodal(Request $request){
 
-        $ponya = DB::connection('procurement')->select("call sp_search_id($request->id)");
+        $ponya = DB::connection('procurement')->select("select * from purchase_orders where id = $request->id");
         $s_item = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $request->id");
         return view('admin.procurement.purchaseorder.editmodal', ['partner'=>Partners::all(), 'currency' => Currency::all(),'ponya' => $ponya, 's_item' => $s_item, 'items'=>Items::all()]);
     }
 
     public function infomodal(Request $request){
         $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
+        // dd($info);
         $items = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $request->id ");
         return view('admin.procurement.purchaseorder.infomodal', ['info'=> $info, 'items' => $items]);
     }
@@ -184,7 +185,7 @@ class PurchaseOrderController extends Controller
             $html .=   "</select>
                     </div>
                             <div class='col-lg-2'>
-                                <button onclick='getallitem(this)' type='button' class='btn btn-sm btn-success'>All</button>
+                                <button onclick='getallitem(this)' type='button' class='btn btn-sm btn-primary'>All</button>
                             </div>
                         </div>
                         </div>

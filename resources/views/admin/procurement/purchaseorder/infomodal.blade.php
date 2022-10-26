@@ -5,8 +5,8 @@
    <div class="row">
         <div class="col-lg-6">
             <div class="fv-row mb-7">
-                <label class="fw-bold fs-6 mb-2">Po Code</label>
-                <input type="text" id="code" name="code" value="{{ $info[0]->code }}" readonly class="form-control form-control-white mb-3 mb-lg-0"  required/>
+                <label class="fw-bold fs-6 mb-2">Number Po</label>
+                <input type="text" id="code" name="code" value="{{ $info[0]->number_po }}" readonly class="form-control form-control-white mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Order Date</label>
@@ -15,21 +15,21 @@
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Partners</label>
                     <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" disabled id="partner_id" name="partner_id" required>
-                        <option value="{{ $info[0]->partner_id }}">{{ $info[0]->partner_id }}</option>
+                        <option >{{ $info[0]->partner_name }}</option>
 
                     </select>
             </div>
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Address</label>
-                <textarea type="text" name="address" id="address" readonly class="form-control form-control-solid mb-3 mb-lg-0"  ></textarea>
+                <textarea type="text" name="address" id="address" readonly class="form-control form-control-solid mb-3 mb-lg-0"  >{{ $info[0]->address }}</textarea>
             </div>
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Phone Number</label>
-                <input type="text" name="phone" id="phone" readonly class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="text" name="phone" id="phone" value="{{ $info[0]->phone }}" readonly class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Fax</label>
-                <input type="text" name="fax" id="fax" readonly class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="text" name="fax" id="fax" value="{{ $info[0]->fax }}"  readonly class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
         </div>
         <div class="col-lg-6">
@@ -40,7 +40,7 @@
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Currency</label>
                     <select class="form-select  form-select-solid mb-3 mb-lg-0" disabled name="currency_id" id="currency_id" required>
-                        <option value="{{ $info[0]->currency_id }}">{{ $info[0]->currency_id }}</option>
+                        <option>{{ $info[0]->currency_name }}</option>
                     </select>
             </div>
             <div class="fv-row mb-7">
@@ -61,12 +61,12 @@
         <div class="col-lg-12"id="itemsAddList">
             <h1>Items</h1>
             <hr>
-            @foreach ($items as $item)
+            @foreach ($info as $item)
             <div class="row" >
                 <div class="fv-row mb-7 col-lg-3">
                     <label class="required form-label fw-bold">Item</label>
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0 item_id select-2" id="item_id" value="{{ $item->item_id }}" disabled name="item_id[]"  required>
-                            <option>{{ $item->item_id }}</option>
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0 item_id select-2" id="item_id" disabled name="item_id[]"  required>
+                            <option>{{ $item->item_name }}</option>
                     </select>
                 </div>
                 <div class="fv-row mb-7 col-lg-2">
@@ -83,8 +83,8 @@
                 </div>
                 <div class="fv-row mb-7 col-lg-3">
                     <label class="required fw-bold fs-6 mb-2">Total</label>
-                    <input type="text" name="total[]" id="total" value="{{ $item->total_price }}" readonly class="form-control form-control-solid mb-3 mb-lg-0 totalnya"  required/>
-                    <input type="hidden" name="getdiscountperitem[]" value="{{ $item->total_discount }}" id="getdiscountperitem"  readonly class="form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem"  required/>
+                    <input type="text" name="total[]" id="total" value="@Rupiah($item->total_price)" readonly class="form-control form-control-solid mb-3 mb-lg-0 totalnya"  required/>
+                    <input type="hidden" name="getdiscountperitem[]" id="getdiscountperitem" value="{{ $item->total_discount }}" class="form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem"  required/>
                 </div>
             </div>
             @endforeach
