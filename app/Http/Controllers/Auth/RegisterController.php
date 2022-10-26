@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\NotifEvent;
 use App\Http\Controllers\Controller;
 use App\Mail\RegisterMail;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\UserActivity;
 use App\Models\UserDetail;
 use App\Models\UserRole;
 use App\Models\UserToken;
@@ -99,7 +101,14 @@ class RegisterController extends Controller
         Mail::to($data->email)->send(new RegisterMail($details));
 
         $this->createUser($data);
-
+        $newUser = User::latest()->first();
+        UserActivity::create([
+            'id_user' => $newUser->id,
+            'menu' => "Register",
+            'aktivitas' => "Register ",
+            'keterangan' => auth()->user()->name ." Register to the app, wait for Verified"
+        ]);
+        NotifEvent::dispatch(auth()->user()->name .' Register to the app.');
         // dd($token);
         return redirect('/login')->with('success', 'Check Your Email');
     }
@@ -107,6 +116,7 @@ class RegisterController extends Controller
     public function createUser($data){
         UserToken::create(['email'=> $data->email, 'token' => $data->token]);
         $role = UserRole::where(['role' => 'Demo'])->first();
+
         return User::create([
             'username' => $data->username,
             'email' => $data->email,
@@ -147,7 +157,16 @@ class RegisterController extends Controller
     public function update(Request $request){
         UserToken::where(['email' => $request->email])->delete();
         User::where(['email' => $request->email])->update(['password' => Hash::make($request->password), 'is_active' => 1]);
-        return redirect('/login')->with('success', 'Your Account Already to User');
+
+        $newUser = User::where(['email' => $request->email])->first();
+        UserActivity::create([
+            'id_user' => $newUser->id,
+            'menu' => "Register Verified",
+            'aktivitas' => "Register Verified",
+            'keterangan' => auth()->user()->name ." Register success, this account already active"
+        ]);
+        NotifEvent::dispatch(auth()->user()->name .' Register success, this account already active.');
+        return redirect('/login')->with('success', 'Your Account Already Active');
     }
 
     public function checkemail(Request $request){

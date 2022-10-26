@@ -72,7 +72,14 @@
             <hr>
         <div class="row" >
             <div class="fv-row mb-7 col-lg-3">
-                <label class="required form-label fw-bold">Item</label>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label class="required form-label fw-bold">Item </label>
+                    </div>
+                    <div class="col-lg-6 text-end">
+                        <a onclick="getallitem(this)" class="text-success">List All</a>
+                    </div>
+                </div>
                 <select class="form-select  form-select-solid mb-3 mb-lg-0 item_id select-2" id="item_id" name="item_id[]" onchange="getBaseQty(this)" required>
                         <option>Choose Partner First</option>
                 </select>
@@ -169,6 +176,12 @@
             })
     })
 
+    function getallitem(e){
+        $.get("{{ url('/admin/procurement/purchase-order/getallitem') }}", {}, function(data){
+            $(e).parent().parent().parent().find('#item_id').html(data.html);
+        })
+    }
+
     function getBaseQty(e){
         $.get("{{ url('/admin/procurement/purchase-order/getbaseqty') }}/"+e.value, {}, function(data){
             $(e).parent().parent().find('#price_parent').remove();
@@ -224,6 +237,7 @@
         $(e).parent().parent().find('#getdiscountperitem').val(getdiscountperitem);
         sumAll()
     }
+
     function hitungByPrice(e){
         // if(e.value.length >0){
         //     $(e).closest('#notifprice').hide()

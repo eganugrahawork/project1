@@ -46,6 +46,13 @@
         </div>
 
 
+        <div id="kt_drawer_chat" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="chat" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'300px', 'md': '500px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_drawer_chat_toggle" data-kt-drawer-close="#kt_drawer_chat_close">
+            <div class="card w-100 rounded-0 border-0" id="kt_drawer_chat_messenger">
+
+
+            </div>
+        </div>
+
 
                 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
                 <script>var hostUrl = "/metronic/assets/";</script>
@@ -65,14 +72,25 @@
 
                 <script src="/metronic/assets/plugins/custom/datatables/datatables.bundle.js"></script>
 
+
+
+                <script>
+                      $('#kt_drawer_chat_toggle').on('click', function(){
+                            $('#kt_drawer_chat_messenger').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>');
+                            $.get("{{ url('/admin/listuseronline') }}", {}, function(data){
+                                $('#kt_drawer_chat_messenger').html(data);
+                             })
+                        })
+
+
+                    function openChat(id){
+                            $.get("{{ url('/admin/openchat') }}/"+id, {}, function(data){
+                                $('#kt_drawer_chat_messenger').html(data);
+                             })
+                    }
+                </script>
+
             @if (auth()->user()->userrole->role == 'Super Admin')
-            <div id="kt_drawer_chat" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="chat" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'300px', 'md': '500px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_drawer_chat_toggle" data-kt-drawer-close="#kt_drawer_chat_close">
-                <div class="card w-100 rounded-0 border-0" id="kt_drawer_chat_messenger">
-
-
-                </div>
-            </div>
-
 
             <button id="kt_explore_toggle" class="explore-toggle btn btn-sm bg-body btn-color-gray-700 btn-active-primary shadow-sm position-fixed px-5 fw-bolder zindex-2 top-50 mt-10 end-0 transform-90 fs-6 rounded-top-0 notify" title="See notification" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-trigger="hover">
                 <span id="kt_explore_toggle_label"><span class="badgenotify text-white">0</span><i class="bi bi-bell"></i></span>
@@ -128,23 +146,14 @@
                     {{-- End Toastr --}}
 
                     <script>
-                        $('#kt_drawer_chat_toggle').on('click', function(){
-                            $.get("{{ url('/admin/listuseronline') }}", {}, function(data){
-                                $('#kt_drawer_chat_messenger').html(data);
-                             })
-                        })
 
                         $('#kt_explore_toggle').on('click', function(){
+                            $('#notificationList').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>');
                             $.get("{{ url('/admin/listnotification') }}", {}, function(data){
                                 $('#notificationList').html(data);
                             })
                         })
 
-                        function openChat(id){
-                            $.get("{{ url('/admin/openchat') }}/"+id, {}, function(data){
-                                $('#kt_drawer_chat_messenger').html(data);
-                             })
-                        }
                     </script>
 
                     {{-- Pusher --}}

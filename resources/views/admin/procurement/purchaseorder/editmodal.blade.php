@@ -76,10 +76,17 @@
             <div class="row" >
                 <input type="hidden" name="idonpoitems[]" value="{{ $s_item->id }}">
                 <div class="fv-row mb-7 col-lg-3">
-                <label class="required form-label fw-bold">Item</label>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label class="required form-label fw-bold">Item </label>
+                        </div>
+                        <div class="col-lg-6 text-end">
+                            <a onclick="getallitem(this)" class="text-success">List All</a>
+                        </div>
+                    </div>
                 <select class="form-select  form-select-solid mb-3 mb-lg-0 item_id select-2" id="item_id" name="item_id[]" readonly onchange="getBaseQty(this)" required>
                     @foreach ($items as $listitem)
-                    <option value="{{ $listitem->id }}" {{ $s_item->item_id == $listitem->id ? 'selected' : '' }}>{{ $listitem->item_name }}</option>
+                    <option value="{{ $listitem->id }}" {{ $s_item->item_id == $listitem->id ? 'selected' : '' }}>{{ $listitem->item_code }}-{{ $listitem->item_name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -184,6 +191,12 @@
                 $('#price_parent').remove()
             })
     })
+
+    function getallitem(e){
+        $.get("{{ url('/admin/procurement/purchase-order/getallitem') }}", {}, function(data){
+            $(e).parent().parent().parent().find('#item_id').html(data.html);
+        })
+    }
 
     function getBaseQty(e){
         $.get("{{ url('/admin/procurement/purchase-order/getbaseqty') }}/"+e.value, {}, function(data){

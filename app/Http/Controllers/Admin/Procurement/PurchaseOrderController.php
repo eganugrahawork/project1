@@ -47,7 +47,7 @@ class PurchaseOrderController extends Controller
             $statues = "";
 
             if($model->po_status == 0 || $model->po_status !=1){
-                $statues .= "<a onclick='approveModal($model->id_ponya)' class='btn btn-sm btn-danger'><i class='bi bi-patch-check'></i> Confirm Here</a>";
+                $statues .= "<a onclick='approveModal($model->id_ponya)' class='btn btn-sm btn-danger'><i class='bi bi-patch-exclamation'></i></i> Confirm Here</a>";
             }else{
                 $statues .= "<a class='btn btn-sm btn-primary'><i class='bi bi-patch-check'></i> Confirmed</a>";
             }
@@ -76,9 +76,7 @@ class PurchaseOrderController extends Controller
     }
 
     public function infomodal(Request $request){
-        // dd($request->id);
         $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
-        // dd($info[0]->code);
         $items = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $request->id ");
         return view('admin.procurement.purchaseorder.infomodal', ['info'=> $info, 'items' => $items]);
     }
@@ -122,7 +120,6 @@ class PurchaseOrderController extends Controller
 
     public function getitem(Request $request){
         $partner = Partners::where(['id' => $request->id])->first();
-
         $items = Items::where(['partner_id' => $request->id])->get();
         $html ='';
         if(count($items) > 0){
@@ -134,6 +131,18 @@ class PurchaseOrderController extends Controller
             $html ='<option>No Items From This Partner</option>';
         }
         return response()->json(['html'=>$html, 'address' => $partner->address, 'phone'=>$partner->phone, 'fax'=>$partner->fax]);
+    }
+
+    public function getallitem(){
+        $items =Items::all();
+
+        $html = '<option>List All Items</option>';
+
+        foreach($items as $item){
+            $html .= "<option value='$item->id'>$item->item_code - $item->item_name</option>";
+        }
+
+        return response()->json(['html' => $html]);
     }
 
     public function getcurrency(Request $request){
@@ -156,7 +165,14 @@ class PurchaseOrderController extends Controller
 
     public function addnewitemrow(Request $request){
         $html = " <div class='row'> <div class='fv-row mb-7 col-lg-3'>
-        <label class='required form-label fw-bold'>Item</label>
+        <div class='row'>
+            <div class='col-lg-6'>
+                <label class='required form-label fw-bold'>Item </label>
+            </div>
+            <div class='col-lg-6 text-end'>
+                <a onclick='getallitem(this)' class='text-success'>List All</a>
+            </div>
+        </div>
         <select class='form-select form-select-solid mb-3 mb-lg-0 select-2' id='item_id' name='item_id[]' onchange='getBaseQty(this)' required>";
 
         $items = Items::where(['partner_id' => $request->id])->get();

@@ -22,7 +22,7 @@
                                              <img alt="Pic" src="{{ asset('storage/' . $uo->image) }}" />
                                          </div>
                                          <div class="ms-3">
-                                             <a onclick="openChat({{ $uo->id }})" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1">{{ $uo->name }}</a>
+                                             <a onclick="openChat({{ $uo->id }})" href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1">{{ $uo->name }}</a>
                                              <span class="text-muted fs-7 mb-1">{{ $uo->username }}</span>
                                          </div>
                                      </div>

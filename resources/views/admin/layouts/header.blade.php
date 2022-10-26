@@ -160,7 +160,6 @@
 										<!--end::Menu-->
 									</div> --}}
 									<!--end::Theme mode-->
-            @if (auth()->user()->userrole->role == 'Super Admin')
                 <div class="d-flex align-items-center ms-3 ms-lg-4">
                     <div id="kt_drawer_chat_toggle" class="btn btn-icon btn-active-color-primary btn-outline btn-outline-secondary w-30px h-30px w-lg-40px h-lg-40px" >
                         <span class="svg-icon svg-icon-1 ">
@@ -168,8 +167,6 @@
                         </span>
                     </div>
                 </div>
-
-            @endif
 
         </div>
 
