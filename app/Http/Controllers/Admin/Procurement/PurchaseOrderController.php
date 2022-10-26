@@ -164,15 +164,10 @@ class PurchaseOrderController extends Controller
     }
 
     public function addnewitemrow(Request $request){
-        $html = " <div class='row'> <div class='fv-row mb-7 col-lg-3'>
-        <div class='row'>
-            <div class='col-lg-6'>
-                <label class='required form-label fw-bold'>Item </label>
-            </div>
-            <div class='col-lg-6 text-end'>
-                <a onclick='getallitem(this)' class='text-success'>List All</a>
-            </div>
-        </div>
+        $html = " <div class='row'> <div class='fv-row mb-7 col-lg-4'>
+        <label class='required form-label fw-bold'>Item </label>
+                <div class='row'>
+                    <div class='col-lg-10'>
         <select class='form-select form-select-solid mb-3 mb-lg-0 select-2' id='item_id' name='item_id[]' onchange='getBaseQty(this)' required>";
 
         $items = Items::where(['partner_id' => $request->id])->get();
@@ -187,6 +182,11 @@ class PurchaseOrderController extends Controller
 
 
             $html .=   "</select>
+                    </div>
+                            <div class='col-lg-2'>
+                                <button onclick='getallitem(this)' type='button' class='btn btn-sm btn-success'>All</button>
+                            </div>
+                        </div>
                         </div>
 
                         <div class='fv-row mb-7 col-lg-1'>

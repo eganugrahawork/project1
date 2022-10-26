@@ -4,8 +4,11 @@
         <div class="col-lg-6">
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Po Number</label>
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0" name="po_number" required>
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="purchase_order_id" id="purchase_order_id" required>
                         <option>Choose Po Number</option>
+                        @foreach ($purchase_orders as $po)
+                        <option value="{{ $po->id }}">{{ $po->code }}-{{ $po->partnernya->name }} || {{ date('d-m-Y', strtotime($po->order_date)) }}</option>
+                        @endforeach
                     </select>
             </div>
             <div class="fv-row mb-7">
@@ -101,3 +104,23 @@
         </div>
 </form>
 
+<script>
+    $(document).ready(function() {
+           $('.select-2').select2({
+               dropdownParent: $('#mainmodal')
+           });
+
+   });
+</script>
+
+<script>
+    $('#purchase_order_id').on('change', function(){
+        var id = $(this).val();
+
+        $.get("{{ url('/admin/procurement/items-receipt/getdatapo') }}/"+id, {}, function(data, status){
+
+        })
+
+    })
+
+</script>

@@ -236,6 +236,7 @@ Route::middleware(['auth'])->controller(PurchaseOrderController::class)->group(f
     Route::get('/admin/procurement/purchase-order/addmodal', 'addmodal');
     Route::get('/admin/procurement/purchase-order/getitem/{id}', 'getitem');
     Route::get('/admin/procurement/purchase-order/getallitem', 'getallitem');
+    Route::get('/admin/procurement/purchase-order/getbackitem/{id}', 'getbackitem');
     Route::get('/admin/procurement/purchase-order/getcurrency/{id}', 'getcurrency');
     Route::get('/admin/procurement/purchase-order/getbaseqty/{id}', 'getbaseqty');
     Route::get('/admin/procurement/purchase-order/addnewitemrow/{id}', 'addnewitemrow');
@@ -253,6 +254,7 @@ Route::middleware(['auth'])->controller(PurchaseOrderController::class)->group(f
 Route::middleware('auth')->controller(ItemsReceiptController::class)->group(function(){
     Route::get('/admin/procurement/items-receipt', 'index');
     Route::get('/admin/procurement/items-receipt/addmodal', 'addmodal');
+    Route::get('/admin/procurement/items-receipt/getdatapo/{id}', 'getdatapo');
 });
 
 // End Items Receipt

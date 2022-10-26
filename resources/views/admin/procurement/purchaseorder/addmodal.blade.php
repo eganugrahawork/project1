@@ -71,18 +71,18 @@
             <h1>Items</h1>
             <hr>
         <div class="row" >
-            <div class="fv-row mb-7 col-lg-3">
+            <div class="fv-row mb-7 col-lg-4">
+                <label class="required form-label fw-bold">Item </label>
                 <div class="row">
-                    <div class="col-lg-6">
-                        <label class="required form-label fw-bold">Item </label>
+                    <div class="col-lg-10">
+                        <select class="form-select  form-select-solid mb-3 mb-lg-0 item_id select-2" id="item_id" name="item_id[]" onchange="getBaseQty(this)" required>
+                            <option>Choose Partner First</option>
+                        </select>
                     </div>
-                    <div class="col-lg-6 text-end">
-                        <a onclick="getallitem(this)" class="text-success">List All</a>
+                    <div class="col-lg-2">
+                        <button onclick="getallitem(this)" type="button" class="btn btn-sm btn-success">All</button>
                     </div>
                 </div>
-                <select class="form-select  form-select-solid mb-3 mb-lg-0 item_id select-2" id="item_id" name="item_id[]" onchange="getBaseQty(this)" required>
-                        <option>Choose Partner First</option>
-                </select>
             </div>
 
             <div class="fv-row mb-7 col-lg-1">
@@ -178,15 +178,30 @@
 
     function getallitem(e){
         $.get("{{ url('/admin/procurement/purchase-order/getallitem') }}", {}, function(data){
-            $(e).parent().parent().parent().find('#item_id').html(data.html);
+            $(e).parent().parent().find('#item_id').html(data.html);
+            $(e).parent().html("<button onclick='backitem(this)' type='button' id='getbackitem' class='btn btn-sm btn-success'>Back</button>");
         })
+    }
+
+    function backitem(e){
+        var partnerId = $('#partner_id').val();
+        var check = $.isNumeric(partnerId);
+        if(check){
+            $.get("{{ url('/admin/procurement/purchase-order/getitem') }}/"+partnerId, {}, function(data){
+                $(e).parent().parent().find('#item_id').html(data.html);
+                $(e).parent().html("<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-success'>All</button>");
+            })
+        }else{
+            $(e).parent().parent().find('#item_id').html("<option>Choose Partner First</option>");
+            $(e).parent().html("<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-success'>All</button>");
+        }
     }
 
     function getBaseQty(e){
         $.get("{{ url('/admin/procurement/purchase-order/getbaseqty') }}/"+e.value, {}, function(data){
-            $(e).parent().parent().find('#price_parent').remove();
-            $(e).parent().parent().find('#base_qty_parent').remove();
-            $(e).parent().after("<div class='fv-row mb-7 col-lg-1' id='base_qty_parent'><label class='fw-bold fs-6 mb-2'>Base Qty</label><input type='number' name='base_qty' id='base_qyu' class='form-control form-control-white mb-3 mb-lg-0' value='"+data.base_qty+"' readonly/></div>"+data.pricing)
+            $(e).parent().parent().parent().parent().find('#price_parent').remove();
+            $(e).parent().parent().parent().parent().find('#base_qty_parent').remove();
+            $(e).parent().parent().parent().after("<div class='fv-row mb-7 col-lg-1' id='base_qty_parent'><label class='fw-bold fs-6 mb-2'>Base Qty</label><input type='number' name='base_qty' id='base_qyu' class='form-control form-control-white mb-3 mb-lg-0' value='"+data.base_qty+"' readonly/></div>"+data.pricing)
             })
     }
 

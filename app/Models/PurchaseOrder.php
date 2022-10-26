@@ -11,4 +11,9 @@ class PurchaseOrder extends Model
     protected $table = 'purchase_orders';
     protected $guarded = ['id'];
     use HasFactory;
+
+    public function partnernya(){
+        return $this->hasOne(Partners::class, 'id', 'partner_id');
+    }
+
 }
