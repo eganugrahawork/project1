@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="fv-row mb-7">
-                <label class="fw-bold fs-6 mb-2">Po Code</label>
+                <label class="fw-bold fs-6 mb-2">Number Po</label>
                 <input type="text" id="code" name="code" value="{{ $ponya[0]->code }}" readonly class="form-control form-control-white mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
@@ -75,7 +75,7 @@
             @foreach ($s_item as $s_item)
             <div class="row" >
                 <input type="hidden" name="idonpoitems[]" value="{{ $s_item->id }}">
-            <div class="fv-row mb-7 col-lg-3">
+            <div class="fv-row mb-7 col-lg-4">
                     <label class="required form-label fw-bold">Item </label>
                         <div class="row">
                             <div class="col-lg-10">

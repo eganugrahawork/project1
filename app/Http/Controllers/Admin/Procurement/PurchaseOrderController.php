@@ -77,17 +77,16 @@ class PurchaseOrderController extends Controller
 
     public function infomodal(Request $request){
         $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
-        // dd($info);
-        $items = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $request->id ");
-        return view('admin.procurement.purchaseorder.infomodal', ['info'=> $info, 'items' => $items]);
+
+        return view('admin.procurement.purchaseorder.infomodal', ['info'=> $info]);
     }
 
     public function aprovedmodal(Request $request){
         $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
-        $items = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $request->id ");
 
 
-        return view('admin.procurement.purchaseorder.aprovedmodal', ['info'=> $info, 'items' => $items, 'id_po' => $request->id]);
+
+        return view('admin.procurement.purchaseorder.aprovedmodal', ['info'=> $info, 'id_po' => $request->id]);
     }
 
     public function approve(Request $request){
@@ -99,9 +98,9 @@ class PurchaseOrderController extends Controller
             'id_user' => auth()->user()->id,
             'menu' => "Approved PO",
             'aktivitas' => "Approved PO",
-            'keterangan' => "Approved PO ". $info[0]->code
+            'keterangan' => "Approved PO ". $info[0]->number_po
         ]);
-        NotifEvent::dispatch(auth()->user()->name .' Approved PO '. $info[0]->code);
+        NotifEvent::dispatch(auth()->user()->name .' Approved PO '. $info[0]->number_po);
         return response()->json(['success'=> 'Data Approved']);
     }
 
@@ -113,9 +112,9 @@ class PurchaseOrderController extends Controller
             'id_user' => auth()->user()->id,
             'menu' => "Delete PO",
             'aktivitas' => "Delete PO",
-            'keterangan' => "Delete PO ". $info[0]->code
+            'keterangan' => "Delete PO ". $info[0]->number_po
         ]);
-        NotifEvent::dispatch(auth()->user()->name .' Delete PO '. $info[0]->code);
+        NotifEvent::dispatch(auth()->user()->name .' Delete PO '. $info[0]->number_po);
         return response()->json(['success'=> 'Data Deleted']);
     }
 
@@ -276,7 +275,7 @@ class PurchaseOrderController extends Controller
         ]);
         NotifEvent::dispatch(auth()->user()->name .' Added PO '. $request->code);
 
-        return redirect('/admin/procurement/purchase-order')->with(['success'=> 'Purchase Order Added']);
+        return redirect('/admin/procurement/purchase-order')->with('success', 'Purchase Order Added');
     }
 
     public function update(Request $request){
@@ -342,7 +341,7 @@ class PurchaseOrderController extends Controller
         ]);
         NotifEvent::dispatch(auth()->user()->name .' Edit PO '. $request->code);
 
-        return redirect('/admin/procurement/purchase-order')->with(['success'=> 'Purchase Order Edited']);
+        return redirect('/admin/procurement/purchase-order')->with('success', 'Purchase Order Edited');
     }
 
 }
