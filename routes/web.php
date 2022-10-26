@@ -255,6 +255,7 @@ Route::middleware('auth')->controller(ItemsReceiptController::class)->group(func
     Route::get('/admin/procurement/items-receipt', 'index');
     Route::get('/admin/procurement/items-receipt/addmodal', 'addmodal');
     Route::get('/admin/procurement/items-receipt/getdatapo/{id}', 'getdatapo');
+    Route::post('/admin/procurement/items-receipt/store', 'store');
 });
 
 // End Items Receipt

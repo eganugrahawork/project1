@@ -1,4 +1,4 @@
-<form id="kt_modal_add_user_form" class="form" >
+<form id="kt_modal_add_user_form" class="form" action="/admin/procurement/items-receipt/store" method="post">
     @csrf
     <div class="row">
         <div class="col-lg-6">
@@ -17,23 +17,23 @@
             </div>
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Date</label>
-                <input type="text" name="order_date" id="order_date" readonly class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="text" name="order_date" id="order_date" readonly class="form-control form-control-white mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
-                <label class="required form-label fw-bold">Partners</label>
-                <input type="text" name="partner" id="partner" readonly class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <label class=" form-label fw-bold">Partners</label>
+                <input type="text" name="partner" id="partner" readonly class="form-control form-control-white mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Address</label>
-                <textarea type="text" name="address" id="address" readonly class="form-control form-control-solid mb-3 mb-lg-0"  ></textarea>
+                <textarea type="text" name="address" id="address" readonly class="form-control form-control-white mb-3 mb-lg-0"  ></textarea>
             </div>
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Phone Number</label>
-                <input type="text" name="phone" id="phone" readonly class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="text" name="phone" id="phone" readonly class="form-control form-control-white mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Fax</label>
-                <input type="text" name="fax" id="fax" readonly class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="text" name="fax" id="fax" readonly class="form-control form-control-white mb-3 mb-lg-0"  required/>
             </div>
         </div>
         <div class="col-lg-6">
@@ -46,7 +46,7 @@
                 <input type="datetime-local" name="do_date" id="do_date"  class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
-                <label class="fw-bold fs-6 mb-2">Plate Number</label>
+                <label class="required fw-bold fs-6 mb-2">Plate Number</label>
                 <input type="text" name="plate_number" id="plate_number" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">

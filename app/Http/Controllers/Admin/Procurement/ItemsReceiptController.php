@@ -30,30 +30,28 @@ class ItemsReceiptController extends Controller
         foreach($itemnya as $item){
             $html .= "<div class='row'>
             <div class='fv-row mb-7 col-lg-3'>
-                <label class='required form-label fw-bold'>Item</label>
+                <label class=' form-label fw-bold'>Item</label>
                 <select class='form-select  form-select-solid mb-3 mb-lg-0' id='item_id' name='item_id[]'  value='$item->item_id' required>
                         <option>$item->item_id</option>
                 </select>
             </div>
-            <div class='fv-row mb-7 col-lg-3'>
-                <label class='required fw-bold fs-6 mb-2'>Mutation</label>
-                <select class='form-select  form-select-solid mb-3 mb-lg-0' id='mutation_id' name='mutation_id[]' required>
-                    <option>Choose Mutation First</option>
-            </select>
-            </div>
-            <div class='fv-row mb-7 col-lg-1'>
-                <label class='required fw-bold fs-6 mb-2'>Order Qty</label>
+            <div class='fv-row mb-7 col-lg-2'>
+                <label class=' fw-bold fs-6 mb-2'>Order Qty</label>
                 <input type='number' name='qty_order[]' id='qty_order' value='$item->qty' readonly class='form-control form-control-solid mb-3 mb-lg-0 '  required/>
             </div>
-            <div class='fv-row mb-7 col-lg-1'>
-                <label class='required fw-bold fs-6 mb-2'>Received</label>
+            <div class='fv-row mb-7 col-lg-2'>
+                <label class=' fw-bold fs-6 mb-2'>Balance</label>
+                <input type='number' name='balance[]' id='balance' value='$item->qty' readonly class='form-control form-control-solid mb-3 mb-lg-0 '  required/>
+            </div>
+            <div class='fv-row mb-7 col-lg-2'>
+                <label class='required fw-bold fs-6 mb-2'>Receive</label>
                 <input type='number' name='qty[]' id='qty' value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
             <div class='fv-row mb-7 col-lg-1'>
                 <label class='required fw-bold fs-6 mb-2'>Bonus</label>
                 <input type='number' name='qty_bonus[]' id='qty_bonus' value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
-            <div class='fv-row mb-7 col-lg-3'>
+            <div class='fv-row mb-7 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Note</label>
                 <input type='text' name='description[]' id='description' class='form-control form-control-solid mb-3 mb-lg-0 descriptionnya'  required/>
             </div>
@@ -68,6 +66,10 @@ class ItemsReceiptController extends Controller
             'fax' => $po->partnernya->fax,
             'html' => $html
         ]);
+    }
+
+    public function store(Request $request){
+        dd($request);
     }
 
 }
