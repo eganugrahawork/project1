@@ -86,7 +86,7 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="kontennya">
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-2" id="kontennya">
             </div>
         </div>
     </div>
@@ -217,6 +217,55 @@
             })
         });
 
+        function exportPDF(id){
+            // e.preventDefault();
+            const href = "{{ url('/admin/procurement/purchase-order/exportpdf') }}/"+id
+            console.log(href);
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Export this Data ?',
+                text: "Format Pdf",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Export',
+                cancelButtonText: 'Cancel',
+                reverseButtons: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+                    $.ajax({
+                        type:"GET",
+                        url: href,
+                        success:function(response){
+                            Swal.fire(
+                                'Success',
+                                response.success,
+                                'success'
+                            )
+                            $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
+                        }
+                    })
+
+                } else if (
+
+                result.dismiss === Swal.DismissReason.cancel
+                ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Cancel Export',
+                    'success'
+                )
+                }
+            })
+        }
 </script>
 
 @endsection

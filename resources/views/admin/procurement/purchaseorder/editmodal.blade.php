@@ -1,3 +1,7 @@
+<div class="d-flex justify-content-start">
+    <h3>Edit Purchase Order</h3>
+</div>
+ <hr class="border border-dark border-2 opacity-50">
 <form id="add-form" class="form" action="/admin/procurement/purchase-order/update" method="post">
     @csrf
     <input type="hidden" name="id_po" value="{{ $ponya[0]->id }}">
@@ -70,7 +74,7 @@
         </div>
         <div class="col-lg-12"id="itemsAddList">
             <h1>Items</h1>
-            <hr>
+            <hr class="border border-dark border-2 opacity-50">
 
             @foreach ($s_item as $s_item)
             <div class="row" >
@@ -123,39 +127,39 @@
             <button class="btn btn-sm btn-primary" type="button" onclick="addNewItemRow()">+</button>
         </div>
     </div>
-    <hr>
+    <hr class="border border-dark border-2 opacity-50">
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Subtotal</div>
-            <div class="col-lg-6"><input type="text" name="subtotal" readonly id="subtotal" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" name="subtotal" readonly id="subtotal" class="form-control form-control-white text-end"></div>
         </div>
     </div>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Discount</div>
-            <div class="col-lg-6"><input type="text" name="totaldiscount" readonly id="totaldiscount" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" name="totaldiscount" readonly id="totaldiscount" class="form-control form-control-white text-end"></div>
         </div>
     </div>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Taxable</div>
-            <div class="col-lg-6"><input type="text" name="taxable" readonly id="taxable" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" name="taxable" readonly id="taxable" class="form-control form-control-white text-end"></div>
         </div>
     </div>
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Vat/PPn</div>
-            <div class="col-lg-6"><input type="text" name="totalppn" readonly id="totalppn" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" name="totalppn" readonly id="totalppn" class="form-control form-control-white text-end"></div>
         </div>
     </div>
-    <hr>
+    <hr class="border border-dark border-2 opacity-50">
     <div class="d-flex justify-content-end py-2">
         <div class="row">
             <div class="col-lg-6">Grand Total</div>
-            <div class="col-lg-6"><input type="text" name="grandtotal" readonly id="grandtotal" class="form-control form-control-white"></div>
+            <div class="col-lg-6"><input type="text" name="grandtotal" readonly id="grandtotal" class="form-control form-control-white text-end"></div>
         </div>
     </div>
-    <hr>
+    <hr class="border border-dark border-2 opacity-50">
 
         <div class="d-flex justify-content-end" id="loadingnya">
             <button class="btn btn-sm btn-primary" type="submit" id="btn-update">Update Purchase Order</button>

@@ -1,4 +1,7 @@
-
+<div class="d-flex justify-content-start">
+    <h3>Approve Purchase Order</h3>
+</div>
+ <hr class="border border-dark border-2 opacity-50">
 <div class="row">
     <div class="col-lg-6">
         <div class="fv-row mb-7">
@@ -57,7 +60,7 @@
     </div>
     <div class="col-lg-12"id="itemsAddList">
         <h1>Items</h1>
-        <hr>
+        <hr class="border border-dark border-2 opacity-50">
         @foreach ($info as $item)
         <div class="row" >
             <div class="fv-row mb-7 col-lg-3">
@@ -88,39 +91,39 @@
     </div>
 
 </div>
-<hr>
+<hr class="border border-dark border-2 opacity-50">
 <div class="d-flex justify-content-end py-2">
     <div class="row">
         <div class="col-lg-6">Subtotal</div>
-        <div class="col-lg-6"><input type="text" readonly name="subtotal" id="subtotal" class="form-control form-control-white"></div>
+        <div class="col-lg-6"><input type="text" readonly name="subtotal" id="subtotal" class="form-control form-control-white text-end"></div>
     </div>
 </div>
 <div class="d-flex justify-content-end py-2">
     <div class="row">
         <div class="col-lg-6">Discount</div>
-        <div class="col-lg-6"><input type="text" readonly name="totaldiscount" id="totaldiscount" class="form-control form-control-white"></div>
+        <div class="col-lg-6"><input type="text" readonly name="totaldiscount" id="totaldiscount" class="form-control form-control-white text-end"></div>
     </div>
 </div>
 <div class="d-flex justify-content-end py-2">
     <div class="row">
         <div class="col-lg-6">Taxable</div>
-        <div class="col-lg-6"><input type="text" readonly name="taxable" id="taxable" class="form-control form-control-white"></div>
+        <div class="col-lg-6"><input type="text" readonly name="taxable" id="taxable" class="form-control form-control-white text-end"></div>
     </div>
 </div>
 <div class="d-flex justify-content-end py-2">
     <div class="row">
         <div class="col-lg-6">Vat/PPn</div>
-        <div class="col-lg-6"><input type="text" readonly name="totalppn" id="totalppn" class="form-control form-control-white"></div>
+        <div class="col-lg-6"><input type="text" readonly name="totalppn" id="totalppn" class="form-control form-control-white text-end"></div>
     </div>
 </div>
-<hr>
+<hr class="border border-dark border-2 opacity-50">
 <div class="d-flex justify-content-end py-2">
     <div class="row">
         <div class="col-lg-6">Grand Total</div>
-        <div class="col-lg-6"><input type="text" readonly name="grandtotal" id="grandtotal" class="form-control form-control-white"></div>
+        <div class="col-lg-6"><input type="text" readonly name="grandtotal" id="grandtotal" class="form-control form-control-white text-end"></div>
     </div>
 </div>
-<hr>
+<hr class="border border-dark border-2 opacity-50">
 
 
     <div class="d-flex justify-content-center" id="loadingnya">

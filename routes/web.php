@@ -247,6 +247,7 @@ Route::middleware(['auth'])->controller(PurchaseOrderController::class)->group(f
     Route::get('/admin/procurement/purchase-order/delete/{id}', 'destroy');
     Route::post('/admin/procurement/purchase-order/store', 'store');
     Route::post('/admin/procurement/purchase-order/update', 'update');
+    Route::get('/admin/procurement/purchase-order/exportpdf/{id}', 'exportpdf');
 });
 //End Purchase Order
 

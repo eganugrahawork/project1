@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
+use Barryvdh\DomPDF\Facade\Pdf;
 use PDO;
 
 class PurchaseOrderController extends Controller
@@ -32,15 +33,17 @@ class PurchaseOrderController extends Controller
         return Datatables::of(DB::connection('procurement')->select('Call sp_list_po()'))->addIndexColumn()
         ->addColumn('action', function($model){
             $action = "";
-            $action = "<a onclick='infoModal($model->id_ponya)' class='btn btn-sm btn-info'><i class='bi bi-info-square'></i></a>";
+            $action = "<a onclick='infoModal($model->id_ponya)' class='btn btn-icon btn-info'><i class='bi bi-info-square'></i></a>";
 
             if($model->po_status == 0 || $model->po_status !=1){
                 if(Gate::allows('edit', ['/admin/procurement/purchase-order'])){
-                    $action .= "<a onclick='editModal($model->id_ponya)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
+                    $action .= "<a onclick='editModal($model->id_ponya)' class='btn btn-icon btn-warning'><i class='bi bi-pencil-square'></i></a>";
                 }
                 if(Gate::allows('delete', ['/admin/procurement/purchase-order'])){
-                    $action .= " <a href='/admin/procurement/purchase-order/delete/$model->id_ponya' class='btn btn-sm btn-danger' id='deletepo'><i class='bi bi-trash'></i></a>";
+                    $action .= " <a href='/admin/procurement/purchase-order/delete/$model->id_ponya' class='btn btn-icon btn-danger' id='deletepo'><i class='bi bi-trash'></i></a>";
                 }
+            }else{
+                $action .= "<a onclick='exportPDF($model->id_ponya)' class='btn btn-icon btn-outline btn-outline-dashed btn-outline-dark btn-active-light-dark'><i class='bi bi-file-earmark-pdf'></i></a>";
             }
             return $action;
         })->addColumn('statues', function($model){
@@ -342,6 +345,16 @@ class PurchaseOrderController extends Controller
         NotifEvent::dispatch(auth()->user()->name .' Edit PO '. $request->code);
 
         return redirect('/admin/procurement/purchase-order')->with('success', 'Purchase Order Edited');
+    }
+
+    public function exportpdf(Request $request){
+        // dd($request->id);
+
+        $po = DB::connection('procurement')->select("call sp_search_id($request->id)");
+$datenow = Carbon::now()->format('d-m-Y');
+        $pdf = Pdf::loadView('admin.procurement.purchaseorder.exportpdf', ['po' => $po, 'now'=> $datenow]);
+
+        return $pdf->download("PO-".$po[0]->number_po.".pdf");
     }
 
 }

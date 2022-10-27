@@ -31,17 +31,17 @@ class ItemsReceiptController extends Controller
             $html .= "<div class='row'>
             <div class='fv-row mb-7 col-lg-3'>
                 <label class=' form-label fw-bold'>Item</label>
-                <select class='form-select  form-select-solid mb-3 mb-lg-0' id='item_id' name='item_id[]'  value='$item->item_id' required>
+                <select class='form-select  form-select-white mb-3 mb-lg-0' id='item_id' name='item_id[]'  value='$item->item_id' required>
                         <option>$item->item_id</option>
                 </select>
             </div>
             <div class='fv-row mb-7 col-lg-2'>
                 <label class=' fw-bold fs-6 mb-2'>Order Qty</label>
-                <input type='number' name='qty_order[]' id='qty_order' value='$item->qty' readonly class='form-control form-control-solid mb-3 mb-lg-0 '  required/>
+                <input type='number' name='qty_order[]' id='qty_order' value='$item->qty' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
             </div>
             <div class='fv-row mb-7 col-lg-2'>
                 <label class=' fw-bold fs-6 mb-2'>Balance</label>
-                <input type='number' name='balance[]' id='balance' value='$item->qty' readonly class='form-control form-control-solid mb-3 mb-lg-0 '  required/>
+                <input type='number' name='balance[]' id='balance' value='$item->qty' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
             </div>
             <div class='fv-row mb-7 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Receive</label>
