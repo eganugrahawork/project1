@@ -351,8 +351,18 @@ class PurchaseOrderController extends Controller
         // dd($request->id);
 
         $po = DB::connection('procurement')->select("call sp_search_id($request->id)");
-$datenow = Carbon::now()->format('d-m-Y');
+        $datenow = Carbon::now()->format('d-m-Y');
         $pdf = Pdf::loadView('admin.procurement.purchaseorder.exportpdf', ['po' => $po, 'now'=> $datenow]);
+
+// INI DOUBLE GATAU KENAPA NOTIFNYA SAMA INSERTNYA
+        UserActivity::create([
+                'id_user' => auth()->user()->id,
+                'menu' => "Export Detail PO",
+                'aktivitas' => "Export Detail PO",
+                'keterangan' => "Export Detail PO ". $po[0]->number_po
+            ]);
+            NotifEvent::dispatch(auth()->user()->name .' Export PO '. $po[0]->number_po);
+            // SAMAPI SINI
 
         return $pdf->download("PO-".$po[0]->number_po.".pdf");
     }
