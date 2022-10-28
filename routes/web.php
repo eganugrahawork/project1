@@ -20,6 +20,7 @@ use App\Http\Controllers\Auth\RegisterController;
 // Start Procurement
 use App\Http\Controllers\Admin\Procurement\PurchaseOrderController;
 use App\Http\Controllers\Admin\Procurement\StockController;
+use App\Http\Controllers\Admin\Procurement\StockInTransitController;
 // End Procurement
 
 
@@ -276,6 +277,11 @@ Route::middleware('auth')->controller(StockController::class)->group(function(){
 });
 // End Stock
 
+// Stock in Transit
+Route::middleware('auth')->controller(StockInTransitController::class)->group(function(){
+    Route::get('/admin/inventory/stock-in-transit', 'index');
+});
+// End Stock In Transit
 //Blocked Page Start
 Route::get('/blocked', function(){
     return view('admin.blocked');

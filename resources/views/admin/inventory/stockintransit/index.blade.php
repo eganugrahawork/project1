@@ -6,7 +6,7 @@
 <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
     <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
         <div class="page-title d-flex flex-column me-3">
-            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">Stock</h1>
+            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">Stock In Transit</h1>
             <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
                 <li class="breadcrumb-item text-gray-600">
                     <a href="/admin/dashboard" class="text-gray-600 text-hover-primary">Dashboard</a>
@@ -23,7 +23,12 @@
             <div class="card-header border-0 pt-6">
                 <div class="card-title align-items-start flex-column">
                     <div class="d-flex align-items-center position-relative my-1">
-                       <h2>Stock</h2>
+                       <h2>Stock In Transit</h2>
+                    </div>
+                    <div class="my-2">
+                        <div class="px-2">
+                            <button class="btn btn-sm btn-primary mx-2">+</button><button class="btn btn-sm btn-primary">Register Transit</button>
+                        </div>
                     </div>
                     <div class="d-flex align-items-center position-relative my-1">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
@@ -34,7 +39,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <input type="text" id="searchTableStock" class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
+                        <input type="text" id="searchTableStockInTransit" class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
                     </div>
                 </div>
                 <div class="card-toolbar">
@@ -47,7 +52,7 @@
                         <input type="date" class="form-control text-gray-600" name="end-date">
                     </div>
                     <div class="d-flex justify-content-end" id="loading-add">
-                        <button type="button" class="btn btn-primary me-3" onclick="filterStock()">
+                        <button type="button" class="btn btn-primary me-3" onclick="filterStockInTransit()">
                             Search</button>
                     </div>
 
@@ -56,7 +61,7 @@
             <div class="card-body pt-0">
                 <div class="table-responsive">
 
-                <table class="table table-rounded table-row-bordered border gy-7 gs-7" id="tableStock">
+                <table class="table table-rounded table-row-bordered border gy-7 gs-7" id="tableStockInTransit">
                     <thead>
                         <tr class="text-center text-gray-800 fw-bolder fs-7 text-uppercase gs-0  border-bottom-2 border-right-2 border-top-2 border-gray-300 ">
                             <th class="min-w-70px align-middle border-left-2 border-gray-300" rowspan="2">Code</th>
@@ -143,7 +148,7 @@
 @section('js')
 
 <script>
-        function filterStock(){
+        function filterStockInTransit(){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/procurement/items-receipt/addmodal') }}", {}, function(data, status){
                 $('#kontennya').html(data)
@@ -164,7 +169,7 @@
         $('#mainmodal').modal('toggle')
         }
 
-        // var tableStock =  $('#tableStock').DataTable({
+        // var tableStockInTransit =  $('#tableStockInTransit').DataTable({
         //     serverside : true,
         //     processing : true,
         //     ajax : {
@@ -189,8 +194,8 @@
         //     "bInfo": false
         // });
 
-        // $('#searchTableStock').keyup(function () {
-        //         tableStock.search($(this).val()).draw()
+        // $('#searchTableStockInTransit').keyup(function () {
+        //         tableStockInTransit.search($(this).val()).draw()
         // });
 </script>
 
