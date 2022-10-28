@@ -19,6 +19,7 @@ use App\Http\Controllers\Auth\RegisterController;
 // End Admin
 // Start Procurement
 use App\Http\Controllers\Admin\Procurement\PurchaseOrderController;
+use App\Http\Controllers\Admin\Procurement\StockController;
 // End Procurement
 
 
@@ -268,6 +269,12 @@ Route::middleware('auth')->controller(PurchaseBasisController::class)->group(fun
     Route::get('/admin/procurement/purchase-basis', 'index');
 });
 // Purchase Basis End
+
+// Stock
+Route::middleware('auth')->controller(StockController::class)->group(function(){
+    Route::get('/admin/inventory/stock', 'index');
+});
+// End Stock
 
 //Blocked Page Start
 Route::get('/blocked', function(){

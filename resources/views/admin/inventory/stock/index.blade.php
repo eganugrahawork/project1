@@ -6,7 +6,7 @@
 <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
     <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
         <div class="page-title d-flex flex-column me-3">
-            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">Purchase Basis</h1>
+            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">Stock</h1>
             <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
                 <li class="breadcrumb-item text-gray-600">
                     <a href="/admin/dashboard" class="text-gray-600 text-hover-primary">Dashboard</a>
@@ -23,7 +23,7 @@
             <div class="card-header border-0 pt-6">
                 <div class="card-title align-items-start flex-column">
                     <div class="d-flex align-items-center position-relative my-1">
-                       <h2>Purchase Basis</h2>
+                       <h2>Stock</h2>
                     </div>
                     <div class="d-flex align-items-center position-relative my-1">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
@@ -34,7 +34,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <input type="text" id="searchTablePurchaseBasis" class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
+                        <input type="text" id="searchTableStock" class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
                     </div>
                 </div>
                 <div class="card-toolbar">
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="tablePurchaseBasis">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="tableStock">
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="min-w-20px">Date</th>
@@ -126,7 +126,7 @@
         $('#mainmodal').modal('toggle')
         }
 
-        // var tablePurchaseBasis =  $('#tablePurchaseBasis').DataTable({
+        // var tableStock =  $('#tableStock').DataTable({
         //     serverside : true,
         //     processing : true,
         //     ajax : {
@@ -151,8 +151,8 @@
         //     "bInfo": false
         // });
 
-        // $('#searchTablePurchaseBasis').keyup(function () {
-        //         tablePurchaseBasis.search($(this).val()).draw()
+        // $('#searchTableStock').keyup(function () {
+        //         tableStock.search($(this).val()).draw()
         // });
 </script>
 
