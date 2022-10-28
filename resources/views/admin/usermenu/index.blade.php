@@ -98,11 +98,11 @@
                                                 <div class="fs-5 text-dark fw-bolder">Add Menues</div>
                                             </div>
                                             <div class="separator border-gray-200"></div>
-                                            <div class="px-7 py-5">
+                                            <div class="px-7 py-5" id="addmenuparent">
                                                 <form action="/admin/configuration/menu/store" method="post">
                                                     @csrf
-                                                        <label class="form-label fw-bold">Parent</label>
-                                                        <select class="form-select" name="parent">
+                                                        <label class="form-label fw-bold ">Parent</label>
+                                                        <select class="form-select select-2" name="parent">
                                                             <option value="0">Main Parent</option>
                                                             @foreach ($menu as $m)
                                                                 <option value="{{ $m->id }}">{{ $m->name }}</option>
@@ -540,6 +540,18 @@
 {{-- Datatable End --}}
 
 {{-- Hide url Start --}}
+
+<script>
+    $(document).ready(function() {
+           $('.select-2').select2({
+               dropdownParent: $('#addmenuparent')
+           });
+
+   });
+
+</script>
+
+
 <script>
 
     function editModalMenu(id){

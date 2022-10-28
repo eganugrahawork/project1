@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderItems;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class ItemsReceiptController extends Controller
@@ -23,16 +24,15 @@ class ItemsReceiptController extends Controller
     }
 
     public function getdatapo(Request $request){
-       $po = PurchaseOrder::where(['id' => $request->id])->first();
-        $itemnya = PurchaseOrderItems::where(['purchase_order_id'=> $request->id])->get();
+       $po = DB::connection('procurement')->select('Call sp_search_id('.$request->id.')');
 
         $html = '';
-        foreach($itemnya as $item){
+        foreach($po as $item){
             $html .= "<div class='row'>
             <div class='fv-row mb-7 col-lg-3'>
                 <label class=' form-label fw-bold'>Item</label>
-                <select class='form-select  form-select-white mb-3 mb-lg-0' id='item_id' name='item_id[]'  value='$item->item_id' required>
-                        <option>$item->item_id</option>
+                <select class='form-select  form-select-white mb-3 mb-lg-0' id='item_id' name='item_id[]'  value='' required>
+                        <option>$item->item_name</option>
                 </select>
             </div>
             <div class='fv-row mb-7 col-lg-2'>
@@ -58,12 +58,12 @@ class ItemsReceiptController extends Controller
         </div>";
         }
         return response()->json([
-            'code' => $po->code,
-            'order_date' => $po->order_date,
-            'partner' => $po->partnernya->name,
-            'address' => $po->partnernya->address,
-            'phone' => $po->partnernya->phone,
-            'fax' => $po->partnernya->fax,
+            'code' => $po[0]->number_po,
+            'order_date' => $po[0]->order_date,
+            'partner' => $po[0]->partner_name,
+            'address' => $po[0]->address,
+            'phone' => $po[0]->phone,
+            'fax' => $po[0]->fax,
             'html' => $html
         ]);
     }

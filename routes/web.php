@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PartnersController;
 use App\Http\Controllers\Admin\PriceManagementController;
 use App\Http\Controllers\Admin\Procurement\ItemsReceiptController;
+use App\Http\Controllers\Admin\Procurement\PurchaseBasisController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Admin\UoMController;
@@ -258,8 +259,15 @@ Route::middleware('auth')->controller(ItemsReceiptController::class)->group(func
     Route::get('/admin/procurement/items-receipt/getdatapo/{id}', 'getdatapo');
     Route::post('/admin/procurement/items-receipt/store', 'store');
 });
-
 // End Items Receipt
+
+
+
+// Purchase Basis Start
+Route::middleware('auth')->controller(PurchaseBasisController::class)->group(function(){
+    Route::get('/admin/procurement/purchase-basis', 'index');
+});
+// Purchase Basis End
 
 //Blocked Page Start
 Route::get('/blocked', function(){

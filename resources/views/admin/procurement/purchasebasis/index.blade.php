@@ -6,7 +6,7 @@
 <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
     <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
         <div class="page-title d-flex flex-column me-3">
-            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">Items Receipt</h1>
+            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">Purchase Basis</h1>
             <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
                 <li class="breadcrumb-item text-gray-600">
                     <a href="/admin/dashboard" class="text-gray-600 text-hover-primary">Dashboard</a>
@@ -23,7 +23,7 @@
             <div class="card-header border-0 pt-6">
                 <div class="card-title align-items-start flex-column">
                     <div class="d-flex align-items-center position-relative my-1">
-                       <h2>Items Receipt</h2>
+                       <h2>Purchase Basis</h2>
                     </div>
                     <div class="d-flex align-items-center position-relative my-1">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
@@ -34,33 +34,38 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <input type="text" id="searchTableItemsReceipt" class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
+                        <input type="text" id="searchTablePurchaseBasis" class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
                     </div>
                 </div>
                 <div class="card-toolbar">
+                    <div class="px-2">
+                        <label for="">Start Date</label>
+                        <input type="date" class="form-control" name="start_date">
+                    </div>
+                    <div class="px-2">
+                        <label for="">End Date</label>
+                        <input type="date" class="form_control" name="end-date">
+                    </div>
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
-                        @can('create', ['/admin/procurement/items-receipt'])
-                        <button type="button" class="btn btn-primary me-3" onclick="addModal()">
-                        Add Receive Items</button>
-                        @endcan
+                        <button type="button" class="btn btn-primary me-3" onclick="filterPurchaseBasis()">
+                        Search</button>
                     </div>
 
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="tableItemsReceipt">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="tablePurchaseBasis">
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                            <th class="min-w-20px">No</th>
-                            <th class="min-w-70px ">Delivery Number</th>
-                            <th class="min-w-70px ">Delivery Date</th>
-                            <th class="min-w-70px ">PO Number</th>
+                            <th class="min-w-20px">Date</th>
+                            <th class="min-w-70px ">Code</th>
+                            <th class="min-w-70px ">Items</th>
                             <th class="min-w-70px ">Partner</th>
-                            <th class="min-w-70px ">Receipt Date</th>
+                            <th class="min-w-70px ">Qty</th>
                             <th class="min-w-70px ">Price</th>
-                            <th class="min-w-70px ">Discount</th>
-                            <th class="min-w-70px ">Value</th>
-                            <th class="text-end min-w-50px">Action</th>
+                            <th class="min-w-70px ">Total Price</th>
+                            <th class="min-w-70px ">Vat</th>
+                            <th class="min-w-70px ">Grand Total</th>
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">
@@ -78,7 +83,7 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header" id="mainmodal_header">
-                <h2 class="fw-bolder">Items Receipt</h2>
+                <h2 class="fw-bolder">Purchase Basis</h2>
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" onclick="tutupModal()">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -100,7 +105,7 @@
 @section('js')
 
 <script>
-        function addModal(){
+        function filterPurchaseBasis(){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/procurement/items-receipt/addmodal') }}", {}, function(data, status){
                 $('#kontennya').html(data)
@@ -121,7 +126,7 @@
         $('#mainmodal').modal('toggle')
         }
 
-        // var tableItemsReceipt =  $('#tableItemsReceipt').DataTable({
+        // var tablePurchaseBasis =  $('#tablePurchaseBasis').DataTable({
         //     serverside : true,
         //     processing : true,
         //     ajax : {
@@ -146,8 +151,8 @@
         //     "bInfo": false
         // });
 
-        // $('#searchTableItemsReceipt').keyup(function () {
-        //         tableItemsReceipt.search($(this).val()).draw()
+        // $('#searchTablePurchaseBasis').keyup(function () {
+        //         tablePurchaseBasis.search($(this).val()).draw()
         // });
 </script>
 
