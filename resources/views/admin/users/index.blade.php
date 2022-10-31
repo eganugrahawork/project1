@@ -46,7 +46,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <input type="text" id="searchUsersTable" class="form-control form-control-solid w-250px ps-15" placeholder="User Search" />
+                        <input type="text" id="searchUserTable" class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
                     </div>
                 </div>
                 <div class="card-toolbar">
@@ -407,6 +407,11 @@
                     "bLengthChange": false,
                     "bFilter": true,
                     "bInfo": false
+        });
+
+
+        $('#searchUserTable').keyup(function () {
+            usersTable.search($(this).val()).draw()
         });
         function editModal(id){
             $.get("{{ url('/admin/users/editmodal') }}/"+id, {}, function(data, status){
