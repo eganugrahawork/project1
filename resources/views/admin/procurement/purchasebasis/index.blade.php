@@ -39,6 +39,12 @@
                 </div>
                 <div class="card-toolbar">
                     <div class="px-2">
+                        <label for="">Partners</label>
+                        <select name="partner_id" id="" class="form-select select-2">
+                            <option value="">Choose your partners</option>
+                        </select>
+                    </div>
+                    <div class="px-2">
                         <label for="">Start Date</label>
                         <input type="date" class="form-control" name="start_date">
                     </div>
@@ -105,6 +111,12 @@
 @section('js')
 
 <script>
+     $(document).ready(function() {
+           $('.select-2').select2({
+               dropdownParent: $('.card-toolbar')
+           });
+
+   });
         function filterPurchaseBasis(){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/procurement/items-receipt/addmodal') }}", {}, function(data, status){
