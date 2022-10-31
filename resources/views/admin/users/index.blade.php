@@ -164,7 +164,7 @@
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fw-bold fs-6 mb-2">Agama</label>
-                                    <select class="form-select" data-control="select2" data-placeholder="Select an option" name="religion" required>
+                                    <select class="form-select select-2-first" data-placeholder="Select an option" name="religion" required>
                                         <option></option>
                                         <option value="Islam">Islam</option>
                                         <option value="Kristen">Kristen</option>
@@ -188,7 +188,7 @@
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fw-bold fs-6 mb-2">Wilayah</label>
-                                    <select class="form-select form-select-solid" name="region" required>
+                                    <select class="form-select form-select-solid select-2-first" name="region" required>
                                         @foreach ( $region as $l )
                                         <option value="{{ $l->id }}">{{ $l->name }}</option>
                                         @endforeach
@@ -274,6 +274,12 @@
 @section('js')
 
 <script>
+     $(document).ready(function() {
+           $('.select-2-first').select2({
+               dropdownParent: $('#kt_modal_add_user')
+           });
+
+   });
 // Notif Validation set
  $("#dusrmin").hide()
  $("#dusrcheck").hide()
