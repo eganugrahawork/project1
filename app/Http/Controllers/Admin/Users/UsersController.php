@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\Models\MenuAccess;
 use App\Models\Region;
 use App\Models\User;
-use App\Models\UserAccessMenu;
 use App\Models\UserActivity;
-use App\Models\UserMenu;
 use App\Models\UserRole;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;

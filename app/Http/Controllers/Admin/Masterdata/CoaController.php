@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Masterdata;
 
 use App\Events\NotifEvent;
 use App\Http\Controllers\Controller;
@@ -15,7 +15,7 @@ use Yajra\DataTables\DataTables;
 class CoaController extends Controller
 {
     public function index(){
-        return view('admin.coa.index');
+        return view('admin.masterdata.coa.index');
     }
     public function list(){
         return  Datatables::of(DB::connection('masterdata')->select('Call sp_list_coa()'))->addIndexColumn()
@@ -42,7 +42,7 @@ class CoaController extends Controller
 
     public function addmodal(){
 
-        return view('admin.coa.addmodal', ['coa' =>DB::connection('masterdata')->select('Call sp_list_coa()') ]);
+        return view('admin.masterdata.coa.addmodal', ['coa' =>DB::connection('masterdata')->select('Call sp_list_coa()') ]);
     }
 
 
@@ -68,7 +68,7 @@ class CoaController extends Controller
 
     public function editmodal(Request $request){
 
-        return view('admin.coa.editmodal', ['coa' => Coa::where(['id' => $request->id])->first(), 'parentcoa' => Coa::all()]);
+        return view('admin.masterdata.coa.editmodal', ['coa' => Coa::where(['id' => $request->id])->first(), 'parentcoa' => Coa::all()]);
     }
 
     public function update(Request $request){

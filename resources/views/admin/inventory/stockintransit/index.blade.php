@@ -26,9 +26,11 @@
                        <h2>Stock In Transit</h2>
                     </div>
                     <div class="my-2">
+                        @can('create', ['/admin/inventory/stock-in-transit'])
                         <div class="px-2">
-                            <button class="btn btn-sm btn-primary mx-2">+</button><button class="btn btn-sm btn-primary">Register Transit</button>
+                            <button class="btn btn-sm btn-primary mx-2" onclick="addTransitModal()">+</button><button class="btn btn-sm btn-primary" onclick="registerTransitModal()">Register Transit</button>
                         </div>
+                        @endcan
                     </div>
                     <div class="d-flex align-items-center position-relative my-1">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
@@ -126,7 +128,7 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header" id="mainmodal_header">
-                <h2 class="fw-bolder">Purchase Basis</h2>
+                <h2 class="fw-bolder">Stock In Transit</h2>
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" onclick="tutupModal()">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -148,6 +150,24 @@
 @section('js')
 
 <script>
+
+        function addTransitModal(){
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/inventory/stock-in-transit/addtransitmodal') }}", {}, function(data, status){
+                $('#kontennya').html(data)
+                $('#mainmodal').modal('toggle')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receive Items</button>')
+            })
+        }
+        function registerTransitModal(){
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            // $.get("{{ url('/admin/procurement/items-receipt/addmodal') }}", {}, function(data, status){
+                // $('#kontennya').html(data)
+                $('#mainmodal').modal('toggle')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receive Items</button>')
+            // })
+        }
+
         function filterStockInTransit(){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/procurement/items-receipt/addmodal') }}", {}, function(data, status){
@@ -156,14 +176,22 @@
                 $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receive Items</button>')
             })
         }
+        function filterStockInTransit(){
+            // $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            // $.get("{{ url('/admin/procurement/items-receipt/addmodal') }}", {}, function(data, status){
+            //     $('#kontennya').html(data)
+            //     $('#mainmodal').modal('toggle')
+            //     $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receive Items</button>')
+            // })
+        }
         function editModal(id){
-            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/items-receipt/editmodal') }}/"+id, {}, function(data, status){
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
-                $('#loading-add').html('')
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receive Items</button>')
-            })
+            // $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            // $.get("{{ url('/admin/procurement/items-receipt/editmodal') }}/"+id, {}, function(data, status){
+            //     $('#kontennya').html(data)
+            //     $('#mainmodal').modal('toggle')
+            //     $('#loading-add').html('')
+            //     $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receive Items</button>')
+            // })
         }
         function tutupModal(){
         $('#mainmodal').modal('toggle')

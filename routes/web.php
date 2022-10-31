@@ -1,27 +1,38 @@
 <?php
 // Admin
-use App\Http\Controllers\Admin\CoaController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\ItemsController;
 use App\Http\Controllers\Admin\MenuController;
-use App\Http\Controllers\Admin\PartnersController;
-use App\Http\Controllers\Admin\PriceManagementController;
-use App\Http\Controllers\Admin\Procurement\ItemsReceiptController;
-use App\Http\Controllers\Admin\Procurement\PurchaseBasisController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RegionController;
-use App\Http\Controllers\Admin\UoMController;
 use App\Http\Controllers\Admin\UserRoleController;
-use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 // End Admin
+
+// Users
+use App\Http\Controllers\Admin\Users\UsersController;
+// End Users
+
+// Masterdata
+use App\Http\Controllers\Admin\Masterdata\CoaController;
+use App\Http\Controllers\Admin\Masterdata\ItemsController;
+use App\Http\Controllers\Admin\Masterdata\PartnersController;
+use App\Http\Controllers\Admin\Masterdata\PriceManagementController;
+use App\Http\Controllers\Admin\Masterdata\UoMController;
+// End Masterdata
+
 // Start Procurement
 use App\Http\Controllers\Admin\Procurement\PurchaseOrderController;
-use App\Http\Controllers\Admin\Procurement\StockController;
-use App\Http\Controllers\Admin\Procurement\StockInTransitController;
+use App\Http\Controllers\Admin\Procurement\ItemsReceiptController;
+use App\Http\Controllers\Admin\Procurement\PurchaseBasisController;
 // End Procurement
+
+// Strt Inventory
+use App\Http\Controllers\Admin\Inventory\StockController;
+use App\Http\Controllers\Admin\Inventory\StockInTransitController;
+use App\Http\Controllers\Admin\Selling\SellingController;
+// End Inventory
 
 
 // Utils
@@ -280,8 +291,18 @@ Route::middleware('auth')->controller(StockController::class)->group(function(){
 // Stock in Transit
 Route::middleware('auth')->controller(StockInTransitController::class)->group(function(){
     Route::get('/admin/inventory/stock-in-transit', 'index');
+    Route::get('/admin/inventory/stock-in-transit/addtransitmodal', 'addtransitmodal');
 });
 // End Stock In Transit
+
+
+// Selling
+Route::middleware('auth')->controller(SellingController::class)->group(function(){
+    Route::get('/admin/selling/selling', 'index');
+});
+// End Selling
+
+
 //Blocked Page Start
 Route::get('/blocked', function(){
     return view('admin.blocked');

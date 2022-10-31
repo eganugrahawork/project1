@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Masterdata;
 
 use App\Events\NotifEvent;
 use App\Http\Controllers\Controller;
@@ -15,7 +15,7 @@ use Yajra\DataTables\DataTables;
 class PartnersController extends Controller
 {
     public function index(){
-        return view('admin.partners.index');
+        return view('admin.masterdata.partners.index');
     }
 
     public function list(){
@@ -35,7 +35,7 @@ class PartnersController extends Controller
 
 
     public function addmodal(){
-        return view('admin.partners.addmodal', ['partner_type' => PartnerType::all()]);
+        return view('admin.masterdata.partners.addmodal', ['partner_type' => PartnerType::all()]);
     }
 
     public function store(Request $request){
@@ -87,7 +87,7 @@ class PartnersController extends Controller
 
     public function editmodal(Request $request){
 
-        return view('admin.partners.editmodal', ['partners' => Partners::where(['id'=> $request->id])->first(), 'partner_type' => PartnerType::all()]);
+        return view('admin.masterdata.partners.editmodal', ['partners' => Partners::where(['id'=> $request->id])->first(), 'partner_type' => PartnerType::all()]);
     }
 
     public function update(Request $request){
@@ -120,7 +120,7 @@ class PartnersController extends Controller
     }
 
     public function typeofpartner(){
-        return view('admin.partners.typepartners');
+        return view('admin.masterdata.partners.typepartners');
     }
 
     public function listtypeofpartners(){
@@ -139,7 +139,7 @@ class PartnersController extends Controller
     }
 
     public function addtypepartnermodal(){
-        return view('admin.partners.addtypepartnermodal');
+        return view('admin.masterdata.partners.addtypepartnermodal');
     }
 
     public function storetypepartners(Request $request){
@@ -157,7 +157,7 @@ class PartnersController extends Controller
     }
 
     public function edittypepartnermodal(Request $request){
-        return view('admin.partners.edittypepartnermodal', ['tp' =>  PartnerType::where(['id' => $request->id])->first()]);
+        return view('admin.masterdata.partners.edittypepartnermodal', ['tp' =>  PartnerType::where(['id' => $request->id])->first()]);
     }
 
     public function updatetypepartners(Request $request){

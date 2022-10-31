@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Masterdata;
 
 use App\Events\NotifEvent;
 use App\Http\Controllers\Controller;
@@ -15,11 +15,11 @@ use Yajra\DataTables\DataTables;
 class UoMController extends Controller
 {
     // public function index(){
-    //     return view('admin.uom.index', ['uom'=> DB::connection('masterdata')->select('Call sp_list_uom()')]);
+    //     return view('admin.masterdata.uom.index', ['uom'=> DB::connection('masterdata')->select('Call sp_list_uom()')]);
     // }
     public function index(){
 
-        return view('admin.uom.index');
+        return view('admin.masterdata.uom.index');
     }
 
     public function list(){
@@ -39,7 +39,7 @@ class UoMController extends Controller
     }
 
     public function addmodal(){
-        return view('admin.uom.addmodal');
+        return view('admin.masterdata.uom.addmodal');
     }
 
     public function store(Request $request){
@@ -84,7 +84,7 @@ class UoMController extends Controller
 
     public function editmodal(Request $request){
 
-        return view('admin.uom.editmodal', ['uom'=> Uom::where(['id'=>$request->id])->first()]);
+        return view('admin.masterdata.uom.editmodal', ['uom'=> Uom::where(['id'=>$request->id])->first()]);
     }
 
     public function update(Request $request){

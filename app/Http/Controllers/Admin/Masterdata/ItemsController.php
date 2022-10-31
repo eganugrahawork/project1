@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Masterdata;
 
 use App\Events\NotifEvent;
 use App\Http\Controllers\Controller;
@@ -19,11 +19,11 @@ class ItemsController extends Controller
 {
     public function index(){
 
-        return view('admin.items.index', ['items' => DB::connection('masterdata')->select("CALL sp_list_items()")]);
+        return view('admin.masterdata.items.index', ['items' => DB::connection('masterdata')->select("CALL sp_list_items()")]);
     }
 
     public function addmodal(){
-        return view('admin.items.addmodal', ['partner'=> Partners::all(), 'uom'=>Uom::all(), 'type' => TypeItems::all()]);
+        return view('admin.masterdata.items.addmodal', ['partner'=> Partners::all(), 'uom'=>Uom::all(), 'type' => TypeItems::all()]);
     }
 
     public function store(Request $request){
@@ -56,7 +56,7 @@ class ItemsController extends Controller
     public function editmodal(Request $request){
         $item = Items::where(['id'=>$request->id])->first();
 
-        return view('admin.items.editmodal', ['item' => $item, 'uom' => Uom::all(), 'partner' => Partners::all(), 'type'=>TypeItems::all()]);
+        return view('admin.masterdata.items.editmodal', ['item' => $item, 'uom' => Uom::all(), 'partner' => Partners::all(), 'type'=>TypeItems::all()]);
     }
 
     public function update(Request $request){
@@ -99,16 +99,16 @@ class ItemsController extends Controller
 
     public function typeitems(){
 
-        return view('admin.items.typeitems', ['itemtype' => TypeItems::all()]);
+        return view('admin.masterdata.items.typeitems', ['itemtype' => TypeItems::all()]);
     }
 
     public function typeitemsaddmodal(){
-        return view('admin.items.addtypeitemsmodal');
+        return view('admin.masterdata.items.addtypeitemsmodal');
     }
 
     public function typeitemseditmodal(Request $request){
 
-        return view('admin.items.edittypeitemsmodal', ['typeitems'=>TypeItems::where(['id'=>$request->id])->first()]);
+        return view('admin.masterdata.items.edittypeitemsmodal', ['typeitems'=>TypeItems::where(['id'=>$request->id])->first()]);
     }
 
     public function typeitemsstore(Request $request){
@@ -161,17 +161,17 @@ class ItemsController extends Controller
 
     public function itemprice(){
 
-        return view('admin.items.itemprice.index', ['itemprice' => ItemPrice::all()]);
+        return view('admin.masterdata.items.itemprice.index', ['itemprice' => ItemPrice::all()]);
     }
     public function itemqty(){
 
-        return view('admin.items.itemqty.index', ['itemqty' => ItemQty::all()]);
+        return view('admin.masterdata.items.itemqty.index', ['itemqty' => ItemQty::all()]);
     }
 
     public function addModalItemPrice(){
         // $items = DB::connection('masterdata')->select("SELECT a.id, CONCAT_WS(" - ",a.`item_code`,a.`item_name`,b.`name`) itemnya FROM items a JOIN uom b ON a.uom_id = b.id JOIN partners c ON a.partner_id = c.id");
         $items=Items::all();
-        return view('admin.items.itemprice.addmodal', ['items' =>$items]);
+        return view('admin.masterdata.items.itemprice.addmodal', ['items' =>$items]);
     }
 
     public function getdetailitem(Request $request){
@@ -204,7 +204,7 @@ class ItemsController extends Controller
 
     public function editmodalitemprice(Request $request){
 
-        return view('admin.items.itemprice.editmodal', ['itemprice' =>  ItemPrice::where(['id' => $request->id])->first()]);
+        return view('admin.masterdata.items.itemprice.editmodal', ['itemprice' =>  ItemPrice::where(['id' => $request->id])->first()]);
     }
 
     public function updateitemprice(Request $request){
