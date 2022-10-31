@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Yajra\DataTables\DataTables;
 
 class ItemsReceiptController extends Controller
 {
@@ -23,7 +24,17 @@ class ItemsReceiptController extends Controller
     }
 
     public function list(){
-
+        return  Datatables::of(DB::connection('procurement')->select('Call sp_list_item_receipt()'))->addIndexColumn()
+        ->addColumn('action', function($model){
+            $action = "";
+            if(Gate::allows('edit', ['/admin/procurement/items-receipt'])){
+                $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
+            }
+            if(Gate::allows('delete', ['/admin/procurement/items-receipt'])){
+                $action .= " <a href='/admin/procurement/items-receipt/delete/$model->id' class='btn btn-sm btn-danger' id='deleteItemReceipt'><i class='bi bi-trash'></i></a>";
+            }
+            return $action;
+        })->make(true);
     }
 
     public function addmodal(){

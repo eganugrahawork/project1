@@ -53,10 +53,10 @@
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="min-w-20px">No</th>
                             <th class="min-w-70px ">Delivery Number</th>
-                            <th class="min-w-70px ">Delivery Date</th>
+                            <th class="min-w-70px ">Receipt Date</th>
                             <th class="min-w-70px ">PO Number</th>
                             <th class="min-w-70px ">Partner</th>
-                            <th class="min-w-70px ">Receipt Date</th>
+                            <th class="min-w-70px ">Order Date</th>
                             <th class="min-w-70px ">Price</th>
                             <th class="min-w-70px ">Discount</th>
                             <th class="min-w-70px ">Value</th>
@@ -121,34 +121,36 @@
         $('#mainmodal').modal('toggle')
         }
 
-        // var tableItemsReceipt =  $('#tableItemsReceipt').DataTable({
-        //     serverside : true,
-        //     processing : true,
-        //     ajax : {
-        //             url : "{{ url('/admin/procurement/purchase-order/list') }}"
-        //             },
-        //             columns:
-        //             [
-        //             {
-        //             data: 'DT_RowIndex',
-        //             searchable: false
-        //         },
-        //             {data: 'code', name: 'code'},
-        //             {data: 'partner_id', name: 'partner_id'},
-        //             {data: 'order_date', name: 'order_date'},
-        //             {data: 'price', name: 'price', render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )},
-        //             {data: 'delivery_date', name: 'delivery_date'},
-        //             {data: 'status', name: 'status'},
-        //             {data: 'action', name: 'action'}
-        //             ],
-        //     "bLengthChange": false,
-        //     "bFilter": true,
-        //     "bInfo": false
-        // });
+        var tableItemsReceipt =  $('#tableItemsReceipt').DataTable({
+            serverside : true,
+            processing : true,
+            ajax : {
+                    url : "{{ url('/admin/procurement/items-receipt/list') }}"
+                    },
+                    columns:
+                    [
+                    {
+                    data: 'DT_RowIndex',
+                    searchable: false
+                },
+                    {data: 'do_number', name: 'do_number'},
+                    {data: 'receipt_date', name: 'receipt_date'},
+                    {data: 'code', name: 'code'},
+                    {data: 'name', name: 'name'},
+                    {data: 'order_date', name: 'order_date'},
+                    {data: 'status', name: 'status'},
+                    {data: 'status', name: 'status'},
+                    {data: 'status', name: 'status'},
+                    {data: 'action', name: 'action'}
+                    ],
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false
+        });
 
-        // $('#searchTableItemsReceipt').keyup(function () {
-        //         tableItemsReceipt.search($(this).val()).draw()
-        // });
+        $('#searchTableItemsReceipt').keyup(function () {
+                tableItemsReceipt.search($(this).val()).draw()
+        });
 </script>
 
 @endsection
