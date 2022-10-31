@@ -159,6 +159,7 @@ Route::middleware(['auth'])->controller(RegionController::class)->group(function
 // Items start
 Route::middleware(['auth'])->controller(ItemsController::class)->group(function(){
     Route::get('admin/masterdata/items', 'index');
+    Route::get('admin/masterdata/items/list', 'list');
     Route::post('admin/masterdata/items/store', 'store');
     Route::post('admin/masterdata/items/update', 'update');
     Route::get('admin/masterdata/items/addmodal', 'addmodal');

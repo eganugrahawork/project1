@@ -56,7 +56,7 @@ class UsersController extends Controller
                     $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
                 }
                 if(Gate::allows('delete', ['/admin/users'])){
-                    $action .= " <a href='/admin/users/delete/$model->id' class='btn btn-sm btn-danger button-delete' data-kt-users-table-filter='delete_row'><i class='bi bi-trash'></i></a>";
+                    $action .= " <a href='/admin/users/delete/$model->id' class='btn btn-sm btn-danger' id='deleteUsers'><i class='bi bi-trash'></i></a>";
                 }
 
             return $action;

@@ -8,18 +8,33 @@ use App\Models\ItemPrice;
 use App\Models\ItemQty;
 use App\Models\Items;
 use App\Models\Partners;
-use App\Models\Principal;
 use App\Models\TypeItems;
 use App\Models\Uom;
 use App\Models\UserActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Yajra\DataTables\DataTables;
 
 class ItemsController extends Controller
 {
     public function index(){
 
-        return view('admin.masterdata.items.index', ['items' => DB::connection('masterdata')->select("CALL sp_list_items()")]);
+        return view('admin.masterdata.items.index');
+    }
+
+    public function list(){
+        return  Datatables::of(DB::connection('masterdata')->select("CALL sp_list_items()"))->addIndexColumn()
+        ->addColumn('action', function($model){
+            $action = "";
+            if(Gate::allows('edit', ['/admin/masterdata/items'])){
+                $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
+            }
+            if(Gate::allows('delete', ['/admin/masterdata/items'])){
+                $action .= " <a href='/admin/masterdata/items/delete/$model->id' class='btn btn-sm btn-danger' id='deleteItem'><i class='bi bi-trash'></i></a>";
+            }
+            return $action;
+        })->make(true);
     }
 
     public function addmodal(){

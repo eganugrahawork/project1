@@ -5,14 +5,9 @@
 
 <div class="success-message" data-successmessage="{{ session('success') }}"></div>
 <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
-    <!--begin::Container-->
     <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
-        <!--begin::Page title-->
         <div class="page-title d-flex flex-column me-3">
-            <!--begin::Title-->
             <h1 class="d-flex text-dark fw-bolder my-1 fs-3">{{ $title }}</h1>
-            <!--end::Title-->
-            <!--begin::Breadcrumb-->
             <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
                 <li class="breadcrumb-item text-gray-600">
                     <a href="/admin/dashboard" class="text-gray-600 text-hover-primary">Admin</a>
@@ -20,11 +15,8 @@
                 <li class="breadcrumb-item text-gray-600">Users</li>
 
             </ul>
-            <!--end::Breadcrumb-->
         </div>
-        <!--end::Page title-->
     </div>
-    <!--end::Container-->
 </div>
 
 <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl bg-warna py-4">
@@ -91,15 +83,10 @@
                     <tbody class="text-gray-600 fw-bold">
 
                     </tbody>
-                    <!--end::Table body-->
                 </table>
-                <!--end::Table-->
             </div>
-            <!--end::Card body-->
         </div>
-        <!--end::Card-->
     </div>
-    <!--end::Post-->
 </div>
 
 
@@ -423,6 +410,59 @@
         function tutupModal(){
             $('#mainmodal').modal('toggle')
         }
+
+
+        $(document).on('click', '#deleteUsers', function(e){
+            e.preventDefault();
+
+
+            const href = $(this).attr('href');
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Hapus data ini ?',
+                text: "Data tidak bisa dikembalikan!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, hapus!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                reverseButtons: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+                    $.ajax({
+                        type:"GET",
+                        url: href,
+                        success:function(response){
+                            Swal.fire(
+                                'Success',
+                                response.success,
+                                'success'
+                            )
+                            usersTable.ajax.reload(null, false);
+
+                        }
+                    })
+
+                } else if (
+
+                result.dismiss === Swal.DismissReason.cancel
+                ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Data anda masih aman :)',
+                    'success'
+                )
+                }
+            })
+        });
 </script>
 
 <script src="/metronic/assets/js/custom/apps/user-management/users/list/add.js"></script>

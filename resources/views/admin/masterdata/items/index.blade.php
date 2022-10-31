@@ -34,7 +34,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <input type="text" id="searchIndukTable" class="form-control form-control-solid w-250px ps-15" placeholder="Items Search" />
+                        <input type="text" id="searchItemsTable" class="form-control form-control-solid w-250px ps-15" placeholder="Items Search" />
                     </div>
                 </div>
                 <div class="card-toolbar">
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="indukTable">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="itemsTable">
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="min-w-20px">No
@@ -61,7 +61,7 @@
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">
-                        @foreach ($items as $item)
+                        {{-- @foreach ($items as $item)
                         <tr>
                             <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
                             <td>
@@ -84,7 +84,7 @@
                                 @endcan
                             </td>
                         </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
                 </table>
             </div>
@@ -120,7 +120,7 @@
 @section('js')
 
 <script>
-function addItemsModal(){
+            function addItemsModal(){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/items/addmodal') }}", {}, function(data, status){
                 $('#kontennya').html(data)
@@ -139,6 +139,86 @@ function addItemsModal(){
             function tutupModal(){
                 $('#mainmodal').modal('toggle')
             }
+
+            var itemsTable = $('#itemsTable').DataTable({
+            serverside : true,
+                    processing : true,
+                    ajax : {
+                        url : "{{ url('/admin/masterdata/items/list') }}"
+                    },
+                    columns:
+                    [
+                        {
+                    data: 'DT_RowIndex',
+                    searchable: false
+                },
+                        {data: 'item_code', name: 'item_code'},
+                        {data: 'item_name', name: 'item_name'},
+                        {data: 'item_description', name: 'item_description'},
+                        {data: 'uom_name', name: 'uom_name'},
+                        {data: 'partner_name', name: 'partner_name'},
+                        {data: 'action', name: 'action'}
+                    ],
+                    "bLengthChange": false,
+                    "bFilter": true,
+                    "bInfo": false
+        });
+
+        $('#searchItemsTable').keyup(function () {
+            itemsTable.search($(this).val()).draw()
+        });
+
+        $(document).on('click', '#deleteItem', function(e){
+            e.preventDefault();
+
+
+            const href = $(this).attr('href');
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Hapus data ini ?',
+                text: "Data tidak bisa dikembalikan!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, hapus!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                reverseButtons: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+                    $.ajax({
+                        type:"GET",
+                        url: href,
+                        success:function(response){
+                            Swal.fire(
+                                'Success',
+                                response.success,
+                                'success'
+                            )
+                            itemsTable.ajax.reload(null, false);
+                            $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="addItemsModal()">Add Items</button>')
+                        }
+                    })
+
+                } else if (
+
+                result.dismiss === Swal.DismissReason.cancel
+                ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Data anda masih aman :)',
+                    'success'
+                )
+                }
+            })
+        });
 </script>
 
 @endsection
