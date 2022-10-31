@@ -17,7 +17,7 @@
                 <li class="breadcrumb-item text-gray-600">
                     <a href="/admin/dashboard" class="text-gray-600 text-hover-primary">Admin</a>
                 </li>
-                <li class="breadcrumb-item text-gray-600">UsersSSSS</li>
+                <li class="breadcrumb-item text-gray-600">Users</li>
 
             </ul>
             <!--end::Breadcrumb-->
@@ -36,7 +36,7 @@
             <div class="card-header border-0 pt-6">
                 <!--begin::Card title-->
                 <div class="card-title align-items-start flex-column">
-                    <h2 class="mb-3">User List</h2>
+                    <h2 class="mb-3">Users</h2>
                     <div class="d-flex align-items-center position-relative my-1">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                         <span class="svg-icon svg-icon-1 position-absolute ms-6">
@@ -46,7 +46,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <input type="text" id="searchIndukTable" class="form-control form-control-solid w-250px ps-15" placeholder="User Search" />
+                        <input type="text" id="searchUsersTable" class="form-control form-control-solid w-250px ps-15" placeholder="User Search" />
                     </div>
                 </div>
                 <div class="card-toolbar">
@@ -73,7 +73,7 @@
             </div>
             <div class="card-body pt-0">
                 <!--begin::Table-->
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="indukTable">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="usersTable">
                     <!--begin::Table head-->
                     <thead>
                         <!--begin::Table row-->
@@ -89,39 +89,7 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 fw-bold">
-                        @foreach ($users as $usr)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td class="d-flex align-items-center">
-                                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                    <a href="#">
-                                        <div class="symbol-label">
-                                            <img src="{{ asset('storage/'. $usr->image) }}" alt="" class="w-100" />
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $usr->name }}</a>
-                                    <span>{{ $usr->username }}</span>
-                                </div>
-                            </td>
-                            <td >{{ $usr->email }}</td>
-                            <td>
-                                {{ $usr->userrole->role }}
-                            </td>
-                            <td>{{ $usr->RegionDetail->name }}</td>
-                            <td>{{ $usr->created_at }}</td>
-                            <td class="text-end">
-                                    <a href="/admin/users/show/{{ $usr->id }}" class="btn btn-sm btn-success"><i class="bi bi-info-circle"></i></a>
-                                @can('edit', ['/admin/users'])
-                                    <a onclick="editModal({{ $usr->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                                @endcan
-                                @can('delete', ['/admin/users'])
-                                    <a href="/admin/users/delete/{{ $usr->id }}" class="btn btn-sm btn-danger button-delete" data-kt-users-table-filter="delete_row"><i class="bi bi-trash"></i></a>
-                                @endcan
-                            </td>
-                        </tr>
-                        @endforeach
+
                     </tbody>
                     <!--end::Table body-->
                 </table>
@@ -295,13 +263,9 @@
                 </div>
             </div>
             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="kontennya">
-                <!--end::Form-->
             </div>
-            <!--end::Modal body-->
         </div>
-        <!--end::Modal content-->
     </div>
-    <!--end::Modal dialog-->
 </div>
 
 
@@ -415,7 +379,29 @@
             }
 
         }
-
+        var usersTable = $('#usersTable').DataTable({
+            serverside : true,
+                    processing : true,
+                    ajax : {
+                        url : "{{ url('/admin/users/list') }}"
+                    },
+                    columns:
+                    [
+                        {
+                    data: 'DT_RowIndex',
+                    searchable: false
+                },
+                        {data: 'user', name: 'user', class:'d-flex align-items-center'},
+                        {data: 'email', name: 'email'},
+                        {data: 'role', name: 'role'},
+                        {data: 'region', name: 'region'},
+                        {data: 'created', name: 'created'},
+                        {data: 'action', name: 'action'}
+                    ],
+                    "bLengthChange": false,
+                    "bFilter": true,
+                    "bInfo": false
+        });
         function editModal(id){
             $.get("{{ url('/admin/users/editmodal') }}/"+id, {}, function(data, status){
                 $('#kontennya').html(data)

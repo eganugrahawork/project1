@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
+use Yajra\DataTables\DataTables;
 
 class UsersController extends Controller
 {
@@ -35,12 +37,50 @@ class UsersController extends Controller
         });
     }
 
-
     public function index(){
-        $user = User::with(['UserRole', 'RegionDetail'])->get();
         $role = UserRole::all();
         $region = Region::all();
-        return view('admin.users.index', ['title' => 'Users', 'users' => $user, 'role' => $role, 'region' => $region]);
+        return view('admin.users.index', ['title' => 'Users','role' => $role, 'region' => $region]);
+    }
+
+    public function list(Request $request){
+
+        $user = User::with(['UserRole', 'RegionDetail'])->get();
+        return Datatables::of($user)->addIndexColumn()
+        ->addColumn('action', function($model){
+            $action = "";
+            $action = " <a href='/admin/users/show/$model->id' class='btn btn-sm btn-success'><i class='bi bi-info-circle'></i></a>";
+
+
+                if(Gate::allows('edit', ['/admin/users'])){
+                    $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
+                }
+                if(Gate::allows('delete', ['/admin/users'])){
+                    $action .= " <a href='/admin/users/delete/$model->id' class='btn btn-sm btn-danger button-delete' data-kt-users-table-filter='delete_row'><i class='bi bi-trash'></i></a>";
+                }
+
+            return $action;
+        })->addColumn('user', function($model){
+            $url = url('storage/'. $model->image);
+            $userhtml = " <div class='symbol symbol-circle symbol-50px overflow-hidden me-3'>
+            <a href='#'>
+                <div class='symbol-label'>
+                    <img src='$url' alt='' class='w-100' />
+                </div>
+            </a>
+        </div>
+        <div class='d-flex flex-column'>
+            <a href='#' class='text-gray-800 text-hover-primary mb-1'>$model->name</a>
+            <span>$model->username</span>
+        </div>";
+        return $userhtml;
+        })->addColumn('created', function($model){
+            return $model->created_at->format('d-m-Y');
+        })->addColumn('role', function($model){
+        return $model->userrole->role;
+        })->addColumn('region', function($model){
+            return $model->regiondetail->name;
+        })->rawColumns(['action', 'user'])->make(true);
     }
 
     public function store(Request $request){

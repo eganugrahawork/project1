@@ -132,6 +132,7 @@ Route::middleware(['auth'])->controller(UserRoleController::class)->group(functi
 //Users Start
 Route::middleware(['auth'])->controller(UsersController::class)->group(function(){
     Route::get('admin/users', 'index');
+    Route::get('admin/users/list', 'list');
     Route::get('admin/users/show/{id}', 'show');
     Route::get('admin/users/create', 'create');
     Route::post('admin/users/store', 'store');
