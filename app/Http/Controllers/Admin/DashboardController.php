@@ -121,6 +121,7 @@ class DashboardController extends Controller
             }
         }
 
+        $request->session()->push('menu', $html);
 
         return response()->json($html);
     }

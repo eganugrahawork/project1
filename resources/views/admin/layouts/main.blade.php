@@ -199,12 +199,14 @@
                 </script>
 
                 {{-- Menu --}}
+                    @if (!session('menu'))
+
                 <script>
-                        var loadingMenu = "<button class='btn btn-primary' type='button' disabled><span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Loading...</button>"
+                    var loadingMenu = "<button class='btn btn-primary' type='button' disabled><span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Loading...</button>"
 
-                        $('#kt_header_menu').html(loadingMenu)
+                    $('#kt_header_menu').html(loadingMenu)
 
-                        menu();
+                    menu();
                     function menu(){
                         $.get("{{ url('/admin/loadmenu/0') }}/"+{{ auth()->user()->role_id }}, {}, function(data, status){
                             $('#kt_header_menu').html(data)
@@ -212,6 +214,7 @@
                     }
 
                 </script>
+                    @endif
 
 
                 {{-- End Menu --}}
