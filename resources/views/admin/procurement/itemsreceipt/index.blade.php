@@ -100,6 +100,16 @@
 @section('js')
 
 <script>
+        function infoModal(id){
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/procurement/items-receipt/infomodal') }}/"+id, {}, function(data, status){
+                $('#kontennya').html(data)
+                $('#mainmodal').modal('toggle')
+                $('#loading-add').html('')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receive Items</button>')
+            })
+        }
+
         function addModal(){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/procurement/items-receipt/addmodal') }}", {}, function(data, status){

@@ -32,7 +32,7 @@ class PurchaseOrderController extends Controller
         // dd(DB::connection('procurement')->select('Call sp_list_po()'));
         return Datatables::of(DB::connection('procurement')->select('Call sp_list_po()'))->addIndexColumn()
         ->addColumn('action', function($model){
-            $action = "";
+            // $action = "";
             $action = "<a onclick='infoModal($model->id_ponya)' class='btn btn-icon btn-info'><i class='bi bi-info-square'></i></a>";
 
             if($model->po_status == 0 || $model->po_status !=1){

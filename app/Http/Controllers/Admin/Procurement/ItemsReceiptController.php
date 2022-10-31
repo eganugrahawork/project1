@@ -26,12 +26,12 @@ class ItemsReceiptController extends Controller
     public function list(){
         return  Datatables::of(DB::connection('procurement')->select('Call sp_list_item_receipt()'))->addIndexColumn()
         ->addColumn('action', function($model){
-            $action = "";
+            $action = "<a onclick='infoModal($model->id)' class='btn btn-icon btn-sm btn-info'><i class='bi bi-info-square'></i></a>";
             if(Gate::allows('edit', ['/admin/procurement/items-receipt'])){
-                $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
+                $action .= "<a onclick='editModal($model->id)' class='btn btn-icon btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
             }
             if(Gate::allows('delete', ['/admin/procurement/items-receipt'])){
-                $action .= " <a href='/admin/procurement/items-receipt/delete/$model->id' class='btn btn-sm btn-danger' id='deleteItemReceipt'><i class='bi bi-trash'></i></a>";
+                $action .= " <a href='/admin/procurement/items-receipt/delete/$model->id' class='btn btn-icon btn-sm btn-danger' id='deleteItemReceipt'><i class='bi bi-trash'></i></a>";
             }
             return $action;
         })->make(true);
@@ -39,6 +39,14 @@ class ItemsReceiptController extends Controller
 
     public function addmodal(){
         return view('admin.procurement.itemsreceipt.addmodal', ['purchase_orders' => PurchaseOrder::where(['status' => 1])->get()]);
+    }
+    public function infomodal(Request $request){
+
+        return view('admin.procurement.itemsreceipt.infomodal');
+    }
+    public function editmodal(Request $request){
+
+        return view('admin.procurement.itemsreceipt.editmodal');
     }
 
     public function getdatapo(Request $request){
