@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Procurement;
 
 use App\Http\Controllers\Controller;
 use App\Models\ItemReceipt;
+use App\Models\Mutation;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderItems;
 use Carbon\Carbon;
@@ -19,6 +20,10 @@ class ItemsReceiptController extends Controller
     }
     public function index(){
         return view('admin.procurement.itemsreceipt.index');
+    }
+
+    public function list(){
+
     }
 
     public function addmodal(){
@@ -80,7 +85,7 @@ class ItemsReceiptController extends Controller
     }
 
     public function store(Request $request){
-        dd($request);
+        // dd( Mutation::orderBy('id', 'desc')->first());
         $usrid= auth()->user()->id;
         $usrname= auth()->user()->username;
         DB::connection('procurement')->select("call sp_insert_item_receipt(
@@ -117,11 +122,14 @@ class ItemsReceiptController extends Controller
                        '$notes'
                     )");
 
+                    $mutationnya = Mutation::orderBy('id', 'desc')->first();
 
                     DB::connection('procurement')->select("call sp_insert_item_receipt_details(
                         '$itemReceipt->id',
                         $po_item_id,
-                        '$itemReceipt->id',
+                        $mutationnya->id,
+                        $amountMutation,
+                        '$notes'
                     )");
         }
         return redirect()->back()->with('success', 'Added');

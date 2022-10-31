@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mutation extends Model
 {
+    protected $connection = 'inventory';
+    protected $table = 'mutations';
+
     use HasFactory;
 }
