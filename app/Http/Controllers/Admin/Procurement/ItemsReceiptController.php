@@ -34,6 +34,8 @@ class ItemsReceiptController extends Controller
                 $action .= " <a href='/admin/procurement/items-receipt/delete/$model->id' class='btn btn-icon btn-sm btn-danger' id='deleteItemReceipt'><i class='bi bi-trash'></i></a>";
             }
             return $action;
+        })->addColumn('order_datenya', function($model){
+            return Carbon::parse($model->order_date)->format('Y-m-d');
         })->make(true);
     }
 

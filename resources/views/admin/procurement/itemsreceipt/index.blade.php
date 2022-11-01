@@ -147,7 +147,7 @@
                     {data: 'receipt_date', name: 'receipt_date'},
                     {data: 'code', name: 'code'},
                     {data: 'name', name: 'name'},
-                    {data: 'order_date', name: 'order_date'},
+                    {data: 'order_datenya', name: 'order_datenya'},
                     {data: 'status', name: 'status'},
                     {data: 'status', name: 'status'},
                     {data: 'status', name: 'status'},

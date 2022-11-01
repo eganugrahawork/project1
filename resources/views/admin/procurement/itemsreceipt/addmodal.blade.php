@@ -47,7 +47,7 @@
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Received Date</label>
-                <input type="datetime-local" name="receipt_date" id="do_date"  class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="datetime-local" name="receipt_date" id="do_date" value="2022-01-01T00:00" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Plate Number</label>
