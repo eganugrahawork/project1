@@ -57,11 +57,9 @@
                 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
                 <script>var hostUrl = "/metronic/assets/";</script>
                 <script src="/metronic/assets/plugins/global/plugins.bundle.js"></script>
-                {{-- <script src="/metronic/assets/js/darkmode.bundle.js"></script> --}}
                 <script src="/metronic/assets/js/scripts.bundle.js"></script>
                 <script src="/metronic/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
                 <script src="/metronic/assets/js/custom/widgets.js"></script>
-                {{-- <script src="/metronic/assets/js/custom/apps/chat/chat.js"></script> --}}
                 <script src="/metronic/assets/js/custom/modals/create-app.js"></script>
 
                 <script src="/metronic/assets/js/custom/modals/upgrade-plan.js"></script>
@@ -72,6 +70,8 @@
 
                 <script src="/metronic/assets/plugins/custom/datatables/datatables.bundle.js"></script>
 
+                {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script> --}}
 
 
                 <script>
@@ -90,6 +90,7 @@
                     }
                 </script>
 
+        {{-- Condition --}}
             @if (auth()->user()->userrole->role == 'Super Admin')
 
             <button id="kt_explore_toggle" class="explore-toggle btn btn-sm bg-body btn-color-gray-700 btn-active-primary shadow-sm position-fixed px-5 fw-bolder zindex-2 top-50 mt-10 end-0 transform-90 fs-6 rounded-top-0 notify" title="See notification" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-trigger="hover">
@@ -180,7 +181,7 @@
                      {{-- End Pusher --}}
 
                 @endif
-
+            {{-- End Condition --}}
 
                 {{-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> --}}
 
@@ -200,23 +201,20 @@
 
                 {{-- Menu --}}
                     @if (!session('menu'))
+                        <script>
+                            var loadingMenu = "<button class='btn btn-primary' type='button' disabled><span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Loading...</button>"
 
-                <script>
-                    var loadingMenu = "<button class='btn btn-primary' type='button' disabled><span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Loading...</button>"
+                            $('#kt_header_menu').html(loadingMenu)
 
-                    $('#kt_header_menu').html(loadingMenu)
+                            menu();
+                            function menu(){
+                                $.get("{{ url('/admin/loadmenu/0') }}/"+{{ auth()->user()->role_id }}, {}, function(data, status){
+                                    $('#kt_header_menu').html(data)
+                                })
+                            }
 
-                    menu();
-                    function menu(){
-                        $.get("{{ url('/admin/loadmenu/0') }}/"+{{ auth()->user()->role_id }}, {}, function(data, status){
-                            $('#kt_header_menu').html(data)
-                        })
-                    }
-
-                </script>
+                        </script>
                     @endif
-
-
                 {{-- End Menu --}}
 @yield('js')
 

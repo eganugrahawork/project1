@@ -12,7 +12,7 @@
             </div>
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Order Date</label>
-                <input type="datetime-local" name="order_date" id="order_date" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="datetime-local" name="order_date" id="order_date" value="2022-01-01T00:00" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Partners</label>
@@ -155,6 +155,7 @@
             $('.select-2').select2({
                 dropdownParent: $('#mainmodal')
             });
+
 
     });
 </script>

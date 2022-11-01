@@ -214,7 +214,7 @@ class PurchaseOrderController extends Controller
     }
 
     public function store(Request $request){
-
+        // dd($request);
         DB::connection('procurement')->select("call sp_insert_po(
             '$request->code',
             '$request->order_date',
