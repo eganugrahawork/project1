@@ -55,7 +55,9 @@ class PurchaseOrderController extends Controller
                 $statues .= "<a class='btn btn-sm btn-primary'><i class='bi bi-patch-check'></i> Confirmed</a>";
             }
             return $statues;
-        })->rawColumns(['action', 'statues'])->make(true);
+        })->addColumn('tgl_order', function($model){
+            return Carbon::parse($model->order_date)->format('d-M-Y');
+        })->rawColumns(['action', 'statues', 'tgl_order'])->make(true);
     }
 
     public function addmodal(){

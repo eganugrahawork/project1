@@ -151,7 +151,7 @@
                 },
                     {data: 'po_code', name: 'po_code'},
                     {data: 'name', name: 'name'},
-                    {data: 'order_date', name: 'order_date'},
+                    {data: 'tgl_order', name: 'tgl_order'},
                     {data: 'total_po', name: 'total_po', render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )},
                     // {data: 'due_date', name: 'delivery_date'},
                     {data: 'statues', name: 'statues'},

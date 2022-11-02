@@ -144,7 +144,7 @@
                     searchable: false
                 },
                     {data: 'do_number', name: 'do_number'},
-                    {data: 'receipt_date', name: 'receipt_date'},
+                    {data: 'receipt_date_filter', name: 'receipt_date_filter'},
                     {data: 'code', name: 'code'},
                     {data: 'name', name: 'name'},
                     {data: 'order_datenya', name: 'order_datenya'},

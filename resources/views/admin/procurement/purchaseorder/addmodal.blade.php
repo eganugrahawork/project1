@@ -11,8 +11,10 @@
                 <input type="text" id="code" name="code" value="{{ $code }}" readonly class="form-control form-control-white mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
-                <label class="fw-bold fs-6 mb-2">Order Date</label>
-                <input type="datetime-local" name="order_date" id="order_date" value="2022-01-01T00:00" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <div class="">
+                    <label class="fw-bold fs-6 mb-2">Order Date</label>
+                </div>
+                <input type="text" name="order_date" id="order_date"  class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Partners</label>
@@ -156,6 +158,12 @@
                 dropdownParent: $('#mainmodal')
             });
 
+    flatpickr("#order_date", {
+                static: true,
+                enableTime: true,
+                dateFormat: "Y-m-d H:i:s",
+                time_24hr: true
+            });
 
     });
 </script>

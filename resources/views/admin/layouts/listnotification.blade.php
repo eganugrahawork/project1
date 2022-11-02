@@ -1,6 +1,7 @@
 <div class="d-flex justify-content-center py-2">
     <a href="">Read All</a>
 </div>
+<hr>
 @foreach ($activity as $act)
 <div class="d-flex justify-content-start bg-light-info">
     <div class="d-flex flex-column align-items-start">

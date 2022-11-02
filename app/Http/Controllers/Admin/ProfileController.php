@@ -32,21 +32,19 @@ class ProfileController extends Controller
 
         $onUser = User::where(['id' => $request->id])->first();
         // dd($onUser);
-        $request->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|unique:users,email,'.$onUser->id,
-            'username' => 'required|unique:users,username,'.$onUser->id,
-            'address' => 'required|min:4',
-            'no_hp' => 'required',
-            'id_role' => 'required',
-            'region' => 'required',
-            'image' => 'image|file|max:1024',
-            'password' => 'confirmed',
-            'oldpassword' => 'required|min:8'
-        ]);
+        // $request->validate([
+        //     'name' => 'required|min:3',
+        //     'address' => 'required|min:4',
+        //     'no_hp' => 'required',
+        //     'id_role' => 'required',
+        //     'region' => 'required',
+        //     'image' => 'image|file|max:1024',
+        //     'password' => 'confirmed',
+        //     'oldpassword' => 'required|min:8'
+        // ]);
 
         if(!password_verify($request->oldpassword, $onUser->password)){
-            return redirect()->back()->with('fail', 'Password Salah');
+            return redirect()->back()->with('fail', 'Wrong Password');
         }
 
         $image = $onUser->image;
@@ -70,7 +68,7 @@ class ProfileController extends Controller
         $users = [
             'email' => $request->email,
             'username' => $request->username,
-            'id_role' => $request->id_role,
+            'role_id' => $request->role_id,
             'name' => $request->name,
             'address' => $request->address,
             'image' => $image,

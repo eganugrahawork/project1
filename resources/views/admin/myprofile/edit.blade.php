@@ -50,7 +50,7 @@
                 <div class="row mb-6">
                     <label class="col-lg-4 col-form-label fw-bold fs-6">Role</label>
                     <div class="col-lg-8 fv-row">
-                        <input type="hidden" name="id_role" value="{{ auth()->user()->id_role }}">
+                        <input type="hidden" name="role_id" value="{{ auth()->user()->role_id }}">
                         <label class="col-form-label fw-bold fs-6">{{ auth()->user()->userrole->role }}</label>
                     </div>
                 </div>

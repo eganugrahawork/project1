@@ -35,7 +35,9 @@ class ItemsReceiptController extends Controller
             }
             return $action;
         })->addColumn('order_datenya', function($model){
-            return Carbon::parse($model->order_date)->format('Y-m-d');
+            return Carbon::parse($model->order_date)->format('d-M-Y');
+        })->addColumn('receipt_date_filter', function($model){
+            return Carbon::parse($model->receipt_date)->format('d-M-Y');
         })->make(true);
     }
 
