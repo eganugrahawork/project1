@@ -146,8 +146,10 @@
                                     <input type="text" name="place_of_birth" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="xxx" required/>
                                 </div>
                                 <div class="fv-row mb-7">
-                                    <label class="required fw-bold fs-6 mb-2">Tanggal Lahir</label>
-                                    <input type="date" name="date_of_birth" class="form-control form-control-solid mb-3 mb-lg-0" required/>
+                                    <div>
+                                        <label class="required fw-bold fs-6 mb-2">Tanggal Lahir</label>
+                                    </div>
+                                    <input type="text" id="date_of_birth" name="date_of_birth" class="form-control form-control-solid mb-3 mb-lg-0" required/>
                                 </div>
                                 <div class="fv-row mb-7">
                                     <label class="required fw-bold fs-6 mb-2">Agama</label>
@@ -265,6 +267,11 @@
            $('.select-2-first').select2({
                dropdownParent: $('#kt_modal_add_user')
            });
+
+           flatpickr("#date_of_birth", {
+                static: true,
+                dateFormat: "Y-m-d",
+            });
 
    });
 // Notif Validation set
