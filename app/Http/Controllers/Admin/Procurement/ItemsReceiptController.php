@@ -71,7 +71,7 @@ class ItemsReceiptController extends Controller {
                 <label class=' fw-bold fs-6 mb-2'>Balance</label>
                 <input type='number' name='balance[]' id='balance' value='$item->qty' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
             </div>
-            <div class='fv-row mb-7 col-lg-1'>
+            <div class='fv-row mb-7 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Receive</label>
                 <input type='number' name='qty[]' id='qty' value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
@@ -79,10 +79,7 @@ class ItemsReceiptController extends Controller {
                 <label class='required fw-bold fs-6 mb-2'>Bonus</label>
                 <input type='number' name='qty_bonus[]' id='qty_bonus' value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
-            <div class='fv-row mb-7 col-lg-1'>
-                <label class='required fw-bold fs-6 mb-2'>Titipan</label>
-                <input type='number' name='qty_titipan[]' id='qty_titipan' value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
-            </div>
+
             <div class='fv-row mb-7 col-lg-1'>
                 <label class='required fw-bold fs-6 mb-2'>Discount</label>
                 <input type='number' name='qty_discount[]' id='qty_discount' value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
@@ -122,6 +119,7 @@ class ItemsReceiptController extends Controller {
         $itemReceipt = ItemReceipt::latest()->first();
 
         for ($i = 0; $i < count($request->item_id); $i++) {
+            // The Data
             $amountMutation = $request->qty[$i] + $request->qty_bonus[$i] + $request->qty_discount[$i];
             $datemutation = Carbon::now();
             $item_id = $request->item_id[$i];
@@ -130,6 +128,9 @@ class ItemsReceiptController extends Controller {
             $qty_discount = $request->qty_discount[$i];
             $notes = $request->notes[$i];
             $po_item_id = $request->po_item_id[$i];
+            $qty_order = $request->qty_order[$i];
+
+            // End Data
             DB::connection('procurement')->select("call sp_insert_mutation_receipt(
                         $item_id,
                        '$datemutation',
@@ -150,6 +151,12 @@ class ItemsReceiptController extends Controller {
                         $mutationnya->id,
                         $amountMutation,
                         '$notes'
+                    )");
+
+                    DB::connection('procurement')->select("call sp_update_items_receipt(
+                        $po_item_id,
+                        $qty_order,
+
                     )");
         }
         return redirect()->back()->with('success', 'Added');

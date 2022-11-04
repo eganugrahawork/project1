@@ -92,10 +92,10 @@
             </div>
 
             <div class="fv-row mb-7 col-lg-1">
-                <label class="required fw-bold fs-6 mb-2">Qty</label>
+                <label class="required fw-bold fs-6 mb-2">Qty Pcs</label>
                 <input type="number" name="qty[]" id="qty" value="0" onkeyup="hitungByQty(this)" class="form-control form-control-solid mb-3 mb-lg-0 qty"  required/>
             </div>
-            <div class="fv-row mb-7 col-lg-1">
+            <div class="fv-row mb-7 col-lg-1" id="discount_parent">
                 <label class="required fw-bold fs-6 mb-2">Diskon</label>
                 <input type="number" name="discount[]" id="discount" value="0" onkeyup="hitungByDiscount(this)" class="form-control form-control-solid mb-3 mb-lg-0 discount"  required/>
             </div>
@@ -202,11 +202,11 @@
         if(check){
             $.get("{{ url('/admin/procurement/purchase-order/getitem') }}/"+partnerId, {}, function(data){
                 $(e).parent().parent().find('#item_id').html(data.html);
-                $(e).parent().html("<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-success'>All</button>");
+                $(e).parent().html("<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-primary'>All</button>");
             })
         }else{
             $(e).parent().parent().find('#item_id').html("<option>Choose Partner First</option>");
-            $(e).parent().html("<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-success'>All</button>");
+            $(e).parent().html("<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-primary'>All</button>");
         }
     }
 
@@ -214,7 +214,8 @@
         $.get("{{ url('/admin/procurement/purchase-order/getbaseqty') }}/"+e.value, {}, function(data){
             $(e).parent().parent().parent().parent().find('#price_parent').remove();
             $(e).parent().parent().parent().parent().find('#base_qty_parent').remove();
-            $(e).parent().parent().parent().after("<div class='fv-row mb-7 col-lg-1' id='base_qty_parent'><label class='fw-bold fs-6 mb-2'>Base Qty</label><input type='number' name='base_qty' id='base_qyu' class='form-control form-control-white mb-3 mb-lg-0' value='"+data.base_qty+"' readonly/></div>"+data.pricing)
+            $(e).parent().parent().parent().after("<div class='fv-row mb-7 col-lg-1' id='base_qty_parent'><label class='fw-bold fs-6 mb-2'>Base Qty</label><input type='number' name='base_qty' id='base_qyu' class='form-control form-control-white mb-3 mb-lg-0' value='"+data.base_qty+"' readonly/></div>")
+            $(e).parent().parent().parent().parent().find('#discount_parent').after(data.pricing)
             })
     }
 
