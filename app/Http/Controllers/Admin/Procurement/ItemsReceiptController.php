@@ -51,12 +51,14 @@ class ItemsReceiptController extends Controller {
     }
 
     public function getdatapo(Request $request) {
+
         $po = DB::connection('procurement')->select('Call sp_search_id(' . $request->id . ')');
 
         $html = '';
         foreach ($po as $item) {
             $html .= "<div class='row'>
             <input type='hidden' name='po_item_id[]' value='$item->po_item_id'/>
+            <input type='hidden' name='unit_price[]' value='$item->unit_price'/>
             <div class='fv-row mb-7 col-lg-2'>
                 <label class=' form-label fw-bold'>Item</label>
                 <select class='form-select  form-select-white mb-3 mb-lg-0' id='item_id' name='item_id[]'   required>
@@ -102,6 +104,7 @@ class ItemsReceiptController extends Controller {
     }
 
     public function store(Request $request) {
+        dd($request);
         // dd( Mutation::orderBy('id', 'desc')->first());
         $usrid = auth()->user()->id;
         $usrname = auth()->user()->username;
@@ -153,9 +156,16 @@ class ItemsReceiptController extends Controller {
                         '$notes'
                     )");
 
+                    // DB::connection('procurement')->select("Call sp_insert_update_items_price(
+                    //     $po_item_id,
+                    //     $
+                    // )");
+
                     DB::connection('procurement')->select("call sp_update_items_receipt(
                         $po_item_id,
                         $qty_order,
+                        $qty,
+                        $qty_discount
 
                     )");
         }

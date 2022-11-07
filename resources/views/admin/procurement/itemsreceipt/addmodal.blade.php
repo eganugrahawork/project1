@@ -43,7 +43,7 @@
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Shipment</label>
-                <textarea  name="shipment" id="shipment" class="form-control form-control-solid mb-3 mb-lg-0"  required></textarea>
+                <textarea  name="text" id="shipment" class="form-control form-control-solid mb-3 mb-lg-0"  required></textarea>
             </div>
             <div class="fv-row mb-7">
                 <div>
@@ -91,6 +91,7 @@
                 static: true,
                 enableTime: true,
                 dateFormat: "Y-m-d H:i:s",
+                minuteIncrement:1,
                 time_24hr: true
             });
    });

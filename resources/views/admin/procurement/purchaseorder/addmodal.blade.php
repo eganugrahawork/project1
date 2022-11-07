@@ -162,6 +162,7 @@
                 static: true,
                 enableTime: true,
                 dateFormat: "Y-m-d H:i:s",
+                minuteIncrement:1,
                 time_24hr: true
             });
 
