@@ -38,19 +38,16 @@
                     </div>
                 </div>
                 <div class="card-toolbar">
-                    <div class="px-2">
-                        <label for="" class="text-gray-600">Start Date</label>
-                        <input type="date" class="form-control text-gray-600" name="start_date">
-                    </div>
-                    <div class="px-2">
-                        <label for="" class="text-gray-600">End Date</label>
-                        <input type="date" class="form-control text-gray-600" name="end-date">
-                    </div>
-                    <div class="d-flex justify-content-end" id="loading-add">
-                        <button type="button" class="btn btn-primary me-3" onclick="filterStock()">
-                            Search</button>
-                    </div>
-
+                    <div class="input-group">
+                        <div class="form-outline">
+                          <input type="text" id="daterange" name="daterange" class="form-control text-gray-500" />
+                        </div>
+                        <div class="" id="loading-add">
+                            <button type="button" onclick="filterStock()" class="btn btn-primary">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                      </div>
                 </div>
             </div>
             <div class="card-body pt-0">
@@ -143,13 +140,58 @@
 @section('js')
 
 <script>
-        function filterStock(){
-            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/items-receipt/addmodal') }}", {}, function(data, status){
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receive Items</button>')
-            })
+    var start = moment().subtract(29, "days");
+    var end = moment();
+
+    function cb(start, end) {
+        $("#daterange").val(start.format('YYYY-MM-DD') + " - " + end.format('YYYY-MM-DD'));
+    }
+
+    $("#daterange").daterangepicker({
+        locale: {
+            format: 'YYYY-MM-DD'
+        },
+        startDate: start,
+        endDate: end,
+        ranges: {
+            "Today": [moment(), moment()],
+            "Yesterday": [moment().subtract(1, "days"), moment().subtract(1, "days")],
+            "Last Month": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf(
+                "month")]
+        }
+    }, cb);
+
+    cb(start, end);
+</script>
+
+<script>
+       function filterStock() {
+            $('#loading-add').html(
+                '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            let getData = {
+                'partner_id': $('#partner_id').val(),
+                'date_range': $('#daterange').val()
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('/admin/inventory/stock/filter') }}",
+                data: getData,
+                datatype: 'json',
+                success: function(response) {
+                    console.log(response);
+                    $('#loading-add').html(
+                        '<button type="button" onclick="filterStock()" class="btn btn-primary"><i class = "fas fa-search" ></i></button>'
+                    )
+                }
+
+            });
         }
         function editModal(id){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')

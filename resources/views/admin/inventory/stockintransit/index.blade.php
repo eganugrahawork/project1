@@ -28,7 +28,7 @@
                     <div class="my-2">
                         @can('create', ['/admin/inventory/stock-in-transit'])
                         <div class="px-2">
-                            <button class="btn btn-sm btn-primary mx-2" onclick="addTransitModal()">+</button><button class="btn btn-sm btn-primary" onclick="registerTransitModal()">Register Transit</button>
+                            <button class="btn btn-sm btn-primary mx-2" onclick="addTransitModal()">+</button><button class="btn btn-sm btn-primary" onclick="transitHistory()">Transit History</button>
                         </div>
                         @endcan
                     </div>
@@ -45,17 +45,13 @@
                     </div>
                 </div>
                 <div class="card-toolbar">
-                    <div class="px-2">
-                        <label for="" class="text-gray-600">Start Date</label>
-                        <input type="date" class="form-control text-gray-600" name="start_date">
+                    <div class="form-outline">
+                        <input type="text" id="daterange" name="daterange" class="form-control text-gray-500" />
                     </div>
-                    <div class="px-2">
-                        <label for="" class="text-gray-600">End Date</label>
-                        <input type="date" class="form-control text-gray-600" name="end-date">
-                    </div>
-                    <div class="d-flex justify-content-end" id="loading-add">
-                        <button type="button" class="btn btn-primary me-3" onclick="filterStockInTransit()">
-                            Search</button>
+                    <div class="" id="loading-add">
+                        <button type="button" onclick="filterStockInTransit()" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
 
                 </div>
@@ -150,6 +146,31 @@
 @section('js')
 
 <script>
+    var start = moment().subtract(29, "days");
+    var end = moment();
+
+    function cb(start, end) {
+        $("#daterange").val(start.format('YYYY-MM-DD') + " - " + end.format('YYYY-MM-DD'));
+    }
+
+    $("#daterange").daterangepicker({
+        locale: {
+            format: 'YYYY-MM-DD'
+        },
+        startDate: start,
+        endDate: end,
+        ranges: {
+            "Today": [moment(), moment()],
+            "Yesterday": [moment().subtract(1, "days"), moment().subtract(1, "days")],
+            "Last Month": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf(
+                "month")]
+        }
+    }, cb);
+
+    cb(start, end);
+</script>
+
+<script>
 
         function addTransitModal(){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
@@ -159,7 +180,7 @@
                 $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receive Items</button>')
             })
         }
-        function registerTransitModal(){
+        function transitHistory(){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             // $.get("{{ url('/admin/procurement/items-receipt/addmodal') }}", {}, function(data, status){
                 // $('#kontennya').html(data)
@@ -168,22 +189,35 @@
             // })
         }
 
-        function filterStockInTransit(){
-            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/items-receipt/addmodal') }}", {}, function(data, status){
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receive Items</button>')
-            })
+        function filterStockInTransit() {
+            $('#loading-add').html(
+                '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            let getData = {
+                'partner_id': $('#partner_id').val(),
+                'date_range': $('#daterange').val()
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('/admin/procurement/purchase-basis/filter') }}",
+                data: getData,
+                datatype: 'json',
+                success: function(response) {
+                    console.log(response);
+                    $('#loading-add').html(
+                        '<button type="button" onclick="filterStockInTransit()" class="btn btn-primary"><i class = "fas fa-search" ></i></button>'
+                    )
+                }
+
+            });
         }
-        function filterStockInTransit(){
-            // $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            // $.get("{{ url('/admin/procurement/items-receipt/addmodal') }}", {}, function(data, status){
-            //     $('#kontennya').html(data)
-            //     $('#mainmodal').modal('toggle')
-            //     $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receive Items</button>')
-            // })
-        }
+
         function editModal(id){
             // $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             // $.get("{{ url('/admin/procurement/items-receipt/editmodal') }}/"+id, {}, function(data, status){

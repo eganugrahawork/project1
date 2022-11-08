@@ -1,7 +1,6 @@
 <?php
 // Admin
 use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RegionController;
@@ -9,6 +8,10 @@ use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 // End Admin
+
+// Dashboard
+use App\Http\Controllers\Admin\Dashboard\DashboardController;
+// End Dashboard
 
 // Users
 use App\Http\Controllers\Admin\Users\UsersController;
@@ -284,12 +287,14 @@ Route::middleware('auth')->controller(ItemsReceiptController::class)->group(func
 // Purchase Basis Start
 Route::middleware('auth')->controller(PurchaseBasisController::class)->group(function(){
     Route::get('/admin/procurement/purchase-basis', 'index');
+    Route::post('/admin/procurement/purchase-basis/filter', 'filter');
 });
 // Purchase Basis End
 
 // Stock
 Route::middleware('auth')->controller(StockController::class)->group(function(){
     Route::get('/admin/inventory/stock', 'index');
+    Route::post('/admin/inventory/stock/filter', 'filter');
 });
 // End Stock
 

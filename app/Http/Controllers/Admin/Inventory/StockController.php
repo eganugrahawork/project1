@@ -11,4 +11,11 @@ class StockController extends Controller
     public function index(){
         return view('admin.inventory.stock.index');
     }
+
+    public function filter(Request $request){
+       $datesFilter = explode(' - ', $request->date_range);
+        // dd($datesFilter);
+
+        return response()->json(['data'=> $datesFilter]);
+    }
 }
