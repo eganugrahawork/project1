@@ -14,51 +14,64 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
-class DashboardController extends Controller
-{
-    public function index(){
+class DashboardController extends Controller {
+    public function index() {
 
         return view('admin.dashboard.index', ['title' => 'Dashboard']);
     }
 
-    public function useractivity(){
+    public function useractivity() {
 
         return view('admin.useractivity.index');
     }
 
-    public function listuseractivity(){
-        $activity = DB::connection('masterdata')->select('SELECT a.created_at, a.menu, a.aktivitas, a.keterangan, b.email FROM user_activities a JOIN users b ON a.id_user = b.id');
+    public function listuseractivity() {
+        $activity = DB::connection('masterdata')->select('SELECT a.created_at, a.menu, a.aktivitas, a.keterangan, b.name, b.username, b.image FROM user_activities a JOIN users b ON a.id_user = b.id ORDER BY a.id DESC');
 
-        return  Datatables::of($activity)->addIndexColumn()->make(true);
+        return  Datatables::of($activity)->addIndexColumn()->addColumn('usernya', function($model){
+            $url = url('storage/'. $model->image);
+            $user = "<div class='symbol symbol-circle symbol-50px overflow-hidden me-3'>
+            <a href='#'>
+                <div class='symbol-label'>
+                    <img src='$url' alt='' class='w-100' />
+                </div>
+            </a>
+        </div>
+        <div class='d-flex flex-column'>
+            <a href='#' class='text-gray-800 text-hover-primary mb-1'>$model->name</a>
+            <span>$model->username</span>
+        </div>";
+        return $user;
+        })->rawColumns(['usernya'])->make(true);
     }
 
-    public function listnotification(){
+    public function listnotification() {
         $activity = DB::connection('masterdata')->select('SELECT a.created_at, a.menu, a.aktivitas, a.keterangan, b.email, b.username, b.image FROM user_activities a JOIN users b ON a.id_user = b.id ORDER BY a.id DESC');
         return view('admin.layouts.listnotification', ['activity' => $activity]);
     }
 
-    public function checknotification(){
-      return response()->json(UserActivity::count());
+    public function checknotification() {
+        return response()->json(UserActivity::count());
     }
 
-    public function listuseronline(){
-        $uonline = DB::connection('masterdata')->select('select * from users where status_access = 1 and id <> '. auth()->user()->id);
+    public function listuseronline() {
+        $uonline = DB::connection('masterdata')->select('select * from users where status_access = 1 and id <> ' . auth()->user()->id);
         return view('admin.layouts.listuseronline', ['uonline' => $uonline]);
     }
 
-    public function openchat(Request $request){
-        $user = User::where(['id'=>$request->id])->first();
+    public function openchat(Request $request) {
+        $user = User::where(['id' => $request->id])->first();
         return view('admin.layouts.chatroom', ['user' => $user]);
     }
 
-    public function loadmenu(Request $request){
+    public function loadmenu(Request $request) {
         // dd($request->role_id);
         $menu = DB::connection('masterdata')->select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $request->parent");
         // dd($request->parent);
         $html = '';
-        foreach ($menu as $mn){
+        foreach ($menu as $mn) {
             $submenu = DB::connection('masterdata')->select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $mn->id");
-            if($submenu){
+            if ($submenu) {
                 $html .= "<div data-kt-menu-trigger='click' data-kt-menu-placement='bottom-start' class='menu-item menu-lg-down-accordion me-lg-1'>
                 <span class='menu-link  py-3'>
                     <span class='menu-title'>$mn->name</span>
@@ -68,12 +81,12 @@ class DashboardController extends Controller
 
 
 
-                foreach($submenu as $sm){
+                foreach ($submenu as $sm) {
                     $tandapetik = '"';
                     $subOnSubmenu = DB::connection('masterdata')->select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $sm->id");
 
-                    if($subOnSubmenu){
-                        $html .= "<div data-kt-menu-trigger=". $tandapetik . "{default:'click', lg: 'hover'}". $tandapetik." data-kt-menu-placement='right-start' class='menu-item menu-lg-down-accordion'>
+                    if ($subOnSubmenu) {
+                        $html .= "<div data-kt-menu-trigger=" . $tandapetik . "{default:'click', lg: 'hover'}" . $tandapetik . " data-kt-menu-placement='right-start' class='menu-item menu-lg-down-accordion'>
                         <span class='menu-link py-3'>
                             <span class='menu-icon'>
                                 <span class='svg-icon svg-icon-2'>
@@ -85,7 +98,7 @@ class DashboardController extends Controller
                         </span>
                         <div class='menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg py-lg-4 w-lg-225px'>";
 
-                        foreach($subOnSubmenu as $sosm){
+                        foreach ($subOnSubmenu as $sosm) {
                             $html .= "<div class='menu-item'>
                                         <a class='menu-link py-3' href='$sosm->url'>
                                             <span class='menu-bullet'>
@@ -96,7 +109,7 @@ class DashboardController extends Controller
                                     </div>";
                         }
                         $html .= "</div></div>";
-                    }else{
+                    } else {
                         $html .= "<div class='menu-item'>
                         <a class='menu-link py-3' href='$sm->url'  data-bs-toggle='tooltip' data-bs-trigger='hover' data-bs-dismiss='click' data-bs-placement='right'>
                         <span class='menu-icon'>
@@ -108,10 +121,9 @@ class DashboardController extends Controller
                         </a>
                         </div>";
                     }
-
                 }
                 $html .= '</div></div>';
-            }else{
+            } else {
                 $html .= "<div data-kt-menu-placement='bottom-start' class='menu-item menu-lg-down-accordion me-lg-1'>
                 <a class='menu-link py-3' href='$mn->url'>
                 <span class='menu-title'>$mn->name</span>

@@ -147,8 +147,8 @@
                     searchable: false
                 },
                 {
-                    data: 'email',
-                    name: 'email'
+                    data: 'usernya',
+                    name: 'usernya'
                 },
                 {
                     data: 'menu',
