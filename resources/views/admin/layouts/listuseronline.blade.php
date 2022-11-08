@@ -1,8 +1,7 @@
-<div class="card-header pe-5" id="kt_drawer_chat_messenger_header">
+<div class="card-header pe-5 " id="kt_drawer_chat_messenger_header">
     <div class="card-title">
         <div class="d-flex justify-content-center flex-column me-3">
             <a href="#" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">Online Users</a>
-
         </div>
     </div>
 

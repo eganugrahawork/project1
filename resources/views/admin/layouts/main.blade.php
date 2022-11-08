@@ -102,7 +102,11 @@
         data-kt-drawer-activate="true" data-kt-drawer-overlay="true"
         data-kt-drawer-width="{default:'350px', 'lg': '475px'}" data-kt-drawer-direction="end"
         data-kt-drawer-toggle="#kt_explore_toggle" data-kt-drawer-close="#kt_explore_close">
-        <div class="card shadow-none rounded-0 w-100">
+        <div class="card shadow-none rounded-0 w-100 justify-content-end ribbon ribbon-start ribbon-clip">
+            <div class="ribbon-label">
+                Loccana
+                <span class="ribbon-inner bg-info"></span>
+            </div>
             <div class="card-body" id="kt_explore_body">
                 <div id="kt_explore_scroll" class="scroll-y me-n5 pe-5" data-kt-scroll="true"
                     data-kt-scroll-height="auto" data-kt-scroll-wrappers="#kt_explore_body"
@@ -124,11 +128,11 @@
             })
         })
 
-        function openChat(id) {
-                $.get("{{ url('/admin/openchat') }}/" + id, {}, function(data) {
-                    $('#onlineList').html(data);
-                })
-            }
+        // function openChat(id) {
+        //         $.get("{{ url('/admin/openchat') }}/" + id, {}, function(data) {
+        //             $('#onlineList').html(data);
+        //         })
+        //     }
     </script>
 
     {{-- Condition --}}
