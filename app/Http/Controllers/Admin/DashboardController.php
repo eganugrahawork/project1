@@ -42,7 +42,7 @@ class DashboardController extends Controller
     }
 
     public function listuseronline(){
-        $uonline = DB::connection('masterdata')->select('select * from users where status_access = 1');
+        $uonline = DB::connection('masterdata')->select('select * from users where status_access = 1 and id <> '. auth()->user()->id);
         return view('admin.layouts.listuseronline', ['uonline' => $uonline]);
     }
 

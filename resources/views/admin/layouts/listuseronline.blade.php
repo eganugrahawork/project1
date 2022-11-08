@@ -2,10 +2,7 @@
     <div class="card-title">
         <div class="d-flex justify-content-center flex-column me-3">
             <a href="#" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">Online Users</a>
-            <div class="mb-0 lh-1">
-                <span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
-                <span class="fs-7 fw-bold text-muted">Active</span>
-            </div>
+
         </div>
     </div>
 
@@ -26,8 +23,16 @@
                                              <span class="text-muted fs-7 mb-1">{{ $uo->username }}</span>
                                          </div>
                                      </div>
+
+                                     <div class="py-2">
+                                       <a href=""><i class="bi bi-whatsapp"></i> Chat By Whatsapp</a>
+                                    </div>
+                                    <div class="py-2">
+                                        <a href=""><i class="bi bi-envelope"></i> Send Email</a>
+                                    </div>
                                  </div>
                              </div>
+                             <hr>
                          @endforeach
     </div>
  </div>

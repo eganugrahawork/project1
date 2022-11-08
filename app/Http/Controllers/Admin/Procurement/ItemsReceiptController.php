@@ -160,16 +160,16 @@ class ItemsReceiptController extends Controller {
 
             DB::connection('procurement')->select("Call sp_insert_update_items_price(
                         $po_item_id,
-                        $unit_price,
+                        $unit_price
                     )");
 
-            DB::connection('procurement')->select("call sp_update_items_receipt(
-                        $po_item_id,
-                        $qty_order,
-                        $qty,
-                        $qty_discount
+            // DB::connection('procurement')->select("call sp_update_items_receipt(
+            //             $po_item_id,
+            //             $qty_order,
+            //             $qty,
+            //             $qty_discount
 
-                    )");
+            //         )");
         }
         return redirect()->back()->with('success', 'Added');
     }
