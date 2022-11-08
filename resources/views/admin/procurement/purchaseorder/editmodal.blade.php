@@ -100,18 +100,18 @@
                 <label class='fw-bold fs-6 mb-2'>Base Qty</label>
                 <input type='number' name='base_qty' id='base_qty' class='form-control form-control-white mb-3 mb-lg-0' value='' readonly/>
             </div>
-            <div class='fv-row mb-7 col-lg-2' id='price_parent'>
-                <label class='required fw-bold fs-6 mb-2'>Price</label>
-                <input type='number' name='price[]' id='price' onkeyup='hitungByPrice(this)' value="{{ $s_item->unit_price }}" class='form-control form-control-solid mb-3 mb-lg-0' placeholder='$itemprice->base_price' required/>
-                <p id='notifprice'>Tulis Kembali harga untuk konfirmasi</p>
-            </div>
             <div class="fv-row mb-7 col-lg-1">
                 <label class="required fw-bold fs-6 mb-2">Qty</label>
                 <input type="number" name="qty[]" id="qty" value="{{ $s_item->qty }}" onkeyup="hitungByQty(this)" class="form-control form-control-solid mb-3 mb-lg-0 qty"  required/>
             </div>
-            <div class="fv-row mb-7 col-lg-1">
-                <label class="required fw-bold fs-6 mb-2">Diskon</label>
+            <div class="fv-row mb-7 col-lg-1" id="discount_parent">
+                <label class="required fw-bold fs-6 mb-2">Discount</label>
                 <input type="number" name="discount[]" id="discount" value="{{ $s_item->discount }}" onkeyup="hitungByDiscount(this)" class="form-control form-control-solid mb-3 mb-lg-0 discount"  required/>
+            </div>
+            <div class='fv-row mb-7 col-lg-2' id='price_parent'>
+                <label class='required fw-bold fs-6 mb-2'>Price</label>
+                <input type='number' name='price[]' id='price' onkeyup='hitungByPrice(this)' value="{{ $s_item->unit_price }}" class='form-control form-control-solid mb-3 mb-lg-0' placeholder='$itemprice->base_price' required/>
+                <p id='notifprice'>Tulis Kembali harga untuk konfirmasi</p>
             </div>
             <div class="fv-row mb-7 col-lg-2">
                 <label class="required fw-bold fs-6 mb-2">Total</label>
@@ -230,7 +230,8 @@
         $.get("{{ url('/admin/procurement/purchase-order/getbaseqty') }}/"+e.value, {}, function(data){
             $(e).parent().parent().parent().parent().find('#price_parent').remove();
             $(e).parent().parent().parent().parent().find('#base_qty_parent').remove();
-            $(e).parent().parent().parent().after("<div class='fv-row mb-7 col-lg-1' id='base_qty_parent'><label class='fw-bold fs-6 mb-2'>Base Qty</label><input type='number' name='base_qty' id='base_qyu' class='form-control form-control-white mb-3 mb-lg-0' value='"+data.base_qty+"' readonly/></div>"+data.pricing)
+            $(e).parent().parent().parent().after("<div class='fv-row mb-7 col-lg-1' id='base_qty_parent'><label class='fw-bold fs-6 mb-2'>Base Qty</label><input type='number' name='base_qty' id='base_qyu' class='form-control form-control-white mb-3 mb-lg-0' value='"+data.base_qty+"' readonly/></div>");
+            $(e).parent().parent().parent().parent().find('#discount_parent').after(data.pricing)
             })
     }
 

@@ -25,10 +25,10 @@
                                      </div>
 
                                      <div class="py-2">
-                                       <a href=""><i class="bi bi-whatsapp"></i> Chat By Whatsapp</a>
+                                       <a href="https://api.whatsapp.com/send?phone=62{{ $uo->no_hp }}"><i class="bi bi-whatsapp"></i> Chat By Whatsapp</a>
                                     </div>
                                     <div class="py-2">
-                                        <a href=""><i class="bi bi-envelope"></i> Send Email</a>
+                                        <a href="mailto: {{ $uo->email }}"><i class="bi bi-envelope"></i> Send Email</a>
                                     </div>
                                  </div>
                              </div>
