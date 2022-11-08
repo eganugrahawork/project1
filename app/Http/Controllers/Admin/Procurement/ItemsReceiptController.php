@@ -104,7 +104,7 @@ class ItemsReceiptController extends Controller {
     }
 
     public function store(Request $request) {
-        dd($request);
+        // dd($request);
         // dd( Mutation::orderBy('id', 'desc')->first());
         $usrid = auth()->user()->id;
         $usrname = auth()->user()->username;
@@ -122,7 +122,7 @@ class ItemsReceiptController extends Controller {
         $itemReceipt = ItemReceipt::latest()->first();
 
         for ($i = 0; $i < count($request->item_id); $i++) {
-            // The Data
+            // Declare the data from Request
             $amountMutation = $request->qty[$i] + $request->qty_bonus[$i] + $request->qty_discount[$i];
             $datemutation = Carbon::now();
             $item_id = $request->item_id[$i];
@@ -132,8 +132,10 @@ class ItemsReceiptController extends Controller {
             $notes = $request->notes[$i];
             $po_item_id = $request->po_item_id[$i];
             $qty_order = $request->qty_order[$i];
+            $unit_price = $request->unit_price[$i];
+            // End Declare
 
-            // End Data
+
             DB::connection('procurement')->select("call sp_insert_mutation_receipt(
                         $item_id,
                        '$datemutation',
@@ -156,12 +158,12 @@ class ItemsReceiptController extends Controller {
                         '$notes'
                     )");
 
-                    // DB::connection('procurement')->select("Call sp_insert_update_items_price(
-                    //     $po_item_id,
-                    //     $
-                    // )");
+            DB::connection('procurement')->select("Call sp_insert_update_items_price(
+                        $po_item_id,
+                        $unit_price,
+                    )");
 
-                    DB::connection('procurement')->select("call sp_update_items_receipt(
+            DB::connection('procurement')->select("call sp_update_items_receipt(
                         $po_item_id,
                         $qty_order,
                         $qty,
