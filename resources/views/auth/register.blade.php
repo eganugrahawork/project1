@@ -6,7 +6,7 @@
         <div class="d-flex flex-column flex-lg-row-auto w-xl-500px bg-lighten shadow-sm">
             <div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-500px scroll-y">
                 <!--begin::Header-->
-                <div class="d-flex flex-row-fluid flex-column flex-center p-10 pt-lg-20">
+                <div class="d-flex flex-column flex-center p-10 pt-lg-10">
                     <!--begin::Logo-->
                     <a href="" class="mb-10 mb-lg-20">
                         <img alt="Logo" src="{{ asset('storage/logos/loccanalogo.png') }}" class="h-40px" />
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-150px min-h-lg-300px" style="background-image: url(/metronic/assets/media/illustrations/sketchy-1/16.png)"></div>
+                <div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-75px min-h-lg-75px" style="background-image: url({{ asset('storage/logos/register.png') }})"></div>
                 <!--end::Illustration-->
             </div>
             <!--end::Wrapper-->

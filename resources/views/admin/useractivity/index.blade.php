@@ -19,20 +19,15 @@
     </div>
 
     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
-        <!--begin::Post-->
         <div class="content flex-row-fluid" id="kt_content">
-            <!--begin::Card-->
             <div class="card">
-                <!--begin::Card header-->
                 <div class="card-header border-0 pt-6">
-                    <!--begin::Card title-->
                     <div class="card-title">
                         <h2 class="mb-3">Users Activity</h2>
                     </div>
                     @if (auth()->user()->userrole->role === 'Super Admin')
                         <div class="card-toolbar">
                             <div class="d-flex align-items-center position-relative my-1">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                                 <span class="svg-icon svg-icon-1 position-absolute ms-6">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none">
@@ -43,7 +38,6 @@
                                             fill="black" />
                                     </svg>
                                 </span>
-                                <!--end::Svg Icon-->
                                 <input type="text" id="searchActivityTable"
                                     class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
                             </div>
@@ -51,11 +45,8 @@
                     @endif
                 </div>
                 <div class="card-body pt-0">
-                    <!--begin::Table-->
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="activityTable">
-                        <!--begin::Table head-->
                         <thead>
-                            <!--begin::Table row-->
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
 
                                 <th class="min-w-50px">No</th>
@@ -67,45 +58,16 @@
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 fw-bold">
-                            {{-- @foreach ($user as $usr)
-                                <tr >
-                                    <td class="d-flex align-items-center">{{ $loop->iteration }}</td>
-                                    <td>
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="#">
-                                                <div class="symbol-label">
-                                                    <img src="{{ asset('storage/'. $usr->users->image) }}"  class="w-100" />
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="d-flex flex-column">
-                                            <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $usr->users->name }}</a>
-                                            <span>{{ $usr->users->username }}</span>
-                                        </div>
-                                    </td>
-                                    <td>{{ $usr->menu }}</td>
-                                    <td>{{ $usr->aktivitas }}</td>
-                                    <td>{{ $usr->keterangan }}</td>
-                                    <td>{{ $usr->created_at }}</td>
-                                </tr>
-                            @endforeach --}}
+
                         </tbody>
-                        <!--end::Table body-->
                     </table>
-                    <!--end::Table-->
                 </div>
-                <!--end::Card body-->
             </div>
-            <!--end::Card-->
         </div>
-        <!--end::Post-->
     </div>
 
 
-    {{-- Modal Add User --}}
-
-    {{-- End Modal Add User --}}
-
+    {{-- Modal Activity --}}
     <div class="modal fade" id="mainmodal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered mw-650px">
             <div class="modal-content">
@@ -124,14 +86,11 @@
                     </div>
                 </div>
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="kontennya">
-                    <!--end::Form-->
                 </div>
-                <!--end::Modal body-->
             </div>
-            <!--end::Modal content-->
         </div>
-        <!--end::Modal dialog-->
     </div>
+      {{-- End Modal Activity --}}
 @endsection
 
 @section('js')

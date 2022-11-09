@@ -193,7 +193,6 @@
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             let getData = {
-                'partner_id': $('#partner_id').val(),
                 'date_range': $('#daterange').val()
             }
 
@@ -205,7 +204,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "{{ url('/admin/procurement/purchase-basis/filter') }}",
+                url: "{{ url('/admin/inventory/stock-in-transit/filter') }}",
                 data: getData,
                 datatype: 'json',
                 success: function(response) {

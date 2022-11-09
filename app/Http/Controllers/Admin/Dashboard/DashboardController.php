@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\CustomAccessBlock;
 use App\Models\Region;
 use App\Models\Test;
 use App\Models\User;
@@ -70,6 +71,10 @@ class DashboardController extends Controller {
         // dd($request->parent);
         $html = '';
         foreach ($menu as $mn) {
+        //    $checkBlock = CustomAccessBlock::where(['menu_id' => $m->id, 'user_id' => auth()->user()->id])->first();
+        // //    if($checkBlock){
+
+        // //    }
             $submenu = DB::connection('masterdata')->select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $mn->id");
             if ($submenu) {
                 $html .= "<div data-kt-menu-trigger='click' data-kt-menu-placement='bottom-start' class='menu-item menu-lg-down-accordion me-lg-1'>
