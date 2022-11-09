@@ -44,10 +44,10 @@
         </form>
 
         <div class="d-flex justify-content-center mt-4">
-            <p class="text-white">Do not Have Account ? <a href="/register" class="text-decoration-none">Create Account ?</a></p>
+            <p class="text-white">Do not Have Account ? <a href="/register" class=" text-warning">Create Account ?</a></p>
         </div>
         <div class="d-flex justify-content-center">
-            <a href="/forgot-password" class="text-decoration-none"> Forgot Password ?</a>
+            <a href="/forgot-password" class="text-warning"> Forgot Password ?</a>
         </div>
       </div>
 

@@ -78,7 +78,7 @@
     $("#submitbuttonnya").attr('disabled', true);
 
 
-    $('#email').on('keyup', function(){
+    $('#email').on('change', function(){
         let valuenya = $('#email').val();
 
         // let valuenya = e.value;
