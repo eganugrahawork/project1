@@ -137,9 +137,28 @@
 
 @section('js')
 
+<script>
+toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": true,
+  "positionClass": "toastr-bottom-left",
+  "preventDuplicates": false,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+};
+</script>
 
 <script>
     function editCustomAccess(id){
+        toastr.info("Loading..");
             $.get("{{ url('/admin/configuration/useraccessmenu/editcustomaccess') }}/"+id, {}, function(data, status){
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('show')

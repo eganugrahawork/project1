@@ -153,6 +153,8 @@ class UserRoleController extends Controller
             'aktivitas' => "Hide",
             'keterangan' => "Hide Akses User id $request->idUser pada Menu id $request->idMenu "
         ]);
+
+        session()->forget('menu');
         return response()->json('success');
 
     }
@@ -165,6 +167,7 @@ class UserRoleController extends Controller
             'aktivitas' => "Unhide",
             'keterangan' => "Unhide Akses User id $request->idUser pada Menu id $request->idMenu "
         ]);
+        session()->forget('menu');
         return response()->json('success');
     }
 

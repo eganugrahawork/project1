@@ -29,8 +29,8 @@ class DashboardController extends Controller {
     public function listuseractivity() {
         $activity = DB::connection('masterdata')->select('SELECT a.created_at, a.menu, a.aktivitas, a.keterangan, b.name, b.username, b.image FROM user_activities a JOIN users b ON a.id_user = b.id ORDER BY a.id DESC');
 
-        return  Datatables::of($activity)->addIndexColumn()->addColumn('usernya', function($model){
-            $url = url('storage/'. $model->image);
+        return  Datatables::of($activity)->addIndexColumn()->addColumn('usernya', function ($model) {
+            $url = url('storage/' . $model->image);
             $user = "<div class='symbol symbol-circle symbol-50px overflow-hidden me-3'>
             <a href='#'>
                 <div class='symbol-label'>
@@ -42,7 +42,7 @@ class DashboardController extends Controller {
             <a href='#' class='text-gray-800 text-hover-primary mb-1'>$model->name</a>
             <span>$model->username</span>
         </div>";
-        return $user;
+            return $user;
         })->rawColumns(['usernya'])->make(true);
     }
 
@@ -71,13 +71,13 @@ class DashboardController extends Controller {
         // dd($request->parent);
         $html = '';
         foreach ($menu as $mn) {
-        //    $checkBlock = CustomAccessBlock::where(['menu_id' => $m->id, 'user_id' => auth()->user()->id])->first();
-        // //    if($checkBlock){
+            $checkBlock2 = CustomAccessBlock::where(['menu_id' => $mn->id, 'user_id' => auth()->user()->id])->first();
+            if ($checkBlock2) {
+            } else {
 
-        // //    }
-            $submenu = DB::connection('masterdata')->select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $mn->id");
-            if ($submenu) {
-                $html .= "<div data-kt-menu-trigger='click' data-kt-menu-placement='bottom-start' class='menu-item menu-lg-down-accordion me-lg-1'>
+                $submenu = DB::connection('masterdata')->select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $mn->id");
+                if ($submenu) {
+                    $html .= "<div data-kt-menu-trigger='click' data-kt-menu-placement='bottom-start' class='menu-item menu-lg-down-accordion me-lg-1'>
                 <span class='menu-link  py-3'>
                     <span class='menu-title'>$mn->name</span>
                     <span class='menu-arrow d-lg-none'></span>
@@ -86,12 +86,16 @@ class DashboardController extends Controller {
 
 
 
-                foreach ($submenu as $sm) {
-                    $tandapetik = '"';
-                    $subOnSubmenu = DB::connection('masterdata')->select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $sm->id");
+                    foreach ($submenu as $sm) {
+                        $tandapetik = '"';
+                        $subOnSubmenu = DB::connection('masterdata')->select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $sm->id");
 
-                    if ($subOnSubmenu) {
-                        $html .= "<div data-kt-menu-trigger=" . $tandapetik . "{default:'click', lg: 'hover'}" . $tandapetik . " data-kt-menu-placement='right-start' class='menu-item menu-lg-down-accordion'>
+                        $checkBlock2 = CustomAccessBlock::where(['menu_id' => $sm->id, 'user_id' => auth()->user()->id])->first();
+                        if ($checkBlock2) {
+                        } else {
+
+                        if ($subOnSubmenu) {
+                            $html .= "<div data-kt-menu-trigger=" . $tandapetik . "{default:'click', lg: 'hover'}" . $tandapetik . " data-kt-menu-placement='right-start' class='menu-item menu-lg-down-accordion'>
                         <span class='menu-link py-3'>
                             <span class='menu-icon'>
                                 <span class='svg-icon svg-icon-2'>
@@ -103,8 +107,11 @@ class DashboardController extends Controller {
                         </span>
                         <div class='menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg py-lg-4 w-lg-225px'>";
 
-                        foreach ($subOnSubmenu as $sosm) {
-                            $html .= "<div class='menu-item'>
+                            foreach ($subOnSubmenu as $sosm) {
+                                $checkBlock2 = CustomAccessBlock::where(['menu_id' => $sosm->id, 'user_id' => auth()->user()->id])->first();
+                        if ($checkBlock2) {
+                        } else {
+                                $html .= "<div class='menu-item'>
                                         <a class='menu-link py-3' href='$sosm->url'>
                                             <span class='menu-bullet'>
                                                 <span class='bullet bullet-dot'></span>
@@ -112,10 +119,11 @@ class DashboardController extends Controller {
                                             <span class='menu-title  text-gray-700'>$sosm->name</span>
                                         </a>
                                     </div>";
+                            }
                         }
-                        $html .= "</div></div>";
-                    } else {
-                        $html .= "<div class='menu-item'>
+                            $html .= "</div></div>";
+                        } else {
+                            $html .= "<div class='menu-item'>
                         <a class='menu-link py-3' href='$sm->url'  data-bs-toggle='tooltip' data-bs-trigger='hover' data-bs-dismiss='click' data-bs-placement='right'>
                         <span class='menu-icon'>
                         <span class='svg-icon svg-icon-2'>
@@ -125,16 +133,18 @@ class DashboardController extends Controller {
                         <span class='menu-title text-gray-700'>$sm->name</span>
                         </a>
                         </div>";
+                        }
                     }
-                }
-                $html .= '</div></div>';
-            } else {
-                $html .= "<div data-kt-menu-placement='bottom-start' class='menu-item menu-lg-down-accordion me-lg-1'>
+                    }
+                    $html .= '</div></div>';
+                } else {
+                    $html .= "<div data-kt-menu-placement='bottom-start' class='menu-item menu-lg-down-accordion me-lg-1'>
                 <a class='menu-link py-3' href='$mn->url'>
                 <span class='menu-title'>$mn->name</span>
                 <span class='menu-arrow d-lg-none'></span>
                 </a>
                 </div>";
+                }
             }
         }
 

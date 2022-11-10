@@ -32,8 +32,8 @@
     <link href="/metronic/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     {{-- <link rel="stylesheet" href="/metronic/assets/css/darkmode.bundle.css"> --}}
     <link rel="stylesheet" href="/css/admin/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"> --}}
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"> --}}
 
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> --}}
 </head>
@@ -79,7 +79,7 @@
 
     <script src="/metronic/assets/js/custom/modals/upgrade-plan.js"></script>
     <script src="/js/admin/index.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> --}}
 
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script> --}}
 
@@ -147,9 +147,6 @@
                     $('#notificiationModal').html(data);
                 })
             })
-
-
-
         </script>
 
         {{-- Toastr --}}
@@ -159,9 +156,8 @@
                 "debug": false,
                 "newestOnTop": true,
                 "progressBar": true,
-                "positionClass": "toast-bottom-right",
+                "positionClass": "toastr-bottom-right",
                 "preventDuplicates": false,
-                "onclick": null,
                 "showDuration": "300",
                 "hideDuration": "1000",
                 "timeOut": "5000",
@@ -170,7 +166,7 @@
                 "hideEasing": "linear",
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
-            }
+            };
         </script>
         {{-- End Toastr --}}
 
