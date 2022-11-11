@@ -49,14 +49,14 @@ class UsersController extends Controller
         return Datatables::of($user)->addIndexColumn()
         ->addColumn('action', function($model){
             $action = "";
-            $action = " <a href='/admin/users/show/$model->id' class='btn btn-sm btn-success'><i class='bi bi-info-circle'></i></a>";
+            $action = " <a href='/admin/users/show/$model->id' class='btn btn-sm btn-icon btn-primary btn-hover-rise me-1'><i class='bi bi-info-circle'></i></a>";
 
 
                 if(Gate::allows('edit', ['/admin/users'])){
-                    $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
+                    $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
                 }
                 if(Gate::allows('delete', ['/admin/users'])){
-                    $action .= " <a href='/admin/users/delete/$model->id' class='btn btn-sm btn-danger' id='deleteUsers'><i class='bi bi-trash'></i></a>";
+                    $action .= " <a href='/admin/users/delete/$model->id' class='btn btn-sm btn-icon btn-danger btn-hover-rise me-1' id='deleteUsers'><i class='bi bi-trash'></i></a>";
                 }
 
             return $action;

@@ -27,10 +27,10 @@ class ItemsController extends Controller {
             ->addColumn('action', function ($model) {
                 $action = "";
                 if (Gate::allows('edit', ['/admin/masterdata/items'])) {
-                    $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
+                    $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
                 }
                 if (Gate::allows('delete', ['/admin/masterdata/items'])) {
-                    $action .= " <a href='/admin/masterdata/items/delete/$model->id' class='btn btn-sm btn-danger' id='deleteItem'><i class='bi bi-trash'></i></a>";
+                    $action .= " <a href='/admin/masterdata/items/delete/$model->id' class='btn btn-sm btn-icon btn-danger btn-hover-rise me-1' id='deleteItem'><i class='bi bi-trash'></i></a>";
                 }
                 return $action;
             })->make(true);

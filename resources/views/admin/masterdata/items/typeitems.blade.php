@@ -56,7 +56,7 @@
                             <th class="min-w-125px">Name Type</th>
                             <th class="min-w-125px">Description</th>
                             <th class="min-w-70px">Status</th>
-                            <th class="text-end min-w-70px">Action</th>
+                            <th class="min-w-70px">Action</th>
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">
@@ -75,12 +75,12 @@
                             <td>
                                 <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->status }}</a>
                             </td>
-                            <td class="text-end">
+                            <td class="">
                                 @can('edit', ['/admin/masterdata/typeitems'])
-                                    <a onclick="editModal({{ $item->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                    <a onclick="editModal({{ $item->id }})" class="btn btn-sm btn-icon btn-warning btn-hover-rise me-1"><i class="bi bi-pencil-square"></i></a>
                                 @endcan
                                 @can('delete', ['/admin/masterdata/typeitems'])
-                                    <a href="/admin/masterdata/typeitems/delete/{{ $item->id }}" class="btn btn-sm btn-danger button-delete" ><i class="bi bi-trash"></i></a>
+                                    <a href="/admin/masterdata/typeitems/delete/{{ $item->id }}" class="btn btn-sm btn-icon btn-danger btn-hover-rise me-1 button-delete" ><i class="bi bi-trash"></i></a>
                                 @endcan
                             </td>
                         </tr>

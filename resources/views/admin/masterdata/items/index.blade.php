@@ -57,7 +57,7 @@
                             <th class="min-w-125px">Description</th>
                             <th class="min-w-125px">Unit</th>
                             <th class="min-w-70px">Partner</th>
-                            <th class="text-end min-w-70px">Action</th>
+                            <th class="min-w-70px">Action</th>
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">

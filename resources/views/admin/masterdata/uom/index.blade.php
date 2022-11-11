@@ -34,7 +34,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <input type="text" id="searchUomTable" class="form-control form-control-solid w-250px ps-15" placeholder="UOM Search" />
+                        <input type="text" id="searchUomTable" class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
                     </div>
                 </div>
                 <div class="card-toolbar">
@@ -55,7 +55,7 @@
                             <th class="min-w-125px">Nama UoM</th>
                             <th class="min-w-125px">Simbol</th>
                             <th class="min-w-125px">Keterangan</th>
-                            <th class="text-end min-w-70px">Action</th>
+                            <th class="min-w-70px">Action</th>
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">

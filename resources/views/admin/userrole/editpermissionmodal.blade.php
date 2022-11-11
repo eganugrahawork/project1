@@ -3,12 +3,21 @@
     <table class="table align-middle table-row-dashed">
     <tbody>
         <tr class="text-muted fw-bolder fs-7 text-uppercase gs-0">
-            <th colspan="5" class="text-center">Menu</th>
+            <th colspan="6" class="text-center">Permission on Menu</th>
         </tr>
         @foreach ($menu as $m)
         <tr>
             <td>{{ $loop->iteration }}</td>
             <td>{{ $m->name }}</td>
+            <td>
+                <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                    <input class="form-check-input permission-menu" data-idrole="{{ $role_id }}" data-idmenu="{{ $m->id }}" data-permissiontype="approve" type="checkbox" @php
+                    $data = ['role_id' => $role_id, 'menu_id' => $m->id];
+                        checkPermissionMenuApprove($data)
+                    @endphp  />
+                    <span class="form-check-label">Approve</span>
+                </label>
+            </td>
             <td>
                 <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
                     <input class="form-check-input permission-menu" data-idrole="{{ $role_id }}" data-idmenu="{{ $m->id }}" data-permissiontype="create" type="checkbox" @php

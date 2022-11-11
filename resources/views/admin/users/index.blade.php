@@ -77,7 +77,7 @@
                             <th class="min-w-80px">Role</th>
                             <th class="min-w-80px">Region</th>
                             <th class="min-w-80px">Created at</th>
-                            <th class="text-end min-w-100px">Actions</th>
+                            <th class="min-w-100px">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 fw-bold">

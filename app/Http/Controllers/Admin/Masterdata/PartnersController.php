@@ -23,10 +23,10 @@ class PartnersController extends Controller
         ->addColumn('action', function($model){
             $action = "";
             if(Gate::allows('edit', ['/admin/masterdata/partners'])){
-                $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
+                $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
             }
             if(Gate::allows('delete', ['/admin/masterdata/partners'])){
-                $action .= " <a href='/admin/masterdata/partners/delete/$model->id' class='btn btn-sm btn-danger' id='deletepartners'><i class='bi bi-trash'></i></a>";
+                $action .= " <a href='/admin/masterdata/partners/delete/$model->id' class='btn btn-sm btn-icon btn-danger btn-hover-rise me-1' id='deletepartners'><i class='bi bi-trash'></i></a>";
             }
             return $action;
         })
@@ -128,10 +128,10 @@ class PartnersController extends Controller
         ->addColumn('action', function($model){
             $action = "";
             if(Gate::allows('edit', ['/admin/masterdata/typeofpartner'])){
-                $action .= "<a onclick='editModalType($model->id)' class='btn btn-sm btn-warning'><i class='bi bi-pencil-square'></i></a>";
+                $action .= "<a onclick='editModalType($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
             }
             if(Gate::allows('delete', ['/admin/masterdata/typeofpartner'])){
-                $action .= " <a href='/admin/masterdata/partners/destroytypepartners/$model->id' class='btn btn-sm btn-danger' id='deletepartnerstype'><i class='bi bi-trash'></i></a>";
+                $action .= " <a href='/admin/masterdata/partners/destroytypepartners/$model->id' class='btn btn-sm btn-icon btn-danger btn-hover-rise me-1' id='deletepartnerstype'><i class='bi bi-trash'></i></a>";
             }
             return $action;
         })

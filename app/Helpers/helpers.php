@@ -13,6 +13,13 @@ function checkAccess($data){
     }
 }
 
+function checkPermissionMenuApprove($data){
+    $result = DB::connection('masterdata')->select("select * from crud_permission where role_id = $data[role_id] and menu_id = $data[menu_id] and approve = 1");
+
+    if($result){
+        echo"Checked";
+    }
+}
 function checkPermissionMenuCreate($data){
     $result = DB::connection('masterdata')->select("select * from crud_permission where role_id = $data[role_id] and menu_id = $data[menu_id] and created = 1");
 

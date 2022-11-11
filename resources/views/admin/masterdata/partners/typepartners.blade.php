@@ -53,7 +53,7 @@
                             <th class="min-w-20px">No</th>
                             <th class="min-w-125px">Name</th>
                             <th class="min-w-125px">Status</th>
-                            <th class="text-end min-w-70px">Action</th>
+                            <th class="min-w-70px">Action</th>
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">

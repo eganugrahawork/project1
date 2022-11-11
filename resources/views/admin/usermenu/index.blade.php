@@ -465,7 +465,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="card-footer flex-wrap pt-0">
-                                                            <button type="button" class="btn btn-warning  my-1"
+                                                            <button type="button" class="btn btn-light text-gray-600  my-1"
                                                                 onclick="editModalPermission({{ $r->id }})">Edit
                                                                 Permission</button>
                                                         </div>

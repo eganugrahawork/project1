@@ -39,6 +39,17 @@ class AppServiceProvider extends ServiceProvider
     {
         Blade::directive('Rupiah', function ( $expression ) { return "Rp. <?php echo number_format($expression,0,',','.'); ?>"; });
 
+        Gate::define('approve', function(User $user,  $url){
+
+                $idnya = Menu::where(['url' => $url])->pluck('id')->first();
+
+                $isAvailable =null;
+                if($idnya){
+                    $isAvailable= CrudPermission::where(['menu_id'=>$idnya,'role_id'=> $user->role_id, 'approve' => 1])->first();
+                }
+                return $isAvailable;
+        });
+
         Gate::define('create', function(User $user,  $url){
 
                 $idnya = Menu::where(['url' => $url])->pluck('id')->first();
@@ -48,8 +59,6 @@ class AppServiceProvider extends ServiceProvider
                     $isAvailable= CrudPermission::where(['menu_id'=>$idnya,'role_id'=> $user->role_id, 'created' => 1])->first();
                 }
                 return $isAvailable;
-
-
         });
 
         Gate::define('edit', function(User $user, $url){

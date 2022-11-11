@@ -56,7 +56,7 @@
                             <th class="min-w-125px">Alamat</th>
                             <th class="min-w-125px">No Telp</th>
                             <th class="min-w-125px">No Fax</th>
-                            <th class="text-end min-w-70px">Action</th>
+                            <th class="min-w-70px">Action</th>
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">

@@ -33,26 +33,31 @@ class PurchaseOrderController extends Controller {
         return Datatables::of(DB::connection('procurement')->select('Call sp_list_po()'))->addIndexColumn()
             ->addColumn('action', function ($model) {
                 // $action = "";
-                $action = "<a onclick='infoModal($model->id_ponya)' class='btn btn-icon btn-info'><i class='bi bi-info-square'></i></a>";
+                $action = "<a onclick='infoModal($model->id_ponya)' class='btn btn-icon btn-sm btn-info btn-hover-rise me-1'><i class='bi bi-info-square'></i></a>";
 
                 if ($model->po_status == 0 || $model->po_status != 1) {
                     if (Gate::allows('edit', ['/admin/procurement/purchase-order'])) {
-                        $action .= "<a onclick='editModal($model->id_ponya)' class='btn btn-icon btn-warning'><i class='bi bi-pencil-square'></i></a>";
+                        $action .= "<a onclick='editModal($model->id_ponya)' class='btn btn-icon btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
                     }
                     if (Gate::allows('delete', ['/admin/procurement/purchase-order'])) {
-                        $action .= " <a href='/admin/procurement/purchase-order/delete/$model->id_ponya' class='btn btn-icon btn-danger' id='deletepo'><i class='bi bi-trash'></i></a>";
+                        $action .= " <a href='/admin/procurement/purchase-order/delete/$model->id_ponya' class='btn btn-icon btn-sm btn-danger btn-hover-rise me-1' id='deletepo'><i class='bi bi-trash'></i></a>";
                     }
                 } else {
-                    $action .= "<a onclick='exportPDF($model->id_ponya)' class='btn btn-icon btn-outline btn-outline-dashed btn-outline-dark btn-active-light-dark'><i class='bi bi-file-earmark-pdf'></i></a>";
+                    $action .= "<a onclick='exportPDF($model->id_ponya)' class='btn btn-icon btn-sm btn-outline btn-outline-dashed btn-outline-dark btn-active-light-dark btn-hover-rise me-1'><i class='bi bi-file-earmark-pdf'></i></a>";
                 }
                 return $action;
             })->addColumn('statues', function ($model) {
                 $statues = "";
 
                 if ($model->po_status == 0 || $model->po_status != 1) {
-                    $statues .= "<a onclick='approveModal($model->id_ponya)' class='btn btn-sm btn-danger'><i class='bi bi-patch-exclamation'></i></i> Confirm Here</a>";
+
+                    if (Gate::allows('approve', ['/admin/procurement/purchase-order'])) {
+                        $statues .= "<a onclick='approveModal($model->id_ponya)' class='btn btn-sm btn-danger btn-hover-rise me-1'><i class='bi bi-patch-exclamation'></i></i> Confirm Here</a>";
+                    } else {
+                        $statues .= "<a class='btn btn-sm btn-secondary btn-hover-rise me-1 '><i class='bi bi-question-octagon'></i>Not Confirmed</a>";
+                    }
                 } else {
-                    $statues .= "<a class='btn btn-sm btn-primary'><i class='bi bi-patch-check'></i> Confirmed</a>";
+                    $statues .= "<a class='btn btn-sm btn-primary btn-hover-rise me-1'><i class='bi bi-patch-check'></i> Confirmed</a>";
                 }
                 return $statues;
             })->addColumn('tgl_order', function ($model) {
