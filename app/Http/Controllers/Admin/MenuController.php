@@ -107,6 +107,8 @@ class MenuController extends Controller
             'sequence' => $request->sequence,
             'status' =>$request->status
         ]);
+
+        session()->forget('menu');
         return redirect('/admin/configuration/menu')->with('success', 'Menu diubah');
     }
 

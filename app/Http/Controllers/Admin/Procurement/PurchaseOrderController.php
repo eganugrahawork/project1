@@ -164,8 +164,8 @@ class PurchaseOrderController extends Controller {
     }
 
     public function getbaseqty(Request $request) {
-        $itemprice = ItemPrice::where(['item_id' => $request->id, 'status' => 1])->first();
-        $itemqty = ItemQty::where(['item_id' => $request->id, 'status' => 1])->first();
+        $itemprice = ItemPrice::where(['item_id' => $request->id])->first();
+        $itemqty = ItemQty::where(['item_id' => $request->id])->first();
         $pricing  = " <div class='fv-row mb-7 col-lg-2' id='price_parent'>
         <label class='required fw-bold fs-6 mb-2'>Price</label>
         <input type='number' name='price[]' id='price' onkeyup='hitungByPrice(this)' class='form-control form-control-solid mb-3 mb-lg-0' placeholder='$itemprice->base_price' required/>

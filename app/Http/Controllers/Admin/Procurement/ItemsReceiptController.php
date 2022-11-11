@@ -159,17 +159,28 @@ class ItemsReceiptController extends Controller {
                     )");
 
             DB::connection('procurement')->select("Call sp_insert_update_items_price(
-                        $po_item_id,
+                        $item_id,
                         $unit_price
                     )");
 
-            // DB::connection('procurement')->select("call sp_update_items_receipt(
-            //             $po_item_id,
-            //             $qty_order,
-            //             $qty,
-            //             $qty_discount
+            DB::connection('procurement')->select("call sp_insert_update_items_receipt(
+                        $item_id,
+                        $qty,
+                        $qty_bonus,
+                        $qty_discount
 
-            //         )");
+                    )");
+
+                    DB::connection('procurement')->select("call sp_insert_item_history(
+                        $item_id,
+                        $itemReceipt->id,
+                        $unit_price,
+                        $qty,
+                        $qty_discount,
+                        $qty_bonus,
+                        1
+                    )");
+                    // 1 diatas berarti status bernilai po
         }
         return redirect()->back()->with('success', 'Added');
     }

@@ -32,16 +32,16 @@
             </div> --}}
         </div>
         <div class="col-lg-6">
-            {{-- <div class="fv-row mb-7">
-                <label class="required fw-bold fs-6 mb-2">Unit per Box</label>
+            <div class="fv-row mb-7">
+                <label class="required fw-bold fs-6 mb-2">Unit Box</label>
                 <div class="col-lg-6">
                     <input type="number" name="unit_box" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
                 </div>
-            </div> --}}
+            </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Item Type</label>
                 <div class="col-lg-6">
-                    <select class="form-select form-select-solid select-2" name="type_id" required>
+                    <select class="form-select form-select-solid " name="type_id" required>
                         @foreach ($type as $type)
                         <option value="{{ $type->id }}">{{ $type->name_type }}</option>
                         @endforeach
@@ -70,9 +70,8 @@
                 <label class="required form-label fw-bold">Status</label>
                 <div class="col-lg-6">
                     <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
-                        <option value="0">Dijual</option>
-                        <option value="1">Tidak Dijual</option>
-                        <option value="2">Limit</option>
+                        <option value="1">Sale</option>
+                        <option value="0">Not Sale</option>
                     </select>
                 </div>
             </div>

@@ -35,12 +35,12 @@
             </div>
         </div>
         <div class="col-lg-6">
-            {{-- <div class="fv-row mb-7">
-                <label class="required fw-bold fs-6 mb-2">Unit per Box</label>
+            <div class="fv-row mb-7">
+                <label class="required fw-bold fs-6 mb-2">Unit Box</label>
                 <div class="col-lg-6">
-                    <input type="number" name="unit_box" value="{{ $item->unit_box }}" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                    <input type="number" name="unit_box" value="{{ $item->itemqty->unit_box }}" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
                 </div>
-            </div> --}}
+            </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Item Type</label>
                 <div class="col-lg-6">
@@ -84,13 +84,11 @@
                 <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
                         <option value="0"  @if ($item->status ==0 || $item->status == null)
                             selected
-                        @endif>Dijual</option>
+                        @endif>Tidak Dijual</option>
                         <option value="1"  @if ($item->status == 1)
                             selected
-                        @endif>Tidak Dijual</option>
-                        <option value="2"  @if ($item->status == 2)
-                            selected
-                        @endif>Limit</option>
+                        @endif>Dijual</option>
+
                 </select>
             </div>
 

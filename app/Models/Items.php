@@ -18,6 +18,9 @@ class Items extends Model
     public function Partner(){
         return $this->hasOne(Partners::class, 'id', 'partner_id');
     }
+    public function ItemQty(){
+        return $this->hasOne(ItemQty::class, 'item_id', 'id');
+    }
 
     // public function PriceHistory(){
     //     return $this->hasOne(PriceHistory::class, 'items_id', 'id');
