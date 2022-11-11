@@ -17,13 +17,15 @@
     <div class="fail-message" data-failmessage="{{ session('fail') }}"></div>
     <div class="box">
         <h2>Login</h2>
+        <hr>
+        <span id="typehere" class="fs-6 fw-bolder text-white"></span>
         @error('username')
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Waduh !!</strong> {{ $message }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
         @enderror
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login') }}" class="mt-3">
           @csrf
             <div class="inputBox">
             <input type="username" name="username" class="@error('username') is-invalid @enderror" required onkeyup="this.setAttribute('value', this.value);" value="{{ old('username') }}">
@@ -82,6 +84,15 @@
                 text: failMessage
             })
         }
+      </script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.8/typed.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.8/typed.min.js"></script>
+      <script>
+      var typed = new Typed("#typehere", {
+    strings: ["Loccana ", "Is The Best Solution", "For Your Bussiness.", "Lets Register Now", 'And Get The Best Offer From Us.', 'Dont Forget To Smile And Make Your Day Happier :).', 'Greeting From Us, Team Loccana.'],
+    typeSpeed: 50
+});
       </script>
 
 </body>
