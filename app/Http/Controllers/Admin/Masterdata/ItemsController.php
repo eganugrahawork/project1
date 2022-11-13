@@ -25,7 +25,7 @@ class ItemsController extends Controller {
     public function list() {
         return  Datatables::of(DB::connection('masterdata')->select("CALL sp_list_items()"))->addIndexColumn()
             ->addColumn('action', function ($model) {
-                $action = "";
+                $action = "<a onclick='infoModal($model->id)' class='btn btn-sm btn-icon btn-info btn-hover-rise me-1'><i class='bi bi-info-square'></i></a>";
                 if (Gate::allows('edit', ['/admin/masterdata/items'])) {
                     $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
                 }
@@ -70,6 +70,12 @@ class ItemsController extends Controller {
         return redirect()->back()->with('success', 'Data Item Ditambahkan !');
     }
 
+    public function infomodal(Request $request) {
+        $item = Items::where(['id' => $request->id])->first();
+
+        return view('admin.masterdata.items.infomodal', ['item' => $item, 'uom' => Uom::all(), 'partner' => Partners::all(), 'type' => TypeItems::all()]);
+    }
+
     public function editmodal(Request $request) {
         $item = Items::where(['id' => $request->id])->first();
 
@@ -78,7 +84,7 @@ class ItemsController extends Controller {
 
     public function update(Request $request) {
 
-     DB::connection('masterdata')->select("call sp_update_items(
+        DB::connection('masterdata')->select("call sp_update_items(
         $request->id,
          '$request->item_code',
              '$request->item_name',

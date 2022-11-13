@@ -21,7 +21,7 @@ class PartnersController extends Controller
     public function list(){
         return  Datatables::of(DB::connection('masterdata')->select('Call sp_list_partners()'))->addIndexColumn()
         ->addColumn('action', function($model){
-            $action = "";
+            $action = "<a onclick='infoModal($model->id)' class='btn btn-sm btn-icon btn-info btn-hover-rise me-1'><i class='bi bi-info-square'></i></a>";
             if(Gate::allows('edit', ['/admin/masterdata/partners'])){
                 $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
             }
@@ -83,6 +83,11 @@ class PartnersController extends Controller
         NotifEvent::dispatch(auth()->user()->name .' menghapus Partners '. $partnernya->name);
 
         return response()->json(['success'=> 'Partner Berhasil Dihapus']);
+    }
+
+    public function infomodal(Request $request){
+
+        return view('admin.masterdata.partners.infomodal', ['partners' => Partners::where(['id'=> $request->id])->first(), 'partner_type' => PartnerType::all()]);
     }
 
     public function editmodal(Request $request){

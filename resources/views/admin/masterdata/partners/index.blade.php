@@ -70,7 +70,7 @@
 
 {{-- Main Modal --}}
 <div class="modal fade" id="mainmodal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-800px">
+    <div class="modal-dialog modal-dialog-centered mw-1000px">
         <div class="modal-content">
             <div class="modal-header" id="mainmodal_header">
                 <h2 class="fw-bolder">Partners</h2>
@@ -120,6 +120,15 @@
 @section('js')
 
 <script>
+        function infoModal(id){
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/masterdata/partners/infomodal') }}/"+id, {}, function(data, status){
+                $('#kontennya').html(data)
+                $('#mainmodal').modal('toggle')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="addpartnersModal()">Add partners</button>')
+            })
+        }
+
         function addpartnersModal(){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/partners/addmodal') }}", {}, function(data, status){

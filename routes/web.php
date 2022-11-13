@@ -166,6 +166,7 @@ Route::middleware(['auth'])->controller(ItemsController::class)->group(function(
     Route::post('admin/masterdata/items/store', 'store');
     Route::post('admin/masterdata/items/update', 'update');
     Route::get('admin/masterdata/items/addmodal', 'addmodal');
+    Route::get('admin/masterdata/items/infomodal/{id}', 'infomodal');
     Route::get('admin/masterdata/items/editmodal/{id}', 'editmodal');
     Route::get('admin/masterdata/items/delete/{id}', 'destroy');
     Route::get('admin/masterdata/typeitems', 'typeitems');
@@ -191,6 +192,7 @@ Route::middleware(['auth'])->controller(PartnersController::class)->group(functi
     Route::post('admin/masterdata/partners/store', 'store');
     Route::post('admin/masterdata/partners/update', 'update');
     Route::get('admin/masterdata/partners/delete/{id}', 'destroy');
+    Route::get('admin/masterdata/partners/infomodal/{id}', 'infomodal');
     Route::get('admin/masterdata/partners/editmodal/{id}', 'editmodal');
     Route::get('admin/masterdata/partners/addmodal', 'addmodal');
     Route::get('admin/masterdata/typeofpartner', 'typeofpartner');
