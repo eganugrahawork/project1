@@ -27,7 +27,8 @@
             </div>
         </div>
         @php
-            $checkRead = DB::connection('masterdata')->select("select id from seen_activities a where a.user_id = 35 and a.user_activities_id=$act->id");
+        $inUser = auth()->user()->id;
+            $checkRead = DB::connection('masterdata')->select("select id from seen_activities a where a.user_id = $inUser  and a.user_activities_id=$act->id");
         @endphp
         @if ($checkRead)
             <div class="py-2"></div>

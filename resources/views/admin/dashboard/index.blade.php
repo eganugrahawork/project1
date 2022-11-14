@@ -59,7 +59,7 @@
                                     <div class="separator border-gray-200"></div>
                                     <div class="menu-item px-3 py-2">
                                         <label class="text-gray-400">Date</label>
-                                        <input type="text" class="form-control form-control-gray-400">
+                                        <input type="text" class="form-control form-control-gray-400" id="dateRangeSales">
                                     </div>
 
                                     <div class="d-flex justify-content-end px-3">
@@ -105,7 +105,7 @@
                                     <div class="separator border-gray-200"></div>
                                     <div class="menu-item px-3 py-2">
                                         <label class="text-gray-400">Date</label>
-                                        <input type="text" class="form-control form-control-gray-400">
+                                        <input type="text" class="form-control form-control-gray-400" id="dateRangeOrder">
                                     </div>
 
                                     <div class="d-flex justify-content-end px-3">
@@ -394,4 +394,56 @@
         </div>
         <!--end::Post-->
     </div>
+@endsection
+
+@section('js')
+<script>
+    var start = moment().subtract(29, "days");
+    var end = moment();
+
+    function cb(start, end) {
+        $("#dateRangeSales").val(start.format('YYYY-MM-DD') + " - " + end.format('YYYY-MM-DD'));
+    }
+
+    $("#dateRangeSales").daterangepicker({
+        static: true,
+        locale: {
+            format: 'YYYY-MM-DD'
+        },
+        startDate: start,
+        endDate: end,
+        ranges: {
+            "Today": [moment(), moment()],
+            "Yesterday": [moment().subtract(1, "days"), moment().subtract(1, "days")],
+            "Last Month": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf(
+                "month")]
+        },
+        "drops": "auto"
+    }, cb);
+
+    cb(start, end);
+
+    function dds(start, end) {
+        $("#dateRangeOrder").val(start.format('YYYY-MM-DD') + " - " + end.format('YYYY-MM-DD'));
+    }
+
+    $("#dateRangeOrder").daterangepicker({
+        static: true,
+        locale: {
+            format: 'YYYY-MM-DD'
+        },
+        startDate: start,
+        endDate: end,
+        ranges: {
+            "Today": [moment(), moment()],
+            "Yesterday": [moment().subtract(1, "days"), moment().subtract(1, "days")],
+            "Last Month": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf(
+                "month")]
+        },
+        "drops": "auto"
+    }, dds);
+
+    dds(start, end);
+</script>
+
 @endsection
