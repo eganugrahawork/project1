@@ -6,7 +6,7 @@
             </div>
             <div class="card-body">
                 <p class="text-white">Code : {{ $partner->code }}</p>
-                <p>Type : {{ $partner->partner_type }}</p>
+                <p>Type : {{ $partner->partnertype->name }}</p>
                 <p>Phone :{{ $partner->phone }}</p>
                 <p>Fax : {{ $partner->fax }}</p>
                 <p>Email : {{ $partner->email }}</p>

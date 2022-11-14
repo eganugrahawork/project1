@@ -11,4 +11,8 @@ class Partners extends Model
     protected $table = 'partners';
     protected $guarded =  ['id'];
     use HasFactory;
+
+    public function partnerType(){
+        return $this->hasOne(PartnerType::class, 'id', 'partner_type');
+    }
 }
