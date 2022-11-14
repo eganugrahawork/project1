@@ -79,6 +79,7 @@ Auth::routes();
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 Route::get('/admin/loadmenu/{parent}/{role_id}', [DashboardController::class, 'loadmenu'])->middleware('auth');
 Route::get('/admin/useractivity', [DashboardController::class, 'useractivity'])->middleware('auth');
+Route::get('/admin/readallnotif', [DashboardController::class, 'readallnotif'])->middleware('auth');
 Route::get('/admin/listuseractivity', [DashboardController::class, 'listuseractivity'])->middleware('auth');
 Route::get('/admin/checknotification', [DashboardController::class, 'checknotification'])->middleware('auth');
 Route::get('/admin/listuseronline', [DashboardController::class, 'listuseronline'])->middleware(['auth']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\CustomAccessBlock;
 use App\Models\Region;
+use App\Models\SeenActivities;
 use App\Models\Test;
 use App\Models\User;
 use App\Models\UserActivity;
@@ -46,13 +47,39 @@ class DashboardController extends Controller {
         })->rawColumns(['usernya'])->make(true);
     }
 
+    public function checknotification() {
+        $inUser = auth()->user()->id;
+        $ini = DB::connection('masterdata')->select("SELECT  *
+        FROM    user_activities a
+        WHERE   NOT EXISTS
+                (
+                SELECT  id
+                FROM    seen_activities b
+                WHERE   a.id = b.user_activities_id AND b.user_id = $inUser
+                )");
+        return response()->json(count($ini));
+    }
+
     public function listnotification() {
-        $activity = DB::connection('masterdata')->select('SELECT a.created_at, a.menu, a.aktivitas, a.keterangan, b.email, b.username, b.image FROM user_activities a JOIN users b ON a.id_user = b.id ORDER BY a.id DESC');
+        $activity = DB::connection('masterdata')->select('SELECT a.created_at, a.menu, a.aktivitas, a.keterangan, b.email, b.username, b.image, a.id FROM user_activities a JOIN users b ON a.id_user = b.id ORDER BY a.id DESC');
         return view('admin.layouts.listnotification', ['activity' => $activity]);
     }
 
-    public function checknotification() {
-        return response()->json(UserActivity::count());
+    public function readallnotif() {
+        $inUser = auth()->user()->id;
+        $notif = DB::connection('masterdata')->select("SELECT  a.id
+        FROM    user_activities a
+        WHERE   NOT EXISTS
+                (
+                SELECT  id
+                FROM    seen_activities b
+                WHERE   a.id = b.user_activities_id AND b.user_id = $inUser
+                )");
+        foreach ($notif as $ntf) {
+            SeenActivities::create(['user_id' => $inUser,'user_activities_id'=>$ntf->id]);
+        }
+
+        return response()->json(['success' => 'Readed']);
     }
 
     public function listuseronline() {
@@ -60,10 +87,10 @@ class DashboardController extends Controller {
         return view('admin.layouts.listuseronline', ['uonline' => $uonline]);
     }
 
-    public function openchat(Request $request) {
-        $user = User::where(['id' => $request->id])->first();
-        return view('admin.layouts.chatroom', ['user' => $user]);
-    }
+    // public function openchat(Request $request) {
+    //     $user = User::where(['id' => $request->id])->first();
+    //     return view('admin.layouts.chatroom', ['user' => $user]);
+    // }
 
     public function loadmenu(Request $request) {
         // dd($request->role_id);
@@ -94,8 +121,8 @@ class DashboardController extends Controller {
                         if ($checkBlock2) {
                         } else {
 
-                        if ($subOnSubmenu) {
-                            $html .= "<div data-kt-menu-trigger=" . $tandapetik . "{default:'click', lg: 'hover'}" . $tandapetik . " data-kt-menu-placement='right-start' class='menu-item menu-lg-down-accordion'>
+                            if ($subOnSubmenu) {
+                                $html .= "<div data-kt-menu-trigger=" . $tandapetik . "{default:'click', lg: 'hover'}" . $tandapetik . " data-kt-menu-placement='right-start' class='menu-item menu-lg-down-accordion'>
                         <span class='menu-link py-3'>
                             <span class='menu-icon'>
                                 <span class='svg-icon svg-icon-2'>
@@ -107,11 +134,11 @@ class DashboardController extends Controller {
                         </span>
                         <div class='menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg py-lg-4 w-lg-225px'>";
 
-                            foreach ($subOnSubmenu as $sosm) {
-                                $checkBlock2 = CustomAccessBlock::where(['menu_id' => $sosm->id, 'user_id' => auth()->user()->id])->first();
-                        if ($checkBlock2) {
-                        } else {
-                                $html .= "<div class='menu-item'>
+                                foreach ($subOnSubmenu as $sosm) {
+                                    $checkBlock2 = CustomAccessBlock::where(['menu_id' => $sosm->id, 'user_id' => auth()->user()->id])->first();
+                                    if ($checkBlock2) {
+                                    } else {
+                                        $html .= "<div class='menu-item'>
                                         <a class='menu-link py-3' href='$sosm->url'>
                                             <span class='menu-bullet'>
                                                 <span class='bullet bullet-dot'></span>
@@ -119,11 +146,11 @@ class DashboardController extends Controller {
                                             <span class='menu-title  text-gray-700'>$sosm->name</span>
                                         </a>
                                     </div>";
-                            }
-                        }
-                            $html .= "</div></div>";
-                        } else {
-                            $html .= "<div class='menu-item'>
+                                    }
+                                }
+                                $html .= "</div></div>";
+                            } else {
+                                $html .= "<div class='menu-item'>
                         <a class='menu-link py-3' href='$sm->url'  data-bs-toggle='tooltip' data-bs-trigger='hover' data-bs-dismiss='click' data-bs-placement='right'>
                         <span class='menu-icon'>
                         <span class='svg-icon svg-icon-2'>
@@ -133,8 +160,8 @@ class DashboardController extends Controller {
                         <span class='menu-title text-gray-700'>$sm->name</span>
                         </a>
                         </div>";
+                            }
                         }
-                    }
                     }
                     $html .= '</div></div>';
                 } else {
