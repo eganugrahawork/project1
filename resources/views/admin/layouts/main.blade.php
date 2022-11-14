@@ -187,7 +187,11 @@
 
             function notif() {
                 $.get("{{ url('/admin/checknotification') }}", {}, function(data) {
-                    $('#notifycountnya').html(data);
+                    if(data === 0){
+                        $('#notifycountnya').remove();
+                    }else{
+                        $('#notifycountnya').html('<span class="position-absolute top-0 start-100 translate-middle  badge badge-circle badge-primary">'+data+'</span>');
+                    }
                 });
             }
 

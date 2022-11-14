@@ -181,7 +181,9 @@
                         class="btn btn-icon btn-active-color-primary btn-outline btn-outline-secondary w-30px h-30px w-lg-40px h-lg-40px">
                         <div class="symbol symbol-25px">
                             <i class="bi bi-bell"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle  badge badge-circle badge-primary" id="notifycountnya">0</span>
+                            <div id="notifycountnya">
+
+                            </div>
                         </div>
                     </div>
                 </div>

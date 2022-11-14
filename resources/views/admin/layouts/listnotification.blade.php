@@ -1,8 +1,8 @@
 <div class="text-center py-3 px-2">
     <h4>Notification</h4>
 </div>
-<div class="d-flex justify-content-center py-2 px-2">
-    <a onclick="readAll()" href="#">Read All</a>
+<div class="d-flex justify-content-center py-2 px-2 bg-warna rounded">
+    <a onclick="readAll()" class="text-white" href="#">Read All</a>
 </div>
 <hr>
 <div class="ms-4">
@@ -33,29 +33,33 @@
             <div class="py-2"></div>
         @else
             <div class="d-flex justify-content-end mb-10 ">
-                <a href="#" onclick="read({{ $act->id }})">Read</a>
+                <a href="#" onclick="read({{ $act->id }})" class="btn btn-sm btn-primary">Read</a>
             </div>
         @endif
     @endforeach
+    <div class="d-flex justify-content-end py-4 mb-6">
+        <a href="/admin/useractivity" class="btn btn-sm btn-warning">Readmore Activity</a>
+    </div>
 </div>
 
 <script>
     function readAll() {
-        $('#notificiationModal').html(
-            '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+
+        $('#kt_drawer_chat_toggle').click();
+        $('#notifycountnya').html(
+            '<span class="position-absolute top-0 start-100 translate-middle  badge badge-circle badge-primary">...</span>'
+            );
         $.get("{{ url('/admin/readallnotif') }}", {}, function(data, status) {
-            $('#kt_drawer_chat_toggle').click();
-            $('#notifycountnya').html('...');
             notif();
         })
     }
 
-    function read(id){
-        $('#notificiationModal').html(
-            '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-        $.get("{{ url('/admin/read') }}/"+id, {}, function(data, status) {
+    function read(id) {
             $('#kt_drawer_chat_toggle').click();
-            $('#notifycountnya').html('...');
+            $('#notifycountnya').html(
+                '<span class="position-absolute top-0 start-100 translate-middle  badge badge-circle badge-primary">...</span>'
+                );
+        $.get("{{ url('/admin/read') }}/" + id, {}, function(data, status) {
             notif();
         })
     }
