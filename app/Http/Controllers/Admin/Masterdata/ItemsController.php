@@ -73,7 +73,7 @@ class ItemsController extends Controller {
     public function infomodal(Request $request) {
         $item = Items::where(['id' => $request->id])->first();
 
-        return view('admin.masterdata.items.infomodal', ['item' => $item, 'uom' => Uom::all(), 'partner' => Partners::all(), 'type' => TypeItems::all()]);
+        return view('admin.masterdata.items.infomodal', ['item' => $item]);
     }
 
     public function editmodal(Request $request) {

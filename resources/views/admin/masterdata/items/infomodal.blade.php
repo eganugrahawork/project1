@@ -1,10 +1,41 @@
 <div class="row">
     <div class="col-lg-4">
-        <h2>Card Info Items</h2>
-        <h2>Total Order</h2>
-        <h2>Total Selling</h2>
-        <h2>DSB</h2>
-        <h2></h2>
+        <div class="card card-bordered mb-5 bg-warna text-gray-400">
+            <div class="card-header">
+                <h3 class="card-title text-white text-center">{{ $item->item_name }}</h3>
+            </div>
+            <div class="card-body">
+                <p class="text-white">Code : {{ $item->item_code }}</p>
+                <p>Type : {{ $item->type_id }}</p>
+                <p>{{ $item->item_description }}</p>
+                <p>Unit : {{ $item->uom->name }}</p>
+                <p>Unit Box : {{ $item->itemqty->unit_box }}</p>
+                <p>Vat : {{ $item->vat }}%</p>
+            </div>
+            <div class="card-footer">
+                {{ $item->partner->name }}
+            </div>
+        </div>
+        <div class="card card-bordered mb-5 bg-info">
+            <div class="card-header">
+                <h3 class="card-title text-white text-center">Total Selling</h3>
+            </div>
+            <div class="card-body">
+                <input type="text" class="form-control form-control-flush text-white" value="2022-01-01 - 2022-11-31">
+                <hr>
+                <h2 class="text-white">Rp. 20.000.000.000</h2>
+            </div>
+        </div>
+        <div class="card card-bordered mb-5 bg-warning">
+            <div class="card-header">
+                <h3 class="card-title text-white text-center">Total Order</h3>
+            </div>
+            <div class="card-body">
+                <input type="text" class="form-control form-control-flush text-white" value="2022-01-01 - 2022-11-31">
+                <hr>
+                <h2 class="text-white">Rp. 20.000.000.000</h2>
+            </div>
+        </div>
     </div>
     <div class="col-lg-8">
         <div class="">

@@ -87,7 +87,7 @@ class PartnersController extends Controller
 
     public function infomodal(Request $request){
 
-        return view('admin.masterdata.partners.infomodal', ['partners' => Partners::where(['id'=> $request->id])->first(), 'partner_type' => PartnerType::all()]);
+        return view('admin.masterdata.partners.infomodal', ['partner' => Partners::where(['id'=> $request->id])->first()]);
     }
 
     public function editmodal(Request $request){
