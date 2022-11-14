@@ -61,8 +61,14 @@ class DashboardController extends Controller {
     }
 
     public function listnotification() {
-        $activity = DB::connection('masterdata')->select('SELECT a.created_at, a.menu, a.aktivitas, a.keterangan, b.email, b.username, b.image, a.id FROM user_activities a JOIN users b ON a.id_user = b.id ORDER BY a.id DESC');
+        $activity = DB::connection('masterdata')->select('SELECT a.created_at, a.menu, a.aktivitas, a.keterangan, b.email, b.username, b.image, a.id FROM user_activities a JOIN users b ON a.id_user = b.id ORDER BY a.id DESC LIMIT 30');
         return view('admin.layouts.listnotification', ['activity' => $activity]);
+    }
+
+    public function read(Request $request){
+        SeenActivities::create(['user_id' => auth()->user()->id,'user_activities_id'=>$request->id]);
+
+        return response()->json(['success' => 'Readed']);
     }
 
     public function readallnotif() {

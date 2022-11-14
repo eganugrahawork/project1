@@ -2,7 +2,7 @@
     <h4>Notification</h4>
 </div>
 <div class="d-flex justify-content-center py-2 px-2">
-    <a onclick="readAll()">Read All</a>
+    <a onclick="readAll()" href="#">Read All</a>
 </div>
 <hr>
 <div class="ms-4">
@@ -21,27 +21,42 @@
                     </div>
                 </div>
                 <div class="p-5  text-dark fw-bold mw-lg-400px text-start" data-kt-element="message-text">
-                    {{ $act->keterangan }}</div>
+                    {{ $act->keterangan }}
+                </div>
+
             </div>
         </div>
         @php
             $checkRead = DB::connection('masterdata')->select("select id from seen_activities a where a.user_id = 35 and a.user_activities_id=$act->id");
         @endphp
         @if ($checkRead)
-<div class="py-2"></div>
+            <div class="py-2"></div>
         @else
-        <div class="d-flex justify-content-end mb-10 ">
-            <a href="">Read</a>
-        </div>
+            <div class="d-flex justify-content-end mb-10 ">
+                <a href="#" onclick="read({{ $act->id }})">Read</a>
+            </div>
         @endif
     @endforeach
 </div>
 
 <script>
-    function readAll(){
-        $('#notificiationModal').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-        $.get("{{ url('/admin/readallnotif') }}", {}, function(data, status){
-                $('#kt_drawer_chat_toggle').modal('toggle')
-            })
+    function readAll() {
+        $('#notificiationModal').html(
+            '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+        $.get("{{ url('/admin/readallnotif') }}", {}, function(data, status) {
+            $('#kt_drawer_chat_toggle').click();
+            $('#notifycountnya').html('...');
+            notif();
+        })
+    }
+
+    function read(id){
+        $('#notificiationModal').html(
+            '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+        $.get("{{ url('/admin/read') }}/"+id, {}, function(data, status) {
+            $('#kt_drawer_chat_toggle').click();
+            $('#notifycountnya').html('...');
+            notif();
+        })
     }
 </script>
