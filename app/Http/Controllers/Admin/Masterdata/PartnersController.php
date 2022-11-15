@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Masterdata;
 
 use App\Events\NotifEvent;
 use App\Http\Controllers\Controller;
+use App\Models\Items;
 use App\Models\Partners;
 use App\Models\PartnerType;
 use App\Models\UserActivity;
@@ -88,6 +89,18 @@ class PartnersController extends Controller
     public function infomodal(Request $request){
 
         return view('admin.masterdata.partners.infomodal', ['partner' => Partners::where(['id'=> $request->id])->first()]);
+    }
+
+    public function getinfoitem(Request $request){
+        return  Datatables::of(Items::where(['partner_id' => $request->id])->get())->addIndexColumn()
+        ->addColumn('unit', function($model){
+            return $model->uom->name;
+        })->addColumn('stock', function($model){
+            return 'not configured';
+        })->addColumn('price', function($model){
+            return 'not configured';
+        })
+        ->make(true);
     }
 
     public function editmodal(Request $request){

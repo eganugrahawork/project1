@@ -6,6 +6,7 @@ use App\Events\NotifEvent;
 use App\Http\Controllers\Controller;
 use App\Models\ItemPrice;
 use App\Models\ItemQty;
+use App\Models\ItemReceipt;
 use App\Models\Items;
 use App\Models\Partners;
 use App\Models\TypeItems;
@@ -74,6 +75,14 @@ class ItemsController extends Controller {
         $item = Items::where(['id' => $request->id])->first();
 
         return view('admin.masterdata.items.infomodal', ['item' => $item]);
+    }
+
+    public function getinfoitemreceipt(Request $request){
+        // return  Datatables::of(ItemReceipt::where([]))->addIndexColumn()
+        // ->addColumn('action', function ($model) {
+
+        //     return $action;
+        // })->make(true);
     }
 
     public function editmodal(Request $request) {

@@ -1,4 +1,5 @@
 <div class="row">
+    <input type="hidden" id="item_id" value="{{ $item->id }}">
     <div class="col-lg-4">
         <div class="card card-bordered mb-5 bg-warna text-gray-200">
             <div class="card-header">
@@ -14,6 +15,14 @@
             </div>
             <div class="card-footer">
                 {{ $item->partner->name }}
+            </div>
+        </div>
+        <div class="card card-bordered mb-5 bg-primary">
+            <div class="card-header">
+                <h3 class="card-title text-white text-center">Stock</h3>
+            </div>
+            <div class="card-body">
+                <h2 class="text-white">552</h2>
             </div>
         </div>
         <div class="card card-bordered mb-5 bg-info">
@@ -48,15 +57,24 @@
         </div>
     </div>
     <div class="col-lg-8">
-        <div class="">
+        <h2>Items Receipt History</h2>
+        <hr>
+        <div class="table-responsive">
+            <table class="table align-middle table-row-dashed fs-6 gy-5" id="itemReceiptTable">
+                <thead>
+                    <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                        <th class="min-w-50px">No</th>
+                        <th class="min-w-80px">Delivery Number</th>
+                        <th class="min-w-80px">Receipt Date</th>
+                        <th class="min-w-80px">PO Number</th>
+                        <th class="min-w-80px">Order Date</th>
+                        <th class="min-w-80px">Qty</th>
+                        <th class="min-w-100px">Price</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600 fw-bold">
 
-            <h2>Items Receipt History</h2>
-            <hr>
-            <table>
-                <td>no</td>
-                <td>Name item</td>
-                <td>no</td>
-                <td>no</td>
+                </tbody>
             </table>
         </div>
         <div class="">
@@ -114,4 +132,44 @@
     }, dds);
 
     dds(start, end);
+</script>
+
+<script>
+    var item_id = $('#item_id').val();
+    // var itemReceiptTable = $('#itemReceiptTable').DataTable({
+    //     pageLength : 5,
+    //     serverside: true,
+    //     processing: true,
+    //     ajax: {
+    //         url: "{{ url('/admin/masterdata/items/getinfoitemreceipt') }}/" + item_id
+    //     },
+    //     columns: [{
+    //             data: 'DT_RowIndex',
+    //             searchable: false
+    //         },
+    //         {
+    //             data: 'do_number',
+    //             name: 'do_number'
+    //         },
+    //         {
+    //             data: 'item_name',
+    //             name: 'item_name'
+    //         },
+    //         {
+    //             data: 'unit',
+    //             name: 'unit'
+    //         },
+    //         {
+    //             data: 'stock',
+    //             name: 'stock'
+    //         },
+    //         {
+    //             data: 'price',
+    //             name: 'price'
+    //         }
+    //     ],
+    //     "bLengthChange": false,
+    //     "bFilter": true,
+    //     "bInfo": false
+    // });
 </script>

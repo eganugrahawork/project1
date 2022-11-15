@@ -1,4 +1,5 @@
 <div class="row">
+    <input type="hidden" id='partner_id' value="{{ $partner->id }}">
     <div class="col-lg-4">
         <div class="card card-bordered mb-5 bg-warna text-gray-200">
             <div class="card-header">
@@ -21,7 +22,7 @@
         </div>
         <div class="card card-bordered mb-5 bg-info">
             <div class="card-header">
-                <h3 class="card-title text-white text-center">Total Selling</h3>
+                <h3 class="card-title text-white text-center">Sales</h3>
             </div>
             <div class="card-body">
                 <h2 class="text-white">Rp. 20.000.000.000</h2>
@@ -29,7 +30,8 @@
             <div class="card-footer bg-light">
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-calendar2-week"></i></span>
-                    <input type="text" class="form-control form-control-flush text-gray-600 daterange-selling"  name="daterange" value="2022-01-01 - 2022-11-31" style="font-size: 11px;">
+                    <input type="text" class="form-control form-control-flush text-gray-600 daterange-selling"
+                        name="daterange" value="2022-01-01 - 2022-11-31" style="font-size: 11px;">
                 </div>
             </div>
         </div>
@@ -43,21 +45,30 @@
             <div class="card-footer bg-light">
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-calendar2-week"></i></span>
-                    <input type="text" class="form-control form-control-flush text-gray-600 daterange-order"  name="daterange" value="2022-01-01 - 2022-11-31" style="font-size: 11px;">
+                    <input type="text" class="form-control form-control-flush text-gray-600 daterange-order"
+                        name="daterange" value="2022-01-01 - 2022-11-31" style="font-size: 11px;">
                 </div>
             </div>
         </div>
     </div>
     <div class="col-lg-8">
-        <div class="">
+        <h2>Items</h2>
+        <hr>
+        <div class="table-responsive">
+            <table class="table" id="itemTable">
+                <thead>
+                    <tr class="fw-bolder fs-6 text-dark">
+                        <th>No</th>
+                        <th>Item Code</th>
+                        <th>Item Name</th>
+                        <th>Unit</th>
+                        <th>Stock</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600">
 
-            <h2>Items</h2>
-            <hr>
-            <table>
-                <td>no</td>
-                <td>Name item</td>
-                <td>no</td>
-                <td>no</td>
+                </tbody>
             </table>
         </div>
         <div class="">
@@ -66,6 +77,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     var start = moment().subtract(29, "days");
@@ -88,7 +100,7 @@
             "Last Month": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf(
                 "month")]
         },
-        "drops": "auto"
+        "drops": "up"
     }, cb);
 
     cb(start, end);
@@ -110,8 +122,49 @@
             "Last Month": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf(
                 "month")]
         },
-        "drops": "auto"
+        "drops": "up"
     }, dds);
 
     dds(start, end);
+</script>
+
+<script>
+    var partner_id = $('#partner_id').val();
+    var itemTable = $('#itemTable').DataTable({
+        pageLength : 5,
+        serverside: true,
+        processing: true,
+        ajax: {
+            url: "{{ url('/admin/masterdata/partners/getinfoitem') }}/" + partner_id
+        },
+        columns: [{
+                data: 'DT_RowIndex',
+                searchable: false
+            },
+            {
+                data: 'item_code',
+                name: 'item_code',
+                className: "dt-nowrap"
+            },
+            {
+                data: 'item_name',
+                name: 'item_name'
+            },
+            {
+                data: 'unit',
+                name: 'unit'
+            },
+            {
+                data: 'stock',
+                name: 'stock'
+            },
+            {
+                data: 'price',
+                name: 'price'
+            }
+        ],
+        "bLengthChange": false,
+        "bFilter": true,
+        "bInfo": false
+    });
 </script>
