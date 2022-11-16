@@ -66,30 +66,7 @@
                             </tr>
                         </thead>
                         <tbody class="fw-bold text-gray-600">
-                            {{-- @foreach ($items as $item)
-                        <tr>
-                            <td class="text-gray-800 text-hover-primary mb-1">{{ $loop->iteration }}</td>
-                            <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->item_code }}</a>
-                            </td>
-                            <td>
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $item->item_name }}</a>
-                            </td>
-                            <td>
-                                <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $item->item_description }}</a>
-                            </td>
-                            <td>{{ $item->uom_name }}</td>
-                            <td>{{ $item->partner_name }}</td>
-                            <td class="text-end">
-                                @can('edit', ['/admin/masterdata/items'])
-                                    <a onclick="editModal({{ $item->id }})" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                                @endcan
-                                @can('delete', ['/admin/masterdata/items'])
-                                    <a href="/admin/masterdata/items/delete/{{ $item->id }}" class="btn btn-sm btn-danger button-delete" ><i class="bi bi-trash"></i></a>
-                                @endcan
-                            </td>
-                        </tr>
-                        @endforeach --}}
+
                         </tbody>
                     </table>
                 </div>

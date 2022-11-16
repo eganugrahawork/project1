@@ -55,12 +55,6 @@ class ItemsController extends Controller {
                     $request->unit_box
     )");
 
-
-        // Items::create($data);
-
-        // $itemnya = Items::latest()->first();
-        // ItemPrice::create(['item_id' => $itemnya->id, 'status' => 1]);
-        // ItemQty::create(['item_id' => $itemnya->id, 'status' => 1]);
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "Items",
@@ -134,7 +128,7 @@ class ItemsController extends Controller {
 
     public function typeitems() {
 
-        return view('admin.masterdata.items.typeitems', ['itemtype' => TypeItems::all()]);
+        return view('admin.masterdata.items.typeitems', ['itemtype' => DB::connection('masterdata')->select('call sp_list_item_types')]);
     }
 
     public function typeitemsaddmodal() {
@@ -147,12 +141,13 @@ class ItemsController extends Controller {
     }
 
     public function typeitemsstore(Request $request) {
-        TypeItems::create([
-            'type_code' => $request->type_code,
-            'name_type' => $request->name_type,
-            'description' => $request->description,
-            'status' => $request->status
-        ]);
+
+        DB::connection('masterdata')->select("call sp_insert_item_types(
+            '$request->type_code',
+            '$request->name_type',
+            '$request->description',
+            $request->status
+        )");
 
         UserActivity::create([
             'id_user' => auth()->user()->id,
@@ -162,16 +157,18 @@ class ItemsController extends Controller {
         ]);
         NotifEvent::dispatch(auth()->user()->name . ' Tambah Type Items  ' . $request->name_type);
 
-        return redirect()->back()->with(['success' => 'Type Items added']);
+        return redirect()->back()->with('success',  'Type Items added');
     }
 
     public function typeitemsupdate(Request $request) {
-        TypeItems::where(['id' => $request->id])->update([
-            'type_code' => $request->type_code,
-            'name_type' => $request->name_type,
-            'description' => $request->description,
-            'status' => $request->status
-        ]);
+        DB::connection('masterdata')->select("call sp_update_item_types(
+            $request->id,
+            '$request->type_code',
+            '$request->name_type',
+            '$request->description',
+            $request->status
+        )");
+
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "Type Items",
@@ -183,7 +180,9 @@ class ItemsController extends Controller {
     }
 
     public function typeitemsdelete(Request $request) {
-        TypeItems::where(['id' => $request->id])->delete();
+        DB::connection('masterdata')->select("call sp_delete_item_types(
+            $request->id
+        )");
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "Type Items",
@@ -204,16 +203,15 @@ class ItemsController extends Controller {
     }
 
     public function addModalItemPrice() {
-        // $items = DB::connection('masterdata')->select("SELECT a.id, CONCAT_WS(" - ",a.`item_code`,a.`item_name`,b.`name`) itemnya FROM items a JOIN uom b ON a.uom_id = b.id JOIN partners c ON a.partner_id = c.id");
+
         $items = Items::all();
         return view('admin.masterdata.items.itemprice.addmodal', ['items' => $items]);
     }
 
     public function getdetailitem(Request $request) {
-        //    $itemss = DB::connection('masterdata')->select("select b.name , c.name  from items a join uom b on a.uom_id = b.id join partners c on a.partner_id = c.id where a.id = $request->id");
+
         $itemss = Items::where(['id' => $request->id])->first();
-        // dd($itemss);
-        // $item = json_decode($itemss, true);
+
         return response()->json(['uom' => $itemss->uom->name, 'partner' => $itemss->partner->name]);
     }
 
@@ -231,8 +229,6 @@ class ItemsController extends Controller {
             'price_pcs' => $request->price_pcs,
             'status' => 1
         ]);
-
-
 
         return redirect()->back()->with(['success' =>  'Item Price ditambahkan']);
     }
