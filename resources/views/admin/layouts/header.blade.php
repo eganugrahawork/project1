@@ -21,6 +21,9 @@
             </div>
         </div>
         <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center ms-3 ms-lg-4">
+                <a href="#" class="btn btn-color-gray-700 btn-active-color-primary btn-outline btn-outline-secondary fs-8"><span id="checkInternetSpeed">0ms</span> <i class="bi bi-wifi"></i></a>
+            </div>
             <div class="d-flex align-items-center flex-shrink-0">
                 <div class="d-flex align-items-center ms-3 ms-lg-4" id="kt_header_user_menu_toggle">
                     <div class="btn btn-icon btn-color-gray-700 btn-active-color-primary btn-outline btn-outline-secondary w-30px h-30px w-lg-40px h-lg-40px"
@@ -38,6 +41,7 @@
                     </div>
                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
                         data-kt-menu="true">
+
                         <div class="menu-item px-3">
                             <div class="menu-content d-flex align-items-center px-3">
                                 <div class="symbol symbol-50px me-5">

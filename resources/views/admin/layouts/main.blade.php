@@ -59,8 +59,11 @@
     <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
         <span class="svg-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black"></rect>
-                <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black"></path>
+                <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1"
+                    transform="rotate(90 13 6)" fill="black"></rect>
+                <path
+                    d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z"
+                    fill="black"></path>
             </svg>
         </span>
     </div>
@@ -187,10 +190,12 @@
 
             function notif() {
                 $.get("{{ url('/admin/checknotification') }}", {}, function(data) {
-                    if(data === 0){
+                    if (data === 0) {
                         $('#notifycountnya').remove();
-                    }else{
-                        $('#notifycountnya').html('<span class="position-absolute top-0 start-100 translate-middle  badge badge-circle badge-primary">'+data+'</span>');
+                    } else {
+                        $('#notifycountnya').html(
+                            '<span class="position-absolute top-0 start-100 translate-middle  badge badge-circle badge-primary">' +
+                            data + '</span>');
                     }
                 });
             }
@@ -225,6 +230,95 @@
             });
         });
     </script>
+
+    {{-- Check Connection --}}
+    <script type="text/javascript">
+        var x = 0;
+        var jumlah = 0;
+        var data = [];
+
+        $(document).ready(function() {
+            $('#checkInternetSpeed').addClass('text-danger');
+            $('#checkInternetSpeed').removeClass('text-warning');
+            $('#checkInternetSpeed').removeClass('text-primary');
+            $('#checkInternetSpeed').removeClass('text-success');
+            setInterval(MeasureConnectionSpeed, 5000);
+        });
+
+        var imageAddr = "{{ url('storage/background/testconnect.PNG') }}";
+        var downloadSize = 41500; //bytes
+
+        function InitiateSpeedDetection() {
+            window.setTimeout(MeasureConnectionSpeed, 1);
+        };
+
+        if (window.addEventListener) {
+            window.addEventListener('load', InitiateSpeedDetection, false);
+        } else if (window.attachEvent) {
+            window.attachEvent('onload', InitiateSpeedDetection);
+        }
+
+        function MeasureConnectionSpeed() {
+            var startTime, endTime;
+            var download = new Image();
+            download.onload = function() {
+                endTime = (new Date()).getTime();
+                showResults();
+            }
+
+            download.onerror = function(err, msg) {
+                console.log('error download');
+            }
+
+            startTime = (new Date()).getTime();
+            var cacheBuster = "?nnn=" + startTime;
+            download.src = imageAddr + cacheBuster;
+
+            function showResults() {
+                var duration = (endTime - startTime) / 1000;
+                var bitsLoaded = downloadSize * 8;
+                var speedBps = (bitsLoaded / duration).toFixed(2);
+                var speedKbps = (speedBps / 1024).toFixed(2);
+                var speedMbps = (speedKbps / 1024).toFixed(2);
+
+                if (speedMbps < 10) {
+                    $('#checkInternetSpeed').removeClass('text-warning');
+                    $('#checkInternetSpeed').removeClass('text-success');
+                    $('#checkInternetSpeed').removeClass('text-primary');
+                    $('#checkInternetSpeed').addClass('text-danger');
+
+                    jumlah = jumlah + 1;
+                    if (jumlah <= 5) {
+                        Swal.fire({
+                            text: "Be carefull, your connection not stable..",
+                            icon: "warning",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok",
+                            customClass: {
+                                confirmButton: "btn btn-warning"
+                            }
+                        });
+                    }
+                } else if (speedMbps < 20) {
+                    jumlah = 0;
+                    $('#checkInternetSpeed').addClass('text-warning');
+                    $('#checkInternetSpeed').removeClass('text-danger');
+                    $('#checkInternetSpeed').removeClass('text-success');
+                    $('#checkInternetSpeed').removeClass('text-primary');
+                } else {
+                    jumlah = 0;
+                    $('#checkInternetSpeed').addClass('text-primary');
+                    $('#checkInternetSpeed').removeClass('text-danger');
+                    $('#checkInternetSpeed').removeClass('text-warning');
+                    $('#checkInternetSpeed').removeClass('text-success');
+                }
+
+                $('#checkInternetSpeed').html(Math.round(speedMbps) + "ms");
+            }
+        }
+    </script>
+    {{-- End Check Connection --}}
+
 
     {{-- Menu --}}
     @if (!session('menu'))
