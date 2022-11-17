@@ -92,14 +92,9 @@ class PartnersController extends Controller
     }
 
     public function getinfoitem(Request $request){
-        return  Datatables::of(Items::where(['partner_id' => $request->id])->get())->addIndexColumn()
-        ->addColumn('unit', function($model){
-            return $model->uom->name;
-        })->addColumn('stock', function($model){
-            return 'not configured';
-        })->addColumn('price', function($model){
-            return 'not configured';
-        })
+
+        return  Datatables::of(DB::connection('masterdata')->select("SELECT a.`item_code`, a.`item_name`, a.`item_description`, b.name AS unit, c.`base_qty` AS stock, d.`buy_price` AS buy_price FROM items a JOIN uom b ON a.uom_id = b.`id`
+        JOIN item_qty c ON a.`id` = c.`item_id` JOIN item_price d ON a.`id` = d.`item_id` WHERE a.partner_id = $request->id"))->addIndexColumn()
         ->make(true);
     }
 

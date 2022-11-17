@@ -63,7 +63,7 @@
                         <th>Item Name</th>
                         <th>Unit</th>
                         <th>Stock</th>
-                        <th>Price</th>
+                        <th>Buy Price</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-600">
@@ -156,11 +156,13 @@
             },
             {
                 data: 'stock',
-                name: 'stock'
+                name: 'stock',
+                render: $.fn.dataTable.render.number( '.', ',', 0, '' )
             },
             {
-                data: 'price',
-                name: 'price'
+                data: 'buy_price',
+                name: 'buy_price',
+                render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )
             }
         ],
         "bLengthChange": false,
