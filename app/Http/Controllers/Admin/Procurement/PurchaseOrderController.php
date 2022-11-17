@@ -362,12 +362,27 @@ class PurchaseOrderController extends Controller {
     }
 
     public function exportpdf(Request $request) {
-        // dd($request->id);
 
         $po = DB::connection('procurement')->select("call sp_search_id($request->id)");
+        // dd($po);
         $datenow = Carbon::now()->format('d-m-Y');
-        $pdf = Pdf::loadView('admin.procurement.purchaseorder.exportpdf', ['po' => $po, 'now' => $datenow]);
 
+
+        $taxable = 0;
+        $totaldiscount=0;
+        $subtotal =0;
+        $totalppn= 0;
+        $grandtotal = 0;
+        foreach ($po as $item) {
+            $taxable += $item->total_price;
+            $totaldiscount += $item->total_discount;
+        }
+
+        $subtotal = $taxable + $totaldiscount;
+        $totalppn = $po[0]->ppn * $taxable / 100;
+        $grandtotal = $taxable + $totalppn;
+
+        $pdf = Pdf::loadView('admin.procurement.purchaseorder.exportpdf', ['po' => $po, 'now' => $datenow, 'subtotal' => $subtotal, 'taxable' => $taxable, 'totalppn' => $totalppn, 'totaldiscount' => $totaldiscount, 'grandtotal' => $grandtotal]);
         // INI DOUBLE GATAU KENAPA NOTIFNYA SAMA INSERTNYA
         UserActivity::create([
             'id_user' => auth()->user()->id,
