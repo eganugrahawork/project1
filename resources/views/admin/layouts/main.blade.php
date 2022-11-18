@@ -288,16 +288,8 @@
                     $('#checkInternetSpeed').addClass('text-danger');
 
                     jumlah = jumlah + 1;
-                    if (jumlah <= 5) {
-                        Swal.fire({
-                            text: "Be carefull, your connection not stable..",
-                            icon: "warning",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok",
-                            customClass: {
-                                confirmButton: "btn btn-warning"
-                            }
-                        });
+                    if (speedMbps <= 5) {
+                        toastr.warning("Be carefull, your connection not stable..");
                     }
                 } else if (speedMbps < 20) {
                     jumlah = 0;
@@ -313,7 +305,7 @@
                     $('#checkInternetSpeed').removeClass('text-success');
                 }
 
-                $('#checkInternetSpeed').html(Math.round(speedMbps) + "ms");
+                $('#checkInternetSpeed').html(Math.round(speedMbps) + "Mbps");
             }
         }
     </script>
