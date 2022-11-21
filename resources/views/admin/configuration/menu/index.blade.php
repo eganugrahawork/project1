@@ -465,7 +465,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="card-footer flex-wrap pt-0">
-                                                            <button type="button" class="btn btn-light text-gray-600  my-1"
+                                                            <button type="button"
+                                                                class="btn btn-light text-gray-600  my-1"
                                                                 onclick="editModalPermission({{ $r->id }})">Edit
                                                                 Permission</button>
                                                         </div>
@@ -588,23 +589,36 @@
         });
     </script>
 
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toastr-bottom-left",
+            "preventDuplicates": false,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+    </script>
 
     <script>
         function editModalMenu(id) {
+            toastr.info("Loading..");
             $.get("{{ url('/admin/configuration/menu/editmodal') }}/" + id, {}, function(data, status) {
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('show')
             })
         }
 
-        function editModalSubmenu(id) {
-            $.get("{{ url('/admin/configuration/submenu/editmodal') }}/" + id, {}, function(data, status) {
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('show')
-            })
-        }
-
         function editModalAccess(id) {
+            toastr.info("Loading..");
             $.get("{{ url('/admin/configuration/useraccessmenu/editmodalaccess') }}/" + id, {}, function(data, status) {
                 $('#contentAccess').html(data)
                 $('#accessModal').modal('show')
@@ -612,6 +626,7 @@
         }
 
         function editModalRole(id) {
+            toastr.info("Loading..");
             $.get("{{ url('/admin/configuration/userrole/editmodalrole') }}/" + id, {}, function(data, status) {
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('show')
@@ -619,6 +634,7 @@
         }
 
         function editModalLocation(id) {
+            toastr.info("Loading..");
             $.get("{{ url('/admin/configuration/location/editmodal') }}/" + id, {}, function(data, status) {
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('show')
@@ -626,8 +642,10 @@
         }
 
         function editModalPermission(id) {
+            toastr.info("Loading..");
             $.get("{{ url('/admin/configuration/useraccessmenu/editpermissionmodal') }}/" + id, {}, function(data,
-            status) {
+                status) {
+
                 $('#contentAccess').html(data)
                 $('#accessModal').modal('show')
             })

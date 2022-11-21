@@ -70,7 +70,7 @@ class UserRoleController extends Controller {
         // dd($request->id);
         $role = UserRole::where(['id' => $request->id])->first();
         $menu = Menu::all();
-        return view('admin.userrole.useraccess', ['title' => 'User Access',  'menu' => $menu, 'role_id' => $request->id, 'role' => $role->role]);
+        return view('admin.configuration.role.useraccess', ['title' => 'User Access',  'menu' => $menu, 'role_id' => $request->id, 'role' => $role->role]);
     }
 
     public function changeaccess(Request $request) {
@@ -101,7 +101,7 @@ class UserRoleController extends Controller {
             ]);
             MenuAccess::where($data)->delete();
         }
-
+        session()->forget('menu');
         return;
     }
 
@@ -110,7 +110,7 @@ class UserRoleController extends Controller {
     public function editmodalaccess(Request $request) {
         $menu = Menu::where(['parent' => 0])->get();
 
-        return view('admin.userrole.editmodalaccess', ['menu' => $menu, 'role_id' => $request->id]);
+        return view('admin.configuration.role.editmodalaccess', ['menu' => $menu, 'role_id' => $request->id]);
     }
 
 
@@ -118,7 +118,7 @@ class UserRoleController extends Controller {
 
         $role = UserRole::where(['id' => $request->id])->first();
 
-        return view('admin.userrole.editmodalrole', ['role' => $role]);
+        return view('admin.configuration.role.editmodalrole', ['role' => $role]);
     }
 
 
@@ -128,14 +128,14 @@ class UserRoleController extends Controller {
 
         $user = User::where(['role_id' => $request->id])->get();
 
-        return view('admin.userrole.viewrole', ['role' => $role, 'menurole' => $menuRole, 'user' => $user]);
+        return view('admin.configuration.role.viewrole', ['role' => $role, 'menurole' => $menuRole, 'user' => $user]);
     }
 
     public function editcustomaccess(Request $request) {
         $user = User::where(['id' => $request->id])->first();
         $uaccess = MenuAccess::where(['role_id' => $user->role_id])->get();
 
-        return view('admin.userrole.editcustomaccess', ['user' => $user, 'useraccess' => $uaccess]);
+        return view('admin.configuration.role.editcustomaccess', ['user' => $user, 'useraccess' => $uaccess]);
     }
 
 
@@ -167,7 +167,7 @@ class UserRoleController extends Controller {
     public function editpermissionmodal(Request $request) {
         $menu = DB::connection('masterdata')->select("select b.name, b.id from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->id");
 
-        return view('admin.userrole.editpermissionmodal', ['menu' => $menu, 'role_id' => $request->id]);
+        return view('admin.configuration.role.editpermissionmodal', ['menu' => $menu, 'role_id' => $request->id]);
     }
 
     public function permissionmenu(Request $request) {

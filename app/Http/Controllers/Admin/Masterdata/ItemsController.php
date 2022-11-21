@@ -128,16 +128,16 @@ class ItemsController extends Controller {
 
     public function typeitems() {
 
-        return view('admin.masterdata.items.typeitems', ['itemtype' => DB::connection('masterdata')->select('call sp_list_item_types')]);
+        return view('admin.masterdata.items.typeitem.index', ['itemtype' => DB::connection('masterdata')->select('call sp_list_item_types')]);
     }
 
     public function typeitemsaddmodal() {
-        return view('admin.masterdata.items.addtypeitemsmodal');
+        return view('admin.masterdata.items.typeitem.addtypeitemsmodal');
     }
 
     public function typeitemseditmodal(Request $request) {
 
-        return view('admin.masterdata.items.edittypeitemsmodal', ['typeitems' => TypeItems::where(['id' => $request->id])->first()]);
+        return view('admin.masterdata.items.typeitem.edittypeitemsmodal', ['typeitems' => TypeItems::where(['id' => $request->id])->first()]);
     }
 
     public function typeitemsstore(Request $request) {

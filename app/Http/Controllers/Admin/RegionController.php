@@ -48,6 +48,6 @@ class RegionController extends Controller
     public function editmodal(Request $request){
         $region = Region::where(['id'=> $request->id])->first();
 
-        return view('admin.usermenu.editmodallokasi', ['region'=>$region]);
+        return view('admin.configuration.region.editmodalregion', ['region'=>$region]);
     }
 }

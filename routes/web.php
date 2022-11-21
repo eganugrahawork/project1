@@ -77,7 +77,7 @@ Auth::routes();
 //Dashboard
 // Route::get('/admin/checkonline', [DashboardController::class, 'checkonline'])->middleware('auth');
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middleware('auth');
-Route::get('/admin/loadmenu/{parent}/{role_id}', [DashboardController::class, 'loadmenu'])->middleware('auth');
+
 Route::get('/admin/useractivity', [DashboardController::class, 'useractivity'])->middleware('auth');
 Route::get('/admin/readallnotif', [DashboardController::class, 'readallnotif'])->middleware('auth');
 Route::get('/admin/read/{id}', [DashboardController::class, 'read'])->middleware('auth');
@@ -112,6 +112,7 @@ Route::middleware(['auth'])->controller(MenuController::class)->group(function()
     Route::post('admin/configuration/menu/update', 'update');
     Route::get('admin/configuration/menu/editmodal/{id}', 'editmodal');
     Route::get('admin/configuration/menu/delete/{id}', 'destroy');
+    Route::get('/admin/loadmenu/{parent}/{role_id}', 'loadmenu')->middleware('auth');
 });
 //End Menu
 
@@ -134,6 +135,15 @@ Route::middleware(['auth'])->controller(UserRoleController::class)->group(functi
 });
 //UserAccessMenu End
 
+// Lokasi Start
+Route::middleware(['auth'])->controller(RegionController::class)->group(function(){
+    Route::get('admin/configuration/location/editmodal/{id}', 'editmodal');
+    Route::get('admin/configuration/location/delete/{id}', 'destroy');
+    Route::post('admin/configuration/location/store', 'store');
+    Route::post('admin/configuration/location/update', 'update');
+});
+// Lokasi End
+
 //Users Start
 Route::middleware(['auth'])->controller(UsersController::class)->group(function(){
     Route::get('admin/users', 'index');
@@ -149,16 +159,6 @@ Route::middleware(['auth'])->controller(UsersController::class)->group(function(
     Route::get('admin/users/editmodal/{id}', 'editmodal');
 });
 //Users END
-
-
-// Lokasi Start
-Route::middleware(['auth'])->controller(RegionController::class)->group(function(){
-    Route::get('admin/configuration/location/editmodal/{id}', 'editmodal');
-    Route::get('admin/configuration/location/delete/{id}', 'destroy');
-    Route::post('admin/configuration/location/store', 'store');
-    Route::post('admin/configuration/location/update', 'update');
-});
-// Lokasi End
 
 
 // Items start
