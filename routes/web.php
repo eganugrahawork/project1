@@ -1,13 +1,18 @@
 <?php
 // Admin
+
+use App\Http\Controllers\Admin\Configuration\ConfigurationController;
 use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\Admin\MenuController;
-use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\RegionController;
-use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 // End Admin
+
+// Configuration
+use App\Http\Controllers\Admin\Configuration\MenuController;
+use App\Http\Controllers\Admin\Configuration\ProfileController;
+use App\Http\Controllers\Admin\Configuration\RegionController;
+use App\Http\Controllers\Admin\Configuration\UserRoleController;
+// End Configuration
 
 // Dashboard
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
@@ -74,18 +79,24 @@ Route::middleware(['guest'])->controller(ForgotPasswordController::class)->group
 
 Auth::routes();
 
+
+
+Route::middleware(['auth'])->controller(ConfigurationController::class)->group(function(){
+    Route::get('/admin/useractivity',  'useractivity');
+    Route::get('/admin/readallnotif',  'readallnotif');
+    Route::get('/admin/read/{id}',  'read');
+    Route::get('/admin/listuseractivity',  'listuseractivity');
+    Route::get('/admin/checknotification',  'checknotification');
+    Route::get('/admin/listuseronline',  'listuseronline');
+    Route::get('/admin/listnotification ',  'listnotification');
+    // Route::get('/admin/openchat/{id} ',  'openchat']);
+});
+
+
 //Dashboard
 // Route::get('/admin/checkonline', [DashboardController::class, 'checkonline'])->middleware('auth');
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
-Route::get('/admin/useractivity', [DashboardController::class, 'useractivity'])->middleware('auth');
-Route::get('/admin/readallnotif', [DashboardController::class, 'readallnotif'])->middleware('auth');
-Route::get('/admin/read/{id}', [DashboardController::class, 'read'])->middleware('auth');
-Route::get('/admin/listuseractivity', [DashboardController::class, 'listuseractivity'])->middleware('auth');
-Route::get('/admin/checknotification', [DashboardController::class, 'checknotification'])->middleware('auth');
-Route::get('/admin/listuseronline', [DashboardController::class, 'listuseronline'])->middleware(['auth']);
-Route::get('/admin/listnotification ', [DashboardController::class, 'listnotification'])->middleware(['auth']);
-// Route::get('/admin/openchat/{id} ', [DashboardController::class, 'openchat'])->middleware(['auth']);
 //End Dashboard
 
 
