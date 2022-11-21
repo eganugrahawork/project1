@@ -101,8 +101,6 @@ class PurchaseOrderController extends Controller {
     public function aprovedmodal(Request $request) {
         $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
 
-
-
         return view('admin.procurement.purchaseorder.aprovedmodal', ['info' => $info, 'id_po' => $request->id]);
     }
 
@@ -119,6 +117,22 @@ class PurchaseOrderController extends Controller {
         ]);
         NotifEvent::dispatch(auth()->user()->name . ' Approved PO ' . $info[0]->number_po);
         return response()->json(['success' => 'Data Approved']);
+    }
+
+    public function reject(Request $request){
+        $user_rejecting = auth()->user()->username;
+        $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
+
+// BELUM QUERYNYA
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Rejected PO",
+            'aktivitas' => "Rejected PO",
+            'keterangan' => "Rejected PO " . $info[0]->number_po
+        ]);
+
+        NotifEvent::dispatch(auth()->user()->name . ' Rejected PO ' . $info[0]->number_po);
+        return response()->json(['success' => 'Data Rejected']);
     }
 
     public function destroy(Request $request) {

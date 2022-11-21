@@ -89,6 +89,7 @@ Route::middleware(['auth'])->controller(ConfigurationController::class)->group(f
     Route::get('/admin/checknotification',  'checknotification');
     Route::get('/admin/listuseronline',  'listuseronline');
     Route::get('/admin/listnotification ',  'listnotification');
+    Route::get('/admin/changedarkmode ',  'changedarkmode');
     // Route::get('/admin/openchat/{id} ',  'openchat']);
 });
 
@@ -280,6 +281,7 @@ Route::middleware(['auth'])->controller(PurchaseOrderController::class)->group(f
     Route::get('/admin/procurement/purchase-order/infomodal/{id}', 'infomodal');
     Route::get('/admin/procurement/purchase-order/aprovedmodal/{id}', 'aprovedmodal');
     Route::get('/admin/procurement/purchase-order/approve/{id}', 'approve');
+    Route::get('/admin/procurement/purchase-order/reject/{id}', 'reject');
     Route::get('/admin/procurement/purchase-order/delete/{id}', 'destroy');
     Route::post('/admin/procurement/purchase-order/store', 'store');
     Route::post('/admin/procurement/purchase-order/update', 'update');

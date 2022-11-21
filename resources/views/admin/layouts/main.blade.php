@@ -30,12 +30,14 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="/metronic/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="/metronic/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-    {{-- <link rel="stylesheet" href="/metronic/assets/css/darkmode.bundle.css"> --}}
-    <link rel="stylesheet" href="/css/admin/index.css">
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"> --}}
-    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"> --}}
 
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> --}}
+    <link rel="stylesheet" href="/css/admin/index.css">
+
+    @if (session('darkmode'))
+        <link href="/metronic/assets/plugins/global/plugins.dark.bundle.rtl.css" rel="stylesheet" type="text/css" />
+        <link href="/metronic/assets/css/style.dark.bundle.rtl.css" rel="stylesheet" type="text/css" />
+    @endif
+
 </head>
 
 <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled aside-enabled">
@@ -92,17 +94,9 @@
 
     <script src="/metronic/assets/js/custom/modals/upgrade-plan.js"></script>
     <script src="/js/admin/index.js"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> --}}
 
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script> --}}
 
     <script src="/metronic/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script> --}}
-
-    {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}}
-
 
 
     <button id="kt_explore_toggle"
@@ -146,6 +140,12 @@
         //             $('#onlineList').html(data);
         //         })
         //     }
+
+        function changeDarkMode(){
+            $.get("{{ url('/admin/changedarkmode') }}", {}, function(data) {
+                location.reload()
+            })
+        }
     </script>
 
     {{-- Condition --}}
@@ -215,7 +215,6 @@
     @endif
     {{-- End Condition --}}
 
-    {{-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> --}}
 
     <script>
         $(document).ready(function() {

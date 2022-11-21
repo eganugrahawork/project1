@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\SeenActivities;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDO;
 use Yajra\DataTables\DataTables;
 
 class ConfigurationController extends Controller
@@ -85,5 +86,14 @@ class ConfigurationController extends Controller
     //     return view('admin.configuration.chatroom', ['user' => $user]);
     // }
 
+    public function changedarkmode(){
+        if(session('darkmode')){
+            session()->forget('darkmode');
+        }else{
+            session()->push('darkmode', '');
+        }
+
+        return response()->json('success');
+    }
 
 }
