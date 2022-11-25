@@ -131,6 +131,20 @@ class ItemsController extends Controller {
         return view('admin.masterdata.items.typeitem.index', ['itemtype' => DB::connection('masterdata')->select('call sp_list_item_types')]);
     }
 
+    public function listtype() {
+        return  Datatables::of(DB::connection('masterdata')->select('call sp_list_item_types'))->addIndexColumn()
+            ->addColumn('action', function ($model) {
+                $action = "";
+                if (Gate::allows('edit', ['/admin/masterdata/typeitems'])) {
+                    $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
+                }
+                if (Gate::allows('delete', ['/admin/masterdata/typeitems'])) {
+                    $action .= " <a href='/admin/masterdata/typeitems/delete/$model->id' class='btn btn-sm btn-icon btn-danger btn-hover-rise me-1' id='deleteTypeItem'><i class='bi bi-trash'></i></a>";
+                }
+                return $action;
+            })->make(true);
+    }
+
     public function typeitemsaddmodal() {
         return view('admin.masterdata.items.typeitem.addtypeitemsmodal');
     }
@@ -157,7 +171,7 @@ class ItemsController extends Controller {
         ]);
         NotifEvent::dispatch(auth()->user()->name . ' Tambah Type Items  ' . $request->name_type);
 
-        return redirect()->back()->with('success',  'Type Items added');
+        return response()->json(['success' =>  'Type Items added']);
     }
 
     public function typeitemsupdate(Request $request) {
@@ -176,7 +190,7 @@ class ItemsController extends Controller {
             'keterangan' => "Update Type items " . $request->name_type
         ]);
         NotifEvent::dispatch(auth()->user()->name . ' Update Type Items  ' . $request->name_type);
-        return redirect('/admin/masterdata/typeitems')->with(['success' => 'Type Items edited']);
+        return response()->json(['success' =>  'Type Items Updated']);
     }
 
     public function typeitemsdelete(Request $request) {
@@ -190,7 +204,7 @@ class ItemsController extends Controller {
             'keterangan' => "Hapus Type items dengan id " . $request->id
         ]);
         NotifEvent::dispatch(auth()->user()->name . ' Hapus Type Items dengan id  ' . $request->id);
-        return redirect('/admin/masterdata/typeitems')->with(['success' => 'Type Items Deleted']);
+        return response()->json(['success' =>  'Type Items Deleted']);
     }
 
     public function itemprice() {

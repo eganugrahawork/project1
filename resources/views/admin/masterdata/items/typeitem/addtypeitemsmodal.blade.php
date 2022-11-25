@@ -1,4 +1,4 @@
-<form id="kt_modal_add_user_form" class="form" action="/admin/masterdata/typeitems/store" method="post">
+<form id="add-form" class="form">
     @csrf
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Code of Type Item</label>
@@ -29,9 +29,26 @@
 </form>
 
 <script>
-    $('form').submit(function(){
-    $('#btn-add').hide()
-    $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-    // $('#btn-custom').attr("disabled", 'disabled')
-})
+     $('#add-form').on('submit', function(e) {
+        e.preventDefault();
+
+        $('#loadingnya').html(
+            '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+
+        $.ajax({
+            type: "POST",
+            url: "{{ url('/admin/masterdata/typeitems/store') }}",
+            data: $('#add-form').serialize(),
+            dataType: 'json',
+            success: function(response) {
+                Swal.fire(
+                    'Success',
+                    response.success,
+                    'success'
+                )
+                $('#mainmodal').modal('toggle');
+                typeItemTable.ajax.reload(null, false);
+            }
+        })
+    });
 </script>

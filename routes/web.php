@@ -184,12 +184,15 @@ Route::middleware(['auth'])->controller(ItemsController::class)->group(function(
     Route::get('admin/masterdata/items/getinfoitemreceipt/{id}', 'getinfoitemreceipt');
     Route::get('admin/masterdata/items/editmodal/{id}', 'editmodal');
     Route::get('admin/masterdata/items/delete/{id}', 'destroy');
-    Route::get('admin/masterdata/typeitems', 'typeitems');
+    // Type Items
+    Route::get('/admin/masterdata/typeitems', 'typeitems');
+    Route::get('/admin/masterdata/typeitems/listtype', 'listtype');
     Route::get('/admin/masterdata/typeitems/addmodal', 'typeitemsaddmodal');
     Route::get('/admin/masterdata/typeitems/editmodal/{id}', 'typeitemseditmodal');
     Route::post('/admin/masterdata/typeitems/store', 'typeitemsstore');
     Route::post('/admin/masterdata/typeitems/update', 'typeitemsupdate');
     Route::get('/admin/masterdata/typeitems/delete/{id}', 'typeitemsdelete');
+    // End Type Items
     Route::get('/admin/masterdata/itemqty', 'itemqty');
     Route::get('/admin/masterdata/itemprice', 'itemprice');
     Route::get('/admin/masterdata/itemprice/addmodal', 'addModalItemPrice');

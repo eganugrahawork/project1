@@ -1,4 +1,4 @@
-<form id="kt_modal_add_user_form" class="form" action="/admin/masterdata/typeitems/update" method="post">
+<form id="update-form" class="form">
     @csrf
     <input type="hidden" name="id" value="{{ $typeitems->id }}">
             <div class="fv-row mb-7">
@@ -30,9 +30,26 @@
 </form>
 
 <script>
-    $('form').submit(function(){
-    $('#btn-update').hide()
-    $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-    // $('#btn-custom').attr("disabled", 'disabled')
-})
+    $('#update-form').on('submit', function(e) {
+        e.preventDefault();
+
+        $('#loadingnya').html(
+            '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+
+        $.ajax({
+            type: "POST",
+            url: "{{ url('/admin/masterdata/typeitems/update') }}",
+            data: $('#update-form').serialize(),
+            dataType: 'json',
+            success: function(response) {
+                Swal.fire(
+                    'Success',
+                    response.success,
+                    'success'
+                )
+                $('#mainmodal').modal('toggle');
+                typeItemTable.ajax.reload(null, false);
+            }
+        })
+    });
 </script>
