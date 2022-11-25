@@ -36,7 +36,7 @@
                                 data-idmenu="{{ $m->id }}" data-permissiontype="approve" type="checkbox"
                                 @php
 $data = ['role_id' => $role_id, 'menu_id' => $m->id];
-                        checkPermissionMenuApprove($data) @endphp />
+                        checkPermissionMenuApprove($data) @endphp onclick="changePermission(this)"/>
 
                         </label>
                     </td>
@@ -46,7 +46,7 @@ $data = ['role_id' => $role_id, 'menu_id' => $m->id];
                                 data-idmenu="{{ $m->id }}" data-permissiontype="create" type="checkbox"
                                 @php
 $data = ['role_id' => $role_id, 'menu_id' => $m->id];
-                        checkPermissionMenuCreate($data) @endphp />
+                        checkPermissionMenuCreate($data) @endphp  onclick="changePermission(this)" />
 
                         </label>
                     </td>
@@ -56,7 +56,7 @@ $data = ['role_id' => $role_id, 'menu_id' => $m->id];
                                 data-idmenu="{{ $m->id }}" data-permissiontype="edit" type="checkbox"
                                 @php
 $data = ['role_id' => $role_id, 'menu_id' => $m->id];
-                        checkPermissionMenuEdit($data) @endphp />
+                        checkPermissionMenuEdit($data) @endphp  onclick="changePermission(this)" />
 
                         </label>
                     </td>
@@ -66,7 +66,7 @@ $data = ['role_id' => $role_id, 'menu_id' => $m->id];
                                 data-idmenu="{{ $m->id }}" data-permissiontype="delete" type="checkbox"
                                 @php
 $data = ['role_id' => $role_id, 'menu_id' => $m->id];
-                        checkPermissionMenuDelete($data) @endphp />
+                        checkPermissionMenuDelete($data) @endphp  onclick="changePermission(this)" />
 
                         </label>
                     </td>
@@ -93,10 +93,11 @@ $data = ['role_id' => $role_id, 'menu_id' => $m->id];
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $('.permission-menu').on('click', function() {
-        const menuId = $(this).data('idmenu');
-        const roleId = $(this).data('idrole');
-        const permission = $(this).data('permissiontype')
+
+    function changePermission(e) {
+        const menuId = $(e).data('idmenu');
+        const roleId = $(e).data('idrole');
+        const permission = $(e).data('permissiontype')
 
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -136,5 +137,7 @@ $data = ['role_id' => $role_id, 'menu_id' => $m->id];
                 $('#accessModal').modal('toggle');
             }
         })
-    });
+    };
+
+
 </script>

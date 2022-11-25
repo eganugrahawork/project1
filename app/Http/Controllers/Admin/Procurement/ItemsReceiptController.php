@@ -182,6 +182,6 @@ class ItemsReceiptController extends Controller {
                     )");
                     // 1 diatas berarti status bernilai po
         }
-        return redirect()->back()->with('success', 'Added');
+        return response()->json(['success' => 'Item Receiving']);
     }
 }

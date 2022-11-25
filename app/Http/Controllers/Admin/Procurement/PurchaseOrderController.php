@@ -49,13 +49,15 @@ class PurchaseOrderController extends Controller {
             })->addColumn('statues', function ($model) {
                 $statues = "";
 
-                if ($model->po_status == 0 || $model->po_status != 1) {
+                if ($model->po_status == 0) {
 
                     if (Gate::allows('approve', ['/admin/procurement/purchase-order'])) {
                         $statues .= "<a onclick='approveModal($model->id_ponya)' class='btn btn-sm btn-danger btn-hover-rise me-1'><i class='bi bi-patch-exclamation'></i></i> Confirm Here</a>";
                     } else {
-                        $statues .= "<a class='btn btn-sm btn-secondary btn-hover-rise me-1 '><i class='bi bi-question-octagon'></i>Not Confirmed</a>";
+                        $statues .= "<a class='btn btn-sm btn-secondary btn-hover-rise me-1 '><i class='bi bi-question-octagon'></i>Pending</a>";
                     }
+                } elseif ($model->po_status == 2) {
+                    $statues .= "<a class='btn btn-sm btn-muted btn-hover-rise me-1'><i class='bi bi-x-octagon'></i></i> Canceled</a>";
                 } else {
                     $statues .= "<a class='btn btn-sm btn-primary btn-hover-rise me-1'><i class='bi bi-patch-check'></i> Confirmed</a>";
                 }
@@ -119,19 +121,19 @@ class PurchaseOrderController extends Controller {
         return response()->json(['success' => 'Data Approved']);
     }
 
-    public function reject(Request $request){
-        $user_rejecting = auth()->user()->username;
-        $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
+    public function reject(Request $request) {
+        //         $user_rejecting = auth()->user()->username;
+        //         $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
 
-// BELUM QUERYNYA
-        UserActivity::create([
-            'id_user' => auth()->user()->id,
-            'menu' => "Rejected PO",
-            'aktivitas' => "Rejected PO",
-            'keterangan' => "Rejected PO " . $info[0]->number_po
-        ]);
+        // // BELUM QUERYNYA
+        //         UserActivity::create([
+        //             'id_user' => auth()->user()->id,
+        //             'menu' => "Rejected PO",
+        //             'aktivitas' => "Rejected PO",
+        //             'keterangan' => "Rejected PO " . $info[0]->number_po
+        //         ]);
 
-        NotifEvent::dispatch(auth()->user()->name . ' Rejected PO ' . $info[0]->number_po);
+        // NotifEvent::dispatch(auth()->user()->name . ' Rejected PO ' . $info[0]->number_po);
         return response()->json(['success' => 'Data Rejected']);
     }
 
@@ -308,7 +310,7 @@ class PurchaseOrderController extends Controller {
         ]);
         NotifEvent::dispatch(auth()->user()->name . ' Added PO ' . $request->code);
 
-        return redirect('/admin/procurement/purchase-order')->with('success', 'Purchase Order Added');
+        return response()->json(['success', 'Purchase Order Added']);
     }
 
     public function update(Request $request) {
@@ -361,7 +363,7 @@ class PurchaseOrderController extends Controller {
                     ]);
                 }
             } else {
-                return redirect('/admin/procurement/purchase-order')->with(['fail' => 'Purchase Order Fail to Edit, The Items Cannot Null']);
+                return response()->json(['fail' => 'Purchase Order Fail to Edit, The Items Cannot Null']);
             }
         }
         UserActivity::create([
@@ -372,7 +374,7 @@ class PurchaseOrderController extends Controller {
         ]);
         NotifEvent::dispatch(auth()->user()->name . ' Edit PO ' . $request->code);
 
-        return redirect('/admin/procurement/purchase-order')->with('success', 'Purchase Order Edited');
+        return response()->json(['success' =>'Purchase Order Edited']);
     }
 
     public function exportpdf(Request $request) {
@@ -383,9 +385,9 @@ class PurchaseOrderController extends Controller {
 
 
         $taxable = 0;
-        $totaldiscount=0;
-        $subtotal =0;
-        $totalppn= 0;
+        $totaldiscount = 0;
+        $subtotal = 0;
+        $totalppn = 0;
         $grandtotal = 0;
         foreach ($po as $item) {
             $taxable += $item->total_price;

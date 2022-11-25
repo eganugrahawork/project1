@@ -2,19 +2,13 @@
     <h3>Add Purchase Order</h3>
 </div>
  <hr class="border border-dark border-2 opacity-50">
-<form id="add-form" class="form" action="/admin/procurement/purchase-order/store" method="post">
+<form id="add-form" class="form">
     @csrf
     <div class="row">
         <div class="col-lg-6">
             <div class="fv-row mb-7">
                 <label class="fw-bold fs-6 mb-2">Number Po</label>
                 <input type="text" id="code" name="code" value="{{ $code }}" readonly class="form-control form-control-white mb-3 mb-lg-0"  required/>
-            </div>
-            <div class="fv-row mb-7">
-                <div class="">
-                    <label class="fw-bold fs-6 mb-2">Order Date</label>
-                </div>
-                <input type="text" name="order_date" id="order_date"  class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Partners</label>
@@ -71,6 +65,12 @@
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Description</label>
                 <textarea type="text" name="description" id="description" class="form-control form-control-solid mb-3 mb-lg-0"  required></textarea>
+            </div>
+            <div class="fv-row mb-7">
+                <div class="">
+                    <label class="fw-bold fs-6 mb-2">Order Date</label>
+                </div>
+                <input type="text" name="order_date" id="order_date"  class="form-control form-control-solid mb-3 mb-lg-0"  required/>
             </div>
         </div>
         <div class="col-lg-12"id="itemsAddList">
@@ -171,11 +171,6 @@
 
 
 <script>
-    // $('form').submit(function(){
-    // $('#btn-add').hide()
-    // $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-    // })
-
 
     $('#partner_id').on('change', function(){
         $('#item_id').html("<option>Loading....</option>")
@@ -323,5 +318,28 @@
          $('#totaldiscount').val(totaldiscount);
          $('#taxable').val(taxable);
     }
+
+    $('#add-form').submit(function(event) {
+        event.preventDefault();
+        $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span>')
+        $.ajax({
+            url: "{{ url('/admin/procurement/purchase-order/store') }}",
+            type: 'POST',
+            data: $('#add-form').serialize(), // Remember that you need to have your csrf token included
+            dataType: 'json',
+            success: function(response) {
+                Swal.fire(
+                    'Success',
+                    response.success,
+                    'success'
+                )
+                $('#mainmodal').modal('toggle')
+                tablePo.ajax.reload()
+            },
+            error: function(response) {
+                // Handle error
+            }
+        });
+    });
 
 </script>

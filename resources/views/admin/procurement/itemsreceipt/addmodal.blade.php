@@ -1,4 +1,4 @@
-<form id="kt_modal_add_user_form" class="form" action="/admin/procurement/items-receipt/store" method="post">
+<form id="addItemReceipt" class="form" >
     @csrf
     <div class="row">
         <div class="col-lg-6">
@@ -114,5 +114,28 @@
         })
 
     })
+
+    $('#addItemReceipt').submit(function(event) {
+        event.preventDefault();
+        $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span>')
+        $.ajax({
+            url: "{{ url('/admin/procurement/items-receipt/store') }}",
+            type: 'post',
+            data: $('#addItemReceipt').serialize(), // Remember that you need to have your csrf token included
+            dataType: 'json',
+            success: function(response) {
+                Swal.fire(
+                    'Success',
+                    response.success,
+                    'success'
+                )
+                $('#mainmodal').modal('toggle')
+                tableItemsReceipt.ajax.reload()
+            },
+            error: function(response) {
+                // Handle error
+            }
+        });
+    });
 
 </script>
