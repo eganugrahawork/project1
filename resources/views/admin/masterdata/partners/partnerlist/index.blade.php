@@ -70,7 +70,7 @@
 
 {{-- Main Modal --}}
 <div class="modal fade" id="mainmodal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-1000px">
+    <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header" id="mainmodal_header">
                 <h2 class="fw-bolder">Partners</h2>
@@ -90,27 +90,6 @@
 </div>
 {{-- End Main Modal --}}
 
-{{-- typepartnermodal Modal --}}
-<div class="modal fade" id="typepartnermodal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-400px">
-        <div class="modal-content">
-            <div class="modal-header" id="typepartnermodal_header">
-                <h2 class="fw-bolder">Partners Type</h2>
-                <div class="btn btn-icon btn-sm btn-active-icon-primary" onclick="tutupModalType()">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
-                        </svg>
-                    </span>
-                </div>
-            </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="kontentypepartnermodal">
-            </div>
-        </div>
-    </div>
-</div>
-{{-- End typepartnermodal Modal --}}
 
 
 

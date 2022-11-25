@@ -40,7 +40,7 @@ class UsersController extends Controller
     public function index(){
         $role = UserRole::all();
         $region = Region::all();
-        return view('admin.users.index', ['title' => 'Users','role' => $role, 'region' => $region]);
+        return view('admin.users.index', ['title' => 'Users']);
     }
 
     public function list(Request $request){
@@ -84,7 +84,7 @@ class UsersController extends Controller
     }
 
     public function store(Request $request){
-
+        // dd($request);
 
         if($request->file('image')){
             $request->image = $request->file('image')->store('img-users');
@@ -118,8 +118,15 @@ class UsersController extends Controller
             'aktivitas' => "Tambah",
             'keterangan' => "Tambah Data ". $request->email
         ]);
-        return redirect('/admin/users')->with('success', 'User Baru ditambahkan');
+        return response()->json(['success'=>'Data ditambahkan']);
 
+    }
+
+    public function addmodal(Request $request){
+        $user = User::where(['id' =>$request->id])->first();
+        $role = UserRole::all();
+        $region = Region::all();
+        return view('admin.users.addmodal', ['title' => 'Create User','role' => $role, 'region' => $region]);
     }
 
     public function edit(Request $request){
@@ -170,7 +177,7 @@ class UsersController extends Controller
         ]);
 
 
-        return redirect('/admin/users')->with('success', 'User Berhasil di Update');
+        return response()->json(['success' => 'Users Updated']);
 
     }
 
@@ -215,9 +222,9 @@ class UsersController extends Controller
         $user = User::where(['email'=> $request->value])->first();
 
         if($user){
-            return response()->json(['success'=>false]);
+            return response()->json(['success'=>'false']);
         }else{
-            return response()->json(['success'=>true]);
+            return response()->json(['success'=>'true']);
         }
     }
 

@@ -160,6 +160,8 @@ Route::middleware(['auth'])->controller(RegionController::class)->group(function
 Route::middleware(['auth'])->controller(UsersController::class)->group(function(){
     Route::get('admin/users', 'index');
     Route::get('admin/users/list', 'list');
+    Route::get('admin/users/addmodal', 'addmodal');
+    Route::get('admin/users/editmodal/{id}', 'editmodal');
     Route::get('admin/users/show/{id}', 'show');
     Route::get('admin/users/create', 'create');
     Route::post('admin/users/store', 'store');
@@ -168,7 +170,6 @@ Route::middleware(['auth'])->controller(UsersController::class)->group(function(
     Route::get('admin/users/delete/{id}', 'destroy');
     Route::post('admin/users/checkusername', 'checkusername');
     Route::post('admin/users/checkemail', 'checkemail');
-    Route::get('admin/users/editmodal/{id}', 'editmodal');
 });
 //Users END
 
