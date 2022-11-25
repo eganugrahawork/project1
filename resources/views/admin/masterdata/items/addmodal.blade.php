@@ -1,25 +1,25 @@
-<form id="kt_modal_add_user_form" class="form" action="/admin/masterdata/items/store" method="post">
+<form id="add-form" class="form" >
     @csrf
     <div class="row">
         <div class="col-lg-6">
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Code of Item</label>
-                <input type="text" name="item_code" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="text" name="item_code" class="form-control form-control-solid mb-3 mb-lg-0" required />
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Name of Item</label>
-                <input type="text" name="item_name" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                <input type="text" name="item_name" class="form-control form-control-solid mb-3 mb-lg-0" required />
             </div>
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Item Description</label>
-                <textarea  name="item_description" class="form-control form-control-solid mb-3 mb-lg-0"  required></textarea>
+                <textarea name="item_description" class="form-control form-control-solid mb-3 mb-lg-0" required></textarea>
             </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Units</label>
                 <div class="col-lg-6">
                     <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="uom_id" required>
                         @foreach ($uom as $uom)
-                        <option value="{{ $uom->id }}">{{ $uom->name }}</option>
+                            <option value="{{ $uom->id }}">{{ $uom->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -35,7 +35,8 @@
             <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">Unit Box</label>
                 <div class="col-lg-6">
-                    <input type="number" name="unit_box" class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                    <input type="number" name="unit_box" class="form-control form-control-solid mb-3 mb-lg-0"
+                        required />
                 </div>
             </div>
             <div class="fv-row mb-7">
@@ -43,7 +44,7 @@
                 <div class="col-lg-6">
                     <select class="form-select form-select-solid " name="type_id" required>
                         @foreach ($type as $type)
-                        <option value="{{ $type->id }}">{{ $type->name_type }}</option>
+                            <option value="{{ $type->id }}">{{ $type->name_type }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -60,11 +61,11 @@
             </div>
             <div class="fv-row mb-7">
                 <label class="form-label fw-bold required">Partners</label>
-            <select class="form-select form-select-solid mb-3 mb-lg-0 select-2" name="partner_id" required>
-                @foreach ($partner as $p)
-                    <option value="{{ $p->id }}">{{ $p->name }}</option>
-                @endforeach
-            </select>
+                <select class="form-select form-select-solid mb-3 mb-lg-0 select-2" name="partner_id" required>
+                    @foreach ($partner as $p)
+                        <option value="{{ $p->id }}">{{ $p->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Status</label>
@@ -81,23 +82,40 @@
 
 
 
-        <div class="d-flex justify-content-end" id="loadingnya">
-            <button class="btn btn-sm btn-primary" id="btn-add">Add Items</button>
-        </div>
+    <div class="d-flex justify-content-end" id="loadingnya">
+        <button class="btn btn-sm btn-primary" id="btn-add">Add Items</button>
+    </div>
 </form>
 
 <script>
     $(document).ready(function() {
-           $('.select-2').select2({
-               dropdownParent: $('#mainmodal')
-           });
+        $('.select-2').select2({
+            dropdownParent: $('#mainmodal')
+        });
 
-   });
+    });
 </script>
 <script>
-    $('form').submit(function(){
-    $('#btn-add').hide()
-    $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-    // $('#btn-custom').attr("disabled", 'disabled')
-})
+    $('#add-form').on('submit', function(e) {
+        e.preventDefault();
+
+        $('#loadingnya').html(
+            '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+
+        $.ajax({
+            type: "POST",
+            url: "{{ url('/admin/masterdata/items/store') }}",
+            data: $('#add-form').serialize(),
+            dataType: 'json',
+            success: function(response) {
+                Swal.fire(
+                    'Success',
+                    response.success,
+                    'success'
+                )
+                $('#mainmodal').modal('toggle');
+                itemsTable.ajax.reload(null, false);
+            }
+        })
+    });
 </script>

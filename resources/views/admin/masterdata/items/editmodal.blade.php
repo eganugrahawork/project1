@@ -1,4 +1,4 @@
-<form id="kt_modal_add_user_form" class="form" action="/admin/masterdata/items/update" method="post">
+<form id="update-form" class="form" >
     @csrf
     <input type="hidden" value="{{ $item->id }}" name="id">
     <div class="row">
@@ -24,7 +24,7 @@
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Units</label>
                 <div class="col-lg-6">
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0" name="uom_id" required>
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="uom_id" required>
                         @foreach ($uom as $uom)
                         <option value="{{ $uom->id }}" @if ($item->uom_id == $uom->id)
                             selected
@@ -44,7 +44,7 @@
             <div class="fv-row mb-7">
                 <label class="required form-label fw-bold">Item Type</label>
                 <div class="col-lg-6">
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0" name="type_id" required>
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="type_id" required>
                         @foreach ($type as $type)
                         <option value="{{ $type->id }}" @if ($type->id == $item->type_id)
                             selected
@@ -71,7 +71,7 @@
             </div>
             <div class="fv-row mb-7">
                 <label class="form-label fw-bold required">Partner</label>
-            <select class="form-select  form-select-solid mb-3 mb-lg-0" name="partner_id" required>
+            <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="partner_id" required>
                 @foreach ($partner as $p)
                     <option value="{{ $p->id }}"  @if ($item->partner_id == $p->id)
                         selected
@@ -104,10 +104,30 @@
 
 
 <script>
-    $('form').submit(function(){
-    $('#btn-update').hide()
-    $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-    // $('#btn-custom').attr("disabled", 'disabled')
-})
+
+$('.select-2').select2()
+
+   $('#update-form').on('submit', function(e) {
+        e.preventDefault();
+
+        $('#loadingnya').html(
+            '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+
+        $.ajax({
+            type: "POST",
+            url: "{{ url('/admin/masterdata/items/update') }}",
+            data: $('#update-form').serialize(),
+            dataType: 'json',
+            success: function(response) {
+                Swal.fire(
+                    'Success',
+                    response.success,
+                    'success'
+                )
+                $('#mainmodal').modal('toggle');
+                itemsTable.ajax.reload(null, false);
+            }
+        })
+    });
 </script>
 

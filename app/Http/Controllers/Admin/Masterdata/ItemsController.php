@@ -62,7 +62,7 @@ class ItemsController extends Controller {
             'keterangan' => "Tambah items " . $request->item_name
         ]);
         NotifEvent::dispatch(auth()->user()->name . ' menambahkan Items ' . $request->item_name);
-        return redirect()->back()->with('success', 'Data Item Ditambahkan !');
+        return response()->json(['success' => 'Data Item Ditambahkan !']);
     }
 
     public function infomodal(Request $request) {
@@ -71,7 +71,7 @@ class ItemsController extends Controller {
         return view('admin.masterdata.items.infomodal', ['item' => $item]);
     }
 
-    public function getinfoitemreceipt(Request $request){
+    public function getinfoitemreceipt(Request $request) {
         // return  Datatables::of(ItemReceipt::where([]))->addIndexColumn()
         // ->addColumn('action', function ($model) {
 
@@ -109,7 +109,7 @@ class ItemsController extends Controller {
             'keterangan' => "Ubah items " . $request->item_name
         ]);
         NotifEvent::dispatch(auth()->user()->name . ' mengubah Items menjadi ' . $request->item_name);
-        return redirect()->back()->with('success', 'Data Item diUpdate !');
+        return response()->json(['success' => 'Data Item diUpdate !']);
     }
 
     public function destroy(Request $request) {

@@ -1,5 +1,5 @@
 <form id="update-form">
-    {{-- @csrf --}}
+    @csrf
     <div class="row">
         <div class="col-lg-6">
         <div class="fv-row mb-7">
@@ -72,4 +72,29 @@
             <button class="btn btn-sm btn-primary" id="btn-update">Update Partners</button>
         </div>
 </form>
+
+<script>
+    $('#update-form').on('submit', function(e){
+            e.preventDefault();
+
+            $('#btn-update').hide()
+            $('#loadingnya').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('/admin/masterdata/partners/update') }}",
+                data: $('#update-form').serialize(),
+                dataType: 'json',
+                success:function(response){
+                    Swal.fire(
+                        'Success',
+                        response.success,
+                        'success'
+                    )
+                    $('#mainmodal').modal('toggle');
+                    partnerTable.ajax.reload(null, false);
+                }
+            })
+        })
+</script>
 

@@ -39,7 +39,7 @@
                             </span>
                             <!--end::Svg Icon-->
                             <input type="text" id="searchItemsTable"
-                                class="form-control form-control-solid w-250px ps-15" placeholder="Items Search" />
+                                class="form-control form-control-solid w-250px ps-15" placeholder="Search.." />
                         </div>
                     </div>
                     <div class="card-toolbar">
@@ -57,12 +57,12 @@
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th class="min-w-20px">No
                                 </th>
-                                <th class="min-w-125px">Items Code</th>
-                                <th class="min-w-125px">Items Name</th>
-                                <th class="min-w-125px">Description</th>
-                                <th class="min-w-125px">Unit</th>
-                                <th class="min-w-70px">Partner</th>
-                                <th class="min-w-70px">Action</th>
+                                <th class="min-w-50px">Items Code</th>
+                                <th class="min-w-50px">Items Name</th>
+                                <th class="min-w-50px">Description</th>
+                                <th class="min-w-50px">Unit</th>
+                                <th class="min-w-50px">Partner</th>
+                                <th class="min-w-50px">Action</th>
                             </tr>
                         </thead>
                         <tbody class="fw-bold text-gray-600">
