@@ -30,7 +30,7 @@
     <!-- Variables CSS Files. Uncomment your preferred color scheme -->
     <link href="/herobiz/assets/css/variables.css" rel="stylesheet">
     <!-- <link href="/herobiz/assets/css/variables-blue.css" rel="stylesheet"> -->
-    <!-- <link href="/herobiz/assets/css/variables-green.css" rel="stylesheet"> -->
+    {{-- <link href="/herobiz/assets/css/variables-green.css" rel="stylesheet"> --}}
     <!-- <link href="/herobiz/assets/css/variables-orange.css" rel="stylesheet"> -->
     <!-- <link href="/herobiz/assets/css/variables-purple.css" rel="stylesheet"> -->
     <!-- <link href="/herobiz/assets/css/variables-red.css" rel="stylesheet"> -->
@@ -39,12 +39,7 @@
     <!-- Template Main CSS File -->
     <link href="/herobiz/assets/css/main.css" rel="stylesheet">
 
-    <!-- =======================================================
-  * Template Name: HeroBiz - v2.3.1
-  * Template URL: https://bootstrapmade.com/herobiz-bootstrap-business-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
 </head>
 
 <body>
@@ -61,20 +56,20 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-
+                    <li><a class="nav-link scrollto" href="#hero-animated">Home</a></li>
                     <li class="dropdown"><a href="#"><span>Produk</span> <i
                                 class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
-                            <li><a href="#" class="active">Point Of Sales</a></li>
-                            <li><a href="#">Inventory of Manufacture</a></li>
-                            <li><a href="#">Home 3 - index-3.html</a></li>
-                            <li><a href="#">Home 4 - index-4.html</a></li>
+                            <li><a href="#">Point Of Sales</a></li>
+                            <li><a href="#">Inventory</a></li>
+                            <li><a href="#">Manufacture</a></li>
                         </ul>
                     </li>
 
-                    <li><a class="nav-link scrollto" href="#about">About</a></li>
-                    <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                    <li><a class="nav-link scrollto" href="#team">Team</a></li>
+                    <li><a class="nav-link scrollto" href="#about">Tentang</a></li>
+                    <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
+                    <li><a class="nav-link scrollto" href="#pricing">Price</a></li>
+                    <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
                     {{--
           <li class="dropdown megamenu"><a href="#"><span>Mega Menu</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
@@ -117,7 +112,6 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li> --}}
-                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle d-none"></i>
             </nav><!-- .navbar -->
@@ -581,7 +575,7 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-header">
-                    <h2>Produk Kami</h2>
+                    <h2>Layanan Kami</h2>
                     <p>Berkembang dan Sukses bersama Loccana.</p>
                 </div>
 
@@ -812,36 +806,8 @@
                         <div class="pricing-item featured">
 
                             <div class="pricing-header">
-                                <h3>Pro POS</h3>
-                                <h4><sup>Rp</sup>29<span> / month</span></h4>
-                            </div>
-
-                            <ul>
-                                <li><i class="bi bi-dot"></i> <span>Cashier</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Transaction</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Report</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Stock</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Utilities</span></li>
-                                <li class="na"><i class="bi bi-x"></i> <span>PPC </span>
-                                <li ><i class="bi bi-dot"></i> <span>Piutang </span>
-                                </li>
-                                <li ><i class="bi bi-dot"></i> <span>Finance</span></li>
-                                <li class="na"><i class="bi bi-x"></i> <span>Finish Good </span>
-                            </ul>
-
-                            <div class="text-center mt-auto">
-                                <a href="#" class="buy-btn">Buy Now</a>
-                            </div>
-
-                        </div>
-                    </div><!-- End Pricing Item -->
-
-                    <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="600">
-                        <div class="pricing-item">
-
-                            <div class="pricing-header">
                                 <h3>Standard ERP</h3>
-                                <h4><sup>Rp</sup>499<span> / month</span></h4>
+                                <h4><sup>Rp</sup>29<span> / month</span></h4>
                             </div>
 
                             <ul>
@@ -855,6 +821,35 @@
                                 </li>
                                 <li ><i class="bi bi-dot"></i> <span>Finance</span></li>
                                 <li><i class="bi bi-dot"></i> <span>Finish Good </span>
+                            </ul>
+
+
+                            <div class="text-center mt-auto">
+                                <a href="#" class="buy-btn">Buy Now</a>
+                            </div>
+
+                        </div>
+                    </div><!-- End Pricing Item -->
+
+                    <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="600">
+                        <div class="pricing-item">
+
+                            <div class="pricing-header">
+                                <h3>Pro POS</h3>
+                                <h4><sup>Rp</sup>499<span> / month</span></h4>
+                            </div>
+
+                            <ul>
+                                <li><i class="bi bi-dot"></i> <span>Cashier</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Transaction</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Report</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Stock</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Utilities</span></li>
+                                <li class="na"><i class="bi bi-x"></i> <span>PPC </span>
+                                <li ><i class="bi bi-dot"></i> <span>Piutang </span>
+                                </li>
+                                <li ><i class="bi bi-dot"></i> <span>Finance</span></li>
+                                <li class="na"><i class="bi bi-x"></i> <span>Finish Good </span>
                             </ul>
 
                             <div class="text-center mt-auto">
@@ -1046,9 +1041,8 @@
         <section id="contact" class="contact">
             <div class="container">
                 <div class="section-header">
-                    <h2>Contact Us</h2>
-                    <p>Ea vitae aspernatur deserunt voluptatem impedit deserunt magnam occaecati dssumenda quas ut ad
-                        dolores adipisci aliquam.</p>
+                    <h2>Kontak Kami</h2>
+                    <p></p>
                 </div>
 
             </div>
