@@ -10,7 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="/herobiz/assets/img/favicon.png" rel="icon">
+    <link rel="icon" href="{{ asset('storage/logos/logoputih.png') }}"/>
     <link href="/herobiz/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
@@ -55,7 +55,7 @@
 
             <a href="index.html" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="/herobiz/assets/img/logo.png" alt=""> -->
+                 {{-- <img src="/herobiz/assets/img/logo.png" alt=""> --}}
                 <h1>Loccana<span>.</span></h1>
             </a>
 
@@ -135,7 +135,7 @@
             <p>Solusi untuk pencatatan Akuntansi bisnis online, manufacture, restoran, coffe shop dan produksi lainnya.
             </p>
             <div class="d-flex">
-                <a href="#about" class="btn btn-primary scrollto">Tentang Kami</a>
+                <a href="#contact" class="btn btn-primary scrollto">Kontak Kami</a>
             </div>
         </div>
     </section>
