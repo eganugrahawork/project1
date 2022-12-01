@@ -125,11 +125,14 @@
         <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
             data-aos="zoom-out">
             <img src="/herobiz/assets/img/hero-carousel/hero-carousel-3.svg" class="img-fluid animated">
-            <h2>Selamat datang di <span class="text-dark fw-bold">Loccana</span></h2>
-            <p>Solusi untuk pencatatan Akuntansi bisnis online, manufacture, restoran, coffe shop dan produksi lainnya.
-            </p>
+            <h2><span class="text-dark fw-bold"> Solusi pintar </span> untuk menjalankan bisnis anda secara sederhana dan <span class="text-dark fw-bold">mudah</span> digunakan.</h2>
             <div class="d-flex">
-                <a href="#contact" class="btn btn-primary scrollto">Kontak Kami</a>
+                <div class="px-2">
+                    <a href="#contact" class="btn btn-primary btn-lg">Kontak Kami</a>
+                </div>
+                <div class="px-2">
+                    <a href="/login" class="btn btn-outline btn-outline-dark btn-lg">Coba Gratis</a>
+                </div>
             </div>
         </div>
     </section>
