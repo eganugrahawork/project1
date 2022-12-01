@@ -10,7 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link rel="icon" href="/herobiz/assets/img/brand-logo/thumb.png" />
+    <link rel="icon" href="{{ asset('/herobiz/assets/img/brand-logo/thumb.png') }}" />
     <link href="/herobiz/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
@@ -108,7 +108,7 @@
                         <div class="service-item position-relative">
                             <div class="icon"><i class="bi bi-activity icon"></i></div>
                             <h4><a href="" class="stretched-link">Monitoring Produk Lebih Akurat</a></h4>
-                            <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                            <p>Memastikan pelaksanaan kegiatan tetap pada jalurnya (sesuai pedoman dan perencanaan program).</p>
                         </div>
                     </div><!-- End Service Item -->
 
@@ -116,7 +116,7 @@
                         <div class="service-item position-relative">
                             <div class="icon"><i class="bi bi-bounding-box-circles icon"></i></div>
                             <h4><a href="" class="stretched-link">Sistem Database Yang Terpusat</a></h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                            <p>Informasi (data) disimpan di lokasi terpusat dan pengguna dari lokasi berbeda dapat mengakses data ini.</p>
                         </div>
                     </div><!-- End Service Item -->
 
@@ -124,15 +124,15 @@
                         <div class="service-item position-relative">
                             <div class="icon"><i class="bi bi-calendar4-week icon"></i></div>
                             <h4><a href="" class="stretched-link">Waktu Pengolahan Data Lebih Optimal</a></h4>
-                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+                            <p>Memberikan beberapa manfaat seperti dapat meningkatkan efisiensi operasional, meningkatkan inovasi perusahaan dalam bisnis, membantu pengambilan keputusan dan masih banyak lainnya</p>
                         </div>
                     </div><!-- End Service Item -->
 
                     <div class="col-xl-3 col-md-6 d-flex" data-aos="zoom-out" data-aos-delay="600">
                         <div class="service-item position-relative">
                             <div class="icon"><i class="bi bi-broadcast icon"></i></div>
-                            <h4><a href="" class="stretched-link">Kosumisasi</a></h4>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                            <h4><a href="" class="stretched-link">Kostumisasi</a></h4>
+                            <p>Upaya untuk menyesuaikan produk dengan keinginan konsumen</p>
                         </div>
                     </div><!-- End Service Item -->
 
