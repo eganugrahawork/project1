@@ -10,7 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link rel="icon" href="{{ asset('storage/logos/logoputih.png') }}"/>
+    <link rel="icon" href="{{ asset('storage/logos/logoputih.png') }}" />
     <link href="/herobiz/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
@@ -50,8 +50,8 @@
 
             <a href="index.html" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                 {{-- <img src="/herobiz/assets/img/logo.png" alt=""> --}}
-                <h1>Loccana<span>.</span></h1>
+                <img src="/herobiz/assets/img/brand-logo/loccana.png" alt="">
+                {{-- <h1>Loccana<span>.</span></h1> --}}
             </a>
 
             <nav id="navbar" class="navbar">
@@ -125,7 +125,8 @@
         <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
             data-aos="zoom-out">
             <img src="/herobiz/assets/img/hero-carousel/hero-carousel-3.svg" class="img-fluid animated">
-            <h2><span class="text-dark fw-bold"> Solusi pintar </span> untuk menjalankan bisnis anda secara sederhana dan <span class="text-dark fw-bold">mudah</span> digunakan.</h2>
+            <h2><span class="text-dark fw-bold"> Solusi pintar </span> untuk menjalankan bisnis anda secara sederhana
+                dan <span class="text-dark fw-bold">mudah</span> digunakan.</h2>
             <div class="d-flex">
                 <div class="px-2">
                     <a href="#contact" class="btn btn-primary btn-lg">Kontak Kami</a>
@@ -315,21 +316,11 @@
 
                 <div class="clients-slider swiper">
                     <div class="swiper-wrapper align-items-center">
-                        <div class="swiper-slide"><img src="/herobiz/assets/img/clients/client-1.png"
+                        <div class="swiper-slide"><img src="/herobiz/assets/img/brand-logo/sdm-logo3.png"
                                 class="img-fluid" alt=""></div>
-                        <div class="swiper-slide"><img src="/herobiz/assets/img/clients/client-2.png"
+                        <div class="swiper-slide"><img src="/herobiz/assets/img/brand-logo/endira-logo3.png"
                                 class="img-fluid" alt=""></div>
-                        <div class="swiper-slide"><img src="/herobiz/assets/img/clients/client-3.png"
-                                class="img-fluid" alt=""></div>
-                        <div class="swiper-slide"><img src="/herobiz/assets/img/clients/client-4.png"
-                                class="img-fluid" alt=""></div>
-                        <div class="swiper-slide"><img src="/herobiz/assets/img/clients/client-5.png"
-                                class="img-fluid" alt=""></div>
-                        <div class="swiper-slide"><img src="/herobiz/assets/img/clients/client-6.png"
-                                class="img-fluid" alt=""></div>
-                        <div class="swiper-slide"><img src="/herobiz/assets/img/clients/client-7.png"
-                                class="img-fluid" alt=""></div>
-                        <div class="swiper-slide"><img src="/herobiz/assets/img/clients/client-8.png"
+                        <div class="swiper-slide"><img src="/herobiz/assets/img/brand-logo/celebit-logo3.png"
                                 class="img-fluid" alt=""></div>
                     </div>
                 </div>
@@ -820,9 +811,9 @@
                                 <li><i class="bi bi-dot"></i> <span>Stock</span></li>
                                 <li><i class="bi bi-dot"></i> <span>Utilities</span></li>
                                 <li><i class="bi bi-dot"></i> <span>PPC </span>
-                                <li ><i class="bi bi-dot"></i> <span>Piutang </span>
+                                <li><i class="bi bi-dot"></i> <span>Piutang </span>
                                 </li>
-                                <li ><i class="bi bi-dot"></i> <span>Finance</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Finance</span></li>
                                 <li><i class="bi bi-dot"></i> <span>Finish Good </span>
                             </ul>
 
@@ -849,9 +840,9 @@
                                 <li><i class="bi bi-dot"></i> <span>Stock</span></li>
                                 <li><i class="bi bi-dot"></i> <span>Utilities</span></li>
                                 <li class="na"><i class="bi bi-x"></i> <span>PPC </span>
-                                <li ><i class="bi bi-dot"></i> <span>Piutang </span>
+                                <li><i class="bi bi-dot"></i> <span>Piutang </span>
                                 </li>
-                                <li ><i class="bi bi-dot"></i> <span>Finance</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Finance</span></li>
                                 <li class="na"><i class="bi bi-x"></i> <span>Finish Good </span>
                             </ul>
 
@@ -1057,15 +1048,14 @@
                     <div class="col-lg-4">
 
                         <div class="info">
-                            <h3>Get in touch</h3>
-                            <p>Et id eius voluptates atque nihil voluptatem enim in tempore minima sit ad mollitia
-                                commodi minus.</p>
+                            <h3>Punya Pertanyaan ?</h3>
+                            <p>Tim kami selalu siap dalam 1x8 jam untuk melayani.</p>
 
                             <div class="info-item d-flex">
                                 <i class="bi bi-geo-alt flex-shrink-0"></i>
                                 <div>
-                                    <h4>Location:</h4>
-                                    <p>A108 Adam Street, New York, NY 535022</p>
+                                    <h4>Lokasi :</h4>
+                                    <p>PT. Swamedia Informatika Jl. Sidomulyo No. 29-31, Bandung, Jawa Barat</p>
                                 </div>
                             </div><!-- End Info Item -->
 
@@ -1073,7 +1063,7 @@
                                 <i class="bi bi-envelope flex-shrink-0"></i>
                                 <div>
                                     <h4>Email:</h4>
-                                    <p>info@example.com</p>
+                                    <p>@gmail.com</p>
                                 </div>
                             </div><!-- End Info Item -->
 
@@ -1081,7 +1071,7 @@
                                 <i class="bi bi-phone flex-shrink-0"></i>
                                 <div>
                                     <h4>Call:</h4>
-                                    <p>+1 5589 55488 55</p>
+                                    <p>+6285719160602</p>
                                 </div>
                             </div><!-- End Info Item -->
 
@@ -1135,10 +1125,11 @@
                         <div class="footer-info">
                             <h3>Loccana</h3>
                             <p>
-                                Cikutra <br>
-                                Bandung, Indonesian<br><br>
-                                <strong>Phone:</strong> +62xxx<br>
-                                <strong>Email:</strong> xxx<br>
+                                PT. Swamedia Informatika <br>
+                                Jl. Sidomulyo No. 29-31,<br>
+                                Bandung, Jawa Barat <br>
+                                <strong>Phone:</strong> +6285719160602<br>
+                                <strong>Email:</strong> @gmail.com<br>
                             </p>
                         </div>
                     </div>
@@ -1146,28 +1137,27 @@
                     <div class="col-lg-2 col-md-6 footer-links">
                         <h4>Useful Links</h4>
                         <ul>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                            <li><i class="bi bi-chevron-right"></i> <a href="#hero-animated">Home</a></li>
+                            <li><i class="bi bi-chevron-right"></i> <a href="#about">Tentang Kami</a></li>
+                            <li><i class="bi bi-chevron-right"></i> <a href="#services">Pelayanan</a></li>
+                            <li><i class="bi bi-chevron-right"></i> <a href="#team">Team</a></li>
                         </ul>
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Our Services</h4>
                         <ul>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                            <li><i class="bi bi-chevron-right"></i> <a href="#services">Web Design</a></li>
+                            <li><i class="bi bi-chevron-right"></i> <a href="#services">Web Development</a></li>
+                            <li><i class="bi bi-chevron-right"></i> <a href="#services">Product Management</a></li>
+                            <li><i class="bi bi-chevron-right"></i> <a href="#services">Marketing</a></li>
+                            <li><i class="bi bi-chevron-right"></i> <a href="#services">Graphic Design</a></li>
                         </ul>
                     </div>
 
                     <div class="col-lg-4 col-md-6 footer-newsletter">
                         <h4>Our Newsletter</h4>
-                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                        <p>@gmail.com</p>
                         <form action="" method="post">
                             <input type="email" name="email"><input type="submit" value="Subscribe">
                         </form>
@@ -1184,14 +1174,14 @@
 
                 <div class="d-flex flex-column align-items-center align-items-lg-start">
                     <div class="copyright">
-                        &copy; Copyright <strong><span>HeroBiz</span></strong>. All Rights Reserved
+                        &copy; Copyright <strong><span>Loccana</span></strong>. All Rights Reserved
                     </div>
                     <div class="credits">
                         <!-- All the links in the footer should remain intact. -->
                         <!-- You can delete the links only if you purchased the pro version. -->
                         <!-- Licensing information: https://bootstrapmade.com/license/ -->
                         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
-                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                        Designed by <a href="#team">Loccana Team</a>
                     </div>
                 </div>
 
