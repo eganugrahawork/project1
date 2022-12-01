@@ -10,7 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link rel="icon" href="{{ asset('storage/logos/logoputih.png') }}" />
+    <link rel="icon" href="/herobiz/assets/img/brand-logo/thumb.png" />
     <link href="/herobiz/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
@@ -49,7 +49,6 @@
         <div class="container-fluid d-flex align-items-center justify-content-between">
 
             <a href="index.html" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
-                <!-- Uncomment the line below if you also wish to use an image logo -->
                 <img src="/herobiz/assets/img/brand-logo/loccana.png" alt="">
                 {{-- <h1>Loccana<span>.</span></h1> --}}
             </a>
@@ -70,48 +69,7 @@
                     <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
                     <li><a class="nav-link scrollto" href="#pricing">Price</a></li>
                     <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
-                    {{--
-          <li class="dropdown megamenu"><a href="#"><span>Mega Menu</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              <li>
-                <a href="#">Column 1 link 1</a>
-                <a href="#">Column 1 link 2</a>
-                <a href="#">Column 1 link 3</a>
-              </li>
-              <li>
-                <a href="#">Column 2 link 1</a>
-                <a href="#">Column 2 link 2</a>
-                <a href="#">Column 3 link 3</a>
-              </li>
-              <li>
-                <a href="#">Column 3 link 1</a>
-                <a href="#">Column 3 link 2</a>
-                <a href="#">Column 3 link 3</a>
-              </li>
-              <li>
-                <a href="#">Column 4 link 1</a>
-                <a href="#">Column 4 link 2</a>
-                <a href="#">Column 4 link 3</a>
-              </li>
-            </ul>
-          </li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li> --}}
+
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle d-none"></i>
             </nav><!-- .navbar -->
@@ -1080,7 +1038,7 @@
                     </div>
 
                     <div class="col-lg-8">
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <form onsubmit="sendEmail()" class="php-email-form">
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <input type="text" name="name" class="form-control" id="name"
@@ -1091,18 +1049,18 @@
                                         placeholder="Your Email" required>
                                 </div>
                             </div>
+                            <div class="col-lg-6 mt-3">
+                                <input type="text" class="form-control" name="nohp" id="nohp"
+                                    placeholder="Nomor Handphone" required>
+                            </div>
                             <div class="form-group mt-3">
                                 <input type="text" class="form-control" name="subject" id="subject"
                                     placeholder="Subject" required>
                             </div>
                             <div class="form-group mt-3">
-                                <textarea class="form-control" name="message" placeholder="Message" required></textarea>
+                                <textarea class="form-control" name="message" id="message" placeholder="Message" required></textarea>
                             </div>
-                            <div class="my-3">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
-                            </div>
+
                             <div class="text-center"><button type="submit">Send Message</button></div>
                         </form>
                     </div><!-- End Contact Form -->
@@ -1177,10 +1135,6 @@
                         &copy; Copyright <strong><span>Loccana</span></strong>. All Rights Reserved
                     </div>
                     <div class="credits">
-                        <!-- All the links in the footer should remain intact. -->
-                        <!-- You can delete the links only if you purchased the pro version. -->
-                        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
                         Designed by <a href="#team">Loccana Team</a>
                     </div>
                 </div>
@@ -1211,8 +1165,38 @@
     <script src="/herobiz/assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="/herobiz/assets/vendor/php-email-form/validate.js"></script>
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Template Main JS File -->
     <script src="/herobiz/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        function sendEmail() {
+            var templateParams = {
+                from_name: document.getElementById('name').value,
+                from_email: document.getElementById('email').value,
+                from_nohp: document.getElementById('nohp').value,
+                message: document.getElementById('message').value
+            };
+
+            emailjs.send('service_9ryv19d', 'template_xcknhhy', templateParams, 'P-zRLmHcpN0ftofjI');
+
+            Swal.fire({
+                title: 'Email Sudah Dikirim.',
+                text: "Mohon Tunggu Balasan Dari Kami Ya.",
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Oke'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload();
+                }
+            })
+
+        }
+    </script>
 
 </body>
 
