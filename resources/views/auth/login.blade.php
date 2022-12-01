@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
-    <link rel="icon" href="{{ asset('storage/logos/logoputih.png') }}"/>
+    <link rel="icon" href="{{ asset('/metronic/assets/media/logos/thumb.png') }}"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
 
-    <img src="{{ asset('storage/logos/loccanalogo.png') }}" id="img-responsive" >
+    <img src="{{ asset('/metronic/assets/media/logos/loccana.png') }}" id="img-responsive" >
     <div class="success-message" data-successmessage="{{ session('success') }}"></div>
     <div class="fail-message" data-failmessage="{{ session('fail') }}"></div>
     <div class="box">

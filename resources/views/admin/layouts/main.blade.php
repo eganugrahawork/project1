@@ -18,7 +18,7 @@
     <meta property="og:url" content="https://keenthemes.com/metronic" />
     <meta property="og:site_name" content="Keenthemes | Metronic" />
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-    <link rel="icon" type="image/gif" href="{{ asset('storage/logos/logoputih.png') }}" />
+    <link rel="icon" type="image/gif" href="{{ asset('/metronic/assets/media/logos/thumb.png') }}" />
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>

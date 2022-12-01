@@ -4,7 +4,7 @@
     <!--begin::Container-->
     <div class="container-xxl d-flex flex-grow-1 flex-stack">
         <div class="d-flex align-items-center me-5">
-            <img alt="Logo" src="{{ asset('storage/logos/loccanalogo.png') }}" class="h-30px h-lg-40px" />
+            <img alt="Logo" src="{{ asset('/metronic/assets/media/logos/loccana.png') }}" class="h-30px h-lg-40px" />
             <div class="d-lg-none btn btn-icon btn-active-color-primary w-30px h-30px ms-2 me-3"
                 id="kt_header_menu_toggle">
                 <span class="svg-icon svg-icon-1">

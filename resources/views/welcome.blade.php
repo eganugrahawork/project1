@@ -73,8 +73,11 @@
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle d-none"></i>
             </nav><!-- .navbar -->
-
-            <a class="btn-getstarted scrollto" href="/login">Login/Register</a>
+            @guest
+                <a class="btn-getstarted scrollto" href="/login">Login/Register</a>
+            @else
+                <a class="btn-getstarted scrollto" href="/admin/dashboard">Administrator</a>
+            @endguest
 
         </div>
     </header><!-- End Header -->
@@ -108,7 +111,8 @@
                         <div class="service-item position-relative">
                             <div class="icon"><i class="bi bi-activity icon"></i></div>
                             <h4><a href="" class="stretched-link">Monitoring Produk Lebih Akurat</a></h4>
-                            <p>Memastikan pelaksanaan kegiatan tetap pada jalurnya (sesuai pedoman dan perencanaan program).</p>
+                            <p>Memastikan pelaksanaan kegiatan tetap pada jalurnya (sesuai pedoman dan perencanaan
+                                program).</p>
                         </div>
                     </div><!-- End Service Item -->
 
@@ -116,7 +120,8 @@
                         <div class="service-item position-relative">
                             <div class="icon"><i class="bi bi-bounding-box-circles icon"></i></div>
                             <h4><a href="" class="stretched-link">Sistem Database Yang Terpusat</a></h4>
-                            <p>Informasi (data) disimpan di lokasi terpusat dan pengguna dari lokasi berbeda dapat mengakses data ini.</p>
+                            <p>Informasi (data) disimpan di lokasi terpusat dan pengguna dari lokasi berbeda dapat
+                                mengakses data ini.</p>
                         </div>
                     </div><!-- End Service Item -->
 
@@ -124,7 +129,9 @@
                         <div class="service-item position-relative">
                             <div class="icon"><i class="bi bi-calendar4-week icon"></i></div>
                             <h4><a href="" class="stretched-link">Waktu Pengolahan Data Lebih Optimal</a></h4>
-                            <p>Memberikan beberapa manfaat seperti dapat meningkatkan efisiensi operasional, meningkatkan inovasi perusahaan dalam bisnis, membantu pengambilan keputusan dan masih banyak lainnya</p>
+                            <p>Memberikan beberapa manfaat seperti dapat meningkatkan efisiensi operasional,
+                                meningkatkan inovasi perusahaan dalam bisnis, membantu pengambilan keputusan dan masih
+                                banyak lainnya</p>
                         </div>
                     </div><!-- End Service Item -->
 
@@ -147,7 +154,8 @@
 
                 <div class="section-header">
                     <h2>Tentang Kami</h2>
-                    <p>Loccana adalah solusi aplikasi untuk mengelola pencatatan bisnis berupa,keuangan, manufacturing, inventory, distribusi, penjualan. Ayo berkembang dan sukses bersama Loccana.</p>
+                    <p>Loccana adalah solusi aplikasi untuk mengelola pencatatan bisnis berupa,keuangan, manufacturing,
+                        inventory, distribusi, penjualan. Ayo berkembang dan sukses bersama Loccana.</p>
                 </div>
 
                 <div class="row g-4 g-lg-5" data-aos="fade-up" data-aos-delay="200">
@@ -163,7 +171,8 @@
 
                         <!-- Tabs -->
                         <ul class="nav nav-pills mb-3">
-                            <li><a class="nav-link active" data-bs-toggle="pill" href="#tab1">Inventory and Distribution Sales System</a>
+                            <li><a class="nav-link active" data-bs-toggle="pill" href="#tab1">Inventory and
+                                    Distribution Sales System</a>
                             </li>
                             <li><a class="nav-link" data-bs-toggle="pill" href="#tab2">Point Of Sales</a></li>
                             <li><a class="nav-link" data-bs-toggle="pill" href="#tab3">Manufacturing</a>
@@ -276,16 +285,13 @@
 
                 <div class="row align-items-center justify-content-center">
                     <div class="col-lg-4 text-center">
-                        <img src="/herobiz/assets/img/brand-logo/sdm-logo3.png"
-                                class="img-fluid" width="50%">
+                        <img src="/herobiz/assets/img/brand-logo/sdm-logo3.png" class="img-fluid" width="50%">
                     </div>
                     <div class="col-lg-4 text-center">
-                        <img src="/herobiz/assets/img/brand-logo/endira-logo3.png"
-                                class="img-fluid" width="50%">
+                        <img src="/herobiz/assets/img/brand-logo/endira-logo3.png" class="img-fluid" width="50%">
                     </div>
                     <div class="col-lg-4 text-center">
-                        <img src="/herobiz/assets/img/brand-logo/celebit-logo3.png"
-                                class="img-fluid" width="50%">
+                        <img src="/herobiz/assets/img/brand-logo/celebit-logo3.png" class="img-fluid" width="50%">
                     </div>
                 </div>
 
@@ -957,7 +963,7 @@
                                     <a href=""><i class="bi bi-linkedin"></i></a>
                                 </div>
                                 <h4>Dwi Wahyu Bintarto</h4>
-                                <span>Head Of Product</span>
+                                <span>Database Administrator</span>
                             </div>
                         </div>
                     </div><!-- End Team Member -->
@@ -975,7 +981,7 @@
                                     <a href=""><i class="bi bi-linkedin"></i></a>
                                 </div>
                                 <h4>Ega Nugraha</h4>
-                                <span>Best Developer In The World</span>
+                                <span>Developer</span>
                             </div>
                         </div>
                     </div><!-- End Team Member -->
@@ -993,7 +999,7 @@
                                     <a href=""><i class="bi bi-linkedin"></i></a>
                                 </div>
                                 <h4>Annandhita</h4>
-                                <span>-</span>
+                                <span>Sales Marketing</span>
                             </div>
                         </div>
                     </div><!-- End Team Member -->
