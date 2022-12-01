@@ -147,9 +147,7 @@
 
                 <div class="section-header">
                     <h2>Tentang Kami</h2>
-                    <p>Loccana berdiri sejak 2019, dan telah mengelola pencatatan keuangan lebih dari 70 perusahaan di
-                        Indonesia. Pelayanan selama 1x8 jam setiap harinya bagi setiap konsumen kami. Ayo berkembang dan
-                        sukses bersama Loccana.</p>
+                    <p>Loccana adalah solusi aplikasi untuk mengelola pencatatan bisnis berupa,keuangan, manufacturing, inventory, distribusi, penjualan. Ayo berkembang dan sukses bersama Loccana.</p>
                 </div>
 
                 <div class="row g-4 g-lg-5" data-aos="fade-up" data-aos-delay="200">
@@ -165,10 +163,10 @@
 
                         <!-- Tabs -->
                         <ul class="nav nav-pills mb-3">
-                            <li><a class="nav-link active" data-bs-toggle="pill" href="#tab1">Point Of Sales</a>
+                            <li><a class="nav-link active" data-bs-toggle="pill" href="#tab1">Inventory and Distribution Sales System</a>
                             </li>
-                            <li><a class="nav-link" data-bs-toggle="pill" href="#tab2">Inventory</a></li>
-                            <li><a class="nav-link" data-bs-toggle="pill" href="#tab3">Production Management</a>
+                            <li><a class="nav-link" data-bs-toggle="pill" href="#tab2">Point Of Sales</a></li>
+                            <li><a class="nav-link" data-bs-toggle="pill" href="#tab3">Manufacturing</a>
                             </li>
                         </ul><!-- End Tabs -->
 
@@ -271,8 +269,27 @@
         <!-- ======= Clients Section ======= -->
         <section id="clients" class="clients">
             <div class="container" data-aos="zoom-out">
+                <div class="section-header">
+                    <h2>Partner Kami</h2>
+                    <p>Berkembang dan Sukses bersama Loccana.</p>
+                </div>
 
-                <div class="clients-slider swiper">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-lg-4 text-center">
+                        <img src="/herobiz/assets/img/brand-logo/sdm-logo3.png"
+                                class="img-fluid" width="50%">
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <img src="/herobiz/assets/img/brand-logo/endira-logo3.png"
+                                class="img-fluid" width="50%">
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <img src="/herobiz/assets/img/brand-logo/celebit-logo3.png"
+                                class="img-fluid" width="50%">
+                    </div>
+                </div>
+
+                {{-- <div class="clients-slider swiper">
                     <div class="swiper-wrapper align-items-center">
                         <div class="swiper-slide"><img src="/herobiz/assets/img/brand-logo/sdm-logo3.png"
                                 class="img-fluid" alt=""></div>
@@ -281,7 +298,7 @@
                         <div class="swiper-slide"><img src="/herobiz/assets/img/brand-logo/celebit-logo3.png"
                                 class="img-fluid" alt=""></div>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </section><!-- End Clients Section -->
@@ -291,7 +308,6 @@
             <div class="container" data-aos="zoom-out">
 
                 <div class="row g-5">
-
                     <div
                         class="col-lg-8 col-md-6 content d-flex flex-column justify-content-center order-last order-md-first">
                         <h3>Owner Quotes <em>BERHASIL</em></h3>
@@ -543,7 +559,7 @@
                                     <i class="bi bi-activity"></i>
                                 </div>
                                 <a href="#" class="stretched-link">
-                                    <h3>Point Of Sales</h3>
+                                    <h3>Inventory and Distribution Sales System</h3>
                                 </a>
                                 <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus
                                     dolores iure perferendis.</p>
@@ -561,7 +577,7 @@
                                     <i class="bi bi-broadcast"></i>
                                 </div>
                                 <a href="#" class="stretched-link">
-                                    <h3>Inventory</h3>
+                                    <h3>Point Of Sales</h3>
                                 </a>
                                 <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque
                                     eum hic non ut nesciunt dolorem.</p>
@@ -579,7 +595,7 @@
                                     <i class="bi bi-easel"></i>
                                 </div>
                                 <a href="#" class="stretched-link">
-                                    <h3>Manufacturer</h3>
+                                    <h3>Manufacturing</h3>
                                 </a>
                                 <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id
                                     voluptas adipisci eos earum corrupti.</p>
