@@ -33,7 +33,12 @@ class CoaController extends Controller
                 $parent = 'Main Parent';
             }else{
                 $coa = Coa::where(['id' => $model->id_parent])->first();
-                $parent =  $coa->coa.'-'.$coa->description;
+                if($coa){
+
+                    $parent =  $coa->coa.'-'.$coa->description;
+                }else{
+                    $parent = 'Undefined / Deleted';
+                }
             }
             return $parent;
 

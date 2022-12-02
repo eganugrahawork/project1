@@ -1,6 +1,7 @@
 <?php
 // Admin
 
+use App\Http\Controllers\Admin\Cashier\CashierController;
 use App\Http\Controllers\Admin\Configuration\ConfigurationController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -335,6 +336,13 @@ Route::middleware('auth')->controller(SellingController::class)->group(function(
     Route::get('/admin/selling/selling', 'index');
 });
 // End Selling
+Route::middleware('auth')->controller(CashierController::class)->group(function(){
+    Route::get('/admin/cashier', 'index');
+});
+//Cashier
+
+
+//End Cashier
 
 
 //Blocked Page Start

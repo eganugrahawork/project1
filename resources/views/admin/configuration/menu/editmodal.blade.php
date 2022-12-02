@@ -3,7 +3,7 @@
         <input type="hidden" name="id" value="{{ $menu->id }}">
             <div class="fv-row mb-7">
                 <label class="form-label fw-bold">Parent</label>
-                <select class="form-select form-select-solid mb-3 mb-lg-0" name="parent">
+                <select class="form-select form-select-solid mb-3 mb-lg-0 select-2" name="parent">
                     <option value="0" {{ $menu->parent == 0 ? 'selected' : '' }}>Main Parent</option>
                     @foreach ($allmenu as $m)
                         <option value="{{ $m->id }}" @if ($m->id == $menu->parent)
@@ -39,3 +39,12 @@
                 <button class="btn btn-sm btn-primary">Update</button>
             </div>
 </form>
+
+<script>
+    $(document).ready(function() {
+            $('.select-2').select2({
+                dropdownParent: $('#mainmodal')
+            });
+
+        });
+</script>
