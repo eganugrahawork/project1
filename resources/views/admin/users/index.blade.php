@@ -14,11 +14,11 @@
                 <div class="card-header pb-0">
                     <!--begin::Card title-->
                     <div class="card-title align-items-start flex-column">
-                        <h3 class="mb-3">Users</h3>
+                        <h5 class="mb-3">Users</h5>
                         <div class="d-flex align-items-center position-relative my-1">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                             <div class="form-group">
-                                <div class="input-group mb-4">
+                                <div class="input-group">
                                     <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                                     <input class="form-control" placeholder="Search" id="searchUserTable" type="text">
                                 </div>
@@ -64,7 +64,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="text-xs">
+                            <tbody class="text-md fw-bold" style="border:none;">
 
                             </tbody>
                         </table>

@@ -37,7 +37,7 @@
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody class="text-gray-600">
+                    <tbody class="text-gray-600" style="border:none;">
                         @foreach ($itemprice as $ip)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>

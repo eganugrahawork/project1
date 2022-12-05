@@ -44,7 +44,7 @@
                                 <th class="min-w-70px">Action</th>
                             </tr>
                         </thead>
-                        <tbody class="fw-bold text-gray-600">
+                        <tbody class="fw-bold text-gray-600" style="border:none;">
 
                         </tbody>
                     </table>

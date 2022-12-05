@@ -10,11 +10,11 @@
             <div class="card-header">
                 <div class="card-title align-items-start flex-column">
                     <div class="d-flex align-items-center position-relative my-1">
-                       <h2>Partners</h2>
+                       <h5>Partners</h5>
                     </div>
                     <div class="d-flex align-items-center position-relative my-1">
                         <div class="form-group">
-                            <div class="input-group mb-4">
+                            <div class="input-group">
                                 <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                                 <input class="form-control" placeholder="Search" id="searchPartnerTable" type="text">
                             </div>
@@ -43,7 +43,7 @@
                             <th class="min-w-70px">Action</th>
                         </tr>
                     </thead>
-                    <tbody class="fw-bold text-gray-600">
+                    <tbody class="fw-bold text-gray-600" style="border:none;">
                     </tbody>
                 </table>
             </div>

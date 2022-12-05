@@ -1,180 +1,202 @@
 @extends('admin.layouts.main')
 
 @section('content')
-<div class="success-message" data-successmessage="{{ session('success') }}"></div>
-<div class="fail-message" data-failmessage="{{ session('fail') }}"></div>
-<div class="toolbar py-5 py-lg-5" id="kt_toolbar">
-    <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
-        <div class="page-title d-flex flex-column me-3">
-            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">Purchase Order</h1>
-            <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
-                <li class="breadcrumb-item text-gray-600">
-                    <a href="/admin/dashboard" class="text-gray-600 text-hover-primary">Dashboard</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-
-<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl bg-warna py-4">
-    <div class="content flex-row-fluid" id="kt_content">
-        <div class="card bg-white">
-            <div class="card-header border-0 pt-6">
-                <div class="card-title align-items-start flex-column">
-                    <div class="d-flex align-items-center position-relative my-1">
-                       <h2>Purchase Order</h2>
+    <div class="success-message" data-successmessage="{{ session('success') }}"></div>
+    <div class="fail-message" data-failmessage="{{ session('fail') }}"></div>
+    <div class="row">
+        <div class="col-12">
+            <div id="content"></div>
+            <div class="card" id="indexContent">
+                <div class="card-header border-0">
+                    <div class="card-title align-items-start flex-column">
+                        <div class="d-flex align-items-center position-relative my-1">
+                            <h5 class="fw-bolder fs-4 text-gray-600">Purchase Order</h5>
+                        </div>
+                        <div class="d-flex align-items-center position-relative my-1">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                    <input class="form-control" placeholder="Search" id="searchTablePo" type="text">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex align-items-center position-relative my-1">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                        <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
-                                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
+                    <div class="card-toolbar">
+                        <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
+                            @can('create', ['/admin/procurement/purchase-order'])
+                                <button type="button" class="btn btn-primary me-3" onclick="create()">
+                                    Add Purchase Order</button>
+                            @endcan
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body pt-0">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="tablePo">
+                        <thead>
+                            <tr class="text-start text-uppercase text-gray-400 fw-bolder fs-7 gs-0">
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">PO Code</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Partner Name
+                                </th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Order Date
+                                </th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Total</th>
+                                {{-- <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Due Date</th> --}}
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Status</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="fw-bold text-gray-600" style="border:none;">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--end::Post-->
+    </div>
+
+    {{-- Main Modal --}}
+    <div class="modal fade" id="mainmodal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header bg-warna" id="mainmodal_header">
+                    <h2 class="fw-bolder text-white">Purchase Order</h2>
+                    <div class="btn btn-sm btn-white" onclick="tutupModal()">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                    rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                    transform="rotate(45 7.41422 6)" fill="black" />
                             </svg>
                         </span>
-                        <!--end::Svg Icon-->
-                        <input type="text" id="searchTablePo" class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
                     </div>
                 </div>
-                <div class="card-toolbar">
-                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
-                        @can('create', ['/admin/procurement/purchase-order'])
-                        <button type="button" class="btn btn-primary me-3" onclick="addPoModal()">
-                        Add Purchase Order</button>
-                        @endcan
-                    </div>
-
+                <div class="modal-body scroll-y mx-5 mx-xl-15 my-2" id="kontennya">
                 </div>
-            </div>
-            <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="tablePo">
-                    <thead>
-                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                            <th class="min-w-20px">No</th>
-                            <th class="min-w-70px ">PO Code</th>
-                            <th class="min-w-70px ">Partner Name</th>
-                            <th class="min-w-70px ">Order Date</th>
-                            <th class="min-w-70px ">Total</th>
-                            {{-- <th class="min-w-70px ">Due Date</th> --}}
-                            <th class="min-w-70px ">Status</th>
-                            <th class="min-w-50px">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody class="fw-bold text-gray-600">
-
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
-    <!--end::Post-->
-</div>
-
-{{-- Main Modal --}}
-<div class="modal fade" id="mainmodal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-            <div class="modal-header bg-warna" id="mainmodal_header">
-                <h2 class="fw-bolder text-white">Purchase Order</h2>
-                <div class="btn btn-sm btn-white" onclick="tutupModal()">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
-                        </svg>
-                    </span>
-                </div>
-            </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-2" id="kontennya">
-            </div>
-        </div>
-    </div>
-</div>
-{{-- End Main Modal --}}
-
+    {{-- End Main Modal --}}
 @endsection
 
 @section('js')
-
-<script>
-        function addPoModal(){
-            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/purchase-order/addmodal') }}", {}, function(data, status){
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
+    <script>
+        function create() {
+            $('#loading-add').html(
+                '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/procurement/purchase-order/create') }}", {}, function(data, status) {
+                $('#indexContent').hide();
+                $('#content').html(data)
+                $('#content').show()
+                $('#loading-add').html(
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                    )
             })
-        }
-        function editModal(id){
-            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/purchase-order/editmodal') }}/"+id, {}, function(data, status){
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
-                $('#loading-add').html('')
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
-            })
-        }
-        function infoModal(id){
-            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/purchase-order/infomodal') }}/"+id, {}, function(data, status){
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
-                $('#loading-add').html('')
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
-            })
-        }
-        function approveModal(id){
-            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/purchase-order/aprovedmodal') }}/"+id, {}, function(data, status){
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
-                $('#loading-add').html('')
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
-            })
-        }
-        function tutupModal(){
-        $('#mainmodal').modal('toggle')
         }
 
-        var tablePo =  $('#tablePo').DataTable({
-            serverside : true,
-            processing : true,
-            ajax : {
-                    url : "{{ url('/admin/procurement/purchase-order/list') }}"
-                    },
-                    columns:
-                    [
-                    {
+        function edit(id) {
+            $('#loading-add').html(
+                '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/procurement/purchase-order/edit') }}/" + id, {}, function(data, status) {
+                $('#indexContent').hide();
+                $('#content').html(data)
+                $('#content').show()
+                $('#loading-add').html(
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                    )
+            })
+        }
+
+        function info(id) {
+            $('#loading-add').html(
+                '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/procurement/purchase-order/info') }}/" + id, {}, function(data, status) {
+                $('#indexContent').hide();
+                $('#content').html(data)
+                $('#content').show()
+                $('#loading-add').html(
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                    )
+            })
+        }
+
+        function approve(id) {
+            $('#loading-add').html(
+                '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/procurement/purchase-order/approveview') }}/" + id, {}, function(data, status) {
+                $('#indexContent').hide();
+                $('#content').html(data)
+                $('#content').show()
+                $('#loading-add').html(
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                    )
+            })
+        }
+
+        function tutupContent() {
+            $('#content').hide()
+            $('#indexContent').show()
+        }
+
+        var tablePo = $('#tablePo').DataTable({
+            serverside: true,
+            processing: true,
+            ajax: {
+                url: "{{ url('/admin/procurement/purchase-order/list') }}"
+            },
+            columns: [{
                     data: 'DT_RowIndex',
                     searchable: false
                 },
-                    {data: 'po_code', name: 'po_code'},
-                    {data: 'name', name: 'name'},
-                    {data: 'tgl_order', name: 'tgl_order'},
-                    {data: 'total_po', name: 'total_po', render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )},
-                    // {data: 'due_date', name: 'delivery_date'},
-                    {data: 'statues', name: 'statues'},
-                    {data: 'action', name: 'action'}
-                    ],
+                {
+                    data: 'po_code',
+                    name: 'po_code'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'tgl_order',
+                    name: 'tgl_order'
+                },
+                {
+                    data: 'total_po',
+                    name: 'total_po',
+                    render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')
+                },
+                // {data: 'due_date', name: 'delivery_date'},
+                {
+                    data: 'statues',
+                    name: 'statues'
+                },
+                {
+                    data: 'action',
+                    name: 'action'
+                }
+            ],
             "bLengthChange": false,
             "bFilter": true,
             "bInfo": false
         });
 
-        $('#searchTablePo').keyup(function () {
-                tablePo.search($(this).val()).draw()
+        $('#searchTablePo').keyup(function() {
+            tablePo.search($(this).val()).draw()
         });
 
 
-        $(document).on('click', '#deletepo', function(e){
+        $(document).on('click', '#deletepo', function(e) {
             e.preventDefault();
             const href = $(this).attr('href');
 
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
-                confirmButton: 'btn btn-success',
-                cancelButton: 'btn btn-danger'
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
                 },
                 buttonsStyling: false
             })
@@ -189,43 +211,47 @@
                 reverseButtons: false
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+                    $('#loading-add').html(
+                        '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>'
+                        )
                     $.ajax({
-                        type:"GET",
+                        type: "GET",
                         url: href,
-                        success:function(response){
+                        success: function(response) {
                             Swal.fire(
                                 'Success',
                                 response.success,
                                 'success'
                             )
                             tablePo.ajax.reload(null, false);
-                            $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
+                            $('#loading-add').html(
+                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                                )
                         }
                     })
 
                 } else if (
 
-                result.dismiss === Swal.DismissReason.cancel
+                    result.dismiss === Swal.DismissReason.cancel
                 ) {
-                swalWithBootstrapButtons.fire(
-                    'Cancelled',
-                    'Data anda masih aman :)',
-                    'success'
-                )
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Data anda masih aman :)',
+                        'success'
+                    )
                 }
             })
         });
 
-        function exportPDF(id){
+        function exportPDF(id) {
             // e.preventDefault();
-            const href = "{{ url('/admin/procurement/purchase-order/exportpdf') }}/"+id
+            const href = "{{ url('/admin/procurement/purchase-order/exportpdf') }}/" + id
             console.log(href);
 
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
-                confirmButton: 'btn btn-success',
-                cancelButton: 'btn btn-danger'
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
                 },
                 buttonsStyling: false
             })
@@ -240,32 +266,35 @@
                 reverseButtons: false
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+                    $('#loading-add').html(
+                        '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>'
+                        )
                     $.ajax({
-                        type:"GET",
+                        type: "GET",
                         url: href,
-                        success:function(response){
+                        success: function(response) {
                             Swal.fire(
                                 'Success',
                                 response.success,
                                 'success'
                             )
-                            $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
+                            $('#loading-add').html(
+                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                                )
                         }
                     })
 
                 } else if (
 
-                result.dismiss === Swal.DismissReason.cancel
+                    result.dismiss === Swal.DismissReason.cancel
                 ) {
-                swalWithBootstrapButtons.fire(
-                    'Cancelled',
-                    'Cancel Export',
-                    'success'
-                )
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Cancel Export',
+                        'success'
+                    )
                 }
             })
         }
-</script>
-
+    </script>
 @endsection

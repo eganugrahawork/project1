@@ -10,11 +10,11 @@
                 <div class="card-header border-0">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative my-1">
-                            <h2>COA</h2>
+                            <h5>Chart Of Account</h5>
                         </div>
                         <div class="d-flex align-items-center position-relative my-1">
                             <div class="form-group">
-                                <div class="input-group mb-4">
+                                <div class="input-group">
                                     <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                                     <input class="form-control" placeholder="Search" id="searchCoaTable" type="text">
                                 </div>
@@ -44,7 +44,7 @@
                                     <th class="min-w-70px">Action</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-dark text-md border-none">
+                            <tbody class="text-md text-secondary mb-0" style="border:none;">
 
                             </tbody>
                         </table>

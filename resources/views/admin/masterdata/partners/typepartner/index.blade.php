@@ -7,14 +7,14 @@
         <div class="col-12">
             <div id="content"></div>
             <div class="card" id="indexContent">
-                <div class="card-header border-0 pt-6">
+                <div class="card-header border-0">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative my-1">
-                            <h2>Type Partners</h2>
+                            <h5>Type Partners</h5>
                         </div>
                         <div class="d-flex align-items-center position-relative my-1">
                             <div class="form-group">
-                                <div class="input-group mb-4">
+                                <div class="input-group">
                                     <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                                     <input class="form-control" placeholder="Search" id="searchTypeOfPartner" type="text">
                                 </div>
@@ -40,7 +40,7 @@
                                 <th class="min-w-70px">Action</th>
                             </tr>
                         </thead>
-                        <tbody class="text-gray-600">
+                        <tbody class="text-gray-600" style="border:none;">
                         </tbody>
                     </table>
                 </div>

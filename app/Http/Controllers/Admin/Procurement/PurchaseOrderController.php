@@ -33,11 +33,11 @@ class PurchaseOrderController extends Controller {
         return Datatables::of(DB::connection('procurement')->select('Call sp_list_po()'))->addIndexColumn()
             ->addColumn('action', function ($model) {
                 // $action = "";
-                $action = "<a onclick='infoModal($model->id_ponya)' class='btn btn-icon btn-sm btn-info btn-hover-rise me-1'><i class='bi bi-info-square'></i></a>";
+                $action = "<a onclick='info($model->id_ponya)' class='btn btn-icon btn-sm btn-info btn-hover-rise me-1'><i class='bi bi-info-square'></i></a>";
 
                 if ($model->po_status == 0 || $model->po_status != 1) {
                     if (Gate::allows('edit', ['/admin/procurement/purchase-order'])) {
-                        $action .= "<a onclick='editModal($model->id_ponya)' class='btn btn-icon btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
+                        $action .= "<a onclick='edit($model->id_ponya)' class='btn btn-icon btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
                     }
                     if (Gate::allows('delete', ['/admin/procurement/purchase-order'])) {
                         $action .= " <a href='/admin/procurement/purchase-order/delete/$model->id_ponya' class='btn btn-icon btn-sm btn-danger btn-hover-rise me-1' id='deletepo'><i class='bi bi-trash'></i></a>";
@@ -52,7 +52,7 @@ class PurchaseOrderController extends Controller {
                 if ($model->po_status == 0) {
 
                     if (Gate::allows('approve', ['/admin/procurement/purchase-order'])) {
-                        $statues .= "<a onclick='approveModal($model->id_ponya)' class='btn btn-sm btn-danger btn-hover-rise me-1'><i class='bi bi-patch-exclamation'></i></i> Confirm Here</a>";
+                        $statues .= "<a onclick='approve($model->id_ponya)' class='btn btn-sm btn-danger btn-hover-rise me-1'><i class='bi bi-patch-exclamation'></i></i> Confirm Here</a>";
                     } else {
                         $statues .= "<a class='btn btn-sm btn-secondary btn-hover-rise me-1 '><i class='bi bi-question-octagon'></i>Pending</a>";
                     }
@@ -67,7 +67,7 @@ class PurchaseOrderController extends Controller {
             })->rawColumns(['action', 'statues', 'tgl_order'])->make(true);
     }
 
-    public function addmodal() {
+    public function create() {
 
         $ordering = Ordering::where(['name_menu' => 'purchase_order'])->first();
         if ($ordering['seq_max'] + 1 < 1000) {
@@ -84,26 +84,26 @@ class PurchaseOrderController extends Controller {
             $code = $ordering['begin_code'] . date('Y') . '' . ($ordering['seq_max'] + 1) . $ordering['end_code'];
         }
 
-        return view('admin.procurement.purchaseorder.addmodal', ['code' => $code, 'partner' => Partners::all(), 'currency' => Currency::all()]);
+        return view('admin.procurement.purchaseorder.create', ['code' => $code, 'partner' => Partners::all(), 'currency' => Currency::all()]);
     }
 
-    public function editmodal(Request $request) {
+    public function edit(Request $request) {
 
         $ponya = DB::connection('procurement')->select("select * from purchase_orders where id = $request->id");
         $s_item = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $request->id");
-        return view('admin.procurement.purchaseorder.editmodal', ['partner' => Partners::all(), 'currency' => Currency::all(), 'ponya' => $ponya, 's_item' => $s_item, 'items' => Items::all()]);
+        return view('admin.procurement.purchaseorder.edit', ['partner' => Partners::all(), 'currency' => Currency::all(), 'ponya' => $ponya, 's_item' => $s_item, 'items' => Items::all()]);
     }
 
-    public function infomodal(Request $request) {
+    public function info(Request $request) {
         $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
 
-        return view('admin.procurement.purchaseorder.infomodal', ['info' => $info]);
+        return view('admin.procurement.purchaseorder.info', ['info' => $info]);
     }
 
-    public function aprovedmodal(Request $request) {
+    public function approveview(Request $request) {
         $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
 
-        return view('admin.procurement.purchaseorder.aprovedmodal', ['info' => $info, 'id_po' => $request->id]);
+        return view('admin.procurement.purchaseorder.approveview', ['info' => $info, 'id_po' => $request->id]);
     }
 
     public function approve(Request $request) {
@@ -187,7 +187,7 @@ class PurchaseOrderController extends Controller {
     public function getbaseqty(Request $request) {
         $itemprice = ItemPrice::where(['item_id' => $request->id])->first();
         $itemqty = ItemQty::where(['item_id' => $request->id])->first();
-        $pricing  = " <div class='fv-row mb-7 col-lg-2' id='price_parent'>
+        $pricing  = " <div class='fv-row mb-3 col-lg-2' id='price_parent'>
         <label class='required fw-bold fs-6 mb-2'>Price</label>
         <input type='number' name='price[]' id='price' onkeyup='hitungByPrice(this)' class='form-control form-control-solid mb-3 mb-lg-0' placeholder='$itemprice->base_price' required/>
         <p id='notifprice'>Tulis Kembali harga untuk konfirmasi</p>
@@ -196,7 +196,7 @@ class PurchaseOrderController extends Controller {
     }
 
     public function addnewitemrow(Request $request) {
-        $html = " <div class='row'> <div class='fv-row mb-7 col-lg-4'>
+        $html = " <div class='row'> <div class='fv-row mb-3 col-lg-4'>
         <label class='required form-label fw-bold'>Item </label>
                 <div class='row'>
                     <div class='col-lg-10'>
@@ -221,20 +221,20 @@ class PurchaseOrderController extends Controller {
                         </div>
                         </div>
 
-                        <div class='fv-row mb-7 col-lg-1'>
+                        <div class='fv-row mb-3 col-lg-1'>
                         <label class='required fw-bold fs-6 mb-2'>Qty</label>
                         <input type='number' name='qty[]' id='qty' onkeyup='hitungByQty(this)'  class='form-control form-control-solid mb-3 mb-lg-0'  required/>
                         </div>
-                        <div class='fv-row mb-7 col-lg-1' id='discount_parent'>
+                        <div class='fv-row mb-3 col-lg-1' id='discount_parent'>
                             <label class='required fw-bold fs-6 mb-2'>Discount</label>
                             <input type='number' name='discount[]' id='discount'  onkeyup='hitungByDiscount(this)' class='form-control form-control-solid mb-3 mb-lg-0'  required/>
                         </div>
-                        <div class='fv-row mb-7 col-lg-2'>
+                        <div class='fv-row mb-3 col-lg-2'>
                         <label class='required fw-bold fs-6 mb-2'>Total</label>
                         <input type='number' name='total[]' id='total' readonly class='form-control form-control-solid mb-3 mb-lg-0 totalnya'  required/>
                         <input type='hidden' name='getdiscountperitem[]' id='getdiscountperitem' readonly class='form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem'  required/>
                         </div>
-                        <div class='fv-row mb-7 col-lg-1'>
+                        <div class='fv-row mb-3 col-lg-1'>
                         <label class='fw-bold fs-6 mb-2'>Remove</label>
                             <button class='btn btn-sm btn-warning' type='button' onclick='removeItemRow(this)'>-</button>
                     </div></div>";

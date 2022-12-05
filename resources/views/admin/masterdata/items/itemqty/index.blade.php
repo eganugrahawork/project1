@@ -48,7 +48,7 @@
 
                         </tr>
                     </thead>
-                    <tbody class="fw-bold text-gray-600">
+                    <tbody class="fw-bold text-gray-600" style="border:none;">
                         @foreach ($itemqty as $iq)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>

@@ -10,7 +10,7 @@
                 <div class="card-header">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative my-1">
-                            <h2>Items</h2>
+                            <h5>Items</h5>
                         </div>
                         <div class="d-flex align-items-center position-relative my-1">
                             <div class="form-group">
@@ -44,7 +44,7 @@
                                 <th class="min-w-50px">Action</th>
                             </tr>
                         </thead>
-                        <tbody class="fw-bold text-gray-600">
+                        <tbody class="text-md text-gray-600" style="border:none;">
 
                         </tbody>
                     </table>

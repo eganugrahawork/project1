@@ -282,16 +282,16 @@ Route::middleware(['auth'])->controller(CoaController::class)->group(function ()
 Route::middleware(['auth'])->controller(PurchaseOrderController::class)->group(function () {
     Route::get('/admin/procurement/purchase-order', 'index');
     Route::get('/admin/procurement/purchase-order/list', 'list');
-    Route::get('/admin/procurement/purchase-order/addmodal', 'addmodal');
+    Route::get('/admin/procurement/purchase-order/create', 'create');
     Route::get('/admin/procurement/purchase-order/getitem/{id}', 'getitem');
     Route::get('/admin/procurement/purchase-order/getallitem', 'getallitem');
     Route::get('/admin/procurement/purchase-order/getbackitem/{id}', 'getbackitem');
     Route::get('/admin/procurement/purchase-order/getcurrency/{id}', 'getcurrency');
     Route::get('/admin/procurement/purchase-order/getbaseqty/{id}', 'getbaseqty');
     Route::get('/admin/procurement/purchase-order/addnewitemrow/{id}', 'addnewitemrow');
-    Route::get('/admin/procurement/purchase-order/editmodal/{id}', 'editmodal');
-    Route::get('/admin/procurement/purchase-order/infomodal/{id}', 'infomodal');
-    Route::get('/admin/procurement/purchase-order/aprovedmodal/{id}', 'aprovedmodal');
+    Route::get('/admin/procurement/purchase-order/edit/{id}', 'edit');
+    Route::get('/admin/procurement/purchase-order/info/{id}', 'info');
+    Route::get('/admin/procurement/purchase-order/approveview/{id}', 'approveview');
     Route::get('/admin/procurement/purchase-order/approve/{id}', 'approve');
     Route::get('/admin/procurement/purchase-order/reject/{id}', 'reject');
     Route::get('/admin/procurement/purchase-order/delete/{id}', 'destroy');
