@@ -26,18 +26,18 @@
             <div class="card-body pt-0">
                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="itemPrice">
                     <thead>
-                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                            <th>No</th>
-                            <th>Item Code</th>
-                            <th>Item Name</th>
-                            <th>Partner Name</th>
-                            <th>Top Price</th>
-                            <th>Base Price</th>
-                            <th>Bottom Price</th>
-                            <th>Status</th>
+                        <tr >
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Item Code</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Item Name</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Partner Name</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Top Price</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Base Price</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Bottom Price</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Status</th>
                         </tr>
                     </thead>
-                    <tbody class="text-gray-600" style="border:none;">
+                    <tbody class="text-gray-600 text-md fw-bold" style="border:none;">
                         @foreach ($itemprice as $ip)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
