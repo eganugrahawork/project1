@@ -3,42 +3,28 @@
 @section('content')
 <div class="success-message" data-successmessage="{{ session('success') }}"></div>
 <div class="fail-message" data-failmessage="{{ session('fail') }}"></div>
-<div class="toolbar py-5 py-lg-5" id="kt_toolbar">
-    <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
-        <div class="page-title d-flex flex-column me-3">
-            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">Items Receipt</h1>
-            <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
-                <li class="breadcrumb-item text-gray-600">
-                    <a href="/admin/dashboard" class="text-gray-600 text-hover-primary">Dashboard</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-
-<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl bg-warna py-4">
-    <div class="content flex-row-fluid" id="kt_content">
-        <div class="card bg-white">
-            <div class="card-header border-0 pt-6">
+<div class="row">
+    <div class="col-12">
+        <div id="content"></div>
+        <div class="card" id="indexContent">
+            <div class="card-header border-0">
                 <div class="card-title align-items-start flex-column">
                     <div class="d-flex align-items-center position-relative my-1">
-                       <h2>Items Receipt</h2>
+                       <h5 class="fw-bolder text-gray-600">Items Receipt</h5>
                     </div>
                     <div class="d-flex align-items-center position-relative my-1">
-                        <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
-                                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
-                            </svg>
-                        </span>
-                        <input type="text" id="searchTableItemsReceipt" class="form-control form-control-solid w-250px ps-15" placeholder="Search" />
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                <input class="form-control" placeholder="Search" id="searchTableItemsReceipt" type="text">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-toolbar">
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                         @can('create', ['/admin/procurement/items-receipt'])
-                        <button type="button" class="btn btn-primary me-3" onclick="addModal()">
+                        <button type="button" class="btn btn-primary me-3" onclick="create()">
                         Add Receipt Items</button>
                         @endcan
                     </div>
@@ -49,19 +35,19 @@
                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="tableItemsReceipt">
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                            <th class="min-w-20px">No</th>
-                            <th class="min-w-70px ">Delivery Number</th>
-                            <th class="min-w-70px ">Receipt Date</th>
-                            <th class="min-w-70px ">PO Number</th>
-                            <th class="min-w-70px ">Partner</th>
-                            <th class="min-w-70px ">Order Date</th>
-                            <th class="min-w-70px ">Price</th>
-                            <th class="min-w-70px ">Discount</th>
-                            <th class="min-w-70px ">Value</th>
-                            <th class="text-end min-w-50px">Action</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Delivery Number</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Receipt Date</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">PO Number</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Partner</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Order Date</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Price</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Discount</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Value</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Action</th>
                         </tr>
                     </thead>
-                    <tbody class="fw-bold text-gray-600">
+                    <tbody class="fw-bold text-md text-gray-600" style="border:none;">
 
                     </tbody>
                 </table>
@@ -70,62 +56,43 @@
     </div>
 </div>
 
-{{-- Main Modal --}}
-<div class="modal fade" id="mainmodal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-            <div class="modal-header" id="mainmodal_header">
-                <h2 class="fw-bolder">Items Receipt</h2>
-                <div class="btn btn-icon btn-sm btn-active-icon-primary" onclick="tutupModal()">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
-                        </svg>
-                    </span>
-                </div>
-            </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="kontennya">
-            </div>
-        </div>
-    </div>
-</div>
-{{-- End Main Modal --}}
 
 @endsection
 
 @section('js')
 
 <script>
-        function infoModal(id){
+        function info(id){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/items-receipt/infomodal') }}/"+id, {}, function(data, status){
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
-                $('#loading-add').html('')
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receipt Items</button>')
+            $.get("{{ url('/admin/procurement/items-receipt/info') }}/"+id, {}, function(data, status){
+                $('#indexContent').hide();
+                $('#content').html(data)
+                $('#content').show()
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="create()">Add Receipt Items</button>')
             })
         }
 
-        function addModal(){
+        function create(){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/items-receipt/addmodal') }}", {}, function(data, status){
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receipt Items</button>')
+            $.get("{{ url('/admin/procurement/items-receipt/create') }}", {}, function(data, status){
+                $('#indexContent').hide();
+                $('#content').html(data)
+                $('#content').show()
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="create()">Add Receipt Items</button>')
             })
         }
-        function editModal(id){
+        function edit(id){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/items-receipt/editmodal') }}/"+id, {}, function(data, status){
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
-                $('#loading-add').html('')
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receipt Items</button>')
+            $.get("{{ url('/admin/procurement/items-receipt/edit') }}/"+id, {}, function(data, status){
+                $('#indexContent').hide();
+                $('#content').html(data)
+                $('#content').show()
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="create()">Add Receipt Items</button>')
             })
         }
-        function tutupModal(){
-        $('#mainmodal').modal('toggle')
+        function tutupContent() {
+            $('#content').hide()
+            $('#indexContent').show()
         }
 
         var tableItemsReceipt =  $('#tableItemsReceipt').DataTable({

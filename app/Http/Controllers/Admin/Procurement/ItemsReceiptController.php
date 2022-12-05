@@ -23,9 +23,9 @@ class ItemsReceiptController extends Controller {
     public function list() {
         return  Datatables::of(DB::connection('procurement')->select('Call sp_list_item_receipt()'))->addIndexColumn()
             ->addColumn('action', function ($model) {
-                $action = "<a onclick='infoModal($model->id)' class='btn btn-icon btn-sm btn-info me-1 btn-hover-rise'><i class='bi bi-info-square'></i></a>";
+                $action = "<a onclick='info($model->id)' class='btn btn-icon btn-sm btn-info me-1 btn-hover-rise'><i class='bi bi-info-square'></i></a>";
                 if (Gate::allows('edit', ['/admin/procurement/items-receipt'])) {
-                    $action .= "<a onclick='editModal($model->id)' class='btn btn-icon btn-sm btn-warning me-1 btn-hover-rise'><i class='bi bi-pencil-square'></i></a>";
+                    $action .= "<a onclick='edit($model->id)' class='btn btn-icon btn-sm btn-warning me-1 btn-hover-rise'><i class='bi bi-pencil-square'></i></a>";
                 }
                 if (Gate::allows('delete', ['/admin/procurement/items-receipt'])) {
                     $action .= " <a href='/admin/procurement/items-receipt/delete/$model->id' class='btn btn-icon btn-sm btn-danger me-1 btn-hover-rise' id='deleteItemReceipt'><i class='bi bi-trash'></i></a>";
@@ -38,16 +38,16 @@ class ItemsReceiptController extends Controller {
             })->make(true);
     }
 
-    public function addmodal() {
-        return view('admin.procurement.itemsreceipt.addmodal', ['purchase_orders' => PurchaseOrder::where(['status' => 1])->get()]);
+    public function create() {
+        return view('admin.procurement.itemsreceipt.create', ['purchase_orders' => PurchaseOrder::where(['status' => 1])->get()]);
     }
-    public function infomodal(Request $request) {
+    public function info(Request $request) {
 
-        return view('admin.procurement.itemsreceipt.infomodal');
+        return view('admin.procurement.itemsreceipt.info');
     }
-    public function editmodal(Request $request) {
+    public function edit(Request $request) {
 
-        return view('admin.procurement.itemsreceipt.editmodal');
+        return view('admin.procurement.itemsreceipt.edit');
     }
 
     public function getdatapo(Request $request) {
@@ -59,34 +59,34 @@ class ItemsReceiptController extends Controller {
             $html .= "<div class='row'>
             <input type='hidden' name='po_item_id[]' value='$item->po_item_id'/>
             <input type='hidden' name='unit_price[]' value='$item->unit_price'/>
-            <div class='fv-row mb-7 col-lg-2'>
+            <div class='fv-row mb-3 col-lg-2'>
                 <label class=' form-label fw-bold'>Item</label>
                 <select class='form-select  form-select-white mb-3 mb-lg-0' id='item_id' name='item_id[]'   required>
                         <option value='$item->item_id'>$item->item_name</option>
                 </select>
             </div>
-            <div class='fv-row mb-7 col-lg-2'>
+            <div class='fv-row mb-3 col-lg-2'>
                 <label class=' fw-bold fs-6 mb-2'>Order Qty</label>
                 <input type='number' name='qty_order[]' id='qty_order' value='$item->qty' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
             </div>
-            <div class='fv-row mb-7 col-lg-2'>
+            <div class='fv-row mb-3 col-lg-2'>
                 <label class=' fw-bold fs-6 mb-2'>Balance</label>
                 <input type='number' name='balance[]' id='balance' value='$item->qty' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
             </div>
-            <div class='fv-row mb-7 col-lg-2'>
+            <div class='fv-row mb-3 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Receive</label>
                 <input type='number' name='qty[]' id='qty' value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
-            <div class='fv-row mb-7 col-lg-1'>
+            <div class='fv-row mb-3 col-lg-1'>
                 <label class='required fw-bold fs-6 mb-2'>Bonus</label>
                 <input type='number' name='qty_bonus[]' id='qty_bonus' value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
 
-            <div class='fv-row mb-7 col-lg-1'>
+            <div class='fv-row mb-3 col-lg-1'>
                 <label class='required fw-bold fs-6 mb-2'>Discount</label>
                 <input type='number' name='qty_discount[]' id='qty_discount' value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
-            <div class='fv-row mb-7 col-lg-2'>
+            <div class='fv-row mb-3 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Note</label>
                 <input type='text' name='notes[]' id='notes' class='form-control form-control-solid mb-3 mb-lg-0 descriptionnya'  required/>
             </div>

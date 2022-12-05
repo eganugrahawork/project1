@@ -305,9 +305,9 @@ Route::middleware(['auth'])->controller(PurchaseOrderController::class)->group(f
 Route::middleware('auth')->controller(ItemsReceiptController::class)->group(function () {
     Route::get('/admin/procurement/items-receipt', 'index');
     Route::get('/admin/procurement/items-receipt/list', 'list');
-    Route::get('/admin/procurement/items-receipt/addmodal', 'addmodal');
-    Route::get('/admin/procurement/items-receipt/infomodal/{id}', 'infomodal');
-    Route::get('/admin/procurement/items-receipt/editmodal/{id}', 'editmodal');
+    Route::get('/admin/procurement/items-receipt/create', 'create');
+    Route::get('/admin/procurement/items-receipt/info/{id}', 'info');
+    Route::get('/admin/procurement/items-receipt/edit/{id}', 'edit');
     Route::get('/admin/procurement/items-receipt/getdatapo/{id}', 'getdatapo');
     Route::post('/admin/procurement/items-receipt/store', 'store');
 });
