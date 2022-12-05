@@ -7,7 +7,7 @@
     <div class="col-12">
         <div id="content"></div>
         <div class="card" id="indexContent">
-            <div class="card-header border-0 pt-6">
+            <div class="card-header">
                 <div class="card-title align-items-start flex-column">
                     <div class="d-flex align-items-center position-relative my-1">
                        <h2>Partners</h2>
@@ -59,8 +59,9 @@
         function info(id){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/partners/info') }}/"+id, {}, function(data, status){
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
+                $('#indexContent').hide()
+                $('#content').html(data)
+                $('#content').show()
                 $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add partners</button>')
             })
         }
@@ -68,8 +69,10 @@
         function create(){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/partners/create') }}", {}, function(data, status){
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
+                $('#indexContent').hide()
+                $('#content').html(data)
+                $('#content').show()
+
                 $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add partners</button>')
             })
         }
@@ -77,8 +80,10 @@
         function edit(id){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/partners/edit') }}/"+id, {}, function(data, status){
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
+                $('#indexContent').hide()
+                $('#content').html(data)
+                $('#content').show()
+
                 $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add partners</button>')
             })
         }

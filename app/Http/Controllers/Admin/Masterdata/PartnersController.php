@@ -22,7 +22,7 @@ class PartnersController extends Controller
     public function list(){
         return  Datatables::of(DB::connection('masterdata')->select('Call sp_list_partners()'))->addIndexColumn()
         ->addColumn('action', function($model){
-            $action = "<a onclick='infoModal($model->id)' class='btn btn-sm btn-icon btn-info btn-hover-rise me-1'><i class='bi bi-info-square'></i></a>";
+            $action = "<a onclick='info($model->id)' class='btn btn-sm btn-icon btn-info btn-hover-rise me-1'><i class='bi bi-info-square'></i></a>";
             if(Gate::allows('edit', ['/admin/masterdata/partners'])){
                 $action .= "<a onclick='edit($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
             }
@@ -86,9 +86,9 @@ class PartnersController extends Controller
         return response()->json(['success'=> 'Partner Berhasil Dihapus']);
     }
 
-    public function infomodal(Request $request){
+    public function info(Request $request){
 
-        return view('admin.masterdata.partners.partnerlist.infomodal', ['partner' => Partners::where(['id'=> $request->id])->first()]);
+        return view('admin.masterdata.partners.partnerlist.info', ['partner' => Partners::where(['id'=> $request->id])->first()]);
     }
 
     public function getinfoitem(Request $request){
@@ -131,74 +131,5 @@ class PartnersController extends Controller
 
         return response()->json(['success'=> 'Partner diupdate']);
     }
-
-    public function typeofpartner(){
-        return view('admin.masterdata.partners.typepartner.index');
-    }
-
-    public function listtypeofpartners(){
-        return  Datatables::of(DB::connection('masterdata')->select('Call sp_list_partner_types()'))->addIndexColumn()
-        ->addColumn('action', function($model){
-            $action = "";
-            if(Gate::allows('edit', ['/admin/masterdata/typeofpartner'])){
-                $action .= "<a onclick='editModalType($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
-            }
-            if(Gate::allows('delete', ['/admin/masterdata/typeofpartner'])){
-                $action .= " <a href='/admin/masterdata/partners/destroytypepartners/$model->id' class='btn btn-sm btn-icon btn-danger btn-hover-rise me-1' id='deletepartnerstype'><i class='bi bi-trash'></i></a>";
-            }
-            return $action;
-        })
-        ->make(true);
-    }
-
-    public function addtypepartnermodal(){
-        return view('admin.masterdata.partners.typepartner.addtypepartnermodal');
-    }
-
-    public function storetypepartners(Request $request){
-        DB::connection('masterdata')->select("call sp_insert_partner_types('$request->name', $request->status)");
-
-        UserActivity::create([
-            'id_user' => auth()->user()->id,
-            'menu' => "Type Partners",
-            'aktivitas' => "Tambah",
-            'keterangan' => "Tambah Type Partners ". $request->name
-        ]);
-
-        NotifEvent::dispatch(auth()->user()->name .' menambahkan Type Partner '. $request->name);
-        return response()->json(['success' => 'Type Partner Added']);
-    }
-
-    public function edittypepartnermodal(Request $request){
-        return view('admin.masterdata.partners.typepartner.edittypepartnermodal', ['tp' =>  PartnerType::where(['id' => $request->id])->first()]);
-    }
-
-    public function updatetypepartners(Request $request){
-        DB::connection('masterdata')->select("call sp_update_partner_types($request->id,'$request->name', $request->status)");
-        UserActivity::create([
-            'id_user' => auth()->user()->id,
-            'menu' => "Type Partners",
-            'aktivitas' => "Update",
-            'keterangan' => "Update Type Partners ". $request->name
-        ]);
-
-        NotifEvent::dispatch(auth()->user()->name .' Update Type Partner '. $request->name);
-        return response()->json(['success', 'Type Partner has Edited']);
-    }
-
-    public function destroytypepartners(Request $request){
-        DB::connection('masterdata')->select("call sp_delete_partner_types($request->id)");
-        UserActivity::create([
-            'id_user' => auth()->user()->id,
-            'menu' => "Type Partners",
-            'aktivitas' => "Hapus",
-            'keterangan' => "Hapus Type Partners dengan id ". $request->id
-        ]);
-
-        NotifEvent::dispatch(auth()->user()->name .' Hapus Type Partner Menjadi '. $request->id);
-
-        return response()->json(['success', 'Type Parter Deleted']);
-    }
-
 
 }

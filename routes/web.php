@@ -40,6 +40,8 @@ use App\Http\Controllers\Admin\Procurement\PurchaseBasisController;
 // Strt Inventory
 use App\Http\Controllers\Admin\Inventory\StockController;
 use App\Http\Controllers\Admin\Inventory\StockInTransitController;
+use App\Http\Controllers\Admin\Masterdata\TypeItemController;
+use App\Http\Controllers\Admin\Masterdata\TypePartnerController;
 use App\Http\Controllers\Admin\Selling\SellingController;
 // End Inventory
 
@@ -58,18 +60,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['guest'])->controller(RegisterController::class)->group(function(){
+Route::middleware(['guest'])->controller(RegisterController::class)->group(function () {
     Route::post('/register/update', 'update');
     Route::post('/register/create', 'create');
     Route::get('/register_verify', 'register_verify');
     Route::post('/checkemail', 'checkemail');
 });
 
-Route::middleware(['guest'])->controller(ForgotPasswordController::class)->group(function(){
+Route::middleware(['guest'])->controller(ForgotPasswordController::class)->group(function () {
     Route::get('/forgot-password', 'show');
     Route::post('/forgot-password/sendemail', 'sendemail');
     Route::post('/forgot-password/checkemail', 'checkemail');
@@ -82,7 +85,7 @@ Auth::routes();
 
 
 
-Route::middleware(['auth'])->controller(ConfigurationController::class)->group(function(){
+Route::middleware(['auth'])->controller(ConfigurationController::class)->group(function () {
     Route::get('/admin/useractivity',  'useractivity');
     Route::get('/admin/readallnotif',  'readallnotif');
     Route::get('/admin/read/{id}',  'read');
@@ -111,7 +114,7 @@ Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middlewar
 
 
 // Profile Start
-Route::middleware(['auth'])->controller(ProfileController::class)->group(function(){
+Route::middleware(['auth'])->controller(ProfileController::class)->group(function () {
     Route::get('admin/myprofile', 'index');
     Route::get('admin/myprofile/edit', 'editmyprofile');
     Route::post('admin/myprofile/update', 'update');
@@ -119,7 +122,7 @@ Route::middleware(['auth'])->controller(ProfileController::class)->group(functio
 // Profile End
 
 //Menu Start
-Route::middleware(['auth'])->controller(MenuController::class)->group(function(){
+Route::middleware(['auth'])->controller(MenuController::class)->group(function () {
     Route::get('admin/configuration/menu',  'index');
     Route::post('admin/configuration/menu/store', 'store');
     Route::post('admin/configuration/menu/update', 'update');
@@ -131,7 +134,7 @@ Route::middleware(['auth'])->controller(MenuController::class)->group(function()
 
 
 //UserAccessMenu Start
-Route::middleware(['auth'])->controller(UserRoleController::class)->group(function(){
+Route::middleware(['auth'])->controller(UserRoleController::class)->group(function () {
     Route::get('admin/configuration/userrole/viewrole/{id}', 'viewrole');
     Route::post('admin/configuration/userrole/store', 'store');
     Route::post('admin/configuration/userrole/update', 'update');
@@ -149,7 +152,7 @@ Route::middleware(['auth'])->controller(UserRoleController::class)->group(functi
 //UserAccessMenu End
 
 // Lokasi Start
-Route::middleware(['auth'])->controller(RegionController::class)->group(function(){
+Route::middleware(['auth'])->controller(RegionController::class)->group(function () {
     Route::get('admin/configuration/location/editmodal/{id}', 'editmodal');
     Route::get('admin/configuration/location/delete/{id}', 'destroy');
     Route::post('admin/configuration/location/store', 'store');
@@ -158,7 +161,7 @@ Route::middleware(['auth'])->controller(RegionController::class)->group(function
 // Lokasi End
 
 //Users Start
-Route::middleware(['auth'])->controller(UsersController::class)->group(function(){
+Route::middleware(['auth'])->controller(UsersController::class)->group(function () {
     Route::get('admin/users', 'index');
     Route::get('admin/users/list', 'list');
     Route::get('admin/users/create', 'create');
@@ -174,37 +177,38 @@ Route::middleware(['auth'])->controller(UsersController::class)->group(function(
 
 
 // Items start
-Route::middleware(['auth'])->controller(ItemsController::class)->group(function(){
+Route::middleware(['auth'])->controller(ItemsController::class)->group(function () {
     Route::get('admin/masterdata/items', 'index');
     Route::get('admin/masterdata/items/list', 'list');
+    Route::get('admin/masterdata/items/create', 'create');
     Route::post('admin/masterdata/items/store', 'store');
+    Route::get('admin/masterdata/items/edit/{id}', 'edit');
     Route::post('admin/masterdata/items/update', 'update');
-    Route::get('admin/masterdata/items/addmodal', 'addmodal');
-    Route::get('admin/masterdata/items/infomodal/{id}', 'infomodal');
+    Route::get('admin/masterdata/items/info/{id}', 'info');
     Route::get('admin/masterdata/items/getinfoitemreceipt/{id}', 'getinfoitemreceipt');
-    Route::get('admin/masterdata/items/editmodal/{id}', 'editmodal');
     Route::get('admin/masterdata/items/delete/{id}', 'destroy');
-    // Type Items
-    Route::get('/admin/masterdata/typeitems', 'typeitems');
-    Route::get('/admin/masterdata/typeitems/listtype', 'listtype');
-    Route::get('/admin/masterdata/typeitems/addmodal', 'typeitemsaddmodal');
-    Route::get('/admin/masterdata/typeitems/editmodal/{id}', 'typeitemseditmodal');
-    Route::post('/admin/masterdata/typeitems/store', 'typeitemsstore');
-    Route::post('/admin/masterdata/typeitems/update', 'typeitemsupdate');
-    Route::get('/admin/masterdata/typeitems/delete/{id}', 'typeitemsdelete');
-    // End Type Items
+
+// Another
     Route::get('/admin/masterdata/itemqty', 'itemqty');
     Route::get('/admin/masterdata/itemprice', 'itemprice');
-    Route::get('/admin/masterdata/itemprice/addmodal', 'addModalItemPrice');
-    Route::get('/admin/masterdata/itemprice/getdetailitem/{id}', 'getdetailitem');
-    Route::post('/admin/masterdata/itemprice/store', 'storeitemprice');
-    Route::get('/admin/masterdata/itemprice/editmodal/{id}', 'editmodalitemprice');
-    Route::post('/admin/masterdata/itemprice/update', 'updateitemprice');
+// End Another
 });
 
 
+// Type Items
+Route::middleware(['auth'])->controller(TypeItemController::class)->group(function () {
+    Route::get('/admin/masterdata/typeitems', 'index');
+    Route::get('/admin/masterdata/typeitems/list', 'list');
+    Route::get('/admin/masterdata/typeitems/create', 'create');
+    Route::get('/admin/masterdata/typeitems/edit/{id}', 'edit');
+    Route::post('/admin/masterdata/typeitems/store', 'store');
+    Route::post('/admin/masterdata/typeitems/update', 'update');
+    Route::get('/admin/masterdata/typeitems/delete/{id}', 'destroy');
+});
+// End Type Items
+
 // Partners Start
-Route::middleware(['auth'])->controller(PartnersController::class)->group(function(){
+Route::middleware(['auth'])->controller(PartnersController::class)->group(function () {
     Route::get('admin/masterdata/partners', 'index');
     Route::get('admin/masterdata/partners/list', 'list');
     Route::get('admin/masterdata/partners/info/{id}', 'info');
@@ -214,19 +218,24 @@ Route::middleware(['auth'])->controller(PartnersController::class)->group(functi
     Route::post('admin/masterdata/partners/update', 'update');
     Route::get('admin/masterdata/partners/delete/{id}', 'destroy');
     Route::get('admin/masterdata/partners/getinfoitem/{id}', 'getinfoitem');
-    Route::get('admin/masterdata/typeofpartner', 'typeofpartner');
-    Route::get('admin/masterdata/partners/listtypeofpartners', 'listtypeofpartners');
-    Route::get('admin/masterdata/partners/addtypepartnermodal', 'addtypepartnermodal');
-    Route::post('admin/masterdata/partners/storetypepartners', 'storetypepartners');
-    Route::get('admin/masterdata/partners/edittypepartnermodal/{id}', 'edittypepartnermodal');
-    Route::post('admin/masterdata/partners/updatetypepartners', 'updatetypepartners');
-    Route::get('admin/masterdata/partners/destroytypepartners/{id}', 'destroytypepartners');
 });
-// Principal End
+// Partners End
 
+// Type Partner
+Route::middleware(['auth'])->controller(TypePartnerController::class)->group(function () {
+    Route::get('admin/masterdata/typeofpartner', 'index');
+    Route::get('admin/masterdata/typepartners/list', 'list');
+    Route::get('admin/masterdata/typepartners/create', 'create');
+    Route::post('admin/masterdata/typepartners/store', 'store');
+    Route::get('admin/masterdata/typepartners/edit/{id}', 'edit');
+    Route::post('admin/masterdata/typepartners/update', 'update');
+    Route::get('admin/masterdata/typepartners/destroy/{id}', 'destroy');
+});
+
+// End Type Partner
 
 // UoM Start
-Route::middleware(['auth'])->controller(UoMController::class)->group(function(){
+Route::middleware(['auth'])->controller(UoMController::class)->group(function () {
     Route::get('admin/masterdata/uom', 'index');
     Route::get('admin/masterdata/uom/list', 'list');
     Route::get('admin/masterdata/uom/create', 'create');
@@ -238,7 +247,7 @@ Route::middleware(['auth'])->controller(UoMController::class)->group(function(){
 //End UoM
 
 //Customer
-Route::middleware(['auth'])->controller(CustomerController::class)->group(function(){
+Route::middleware(['auth'])->controller(CustomerController::class)->group(function () {
     Route::get('admin/masterdata/customer', 'index');
     Route::get('admin/masterdata/customer/addmodal', 'addmodal');
     Route::get('admin/masterdata/customer/editmodal/{id}', 'editmodal');
@@ -249,19 +258,19 @@ Route::middleware(['auth'])->controller(CustomerController::class)->group(functi
 // End
 
 // PriceManagement
-Route::middleware(['auth'])->controller(PriceManagementController::class)->group(function(){
-    Route::get('admin/masterdata/pricemanagement','index');
-    Route::get('admin/masterdata/pricemanagement/editmodal/{id}','editmodal');
+Route::middleware(['auth'])->controller(PriceManagementController::class)->group(function () {
+    Route::get('admin/masterdata/pricemanagement', 'index');
+    Route::get('admin/masterdata/pricemanagement/editmodal/{id}', 'editmodal');
     Route::post('admin/masterdata/pricemanagement/update', 'update');
 });
 // End PriceManagement
 
 // Coa
-Route::middleware(['auth'])->controller(CoaController::class)->group(function(){
+Route::middleware(['auth'])->controller(CoaController::class)->group(function () {
     Route::get('admin/masterdata/coa', 'index');
     Route::get('admin/masterdata/coa/list', 'list');
     Route::get('admin/masterdata/coa/create', 'create');
-    Route::get('admin/masterdata/coa/edit/{id}','edit');
+    Route::get('admin/masterdata/coa/edit/{id}', 'edit');
     Route::post('admin/masterdata/coa/store', 'store');
     Route::post('admin/masterdata/coa/update', 'update');
     Route::get('admin/masterdata/coa/delete/{id}', 'destroy');
@@ -270,7 +279,7 @@ Route::middleware(['auth'])->controller(CoaController::class)->group(function(){
 
 
 // Purchase Order
-Route::middleware(['auth'])->controller(PurchaseOrderController::class)->group(function(){
+Route::middleware(['auth'])->controller(PurchaseOrderController::class)->group(function () {
     Route::get('/admin/procurement/purchase-order', 'index');
     Route::get('/admin/procurement/purchase-order/list', 'list');
     Route::get('/admin/procurement/purchase-order/addmodal', 'addmodal');
@@ -293,7 +302,7 @@ Route::middleware(['auth'])->controller(PurchaseOrderController::class)->group(f
 //End Purchase Order
 
 // Items Receipt
-Route::middleware('auth')->controller(ItemsReceiptController::class)->group(function(){
+Route::middleware('auth')->controller(ItemsReceiptController::class)->group(function () {
     Route::get('/admin/procurement/items-receipt', 'index');
     Route::get('/admin/procurement/items-receipt/list', 'list');
     Route::get('/admin/procurement/items-receipt/addmodal', 'addmodal');
@@ -307,21 +316,21 @@ Route::middleware('auth')->controller(ItemsReceiptController::class)->group(func
 
 
 // Purchase Basis Start
-Route::middleware('auth')->controller(PurchaseBasisController::class)->group(function(){
+Route::middleware('auth')->controller(PurchaseBasisController::class)->group(function () {
     Route::get('/admin/procurement/purchase-basis', 'index');
     Route::post('/admin/procurement/purchase-basis/filter', 'filter');
 });
 // Purchase Basis End
 
 // Stock
-Route::middleware('auth')->controller(StockController::class)->group(function(){
+Route::middleware('auth')->controller(StockController::class)->group(function () {
     Route::get('/admin/inventory/stock', 'index');
     Route::post('/admin/inventory/stock/filter', 'filter');
 });
 // End Stock
 
 // Stock in Transit
-Route::middleware('auth')->controller(StockInTransitController::class)->group(function(){
+Route::middleware('auth')->controller(StockInTransitController::class)->group(function () {
     Route::get('/admin/inventory/stock-in-transit', 'index');
     Route::post('/admin/inventory/stock-in-transit/filter', 'filter');
     Route::get('/admin/inventory/stock-in-transit/addtransitmodal', 'addtransitmodal');
@@ -330,11 +339,11 @@ Route::middleware('auth')->controller(StockInTransitController::class)->group(fu
 
 
 // Selling
-Route::middleware('auth')->controller(SellingController::class)->group(function(){
+Route::middleware('auth')->controller(SellingController::class)->group(function () {
     Route::get('/admin/selling/selling', 'index');
 });
 // End Selling
-Route::middleware('auth')->controller(CashierController::class)->group(function(){
+Route::middleware('auth')->controller(CashierController::class)->group(function () {
     Route::get('/admin/cashier', 'index');
 });
 //Cashier
@@ -344,11 +353,7 @@ Route::middleware('auth')->controller(CashierController::class)->group(function(
 
 
 //Blocked Page Start
-Route::get('/blocked', function(){
+Route::get('/blocked', function () {
     return view('admin.blocked');
 });
 //Blocked Page End
-
-
-
-

@@ -20,7 +20,7 @@
                             class="text-muted fs-7 mb-1">{{ Carbon\Carbon::parse($act->created_at)->diffForHumans() }}</span>
                     </div>
                 </div>
-                <div class="p-5  text-dark fw-bold mw-lg-400px text-start" data-kt-element="message-text">
+                <div class="p-3  text-dark fw-bold mw-lg-400px text-start" data-kt-element="message-text">
                     {{ $act->keterangan }}
                 </div>
 
@@ -33,7 +33,7 @@
         @if ($checkRead)
             <div class="py-2"></div>
         @else
-            <div class="d-flex justify-content-end mb-10 ">
+            <div class="d-flex justify-content-end  ">
                 <a href="#" onclick="read({{ $act->id }})" class="btn btn-sm btn-primary">Read</a>
             </div>
         @endif

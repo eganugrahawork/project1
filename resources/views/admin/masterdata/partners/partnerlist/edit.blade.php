@@ -7,26 +7,26 @@
             @csrf
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <input type="hidden" name="id" id="id" value="{{ $partners->id }}">
-                        <label class="required fw-bold fs-6 mb-2">Kode</label>
+                        <label class="required fw-bold fs-6 mb-2">Code</label>
                         <input type="text" name="code" id="code"
                             class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $partners->code }}"
                             required />
                     </div>
-                    <div class="fv-row mb-7">
-                        <label class="required fw-bold fs-6 mb-2">Nama</label>
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Name</label>
                         <input type="text" name="name" id="name"
                             class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $partners->name }}"
                             required />
                     </div>
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Email</label>
                         <input type="email" name="email" id="email"
                             class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $partners->email }}"
                             required />
                     </div>
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class="required form-label fw-bold">Partner Type</label>
                         <div class="col-lg-8">
                             <select class="form-select  form-select-solid mb-3 mb-lg-0" name="partner_type"
@@ -39,30 +39,30 @@
                             </select>
                         </div>
                     </div>
-                    <div class="fv-row mb-7">
-                        <label class="required fw-bold fs-6 mb-2">No Hp</label>
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Phone Number</label>
                         <input type="number" name="phone" id="phone"
                             class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $partners->phone }}"
                             required />
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Fax</label>
                         <input type="text" name="fax" id="fax"
                             class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $partners->fax }}"
                             required />
                     </div>
-                    <div class="fv-row mb-7">
-                        <label class="required fw-bold fs-6 mb-2">Alamat</label>
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Address</label>
                         <textarea name="address" id="address" class="form-control form-control-solid mb-3 mb-lg-0" required>{{ $partners->address }}</textarea>
                     </div>
-                    <div class="fv-row mb-7">
-                        <label class="required fw-bold fs-6 mb-2">Alamat Pengiriman</label>
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Ship address</label>
                         <textarea name="ship_address" id="ship_address" class="form-control form-control-solid mb-3 mb-lg-0" required>{{ $partners->ship_address }}</textarea>
                     </div>
 
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Bank</label>
                         <div class="row">
                             <div class="col-lg-4">
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3 col-lg-6">
                         <label class="form-label fw-bold required">Status</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" id="status"
                             required>
@@ -88,7 +88,12 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end" id="loadingnya">
-                <button class="btn btn-sm btn-primary" id="btn-update">Update Partners</button>
+                <div class="py-2">
+                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
+                </div>
+                <div class="py-2">
+                    <button class="btn btn-sm btn-primary" id="btn-update">Update Partner</button>
+                </div>
             </div>
         </form>
     </div>
