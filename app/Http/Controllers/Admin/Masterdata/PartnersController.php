@@ -24,7 +24,7 @@ class PartnersController extends Controller
         ->addColumn('action', function($model){
             $action = "<a onclick='infoModal($model->id)' class='btn btn-sm btn-icon btn-info btn-hover-rise me-1'><i class='bi bi-info-square'></i></a>";
             if(Gate::allows('edit', ['/admin/masterdata/partners'])){
-                $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
+                $action .= "<a onclick='edit($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
             }
             if(Gate::allows('delete', ['/admin/masterdata/partners'])){
                 $action .= " <a href='/admin/masterdata/partners/delete/$model->id' class='btn btn-sm btn-icon btn-danger btn-hover-rise me-1' id='deletepartners'><i class='bi bi-trash'></i></a>";
@@ -35,8 +35,8 @@ class PartnersController extends Controller
     }
 
 
-    public function addmodal(){
-        return view('admin.masterdata.partners.partnerlist.addmodal', ['partner_type' => PartnerType::all()]);
+    public function create(){
+        return view('admin.masterdata.partners.partnerlist.create', ['partner_type' => PartnerType::all()]);
     }
 
     public function store(Request $request){
@@ -98,9 +98,9 @@ class PartnersController extends Controller
         ->make(true);
     }
 
-    public function editmodal(Request $request){
+    public function edit(Request $request){
 
-        return view('admin.masterdata.partners.partnerlist.editmodal', ['partners' => Partners::where(['id'=> $request->id])->first(), 'partner_type' => PartnerType::all()]);
+        return view('admin.masterdata.partners.partnerlist.edit', ['partners' => Partners::where(['id'=> $request->id])->first(), 'partner_type' => PartnerType::all()]);
     }
 
     public function update(Request $request){

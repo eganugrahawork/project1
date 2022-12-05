@@ -22,7 +22,7 @@ class CoaController extends Controller
         ->addColumn('action', function($model){
             $action = "";
             if(Gate::allows('edit', ['/admin/masterdata/coa'])){
-                $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
+                $action .= "<a onclick='edit($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
             }
             if(Gate::allows('delete', ['/admin/masterdata/coa'])){
                 $action .= " <a href='/admin/masterdata/coa/delete/$model->id' class='btn btn-sm btn-icon btn-danger btn-hover-rise me-1' id='deletecoa'><i class='bi bi-trash'></i></a>";
@@ -45,9 +45,9 @@ class CoaController extends Controller
         })->make(true);
     }
 
-    public function addmodal(){
+    public function create(){
 
-        return view('admin.masterdata.coa.addmodal', ['coa' =>DB::connection('masterdata')->select('Call sp_list_coa()') ]);
+        return view('admin.masterdata.coa.create', ['coa' =>DB::connection('masterdata')->select('Call sp_list_coa()') ]);
     }
 
 
@@ -71,9 +71,9 @@ class CoaController extends Controller
         return response()->json(['success'=> 'Coa Ditambahkan']);
     }
 
-    public function editmodal(Request $request){
+    public function edit(Request $request){
 
-        return view('admin.masterdata.coa.editmodal', ['coa' => Coa::where(['id' => $request->id])->first(), 'parentcoa' => Coa::all()]);
+        return view('admin.masterdata.coa.edit', ['coa' => Coa::where(['id' => $request->id])->first(), 'parentcoa' => Coa::all()]);
     }
 
     public function update(Request $request){

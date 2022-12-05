@@ -50,10 +50,8 @@ class UsersController extends Controller
         ->addColumn('action', function($model){
             $action = "";
             $action = " <a href='/admin/users/show/$model->id' class='btn btn-sm btn-icon btn-primary btn-hover-rise me-1'><i class='bi bi-info-circle'></i></a>";
-
-
                 if(Gate::allows('edit', ['/admin/users'])){
-                    $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
+                    $action .= "<a onclick='edit($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
                 }
                 if(Gate::allows('delete', ['/admin/users'])){
                     $action .= " <a href='/admin/users/delete/$model->id' class='btn btn-sm btn-icon btn-danger btn-hover-rise me-1' id='deleteUsers'><i class='bi bi-trash'></i></a>";
@@ -81,6 +79,13 @@ class UsersController extends Controller
         })->addColumn('region', function($model){
             return $model->regiondetail->name;
         })->rawColumns(['action', 'user'])->make(true);
+    }
+
+    public function create(Request $request){
+        $user = User::where(['id' =>$request->id])->first();
+        $role = UserRole::all();
+        $region = Region::all();
+        return view('admin.users.create', ['title' => 'Create User','role' => $role, 'region' => $region]);
     }
 
     public function store(Request $request){
@@ -122,17 +127,12 @@ class UsersController extends Controller
 
     }
 
-    public function addmodal(Request $request){
-        $user = User::where(['id' =>$request->id])->first();
-        $role = UserRole::all();
-        $region = Region::all();
-        return view('admin.users.addmodal', ['title' => 'Create User','role' => $role, 'region' => $region]);
-    }
-
     public function edit(Request $request){
-        $user = User::where(['id' =>$request->id])->first();
+        $user = User::where(['id' => $request->id])->first();
+        $region = Region::all();
         $role = UserRole::all();
-        return view('admin.users.edit', ['title' => 'Edit User', 'user' => $user, 'role' => $role]);
+        return view('admin.users.edit', ['user' => $user, 'role' => $role, 'region'=>$region]);
+
     }
 
     public function update(Request $request){
@@ -228,11 +228,4 @@ class UsersController extends Controller
         }
     }
 
-    public function editmodal(Request $request){
-        $user = User::where(['id' => $request->id])->first();
-        $region = Region::all();
-        $role = UserRole::all();
-        return view('admin.users.editmodal', ['user' => $user, 'role' => $role, 'region'=>$region]);
-
-    }
 }

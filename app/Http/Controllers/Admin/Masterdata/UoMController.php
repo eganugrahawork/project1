@@ -28,7 +28,7 @@ class UoMController extends Controller
         ->addColumn('action', function($model){
             $action = "";
             if(Gate::allows('edit', ['/admin/masterdata/uom'])){
-                $action .= "<a onclick='editModal($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
+                $action .= "<a onclick='edit($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
             }
             if(Gate::allows('delete', ['/admin/masterdata/uom'])){
                 $action .= " <a href='/admin/masterdata/uom/delete/$model->id' class='btn btn-sm btn-icon btn-danger btn-hover-rise me-1' id='deleteuom'><i class='bi bi-trash'></i></a>";
@@ -38,8 +38,8 @@ class UoMController extends Controller
         ->make(true);
     }
 
-    public function addmodal(){
-        return view('admin.masterdata.uom.addmodal');
+    public function create(){
+        return view('admin.masterdata.uom.create');
     }
 
     public function store(Request $request){
@@ -82,9 +82,9 @@ class UoMController extends Controller
         return response()->json(['success' => 'Uom berhasil dihapus']);
     }
 
-    public function editmodal(Request $request){
+    public function edit(Request $request){
 
-        return view('admin.masterdata.uom.editmodal', ['uom'=> Uom::where(['id'=>$request->id])->first()]);
+        return view('admin.masterdata.uom.edit', ['uom'=> Uom::where(['id'=>$request->id])->first()]);
     }
 
     public function update(Request $request){

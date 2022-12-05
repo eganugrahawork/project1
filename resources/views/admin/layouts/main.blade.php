@@ -33,30 +33,28 @@
 
     <link rel="stylesheet" href="/css/admin/index.css">
 
-    @if (session('darkmode'))
-        <link href="/metronic/assets/plugins/global/plugins.dark.bundle.rtl.css" rel="stylesheet" type="text/css" />
-        <link href="/metronic/assets/css/style.dark.bundle.rtl.css" rel="stylesheet" type="text/css" />
-    @endif
-
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="/argon/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/argon/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="/argon/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link id="pagestyle" href="/argon/assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 </head>
 
-<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled aside-enabled">
+<body id="kt_body" class="g-sidenav-show   bg-gray-100">
 
-    <div class="d-flex flex-column flex-root">
-        <div class="page d-flex flex-row flex-column-fluid">
-            <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-                @include('admin.layouts.header')
+    @include('admin.layouts.aside2')
 
+    <main class="main-content position-relative border-radius-lg ">
+        @include('admin.layouts.navbar2')
 
-                @yield('content')
-
-
-                @include('admin.layouts.footer')
-
-            </div>
+        <div class="container-fluid py-4" id="main_content">
+            @yield('content')
         </div>
-    </div>
 
+        @include('admin.layouts.footer2')
+
+    </main>
 
     <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
         <span class="svg-icon">
@@ -99,12 +97,6 @@
     <script src="/metronic/assets/plugins/custom/datatables/datatables.bundle.js"></script>
 
 
-    <button id="kt_explore_toggle"
-        class="explore-toggle btn btn-sm bg-body btn-color-gray-700 btn-active-primary shadow-sm position-fixed px-5 fw-bolder zindex-2 top-50 mt-10 end-0 transform-90 fs-6 rounded-top-0 notify"
-        title="Online Users" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-trigger="hover">
-        <span id="kt_explore_toggle_label">Online Users</span>
-    </button>
-
     <div id="kt_explore" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="explore"
         data-kt-drawer-activate="true" data-kt-drawer-overlay="true"
         data-kt-drawer-width="{default:'350px', 'lg': '475px'}" data-kt-drawer-direction="end"
@@ -141,7 +133,7 @@
         //         })
         //     }
 
-        function changeDarkMode(){
+        function changeDarkMode() {
             $.get("{{ url('/admin/changedarkmode') }}", {}, function(data) {
                 location.reload()
             })
@@ -215,20 +207,6 @@
     @endif
     {{-- End Condition --}}
 
-
-    <script>
-        $(document).ready(function() {
-            var indukTable = $('#indukTable').DataTable({
-                "bLengthChange": false,
-                "bFilter": true,
-                "bInfo": false,
-            });
-
-            $('#searchIndukTable').keyup(function() {
-                indukTable.search($(this).val()).draw()
-            });
-        });
-    </script>
 
     {{-- Check Connection --}}
     <script type="text/javascript">
@@ -311,24 +289,40 @@
     {{-- End Check Connection --}}
 
 
+    {{-- Argon --}}
+
+    <script src="/argon/assets/js/core/popper.min.js"></script>
+    <script src="/argon/assets/js/core/bootstrap.min.js"></script>
+    <script src="/argon/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/argon/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/argon/assets/js/plugins/chartjs.min.js"></script>
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="/argon/assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+
+    {{-- End Argon --}}
+
     {{-- Menu --}}
     @if (!session('menu'))
         <script>
             var loadingMenu =
                 "<button class='btn btn-primary' type='button' disabled><span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Loading...</button>"
 
-            $('#kt_header_menu').html(loadingMenu)
+            $('#kt_aside_menu').html(loadingMenu)
 
             menu();
 
             function menu() {
                 $.get("{{ url('/admin/loadmenu/0') }}/" + {{ auth()->user()->role_id }}, {}, function(data, status) {
-                    $('#kt_header_menu').html(data)
+                    $('#kt_aside_menu').html(data)
                 })
             }
         </script>
     @endif
     {{-- End Menu --}}
+
+
     @yield('js')
 
 </body>

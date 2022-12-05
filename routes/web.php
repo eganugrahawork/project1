@@ -161,12 +161,10 @@ Route::middleware(['auth'])->controller(RegionController::class)->group(function
 Route::middleware(['auth'])->controller(UsersController::class)->group(function(){
     Route::get('admin/users', 'index');
     Route::get('admin/users/list', 'list');
-    Route::get('admin/users/addmodal', 'addmodal');
-    Route::get('admin/users/editmodal/{id}', 'editmodal');
-    Route::get('admin/users/show/{id}', 'show');
     Route::get('admin/users/create', 'create');
-    Route::post('admin/users/store', 'store');
     Route::get('admin/users/edit/{id}', 'edit');
+    Route::get('admin/users/show/{id}', 'show');
+    Route::post('admin/users/store', 'store');
     Route::post('admin/users/update', 'update');
     Route::get('admin/users/delete/{id}', 'destroy');
     Route::post('admin/users/checkusername', 'checkusername');
@@ -209,13 +207,13 @@ Route::middleware(['auth'])->controller(ItemsController::class)->group(function(
 Route::middleware(['auth'])->controller(PartnersController::class)->group(function(){
     Route::get('admin/masterdata/partners', 'index');
     Route::get('admin/masterdata/partners/list', 'list');
+    Route::get('admin/masterdata/partners/info/{id}', 'info');
+    Route::get('admin/masterdata/partners/create', 'create');
     Route::post('admin/masterdata/partners/store', 'store');
+    Route::get('admin/masterdata/partners/edit/{id}', 'edit');
     Route::post('admin/masterdata/partners/update', 'update');
     Route::get('admin/masterdata/partners/delete/{id}', 'destroy');
-    Route::get('admin/masterdata/partners/infomodal/{id}', 'infomodal');
     Route::get('admin/masterdata/partners/getinfoitem/{id}', 'getinfoitem');
-    Route::get('admin/masterdata/partners/editmodal/{id}', 'editmodal');
-    Route::get('admin/masterdata/partners/addmodal', 'addmodal');
     Route::get('admin/masterdata/typeofpartner', 'typeofpartner');
     Route::get('admin/masterdata/partners/listtypeofpartners', 'listtypeofpartners');
     Route::get('admin/masterdata/partners/addtypepartnermodal', 'addtypepartnermodal');
@@ -231,8 +229,8 @@ Route::middleware(['auth'])->controller(PartnersController::class)->group(functi
 Route::middleware(['auth'])->controller(UoMController::class)->group(function(){
     Route::get('admin/masterdata/uom', 'index');
     Route::get('admin/masterdata/uom/list', 'list');
-    Route::get('admin/masterdata/uom/addmodal', 'addmodal');
-    Route::get('admin/masterdata/uom/editmodal/{id}', 'editmodal');
+    Route::get('admin/masterdata/uom/create', 'create');
+    Route::get('admin/masterdata/uom/edit/{id}', 'edit');
     Route::get('admin/masterdata/uom/delete/{id}', 'destroy');
     Route::post('admin/masterdata/uom/store', 'store');
     Route::post('admin/masterdata/uom/update', 'update');
@@ -262,8 +260,8 @@ Route::middleware(['auth'])->controller(PriceManagementController::class)->group
 Route::middleware(['auth'])->controller(CoaController::class)->group(function(){
     Route::get('admin/masterdata/coa', 'index');
     Route::get('admin/masterdata/coa/list', 'list');
-    Route::get('admin/masterdata/coa/addmodal', 'addmodal');
-    Route::get('admin/masterdata/coa/editmodal/{id}','editmodal');
+    Route::get('admin/masterdata/coa/create', 'create');
+    Route::get('admin/masterdata/coa/edit/{id}','edit');
     Route::post('admin/masterdata/coa/store', 'store');
     Route::post('admin/masterdata/coa/update', 'update');
     Route::get('admin/masterdata/coa/delete/{id}', 'destroy');
