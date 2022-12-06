@@ -221,7 +221,7 @@
             $(e).parent().parent().find('#item_id').html(data.html);
             $(e).parent().html(
                 "<button onclick='backitem(this)' type='button' id='getbackitem' class='btn btn-sm btn-success'>Back</button>"
-                );
+            );
         })
     }
 
@@ -233,7 +233,7 @@
                 $(e).parent().parent().find('#item_id').html(data.html);
                 $(e).parent().html(
                     "<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-primary'>All</button>"
-                    );
+                );
             })
         } else {
             $(e).parent().parent().find('#item_id').html("<option>Choose Partner First</option>");
@@ -362,26 +362,62 @@
 
     $('#add-form').submit(function(event) {
         event.preventDefault();
-        $('#loadingnya').html(
+
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Save This Data ?',
+            text: "Data will be save to the database!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Save!',
+            cancelButtonText: 'Not, Cancel!',
+            reverseButtons: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#loadingnya').html(
             '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span>')
-        $.ajax({
-            url: "{{ url('/admin/procurement/purchase-order/store') }}",
-            type: 'POST',
-            data: $('#add-form').serialize(), // Remember that you need to have your csrf token included
-            dataType: 'json',
-            success: function(response) {
-                Swal.fire(
-                    'Success',
-                    response.success,
+                $.ajax({
+                    url: "{{ url('/admin/procurement/purchase-order/store') }}",
+                    type: 'POST',
+                    data: $('#add-form')
+                .serialize(), // Remember that you need to have your csrf token included
+                    dataType: 'json',
+                    success: function(response) {
+                        Swal.fire(
+                            'Success',
+                            response.success,
+                            'success'
+                        )
+                        $('#content').hide();
+                        $('#indexContent').show();
+                        tablePo.ajax.reload()
+                    },
+                    error: function(response) {
+                        // Handle error
+                    }
+                });
+
+            } else if (
+
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    '',
                     'success'
                 )
-                $('#content').hide();
-                $('#indexContent').show();
-                tablePo.ajax.reload()
-            },
-            error: function(response) {
-                // Handle error
             }
-        });
+        })
+
+
+
     });
 </script>

@@ -56,7 +56,6 @@
         </div>
         <!--end::Post-->
     </div>
-
 @endsection
 
 @section('js')
@@ -70,7 +69,7 @@
                 $('#content').show()
                 $('#loading-add').html(
                     '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
-                    )
+                )
             })
         }
 
@@ -83,7 +82,7 @@
                 $('#content').show()
                 $('#loading-add').html(
                     '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
-                    )
+                )
             })
         }
 
@@ -96,7 +95,7 @@
                 $('#content').show()
                 $('#loading-add').html(
                     '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
-                    )
+                )
             })
         }
 
@@ -109,13 +108,15 @@
                 $('#content').show()
                 $('#loading-add').html(
                     '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
-                    )
+                )
             })
         }
 
         function tutupContent() {
             $('#content').hide()
             $('#indexContent').show()
+
+            $(document).scrollTop($(document).height())
         }
 
         var tablePo = $('#tablePo').DataTable({
@@ -189,7 +190,7 @@
                 if (result.isConfirmed) {
                     $('#loading-add').html(
                         '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>'
-                        )
+                    )
                     $.ajax({
                         type: "GET",
                         url: href,
@@ -202,7 +203,7 @@
                             tablePo.ajax.reload(null, false);
                             $('#loading-add').html(
                                 '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
-                                )
+                            )
                         }
                     })
 
@@ -244,7 +245,7 @@
                 if (result.isConfirmed) {
                     $('#loading-add').html(
                         '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>'
-                        )
+                    )
                     $.ajax({
                         type: "GET",
                         url: href,
@@ -256,7 +257,7 @@
                             )
                             $('#loading-add').html(
                                 '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
-                                )
+                            )
                         }
                     })
 
