@@ -3,90 +3,78 @@
 
 @section('content')
     <div class="success-message" data-successmessage="{{ session('success') }}"></div>
-    <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
-        <!--begin::Container-->
-        <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
-            <!--begin::Page title-->
-            <div class="page-title d-flex flex-column me-3">
-                <!--begin::Title-->
-                <h1 class="d-flex text-dark fw-bolder my-1 fs-3">{{ $title }}</h1>
-                <!--end::Title-->
-                <!--begin::Breadcrumb-->
-                <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
-                    <li class="breadcrumb-item text-gray-600">
-                        <a href="/admin/dashboard" class="text-gray-600 text-hover-primary">{{ auth()->user()->name }} :
-                            {{ auth()->user()->userrole->role }}</a>
-                    </li>
 
-                </ul>
-            </div>
-        </div>
-    </div>
 
     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
         <div class="content flex-row-fluid" id="kt_content">
-            <div class="row gy-0 gx-10">
+            <div class="card  px-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <h5>Loccana</h5>
+                        </div>
+                        <div class="col-lg-11">
+                            <ul class="nav row">
+                                <li class="nav-item col-12 col-lg  mb-lg-0">
+                                    <a class="nav-link active text-gray-600 fs-7 fw-bolder" data-bs-toggle="tab"
+                                        href="#kt_general_widget_1_1">
+                                        <i class="bi bi-list"></i>
+                                        <span class="fs-6 fw-bold">Menu Data</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item col-12 col-lg  mb-lg-0">
+                                    <a class="nav-link text-gray-600 fs-7 fw-bolder" data-bs-toggle="tab"
+                                        href="#kt_general_widget_1_7">
+                                        <i class="bi bi-person-badge-fill"></i>
+                                        <span class="fs-6 fw-bold">Role Data</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item col-12 col-lg  mb-lg-0">
+                                    <a class="nav-link text-gray-600 fs-7 fw-bolder" data-bs-toggle="tab"
+                                        href="#kt_general_widget_1_8">
+                                        <i class="bi bi-geo"></i>
+                                        <span class="fs-6 fw-bold">Region Data</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item col-12 col-lg  mb-lg-0">
+                                    <a class="nav-link text-gray-600 fs-7 fw-bolder" data-bs-toggle="tab"
+                                        href="#kt_general_widget_1_6">
+                                        <i class="bi bi-signpost-split"></i>
+                                        <span class="fs-6 fw-bold">Access Control</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item col-12 col-lg mb-lg-0">
+                                    <a class="nav-link text-gray-600 fs-7 fw-bolder" data-bs-toggle="tab"
+                                        href="#kt_general_widget_1_9">
+                                        <i class="bi bi-signpost-split"></i>
+                                        <span class="fs-6 fw-bold">Permission Control</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row gy-0 gx-10 py-3">
                 <div class="col-xl-12">
-                    <div class="mb-10">
-                        <ul class="nav row mb-10">
-                            <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                                <a class="nav-link active btn btn-flex text-white btn btn-primary" data-bs-toggle="tab"
-                                    href="#kt_general_widget_1_1">
-                                    <i class="bi bi-list"></i>
-                                    <span class="fs-6 fw-bold">Menu Data</span>
-                                </a>
-                            </li>
-                            <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                                <a class="nav-link btn btn-flex text-white btn btn-primary" data-bs-toggle="tab"
-                                    href="#kt_general_widget_1_7">
-                                    <i class="bi bi-person-badge-fill"></i>
-                                    <span class="fs-6 fw-bold">Role Data</span>
-                                </a>
-                            </li>
-                            <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                                <a class="nav-link btn btn-flex text-white btn btn-primary" data-bs-toggle="tab"
-                                    href="#kt_general_widget_1_8">
-                                    <i class="bi bi-geo"></i>
-                                    <span class="fs-6 fw-bold">Region Data</span>
-                                </a>
-                            </li>
-                            <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                                <a class="nav-link btn btn-flex text-white btn btn-primary" data-bs-toggle="tab"
-                                    href="#kt_general_widget_1_6">
-                                    <i class="bi bi-signpost-split"></i>
-                                    <span class="fs-6 fw-bold">Access Control</span>
-                                </a>
-                            </li>
-                            <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
-                                <a class="nav-link btn btn-flex text-white btn btn-primary" data-bs-toggle="tab"
-                                    href="#kt_general_widget_1_9">
-                                    <i class="bi bi-signpost-split"></i>
-                                    <span class="fs-6 fw-bold">Permission Control</span>
-                                </a>
-                            </li>
-                        </ul>
+                    <div class="mb-5">
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="kt_general_widget_1_1">
                                 <div class="card">
-                                    <div class="card-header border-0 pt-5">
+                                    <div class="card-header border-0 ">
                                         <div class="card-title align-items-start flex-column">
                                             <span class="card-label fw-bolder fs-3 mb-1">Menu</span>
                                             <span class="text-muted mt-1 fw-bold fs-7"></span>
                                             <div class="d-flex align-items-center position-relative my-1">
-                                                <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
-                                                            height="2" rx="1"
-                                                            transform="rotate(45 17.0365 15.1223)" fill="black" />
-                                                        <path
-                                                            d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                                                            fill="black" />
-                                                    </svg>
-                                                </span>
-                                                <input type="text" id="searchMenuTable"
-                                                    class="form-control form-control-solid w-250px ps-15"
-                                                    placeholder="Search.." />
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i
+                                                                class="ni ni-zoom-split-in"></i></span>
+                                                        <input class="form-control" placeholder="Search"
+                                                            id="searchMenuTable" type="text">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="card-toolbar">
@@ -99,11 +87,11 @@
                                             </button>
                                             <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px"
                                                 data-kt-menu="true" id="kt_menu_617b94b52ee36">
-                                                <div class="px-7 py-5">
+                                                <div class="px-3 ">
                                                     <div class="fs-5 text-dark fw-bolder">Add Menues</div>
                                                 </div>
                                                 <div class="separator border-gray-200"></div>
-                                                <div class="px-7 py-5" id="addmenuparent">
+                                                <div class="px-3" id="addmenuparent">
                                                     <form action="/admin/configuration/menu/store" method="post">
                                                         @csrf
                                                         <label class="form-label fw-bold ">Parent</label>
@@ -115,8 +103,7 @@
                                                             @endforeach
                                                         </select>
                                                         <label class="form-label fw-bold">Name</label>
-                                                        <input type="text" name="name" class="form-control"
-                                                            required>
+                                                        <input type="text" name="name" class="form-control" required>
                                                         <label class="form-label fw-bold">Url</label>
                                                         <input type="text" class="form-control" name="url">
                                                         <label class="form-label fw-bold">Icon</label>
@@ -137,21 +124,35 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-body py-3">
+                                    <div class="card-body pb-5 px-5">
                                         <div class="table-responsive">
                                             <table class="table align-middle table-row-dashed" id="menuTable">
                                                 <thead>
                                                     <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                                                        <th class="min-w-50px">No</th>
-                                                        <th class="min-w-150px">Menu</th>
-                                                        <th class="min-w-50px">Parent</th>
-                                                        <th class="min-w-125px">Url</th>
-                                                        <th class="min-w-125px">Icon</th>
-                                                        <th class="min-w-125px">Status</th>
-                                                        <th class="text-end min-w-100px">Action</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                                            No</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                                            Menu</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                                            Parent</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                                            Url</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                                            Icon</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                                            Status</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                                            Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="text-gray-600 fw-bold">
+                                                <tbody class="text-gray-600 text-md fw-bold" style="border:none;">
                                                     @foreach ($menu as $m)
                                                         <tr>
                                                             <td>{{ $loop->iteration }}</td>
@@ -166,7 +167,7 @@
                                                             <td>{{ $m->url }}</td>
                                                             <td>{{ $m->icon }}</td>
                                                             <td>{{ $m->status }}</td>
-                                                            <td class="text-end">
+                                                            <td>
                                                                 <a class="btn btn-sm btn-warning"
                                                                     onclick="editModalMenu({{ $m->id }})"><i
                                                                         class="bi bi-pencil-square"></i></a>
@@ -184,8 +185,8 @@
                             </div>
 
                             <div class="tab-pane fade" id="kt_general_widget_1_6">
-                                <div class="card">
-                                    <div class="card-header border-0 pt-5">
+                                <div class="card px-5 pb-5">
+                                    <div class="card-header border-0">
                                         <h3 class="card-title align-items-start flex-column">
                                             <span class="card-label fw-bolder fs-3 mb-1">Access</span>
                                         </h3>
@@ -210,18 +211,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-body py-3">
+                                    <div class="card-body py-3 mb-3">
                                         <div class="row">
                                             @foreach ($role as $r)
                                                 <div class="col-md-4">
-                                                    <div class="card card-flush h-md-100">
+                                                    <div class="card card-flush h-md-100 shadow">
                                                         <div class="card-header">
                                                             <div class="card-title">
                                                                 <h2>{{ $r->role }}</h2>
                                                             </div>
                                                         </div>
                                                         @php
-                                                            $getmenu = DB::connection('masterdata')->select("select b.name from menu_access a join menus b on a.menu_id = b.id where role_id=$r->id ");
                                                             $getUser = DB::connection('masterdata')->select("select username from users where role_id = $r->id");
                                                             $jmlUser = count($getUser);
                                                         @endphp
@@ -229,19 +229,7 @@
                                                         <div class="card-body pt-1">
                                                             <div class="fw-bolder text-gray-600 mb-5">Total users with this
                                                                 role: {{ $jmlUser }}</div>
-                                                            <div class="d-flex flex-column text-gray-600">
-                                                                <h5>Menu</h5>
-                                                                <div class="row">
-                                                                    @foreach ($getmenu as $gm)
-                                                                        <div
-                                                                            class="d-flex align-items-center py-2 col-lg-6">
-                                                                            <span
-                                                                                class="bullet bg-primary me-3"></span>{{ $gm->name }}
-                                                                        </div>
-                                                                    @endforeach
-                                                                </div>
 
-                                                            </div>
                                                         </div>
                                                         <div class="card-footer flex-wrap pt-0">
                                                             <a href="/admin/configuration/userrole/viewrole/{{ $r->id }}"
@@ -262,24 +250,18 @@
 
                             <div class="tab-pane fade" id="kt_general_widget_1_7">
                                 <div class="card">
-                                    <div class="card-header border-0 pt-5">
+                                    <div class="card-header border-0">
                                         <h3 class="card-title align-items-start flex-column">
                                             <span class="card-label fw-bolder fs-3 mb-1">Role</span>
                                             <div class="d-flex align-items-center position-relative my-1">
-                                                <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.5" x="17.0365" y="15.1223"
-                                                            width="8.15546" height="2" rx="1"
-                                                            transform="rotate(45 17.0365 15.1223)" fill="black" />
-                                                        <path
-                                                            d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                                                            fill="black" />
-                                                    </svg>
-                                                </span>
-                                                <input type="text" id="searchRole"
-                                                    class="form-control form-control-solid w-250px ps-15"
-                                                    placeholder="Role Search" />
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i
+                                                                class="ni ni-zoom-split-in"></i></span>
+                                                        <input class="form-control" placeholder="Search"
+                                                            id="searchRoleTable" type="text">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </h3>
                                         <div class="card-toolbar">
@@ -292,11 +274,11 @@
                                             </button>
                                             <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px"
                                                 data-kt-menu="true" id="kt_menu_617b94b537c9a">
-                                                <div class="px-7 py-5">
+                                                <div class="">
                                                     <div class="fs-5 text-dark fw-bolder">Add Role</div>
                                                 </div>
                                                 <div class="separator border-gray-200"></div>
-                                                <div class="px-7 py-5">
+                                                <div class="">
                                                     <form action="/admin/configuration/userrole/store" method="post">
                                                         @csrf
                                                         <label class="form-label fw-bold">Role</label>
@@ -316,17 +298,23 @@
                                             <table class="table align-middle table-row-dashed" id="roleTable">
                                                 <thead>
                                                     <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                                                        <th class="min-w-50px">No</th>
-                                                        <th class="min-w-100px">Role</th>
-                                                        <th class="text-end min-w-100px">Action</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                                            No</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                                            Role</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                                            Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="text-gray-600 fw-bold">
+                                                <tbody class="text-gray-600 text-md fw-bold" style="border:none;">
                                                     @foreach ($role as $r)
                                                         <tr>
                                                             <td>{{ $loop->iteration }}</td>
                                                             <td>{{ $r->role }}</td>
-                                                            <td class="text-end">
+                                                            <td>
                                                                 <a class="btn btn-sm btn-warning"
                                                                     onclick="editModalRole({{ $r->id }})"><i
                                                                         class="bi bi-pencil-square"></i></a>
@@ -345,24 +333,18 @@
 
                             <div class="tab-pane fade" id="kt_general_widget_1_8">
                                 <div class="card">
-                                    <div class="card-header border-0 pt-5">
+                                    <div class="card-header border-0">
                                         <h3 class="card-title align-items-start flex-column">
                                             <span class="card-label fw-bolder fs-3 mb-1">Region</span>
                                             <div class="d-flex align-items-center position-relative my-1">
-                                                <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.5" x="17.0365" y="15.1223"
-                                                            width="8.15546" height="2" rx="1"
-                                                            transform="rotate(45 17.0365 15.1223)" fill="black" />
-                                                        <path
-                                                            d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                                                            fill="black" />
-                                                    </svg>
-                                                </span>
-                                                <input type="text" id="searchRegion"
-                                                    class="form-control form-control-solid w-250px ps-15"
-                                                    placeholder="Region Search" />
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i
+                                                                class="ni ni-zoom-split-in"></i></span>
+                                                        <input class="form-control" placeholder="Search"
+                                                            id="searchRegion" type="text">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </h3>
                                         <div class="card-toolbar">
@@ -375,11 +357,11 @@
                                             </button>
                                             <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px"
                                                 data-kt-menu="true" id="kt_menu_617b94b537c9a">
-                                                <div class="px-7 py-5">
+                                                <div class="">
                                                     <div class="fs-5 text-dark fw-bolder">Add Region</div>
                                                 </div>
                                                 <div class="separator border-gray-200"></div>
-                                                <div class="px-7 py-5">
+                                                <div class="">
                                                     <form action="/admin/configuration/location/store" method="post">
                                                         @csrf
                                                         <label class="form-label fw-bold">Name</label>
@@ -398,17 +380,23 @@
                                             <table class="table align-middle table-row-dashed" id="regionTable">
                                                 <thead>
                                                     <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                                                        <th class="min-w-50px">No</th>
-                                                        <th class="min-w-100px">Region</th>
-                                                        <th class="text-end min-w-100px">Action</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                                            No</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                                            Region</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                                            Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="text-gray-600 fw-bold">
+                                                <tbody class="text-gray-600 text-md fw-bold" style="border:none;">
                                                     @foreach ($region as $r)
                                                         <tr>
                                                             <td>{{ $loop->iteration }}</td>
                                                             <td>{{ $r->name }}</td>
-                                                            <td class="text-end">
+                                                            <td>
                                                                 <a class="btn btn-sm btn-warning"
                                                                     onclick="editModalLocation({{ $r->id }})"><i
                                                                         class="bi bi-pencil-square"></i></a>
@@ -427,7 +415,7 @@
 
                             <div class="tab-pane fade" id="kt_general_widget_1_9">
                                 <div class="card">
-                                    <div class="card-header border-0 pt-5">
+                                    <div class="card-header border-0">
                                         <h3 class="card-title align-items-start flex-column">
                                             <span class="card-label fw-bolder fs-3 mb-1">Permission Control</span>
                                         </h3>
@@ -452,14 +440,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-body py-3">
+                                    <div class="card-body  py-3">
                                         <div class="row">
                                             @foreach ($role as $r)
                                                 <div class="col-md-4">
-                                                    <div class="card card-flush h-md-100 bg-warna">
+                                                    <div class="card shadow card-flush h-md-100">
                                                         <div class="card-header">
                                                             <div class="card-title">
-                                                                <h2 class="text-white">{{ $r->role }}</h2>
+                                                                <h2 class="text-gray-600 fw-bolder">{{ $r->role }}
+                                                                </h2>
                                                             </div>
                                                         </div>
                                                         <div class="card-body pt-1">
@@ -563,7 +552,7 @@
                 "bInfo": false,
                 'pageLength': 5
             });
-            $('#searchRole').keyup(function() {
+            $('#searchRoleTable').keyup(function() {
                 roleTable.search($(this).val()).draw()
             });
         });
