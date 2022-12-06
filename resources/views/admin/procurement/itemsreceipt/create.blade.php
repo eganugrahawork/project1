@@ -157,9 +157,10 @@
     });
 
     function balanceEdit(e) {
-        var order_qty = $(e).parent().parent().find('#qty_order').val();
+        var order_qty = $(e).parent().parent().find('#nowBalance').val();
         var qty = $(e).val();
 
         $(e).parent().parent().find('#balance').val(order_qty - qty);
+
     }
 </script>

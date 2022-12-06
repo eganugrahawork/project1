@@ -222,11 +222,11 @@ class PurchaseOrderController extends Controller {
 
                         <div class='fv-row mb-3 col-lg-1'>
                         <label class='required fw-bold fs-6 mb-2'>Qty</label>
-                        <input type='number' name='qty[]' id='qty' onkeyup='hitungByQty(this)'  class='form-control form-control-solid mb-3 mb-lg-0'  required/>
+                        <input type='number' name='qty[]' id='qty' onkeyup='hitungByQty(this)' value='0' class='form-control form-control-solid mb-3 mb-lg-0'  required/>
                         </div>
                         <div class='fv-row mb-3 col-lg-1' id='discount_parent'>
                             <label class='required fw-bold fs-6 mb-2'>Discount</label>
-                            <input type='number' name='discount[]' id='discount'  onkeyup='hitungByDiscount(this)' class='form-control form-control-solid mb-3 mb-lg-0'  required/>
+                            <input type='number' name='discount[]' id='discount'  onkeyup='hitungByDiscount(this)' value='0' class='form-control form-control-solid mb-3 mb-lg-0'  required/>
                         </div>
                         <div class='fv-row mb-3 col-lg-2'>
                         <label class='required fw-bold fs-6 mb-2'>Total</label>

@@ -175,11 +175,12 @@
 
             <div class="d-flex justify-content-center" id="loadingnya">
                 <div class="px-2">
-                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
-                </div>
-                <div class="px-2">
                     <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Save</button>
                 </div>
+                <div class="px-2">
+                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
+                </div>
+
             </div>
         </form>
     </div>

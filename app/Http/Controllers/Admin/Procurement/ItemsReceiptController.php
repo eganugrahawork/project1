@@ -53,9 +53,21 @@ class ItemsReceiptController extends Controller {
     public function getdatapo(Request $request) {
 
         $po = DB::connection('procurement')->select('Call sp_search_id(' . $request->id . ')');
-
         $html = '';
         foreach ($po as $item) {
+            // $getBalance = DB::connection('procurement')->select('SELECT * FROM items_receipt_details a WHERE a.`po_item_id` = ' . $item->po_item_id . ' ORDER BY a.`id` DESC LIMIT 1');
+            // if (count($getBalance) > 0) {
+            //     $balance = $getBalance[0]->qty_balance;
+            // } else {
+            //     $balance = $item->qty;
+            // }
+
+            // if ($balance < 1) {
+            //     $disabled = 'disabled';
+            // } else {
+            //     $disabled = '';
+            // }
+
             $html .= "<div class='row'>
             <input type='hidden' name='po_item_id[]' value='$item->po_item_id'/>
             <input type='hidden' name='unit_price[]' value='$item->unit_price'/>
@@ -69,26 +81,27 @@ class ItemsReceiptController extends Controller {
                 <label class=' fw-bold fs-6 mb-2'>Order Qty</label>
                 <input type='number' name='qty_order[]' id='qty_order' value='$item->qty' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
             </div>
+            <input type='hidden'  id='nowBalance' value='$item->qty_balance' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class=' fw-bold fs-6 mb-2'>Balance</label>
-                <input type='number' name='balance[]' id='balance' value='$item->qty' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
+                <input type='number' name='balance[]' id='balance' value='$item->qty_balance' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Receipt</label>
-                <input type='number' name='qty[]' id='qty' onkeyup='balanceEdit(this)' value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
+                <input type='number' name='qty[]' id='qty' onkeyup='balanceEdit(this)' value='0'  class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
             <div class='fv-row mb-3 col-lg-1'>
                 <label class='required fw-bold fs-6 mb-2'>Bonus</label>
-                <input type='number' name='qty_bonus[]' id='qty_bonus' value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
+                <input type='number' name='qty_bonus[]' id='qty_bonus' value='0'  class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
 
             <div class='fv-row mb-3 col-lg-1'>
                 <label class='required fw-bold fs-6 mb-2'>Discount</label>
-                <input type='number' name='qty_discount[]' id='qty_discount' value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
+                <input type='number' name='qty_discount[]' id='qty_discount'  value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Note</label>
-                <input type='text' name='notes[]' id='notes' class='form-control form-control-solid mb-3 mb-lg-0 descriptionnya'  value='-'/>
+                <input type='text' name='notes[]' id='notes'  class='form-control form-control-solid mb-3 mb-lg-0 descriptionnya'  value='-'/>
             </div>
         </div>";
         }
@@ -133,7 +146,7 @@ class ItemsReceiptController extends Controller {
             $po_item_id = $request->po_item_id[$i];
             $qty_order = $request->qty_order[$i];
             $unit_price = $request->unit_price[$i];
-            $balance= $request->balance[$i];
+            $balance = $request->balance[$i];
             // End Declare
 
 
@@ -173,7 +186,7 @@ class ItemsReceiptController extends Controller {
 
                     )");
 
-                    DB::connection('procurement')->select("call sp_insert_item_history(
+            DB::connection('procurement')->select("call sp_insert_item_history(
                         $item_id,
                         $itemReceipt->id,
                         $unit_price,
@@ -182,7 +195,7 @@ class ItemsReceiptController extends Controller {
                         $qty_bonus,
                         1
                     )");
-                    // 1 diatas berarti status bernilai po
+            // 1 diatas berarti status bernilai po
         }
         return response()->json(['success' => 'Item Receiving']);
     }
