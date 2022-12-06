@@ -88,7 +88,7 @@ class ItemsReceiptController extends Controller {
             </div>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Note</label>
-                <input type='text' name='notes[]' id='notes' class='form-control form-control-solid mb-3 mb-lg-0 descriptionnya'  required/>
+                <input type='text' name='notes[]' id='notes' class='form-control form-control-solid mb-3 mb-lg-0 descriptionnya'  value='-'/>
             </div>
         </div>";
         }
@@ -155,7 +155,7 @@ class ItemsReceiptController extends Controller {
                         '$itemReceipt->id',
                         $po_item_id,
                         $mutationnya->id,
-                        $amountMutation,
+                        $qty,
                         $balance,
                         '$notes'
                     )");
