@@ -87,7 +87,7 @@
             </div>
             <hr>
 
-            <div class="d-flex justify-content-center   " id="loadingnya">
+            <div class="d-flex justify-content-center" id="loadingnya">
                 <div class="px-2">
                     <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Confirm</button>
                 </div>
@@ -138,7 +138,7 @@
             url: "{{ url('/admin/procurement/items-receipt/store') }}",
             type: 'post',
             data: $('#addItemReceipt')
-        .serialize(), // Remember that you need to have your csrf token included
+                .serialize(), // Remember that you need to have your csrf token included
             dataType: 'json',
             success: function(response) {
                 Swal.fire(
@@ -155,4 +155,11 @@
             }
         });
     });
+
+    function balanceEdit(e) {
+        var order_qty = $(e).parent().parent().find('#qty_order').val();
+        var qty = $(e).val();
+
+        $(e).parent().parent().find('#balance').val(order_qty - qty);
+    }
 </script>

@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4>Info PO {{ $info[0]->number_po }}</h4>
+        <h4>Confirmation PO {{ $info[0]->number_po }}</h4>
     </div>
     <div class="card-body">
         <div class="row">

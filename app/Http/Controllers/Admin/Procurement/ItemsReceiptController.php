@@ -52,7 +52,7 @@ class ItemsReceiptController extends Controller {
 
     public function getdatapo(Request $request) {
 
-        $po = DB::connection('procurement')->select('Call sp_search_id(' . $request->id . ')');
+        $po = DB::connection('procurement')->select('Call sp_search_id_item_receipt(' . $request->id . ')');
 
         $html = '';
         foreach ($po as $item) {
@@ -71,11 +71,11 @@ class ItemsReceiptController extends Controller {
             </div>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class=' fw-bold fs-6 mb-2'>Balance</label>
-                <input type='number' name='balance[]' id='balance' value='$item->qty' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
+                <input type='number' name='balance[]' id='balance' value='$item->qty_balance' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Receipt</label>
-                <input type='number' name='qty[]' id='qty' value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
+                <input type='number' name='qty[]' id='qty' onkeyup='balanceEdit(this)' value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
             <div class='fv-row mb-3 col-lg-1'>
                 <label class='required fw-bold fs-6 mb-2'>Bonus</label>
@@ -133,6 +133,7 @@ class ItemsReceiptController extends Controller {
             $po_item_id = $request->po_item_id[$i];
             $qty_order = $request->qty_order[$i];
             $unit_price = $request->unit_price[$i];
+            $balance= $request->balance[$i];
             // End Declare
 
 
@@ -155,6 +156,7 @@ class ItemsReceiptController extends Controller {
                         $po_item_id,
                         $mutationnya->id,
                         $amountMutation,
+                        $balance,
                         '$notes'
                     )");
 

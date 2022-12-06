@@ -112,7 +112,8 @@
                     {data: 'code', name: 'code'},
                     {data: 'name', name: 'name'},
                     {data: 'order_datenya', name: 'order_datenya'},
-                    {data: 'status', name: 'status'},
+                    {data: 'total_po', name: 'total_po',
+                    render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')},
                     {data: 'status', name: 'status'},
                     {data: 'status', name: 'status'},
                     {data: 'action', name: 'action'}

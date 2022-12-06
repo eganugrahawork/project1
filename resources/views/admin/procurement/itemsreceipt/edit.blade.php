@@ -7,7 +7,7 @@
             @csrf
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class="required form-label fw-bold">Po Number</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="purchase_order_id"
                             id="purchase_order_id" required>
@@ -17,57 +17,59 @@
                         @endforeach --}}
                         </select>
                     </div>
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Po Code</label>
                         <input type="text" id="code" name="code" readonly
                             class="form-control form-control-white mb-3 mb-lg-0" required />
                     </div>
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Date</label>
                         <input type="text" name="order_date" id="order_date" readonly
                             class="form-control form-control-white mb-3 mb-lg-0" required />
                     </div>
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class=" form-label fw-bold">Partners</label>
                         <input type="text" name="partner" id="partner" readonly
                             class="form-control form-control-white mb-3 mb-lg-0" required />
                     </div>
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Address</label>
                         <textarea type="text" name="address" id="address" readonly class="form-control form-control-white mb-3 mb-lg-0"></textarea>
                     </div>
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Phone Number</label>
                         <input type="text" name="phone" id="phone" readonly
                             class="form-control form-control-white mb-3 mb-lg-0" required />
                     </div>
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Fax</label>
                         <input type="text" name="fax" id="fax" readonly
                             class="form-control form-control-white mb-3 mb-lg-0" required />
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Number Delivery Order</label>
                         <input type="text" name="do_number" id="do_number"
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Shipment</label>
                         <textarea name="shipment" id="shipment" class="form-control form-control-solid mb-3 mb-lg-0" required></textarea>
                     </div>
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Received Date</label>
-                        <input type="datetime-local" name="receipt_date" id="do_date"
+                        <div class="">
+                            <input type="datetime-local" name="receipt_date" id="receipt_date"
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
+                        </div>
                     </div>
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Plate Number</label>
                         <input type="text" name="plate_number" id="plate_number"
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
-                    <div class="fv-row mb-7">
+                    <div class="fv-row mb-3">
                         <label class="required form-label fw-bold">Status</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
                             <option value="1">Yes</option>
@@ -76,7 +78,7 @@
                     </div>
                 </div>
                 <hr>
-                <h1>Items</h1>
+                <h5 class="fw-bolder">Items</h5>
                 <hr>
                 <div class="col-lg-12"id="itemsAddList">
 
@@ -89,7 +91,7 @@
                     <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Confirm</button>
                 </div>
                 <div class="px-2">
-                    <button class="btn btn-sm btn-success" onclick="tutupModal()" id="btn-add">Cancel</button>
+                    <button class="btn btn-sm btn-secondary" onclick="tutupContent()" id="btn-add">Cancel</button>
                 </div>
             </div>
         </form>
@@ -98,7 +100,13 @@
 <script>
     $(document).ready(function() {
         $('.select-2').select2();
-
+        flatpickr("#receipt_date", {
+            static: true,
+            enableTime: true,
+            dateFormat: "Y-m-d H:i:s",
+            minuteIncrement: 1,
+            time_24hr: true
+        });
     });
 </script>
 
