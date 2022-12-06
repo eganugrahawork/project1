@@ -52,7 +52,7 @@ class ItemsReceiptController extends Controller {
 
     public function getdatapo(Request $request) {
 
-        $po = DB::connection('procurement')->select('Call sp_search_id_item_receipt(' . $request->id . ')');
+        $po = DB::connection('procurement')->select('Call sp_search_id(' . $request->id . ')');
 
         $html = '';
         foreach ($po as $item) {
@@ -71,7 +71,7 @@ class ItemsReceiptController extends Controller {
             </div>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class=' fw-bold fs-6 mb-2'>Balance</label>
-                <input type='number' name='balance[]' id='balance' value='$item->qty_balance' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
+                <input type='number' name='balance[]' id='balance' value='$item->qty' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Receipt</label>
