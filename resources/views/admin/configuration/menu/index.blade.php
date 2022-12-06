@@ -7,13 +7,13 @@
 
     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
         <div class="content flex-row-fluid" id="kt_content">
-            <div class="card  px-2">
-                <div class="card-body">
+            <div class="card  px-2 ">
+                <div class="card-body ">
                     <div class="row">
                         <div class="col-lg-1">
-                            <h5>Loccana</h5>
+                            <img src="/herobiz/assets/img/brand-logo/thumb.png" class="w-100 h-100">
                         </div>
-                        <div class="col-lg-11">
+                        <div class="col-lg-11 ">
                             <ul class="nav row">
                                 <li class="nav-item col-12 col-lg  mb-lg-0">
                                     <a class="nav-link active text-gray-600 fs-7 fw-bolder" data-bs-toggle="tab"
