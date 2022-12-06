@@ -70,7 +70,7 @@
     </div>
     <hr>
 
-        <div class="d-flex justify-content-end" id="loadingnya">
+        <div class="d-flex justify-content-center" id="loadingnya">
             <div class="px-2">
                 <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Confirm</button>
             </div>

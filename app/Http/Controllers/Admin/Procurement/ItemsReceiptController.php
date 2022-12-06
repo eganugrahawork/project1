@@ -74,7 +74,7 @@ class ItemsReceiptController extends Controller {
                 <input type='number' name='balance[]' id='balance' value='$item->qty' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
-                <label class='required fw-bold fs-6 mb-2'>Receive</label>
+                <label class='required fw-bold fs-6 mb-2'>Receipt</label>
                 <input type='number' name='qty[]' id='qty' value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
             <div class='fv-row mb-3 col-lg-1'>

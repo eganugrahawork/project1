@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4>Info PO {{ $info[0]->number_po }}</h4>
+        <h4>Detail Purchase Order</h4>
     </div>
     <div class="card-body">
         <div class="row">
@@ -149,8 +149,8 @@
         </div>
         <hr class="border border-dark border-2 opacity-50">
 
-        <div class="d-flex justify-content-end" id="loadingnya">
-            <button class="btn btn-sm btn-secondary" type="button" id="btn-close">Close</button>
+        <div class="d-flex justify-content-center" id="loadingnya">
+            <button class="btn btn-sm btn-info" type="button" id="btn-close">Close</button>
         </div>
     </div>
 </div>

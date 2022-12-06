@@ -261,7 +261,7 @@
                 if (speedMbps < 10) {
                     $('#checkInternetSpeed').removeClass('text-warning');
                     $('#checkInternetSpeed').removeClass('text-success');
-                    $('#checkInternetSpeed').removeClass('text-primary');
+                    $('#checkInternetSpeed').removeClass('text-info');
                     $('#checkInternetSpeed').addClass('text-danger');
 
                     jumlah = jumlah + 1;
@@ -273,10 +273,10 @@
                     $('#checkInternetSpeed').addClass('text-warning');
                     $('#checkInternetSpeed').removeClass('text-danger');
                     $('#checkInternetSpeed').removeClass('text-success');
-                    $('#checkInternetSpeed').removeClass('text-primary');
+                    $('#checkInternetSpeed').removeClass('text-info');
                 } else {
                     jumlah = 0;
-                    $('#checkInternetSpeed').addClass('text-primary');
+                    $('#checkInternetSpeed').addClass('text-info');
                     $('#checkInternetSpeed').removeClass('text-danger');
                     $('#checkInternetSpeed').removeClass('text-warning');
                     $('#checkInternetSpeed').removeClass('text-success');

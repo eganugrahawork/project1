@@ -87,12 +87,12 @@
             </div>
             <hr>
 
-            <div class="d-flex justify-content-end" id="loadingnya">
+            <div class="d-flex justify-content-center   " id="loadingnya">
                 <div class="px-2">
                     <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Confirm</button>
                 </div>
                 <div class="px-2">
-                    <button class="btn btn-sm btn-success" onclick="tutupContent()" id="btn-add">Cancel</button>
+                    <button class="btn btn-sm btn-secondary" onclick="tutupContent()" id="btn-add">Cancel</button>
                 </div>
             </div>
         </form>

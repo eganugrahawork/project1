@@ -35,7 +35,7 @@ class PurchaseOrderController extends Controller {
                 // $action = "";
                 $action = "<a onclick='info($model->id_ponya)' class='btn btn-icon btn-sm btn-info btn-hover-rise me-1'><i class='bi bi-info-square'></i></a>";
 
-                if ($model->po_status == 0 || $model->po_status != 1) {
+                if ($model->po_status == 0) {
                     if (Gate::allows('edit', ['/admin/procurement/purchase-order'])) {
                         $action .= "<a onclick='edit($model->id_ponya)' class='btn btn-icon btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
                     }
@@ -52,12 +52,12 @@ class PurchaseOrderController extends Controller {
                 if ($model->po_status == 0) {
 
                     if (Gate::allows('approve', ['/admin/procurement/purchase-order'])) {
-                        $statues .= "<a onclick='approve($model->id_ponya)' class='btn btn-sm btn-danger btn-hover-rise me-1'><i class='bi bi-patch-exclamation'></i></i> Confirm Here</a>";
+                        $statues .= "<a onclick='approve($model->id_ponya)' class='btn btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-patch-exclamation'></i></i> Confirm Here</a>";
                     } else {
                         $statues .= "<a class='btn btn-sm btn-secondary btn-hover-rise me-1 '><i class='bi bi-question-octagon'></i>Pending</a>";
                     }
                 } elseif ($model->po_status == 2) {
-                    $statues .= "<a class='btn btn-sm btn-muted btn-hover-rise me-1'><i class='bi bi-x-octagon'></i></i> Canceled</a>";
+                    $statues .= "<a class='btn btn-sm btn-danger btn-hover-rise me-1'><i class='bi bi-x-octagon'></i></i> Rejected</a>";
                 } else {
                     $statues .= "<a class='btn btn-sm btn-primary btn-hover-rise me-1'><i class='bi bi-patch-check'></i> Confirmed</a>";
                 }
@@ -110,7 +110,7 @@ class PurchaseOrderController extends Controller {
         $user_approving = auth()->user()->username;
         $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
 
-        DB::connection('procurement')->select("call sp_approve_po($request->id, '$user_approving')");
+        DB::connection('procurement')->select("call sp_approve_po($request->id, '$user_approving', 1)");
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "Approved PO",
@@ -122,18 +122,17 @@ class PurchaseOrderController extends Controller {
     }
 
     public function reject(Request $request) {
-        //         $user_rejecting = auth()->user()->username;
-        //         $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
+        $user_approving = auth()->user()->username;
+        $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
 
-        // // BELUM QUERYNYA
-        //         UserActivity::create([
-        //             'id_user' => auth()->user()->id,
-        //             'menu' => "Rejected PO",
-        //             'aktivitas' => "Rejected PO",
-        //             'keterangan' => "Rejected PO " . $info[0]->number_po
-        //         ]);
-
-        // NotifEvent::dispatch(auth()->user()->name . ' Rejected PO ' . $info[0]->number_po);
+        DB::connection('procurement')->select("call sp_approve_po($request->id, '$user_approving', 2)");
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Approved PO",
+            'aktivitas' => "Approved PO",
+            'keterangan' => "Approved PO " . $info[0]->number_po
+        ]);
+        NotifEvent::dispatch(auth()->user()->name . ' Rejected PO ' . $info[0]->number_po);
         return response()->json(['success' => 'Data Rejected']);
     }
 

@@ -173,11 +173,11 @@
             </div>
             <hr class="border border-dark border-2 opacity-50">
 
-            <div class="d-flex justify-content-end" id="loadingnya">
-                <div class="py-2">
+            <div class="d-flex justify-content-center" id="loadingnya">
+                <div class="px-2">
                     <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
                 </div>
-                <div class="py-2">
+                <div class="px-2">
                     <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Save</button>
                 </div>
             </div>

@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div class="col-lg-12"id="itemsAddList">
-                <h1>Items</h1>
+                <h5 class="fw-bolder">Items</h5>
                 <hr class="border border-dark border-2 opacity-50">
                 @foreach ($info as $item)
                     <div class="row">
