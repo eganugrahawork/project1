@@ -124,7 +124,7 @@
                             <div class='fv-row mb-3 col-lg-1' id='base_qty_parent'>
                                 <label class='fw-bold fs-6 mb-2'>Base Qty</label>
                                 <input type='number' name='base_qty' id='base_qty'
-                                    class='form-control form-control-white mb-3 mb-lg-0' value='' readonly />
+                                    class='form-control form-control-white mb-3 mb-lg-0' value='{{ $s_item->base_qty }}' readonly />
                             </div>
                             <div class="fv-row mb-3 col-lg-1">
                                 <label class="required fw-bold fs-6 mb-2">Qty</label>
