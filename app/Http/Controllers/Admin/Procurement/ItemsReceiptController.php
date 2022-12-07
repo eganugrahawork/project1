@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Admin\Procurement;
 
 use App\Http\Controllers\Controller;
 use App\Models\ItemReceipt;
+use App\Models\ItemReceiptDetail;
 use App\Models\Mutation;
 use App\Models\PurchaseOrder;
-use App\Models\PurchaseOrderItems;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use PDO;
 use Yajra\DataTables\DataTables;
 
 class ItemsReceiptController extends Controller {
@@ -23,12 +24,12 @@ class ItemsReceiptController extends Controller {
     public function list() {
         return  Datatables::of(DB::connection('procurement')->select('Call sp_list_item_receipt()'))->addIndexColumn()
             ->addColumn('action', function ($model) {
-                $action = "<a onclick='info($model->id)' class='btn btn-icon btn-sm btn-info me-1 btn-hover-rise'><i class='bi bi-info-square'></i></a>";
+                $action = "<a onclick='info($model->id_po)' class='btn btn-icon btn-sm btn-info me-1 btn-hover-rise'><i class='bi bi-info-square'></i></a>";
                 if (Gate::allows('edit', ['/admin/procurement/items-receipt'])) {
-                    $action .= "<a onclick='edit($model->id)' class='btn btn-icon btn-sm btn-warning me-1 btn-hover-rise'><i class='bi bi-pencil-square'></i></a>";
+                    $action .= "<a onclick='edit($model->id_po)' class='btn btn-icon btn-sm btn-warning me-1 btn-hover-rise'><i class='bi bi-pencil-square'></i></a>";
                 }
                 if (Gate::allows('delete', ['/admin/procurement/items-receipt'])) {
-                    $action .= " <a href='/admin/procurement/items-receipt/delete/$model->id' class='btn btn-icon btn-sm btn-danger me-1 btn-hover-rise' id='deleteItemReceipt'><i class='bi bi-trash'></i></a>";
+                    $action .= " <a href='/admin/procurement/items-receipt/delete/$model->id_receipt' class='btn btn-icon btn-sm btn-danger me-1 btn-hover-rise' id='deleteItemReceipt'><i class='bi bi-trash'></i></a>";
                 }
                 return $action;
             })->addColumn('order_datenya', function ($model) {
@@ -43,7 +44,6 @@ class ItemsReceiptController extends Controller {
     }
     public function info(Request $request) {
         $po = DB::connection('procurement')->select('Call sp_search_id_item_receipt(' . $request->id . ')');
-        dd($po);
         return view('admin.procurement.itemsreceipt.info', ['po' => $po]);
     }
     public function edit(Request $request) {
@@ -174,6 +174,8 @@ class ItemsReceiptController extends Controller {
                         '$notes'
                     )");
 
+            $item_receipt_item = ItemReceiptDetail::latest()->first();
+
             DB::connection('procurement')->select("Call sp_insert_update_items_price(
                         $item_id,
                         $unit_price
@@ -187,9 +189,10 @@ class ItemsReceiptController extends Controller {
 
                     )");
 
+
             DB::connection('procurement')->select("call sp_insert_item_history(
                         $item_id,
-                        $itemReceipt->id,
+                        $item_receipt_item->id,
                         $unit_price,
                         $qty,
                         $qty_discount,
@@ -199,5 +202,33 @@ class ItemsReceiptController extends Controller {
             // 1 diatas berarti status bernilai po
         }
         return response()->json(['success' => 'Item Receiving']);
+    }
+
+    public function update(Request $request){
+        // dd($request);
+        DB::connection('procurement')->select("call sp_update_item_receipt(
+            $request->id_po,
+            '$request->do_number',
+            '$request->plate_number',
+            '$request->shipment',
+            '$request->receipt_date'
+        )");
+        return response()->json(['success' => 'Item Receipt Updated']);
+    }
+
+    public function destroy(Request $request){
+        $detail = ItemReceiptDetail::where(['item_receipt_id' => $request->id])->get();
+
+        foreach($detail as $dt){
+            DB::connection('procurement')->select("call sp_delete_item_receipt_qty(
+                $dt->id
+            )");
+        }
+
+        DB::connection('procurement')->select("call sp_delete_item_receipt(
+            $request->id
+        )");
+
+        return response()->json(['success' => 'Item Receipt Deleted']);
     }
 }

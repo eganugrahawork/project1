@@ -310,6 +310,8 @@ Route::middleware('auth')->controller(ItemsReceiptController::class)->group(func
     Route::get('/admin/procurement/items-receipt/edit/{id}', 'edit');
     Route::get('/admin/procurement/items-receipt/getdatapo/{id}', 'getdatapo');
     Route::post('/admin/procurement/items-receipt/store', 'store');
+    Route::post('/admin/procurement/items-receipt/update', 'update');
+    Route::get('/admin/procurement/items-receipt/delete/{id}', 'destroy');
 });
 // End Items Receipt
 

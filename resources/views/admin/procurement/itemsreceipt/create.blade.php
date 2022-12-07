@@ -130,31 +130,67 @@
 
     })
 
+
+
+
     $('#addItemReceipt').submit(function(event) {
         event.preventDefault();
-        $('#loadingnya').html(
-            '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span>')
-        $.ajax({
-            url: "{{ url('/admin/procurement/items-receipt/store') }}",
-            type: 'post',
-            data: $('#addItemReceipt')
-                .serialize(), // Remember that you need to have your csrf token included
-            dataType: 'json',
-            success: function(response) {
-                Swal.fire(
-                    'Success',
-                    response.success,
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Save This Data ?',
+            text: "Data will be save to the database!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Save!',
+            cancelButtonText: 'Not, Cancel!',
+            reverseButtons: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#loadingnya').html(
+                    '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span>'
+                    )
+                $.ajax({
+                    url: "{{ url('/admin/procurement/items-receipt/store') }}",
+                    type: 'post',
+                    data: $('#addItemReceipt')
+                        .serialize(), // Remember that you need to have your csrf token included
+                    dataType: 'json',
+                    success: function(response) {
+                        Swal.fire(
+                            'Success',
+                            response.success,
+                            'success'
+                        )
+                        $('#content').hide();
+                        $('#indexContent').show();
+                        $('#searchTableItemsReceipt').focus()
+                        tableItemsReceipt.ajax.reload()
+                    },
+                    error: function(response) {
+                        // Handle error
+                    }
+                });
+
+            } else if (
+
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    '',
                     'success'
                 )
-                $('#content').hide();
-                $('#indexContent').show();
-                $('#searchTableItemsReceipt').focus()
-                tableItemsReceipt.ajax.reload()
-            },
-            error: function(response) {
-                // Handle error
             }
-        });
+        })
+
     });
 
     function balanceEdit(e) {
