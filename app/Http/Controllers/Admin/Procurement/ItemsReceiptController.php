@@ -42,8 +42,9 @@ class ItemsReceiptController extends Controller {
         return view('admin.procurement.itemsreceipt.create', ['purchase_orders' => PurchaseOrder::where(['status' => 1])->get()]);
     }
     public function info(Request $request) {
-
-        return view('admin.procurement.itemsreceipt.info');
+        $po = DB::connection('procurement')->select('Call sp_search_id_item_receipt(' . $request->id . ')');
+        dd($po);
+        return view('admin.procurement.itemsreceipt.info', ['po' => $po]);
     }
     public function edit(Request $request) {
         $po = DB::connection('procurement')->select('Call sp_search_id_item_receipt(' . $request->id . ')');

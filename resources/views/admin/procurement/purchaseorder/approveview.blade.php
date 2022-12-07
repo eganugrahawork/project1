@@ -230,6 +230,7 @@
             if (result.isConfirmed) {
                 $('#content').hide();
                 $('#indexContent').show();
+                $('#searchTablePo').focus()
                 $('#loading-add').html(
                     '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>'
                 )
@@ -302,6 +303,7 @@
                         )
                         $('#content').hide();
                         $('#indexContent').show();
+                        $('#searchTablePo').focus()
                     }
                 })
 

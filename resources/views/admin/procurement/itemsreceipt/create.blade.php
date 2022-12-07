@@ -148,6 +148,7 @@
                 )
                 $('#content').hide();
                 $('#indexContent').show();
+                $('#searchTablePo').focus()
                 tableItemsReceipt.ajax.reload()
             },
             error: function(response) {

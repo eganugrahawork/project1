@@ -11,7 +11,7 @@
                         <label class="required form-label fw-bold">Po Number</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="purchase_order_id"
                             id="purchase_order_id" required>
-                            <option>{{ $ponya[0]->number_po }}</option>
+                            <option>{{ $po[0]->number_po }}</option>
                         </select>
                     </div>
                     <div class="fv-row mb-3">

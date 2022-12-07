@@ -195,6 +195,7 @@
     $('#btn-close').on('click', function() {
         $('#content').hide();
         $('#indexContent').show();
+        $('#searchTablePo').focus()
         $('body').scrollTop(0);
     })
 </script>

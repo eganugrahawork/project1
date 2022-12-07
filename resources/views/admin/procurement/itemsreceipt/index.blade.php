@@ -93,6 +93,8 @@
         function tutupContent() {
             $('#content').hide()
             $('#indexContent').show()
+            $('#searchTableItemsReceipt').focus();
+
         }
 
         var tableItemsReceipt =  $('#tableItemsReceipt').DataTable({

@@ -444,6 +444,7 @@
                         }
                         $('#content').hide();
                         $('#indexContent').show();
+                        $('#searchTablePo').focus()
                         tablePo.ajax.reload()
                     },
                     error: function(response) {

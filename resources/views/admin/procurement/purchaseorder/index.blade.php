@@ -115,8 +115,8 @@
         function tutupContent() {
             $('#content').hide()
             $('#indexContent').show()
+            $('#searchTablePo').focus()
 
-            $(document).scrollTop($(document).height())
         }
 
         var tablePo = $('#tablePo').DataTable({
