@@ -52,8 +52,8 @@ class ItemsReceiptController extends Controller {
     }
 
     public function getdatapo(Request $request) {
-
         $po = DB::connection('procurement')->select('Call sp_search_id_item_receipt(' . $request->id . ')');
+        // dd($po);
         $html = '';
         foreach ($po as $item) {
             // $getBalance = DB::connection('procurement')->select('SELECT * FROM items_receipt_details a WHERE a.`po_item_id` = ' . $item->po_item_id . ' ORDER BY a.`id` DESC LIMIT 1');
@@ -218,7 +218,6 @@ class ItemsReceiptController extends Controller {
 
     public function destroy(Request $request){
         $detail = ItemReceiptDetail::where(['item_receipt_id' => $request->id])->get();
-        dd($detail);
 
         foreach($detail as $dt){
             DB::connection('procurement')->select("call sp_delete_item_receipt_qty(

@@ -29,19 +29,20 @@ use App\Http\Controllers\Admin\Masterdata\ItemsController;
 use App\Http\Controllers\Admin\Masterdata\PartnersController;
 use App\Http\Controllers\Admin\Masterdata\PriceManagementController;
 use App\Http\Controllers\Admin\Masterdata\UoMController;
+use App\Http\Controllers\Admin\Masterdata\TypeItemController;
+use App\Http\Controllers\Admin\Masterdata\TypePartnerController;
 // End Masterdata
 
 // Start Procurement
 use App\Http\Controllers\Admin\Procurement\PurchaseOrderController;
 use App\Http\Controllers\Admin\Procurement\ItemsReceiptController;
 use App\Http\Controllers\Admin\Procurement\PurchaseBasisController;
+use App\Http\Controllers\Admin\Procurement\InvoiceController;
 // End Procurement
 
 // Strt Inventory
 use App\Http\Controllers\Admin\Inventory\StockController;
 use App\Http\Controllers\Admin\Inventory\StockInTransitController;
-use App\Http\Controllers\Admin\Masterdata\TypeItemController;
-use App\Http\Controllers\Admin\Masterdata\TypePartnerController;
 use App\Http\Controllers\Admin\Selling\SellingController;
 // End Inventory
 
@@ -315,13 +316,23 @@ Route::middleware('auth')->controller(ItemsReceiptController::class)->group(func
 });
 // End Items Receipt
 
+// Procurement Invoice
+Route::middleware('auth')->controller(InvoiceController::class)->group(function () {
+    Route::get('/admin/procurement/invoice', 'index');
+    Route::get('/admin/procurement/invoice/list', 'list');
+    Route::get('/admin/procurement/invoice/create', 'create');
+    Route::post('/admin/procurement/invoice/store', 'store');
+    Route::get('/admin/procurement/invoice/getdata/{id}', 'getdata');
+});
+
+// End Procurement Invoice
 
 
 // Purchase Basis Start
-Route::middleware('auth')->controller(PurchaseBasisController::class)->group(function () {
-    Route::get('/admin/procurement/purchase-basis', 'index');
-    Route::post('/admin/procurement/purchase-basis/filter', 'filter');
-});
+// Route::middleware('auth')->controller(PurchaseBasisController::class)->group(function () {
+//     Route::get('/admin/procurement/purchase-basis', 'index');
+//     Route::post('/admin/procurement/purchase-basis/filter', 'filter');
+// });
 // Purchase Basis End
 
 // Stock

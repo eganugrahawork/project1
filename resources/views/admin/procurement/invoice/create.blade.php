@@ -1,30 +1,31 @@
 <div class="card">
     <div class="card-header">
-        <h4>Create New Receipt Item</h4>
+        <h4>Create Invoice</h4>
     </div>
     <div class="card-body">
-        <form id="addItemReceipt" class="form">
+        <form id="addInvoice" class="form">
             @csrf
             <div class="row">
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Po Number</label>
+                        <input type="hidden" name="id_receipt" id="id_receipt">
+                        <label class="required form-label fw-bold">Delivery Order Number</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="purchase_order_id"
                             id="purchase_order_id" required>
-                            <option>Choose Po Number</option>
-                            @foreach ($purchase_orders as $po)
-                                <option value="{{ $po->id }}">{{ $po->code }}-{{ $po->partnernya->name }}
+                            <option>Choose DO Number</option>
+                            @foreach ($list as $l)
+                                <option value="{{ $l->id_po }}">{{ $l->do_number }}-{{ $l->name }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Po Code</label>
+                        <label class="fw-bold fs-6 mb-2">No Purchase Order</label>
                         <input type="text" id="code" name="code" readonly
                             class="form-control form-control-white mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Date</label>
+                        <label class="fw-bold fs-6 mb-2">Date Purchase Order</label>
                         <input type="text" name="order_date" id="order_date" readonly
                             class="form-control form-control-white mb-3 mb-lg-0" required />
                     </div>
@@ -43,45 +44,78 @@
                             class="form-control form-control-white mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
+                        <label class="fw-bold fs-6 mb-2">Att</label>
+                        <input type="text" name="att" id="att" value="-" readonly
+                            class="form-control form-control-white mb-3 mb-lg-0" />
+                    </div>
+                    <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Fax</label>
-                        <input type="text" name="fax" id="fax" readonly
+                        <input type="text"  id="fax" readonly
                             class="form-control form-control-white mb-3 mb-lg-0" required />
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Number Delivery Order</label>
-                        <input type="text" name="do_number" id="do_number"
+                        <label class="required fw-bold fs-6 mb-2">Ship To</label>
+                        <textarea id="shipment" class="form-control form-control-solid mb-3 mb-lg-0" readonly required></textarea>
+                    </div>
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Vat/PPN</label>
+                        <input type="text"  id="vat"
+                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                    </div>
+
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Email</label>
+                        <input type="text"  id="email"
+                            class="form-control form-control-solid mb-3 mb-lg-0" value="-" readonly required />
+                    </div>
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Telp/Fax</label>
+                        <input type="text"  id="telp/fax"
+                            class="form-control form-control-solid mb-3 mb-lg-0" value="0837263723" readonly required />
+                    </div>
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Term Of Payment</label>
+                        <input type="text" id="term_of_payment"
+                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                    </div>
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Decription</label>
+                        <textarea  id="description" class="form-control form-control-solid mb-3 mb-lg-0" readonly required></textarea>
+
+                    </div>
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">No Invoice</label>
+                        <input type="text" name="no_invoice" id="no_invoice"
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Shipment</label>
-                        <textarea name="shipment" id="shipment" class="form-control form-control-solid mb-3 mb-lg-0" required></textarea>
-                    </div>
-                    <div class="fv-row mb-3">
-                        <div>
-                            <label class="required fw-bold fs-6 mb-2">Received Date</label>
-                        </div>
-                        <input type="text" name="receipt_date" id="receipt_date"
+                        <label class="required fw-bold fs-6 mb-2">Date Invoice</label>
+                        <input type="text" name="date_invoice" id="date_invoice"
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Plate Number</label>
-                        <input type="text" name="plate_number" id="plate_number"
+                        <label class="required fw-bold fs-6 mb-2">Due Date</label>
+                        <input type="text" name="due_date" id="due_date"
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Status</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
-                            <option value="1">Yes</option>
-                            <option value="0">Not</option>
-                        </select>
+                        <label class="required fw-bold fs-6 mb-2">Description Invoice</label>
+                        <input type="text" name="description_invoice" id="description_invoice"
+                            class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Tax Invoice</label>
+                        <input type="text" name="tax_invoice" id="tax_invoice"
+                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                    </div>
+
                 </div>
                 <hr>
                 <h5 class="fw-bolder">Items</h5>
                 <hr>
-                <div class="col-lg-12"id="itemsAddList">
+                <div class="col-lg-12"id="itemsList">
 
                 </div>
             </div>
@@ -102,12 +136,13 @@
 <script>
     $(document).ready(function() {
         $('.select-2').select2();
-        flatpickr("#receipt_date", {
+        flatpickr("#date_invoice", {
             static: true,
-            enableTime: true,
-            dateFormat: "Y-m-d H:i:s",
-            minuteIncrement: 1,
-            time_24hr: true
+            dateFormat: "Y-m-d",
+        });
+        flatpickr("#due_date", {
+            static: true,
+            dateFormat: "Y-m-d",
         });
     });
 </script>
@@ -115,17 +150,22 @@
 <script>
     $('#purchase_order_id').on('change', function() {
         var id = $(this).val();
-        $('#itemsAddList').html(
+        $('#itemsList').html(
             '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
 
-        $.get("{{ url('/admin/procurement/items-receipt/getdatapo') }}/" + id, {}, function(data) {
+        $.get("{{ url('/admin/procurement/invoice/getdata') }}/" + id, {}, function(data) {
             $('#code').val(data.code);
             $('#order_date').val(data.order_date);
             $('#partner').val(data.partner);
             $('#address').val(data.address);
             $('#phone').val(data.phone);
+            $('#vat').val(data.vat);
             $('#fax').val(data.fax);
-            $('#itemsAddList').html(data.html);
+            $('#shipment').val(data.shipment);
+            $('#term_of_payment').val(data.term_of_payment);
+            $('#description').val(data.description);
+            $('#id_receipt').val(data.id_receipt);
+            $('#itemsList').html(data.html);
         })
 
     })
@@ -133,7 +173,7 @@
 
 
 
-    $('#addItemReceipt').submit(function(event) {
+    $('#addInvoice').submit(function(event) {
         event.preventDefault();
 
         const swalWithBootstrapButtons = Swal.mixin({
@@ -158,9 +198,9 @@
                     '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span>'
                     )
                 $.ajax({
-                    url: "{{ url('/admin/procurement/items-receipt/store') }}",
+                    url: "{{ url('/admin/procurement/invoice/store') }}",
                     type: 'post',
-                    data: $('#addItemReceipt')
+                    data: $('#addInvoice')
                         .serialize(), // Remember that you need to have your csrf token included
                     dataType: 'json',
                     success: function(response) {
