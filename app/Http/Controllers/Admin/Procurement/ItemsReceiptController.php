@@ -46,13 +46,13 @@ class ItemsReceiptController extends Controller {
         return view('admin.procurement.itemsreceipt.info');
     }
     public function edit(Request $request) {
-
-        return view('admin.procurement.itemsreceipt.edit');
+        $po = DB::connection('procurement')->select('Call sp_search_id_item_receipt(' . $request->id . ')');
+        return view('admin.procurement.itemsreceipt.edit', ['po' => $po]);
     }
 
     public function getdatapo(Request $request) {
 
-        $po = DB::connection('procurement')->select('Call sp_search_id(' . $request->id . ')');
+        $po = DB::connection('procurement')->select('Call sp_search_id_item_receipt(' . $request->id . ')');
         $html = '';
         foreach ($po as $item) {
             // $getBalance = DB::connection('procurement')->select('SELECT * FROM items_receipt_details a WHERE a.`po_item_id` = ' . $item->po_item_id . ' ORDER BY a.`id` DESC LIMIT 1');
