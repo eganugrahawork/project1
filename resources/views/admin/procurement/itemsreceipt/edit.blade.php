@@ -96,7 +96,7 @@
                             <div class='fv-row mb-3 col-lg-2'>
                                 <label class=' fw-bold fs-6 mb-2'>Order Qty</label>
                                 <input type='number' name='qty_order[]' id='qty_order' value='{{ $item->qty }}'
-                                    readonly class='form-control form-control-white mb-3 mb-lg-0 ' required />
+                                    readonly class='form-control form-control-white mb-3 mb-lg-0 '  disabled required />
                             </div>
                             <input type='hidden' id='nowBalance' value='{{ $item->qty_balance }}' readonly
                                 class='form-control form-control-white mb-3 mb-lg-0 ' required />
@@ -104,29 +104,29 @@
                                 <label class=' fw-bold fs-6 mb-2'>Balance</label>
                                 <input type='number' name='balance[]' id='balance'
                                     value='{{ $item->qty_balances }}' readonly
-                                    class='form-control form-control-white mb-3 mb-lg-0 ' required />
+                                    class='form-control form-control-white mb-3 mb-lg-0 ' disabled required />
                             </div>
                             <div class='fv-row mb-3 col-lg-2'>
                                 <label class='required fw-bold fs-6 mb-2'>Receipt</label>
                                 <input type='number' name='qty[]' id='qty' onkeyup='balanceEdit(this)'
-                                    value='{{ $item->qty_receipt }}' class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                                    value='{{ $item->qty_receipt }}' class='form-control form-control-solid mb-3 mb-lg-0 ' disabled required />
                             </div>
                             <div class='fv-row mb-3 col-lg-1'>
                                 <label class='required fw-bold fs-6 mb-2'>Bonus</label>
                                 <input type='number' name='qty_bonus[]' id='qty_bonus' value='{{ $item->qty_bonus }}'
-                                    class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                                    class='form-control form-control-solid mb-3 mb-lg-0 ' disabled required />
                             </div>
 
                             <div class='fv-row mb-3 col-lg-1'>
                                 <label class='required fw-bold fs-6 mb-2'>Discount</label>
                                 <input type='number' name='qty_discount[]' id='qty_discount' value='{{ $item->qty_discount }}'
-                                    class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                                    class='form-control form-control-solid mb-3 mb-lg-0 ' disabled required />
                             </div>
                             <div class='fv-row mb-3 col-lg-2'>
                                 <label class='required fw-bold fs-6 mb-2'>Note</label>
                                 <input type='text' name='notes[]' id='notes'
                                     class='form-control form-control-solid mb-3 mb-lg-0 descriptionnya'
-                                    value='{{ $item->deskripsi_items }}' />
+                                    value='{{ $item->deskripsi_items }}' disabled />
                             </div>
                         </div>
                     @endforeach
@@ -139,7 +139,7 @@
                     <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Confirm</button>
                 </div>
                 <div class="px-2">
-                    <button class="btn btn-sm btn-secondary" onclick="tutupContent()">Cancel</button>
+                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Cancel</button>
                 </div>
             </div>
         </form>

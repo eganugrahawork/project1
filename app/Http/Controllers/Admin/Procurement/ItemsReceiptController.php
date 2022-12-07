@@ -218,6 +218,7 @@ class ItemsReceiptController extends Controller {
 
     public function destroy(Request $request){
         $detail = ItemReceiptDetail::where(['item_receipt_id' => $request->id])->get();
+        dd($detail);
 
         foreach($detail as $dt){
             DB::connection('procurement')->select("call sp_delete_item_receipt_qty(

@@ -3,7 +3,7 @@
         <h4>Detail Receipt Item</h4>
     </div>
     <div class="card-body">
-        <form id="kt_modal_add_user_form" class="form" action="/admin/procurement/items-receipt/store" method="post">
+        <form>
             @csrf
             <div class="row">
                 <div class="col-lg-6">
@@ -52,21 +52,23 @@
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Number Delivery Order</label>
                         <input type="text" name="do_number" id="do_number"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $po[0]->do_number }}" disabled required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Shipment</label>
-                        <textarea name="shipment" id="shipment" class="form-control form-control-solid mb-3 mb-lg-0" required></textarea>
+                        <textarea name="shipment" id="shipment" class="form-control form-control-solid mb-3 mb-lg-0" disabled required>{{ $po[0]->shipment }}</textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Received Date</label>
-                        <input type="datetime-local" name="receipt_date" id="do_date"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                        <div class="">
+                            <input type="datetime-local" name="receipt_date" id="receipt_date"
+                                class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $po[0]->receipt_date }}" disabled required />
+                        </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Plate Number</label>
                         <input type="text" name="plate_number" id="plate_number"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $po[0]->plate_number }}" disabled required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required form-label fw-bold">Status</label>
@@ -85,44 +87,45 @@
                             <input type='hidden' name='po_item_id[]' value='{{ $item->po_item_id }}' />
                             <div class='fv-row mb-3 col-lg-2'>
                                 <label class=' form-label fw-bold'>Item</label>
-                                <select class='form-select  form-select-white mb-3 mb-lg-0' id='item_id'
+                                <select class='form-select  form-select-white mb-3 mb-lg-0' disabled id='item_id'
                                     name='item_id[]' required>
                                     <option value='$item->item_id'>{{ $item->item_name }}</option>
                                 </select>
                             </div>
                             <div class='fv-row mb-3 col-lg-2'>
                                 <label class=' fw-bold fs-6 mb-2'>Order Qty</label>
-                                <input type='number' name='qty_order[]' id='qty_order' value='{{ $item->qty }}' readonly
-                                    class='form-control form-control-white mb-3 mb-lg-0 ' required />
+                                <input type='number' name='qty_order[]' id='qty_order' disabled value='{{ $item->qty }}'
+                                    readonly class='form-control form-control-white mb-3 mb-lg-0 ' required />
                             </div>
-                            <input type='hidden' id='nowBalance' value='{{ $item->qty_balance }}' readonly
+                            <input type='hidden' id='nowBalance' value='{{ $item->qty_balance }}'  readonly
                                 class='form-control form-control-white mb-3 mb-lg-0 ' required />
                             <div class='fv-row mb-3 col-lg-2'>
                                 <label class=' fw-bold fs-6 mb-2'>Balance</label>
-                                <input type='number' name='balance[]' id='balance' value='{{ $item->qty_balance }}'
-                                    readonly class='form-control form-control-white mb-3 mb-lg-0 ' required />
+                                <input type='number' name='balance[]' disabled id='balance'
+                                    value='{{ $item->qty_balances }}' readonly
+                                    class='form-control form-control-white mb-3 mb-lg-0 ' required />
                             </div>
                             <div class='fv-row mb-3 col-lg-2'>
                                 <label class='required fw-bold fs-6 mb-2'>Receipt</label>
-                                <input type='number' name='qty[]' id='qty' onkeyup='balanceEdit(this)'
-                                    value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                                <input type='number' name='qty[]' id='qty' disabled onkeyup='balanceEdit(this)'
+                                    value='{{ $item->qty_receipt }}' class='form-control form-control-solid mb-3 mb-lg-0 ' required />
                             </div>
                             <div class='fv-row mb-3 col-lg-1'>
                                 <label class='required fw-bold fs-6 mb-2'>Bonus</label>
-                                <input type='number' name='qty_bonus[]' id='qty_bonus' value='0'
+                                <input type='number' name='qty_bonus[]' id='qty_bonus' disabled value='{{ $item->qty_bonus }}'
                                     class='form-control form-control-solid mb-3 mb-lg-0 ' required />
                             </div>
 
                             <div class='fv-row mb-3 col-lg-1'>
                                 <label class='required fw-bold fs-6 mb-2'>Discount</label>
-                                <input type='number' name='qty_discount[]' id='qty_discount' value='0'
+                                <input type='number' name='qty_discount[]' id='qty_discount' disabled value='{{ $item->qty_discount }}'
                                     class='form-control form-control-solid mb-3 mb-lg-0 ' required />
                             </div>
                             <div class='fv-row mb-3 col-lg-2'>
                                 <label class='required fw-bold fs-6 mb-2'>Note</label>
-                                <input type='text' name='notes[]' id='notes'
+                                <input type='text' name='notes[]' disabled id='notes'
                                     class='form-control form-control-solid mb-3 mb-lg-0 descriptionnya'
-                                    value='-' />
+                                    value='{{ $item->deskripsi_items }}' />
                             </div>
                         </div>
                     @endforeach
@@ -132,7 +135,7 @@
 
             <div class="d-flex justify-content-center" id="loadingnya">
                 <div class="px-2">
-                    <button class="btn btn-sm btn-success" onclick="tutupContent()" >Close</button>
+                    <button class="btn btn-sm btn-success" type="button" onclick="tutupContent()" >Close</button>
                 </div>
             </div>
         </form>
@@ -141,28 +144,8 @@
 
 <script>
     $(document).ready(function() {
-        $('.select-2').select2({
-            dropdownParent: $('#mainmodal')
-        });
+        $('.select-2').select2();
 
     });
 </script>
 
-<script>
-    $('#purchase_order_id').on('change', function() {
-        var id = $(this).val();
-        $('#itemsAddList').html(
-            '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-
-        $.get("{{ url('/admin/procurement/items-receipt/getdatapo') }}/" + id, {}, function(data) {
-            $('#code').val(data.code);
-            $('#order_date').val(data.order_date);
-            $('#partner').val(data.partner);
-            $('#address').val(data.address);
-            $('#phone').val(data.phone);
-            $('#fax').val(data.fax);
-            $('#itemsAddList').html(data.html);
-        })
-
-    })
-</script>
