@@ -43,6 +43,8 @@ use App\Http\Controllers\Admin\Procurement\InvoiceController;
 // Strt Inventory
 use App\Http\Controllers\Admin\Inventory\StockController;
 use App\Http\Controllers\Admin\Inventory\StockInTransitController;
+use App\Http\Controllers\Admin\Procurement\ReportController;
+use App\Http\Controllers\Admin\Procurement\ReturController;
 use App\Http\Controllers\Admin\Selling\SellingController;
 // End Inventory
 
@@ -328,12 +330,19 @@ Route::middleware('auth')->controller(InvoiceController::class)->group(function 
 // End Procurement Invoice
 
 
-// Purchase Basis Start
-// Route::middleware('auth')->controller(PurchaseBasisController::class)->group(function () {
-//     Route::get('/admin/procurement/purchase-basis', 'index');
-//     Route::post('/admin/procurement/purchase-basis/filter', 'filter');
-// });
-// Purchase Basis End
+// Procurement Retur Start
+Route::middleware('auth')->controller(ReturController::class)->group(function () {
+    Route::get('/admin/procurement/retur', 'index');
+    Route::get('/admin/procurement/retur/list', 'list');
+});
+// Procurement Retur End
+
+// Procurement Report
+Route::middleware('auth')->controller(ReportController::class)->group(function () {
+    Route::get('/admin/procurement/report', 'index');
+    Route::get('/admin/procurement/report/list', 'list');
+});
+// End Procurement Report
 
 // Stock
 Route::middleware('auth')->controller(StockController::class)->group(function () {

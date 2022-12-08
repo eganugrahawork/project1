@@ -18,32 +18,40 @@ class InvoiceController extends Controller {
     }
 
     public function store(Request $request) {
-
         DB::connection('procurement')->select("Call sp_insert_invoice(
             '$request->no_invoice',
             $request->purchase_order_id,
             '$request->date_invoice',
             '$request->due_date',
             '$request->att',
-            'sign',
+            '$request->sign',
             '$request->description_invoice',
             '$request->tax_invoice',
             '0'
         )");
         $invoiceLast = PurchaseOrderInvoice::latest()->first();
+
         for ($i = 0; $i < count($request->po_item_id); $i++) {
             $po_item_id = $request->po_item_id[$i];
             $qty_receipt = $request->qty[$i];
             $unit_price = $request->unit_price[$i];
+            $price = $qty_receipt * $unit_price + (($qty_receipt * $unit_price)*$request->ppn);
+            $description = $request->notes[$i];
             DB::connection('procurement')->select("Call sp_insert_invoice_detail(
                 $po_item_id,
                 $invoiceLast->id,
                 $request->id_receipt,
                 $qty_receipt,
-                $unit_price
-
+                $unit_price,
+                $price,
+                '$description'
             )");
         }
+
+        DB::connection('procurement')->select("Call sp_insert_coa_value(
+
+        )");
+        return response()->json(['success' => 'Invoices Created']);
     }
 
 

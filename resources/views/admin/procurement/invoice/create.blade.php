@@ -92,22 +92,31 @@
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Date Invoice</label>
-                        <input type="text" name="date_invoice" id="date_invoice"
+                        <div class="">
+                            <input type="text" name="date_invoice" id="date_invoice"
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
+                        </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Due Date</label>
-                        <input type="text" name="due_date" id="due_date"
+                        <div class="">
+                            <input type="text" name="due_date" id="due_date"
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
+                        </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Description Invoice</label>
-                        <input type="text" name="description_invoice" id="description_invoice"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                        <textarea  name="description_invoice" id="description_invoice"
+                            class="form-control form-control-solid mb-3 mb-lg-0" required > </textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Tax Invoice</label>
                         <input type="text" name="tax_invoice" id="tax_invoice"
+                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                    </div>
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Sign</label>
+                        <input type="text" name="sign" id="sign"
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
 
