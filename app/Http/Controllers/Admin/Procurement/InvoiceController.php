@@ -13,11 +13,15 @@ class InvoiceController extends Controller {
     }
 
     public function create() {
+
+
+
         $list = DB::connection('procurement')->select('Call sp_list_item_receipt()');
         return view('admin.procurement.invoice.create', ['list' => $list]);
     }
 
     public function store(Request $request) {
+        // dd($request);
         DB::connection('procurement')->select("Call sp_insert_invoice(
             '$request->no_invoice',
             $request->purchase_order_id,
@@ -32,6 +36,8 @@ class InvoiceController extends Controller {
         $invoiceLast = PurchaseOrderInvoice::latest()->first();
 
         for ($i = 0; $i < count($request->po_item_id); $i++) {
+            $id_item_receipt_detail = $request->id_item_receipt_detail[$i];
+            $getCoa = DB::connection('procurement')->select("Call sp_search_coa_id($id_item_receipt_detail)");
             $po_item_id = $request->po_item_id[$i];
             $qty_receipt = $request->qty[$i];
             $unit_price = $request->unit_price[$i];
@@ -46,11 +52,34 @@ class InvoiceController extends Controller {
                 $price,
                 '$description'
             )");
+
+            $coa_id = $getCoa[0]->coa_id;
+            $date = $request->date_invoice;
+            $value = $request->total_po;
+            $value_real = $price;
+            $adjusment= 0;
+            $type_cash = 0;
+            $notes =  $description;
+            $rate =  $request->rate;
+            $descriptioncoa = $request->description;
+            $invoice_number = $invoiceLast->invoice_number;
+            $assets_id= 0;
+            DB::connection('procurement')->select("Call sp_insert_coa_value(
+                0,
+                '$coa_id',
+                '$date',
+                '$value',
+                '$value_real',
+                '$adjusment',
+                $type_cash,
+                '$notes',
+                '$rate',
+                '$descriptioncoa',
+                '$invoice_number',
+                '$assets_id'
+
+            )");
         }
-
-        DB::connection('procurement')->select("Call sp_insert_coa_value(
-
-        )");
         return response()->json(['success' => 'Invoices Created']);
     }
 
@@ -62,6 +91,7 @@ class InvoiceController extends Controller {
             $html .= "<div class='row'>
             <input type='hidden' name='po_item_id[]' value='$item->po_item_id'/>
             <input type='hidden' name='unit_price[]' value='$item->unit_price'/>
+            <input type='hidden' name='id_item_receipt_detail[]' value='$item->id_item_receipt_detail'/>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class=' form-label fw-bold'>Item</label>
                 <select class='form-select  form-select-white mb-3 mb-lg-0' id='item_id' name='item_id[]'   required>
@@ -108,6 +138,8 @@ class InvoiceController extends Controller {
             'term_of_payment' => $data[0]->term_of_payment,
             'description' => $data[0]->description,
             'id_receipt' => $data[0]->id_receipt,
+            'rate' => $data[0]->rate,
+            'total_po' => $data[0]->total_po,
             'html' => $html
         ]);
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Masterdata;
 
 use App\Events\NotifEvent;
 use App\Http\Controllers\Controller;
+use App\Models\Coa;
 use App\Models\TypeItems;
 use App\Models\UserActivity;
 use Illuminate\Support\Facades\DB;
@@ -33,18 +34,18 @@ class TypeItemController extends Controller
     }
 
     public function create() {
-        return view('admin.masterdata.items.typeitem.create');
+        return view('admin.masterdata.items.typeitem.create', ['coa' => Coa::all()]);
     }
 
     public function edit(Request $request) {
 
-        return view('admin.masterdata.items.typeitem.edit', ['typeitems' => TypeItems::where(['id' => $request->id])->first()]);
+        return view('admin.masterdata.items.typeitem.edit', ['typeitems' => TypeItems::where(['id' => $request->id])->first(), 'coa' => Coa::all()]);
     }
 
     public function store(Request $request) {
 
         DB::connection('masterdata')->select("call sp_insert_item_types(
-            '$request->type_code',
+            '$request->coa_id',
             '$request->name_type',
             '$request->description',
             $request->status
@@ -64,7 +65,7 @@ class TypeItemController extends Controller
     public function update(Request $request) {
         DB::connection('masterdata')->select("call sp_update_item_types(
             $request->id,
-            '$request->type_code',
+            '$request->coa_id',
             '$request->name_type',
             '$request->description',
             $request->status

@@ -37,7 +37,7 @@
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th class="min-w-20px">No
                                 </th>
-                                <th class="min-w-125px">Type Code</th>
+                                <th class="min-w-125px">Coa</th>
                                 <th class="min-w-125px">Name Type</th>
                                 <th class="min-w-125px">Description</th>
                                 <th class="min-w-70px">Status</th>
@@ -125,8 +125,8 @@
                     searchable: false
                 },
                 {
-                    data: 'type_code',
-                    name: 'type_code'
+                    data: 'coa_id',
+                    name: 'coa_id'
                 },
                 {
                     data: 'name_type',

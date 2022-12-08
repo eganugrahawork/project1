@@ -55,6 +55,8 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
+                    <input type="hidden" id="rate" name="rate" value="">
+                    <input type="hidden" id="total_po" name="total_po" value="">
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Ship To</label>
                         <textarea id="shipment" class="form-control form-control-solid mb-3 mb-lg-0" readonly required></textarea>
@@ -77,12 +79,12 @@
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Term Of Payment</label>
-                        <input type="text" id="term_of_payment"
+                        <input type="text" id="term_of_payment" name="term_of_payment"
                             class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Decription</label>
-                        <textarea  id="description" class="form-control form-control-solid mb-3 mb-lg-0" readonly required></textarea>
+                        <textarea  id="description" name="description" class="form-control form-control-solid mb-3 mb-lg-0" readonly required></textarea>
 
                     </div>
                     <div class="fv-row mb-3">
@@ -174,6 +176,8 @@
             $('#term_of_payment').val(data.term_of_payment);
             $('#description').val(data.description);
             $('#id_receipt').val(data.id_receipt);
+            $('#rate').val(data.rate)
+            $('#total_po').val(data.total_po)
             $('#itemsList').html(data.html);
         })
 
@@ -220,7 +224,7 @@
                         )
                         $('#content').hide();
                         $('#indexContent').show();
-                        $('#searchTableItemsReceipt').focus()
+                        $('#searchTableInvoice').focus()
                         tableItemsReceipt.ajax.reload()
                     },
                     error: function(response) {
