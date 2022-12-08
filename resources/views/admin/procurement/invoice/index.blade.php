@@ -56,14 +56,13 @@
                         <thead>
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No Invoice
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Number Invoice
                                 </th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Invoice Date</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Due Date</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Partner</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Invoice
-                                    Number</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Total</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Balance</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Due Date</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Status</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Action</th>
                             </tr>
@@ -128,37 +127,36 @@
 
         }
 
-        // var tableInvoice =  $('#tableInvoice').DataTable({
-        //     serverside : true,
-        //     processing : true,
-        //     ajax : {
-        //             url : "{{ url('/admin/procurement/items-receipt/list') }}"
-        //             },
-        //             columns:
-        //             [
-        //             {
-        //             data: 'DT_RowIndex',
-        //             searchable: false
-        //         },
-        //             {data: 'do_number', name: 'do_number'},
-        //             {data: 'receipt_date_filter', name: 'receipt_date_filter'},
-        //             {data: 'number_po', name: 'number_po'},
-        //             {data: 'name', name: 'name'},
-        //             {data: 'order_datenya', name: 'order_datenya'},
-        //             {data: 'total_po', name: 'total_po',
-        //             render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')},
-        //             {data: 'total_discount', name: 'total_discount'},
-        //             {data: 'total_price', name: 'total_price', render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')},
-        //             {data: 'action', name: 'action'}
-        //             ],
-        //     "bLengthChange": false,
-        //     "bFilter": true,
-        //     "bInfo": false
-        // });
+        var tableInvoice =  $('#tableInvoice').DataTable({
+            serverside : true,
+            processing : true,
+            ajax : {
+                    url : "{{ url('/admin/procurement/invoice/list') }}"
+                    },
+                    columns:
+                    [
+                    {
+                    data: 'DT_RowIndex',
+                    searchable: false
+                },
+                    {data: 'invoice_number', name: 'invoice_number'},
+                    {data: 'invoice_date', name: 'invoice_date'},
+                    {data: 'due_date', name: 'due_date'},
+                    {data: 'name', name: 'name'},
+                    {data: 'price', name: 'price',
+                    render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')},
+                    {data: 'balance', name: 'balance', render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')},
+                    {data: 'status', name: 'status'},
+                    {data: 'action', name: 'action'}
+                    ],
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false
+        });
 
-        // $('#searchTableInvoice').keyup(function () {
-        //         tableInvoice.search($(this).val()).draw()
-        // });
+        $('#searchTableInvoice').keyup(function () {
+                tableInvoice.search($(this).val()).draw()
+        });
 
         $(document).on('click', '#deleteItemReceipt', function(e) {
             e.preventDefault();

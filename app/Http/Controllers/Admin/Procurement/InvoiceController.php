@@ -4,18 +4,40 @@ namespace App\Http\Controllers\Admin\Procurement;
 
 use App\Http\Controllers\Controller;
 use App\Models\PurchaseOrderInvoice;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Yajra\DataTables\DataTables;
 
 class InvoiceController extends Controller {
     public function index() {
         return view('admin.procurement.invoice.index');
     }
 
+    public function list(){
+        return  Datatables::of(DB::connection('procurement')->select('Call sp_list_invoice()'))->addIndexColumn()
+            ->addColumn('action', function ($model) {
+                $action = "<a onclick='info($model->id)' class='btn btn-icon btn-sm btn-info me-1 btn-hover-rise'><i class='bi bi-info-square'></i></a>";
+                if (Gate::allows('edit', ['/admin/procurement/invoice'])) {
+                    $action .= "<a onclick='edit($model->id)' class='btn btn-icon btn-sm btn-warning me-1 btn-hover-rise'><i class='bi bi-pencil-square'></i></a>";
+                }
+                if (Gate::allows('delete', ['/admin/procurement/invoice'])) {
+                    $action .= " <a href='/admin/procurement/invoice/delete/$model->id' class='btn btn-icon btn-sm btn-danger me-1 btn-hover-rise' id='deleteItemReceipt'><i class='bi bi-trash'></i></a>";
+                }
+                return $action;
+            })->addColumn('invoice_date', function ($model) {
+                return Carbon::parse($model->invoice_date)->format('d-M-Y');
+            })->addColumn('due_date', function ($model) {
+                return Carbon::parse($model->due_date)->format('d-M-Y');
+            })->addColumn('balance', function($model){
+                $total_bayar = 0;
+                $sisa = $model->price - $total_bayar;
+                return $sisa;
+            })->make(true);
+    }
+
     public function create() {
-
-
-
         $list = DB::connection('procurement')->select('Call sp_list_item_receipt()');
         return view('admin.procurement.invoice.create', ['list' => $list]);
     }
@@ -83,6 +105,25 @@ class InvoiceController extends Controller {
         return response()->json(['success' => 'Invoices Created']);
     }
 
+    public function edit(Request $request){
+        $data = DB::connection('procurement')->select('Call sp_search_id_invoice(' . $request->id . ')');
+
+        return view('admin.procurement.invoice.edit', ['data' => $data]);
+    }
+
+    public function update(){
+
+    }
+
+    public function delete(){
+
+    }
+
+    public function info(Request $request){
+        $data = DB::connection('procurement')->select('Call sp_search_id_invoice(' . $request->id . ')');
+
+        return view('admin.procurement.invoice.info', ['data' => $data]);
+    }
 
     public function getdata(Request $request) {
         $data = DB::connection('procurement')->select('Call sp_search_id_item_receipt(' . $request->id . ')');
@@ -118,7 +159,7 @@ class InvoiceController extends Controller {
 
             <div class='fv-row mb-3 col-lg-1'>
                 <label class='required fw-bold fs-6 mb-2'>Discount</label>
-                <input type='number' name='qty_discount[]' id='qty_discount'  value='$item->qty_bonus' readonly class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
+                <input type='number' name='qty_discount[]' id='qty_discount'  value='$item->qty_discount' readonly class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Note</label>

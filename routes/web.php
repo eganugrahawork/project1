@@ -324,9 +324,10 @@ Route::middleware('auth')->controller(InvoiceController::class)->group(function 
     Route::get('/admin/procurement/invoice/list', 'list');
     Route::get('/admin/procurement/invoice/create', 'create');
     Route::post('/admin/procurement/invoice/store', 'store');
+    Route::get('/admin/procurement/invoice/edit/{id}', 'edit');
+    Route::get('/admin/procurement/invoice/info/{id}', 'info');
     Route::get('/admin/procurement/invoice/getdata/{id}', 'getdata');
 });
-
 // End Procurement Invoice
 
 
