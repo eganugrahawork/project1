@@ -51,7 +51,7 @@
                                     <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7"
                                         rowspan="2">Kemasan</th>
                                     <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7"
-                                        rowspan="2">Box </th>
+                                        rowspan="2">Box Lt/Kg</th>
                                     <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7"
                                         colspan="2">Start Stock</th>
                                     <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7"
@@ -88,26 +88,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>P2202R2</td>
-                                    <td>Mercusuar A2201</td>
-                                    <td>PT apa gitu ya</td>
-                                    <td>PEORDA BOX 2203</td>
-                                    <td>APAYA</td>
-                                    <td>0000</td>
-                                    <td>20939</td>
-                                    <td>201928</td>
-                                    <td>0000</td>
-                                    <td>0000</td>
-                                    <td>0000</td>
-                                    <td>0000</td>
-                                    <td>0000</td>
-                                    <td>0000</td>
-                                    <td>0000</td>
-                                    <td>0000</td>
-                                    <td>0000</td>
-                                    <td>0000</td>
-                                </tr>
+
                             </tbody>
                         </table>
 
@@ -192,33 +173,40 @@
             $('#mainmodal').modal('toggle')
         }
 
-        // var tableStock =  $('#tableStock').DataTable({
-        //     serverside : true,
-        //     processing : true,
-        //     ajax : {
-        //             url : "{{ url('/admin/procurement/purchase-order/list') }}"
-        //             },
-        //             columns:
-        //             [
-        //             {
-        //             data: 'DT_RowIndex',
-        //             searchable: false
-        //         },
-        //             {data: 'code', name: 'code'},
-        //             {data: 'partner_id', name: 'partner_id'},
-        //             {data: 'order_date', name: 'order_date'},
-        //             {data: 'price', name: 'price', render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )},
-        //             {data: 'delivery_date', name: 'delivery_date'},
-        //             {data: 'status', name: 'status'},
-        //             {data: 'action', name: 'action'}
-        //             ],
-        //     "bLengthChange": false,
-        //     "bFilter": true,
-        //     "bInfo": false
-        // });
+        var tableStock =  $('#tableStock').DataTable({
+            serverside : true,
+            processing : true,
+            ajax : {
+                    url : "{{ url('/admin/inventory/stock/list') }}"
+                    },
+                    columns:
+                    [
+                    {data: 'item_code', name: 'item_code'},
+                    {data: 'item_name', name: 'item_name'},
+                    {data: 'name', name: 'name'},
+                    {data: 'belumada', name: 'belumada'},
+                    {data: 'box_per_lt', name: 'box_per_lt'},
+                    {data: 'stockawal_lt_kg', name: 'stockawal_lt_kg'},
+                    {data: 'stockawal_box', name: 'stockawal_box'},
+                    {data: 'penerimaan_lt_kg', name: 'penerimaan_lt_kg'},
+                    {data: 'penerimaan_box', name: 'penerimaan_box'},
+                    {data: 'belumada', name: 'belumada'},
+                    {data: 'belumada', name: 'belumada'},
+                    {data: 'belumada', name: 'belumada'},
+                    {data: 'belumada', name: 'belumada'},
+                    {data: 'belumada', name: 'belumada'},
+                    {data: 'belumada', name: 'belumada'},
+                    {data: 'belumada', name: 'belumada'},
+                    {data: 'belumada', name: 'belumada'},
+                    {data: 'belumada', name: 'belumada'}
+                    ],
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false
+        });
 
-        // $('#searchTableStock').keyup(function () {
-        //         tableStock.search($(this).val()).draw()
-        // });
+        $('#searchTableStock').keyup(function () {
+                tableStock.search($(this).val()).draw()
+        });
     </script>
 @endsection

@@ -361,7 +361,7 @@ Route::middleware('auth')->controller(ReportProcurementController::class)->group
 // Stock
 Route::middleware('auth')->controller(StockController::class)->group(function () {
     Route::get('/admin/inventory/stock', 'index');
-    Route::post('/admin/inventory/stock/filter', 'filter');
+    Route::get('/admin/inventory/stock/list', 'list');
 });
 // End Stock
 
