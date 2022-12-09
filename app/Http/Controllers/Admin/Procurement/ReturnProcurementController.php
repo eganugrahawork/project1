@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 
-class ReturController extends Controller {
+class ReturnProcurementController extends Controller
+{
     public function index() {
         return view('admin.procurement.retur.index');
     }

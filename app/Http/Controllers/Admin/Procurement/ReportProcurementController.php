@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 
-class ReportController extends Controller {
+class ReportProcurementController extends Controller
+{
     public function index() {
         $partner = DB::connection('masterdata')->select('call sp_list_partners()');
         return view('admin.procurement.report.index',['partner' => $partner]);
