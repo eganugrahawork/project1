@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 
-class InvoiceController extends Controller {
+class InvoiceProcurementController extends Controller
+{
     public function index() {
         return view('admin.procurement.invoice.index');
     }

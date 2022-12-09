@@ -36,9 +36,9 @@ use App\Http\Controllers\Admin\Masterdata\TypePartnerController;
 
 // Start Procurement
 use App\Http\Controllers\Admin\Procurement\PurchaseOrderController;
+use App\Http\Controllers\Admin\Procurement\InvoiceProcurementController;
 use App\Http\Controllers\Admin\Procurement\ItemsReceiptController;
 use App\Http\Controllers\Admin\Procurement\PurchaseBasisController;
-use App\Http\Controllers\Admin\Procurement\InvoiceController;
 // End Procurement
 
 // Strt Inventory
@@ -46,6 +46,7 @@ use App\Http\Controllers\Admin\Inventory\StockController;
 use App\Http\Controllers\Admin\Inventory\StockInTransitController;
 use App\Http\Controllers\Admin\Procurement\ReportProcurementController;
 use App\Http\Controllers\Admin\Procurement\ReturnProcurementController;
+use App\Http\Controllers\Admin\Selling\InvoiceSellingController;
 use App\Http\Controllers\Admin\Selling\ReportSellingController;
 use App\Http\Controllers\Admin\Selling\SellingController;
 use App\Http\Controllers\ReturnSellingController;
@@ -321,7 +322,7 @@ Route::middleware('auth')->controller(ItemsReceiptController::class)->group(func
 // End Items Receipt
 
 // Procurement Invoice
-Route::middleware('auth')->controller(InvoiceController::class)->group(function () {
+Route::middleware('auth')->controller(InvoiceProcurementController::class)->group(function () {
     Route::get('/admin/procurement/invoice', 'index');
     Route::get('/admin/procurement/invoice/list', 'list');
     Route::get('/admin/procurement/invoice/create', 'create');
@@ -385,6 +386,13 @@ Route::middleware('auth')->controller(SellingController::class)->group(function 
     Route::get('/admin/selling/selling', 'index');
 });
 // End Selling
+
+// Invoice Selling
+Route::middleware('auth')->controller(InvoiceSellingController::class)->group(function () {
+    Route::get('/admin/selling/invoice', 'index');
+});
+
+// End Invoice Selling
 
 // Return Selling
 Route::middleware('auth')->controller(ReturnSellingController::class)->group(function () {
