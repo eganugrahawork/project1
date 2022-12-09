@@ -21,11 +21,14 @@ class ReturController extends Controller {
         return  Datatables::of(DB::connection('procurement')->select('Call sp_list_return()'))->addIndexColumn()
             ->addColumn('action', function ($model) {
                 $action = "<a onclick='info($model->id)' class='btn btn-icon btn-sm btn-info me-1 btn-hover-rise'><i class='bi bi-info-square'></i></a>";
-                if (Gate::allows('edit', ['/admin/procurement/retur'])) {
-                    $action .= "<a onclick='edit($model->id)' class='btn btn-icon btn-sm btn-warning me-1 btn-hover-rise'><i class='bi bi-pencil-square'></i></a>";
-                }
-                if (Gate::allows('delete', ['/admin/procurement/retur'])) {
-                    $action .= " <a href='/admin/procurement/retur/delete/$model->id' class='btn btn-icon btn-sm btn-danger me-1 btn-hover-rise' id='deleteRetur'><i class='bi bi-trash'></i></a>";
+                if($model->status !== '0'){
+
+                    if (Gate::allows('edit', ['/admin/procurement/retur'])) {
+                        $action .= "<a onclick='edit($model->id)' class='btn btn-icon btn-sm btn-warning me-1 btn-hover-rise'><i class='bi bi-pencil-square'></i></a>";
+                    }
+                    if (Gate::allows('delete', ['/admin/procurement/retur'])) {
+                        $action .= " <a href='/admin/procurement/retur/delete/$model->id_retur' class='btn btn-icon btn-sm btn-danger me-1 btn-hover-rise' id='deleteRetur'><i class='bi bi-trash'></i></a>";
+                    }
                 }
                 return $action;
             })->addColumn('retur_date', function ($model) {
