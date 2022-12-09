@@ -7,35 +7,50 @@
         <div class="col-12">
             <div id="content"></div>
             <div class="card" id="indexContent">
-
                 <div class="card-header border-0">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative my-1">
                             <h5 class="fw-bolder text-gray-600">Procurement Report</h5>
                         </div>
-                        <div class="d-flex align-items-center position-relative my-1">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                                    <input class="form-control" placeholder="Search" id="searchtableReport" type="text">
+                    </div>
+                </div>
+                <div class="card-body pt-0">
+                    <div class="d-flex col-lg-12">
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <select name="partner_id" id="partner_id" class="form-select form-select-md select-2">
+                                        <option value="0">All</option>
+                                        @foreach ($partner as $p)
+                                            <option value="{{ $p->id }}">{{ $p->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <input type="text" id="daterange" name="daterange"
+                                                class="form-control form-control-md text-gray-500" />
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <a class="btn btn-sm btn-primary input-group-text" onclick="getTable()"><i
+                                                    class="lab la-searchengin"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-
-                </div>
-                <div class="card-body pt-0">
-                    <div class="d-flex justify-content-start col-lg-4">
-                        <select name="partner_id" id="partner_id" class="form-select form-select-md select-2">
-                            <option value="0">All</option>
-                            @foreach ($partner as $p)
-                            <option value="{{ $p->id }}">{{ $p->name }}</option>
-                            @endforeach
-                        </select>
-                        <input type="text" id="daterange" name="daterange" class="form-control text-gray-500" />
-                        <a class="btn btn-sm btn-primary input-group-text"  onclick="getTable()"><i
-                                class="lab la-searchengin"></i></a>
+                        <div class="col-lg-6 ">
+                            <div class="d-flex align-items-center position-relative justify-content-end  my-1">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                        <input class="form-control" placeholder="Search" id="searchtableReport"
+                                            type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="tableReport">
                         <thead>
@@ -107,16 +122,18 @@
 
 
         function getTable() {
+            var tableReport;
             partner_id = $('#partner_id').val();
             daterange = $('#daterange').val();
-            if(statusTable == true){
+            if (statusTable == true) {
                 $('#tableReport').DataTable().destroy();
             }
-           $('#tableReport').DataTable({
+             tableReport = $('#tableReport').DataTable({
                 serverside: true,
                 processing: true,
+                bDestroy: true,
                 ajax: {
-                    url: "{{ url('/admin/procurement/report/list') }}/"+partner_id+"/"+daterange
+                    url: "{{ url('/admin/procurement/report/list') }}/" + partner_id + "/" + daterange
                 },
                 columns: [{
                         data: 'DT_RowIndex',
@@ -190,12 +207,10 @@
                 "bFilter": true,
                 "bInfo": false
             });
-
+            $('#searchtableReport').keyup(function() {
+                tableReport.search($(this).val()).draw()
+            });
             statusTable = true;
         }
-
-        $('#searchtableReport').keyup(function() {
-            $('#tableReport').search($(this).val()).draw()
-        });
     </script>
 @endsection
