@@ -106,9 +106,9 @@ class RegisterController extends Controller
             'id_user' => $newUser->id,
             'menu' => "Register",
             'aktivitas' => "Register ",
-            'keterangan' => auth()->user()->name ." Register to the app, wait for Verified"
+            'keterangan' => $data->name ." Register to the app, wait for Verified"
         ]);
-        NotifEvent::dispatch(auth()->user()->name .' Register to the app.');
+        NotifEvent::dispatch($data->name.' Register to the app.');
         // dd($token);
         return redirect('/login')->with('success', 'Check Your Email');
     }
