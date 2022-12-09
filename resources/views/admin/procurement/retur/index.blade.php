@@ -35,11 +35,12 @@
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="tableRetur">
                         <thead>
                             <tr class="text-start text-uppercase text-gray-400 fw-bolder fs-7 gs-0">
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Invoice</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Partner</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Retur Date
                                 </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Sign</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Qty Retur</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Status</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Action</th>
                             </tr>
@@ -65,7 +66,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
                 )
             })
         }
@@ -78,7 +79,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
                 )
             })
         }
@@ -91,7 +92,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
                 )
             })
         }
@@ -104,7 +105,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
                 )
             })
         }
@@ -116,54 +117,52 @@
 
         }
 
-        // var tableRetur = $('#tableRetur').DataTable({
-        //     serverside: true,
-        //     processing: true,
-        //     ajax: {
-        //         url: "{{ url('/admin/procurement/retur/list') }}"
-        //     },
-        //     columns: [{
-        //             data: 'DT_RowIndex',
-        //             searchable: false
-        //         },
-        //         {
-        //             data: 'po_code',
-        //             name: 'po_code'
-        //         },
-        //         {
-        //             data: 'name',
-        //             name: 'name'
-        //         },
-        //         {
-        //             data: 'tgl_order',
-        //             name: 'tgl_order'
-        //         },
-        //         {
-        //             data: 'total_po',
-        //             name: 'total_po',
-        //             render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')
-        //         },
-        //         // {data: 'due_date', name: 'delivery_date'},
-        //         {
-        //             data: 'statues',
-        //             name: 'statues'
-        //         },
-        //         {
-        //             data: 'action',
-        //             name: 'action'
-        //         }
-        //     ],
-        //     "bLengthChange": false,
-        //     "bFilter": true,
-        //     "bInfo": false
-        // });
+        var tableRetur = $('#tableRetur').DataTable({
+            serverside: true,
+            processing: true,
+            ajax: {
+                url: "{{ url('/admin/procurement/retur/list') }}"
+            },
+            columns: [{
+                    data: 'DT_RowIndex',
+                    searchable: false
+                },
+                {
+                    data: 'invoice_number',
+                    name: 'invoice_number'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'retur_date',
+                    name: 'retur_date'
+                },
+                {
+                    data: 'qty_return',
+                    name: 'qty_return'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'action',
+                    name: 'action'
+                }
+            ],
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false
+        });
 
-        // $('#searchtableRetur').keyup(function() {
-        //     tableRetur.search($(this).val()).draw()
-        // });
+        $('#searchtableRetur').keyup(function() {
+            tableRetur.search($(this).val()).draw()
+        });
 
 
-        $(document).on('click', '#deleteretur', function(e) {
+        $(document).on('click', '#deleteRetur', function(e) {
             e.preventDefault();
             const href = $(this).attr('href');
 
@@ -199,7 +198,7 @@
                             )
                             tableRetur.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
                             )
                         }
                     })
@@ -253,7 +252,7 @@
                                 'success'
                             )
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
                             )
                         }
                     })

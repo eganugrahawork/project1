@@ -3,16 +3,16 @@
         <h4>Edit Invoice</h4>
     </div>
     <div class="card-body">
-        <form id="addInvoice" class="form">
+        <form id="update-form" class="form">
             @csrf
             <div class="row">
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
-                        <input type="hidden" name="id_receipt" id="id_receipt">
+                        <input type="hidden" name="id_invoice" value="{{ $data[0]->id_invoice }}">
                         <label class="required form-label fw-bold">Delivery Order Number</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="purchase_order_id"
-                            id="purchase_order_id" required>
-                            <option value="">{{ $data[0]->do_number }}-{{ $data[0]->name }}</option>
+                            id="purchase_order_id">
+                            <option value="" selected>{{ $data[0]->do_number }}-{{ $data[0]->name }}</option>
                         </select>
                     </div>
                     <div class="fv-row mb-3">
@@ -169,13 +169,88 @@
 
             <div class="d-flex justify-content-center" id="loadingnya">
                 <div class="px-2">
-                    <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Confirm</button>
+                    <button class="btn btn-sm btn-primary" type="submit" id="btn-update">Update</button>
                 </div>
                 <div class="px-2">
-                    <button class="btn btn-sm btn-secondary" onclick="tutupContent()" id="btn-add">Cancel</button>
+                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Cancel</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('.select-2').select2();
+        flatpickr("#date_invoice", {
+            static: true,
+            dateFormat: "Y-m-d",
+        });
+        flatpickr("#due_date", {
+            static: true,
+            dateFormat: "Y-m-d",
+        });
+    });
+</script>
 
+
+<script>
+    $('#update-form').submit(function(event) {
+        event.preventDefault();
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Save This Data ?',
+            text: "Data will be save to the database!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Save!',
+            cancelButtonText: 'Not, Cancel!',
+            reverseButtons: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#loadingnya').html(
+                    '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span>'
+                    )
+                $.ajax({
+                    url: "{{ url('/admin/procurement/invoice/update') }}",
+                    type: 'post',
+                    data: $('#update-form')
+                        .serialize(), // Remember that you need to have your csrf token included
+                    dataType: 'json',
+                    success: function(response) {
+                        Swal.fire(
+                            'Success',
+                            response.success,
+                            'success'
+                        )
+                        $('#content').hide();
+                        $('#indexContent').show();
+                        $('#searchTableInvoice').focus()
+                        tableItemsReceipt.ajax.reload()
+                    },
+                    error: function(response) {
+                        // Handle error
+                    }
+                });
+
+            } else if (
+
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    '',
+                    'success'
+                )
+            }
+        })
+
+    });
+</script>

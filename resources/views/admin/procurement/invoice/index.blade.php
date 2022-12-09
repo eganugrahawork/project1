@@ -158,7 +158,7 @@
                 tableInvoice.search($(this).val()).draw()
         });
 
-        $(document).on('click', '#deleteItemReceipt', function(e) {
+        $(document).on('click', '#deleteInvoice', function(e) {
             e.preventDefault();
             const href = $(this).attr('href');
 

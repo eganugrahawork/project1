@@ -15,7 +15,7 @@ class InvoiceController extends Controller {
         return view('admin.procurement.invoice.index');
     }
 
-    public function list(){
+    public function list() {
         return  Datatables::of(DB::connection('procurement')->select('Call sp_list_invoice()'))->addIndexColumn()
             ->addColumn('action', function ($model) {
                 $action = "<a onclick='info($model->id)' class='btn btn-icon btn-sm btn-info me-1 btn-hover-rise'><i class='bi bi-info-square'></i></a>";
@@ -23,14 +23,14 @@ class InvoiceController extends Controller {
                     $action .= "<a onclick='edit($model->id)' class='btn btn-icon btn-sm btn-warning me-1 btn-hover-rise'><i class='bi bi-pencil-square'></i></a>";
                 }
                 if (Gate::allows('delete', ['/admin/procurement/invoice'])) {
-                    $action .= " <a href='/admin/procurement/invoice/delete/$model->id' class='btn btn-icon btn-sm btn-danger me-1 btn-hover-rise' id='deleteItemReceipt'><i class='bi bi-trash'></i></a>";
+                    $action .= " <a href='/admin/procurement/invoice/delete/$model->id' class='btn btn-icon btn-sm btn-danger me-1 btn-hover-rise' id='deleteInvoice'><i class='bi bi-trash'></i></a>";
                 }
                 return $action;
             })->addColumn('invoice_date', function ($model) {
                 return Carbon::parse($model->invoice_date)->format('d-M-Y');
             })->addColumn('due_date', function ($model) {
                 return Carbon::parse($model->due_date)->format('d-M-Y');
-            })->addColumn('balance', function($model){
+            })->addColumn('balance', function ($model) {
                 $total_bayar = 0;
                 $sisa = $model->price - $total_bayar;
                 return $sisa;
@@ -63,7 +63,7 @@ class InvoiceController extends Controller {
             $po_item_id = $request->po_item_id[$i];
             $qty_receipt = $request->qty[$i];
             $unit_price = $request->unit_price[$i];
-            $price = $qty_receipt * $unit_price + (($qty_receipt * $unit_price)*$request->ppn);
+            $price = $qty_receipt * $unit_price + (($qty_receipt * $unit_price) * $request->ppn);
             $description = $request->notes[$i];
             DB::connection('procurement')->select("Call sp_insert_invoice_detail(
                 $po_item_id,
@@ -79,13 +79,13 @@ class InvoiceController extends Controller {
             $date = $request->date_invoice;
             $value = $request->total_po;
             $value_real = $price;
-            $adjusment= 0;
+            $adjusment = 0;
             $type_cash = 0;
             $notes =  $description;
             $rate =  $request->rate;
             $descriptioncoa = $request->description;
             $invoice_number = $invoiceLast->invoice_number;
-            $assets_id= 0;
+            $assets_id = 0;
             DB::connection('procurement')->select("Call sp_insert_coa_value(
                 0,
                 '$coa_id',
@@ -105,26 +105,40 @@ class InvoiceController extends Controller {
         return response()->json(['success' => 'Invoices Created']);
     }
 
-    public function edit(Request $request){
+    public function edit(Request $request) {
         $data = DB::connection('procurement')->select('Call sp_search_id_invoice(' . $request->id . ')');
 
         return view('admin.procurement.invoice.edit', ['data' => $data]);
     }
 
-    public function update(){
+    public function update(Request $request) {
+        DB::connection('procurement')->select("call sp_update_invoice(
+            $request->id_invoice,
+            '$request->no_invoice',
+            '$request->date_invoice',
+            '$request->due_date',
+            '$request->description_invoice',
+            '$request->sign',
+            '$request->tax_invoice'
+        )");
 
+        return response()->json(['success' => 'Invoices Updated']);
     }
 
-    public function delete(){
-
-    }
-
-    public function info(Request $request){
+    public function info(Request $request) {
         $data = DB::connection('procurement')->select('Call sp_search_id_invoice(' . $request->id . ')');
 
         return view('admin.procurement.invoice.info', ['data' => $data]);
     }
 
+    public function destroy(Request $request) {
+
+        DB::connection('procurement')->select("call sp_delete_invoice(
+            $request->id
+        )");
+
+        return response()->json(['success' => 'Invoices Updated']);
+    }
     public function getdata(Request $request) {
         $data = DB::connection('procurement')->select('Call sp_search_id_item_receipt(' . $request->id . ')');
         $html = '';

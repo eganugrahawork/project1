@@ -325,7 +325,9 @@ Route::middleware('auth')->controller(InvoiceController::class)->group(function 
     Route::get('/admin/procurement/invoice/create', 'create');
     Route::post('/admin/procurement/invoice/store', 'store');
     Route::get('/admin/procurement/invoice/edit/{id}', 'edit');
+    Route::post('/admin/procurement/invoice/update', 'update');
     Route::get('/admin/procurement/invoice/info/{id}', 'info');
+    Route::get('/admin/procurement/invoice/delete/{id}', 'destroy');
     Route::get('/admin/procurement/invoice/getdata/{id}', 'getdata');
 });
 // End Procurement Invoice
@@ -335,13 +337,22 @@ Route::middleware('auth')->controller(InvoiceController::class)->group(function 
 Route::middleware('auth')->controller(ReturController::class)->group(function () {
     Route::get('/admin/procurement/retur', 'index');
     Route::get('/admin/procurement/retur/list', 'list');
+    Route::get('/admin/procurement/retur/create', 'create');
+    Route::post('/admin/procurement/retur/store', 'store');
+    Route::get('/admin/procurement/retur/approveview/{id}', 'approveview');
+    Route::get('/admin/procurement/retur/approve/{id}', 'approve');
+    Route::get('/admin/procurement/retur/info/{id}', 'info');
+    Route::get('/admin/procurement/retur/edit/{id}', 'edit');
+    Route::post('/admin/procurement/retur/update', 'update');
+    Route::get('/admin/procurement/retur/delete/{id}', 'destroy');
+    Route::get('/admin/procurement/retur/getdata/{id}', 'getdata');
 });
 // Procurement Retur End
 
 // Procurement Report
 Route::middleware('auth')->controller(ReportController::class)->group(function () {
     Route::get('/admin/procurement/report', 'index');
-    Route::get('/admin/procurement/report/list', 'list');
+    Route::get('/admin/procurement/report/list/{partner_id}/{date_range}', 'list');
 });
 // End Procurement Report
 
