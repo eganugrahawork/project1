@@ -10,7 +10,7 @@
                 <div class="card-header border-0">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative">
-                            <h2>Stock</h2>
+                            <h5 class="fw-bolder text-gray-600">Stock</h5>
                         </div>
                     </div>
                 </div>
@@ -18,8 +18,7 @@
                     <div class="d-flex align-items-center position-relative my-1">
                         <div class="input-group">
                             <div class="form-outline">
-                                <input type="text" id="daterange" name="daterange"
-                                    class="form-control text-gray-500" />
+                                <input type="text" id="daterange" name="daterange" class="form-control text-gray-500" />
                             </div>
                             <div class="" id="loading-add">
                                 <button type="button" onclick="filterStock()" class="btn btn-sm btn-primary">
@@ -38,7 +37,8 @@
                     </div>
                     <div class="table-responsive">
 
-                        <table class="table table-rounded table-row-bordered border gy-7 gs-7" id="tableStock">
+                        <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100"
+                            id="tableStock">
                             <thead>
                                 <tr
                                     class="text-center text-gray-800 fw-bolder fs-7 text-uppercase gs-0  border-bottom-2 border-right-2 border-top-2 border-gray-300 ">
@@ -87,7 +87,7 @@
                                     <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Box</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody style="border:none;">
 
                             </tbody>
                         </table>
@@ -173,40 +173,95 @@
             $('#mainmodal').modal('toggle')
         }
 
-        var tableStock =  $('#tableStock').DataTable({
-            serverside : true,
-            processing : true,
-            ajax : {
-                    url : "{{ url('/admin/inventory/stock/list') }}"
-                    },
-                    columns:
-                    [
-                    {data: 'item_code', name: 'item_code'},
-                    {data: 'item_name', name: 'item_name'},
-                    {data: 'name', name: 'name'},
-                    {data: 'belumada', name: 'belumada'},
-                    {data: 'box_per_lt', name: 'box_per_lt'},
-                    {data: 'stockawal_lt_kg', name: 'stockawal_lt_kg'},
-                    {data: 'stockawal_box', name: 'stockawal_box'},
-                    {data: 'penerimaan_lt_kg', name: 'penerimaan_lt_kg'},
-                    {data: 'penerimaan_box', name: 'penerimaan_box'},
-                    {data: 'belumada', name: 'belumada'},
-                    {data: 'belumada', name: 'belumada'},
-                    {data: 'belumada', name: 'belumada'},
-                    {data: 'belumada', name: 'belumada'},
-                    {data: 'belumada', name: 'belumada'},
-                    {data: 'belumada', name: 'belumada'},
-                    {data: 'belumada', name: 'belumada'},
-                    {data: 'belumada', name: 'belumada'},
-                    {data: 'belumada', name: 'belumada'}
-                    ],
-            "bLengthChange": false,
-            "bFilter": true,
-            "bInfo": false
+        var tableStock = $('#tableStock').DataTable({
+
+            serverside: true,
+            processing: true,
+            ajax: {
+                url: "{{ url('/admin/inventory/stock/list') }}"
+            },
+            columns: [{
+                    data: 'item_code',
+                    name: 'item_code'
+                },
+                {
+                    data: 'item_name',
+                    name: 'item_name'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'belumada',
+                    name: 'belumada'
+                },
+                {
+                    data: 'box_per_lt',
+                    name: 'box_per_lt'
+                },
+                {
+                    data: 'stockawal_lt_kg',
+                    name: 'stockawal_lt_kg'
+                },
+                {
+                    data: 'stockawal_box',
+                    name: 'stockawal_box'
+                },
+                {
+                    data: 'penerimaan_lt_kg',
+                    name: 'penerimaan_lt_kg'
+                },
+                {
+                    data: 'penerimaan_box',
+                    name: 'penerimaan_box'
+                },
+                {
+                    data: 'belumada',
+                    name: 'belumada'
+                },
+                {
+                    data: 'belumada',
+                    name: 'belumada'
+                },
+                {
+                    data: 'belumada',
+                    name: 'belumada'
+                },
+                {
+                    data: 'belumada',
+                    name: 'belumada'
+                },
+                {
+                    data: 'belumada',
+                    name: 'belumada'
+                },
+                {
+                    data: 'belumada',
+                    name: 'belumada'
+                },
+                {
+                    data: 'belumada',
+                    name: 'belumada'
+                },
+                {
+                    data: 'belumada',
+                    name: 'belumada'
+                },
+                {
+                    data: 'belumada',
+                    name: 'belumada'
+                }
+            ],
+            bLengthChange: false,
+            bFilter: true,
+            bInfo: false,
+
+
         });
 
-        $('#searchTableStock').keyup(function () {
-                tableStock.search($(this).val()).draw()
+        $('#searchTableStock').keyup(function() {
+            tableStock.search($(this).val()).draw()
         });
     </script>
 @endsection

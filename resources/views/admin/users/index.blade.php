@@ -48,7 +48,7 @@
                 </div>
                 <div class="card-body pt-0">
                     <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0" id="usersTable">
+                        <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="usersTable">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">No</th>

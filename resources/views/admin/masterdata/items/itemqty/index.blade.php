@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="itemQtyTable">
+                <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="itemQtyTable">
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="min-w-20px">No</th>

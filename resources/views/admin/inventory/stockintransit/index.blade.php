@@ -10,7 +10,7 @@
                 <div class="card-header border-0">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative ">
-                            <h2>Stock In Transit</h2>
+                            <h5 class="fw-bolder text-gray-600">Stock In Transit</h5>
                         </div>
 
                     </div>
@@ -20,7 +20,7 @@
                         <div class="d-flex justify-content-start">
                             @can('create', ['/admin/inventory/stock-in-transit'])
                                 <div class="px-2">
-                                    <button class="btn btn-sm btn-primary mx-2" onclick="addTransitModal()">+</button><button
+                                    <button class="btn btn-sm btn-primary mx-2" onclick="create()">+</button><button
                                         class="btn btn-sm btn-primary" onclick="transitHistory()">Transit History</button>
                                 </div>
                             @endcan
@@ -49,36 +49,42 @@
                     </div>
 
                     <div class="table-responsive">
-                        <table class="table table-rounded table-row-bordered border gy-7 gs-7" id="tableStockInTransit">
+                        <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="tableStockInTransit">
                             <thead>
                                 <tr
                                     class="text-center text-gray-800 fw-bolder fs-7 text-uppercase gs-0  border-bottom-2 border-right-2 border-top-2 border-gray-300 ">
-                                    <th class="min-w-70px align-middle border-left-2 border-gray-300" rowspan="2">Code
+                                    <th class="text-uppercase text-secondary align-middle text-md font-weight-bolder opacity-7" rowspan="2">Code
                                     </th>
-                                    <th class="min-w-70px align-middle" rowspan="2">Items</th>
-                                    <th class="min-w-70px align-middle" rowspan="2">Partner</th>
-                                    <th class="min-w-70px align-middle" rowspan="2">Kemasan</th>
-                                    <th class="min-w-70px align-middle" rowspan="2">Box </th>
-                                    <th class="min-w-70px align-middle" colspan="2">Start Stock</th>
-                                    <th class="min-w-70px align-middle" colspan="4">Received</th>
-                                    <th class="min-w-70px align-middle" colspan="4">Delivery Order </th>
-                                    <th class="min-w-70px align-middle" colspan="2">End Stock</th>
-                                    <th class="min-w-70px align-middle" rowspan="2">Option</th>
+                                    <th class="text-uppercase text-secondary align-middle text-md font-weight-bolder opacity-7" rowspan="2">Items</th>
+                                    <th class="text-uppercase text-secondary align-middle text-md font-weight-bolder opacity-7" rowspan="2">Kemasan</th>
+                                    <th class="text-uppercase text-secondary align-middle text-md font-weight-bolder opacity-7" rowspan="2">Partner</th>
+                                    <th class="text-uppercase text-secondary align-middle text-md font-weight-bolder opacity-7" rowspan="2">Box Per Lt/Kg</th>
+                                    <th class="text-uppercase text-secondary align-middle text-md font-weight-bolder opacity-7" colspan="2">Start Stock</th>
+                                    <th class="text-uppercase text-secondary align-middle text-md font-weight-bolder opacity-7" colspan="4">Received</th>
+                                    <th class="text-uppercase text-secondary align-middle text-md font-weight-bolder opacity-7" colspan="4">Delivery Order </th>
+                                    <th class="text-uppercase text-secondary align-middle text-md font-weight-bolder opacity-7" colspan="2">Warehouse Stock</th>
+                                    <th class="text-uppercase text-secondary align-middle text-md font-weight-bolder opacity-7" colspan="2">Transit Stock</th>
+                                    <th class="text-uppercase text-secondary align-middle text-md font-weight-bolder opacity-7" colspan="2">End Stock</th>
+                                    <th class="text-uppercase text-secondary align-middle text-md font-weight-bolder opacity-7" rowspan="2">Option</th>
                                 </tr>
                                 <tr
                                     class="text-center text-gray-800 fw-bolder fs-7 text-uppercase gs-0  border-bottom-2 border-right-2 border-gray-300">
-                                    <th class="align-middle">Lt/Kg</th>
-                                    <th class="align-middle">Box</th>
-                                    <th class="align-middle">Lt/Kg</th>
-                                    <th class="align-middle">Box</th>
-                                    <th class="align-middle">Retur Lt/Kg</th>
-                                    <th class="align-middle">Retur Box</th>
-                                    <th class="align-middle">Lt/Kg</th>
-                                    <th class="align-middle">Box</th>
-                                    <th class="align-middle">Retur Lt/Kg</th>
-                                    <th class="align-middle">Retur Box</th>
-                                    <th class="align-middle">Lt/Kg</th>
-                                    <th class="align-middle">Box</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Lt/Kg</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Box</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Lt/Kg</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Box</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Retur Lt/Kg</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Retur Box</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Lt/Kg</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Box</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Retur Lt/Kg</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Retur Box</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Lt/Kg</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Box</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Lt/Kg</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Box</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Lt/Kg</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Box</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,6 +97,10 @@
                                     <td>0000</td>
                                     <td>20939</td>
                                     <td>201928</td>
+                                    <td>0000</td>
+                                    <td>0000</td>
+                                    <td>0000</td>
+                                    <td>0000</td>
                                     <td>0000</td>
                                     <td>0000</td>
                                     <td>0000</td>
@@ -165,10 +175,10 @@
     </script>
 
     <script>
-        function addTransitModal() {
+        function create() {
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/inventory/stock-in-transit/addtransitmodal') }}", {}, function(data, status) {
+            $.get("{{ url('/admin/inventory/stock-in-transit/create') }}", {}, function(data, status) {
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
                 $('#loading-add').html(

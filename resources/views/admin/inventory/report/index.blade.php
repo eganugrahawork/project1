@@ -52,7 +52,7 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-rounded table-row-bordered border gy-7 gs-7" id="tableStock">
+                    <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="tableStock">
                         <thead>
                             <tr
                                 class="text-center text-gray-800 fw-bolder fs-7 text-uppercase gs-0  border-bottom-2 border-right-2 border-top-2 border-gray-300 ">
