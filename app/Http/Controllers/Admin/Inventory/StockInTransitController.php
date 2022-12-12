@@ -18,4 +18,8 @@ class StockInTransitController extends Controller
 
         return response()->json(['data' => $date[0]]);
     }
+
+    public function create(){
+        return view('admin.inventory.stockintransit.create');
+    }
 }

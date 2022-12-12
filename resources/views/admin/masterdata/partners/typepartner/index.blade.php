@@ -80,6 +80,7 @@
         function tutupContent(){
             $('#content').hide()
             $('#indexContent').show()
+            $('#searchTypeOfPartner').focus()
         }
 
         var typeofpartner = $('#typeofpartner').DataTable({

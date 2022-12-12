@@ -31,7 +31,7 @@
                                     <input type="text" id="daterange" name="daterange"
                                         class="form-control text-gray-500" />
                                 </div>
-                                <div class="" id="loading-add">
+                                <div class="" >
                                     <button type="button" onclick="filterStock()" class="btn btn-sm btn-primary">
                                         <i class="fas fa-search"></i>
                                     </button>
@@ -40,10 +40,11 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
+                        <div id="loading-add"></div>
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                                <input class="form-control" placeholder="Search" id="searchTableStock" type="text">
+                                <input class="form-control" placeholder="Search" id="searchTableStockInTransit" type="text">
                             </div>
                         </div>
                     </div>
@@ -122,30 +123,7 @@
         <!--end::Post-->
     </div>
 
-    {{-- Main Modal --}}
-    <div class="modal fade" id="mainmodal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content">
-                <div class="modal-header" id="mainmodal_header">
-                    <h2 class="fw-bolder">Stock In Transit</h2>
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" onclick="tutupModal()">
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
-                                    rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1"
-                                    transform="rotate(45 7.41422 6)" fill="black" />
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="kontennya">
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- End Main Modal --}}
+
 @endsection
 
 @section('js')
@@ -179,23 +157,15 @@
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/inventory/stock-in-transit/create') }}", {}, function(data, status) {
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
-                $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receive Items</button>'
-                )
+                $('#indexContent').hide();
+                $('#content').html(data)
+                $('#content').show()
+                $('#loading-add').html('')
             })
         }
 
         function transitHistory() {
-            $('#loading-add').html(
-                '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            // $.get("{{ url('/admin/procurement/items-receipt/addmodal') }}", {}, function(data, status){
-            // $('#kontennya').html(data)
-            $('#mainmodal').modal('toggle')
-            $('#loading-add').html(
-                '<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receive Items</button>')
-            // })
+
         }
 
         function filterStockInTransit() {
@@ -226,18 +196,12 @@
             });
         }
 
-        function editModal(id) {
-            // $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            // $.get("{{ url('/admin/procurement/items-receipt/editmodal') }}/"+id, {}, function(data, status){
-            //     $('#kontennya').html(data)
-            //     $('#mainmodal').modal('toggle')
-            //     $('#loading-add').html('')
-            //     $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addModal()">Add Receive Items</button>')
-            // })
-        }
 
-        function tutupModal() {
-            $('#mainmodal').modal('toggle')
+
+        function tutupContent(){
+            $('#content').hide()
+            $('#indexContent').show()
+            $('#searchTableStockInTransit').focus();
         }
 
         // var tableStockInTransit =  $('#tableStockInTransit').DataTable({

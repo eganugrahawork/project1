@@ -370,7 +370,7 @@ Route::middleware('auth')->controller(StockController::class)->group(function ()
 Route::middleware('auth')->controller(StockInTransitController::class)->group(function () {
     Route::get('/admin/inventory/stock-in-transit', 'index');
     Route::post('/admin/inventory/stock-in-transit/filter', 'filter');
-    Route::get('/admin/inventory/stock-in-transit/addtransitmodal', 'addtransitmodal');
+    Route::get('/admin/inventory/stock-in-transit/create', 'create');
 });
 // End Stock In Transit
 
