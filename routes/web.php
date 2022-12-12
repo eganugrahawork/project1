@@ -371,6 +371,7 @@ Route::middleware('auth')->controller(StockInTransitController::class)->group(fu
     Route::get('/admin/inventory/stock-in-transit', 'index');
     Route::post('/admin/inventory/stock-in-transit/filter', 'filter');
     Route::get('/admin/inventory/stock-in-transit/create', 'create');
+    Route::get('/admin/inventory/stock-in-transit/addnewitemrow', 'addnewitemrow');
 });
 // End Stock In Transit
 
@@ -384,6 +385,7 @@ Route::middleware('auth')->controller(ReportInventoryController::class)->group(f
 // Selling
 Route::middleware('auth')->controller(SellingController::class)->group(function () {
     Route::get('/admin/selling/selling', 'index');
+    Route::get('/admin/selling/selling/create', 'create');
 });
 // End Selling
 

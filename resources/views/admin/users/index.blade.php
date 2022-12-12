@@ -100,6 +100,7 @@
         function tutupContent() {
             $('#content').hide()
             $('#indexContent').show()
+            $('#searchUserTable').focus()
         }
 
 

@@ -21,4 +21,8 @@ class SellingController extends Controller
         $month =  array('All', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
         return view('admin.selling.selling.index', ['month' => $month, 'years' => $years]);
     }
+
+    public function create(){
+      return view('admin.selling.selling.create');
+    }
 }

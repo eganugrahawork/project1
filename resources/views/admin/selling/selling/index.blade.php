@@ -37,7 +37,7 @@
                                 @endforeach
                             </select>
                             <a class="btn btn-sm btn-primary input-group-text" onclick=""><i
-                                class="lab la-searchengin"></i></a>
+                                    class="lab la-searchengin"></i></a>
                         </div>
                     </div>
                     <div class="d-flex align-items-center position-relative justify-content-end  my-1">
@@ -71,31 +71,6 @@
         </div>
         <!--end::Post-->
     </div>
-
-    {{-- Main Modal --}}
-    <div class="modal fade" id="mainmodal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content">
-                <div class="modal-header bg-warna" id="mainmodal_header">
-                    <h2 class="fw-bolder text-white">Selling</h2>
-                    <div class="btn btn-sm btn-white" onclick="tutupModal()">
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
-                                    rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1"
-                                    transform="rotate(45 7.41422 6)" fill="black" />
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-2" id="kontennya">
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- End Main Modal --}}
 @endsection
 
 @section('js')
@@ -105,19 +80,20 @@
         function create() {
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/purchase-order/addmodal') }}", {}, function(data, status) {
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
+            $.get("{{ url('/admin/selling/selling/create') }}", {}, function(data, status) {
+                $('#content').show()
+                $('#indexContent').hide()
+                $('#content').html(data)
                 $('#loading-add').html(
                     '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Selling</button>'
                 )
             })
         }
 
-        function editModal(id) {
+        function edit(id) {
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/purchase-order/editmodal') }}/" + id, {}, function(data, status) {
+            $.get("{{ url('/admin/selling/selling/edit') }}/" + id, {}, function(data, status) {
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
                 $('#loading-add').html('')
@@ -127,10 +103,10 @@
             })
         }
 
-        function infoModal(id) {
+        function info(id) {
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/purchase-order/infomodal') }}/" + id, {}, function(data, status) {
+            $.get("{{ url('/admin/selling/selling/info') }}/" + id, {}, function(data, status) {
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
                 $('#loading-add').html('')
@@ -141,22 +117,24 @@
         }
         // function approveModal(id){
         //     $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-        //     $.get("{{ url('/admin/procurement/purchase-order/aprovedmodal') }}/"+id, {}, function(data, status){
+        //     $.get("{{ url('/admin/selling/selling/aprovedmodal') }}/"+id, {}, function(data, status){
         //         $('#kontennya').html(data)
         //         $('#mainmodal').modal('toggle')
         //         $('#loading-add').html('')
         //         $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
         //     })
         // }
-        function tutupModal() {
-            $('#mainmodal').modal('toggle')
+        function tutupContent() {
+            $('#content').hide()
+            $('#indexContent').show()
+            $('#searchtableSelling').focus()
         }
 
         // var tablePo =  $('#tablePo').DataTable({
         //     serverside : true,
         //     processing : true,
         //     ajax : {
-        //             url : "{{ url('/admin/procurement/purchase-order/list') }}"
+        //             url : "{{ url('/admin/selling/selling/list') }}"
         //             },
         //             columns:
         //             [
@@ -234,7 +212,7 @@
 
         // function exportPDF(id){
         //     // e.preventDefault();
-        //     const href = "{{ url('/admin/procurement/purchase-order/exportpdf') }}/"+id
+        //     const href = "{{ url('/admin/selling/selling/exportpdf') }}/"+id
         //     console.log(href);
 
         //     const swalWithBootstrapButtons = Swal.mixin({

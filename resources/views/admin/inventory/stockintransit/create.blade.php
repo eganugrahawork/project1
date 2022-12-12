@@ -29,12 +29,13 @@
                     <hr>
                     <h5 class="fw-bolder">Items</h5>
                     <hr>
-                    <div class="col-lg-12" id="itemsList">
+                    <div class="col-lg-12" id="itemsAddList">
                         <div class='row'>
                             <div class='fv-row mb-3 col-lg-4'>
                                 <label class=' form-label fs-6 fw-bold'>Item</label>
                                 <select class='form-select  form-select-solid mb-3 mb-lg-0' id='item_id'
                                     name='item_id[]' required>
+                                    <option>Choose Item</option>
                                     {{-- <option value='{{ $item->item_id }}'>{{ $item->item_name }}</option> --}}
                                 </select>
                             </div>
@@ -49,12 +50,15 @@
                                     class='form-control form-control-solid mb-3 mb-lg-0 ' required />
                             </div>
                             <div class='fv-row mb-3 col-lg-1  '>
-                                <button class="btn btn-danger btn-sm btn-icon mt-4" type="button" onclick="deleteRow()">-</button>
+                                <button class="btn btn-danger btn-sm btn-icon mt-4" type="button"
+                                    onclick="removeItemRow(this)">-</button>
                             </div>
-
-
                         </div>
-                    </div>
+                      </div>
+                      <div class='fv-row mb-3 d-flex justify-content-end'>
+                          <button class="btn btn-primary btn-sm btn-icon mt-4" type="button"
+                              onclick="addNewItemRow()">+</button>
+                      </div>
                     <hr>
 
                     <div class="d-flex justify-content-center" id="loadingnya">
@@ -81,7 +85,7 @@
                         Lorem Ipsum is simply dummy text...
                     </div>
                     <div class="card-footer">
-                       <p class="text-sm">Loccana Team</p>
+                        <p class="text-sm">Loccana Team</p>
                     </div>
                 </div>
             </div>
@@ -101,21 +105,6 @@
 </script>
 
 <script>
-    $('#purchase_order_id').on('change', function() {
-        var id = $(this).val();
-        $('#itemsList').html(
-            '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-
-        $.get("{{ url('/admin/procurement/invoice/getdata') }}/" + id, {}, function(data) {
-            $('#code').val(data.code);
-            $('#order_date').val(data.order_date);
-            $('#partner').val(data.partner);
-            $('#address').val(data.address);
-        })
-
-    })
-
-
     $('#addTransit').submit(function(event) {
         event.preventDefault();
 
@@ -175,4 +164,17 @@
         })
 
     });
+
+    function addNewItemRow() {
+        $.get("{{ url('/admin/inventory/stock-in-transit/addnewitemrow') }}", function(
+            data) {
+            $('#itemsAddList').append(data.html)
+            $('.select-2').select2();
+        })
+    }
+
+    function removeItemRow(e) {
+        $(e).parent().parent().remove();
+        $('#description').focus()
+    }
 </script>
