@@ -18,13 +18,13 @@ class MenuController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(function($request, $next){
-            if(auth()->user()->userrole->role === "Super Admin"){
-                return $next($request);
-            }else{
-                return redirect('/blocked');
-            }
-        });
+        // $this->middleware(function($request, $next){
+        //     if(auth()->user()->userrole->role === "Super Admin"){
+        //         return $next($request);
+        //     }else{
+        //         return redirect('/blocked');
+        //     }
+        // });
     }
 
 

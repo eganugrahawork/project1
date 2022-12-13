@@ -3,61 +3,47 @@
 @section('content')
     <div class="success-message" data-successmessage="{{ session('success') }}"></div>
     <div class="fail-message" data-failmessage="{{ session('fail') }}"></div>
-    <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
-        <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
-            <div class="page-title d-flex flex-column me-3">
-                <h1 class="d-flex text-dark fw-bolder my-1 fs-3">Cashier</h1>
-                <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
-                    <li class="breadcrumb-item text-gray-600">
-                        <a href="/admin/dashboard" class="text-gray-600 text-hover-primary">Dashboard</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl bg-warna py-4">
-        <div class="content flex-row-fluid" id="kt_content">
-            <div class="card bg-white">
-                <div class="card-header border-0 pt-6">
+    <div class="row">
+      <div class="col-12">
+          <div id="content"></div>
+          <div class="card" id="indexContent">
+              <div class="card-header border-0">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative my-1">
-                            <h2>Transaction</h2>
+                            <h5 class="text-gray-600 fw-bolder ">Transaction</h5>
                         </div>
 
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                             @can('create', ['/admin/cashier'])
-                                <button type="button" class="btn btn-primary me-3" onclick="cashierModal()">
+                                <button type="button" class="btn btn-sm btn-primary me-3" onclick="cashierModal()">
                                     Cashier</button>
                             @endcan
                         </div>
                     </div>
                 </div>
                 <div class="card-body pt-0">
-
-                    <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
-                        <li class="nav-item mt-2">
-                            <a class="nav-link text-active-primary ms-0 me-10 py-5 active"
+                    <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link text-active-primary ms-0 me-10 py-5"
                                 href="#">All Transaction</a>
                         </li>
-                        <li class="nav-item mt-2">
+                        <li class="nav-item">
                             <a class="nav-link text-active-primary ms-0 me-10 py-5"
-                                href="#">Buying</a>
+                                href="#">Spending</a>
                         </li>
-                        <li class="nav-item mt-2">
+                        <li class="nav-item">
                             <a class="nav-link text-active-primary ms-0 me-10 py-5"
-                                href="#">Selling</a>
+                                href="#">Sales</a>
                         </li>
 
                     </ul>
 
-                    <div class="card py-4">
+                    <div class="card py-4" id="menuContentCashier">
                         <div class="card-header card-header-stretch">
                             <div class="card-title">
-                                <h3 class="m-0 text-gray-800">Statement</h3>
+                                <h3 class="m-0 text-gray-800">All Transaction</h3>
                             </div>
                             <div class="card-toolbar m-0">
                                 <div class="d-flex align-items-center position-relative my-1">
@@ -78,27 +64,22 @@
                             </div>
                         </div>
                         <div id="kt_referred_users_tab_content" class="tab-content">
-                            <!--begin::Tab panel-->
                             <div id="kt_referrals_1" class="card-body p-0 tab-pane fade show active" role="tabpanel">
                                 <div class="table-responsive">
-                                    <!--begin::Table-->
                                     <table
                                         class="table table-flush align-middle table-row-bordered table-row-solid gy-4 gs-9">
-                                        <!--begin::Thead-->
                                         <thead class="border-gray-200 fs-5 fw-bold bg-lighten">
                                             <tr>
-                                                <th class="min-w-175px ps-9">Date</th>
+                                                <th class="min-w-175px ">Date</th>
                                                 <th class="min-w-150px px-0">Order ID</th>
                                                 <th class="min-w-350px">Details</th>
                                                 <th class="min-w-125px">Amount</th>
                                                 <th class="min-w-125px text-center">Invoice</th>
                                             </tr>
                                         </thead>
-                                        <!--end::Thead-->
-                                        <!--begin::Tbody-->
                                         <tbody class="fs-6 fw-bold text-gray-600">
                                             <tr>
-                                                <td class="ps-9">Nov 01, 2020</td>
+                                                <td class="">Nov 01, 2020</td>
                                                 <td class="ps-0">102445788</td>
                                                 <td>Darknight transparency 36 Icons Pack</td>
                                                 <td class="text-success">$38.00</td>
@@ -108,7 +89,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Oct 24, 2020</td>
+                                                <td class="">Oct 24, 2020</td>
                                                 <td class="ps-0">423445721</td>
                                                 <td>Seller Fee</td>
                                                 <td class="text-danger">$-2.60</td>
@@ -118,7 +99,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Oct 08, 2020</td>
+                                                <td class="">Oct 08, 2020</td>
                                                 <td class="ps-0">312445984</td>
                                                 <td>Cartoon Mobile Emoji Phone Pack</td>
                                                 <td class="text-success">$76.00</td>
@@ -128,7 +109,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Sep 15, 2020</td>
+                                                <td class="">Sep 15, 2020</td>
                                                 <td class="ps-0">312445984</td>
                                                 <td>Iphone 12 Pro Mockup Mega Bundle</td>
                                                 <td class="text-success">$5.00</td>
@@ -138,7 +119,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">May 30, 2020</td>
+                                                <td class="">May 30, 2020</td>
                                                 <td class="ps-0">523445943</td>
                                                 <td>Seller Fee</td>
                                                 <td class="text-danger">$-1.30</td>
@@ -148,7 +129,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Apr 22, 2020</td>
+                                                <td class="">Apr 22, 2020</td>
                                                 <td class="ps-0">231445943</td>
                                                 <td>Parcel Shipping / Delivery Service App</td>
                                                 <td class="text-success">$204.00</td>
@@ -158,7 +139,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Feb 09, 2020</td>
+                                                <td class="">Feb 09, 2020</td>
                                                 <td class="ps-0">426445943</td>
                                                 <td>Visual Design Illustration</td>
                                                 <td class="text-success">$31.00</td>
@@ -168,7 +149,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Nov 01, 2020</td>
+                                                <td class="">Nov 01, 2020</td>
                                                 <td class="ps-0">984445943</td>
                                                 <td>Abstract Vusial Pack</td>
                                                 <td class="text-success">$52.00</td>
@@ -178,7 +159,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Jan 04, 2020</td>
+                                                <td class="">Jan 04, 2020</td>
                                                 <td class="ps-0">324442313</td>
                                                 <td>Seller Fee</td>
                                                 <td class="text-danger">$-0.80</td>
@@ -188,22 +169,16 @@
                                                 </td>
                                             </tr>
                                         </tbody>
-                                        <!--end::Tbody-->
                                     </table>
-                                    <!--end::Table-->
                                 </div>
                             </div>
-                            <!--end::Tab panel-->
-                            <!--begin::Tab panel-->
                             <div id="kt_referrals_2" class="card-body p-0 tab-pane fade" role="tabpanel">
                                 <div class="table-responsive">
-                                    <!--begin::Table-->
                                     <table
                                         class="table table-flush align-middle table-row-bordered table-row-solid gy-4 gs-9">
-                                        <!--begin::Thead-->
                                         <thead class="border-gray-200 fs-5 fw-bold bg-lighten">
                                             <tr>
-                                                <th class="min-w-175px ps-9">Date</th>
+                                                <th class="min-w-175px ">Date</th>
                                                 <th class="min-w-150px px-0">Order ID</th>
                                                 <th class="min-w-350px">Details</th>
                                                 <th class="min-w-125px">Amount</th>
@@ -214,7 +189,7 @@
                                         <!--begin::Tbody-->
                                         <tbody class="fs-6 fw-bold text-gray-600">
                                             <tr>
-                                                <td class="ps-9">May 30, 2020</td>
+                                                <td class="">May 30, 2020</td>
                                                 <td class="ps-0">523445943</td>
                                                 <td>Seller Fee</td>
                                                 <td class="text-danger">$-1.30</td>
@@ -224,7 +199,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Apr 22, 2020</td>
+                                                <td class="">Apr 22, 2020</td>
                                                 <td class="ps-0">231445943</td>
                                                 <td>Parcel Shipping / Delivery Service App</td>
                                                 <td class="text-success">$204.00</td>
@@ -234,7 +209,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Feb 09, 2020</td>
+                                                <td class="">Feb 09, 2020</td>
                                                 <td class="ps-0">426445943</td>
                                                 <td>Visual Design Illustration</td>
                                                 <td class="text-success">$31.00</td>
@@ -244,7 +219,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Nov 01, 2020</td>
+                                                <td class="">Nov 01, 2020</td>
                                                 <td class="ps-0">984445943</td>
                                                 <td>Abstract Vusial Pack</td>
                                                 <td class="text-success">$52.00</td>
@@ -254,7 +229,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Jan 04, 2020</td>
+                                                <td class="">Jan 04, 2020</td>
                                                 <td class="ps-0">324442313</td>
                                                 <td>Seller Fee</td>
                                                 <td class="text-danger">$-0.80</td>
@@ -264,7 +239,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Nov 01, 2020</td>
+                                                <td class="">Nov 01, 2020</td>
                                                 <td class="ps-0">102445788</td>
                                                 <td>Darknight transparency 36 Icons Pack</td>
                                                 <td class="text-success">$38.00</td>
@@ -274,7 +249,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Oct 24, 2020</td>
+                                                <td class="">Oct 24, 2020</td>
                                                 <td class="ps-0">423445721</td>
                                                 <td>Seller Fee</td>
                                                 <td class="text-danger">$-2.60</td>
@@ -284,7 +259,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Oct 08, 2020</td>
+                                                <td class="">Oct 08, 2020</td>
                                                 <td class="ps-0">312445984</td>
                                                 <td>Cartoon Mobile Emoji Phone Pack</td>
                                                 <td class="text-success">$76.00</td>
@@ -294,7 +269,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Sep 15, 2020</td>
+                                                <td class="">Sep 15, 2020</td>
                                                 <td class="ps-0">312445984</td>
                                                 <td>Iphone 12 Pro Mockup Mega Bundle</td>
                                                 <td class="text-success">$5.00</td>
@@ -319,7 +294,7 @@
                                         <!--begin::Thead-->
                                         <thead class="border-gray-200 fs-5 fw-bold bg-lighten">
                                             <tr>
-                                                <th class="min-w-175px ps-9">Date</th>
+                                                <th class="min-w-175px ">Date</th>
                                                 <th class="min-w-150px px-0">Order ID</th>
                                                 <th class="min-w-350px">Details</th>
                                                 <th class="min-w-125px">Amount</th>
@@ -330,7 +305,7 @@
                                         <!--begin::Tbody-->
                                         <tbody class="fs-6 fw-bold text-gray-600">
                                             <tr>
-                                                <td class="ps-9">Feb 09, 2020</td>
+                                                <td class="">Feb 09, 2020</td>
                                                 <td class="ps-0">426445943</td>
                                                 <td>Visual Design Illustration</td>
                                                 <td class="text-success">$31.00</td>
@@ -340,7 +315,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Nov 01, 2020</td>
+                                                <td class="">Nov 01, 2020</td>
                                                 <td class="ps-0">984445943</td>
                                                 <td>Abstract Vusial Pack</td>
                                                 <td class="text-success">$52.00</td>
@@ -350,7 +325,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Jan 04, 2020</td>
+                                                <td class="">Jan 04, 2020</td>
                                                 <td class="ps-0">324442313</td>
                                                 <td>Seller Fee</td>
                                                 <td class="text-danger">$-0.80</td>
@@ -360,7 +335,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Sep 15, 2020</td>
+                                                <td class="">Sep 15, 2020</td>
                                                 <td class="ps-0">312445984</td>
                                                 <td>Iphone 12 Pro Mockup Mega Bundle</td>
                                                 <td class="text-success">$5.00</td>
@@ -370,7 +345,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Nov 01, 2020</td>
+                                                <td class="">Nov 01, 2020</td>
                                                 <td class="ps-0">102445788</td>
                                                 <td>Darknight transparency 36 Icons Pack</td>
                                                 <td class="text-success">$38.00</td>
@@ -380,7 +355,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Oct 24, 2020</td>
+                                                <td class="">Oct 24, 2020</td>
                                                 <td class="ps-0">423445721</td>
                                                 <td>Seller Fee</td>
                                                 <td class="text-danger">$-2.60</td>
@@ -390,7 +365,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Oct 08, 2020</td>
+                                                <td class="">Oct 08, 2020</td>
                                                 <td class="ps-0">312445984</td>
                                                 <td>Cartoon Mobile Emoji Phone Pack</td>
                                                 <td class="text-success">$76.00</td>
@@ -400,7 +375,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">May 30, 2020</td>
+                                                <td class="">May 30, 2020</td>
                                                 <td class="ps-0">523445943</td>
                                                 <td>Seller Fee</td>
                                                 <td class="text-danger">$-1.30</td>
@@ -410,7 +385,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Apr 22, 2020</td>
+                                                <td class="">Apr 22, 2020</td>
                                                 <td class="ps-0">231445943</td>
                                                 <td>Parcel Shipping / Delivery Service App</td>
                                                 <td class="text-success">$204.00</td>
@@ -435,7 +410,7 @@
                                         <!--begin::Thead-->
                                         <thead class="border-gray-200 fs-5 fw-bold bg-lighten">
                                             <tr>
-                                                <th class="min-w-175px ps-9">Date</th>
+                                                <th class="min-w-175px ">Date</th>
                                                 <th class="min-w-150px px-0">Order ID</th>
                                                 <th class="min-w-350px">Details</th>
                                                 <th class="min-w-125px">Amount</th>
@@ -446,7 +421,7 @@
                                         <!--begin::Tbody-->
                                         <tbody class="fs-6 fw-bold text-gray-600">
                                             <tr>
-                                                <td class="ps-9">Nov 01, 2020</td>
+                                                <td class="">Nov 01, 2020</td>
                                                 <td class="ps-0">102445788</td>
                                                 <td>Darknight transparency 36 Icons Pack</td>
                                                 <td class="text-success">$38.00</td>
@@ -456,7 +431,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Oct 24, 2020</td>
+                                                <td class="">Oct 24, 2020</td>
                                                 <td class="ps-0">423445721</td>
                                                 <td>Seller Fee</td>
                                                 <td class="text-danger">$-2.60</td>
@@ -466,7 +441,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Nov 01, 2020</td>
+                                                <td class="">Nov 01, 2020</td>
                                                 <td class="ps-0">102445788</td>
                                                 <td>Darknight transparency 36 Icons Pack</td>
                                                 <td class="text-success">$38.00</td>
@@ -476,7 +451,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Oct 24, 2020</td>
+                                                <td class="">Oct 24, 2020</td>
                                                 <td class="ps-0">423445721</td>
                                                 <td>Seller Fee</td>
                                                 <td class="text-danger">$-2.60</td>
@@ -486,7 +461,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Feb 09, 2020</td>
+                                                <td class="">Feb 09, 2020</td>
                                                 <td class="ps-0">426445943</td>
                                                 <td>Visual Design Illustration</td>
                                                 <td class="text-success">$31.00</td>
@@ -496,7 +471,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Nov 01, 2020</td>
+                                                <td class="">Nov 01, 2020</td>
                                                 <td class="ps-0">984445943</td>
                                                 <td>Abstract Vusial Pack</td>
                                                 <td class="text-success">$52.00</td>
@@ -506,7 +481,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Jan 04, 2020</td>
+                                                <td class="">Jan 04, 2020</td>
                                                 <td class="ps-0">324442313</td>
                                                 <td>Seller Fee</td>
                                                 <td class="text-danger">$-0.80</td>
@@ -516,7 +491,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Oct 08, 2020</td>
+                                                <td class="">Oct 08, 2020</td>
                                                 <td class="ps-0">312445984</td>
                                                 <td>Cartoon Mobile Emoji Phone Pack</td>
                                                 <td class="text-success">$76.00</td>
@@ -526,7 +501,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="ps-9">Oct 08, 2020</td>
+                                                <td class="">Oct 08, 2020</td>
                                                 <td class="ps-0">312445984</td>
                                                 <td>Cartoon Mobile Emoji Phone Pack</td>
                                                 <td class="text-success">$76.00</td>
