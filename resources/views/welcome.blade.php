@@ -753,7 +753,7 @@
 
                             <div class="pricing-header">
                                 <h3>Standar POS</h3>
-                                <h4><sup>Rp</sup>199<span> / Year</span></h4>
+                                <h4><sup>Rp</sup>199<span> / Month</span></h4>
                             </div>
 
                             <ul>
@@ -781,7 +781,7 @@
 
                             <div class="pricing-header">
                                 <h3>Standard ERP</h3>
-                                <h4><sup>Rp</sup>299<span> / Year</span></h4>
+                                <h4><sup>Rp</sup>299<span> / Month</span></h4>
                             </div>
 
                             <ul>
@@ -810,7 +810,7 @@
 
                             <div class="pricing-header">
                                 <h3>Pro POS</h3>
-                                <h4><sup>Rp</sup>499<span> / Year</span></h4>
+                                <h4><sup>Rp</sup>499<span> / Month</span></h4>
                             </div>
 
                             <ul>
