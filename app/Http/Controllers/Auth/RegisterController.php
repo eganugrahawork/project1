@@ -163,9 +163,9 @@ class RegisterController extends Controller
             'id_user' => $newUser->id,
             'menu' => "Register Verified",
             'aktivitas' => "Register Verified",
-            'keterangan' => auth()->user()->name ." Register success, this account already active"
+            'keterangan' => $newUser->name ." Register success, this account already active"
         ]);
-        NotifEvent::dispatch(auth()->user()->name .' Register success, this account already active.');
+        NotifEvent::dispatch($newUser->name .' Register success, this account already active.');
         return redirect('/login')->with('success', 'Your Account Already Active');
     }
 

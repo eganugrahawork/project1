@@ -94,7 +94,7 @@
                     <a href="/login" class="btn btn-primary btn-lg">Coba Gratis</a>
                 </div>
                 <div class="px-2">
-                    <a href="#contact" class="btn btn-outline btn-outline-warning btn-lg">Kontak Kami</a>
+                    <a href="#contact" class="btn btn-outline btn-outline-light btn-lg">Kontak Kami</a>
                 </div>
             </div>
         </div>
@@ -168,7 +168,7 @@
                             <li><a class="nav-link " data-bs-toggle="pill" href="#tab2">INVENTORY & DISTRIBUTION
                                     SYSTEM</a>
                             </li>
-                            <li><a class="nav-link" data-bs-toggle="pill" href="#tab3">MANUFACTOR</a>
+                            <li><a class="nav-link" data-bs-toggle="pill" href="#tab3">MANUFACTURING</a>
                             </li>
                         </ul><!-- End Tabs -->
 
@@ -288,7 +288,7 @@
                             <div class="tab-pane fade show" id="tab3">
 
                                 <div class="row gy-5">
-                                    <h5 class="text-center fw-bold">MANUFACTOR</h5>
+                                    <h5 class="text-center fw-bold">MANUFACTURING</h5>
                                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                                         <div class="service-item">
                                             <div class="img d-flex justify-content-center">
