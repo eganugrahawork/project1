@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\Configuration\UserRoleController;
 
 // Dashboard
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
+use App\Http\Controllers\Admin\Inventory\ReportInventoryController;
 // End Dashboard
 
 // Users
@@ -29,10 +30,13 @@ use App\Http\Controllers\Admin\Masterdata\ItemsController;
 use App\Http\Controllers\Admin\Masterdata\PartnersController;
 use App\Http\Controllers\Admin\Masterdata\PriceManagementController;
 use App\Http\Controllers\Admin\Masterdata\UoMController;
+use App\Http\Controllers\Admin\Masterdata\TypeItemController;
+use App\Http\Controllers\Admin\Masterdata\TypePartnerController;
 // End Masterdata
 
 // Start Procurement
 use App\Http\Controllers\Admin\Procurement\PurchaseOrderController;
+use App\Http\Controllers\Admin\Procurement\InvoiceProcurementController;
 use App\Http\Controllers\Admin\Procurement\ItemsReceiptController;
 use App\Http\Controllers\Admin\Procurement\PurchaseBasisController;
 // End Procurement
@@ -40,11 +44,13 @@ use App\Http\Controllers\Admin\Procurement\PurchaseBasisController;
 // Strt Inventory
 use App\Http\Controllers\Admin\Inventory\StockController;
 use App\Http\Controllers\Admin\Inventory\StockInTransitController;
-use App\Http\Controllers\Admin\Masterdata\TypeItemController;
-use App\Http\Controllers\Admin\Masterdata\TypePartnerController;
+use App\Http\Controllers\Admin\Procurement\ReportProcurementController;
+use App\Http\Controllers\Admin\Procurement\ReturnProcurementController;
+use App\Http\Controllers\Admin\Selling\InvoiceSellingController;
+use App\Http\Controllers\Admin\Selling\ReportSellingController;
 use App\Http\Controllers\Admin\Selling\SellingController;
+use App\Http\Controllers\ReturnSellingController;
 // End Inventory
-
 
 // Utils
 use Illuminate\Support\Facades\Route;
@@ -310,22 +316,53 @@ Route::middleware('auth')->controller(ItemsReceiptController::class)->group(func
     Route::get('/admin/procurement/items-receipt/edit/{id}', 'edit');
     Route::get('/admin/procurement/items-receipt/getdatapo/{id}', 'getdatapo');
     Route::post('/admin/procurement/items-receipt/store', 'store');
+    Route::post('/admin/procurement/items-receipt/update', 'update');
+    Route::get('/admin/procurement/items-receipt/delete/{id}', 'destroy');
 });
 // End Items Receipt
 
-
-
-// Purchase Basis Start
-Route::middleware('auth')->controller(PurchaseBasisController::class)->group(function () {
-    Route::get('/admin/procurement/purchase-basis', 'index');
-    Route::post('/admin/procurement/purchase-basis/filter', 'filter');
+// Procurement Invoice
+Route::middleware('auth')->controller(InvoiceProcurementController::class)->group(function () {
+    Route::get('/admin/procurement/invoice', 'index');
+    Route::get('/admin/procurement/invoice/list', 'list');
+    Route::get('/admin/procurement/invoice/create', 'create');
+    Route::post('/admin/procurement/invoice/store', 'store');
+    Route::get('/admin/procurement/invoice/edit/{id}', 'edit');
+    Route::post('/admin/procurement/invoice/update', 'update');
+    Route::get('/admin/procurement/invoice/info/{id}', 'info');
+    Route::get('/admin/procurement/invoice/delete/{id}', 'destroy');
+    Route::get('/admin/procurement/invoice/getdata/{id}', 'getdata');
 });
-// Purchase Basis End
+// End Procurement Invoice
+
+
+// Procurement Retur Start
+Route::middleware('auth')->controller(ReturnProcurementController::class)->group(function () {
+    Route::get('/admin/procurement/retur', 'index');
+    Route::get('/admin/procurement/retur/list', 'list');
+    Route::get('/admin/procurement/retur/create', 'create');
+    Route::post('/admin/procurement/retur/store', 'store');
+    Route::get('/admin/procurement/retur/approveview/{id}', 'approveview');
+    Route::get('/admin/procurement/retur/approve/{id}', 'approve');
+    Route::get('/admin/procurement/retur/info/{id}', 'info');
+    Route::get('/admin/procurement/retur/edit/{id}', 'edit');
+    Route::post('/admin/procurement/retur/update', 'update');
+    Route::get('/admin/procurement/retur/delete/{id}', 'destroy');
+    Route::get('/admin/procurement/retur/getdata/{id}', 'getdata');
+});
+// Procurement Retur End
+
+// Report Procurement
+Route::middleware('auth')->controller(ReportProcurementController::class)->group(function () {
+    Route::get('/admin/procurement/report', 'index');
+    Route::get('/admin/procurement/report/list/{partner_id}/{date_range}', 'list');
+});
+// End Report Procurement
 
 // Stock
 Route::middleware('auth')->controller(StockController::class)->group(function () {
     Route::get('/admin/inventory/stock', 'index');
-    Route::post('/admin/inventory/stock/filter', 'filter');
+    Route::get('/admin/inventory/stock/list', 'list');
 });
 // End Stock
 
@@ -333,16 +370,47 @@ Route::middleware('auth')->controller(StockController::class)->group(function ()
 Route::middleware('auth')->controller(StockInTransitController::class)->group(function () {
     Route::get('/admin/inventory/stock-in-transit', 'index');
     Route::post('/admin/inventory/stock-in-transit/filter', 'filter');
-    Route::get('/admin/inventory/stock-in-transit/addtransitmodal', 'addtransitmodal');
+    Route::get('/admin/inventory/stock-in-transit/create', 'create');
+    Route::get('/admin/inventory/stock-in-transit/addnewitemrow', 'addnewitemrow');
 });
 // End Stock In Transit
 
+// Report Inventory
+Route::middleware('auth')->controller(ReportInventoryController::class)->group(function () {
+    Route::get('/admin/inventory/report', 'index');
+    Route::get('/admin/inventory/report/list/{partner_id}/{date_range}', 'list');
+});
+// End Report Inventory
 
 // Selling
 Route::middleware('auth')->controller(SellingController::class)->group(function () {
     Route::get('/admin/selling/selling', 'index');
+    Route::get('/admin/selling/selling/create', 'create');
 });
 // End Selling
+
+// Invoice Selling
+Route::middleware('auth')->controller(InvoiceSellingController::class)->group(function () {
+    Route::get('/admin/selling/invoice', 'index');
+});
+
+// End Invoice Selling
+
+// Return Selling
+Route::middleware('auth')->controller(ReturnSellingController::class)->group(function () {
+    Route::get('/admin/selling/return', 'index');
+    Route::get('/admin/selling/return/list/{partner_id}/{date_range}', 'list');
+});
+// End Return Selling
+
+// Report selling
+Route::middleware('auth')->controller(ReportSellingController::class)->group(function () {
+    Route::get('/admin/selling/report', 'index');
+    Route::get('/admin/selling/report/list/{partner_id}/{date_range}', 'list');
+});
+// End Report selling
+
+
 Route::middleware('auth')->controller(CashierController::class)->group(function () {
     Route::get('/admin/cashier', 'index');
 });

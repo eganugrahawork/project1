@@ -32,7 +32,7 @@
                 </div>
                 <div class="card-body pt-0 ">
                     <div class="table-responsive">
-                        <table class="table" id="coaTable">
+                        <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="coaTable">
                             <thead>
                                 <tr class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
                                     <th class="min-w-20px">No

@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="tableItemsReceipt">
+                <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="tableItemsReceipt">
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
@@ -93,6 +93,8 @@
         function tutupContent() {
             $('#content').hide()
             $('#indexContent').show()
+            $('#searchTableItemsReceipt').focus();
+
         }
 
         var tableItemsReceipt =  $('#tableItemsReceipt').DataTable({
@@ -109,12 +111,13 @@
                 },
                     {data: 'do_number', name: 'do_number'},
                     {data: 'receipt_date_filter', name: 'receipt_date_filter'},
-                    {data: 'code', name: 'code'},
+                    {data: 'number_po', name: 'number_po'},
                     {data: 'name', name: 'name'},
                     {data: 'order_datenya', name: 'order_datenya'},
-                    {data: 'status', name: 'status'},
-                    {data: 'status', name: 'status'},
-                    {data: 'status', name: 'status'},
+                    {data: 'total_po', name: 'total_po',
+                    render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')},
+                    {data: 'total_discount', name: 'total_discount'},
+                    {data: 'total_price', name: 'total_price', render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')},
                     {data: 'action', name: 'action'}
                     ],
             "bLengthChange": false,
@@ -124,6 +127,60 @@
 
         $('#searchTableItemsReceipt').keyup(function () {
                 tableItemsReceipt.search($(this).val()).draw()
+        });
+
+        $(document).on('click', '#deleteItemReceipt', function(e) {
+            e.preventDefault();
+            const href = $(this).attr('href');
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Hapus data ini ?',
+                text: "Data tidak bisa dikembalikan!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, hapus!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                reverseButtons: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#loading-add').html(
+                        '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>'
+                    )
+                    $.ajax({
+                        type: "GET",
+                        url: href,
+                        success: function(response) {
+                            Swal.fire(
+                                'Success',
+                                response.success,
+                                'success'
+                            )
+                            tableItemsReceipt.ajax.reload(null, false);
+                            $('#loading-add').html(
+                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Item Receipt</button>'
+                            )
+                        }
+                    })
+
+                } else if (
+
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Data anda masih aman :)',
+                        'success'
+                    )
+                }
+            })
         });
 </script>
 

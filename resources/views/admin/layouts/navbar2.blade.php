@@ -36,8 +36,8 @@
 
                                 <div class="d-flex flex-column">
                                     <div class="fw-bolder d-flex align-items-center fs-5">{{ auth()->user()->name }}
-                                        <span
-                                            class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">{{ auth()->user()->userrole->role }}</span>
+                                        <span class="badge bg-gradient-primary fs-8 px-2 py-1 ms-2">{{ auth()->user()->userrole->role }}</span>
+
                                     </div>
                                     <a href="#"
                                         class="fw-bold text-muted text-hover-primary fs-7">{{ auth()->user()->email }}</a>
@@ -45,31 +45,31 @@
                             </div>
                         </div>
                         <div class="separator my-2"></div>
-                        <div class="menu-item px-5">
-                            <a href="/admin/myprofile" class="menu-link px-5">My Profile</a>
+                        <div class="menu-item px-3">
+                            <a href="/admin/myprofile" class="menu-link px-3">My Profile</a>
                         </div>
 
                         <div class="separator my-2"></div>
                         @if (auth()->user()->userrole->role === 'Super Admin')
-                            <div class="menu-item px-5 my-1">
-                                <a href="/admin/useractivity" class="menu-link px-5">User Activity</a>
+                            <div class="menu-item px-3 my-1">
+                                <a href="/admin/useractivity" class="menu-link px-3">User Activity</a>
                             </div>
-                            <div class="menu-item px-5 my-1">
-                                <a href="/admin/configuration/menu" class="menu-link px-5">Configuration</a>
+                            <div class="menu-item px-3 my-1">
+                                <a href="/admin/configuration/menu" class="menu-link px-3">Configuration</a>
                             </div>
                         @endif
-                        <div class="menu-item px-5">
+                        <div class="menu-item px-3">
                             <form action="{{ route('logout') }}" method="POST" style="background: transparent;">
                                 @csrf
-                                <button type="submit" class="menu-link px-5"
+                                <button type="submit" class="menu-link px-3"
                                     style="background: transparent; border:none;">Sign Out</button>
                             </form>
 
                         </div>
                         <div class="separator my-2"></div>
 
-                        {{-- <div class="menu-item px-5">
-                            <div class="menu-content px-5">
+                        {{-- <div class="menu-item px-3">
+                            <div class="menu-content px-3">
                                 <label
                                     class="form-check form-switch form-check-custom form-check-solid pulse pulse-success"
                                     for="kt_user_menu_dark_mode_toggle">

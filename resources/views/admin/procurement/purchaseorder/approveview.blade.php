@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4>Info PO {{ $info[0]->number_po }}</h4>
+        <h4>Confirmation PO {{ $info[0]->number_po }}</h4>
     </div>
     <div class="card-body">
         <div class="row">
@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div class="col-lg-12"id="itemsAddList">
-                <h1>Items</h1>
+                <h5 class="fw-bolder">Items</h5>
                 <hr class="border border-dark border-2 opacity-50">
                 @foreach ($info as $item)
                     <div class="row">
@@ -230,6 +230,7 @@
             if (result.isConfirmed) {
                 $('#content').hide();
                 $('#indexContent').show();
+                $('#searchTablePo').focus()
                 $('#loading-add').html(
                     '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>'
                 )
@@ -302,6 +303,7 @@
                         )
                         $('#content').hide();
                         $('#indexContent').show();
+                        $('#searchTablePo').focus()
                     }
                 })
 

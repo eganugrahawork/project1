@@ -56,7 +56,7 @@
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Shipment</label>
-                        <textarea name="text" id="shipment" class="form-control form-control-solid mb-3 mb-lg-0" required></textarea>
+                        <textarea name="shipment" id="shipment" class="form-control form-control-solid mb-3 mb-lg-0" required></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <div>
@@ -87,12 +87,12 @@
             </div>
             <hr>
 
-            <div class="d-flex justify-content-end" id="loadingnya">
+            <div class="d-flex justify-content-center" id="loadingnya">
                 <div class="px-2">
                     <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Confirm</button>
                 </div>
                 <div class="px-2">
-                    <button class="btn btn-sm btn-success" onclick="tutupContent()" id="btn-add">Cancel</button>
+                    <button class="btn btn-sm btn-secondary" onclick="tutupContent()" id="btn-add">Cancel</button>
                 </div>
             </div>
         </form>
@@ -130,29 +130,74 @@
 
     })
 
+
+
+
     $('#addItemReceipt').submit(function(event) {
         event.preventDefault();
-        $('#loadingnya').html(
-            '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span>')
-        $.ajax({
-            url: "{{ url('/admin/procurement/items-receipt/store') }}",
-            type: 'post',
-            data: $('#addItemReceipt')
-        .serialize(), // Remember that you need to have your csrf token included
-            dataType: 'json',
-            success: function(response) {
-                Swal.fire(
-                    'Success',
-                    response.success,
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Save This Data ?',
+            text: "Data will be save to the database!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Save!',
+            cancelButtonText: 'Not, Cancel!',
+            reverseButtons: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#loadingnya').html(
+                    '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span>'
+                    )
+                $.ajax({
+                    url: "{{ url('/admin/procurement/items-receipt/store') }}",
+                    type: 'post',
+                    data: $('#addItemReceipt')
+                        .serialize(), // Remember that you need to have your csrf token included
+                    dataType: 'json',
+                    success: function(response) {
+                        Swal.fire(
+                            'Success',
+                            response.success,
+                            'success'
+                        )
+                        $('#content').hide();
+                        $('#indexContent').show();
+                        $('#searchTableItemsReceipt').focus()
+                        tableItemsReceipt.ajax.reload()
+                    },
+                    error: function(response) {
+                        // Handle error
+                    }
+                });
+
+            } else if (
+
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    '',
                     'success'
                 )
-                $('#content').hide();
-                $('#indexContent').show();
-                tableItemsReceipt.ajax.reload()
-            },
-            error: function(response) {
-                // Handle error
             }
-        });
+        })
+
     });
+
+    function balanceEdit(e) {
+        var order_qty = $(e).parent().parent().find('#nowBalance').val();
+        var qty = $(e).val();
+
+        $(e).parent().parent().find('#balance').val(order_qty - qty);
+
+    }
 </script>

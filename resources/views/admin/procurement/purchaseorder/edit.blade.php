@@ -1,42 +1,39 @@
 <div class="card">
     <div class="card-header">
-        <h4>Edit PO {{ $ponya[0]->code }}</h4>
+        <h4>Edit Purchase Order</h4>
     </div>
     <div class="card-body">
         <form id="edit-form" class="form">
             @csrf
-            <input type="hidden" name="id_po" value="{{ $ponya[0]->id }}">
+            <input type="hidden" name="id_po" value="{{ $ponya[0]->id_po }}">
 
             <div class="row">
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Number Po</label>
-                        <input type="text" id="code" name="code" value="{{ $ponya[0]->code }}" readonly
+                        <input type="text" id="code" name="code" value="{{ $ponya[0]->number_po }}" readonly
                             class="form-control form-control-white mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required form-label fw-bold">Partners</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" id="partner_id"
-                            name="partner_id" required>
-                            @foreach ($partner as $besti)
-                                <option value="{{ $besti->id }}"
-                                    {{ $besti->id == $ponya[0]->partner_id ? 'selected' : '' }}>
-                                    {{ $besti->name }}</option>
-                            @endforeach
+                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" disabled id="partner_id"
+                            name="partner_id">
+                            <option>{{ $ponya[0]->partner_name }}</option>
                         </select>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Address</label>
-                        <textarea type="text" name="address" id="address" readonly class="form-control form-control-solid mb-3 mb-lg-0"></textarea>
+                        <textarea type="text" name="address" id="address" readonly
+                            class="form-control form-control-solid mb-3 mb-lg-0">{{ $ponya[0]->address }}</textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Phone Number</label>
-                        <input type="text" name="phone" id="phone" readonly
+                        <input type="text" name="phone" id="phone" value="{{ $ponya[0]->phone }}" readonly
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Fax</label>
-                        <input type="text" name="fax" id="fax" readonly
+                        <input type="text" name="fax" value="{{ $ponya[0]->fax }}" id="fax" readonly
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
                 </div>
@@ -102,13 +99,13 @@
                     <h5 class="fw-bolder">Items</h5>
                     <hr class="border border-dark border-2 opacity-50">
 
-                    @foreach ($s_item as $s_item)
+                    @foreach ($ponya as $s_item)
                         <div class="row">
                             <div class="fv-row mb-3 col-lg-4">
                                 <label class="required form-label fw-bold">Item </label>
                                 <div class="row">
                                     <div class="col-lg-10">
-                                        <input type="hidden" name="idonpoitems[]" value="{{ $s_item->id }}">
+                                        <input type="hidden" name="idonpoitems[]" value="{{ $s_item->po_item_id }}">
                                         <select class="form-select  form-select-solid mb-3 mb-lg-0 item_id select-2 "
                                             id="item_id" name="item_id[]" onchange="getBaseQty(this)" required>
                                             @foreach ($items as $listitem)
@@ -127,7 +124,7 @@
                             <div class='fv-row mb-3 col-lg-1' id='base_qty_parent'>
                                 <label class='fw-bold fs-6 mb-2'>Base Qty</label>
                                 <input type='number' name='base_qty' id='base_qty'
-                                    class='form-control form-control-white mb-3 mb-lg-0' value='' readonly />
+                                    class='form-control form-control-white mb-3 mb-lg-0' value='{{ $s_item->base_qty }}' readonly />
                             </div>
                             <div class="fv-row mb-3 col-lg-1">
                                 <label class="required fw-bold fs-6 mb-2">Qty</label>
@@ -209,13 +206,13 @@
             </div>
             <hr class="border border-dark border-2 opacity-50">
 
-            <div class="d-flex justify-content-end" id="loadingnya">
-                <div class="py-2">
-                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
-                </div>
-                <div class="py-2">
+            <div class="d-flex justify-content-center" id="loadingnya">
+                <div class="px-2">
                     <button class="btn btn-sm btn-primary" type="submit" id="btn-update">Update Purchase
                         Order</button>
+                </div>
+                <div class="px-2">
+                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
                 </div>
             </div>
         </form>
@@ -401,36 +398,71 @@
 
     $('#edit-form').submit(function(event) {
         event.preventDefault();
-        $('#loadingnya').html(
-            '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span>')
-        $.ajax({
-            url: "{{ url('/admin/procurement/purchase-order/update') }}",
-            type: 'post',
-            data: $('#edit-form')
-                .serialize(), // Remember that you need to have your csrf token included
-            dataType: 'json',
-            success: function(response) {
-                if (response.success) {
-                    Swal.fire(
-                        'Success',
-                        response.success,
-                        'success'
-                    )
-                } else {
-                    Swal.fire(
-                        'error',
-                        response.fail,
-                        'error'
-                    )
 
-                }
-                $('#content').hide();
-                $('#indexContent').show();
-                tablePo.ajax.reload()
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
             },
-            error: function(response) {
-                // Handle error
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Edit this data?',
+            text: "Data cant return back automatically !",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes!',
+            cancelButtonText: 'No!',
+            reverseButtons: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#loadingnya').html(
+                    '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span>'
+                    )
+                $.ajax({
+                    url: "{{ url('/admin/procurement/purchase-order/update') }}",
+                    type: 'POST',
+                    data: $('#edit-form')
+                        .serialize(), // Remember that you need to have your csrf token included
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire(
+                                'Success',
+                                response.success,
+                                'success'
+                            )
+                        } else {
+                            Swal.fire(
+                                'error',
+                                response.fail,
+                                'error'
+                            )
+
+                        }
+                        $('#content').hide();
+                        $('#indexContent').show();
+                        $('#searchTablePo').focus()
+                        tablePo.ajax.reload()
+                    },
+                    error: function(response) {
+                        // Handle error
+                    }
+                });
+
+            } else if (
+
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    '',
+                    'success'
+                )
             }
-        });
+        })
+
     });
 </script>

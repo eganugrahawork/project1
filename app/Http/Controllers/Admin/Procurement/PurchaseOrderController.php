@@ -35,7 +35,7 @@ class PurchaseOrderController extends Controller {
                 // $action = "";
                 $action = "<a onclick='info($model->id_ponya)' class='btn btn-icon btn-sm btn-info btn-hover-rise me-1'><i class='bi bi-info-square'></i></a>";
 
-                if ($model->po_status == 0 || $model->po_status != 1) {
+                if ($model->po_status == 0) {
                     if (Gate::allows('edit', ['/admin/procurement/purchase-order'])) {
                         $action .= "<a onclick='edit($model->id_ponya)' class='btn btn-icon btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
                     }
@@ -52,12 +52,12 @@ class PurchaseOrderController extends Controller {
                 if ($model->po_status == 0) {
 
                     if (Gate::allows('approve', ['/admin/procurement/purchase-order'])) {
-                        $statues .= "<a onclick='approve($model->id_ponya)' class='btn btn-sm btn-danger btn-hover-rise me-1'><i class='bi bi-patch-exclamation'></i></i> Confirm Here</a>";
+                        $statues .= "<a onclick='approve($model->id_ponya)' class='btn btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-patch-exclamation'></i></i> Confirm Here</a>";
                     } else {
                         $statues .= "<a class='btn btn-sm btn-secondary btn-hover-rise me-1 '><i class='bi bi-question-octagon'></i>Pending</a>";
                     }
                 } elseif ($model->po_status == 2) {
-                    $statues .= "<a class='btn btn-sm btn-muted btn-hover-rise me-1'><i class='bi bi-x-octagon'></i></i> Canceled</a>";
+                    $statues .= "<a class='btn btn-sm btn-danger btn-hover-rise me-1'><i class='bi bi-x-octagon'></i></i> Rejected</a>";
                 } else {
                     $statues .= "<a class='btn btn-sm btn-primary btn-hover-rise me-1'><i class='bi bi-patch-check'></i> Confirmed</a>";
                 }
@@ -89,9 +89,8 @@ class PurchaseOrderController extends Controller {
 
     public function edit(Request $request) {
 
-        $ponya = DB::connection('procurement')->select("select * from purchase_orders where id = $request->id");
-        $s_item = DB::connection('procurement')->select("select * from purchase_order_items where purchase_order_id = $request->id");
-        return view('admin.procurement.purchaseorder.edit', ['partner' => Partners::all(), 'currency' => Currency::all(), 'ponya' => $ponya, 's_item' => $s_item, 'items' => Items::all()]);
+        $ponya = DB::connection('procurement')->select("call sp_search_id($request->id)");
+        return view('admin.procurement.purchaseorder.edit', ['partner' => Partners::all(), 'currency' => Currency::all(), 'ponya' => $ponya, 'items' => Items::all()]);
     }
 
     public function info(Request $request) {
@@ -110,7 +109,7 @@ class PurchaseOrderController extends Controller {
         $user_approving = auth()->user()->username;
         $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
 
-        DB::connection('procurement')->select("call sp_approve_po($request->id, '$user_approving')");
+        DB::connection('procurement')->select("call sp_approve_po($request->id, '$user_approving', 1)");
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "Approved PO",
@@ -122,18 +121,17 @@ class PurchaseOrderController extends Controller {
     }
 
     public function reject(Request $request) {
-        //         $user_rejecting = auth()->user()->username;
-        //         $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
+        $user_approving = auth()->user()->username;
+        $info = DB::connection('procurement')->select("call sp_search_id($request->id)");
 
-        // // BELUM QUERYNYA
-        //         UserActivity::create([
-        //             'id_user' => auth()->user()->id,
-        //             'menu' => "Rejected PO",
-        //             'aktivitas' => "Rejected PO",
-        //             'keterangan' => "Rejected PO " . $info[0]->number_po
-        //         ]);
-
-        // NotifEvent::dispatch(auth()->user()->name . ' Rejected PO ' . $info[0]->number_po);
+        DB::connection('procurement')->select("call sp_approve_po($request->id, '$user_approving', 2)");
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Approved PO",
+            'aktivitas' => "Approved PO",
+            'keterangan' => "Approved PO " . $info[0]->number_po
+        ]);
+        NotifEvent::dispatch(auth()->user()->name . ' Rejected PO ' . $info[0]->number_po);
         return response()->json(['success' => 'Data Rejected']);
     }
 
@@ -223,11 +221,11 @@ class PurchaseOrderController extends Controller {
 
                         <div class='fv-row mb-3 col-lg-1'>
                         <label class='required fw-bold fs-6 mb-2'>Qty</label>
-                        <input type='number' name='qty[]' id='qty' onkeyup='hitungByQty(this)'  class='form-control form-control-solid mb-3 mb-lg-0'  required/>
+                        <input type='number' name='qty[]' id='qty' onkeyup='hitungByQty(this)' value='0' class='form-control form-control-solid mb-3 mb-lg-0'  required/>
                         </div>
                         <div class='fv-row mb-3 col-lg-1' id='discount_parent'>
                             <label class='required fw-bold fs-6 mb-2'>Discount</label>
-                            <input type='number' name='discount[]' id='discount'  onkeyup='hitungByDiscount(this)' class='form-control form-control-solid mb-3 mb-lg-0'  required/>
+                            <input type='number' name='discount[]' id='discount'  onkeyup='hitungByDiscount(this)' value='0' class='form-control form-control-solid mb-3 mb-lg-0'  required/>
                         </div>
                         <div class='fv-row mb-3 col-lg-2'>
                         <label class='required fw-bold fs-6 mb-2'>Total</label>
@@ -313,58 +311,97 @@ class PurchaseOrderController extends Controller {
         return response()->json(['success', 'Purchase Order Added']);
     }
 
+    // public function update(Request $request) {
+
+    //     if ($request->idonpoitems) {
+    //         PurchaseOrderItems::where(['purchase_order_id' => $request->id_po])->whereNotIn('id', $request->idonpoitems)->delete();
+
+    //         PurchaseOrder::where(['id' => $request->id_po])->update(['order_date' => $request->order_date, 'ppn' => $request->ppn, 'currency_id' => $request->currency_id, 'rate' => $request->rate, 'term_of_payment' => $request->term_of_payment, 'description' => $request->description, 'total_po' => $request->grandtotal]);
+    //         for ($i = 0; $i < count($request->idonpoitems); $i++) {
+    //             PurchaseOrderItems::where(['id' => $request->idonpoitems[$i]])->update([
+    //                 'item_id' => $request->item_id[$i],
+    //                 'unit_price' => $request->price[$i],
+    //                 'qty' => $request->qty[$i],
+    //                 'discount' => $request->discount[$i],
+    //                 'total_discount' => $request->getdiscountperitem[$i],
+    //                 'total_price' => $request->total[$i]
+    //             ]);
+    //         }
+
+    //         if (count($request->item_id) > count($request->idonpoitems)) {
+    //             // dd($request->id_po);
+    //             for ($i = count($request->idonpoitems); $i < count($request->item_id); $i++) {
+    //                 PurchaseOrderItems::create([
+    //                     'purchase_order_id' => $request->id_po,
+    //                     'item_id' => $request->item_id[$i],
+    //                     'unit_price' => $request->price[$i],
+    //                     'qty' => $request->qty[$i],
+    //                     'discount' => $request->discount[$i],
+    //                     'total_discount' => $request->getdiscountperitem[$i],
+    //                     'total_price' => $request->total[$i]
+    //                 ]);
+    //             }
+    //         }
+    //     } else {
+
+    //         if ($request->item_id) {
+    //             PurchaseOrder::where(['id' => $request->id_po])->update(['order_date' => $request->order_date, 'ppn' => $request->ppn, 'currency_id' => $request->currency_id, 'rate' => $request->rate, 'term_of_payment' => $request->term_of_payment, 'description' => $request->description, 'total_po' => $request->grandtotal]);
+    //             PurchaseOrderItems::where(['purchase_order_id' => $request->id_po])->delete();
+
+    //             for ($i = 0; $i < count($request->item_id); $i++) {
+
+    //                 PurchaseOrderItems::create([
+    //                     'purchase_order_id' => $request->id_po,
+    //                     'item_id' => $request->item_id[$i],
+    //                     'unit_price' => $request->price[$i],
+    //                     'qty' => $request->qty[$i],
+    //                     'discount' => $request->discount[$i],
+    //                     'total_discount' => $request->getdiscountperitem[$i],
+    //                     'total_price' => $request->total[$i]
+    //                 ]);
+    //             }
+    //         } else {
+    //             return response()->json(['fail' => 'Purchase Order Fail to Edit, The Items Cannot Null']);
+    //         }
+    //     }
+    //     UserActivity::create([
+    //         'id_user' => auth()->user()->id,
+    //         'menu' => "Edit PO",
+    //         'aktivitas' => "Edit PO",
+    //         'keterangan' => "Edit PO " . $request->code
+    //     ]);
+    //     NotifEvent::dispatch(auth()->user()->name . ' Edit PO ' . $request->code);
+
+    //     return response()->json(['success' =>'Purchase Order Edited']);
+    // }
+
     public function update(Request $request) {
+        // dd($request);
+        $approved_by = auth()->user()->username;
+        for ($i = 0; $i < count($request->item_id); $i++) {
+            $item_id = $request->item_id[$i];
+            $qty = $request->qty[$i];
+            $price = $request->price[$i];
+            $discount = $request->discount[$i];
+            $total = $request->total[$i];
+            $idonpoitems = $request->idonpoitems[$i];
 
-        if ($request->idonpoitems) {
-            PurchaseOrderItems::where(['purchase_order_id' => $request->id_po])->whereNotIn('id', $request->idonpoitems)->delete();
 
-            PurchaseOrder::where(['id' => $request->id_po])->update(['order_date' => $request->order_date, 'ppn' => $request->ppn, 'currency_id' => $request->currency_id, 'rate' => $request->rate, 'term_of_payment' => $request->term_of_payment, 'description' => $request->description, 'total_po' => $request->grandtotal]);
-            for ($i = 0; $i < count($request->idonpoitems); $i++) {
-                PurchaseOrderItems::where(['id' => $request->idonpoitems[$i]])->update([
-                    'item_id' => $request->item_id[$i],
-                    'unit_price' => $request->price[$i],
-                    'qty' => $request->qty[$i],
-                    'discount' => $request->discount[$i],
-                    'total_discount' => $request->getdiscountperitem[$i],
-                    'total_price' => $request->total[$i]
-                ]);
-            }
-
-            if (count($request->item_id) > count($request->idonpoitems)) {
-                // dd($request->id_po);
-                for ($i = count($request->idonpoitems); $i < count($request->item_id); $i++) {
-                    PurchaseOrderItems::create([
-                        'purchase_order_id' => $request->id_po,
-                        'item_id' => $request->item_id[$i],
-                        'unit_price' => $request->price[$i],
-                        'qty' => $request->qty[$i],
-                        'discount' => $request->discount[$i],
-                        'total_discount' => $request->getdiscountperitem[$i],
-                        'total_price' => $request->total[$i]
-                    ]);
-                }
-            }
-        } else {
-
-            if ($request->item_id) {
-                PurchaseOrder::where(['id' => $request->id_po])->update(['order_date' => $request->order_date, 'ppn' => $request->ppn, 'currency_id' => $request->currency_id, 'rate' => $request->rate, 'term_of_payment' => $request->term_of_payment, 'description' => $request->description, 'total_po' => $request->grandtotal]);
-                PurchaseOrderItems::where(['purchase_order_id' => $request->id_po])->delete();
-
-                for ($i = 0; $i < count($request->item_id); $i++) {
-
-                    PurchaseOrderItems::create([
-                        'purchase_order_id' => $request->id_po,
-                        'item_id' => $request->item_id[$i],
-                        'unit_price' => $request->price[$i],
-                        'qty' => $request->qty[$i],
-                        'discount' => $request->discount[$i],
-                        'total_discount' => $request->getdiscountperitem[$i],
-                        'total_price' => $request->total[$i]
-                    ]);
-                }
-            } else {
-                return response()->json(['fail' => 'Purchase Order Fail to Edit, The Items Cannot Null']);
-            }
+            DB::connection('procurement')->select("call sp_update_po_item(
+                $idonpoitems,
+            '$request->order_date',
+            '$request->term_of_payment',
+            '$request->description',
+            $request->grandtotal,
+            $request->rate,
+           $request->ppn,
+           $item_id ,
+           $qty,
+            $price,
+            $discount,
+            $total,
+            '$approved_by'
+        )");
         }
         UserActivity::create([
             'id_user' => auth()->user()->id,
@@ -374,7 +411,7 @@ class PurchaseOrderController extends Controller {
         ]);
         NotifEvent::dispatch(auth()->user()->name . ' Edit PO ' . $request->code);
 
-        return response()->json(['success' =>'Purchase Order Edited']);
+        return response()->json(['success' => 'Purchase Order Edited']);
     }
 
     public function exportpdf(Request $request) {

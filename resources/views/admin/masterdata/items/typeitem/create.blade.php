@@ -6,8 +6,14 @@
         <form id="add-form" class="form">
             @csrf
             <div class="fv-row mb-3">
-                <label class="required fw-bold fs-6 mb-2">Code of Type Item</label>
-                <input type="text" name="type_code" class="form-control form-control-solid mb-3 mb-lg-0" required />
+                <label class="required form-label fw-bold">Coa</label>
+                <div class="col-lg-6">
+                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="coa_id" required>
+                        @foreach ($coa as $c)
+                            <option value="{{ $c->id }}">{{ $c->coa }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
             <div class="fv-row mb-3">
                 <label class="required fw-bold fs-6 mb-2">Name of Type Item</label>
@@ -41,6 +47,7 @@
 </div>
 
 <script>
+    $('.select-2').select2()
     $('#add-form').on('submit', function(e) {
         e.preventDefault();
 
