@@ -612,9 +612,9 @@
                     <div class="col-lg-3" data-aos="zoom-in" data-aos-delay="200">
                         <div class="pricing-item">
 
-                            <div class="pricing-header">
+                            <div class="pricing-header bg-secondary">
                                 <h3>Basic</h3>
-                                <h4><sup>Rp</sup> 99 <span>Ribu /Bulan</span></h4>
+                                <h4><sup>Rp</sup> 99 <span>Ribu <br>/Bulan</span></h4>
                             </div>
 
                             <ul>
@@ -640,9 +640,9 @@
                     </div><!-- End Pricing Item -->
 
                     <div class="col-lg-3" data-aos="zoom-in" data-aos-delay="400">
-                        <div class="pricing-item">
+                        <div class="pricing-item ">
 
-                            <div class="pricing-header">
+                            <div class="pricing-header bg-success">
                                 <h3>Standard</h3>
                                 <h4><sup>Rp</sup>129<span>Ribu /Bulan</span></h4>
                             </div>
@@ -673,7 +673,7 @@
                     <div class="col-lg-3" data-aos="zoom-in" data-aos-delay="600">
                         <div class="pricing-item">
 
-                            <div class="pricing-header">
+                            <div class="pricing-header bg-primary">
                                 <h3>Pro</h3>
                                 <h4><sup>Rp</sup>387<span>Ribu /Bulan</span></h4>
                             </div>
@@ -735,8 +735,9 @@
                 <div class="col-lg-12 ">
                   <div class="pricing-item ">
 
-                    <div class="pricing-header">
+                    <div class="pricing-header bg-primary">
                         <h3 class="fw-bold">CUSTOM</h3>
+                        <hr>
                         <h4>Mulai dari </h4>
                         <h4><sup>Rp</sup> 1,500 <span>Ribu /Bulan</span></h4>
                     </div>
