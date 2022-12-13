@@ -55,20 +55,20 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto" href="#hero-animated">Home</a></li>
-                    <li class="dropdown"><a href="#"><span>Produk</span> <i
-                                class="bi bi-chevron-down dropdown-indicator"></i></a>
+                    <li><a class="nav-link scrollto text-primary" href="#hero-animated">Home</a></li>
+                    {{-- <li class="dropdown text-primary"><a href="#"><span>Produk</span> <i
+                                class="bi bi-chevron-down dropdown-indicator text-primary"></i></a>
                         <ul>
                             <li><a href="#">Point Of Sales</a></li>
                             <li><a href="#">Inventory</a></li>
                             <li><a href="#">Manufacture</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
 
-                    <li><a class="nav-link scrollto" href="#about">Tentang</a></li>
-                    <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
-                    <li><a class="nav-link scrollto" href="#pricing">Price</a></li>
-                    <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
+                    <li><a class="nav-link scrollto text-primary" href="#about">Tentang</a></li>
+                    <li><a class="nav-link scrollto text-primary" href="#services">Layanan</a></li>
+                    <li><a class="nav-link scrollto text-primary" href="#pricing">Price</a></li>
+                    <li><a class="nav-link scrollto text-primary" href="#contact">Kontak Kami</a></li>
 
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle d-none"></i>
@@ -82,18 +82,19 @@
         </div>
     </header><!-- End Header -->
 
-    <section id="hero-animated" class="hero-animated d-flex align-items-center bg-primary">
+    <section id="hero-animated" class="hero-animated d-flex align-items-center"
+        style="background-image: url('/herobiz/assets/img/bg-annandhita.jpg')">
         <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
             data-aos="zoom-out">
             <img src="/herobiz/assets/img/hero-carousel/hero-carousel-3.svg" class="img-fluid animated">
-            <h2><span class="text-dark fw-bold"> Solusi pintar </span> untuk menjalankan bisnis anda secara sederhana
-                dan <span class="text-dark fw-bold">mudah</span> digunakan.</h2>
+            <h2><span class="text-white fw-bold">Solusi pintar menjalankan bisnis dengan mudah dan sederhana.</span>
+            </h2>
             <div class="d-flex">
                 <div class="px-2">
-                    <a href="#contact" class="btn btn-primary btn-lg">Kontak Kami</a>
+                    <a href="/login" class="btn btn-primary btn-lg">Coba Gratis</a>
                 </div>
                 <div class="px-2">
-                    <a href="/login" class="btn btn-outline btn-outline-dark btn-lg">Coba Gratis</a>
+                    <a href="#contact" class="btn btn-outline btn-outline-warning btn-lg">Kontak Kami</a>
                 </div>
             </div>
         </div>
@@ -110,36 +111,35 @@
                     <div class="col-xl-3 col-md-6 d-flex" data-aos="zoom-out">
                         <div class="service-item position-relative">
                             <div class="icon"><i class="bi bi-activity icon"></i></div>
-                            <h4><a href="" class="stretched-link">Monitoring Produk Lebih Akurat</a></h4>
-                            <p>Memastikan pelaksanaan kegiatan tetap pada jalurnya (sesuai pedoman dan perencanaan
-                                program).</p>
+                            <h4><a href="" class="stretched-link fw-bold">MUDAH</a></h4>
+                            <p>Memberikan tampilan depan outlet <span class="text-dark fw-bold">mudah</span> dipahami
+                                bagi cashier dan dapat diakses melalui smartphone atau tablet.</p>
                         </div>
                     </div><!-- End Service Item -->
 
                     <div class="col-xl-3 col-md-6 d-flex" data-aos="zoom-out" data-aos-delay="200">
                         <div class="service-item position-relative">
                             <div class="icon"><i class="bi bi-bounding-box-circles icon"></i></div>
-                            <h4><a href="" class="stretched-link">Sistem Database Yang Terpusat</a></h4>
-                            <p>Informasi (data) disimpan di lokasi terpusat dan pengguna dari lokasi berbeda dapat
-                                mengakses data ini.</p>
+                            <h4><a href="" class="stretched-link  fw-bold">SEDERHANA </a></h4>
+                            <p>Sistem dengan konsep yang <span class="fw-bold text-dark">sederhana</span> tetapi <span
+                                    class="fw-bold text-dark">berkualitas</span>.</p>
                         </div>
                     </div><!-- End Service Item -->
 
                     <div class="col-xl-3 col-md-6 d-flex" data-aos="zoom-out" data-aos-delay="400">
                         <div class="service-item position-relative">
                             <div class="icon"><i class="bi bi-calendar4-week icon"></i></div>
-                            <h4><a href="" class="stretched-link">Waktu Pengolahan Data Lebih Optimal</a></h4>
-                            <p>Memberikan beberapa manfaat seperti dapat meningkatkan efisiensi operasional,
-                                meningkatkan inovasi perusahaan dalam bisnis, membantu pengambilan keputusan dan masih
-                                banyak lainnya</p>
+                            <h4><a href="" class="stretched-link fw-bold">AKURAT</a></h4>
+                            <p>Menjadikan data penjualan dan stok secara <span class="fw-bold text-dark">akurat</span>
+                            </p>
                         </div>
                     </div><!-- End Service Item -->
 
                     <div class="col-xl-3 col-md-6 d-flex" data-aos="zoom-out" data-aos-delay="600">
                         <div class="service-item position-relative">
                             <div class="icon"><i class="bi bi-broadcast icon"></i></div>
-                            <h4><a href="" class="stretched-link">Kostumisasi</a></h4>
-                            <p>Upaya untuk menyesuaikan produk dengan keinginan konsumen</p>
+                            <h4><a href="" class="stretched-link fw-bold">AMAN</a></h4>
+                            <p>Memastikan data yang tersimpan aman dan dapat diunduh secara offline.</p>
                         </div>
                     </div><!-- End Service Item -->
 
@@ -160,22 +160,15 @@
 
                 <div class="row g-4 g-lg-5" data-aos="fade-up" data-aos-delay="200">
 
-                    <div class="col-lg-5">
-                        <div class="about-img">
-                            <img src="/herobiz/assets/img/about.jpg" class="img-fluid" alt="">
-                        </div>
-                    </div>
+                    <div class="col-lg-12 ">
 
-                    <div class="col-lg-7">
-                        <h3 class="pt-0 pt-lg-5">Loccana Produk</h3>
-
-                        <!-- Tabs -->
-                        <ul class="nav nav-pills mb-3">
-                            <li><a class="nav-link active" data-bs-toggle="pill" href="#tab1">Inventory and
-                                    Distribution Sales System</a>
+                        <ul class="nav nav-pills mb-3 justify-content-center">
+                            <li><a class="nav-link active" data-bs-toggle="pill" href="#tab1">LOCCANA POINT OF
+                                    SALES</a></li>
+                            <li><a class="nav-link " data-bs-toggle="pill" href="#tab2">INVENTORY & DISTRIBUTION
+                                    SYSTEM</a>
                             </li>
-                            <li><a class="nav-link" data-bs-toggle="pill" href="#tab2">Point Of Sales</a></li>
-                            <li><a class="nav-link" data-bs-toggle="pill" href="#tab3">Manufacturing</a>
+                            <li><a class="nav-link" data-bs-toggle="pill" href="#tab3">MANUFACTOR</a>
                             </li>
                         </ul><!-- End Tabs -->
 
@@ -184,21 +177,55 @@
 
                             <div class="tab-pane fade show active" id="tab1">
 
-                                <p class="fst-italic">Point Of Sale (POS) system merupakan sistem terkomputerisasi
-                                    untuk melakukan berbagai fungsi dan merekam penjualan bisnis.</p>
+                                <div class="row gy-5">
+                                    <h5 class="text-center fw-bold">LOCCANA POINT OF SALES</h5>
+                                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                                        <div class="service-item">
+                                            <div class="img">
+                                                <img src="/herobiz/assets/img/services-1.jpg" class="img-fluid"
+                                                    alt="">
+                                            </div>
+                                            <div class="details position-relative">
+                                                <a href="#" class="stretched-link">
+                                                    <h5 class="text-center fw-bold">EFEKTIF </h5>
+                                                </a>
+                                                <p>Loccana Point of Sales memudahkan proses pendataan, penjualan, stock
+                                                    barang dan operasional bisnis</p>
+                                            </div>
+                                        </div>
+                                    </div><!-- End Service Item -->
 
-                                <div class="d-flex align-items-center mt-4">
-                                    <i class="bi bi-check2"></i>
-                                    <h4>Keuntungan didapatkan : </h4>
+                                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                                        <div class="service-item">
+                                            <div class="img">
+                                                <img src="/herobiz/assets/img/easy.jpg" class="img-fluid"
+                                                    alt="">
+                                            </div>
+                                            <div class="details position-relative">
+                                                <a href="#" class="stretched-link">
+                                                    <h5 class="text-center fw-bold">EFISIEN </h5>
+                                                </a>
+                                                <p>Loccana Point of Sales memberikan harga terbaik untuk bisnismu.</p>
+                                            </div>
+                                        </div>
+                                    </div><!-- End Service Item -->
+
+                                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+                                        <div class="service-item">
+                                            <div class="img">
+                                                <img src="/herobiz/assets/img/services-3.jpg" class="img-fluid"
+                                                    alt="">
+                                            </div>
+                                            <div class="details position-relative">
+
+                                                <a href="#" class="stretched-link">
+                                                    <h5 class="text-center fw-bold">SATU UNTUK SEMUA </h5>
+                                                </a>
+                                                <p>Dapat digunakan untuk berbagai macam bisnis.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul style="list-style: none;">
-                                    <li>1. Membantu mengotomatiskan proses transaksi.</li>
-                                    <li>2. Melacak data penjualan penting..</li>
-                                    <li>3. Menunjukkan pola penjualan.</li>
-                                    <li>4. Menangkap perbedaan harga atau arus kas.</li>
-                                    <li>5. Memantau tingkat inventaris.</li>
-                                    <li>6. Mengumpulkan informasi penjualan harian.</li>
-                                </ul>
 
 
 
@@ -206,65 +233,111 @@
 
                             <div class="tab-pane fade show" id="tab2">
 
-                                <p class="fst-italic">Consequuntur inventore voluptates consequatur aut vel et. Eos
-                                    doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo
-                                    suscipit voluptatem.</p>
+                                <div class="row gy-5">
+                                    <h5 class="text-center fw-bold">INVENTORY & DISTRIBUTION SYSTEM</h5>
+                                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                                        <div class="service-item">
+                                            <div class="img">
+                                                <img src="/herobiz/assets/img/services-1.jpg" class="img-fluid"
+                                                    alt="">
+                                            </div>
+                                            <div class="details position-relative">
+                                                <a href="#" class="stretched-link">
+                                                    <h5 class="text-center fw-bold">AKURAT</h5>
+                                                </a>
+                                                <p>Loccana Inventory & Distribution System memastikan data <span
+                                                        class="fw-bold">akurat</span>.</p>
+                                            </div>
+                                        </div>
+                                    </div><!-- End Service Item -->
 
-                                <div class="d-flex align-items-center mt-4">
-                                    <i class="bi bi-check2"></i>
-                                    <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
+                                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                                        <div class="service-item">
+                                            <div class="img">
+                                                <img src="/herobiz/assets/img/services-2.jpg" class="img-fluid"
+                                                    alt="">
+                                            </div>
+                                            <div class="details position-relative">
+                                                <a href="#" class="stretched-link">
+                                                    <h5 class="text-center fw-bold">SEDERHANA </h5>
+                                                </a>
+                                                <p>Memberikan tampilan yang <span class="fw-bold">sederhana</span> dan
+                                                    mudah di eksekusi.</p>
+                                            </div>
+                                        </div>
+                                    </div><!-- End Service Item -->
+
+                                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+                                        <div class="service-item">
+                                            <div class="img">
+                                                <img src="/herobiz/assets/img/services-3.jpg" class="img-fluid"
+                                                    alt="">
+                                            </div>
+                                            <div class="details position-relative">
+                                                <a href="#" class="stretched-link">
+                                                    <h5 class="text-center fw-bold">CEPAT</h5>
+                                                </a>
+                                                <p>Proses distribusi dan stoking secara <span class="fw-bold"> cepat
+                                                    </span>dan <span class="fw-bold"> akurat </span></p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi
-                                    dolorum non eveniet magni quaerat nemo et.</p>
-
-                                <div class="d-flex align-items-center mt-4">
-                                    <i class="bi bi-check2"></i>
-                                    <h4>Incidunt non veritatis illum ea ut nisi</h4>
-                                </div>
-                                <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta
-                                    tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at.
-                                    Dolorem quo tempora. Quia et perferendis.</p>
-
-                                <div class="d-flex align-items-center mt-4">
-                                    <i class="bi bi-check2"></i>
-                                    <h4>Omnis ab quia nemo dignissimos rem eum quos..</h4>
-                                </div>
-                                <p>Eius alias aut cupiditate. Dolor voluptates animi ut blanditiis quos nam. Magnam
-                                    officia aut ut alias quo explicabo ullam esse. Sunt magnam et dolorem eaque magnam
-                                    odit enim quaerat. Vero error error voluptatem eum.</p>
-
-                            </div><!-- End Tab 2 Content -->
+                            </div>
 
                             <div class="tab-pane fade show" id="tab3">
 
-                                <p class="fst-italic">Consequuntur inventore voluptates consequatur aut vel et. Eos
-                                    doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo
-                                    suscipit voluptatem.</p>
+                                <div class="row gy-5">
+                                    <h5 class="text-center fw-bold">MANUFACTOR</h5>
+                                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                                        <div class="service-item">
+                                            <div class="img">
+                                                <img src="/herobiz/assets/img/services-1.jpg" class="img-fluid"
+                                                    alt="">
+                                            </div>
+                                            <div class="details position-relative">
+                                                <a href="#" class="stretched-link">
+                                                    <h5 class="text-center fw-bold">MUDAH</h5>
+                                                </a>
+                                                <p>Loccana Inventory & Distribution System memastikan data <span
+                                                        class="fw-bold">akurat</span>.</p>
+                                            </div>
+                                        </div>
+                                    </div><!-- End Service Item -->
 
-                                <div class="d-flex align-items-center mt-4">
-                                    <i class="bi bi-check2"></i>
-                                    <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
+                                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                                        <div class="service-item">
+                                            <div class="img">
+                                                <img src="/herobiz/assets/img/services-2.jpg" class="img-fluid"
+                                                    alt="">
+                                            </div>
+                                            <div class="details position-relative">
+                                                <a href="#" class="stretched-link">
+                                                    <h5 class="text-center fw-bold">AMAN </h5>
+                                                </a>
+                                                <p>Memberikan tampilan yang <span class="fw-bold">sederhana</span> dan
+                                                    mudah di eksekusi.</p>
+                                            </div>
+                                        </div>
+                                    </div><!-- End Service Item -->
+
+                                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+                                        <div class="service-item">
+                                            <div class="img">
+                                                <img src="/herobiz/assets/img/services-3.jpg" class="img-fluid"
+                                                    alt="">
+                                            </div>
+                                            <div class="details position-relative">
+                                                <a href="#" class="stretched-link">
+                                                    <h5 class="text-center fw-bold">CEPAT</h5>
+                                                </a>
+                                                <p>Proses distribusi dan stoking secara <span class="fw-bold"> cepat
+                                                    </span>dan <span class="fw-bold"> akurat </span></p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi
-                                    dolorum non eveniet magni quaerat nemo et.</p>
-
-                                <div class="d-flex align-items-center mt-4">
-                                    <i class="bi bi-check2"></i>
-                                    <h4>Incidunt non veritatis illum ea ut nisi</h4>
-                                </div>
-                                <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta
-                                    tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at.
-                                    Dolorem quo tempora. Quia et perferendis.</p>
-
-                                <div class="d-flex align-items-center mt-4">
-                                    <i class="bi bi-check2"></i>
-                                    <h4>Omnis ab quia nemo dignissimos rem eum quos..</h4>
-                                </div>
-                                <p>Eius alias aut cupiditate. Dolor voluptates animi ut blanditiis quos nam. Magnam
-                                    officia aut ut alias quo explicabo ullam esse. Sunt magnam et dolorem eaque magnam
-                                    odit enim quaerat. Vero error error voluptatem eum.</p>
-
-                            </div><!-- End Tab 3 Content -->
+                            </div>
 
                         </div>
 
@@ -333,216 +406,6 @@
         </section>
         <!-- End Call To Action Section -->
 
-
-
-        <!-- ======= Features Section ======= -->
-        {{-- <section id="features" class="features">
-      <div class="container" data-aos="fade-up">
-
-        <ul class="nav nav-tabs row gy-4 d-flex">
-
-          <li class="nav-item col-6 col-md-4 col-lg-2">
-            <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1">
-              <i class="bi bi-binoculars color-cyan"></i>
-              <h4>Modinest</h4>
-            </a>
-          </li><!-- End Tab 1 Nav -->
-
-          <li class="nav-item col-6 col-md-4 col-lg-2">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
-              <i class="bi bi-box-seam color-indigo"></i>
-              <h4>Undaesenti</h4>
-            </a>
-          </li><!-- End Tab 2 Nav -->
-
-          <li class="nav-item col-6 col-md-4 col-lg-2">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3">
-              <i class="bi bi-brightness-high color-teal"></i>
-              <h4>Pariatur</h4>
-            </a>
-          </li><!-- End Tab 3 Nav -->
-
-          <li class="nav-item col-6 col-md-4 col-lg-2">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4">
-              <i class="bi bi-command color-red"></i>
-              <h4>Nostrum</h4>
-            </a>
-          </li><!-- End Tab 4 Nav -->
-
-          <li class="nav-item col-6 col-md-4 col-lg-2">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-5">
-              <i class="bi bi-easel color-blue"></i>
-              <h4>Adipiscing</h4>
-            </a>
-          </li><!-- End Tab 5 Nav -->
-
-          <li class="nav-item col-6 col-md-4 col-lg-2">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-6">
-              <i class="bi bi-map color-orange"></i>
-              <h4>Reprehit</h4>
-            </a>
-          </li><!-- End Tab 6 Nav -->
-
-        </ul>
-
-        <div class="tab-content">
-
-          <div class="tab-pane active show" id="tab-1">
-            <div class="row gy-4">
-              <div class="col-lg-8 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="100">
-                <h3>Modinest</h3>
-                <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
-                </p>
-                <ul>
-                  <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                </ul>
-                <p>
-                  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum
-                </p>
-              </div>
-              <div class="col-lg-4 order-1 order-lg-2 text-center" data-aos="fade-up" data-aos-delay="200">
-                <img src="/herobiz/assets/img/features-1.svg" alt="" class="img-fluid">
-              </div>
-            </div>
-          </div><!-- End Tab Content 1 -->
-
-          <div class="tab-pane" id="tab-2">
-            <div class="row gy-4">
-              <div class="col-lg-8 order-2 order-lg-1">
-                <h3>Undaesenti</h3>
-                <p>
-                  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum
-                </p>
-                <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
-                </p>
-                <ul>
-                  <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Provident mollitia neque rerum asperiores dolores quos qui a. Ipsum neque dolor voluptate nisi sed.</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                </ul>
-              </div>
-              <div class="col-lg-4 order-1 order-lg-2 text-center">
-                <img src="/herobiz/assets/img/features-2.svg" alt="" class="img-fluid">
-              </div>
-            </div>
-          </div><!-- End Tab Content 2 -->
-
-          <div class="tab-pane" id="tab-3">
-            <div class="row gy-4">
-              <div class="col-lg-8 order-2 order-lg-1">
-                <h3>Pariatur</h3>
-                <p>
-                  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum
-                </p>
-                <ul>
-                  <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Provident mollitia neque rerum asperiores dolores quos qui a. Ipsum neque dolor voluptate nisi sed.</li>
-                </ul>
-                <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
-                </p>
-              </div>
-              <div class="col-lg-4 order-1 order-lg-2 text-center">
-                <img src="/herobiz/assets/img/features-3.svg" alt="" class="img-fluid">
-              </div>
-            </div>
-          </div><!-- End Tab Content 3 -->
-
-          <div class="tab-pane" id="tab-4">
-            <div class="row gy-4">
-              <div class="col-lg-8 order-2 order-lg-1">
-                <h3>Nostrum</h3>
-                <p>
-                  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum
-                </p>
-                <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
-                </p>
-                <ul>
-                  <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                </ul>
-              </div>
-              <div class="col-lg-4 order-1 order-lg-2 text-center">
-                <img src="/herobiz/assets/img/features-4.svg" alt="" class="img-fluid">
-              </div>
-            </div>
-          </div><!-- End Tab Content 4 -->
-
-          <div class="tab-pane" id="tab-5">
-            <div class="row gy-4">
-              <div class="col-lg-8 order-2 order-lg-1">
-                <h3>Adipiscing</h3>
-                <p>
-                  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum
-                </p>
-                <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
-                </p>
-                <ul>
-                  <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                </ul>
-              </div>
-              <div class="col-lg-4 order-1 order-lg-2 text-center">
-                <img src="/herobiz/assets/img/features-5.svg" alt="" class="img-fluid">
-              </div>
-            </div>
-          </div><!-- End Tab Content 5 -->
-
-          <div class="tab-pane" id="tab-6">
-            <div class="row gy-4">
-              <div class="col-lg-8 order-2 order-lg-1">
-                <h3>Reprehit</h3>
-                <p>
-                  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum
-                </p>
-                <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
-                </p>
-                <ul>
-                  <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                </ul>
-              </div>
-              <div class="col-lg-4 order-1 order-lg-2 text-center">
-                <img src="/herobiz/assets/img/features-6.svg" alt="" class="img-fluid">
-              </div>
-            </div>
-          </div><!-- End Tab Content 6 -->
-
-        </div>
-
-      </div>
-    </section> --}}
-        <!-- End Features Section -->
 
         <!-- ======= Services Section ======= -->
         <section id="services" class="services">
@@ -741,32 +604,32 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-header">
-                    <h2>Our Pricing</h2>
-                    <p>Architecto nobis eos vel nam quidem vitae temporibus voluptates qui hic deserunt iusto omnis nam
-                        voluptas asperiores sequi tenetur dolores incidunt enim voluptatem magnam cumque fuga.</p>
+                    <h5 class="fw-bold">Pakai Loccana sekarang dan dapatkan harga terbaik.</h5>
                 </div>
 
                 <div class="row gy-4">
 
-                    <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="col-lg-3" data-aos="zoom-in" data-aos-delay="200">
                         <div class="pricing-item">
 
                             <div class="pricing-header">
-                                <h3>Standar POS</h3>
-                                <h4><sup>Rp</sup>199<span> / Month</span></h4>
+                                <h3>Basic</h3>
+                                <h4><sup>Rp</sup> 99 <span>Ribu /Bulan</span></h4>
                             </div>
 
                             <ul>
-                                <li><i class="bi bi-dot"></i> <span>Cashier</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Transaction</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Report</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Stock</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Utilities</span></li>
-                                <li class="na"><i class="bi bi-x"></i> <span>PPC </span>
-                                <li class="na"><i class="bi bi-x"></i> <span>Piutang </span>
+                                <li><i class="bi bi-dot"></i> <span>Outlet </span></li>
+                                <li><i class="bi bi-dot"></i> <span>Metode Pembayaran Offline</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Kasir Digital</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Dashbord & Laporan Penjualan</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Pembayaran Transaksi</span></li>
+                                <li><i class="bi bi-x"></i> <span>Fitur Modifikasi Harga </span>
+                                <li><i class="bi bi-x"></i> <span>Menu Order</span>
                                 </li>
-                                <li class="na"><i class="bi bi-x"></i> <span>Finance</span></li>
-                                <li class="na"><i class="bi bi-x"></i> <span>Finish Good </span>
+                                <li><i class="bi bi-x"></i> <span>Finance</span></li>
+                                <li><i class="bi bi-x"></i> <span>Piutang</span>
+                                <li><i class="bi bi-x"></i> <span>Purchase Order</span>
+                                <li><i class="bi bi-x"></i> <span>Inventory</span>
                             </ul>
 
                             <div class="text-center mt-auto">
@@ -776,25 +639,27 @@
                         </div>
                     </div><!-- End Pricing Item -->
 
-                    <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="400">
-                        <div class="pricing-item featured">
+                    <div class="col-lg-3" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="pricing-item">
 
                             <div class="pricing-header">
-                                <h3>Standard ERP</h3>
-                                <h4><sup>Rp</sup>299<span> / Month</span></h4>
+                                <h3>Standard</h3>
+                                <h4><sup>Rp</sup>129<span>Ribu /Bulan</span></h4>
                             </div>
 
                             <ul>
-                                <li><i class="bi bi-dot"></i> <span>Cashier</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Transaction</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Report</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Stock</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Utilities</span></li>
-                                <li><i class="bi bi-dot"></i> <span>PPC </span>
-                                <li><i class="bi bi-dot"></i> <span>Piutang </span>
+                                <li><i class="bi bi-dot"></i> <span>Outlet </span></li>
+                                <li><i class="bi bi-dot"></i> <span>Metode Pembayaran Offline & Online</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Kasir Digital</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Dashbord & Laporan Penjualan</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Pembayaran Transaksi</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Fitur Modifikasi Harga </span>
+                                <li><i class="bi bi-dot"></i> <span>Menu Order</span>
                                 </li>
-                                <li><i class="bi bi-dot"></i> <span>Finance</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Finish Good </span>
+                                <li><i class="bi bi-x"></i> <span>Finance</span></li>
+                                <li><i class="bi bi-x"></i> <span>Piutang</span>
+                                <li><i class="bi bi-x"></i> <span>Purchase Order</span>
+                                <li><i class="bi bi-x"></i> <span>Inventory</span>
                             </ul>
 
 
@@ -805,25 +670,57 @@
                         </div>
                     </div><!-- End Pricing Item -->
 
-                    <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="600">
+                    <div class="col-lg-3" data-aos="zoom-in" data-aos-delay="600">
                         <div class="pricing-item">
 
                             <div class="pricing-header">
-                                <h3>Pro POS</h3>
-                                <h4><sup>Rp</sup>499<span> / Month</span></h4>
+                                <h3>Pro</h3>
+                                <h4><sup>Rp</sup>387<span>Ribu /Bulan</span></h4>
                             </div>
 
                             <ul>
-                                <li><i class="bi bi-dot"></i> <span>Cashier</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Transaction</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Report</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Stock</span></li>
-                                <li><i class="bi bi-dot"></i> <span>Utilities</span></li>
-                                <li class="na"><i class="bi bi-x"></i> <span>PPC </span>
-                                <li><i class="bi bi-dot"></i> <span>Piutang </span>
+                                <li><i class="bi bi-dot"></i> <span>Outlet </span></li>
+                                <li><i class="bi bi-dot"></i> <span>Metode Pembayaran Offline & Online</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Kasir Digital</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Dashbord & Laporan Penjualan</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Pembayaran Transaksi</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Fitur Modifikasi Harga </span>
+                                <li><i class="bi bi-dot"></i> <span>Menu Order</span>
                                 </li>
                                 <li><i class="bi bi-dot"></i> <span>Finance</span></li>
-                                <li class="na"><i class="bi bi-x"></i> <span>Finish Good </span>
+                                <li><i class="bi bi-x"></i> <span>Piutang</span>
+                                <li><i class="bi bi-dot"></i> <span>Purchase Order</span>
+                                <li><i class="bi bi-dot"></i> <span>Inventory</span>
+                            </ul>
+
+                            <div class="text-center mt-auto">
+                                <a href="#" class="buy-btn">Buy Now</a>
+                            </div>
+
+                        </div>
+                    </div><!-- End Pricing Item -->
+
+                    <div class="col-lg-3" data-aos="zoom-in" data-aos-delay="600">
+                        <div class="pricing-item">
+
+                            <div class="pricing-header bg-warning">
+                                <h3>Premium</h3>
+                                <h4><sup>Rp</sup>649<span>Ribu /Bulan</span></h4>
+                            </div>
+
+                            <ul>
+                                <li><i class="bi bi-dot"></i> <span>Outlet </span></li>
+                                <li><i class="bi bi-dot"></i> <span>Metode Pembayaran Offline & Online</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Kasir Digital</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Dashbord & Laporan Penjualan</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Pembayaran Transaksi</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Fitur Modifikasi Harga </span>
+                                <li><i class="bi bi-dot"></i> <span>Menu Order</span>
+                                </li>
+                                <li><i class="bi bi-dot"></i> <span>Finance</span></li>
+                                <li><i class="bi bi-dot"></i> <span>Piutang</span>
+                                <li><i class="bi bi-dot"></i> <span>Purchase Order</span>
+                                <li><i class="bi bi-dot"></i> <span>Inventory</span>
                             </ul>
 
                             <div class="text-center mt-auto">
@@ -835,109 +732,18 @@
 
                 </div>
 
+                <div class="col-lg-12 ">
+                  <div class="pricing-item ">
+
+                    <div class="pricing-header">
+                        <h3 class="fw-bold">CUSTOM</h3>
+                        <h4>Mulai dari </h4>
+                        <h4><sup>Rp</sup> 1,500 <span>Ribu /Bulan</span></h4>
+                    </div>
+                </div>
+                </div>
             </div>
         </section><!-- End Pricing Section -->
-
-        <!-- ======= F.A.Q Section ======= -->
-        {{-- <section id="faq" class="faq">
-      <div class="container-fluid" data-aos="fade-up">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
-
-            <div class="content px-xl-5">
-              <h3>Frequently Asked <strong>Questions</strong></h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-              </p>
-            </div>
-
-            <div class="accordion accordion-flush px-xl-5" id="faqlist">
-
-              <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    Non consectetur a erat nam at lectus urna duis?
-                  </button>
-                </h3>
-                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-                  </div>
-                </div>
-              </div><!-- # Faq item-->
-
-              <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?
-                  </button>
-                </h3>
-                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                  </div>
-                </div>
-              </div><!-- # Faq item-->
-
-              <div class="accordion-item" data-aos="fade-up" data-aos-delay="400">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?
-                  </button>
-                </h3>
-                <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-                  </div>
-                </div>
-              </div><!-- # Faq item-->
-
-              <div class="accordion-item" data-aos="fade-up" data-aos-delay="500">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-4">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
-                  </button>
-                </h3>
-                <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                  </div>
-                </div>
-              </div><!-- # Faq item-->
-
-              <div class="accordion-item" data-aos="fade-up" data-aos-delay="600">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-5">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    Tempus quam pellentesque nec nam aliquam sem et tortor consequat?
-                  </button>
-                </h3>
-                <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
-                  </div>
-                </div>
-              </div><!-- # Faq item-->
-
-            </div>
-
-          </div>
-
-          <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("/herobiz/assets/img/faq.jpg");'>&nbsp;</div>
-        </div>
-
-      </div>
-    </section> --}}
-        <!-- End F.A.Q Section -->
-
-
 
         <!-- ======= Team Section ======= -->
         <section id="team" class="team">
