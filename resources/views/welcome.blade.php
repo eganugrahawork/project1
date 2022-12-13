@@ -48,7 +48,7 @@
     <header id="header" class="header fixed-top" data-scrollto-offset="0">
         <div class="container-fluid d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
+            <a href="#" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
                 <img src="/herobiz/assets/img/brand-logo/loccana.png" alt="">
                 {{-- <h1>Loccana<span>.</span></h1> --}}
             </a>
@@ -181,9 +181,9 @@
                                     <h5 class="text-center fw-bold">LOCCANA POINT OF SALES</h5>
                                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                                         <div class="service-item">
-                                            <div class="img">
-                                                <img src="/herobiz/assets/img/services-1.jpg" class="img-fluid"
-                                                    alt="">
+                                            <div class="img d-flex justify-content-center">
+                                                <img src="/herobiz/assets/img/efective.png" class="img-fluid"
+                                                    width="200">
                                             </div>
                                             <div class="details position-relative">
                                                 <a href="#" class="stretched-link">
@@ -197,9 +197,9 @@
 
                                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
                                         <div class="service-item">
-                                            <div class="img">
-                                                <img src="/herobiz/assets/img/easy.jpg" class="img-fluid"
-                                                    alt="">
+                                            <div class="img d-flex justify-content-center">
+                                                <img src="/herobiz/assets/img/eficience.png" class="img-fluid"
+                                                width="200">
                                             </div>
                                             <div class="details position-relative">
                                                 <a href="#" class="stretched-link">
@@ -212,9 +212,9 @@
 
                                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                                         <div class="service-item">
-                                            <div class="img">
-                                                <img src="/herobiz/assets/img/services-3.jpg" class="img-fluid"
-                                                    alt="">
+                                            <div class="img d-flex justify-content-center">
+                                                <img src="/herobiz/assets/img/together.png" class="img-fluid"
+                                                    width="200">
                                             </div>
                                             <div class="details position-relative">
 
@@ -237,9 +237,9 @@
                                     <h5 class="text-center fw-bold">INVENTORY & DISTRIBUTION SYSTEM</h5>
                                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                                         <div class="service-item">
-                                            <div class="img">
-                                                <img src="/herobiz/assets/img/services-1.jpg" class="img-fluid"
-                                                    alt="">
+                                            <div class="img d-flex justify-content-center">
+                                                <img src="/herobiz/assets/img/accurate.png" class="img-fluid"
+                                                    width="200">
                                             </div>
                                             <div class="details position-relative">
                                                 <a href="#" class="stretched-link">
@@ -253,9 +253,9 @@
 
                                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
                                         <div class="service-item">
-                                            <div class="img">
-                                                <img src="/herobiz/assets/img/services-2.jpg" class="img-fluid"
-                                                    alt="">
+                                            <div class="img d-flex justify-content-center">
+                                                <img src="/herobiz/assets/img/minimalism.png" class="img-fluid"
+                                                    width="200">
                                             </div>
                                             <div class="details position-relative">
                                                 <a href="#" class="stretched-link">
@@ -269,9 +269,9 @@
 
                                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                                         <div class="service-item">
-                                            <div class="img">
-                                                <img src="/herobiz/assets/img/services-3.jpg" class="img-fluid"
-                                                    alt="">
+                                            <div class="img d-flex justify-content-center">
+                                                <img src="/herobiz/assets/img/fast.png" class="img-fluid"
+                                                    width="200">
                                             </div>
                                             <div class="details position-relative">
                                                 <a href="#" class="stretched-link">
@@ -291,9 +291,9 @@
                                     <h5 class="text-center fw-bold">MANUFACTOR</h5>
                                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                                         <div class="service-item">
-                                            <div class="img">
-                                                <img src="/herobiz/assets/img/services-1.jpg" class="img-fluid"
-                                                    alt="">
+                                            <div class="img d-flex justify-content-center">
+                                                <img src="/herobiz/assets/img/easy.png" class="img-fluid"
+                                                    width="200">
                                             </div>
                                             <div class="details position-relative">
                                                 <a href="#" class="stretched-link">
@@ -307,9 +307,9 @@
 
                                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
                                         <div class="service-item">
-                                            <div class="img">
-                                                <img src="/herobiz/assets/img/services-2.jpg" class="img-fluid"
-                                                    alt="">
+                                            <div class="img d-flex justify-content-center">
+                                                <img src="/herobiz/assets/img/safe.png" class="img-fluid"
+                                                    width="200">
                                             </div>
                                             <div class="details position-relative">
                                                 <a href="#" class="stretched-link">
@@ -323,9 +323,9 @@
 
                                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                                         <div class="service-item">
-                                            <div class="img">
-                                                <img src="/herobiz/assets/img/services-3.jpg" class="img-fluid"
-                                                    alt="">
+                                            <div class="img d-flex justify-content-center">
+                                                <img src="/herobiz/assets/img/fast.png" class="img-fluid"
+                                                    width="200">
                                             </div>
                                             <div class="details position-relative">
                                                 <a href="#" class="stretched-link">
