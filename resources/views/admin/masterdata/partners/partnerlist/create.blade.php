@@ -25,7 +25,7 @@
                     <div class="fv-row mb-3">
                         <label class="required form-label fw-bold">Partner Type</label>
                         <div class="col-lg-8">
-                            <select class="form-select  form-select-solid mb-3 mb-lg-0" name="partner_type"
+                            <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="partner_type"
                                 id="partner_type" required>
                                 @foreach ($partner_type as $pt)
                                     <option value="{{ $pt->id }}">{{ $pt->name }}</option>
@@ -92,6 +92,8 @@
 </div>
 
 <script>
+$('.select-2').select2()
+
     $('#add-form').on('submit', function(e) {
         e.preventDefault();
 

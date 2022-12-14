@@ -39,18 +39,23 @@ use App\Http\Controllers\Admin\Procurement\PurchaseOrderController;
 use App\Http\Controllers\Admin\Procurement\InvoiceProcurementController;
 use App\Http\Controllers\Admin\Procurement\ItemsReceiptController;
 use App\Http\Controllers\Admin\Procurement\PurchaseBasisController;
+use App\Http\Controllers\Admin\Procurement\ReportProcurementController;
+use App\Http\Controllers\Admin\Procurement\ReturnProcurementController;
 // End Procurement
 
 // Strt Inventory
 use App\Http\Controllers\Admin\Inventory\StockController;
 use App\Http\Controllers\Admin\Inventory\StockInTransitController;
-use App\Http\Controllers\Admin\Procurement\ReportProcurementController;
-use App\Http\Controllers\Admin\Procurement\ReturnProcurementController;
+
+// End Inventory
+
+
+//Start Selling
 use App\Http\Controllers\Admin\Selling\InvoiceSellingController;
 use App\Http\Controllers\Admin\Selling\ReportSellingController;
+use App\Http\Controllers\Admin\Selling\ReturnSellingController;
 use App\Http\Controllers\Admin\Selling\SellingController;
-use App\Http\Controllers\ReturnSellingController;
-// End Inventory
+// End Selling
 
 // Utils
 use Illuminate\Support\Facades\Route;
@@ -389,6 +394,9 @@ Route::middleware('auth')->controller(ReportInventoryController::class)->group(f
 Route::middleware('auth')->controller(SellingController::class)->group(function () {
     Route::get('/admin/selling/selling', 'index');
     Route::get('/admin/selling/selling/create', 'create');
+    Route::get('/admin/selling/selling/getdatacustomer/{id}', 'getdatacustomer');
+    Route::get('/admin/selling/selling/getdetailitem/{id}', 'getdetailitem');
+    Route::get('/admin/selling/selling/addnewitemrow', 'addnewitemrow');
 });
 // End Selling
 
@@ -396,7 +404,6 @@ Route::middleware('auth')->controller(SellingController::class)->group(function 
 Route::middleware('auth')->controller(InvoiceSellingController::class)->group(function () {
     Route::get('/admin/selling/invoice', 'index');
 });
-
 // End Invoice Selling
 
 // Return Selling
@@ -414,14 +421,17 @@ Route::middleware('auth')->controller(ReportSellingController::class)->group(fun
 // End Report selling
 
 
+//Cashier
 Route::middleware('auth')->controller(CashierController::class)->group(function () {
     Route::get('/admin/cashier', 'index');
 });
-//Cashier
-
-
 //End Cashier
 
+// Cash Bank
+Route::middleware('auth')->controller()->group(function(){
+
+});
+// Cash Bank End
 
 //Blocked Page Start
 Route::get('/blocked', function () {

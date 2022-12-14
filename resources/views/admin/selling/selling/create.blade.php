@@ -5,25 +5,29 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-4">
-                <form id="addTransit" class="form">
+                <form id="createSales" class="form">
                     @csrf
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Sales Number</label>
                         <input type="text" id="sales_number" name="sales_number"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $code }}" readonly
+                            required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Sales Date</label>
+                        <label class="required fw-bold fs-6 mb-2">Sales Date</label>
                         <div class="">
                             <input type="text" id="sales_date" name="sales_date"
                                 class="form-control form-control-solid mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Customer</label>
+                        <label class="required fw-bold fs-6 mb-2">Customer</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="partner_id"
-                            id="partner_id" required>
+                            id="partner_id" onchange="getDataCustomer()" required>
                             <option>Choose Customer</option>
+                            @foreach ($customer as $cust)
+                                <option value="{{ $cust->id }}">{{ $cust->code }}-{{ $cust->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="fv-row mb-3">
@@ -75,7 +79,13 @@
                     <label class="required form-label fw-bold">Term Of Payment</label>
                     <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="term_of_payment"
                         id="term_of_payment" required>
-                        <option>Choose Term</option>
+                        <option value="Cash">Cash</option>
+                        <option value="15">15 Hari</option>
+                        <option value="30">30 Hari</option>
+                        <option value="45">45 Hari</option>
+                        <option value="60">60 Hari</option>
+                        <option value="90">90 Hari</option>
+                        <option value="other">Lainnya</option>
                     </select>
                 </div>
                 <div class="fv-row mb-3">
@@ -106,29 +116,52 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-10">
             <hr>
             <h5 class="fw-bolder">Items</h5>
             <hr>
             <div class="col-lg-12" id="itemsAddList">
                 <div class='row'>
-                    <div class='fv-row mb-3 col-lg-4'>
+                    <div class='fv-row mb-3 col-lg-3'>
                         <label class=' form-label fs-6 fw-bold'>Item</label>
-                        <select class='form-select  form-select-solid mb-3 mb-lg-0' id='item_id' name='item_id[]'
-                            required>
+                        <select class='form-select  form-select-solid mb-3 mb-lg-0 select-2'
+                            onchange='getDetailItem(this)' id='item_id' name='item_id[]' required>
                             <option>Choose Item</option>
-                            {{-- <option value='{{ $item->item_id }}'>{{ $item->item_name }}</option> --}}
+                            @foreach ($item as $itm)
+                                <option value="{{ $itm->id }}">{{ $itm->item_code }}-{{ $itm->item_name }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
-                    <div class='fv-row mb-3 col-lg-2'>
-                        <label class=' fw-bold fs-6 mb-2'>Qty Box</label>
+                    <div class='fv-row mb-3 col-lg-1'>
+                        <label class=' fw-bold fs-6 mb-2'>Q Box</label>
                         <input type='number' name='qty_box[]' id='qty_box'
+                            class='form-control form-control-solid mb-3 mb-lg-0' value='0'
+                            onkeyup='countTotalQty(this)' required />
+                        <p class='fs-9 fw-bolder' id='detail_box'></p>
+                        <input type='hidden' name='qty_per_box[]' id='qty_per_box'>
+                        <input type='hidden' name='stock[]' id='stock'>
+                    </div>
+                    <div class='fv-row mb-3 col-lg-1'>
+                        <label class=' fw-bold fs-6 mb-2'>Qty</label>
+                        <input type='number' name='qty[]' id='qty'
+                            class='form-control form-control-solid mb-3 mb-lg-0' value='0'
+                            onkeyup='countTotalQty(this)' required />
+                    </div>
+                    <div class='fv-row mb-3 col-lg-2'>
+                        <label class='required fw-bold fs-6 mb-2'>Total Qty</label>
+                        <input type='number' name='total_qty[]' id='total_qty' readonly
                             class='form-control form-control-solid mb-3 mb-lg-0 ' required />
                     </div>
                     <div class='fv-row mb-3 col-lg-2'>
-                        <label class='required fw-bold fs-6 mb-2'>Total Qty Box</label>
-                        <input type='number' name='total_qty_box[]' id='total_qty_box' readonly
-                            class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                        <label class=' fw-bold fs-6 mb-2'>Price</label>
+                        <input type='number' name='price[]' id='price'
+                            class='form-control form-control-solid mb-3 mb-lg-0' onkeyup='countTotalQty(this)' value='0' required />
+                    </div>
+                    <div class='fv-row mb-3 col-lg-2'>
+                        <label class=' fw-bold fs-6 mb-2'>Total</label>
+                        <input type='number' name='total_price[]' id='total_price'
+                            class='form-control form-control-solid mb-3 mb-lg-0' readonly required />
                     </div>
                     <div class='fv-row mb-3 col-lg-1  '>
                         <button class="btn btn-danger btn-sm btn-icon mt-4" type="button"
@@ -159,7 +192,7 @@
     $(document).ready(function() {
         $('.select-2').select2();
 
-        flatpickr("#transitdate", {
+        flatpickr("#sales_date", {
             static: true,
             dateFormat: "Y-m-d",
         });
@@ -167,7 +200,7 @@
 </script>
 
 <script>
-    $('#addTransit').submit(function(event) {
+    $('#createSales').submit(function(event) {
         event.preventDefault();
 
         const swalWithBootstrapButtons = Swal.mixin({
@@ -192,9 +225,9 @@
                     '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span>'
                 )
                 $.ajax({
-                    url: "{{ url('/admin/inventory/stock-in-transit/store') }}",
+                    url: "{{ url('/admin/selling/selling/store') }}",
                     type: 'post',
-                    data: $('#addTransit')
+                    data: $('#createSales')
                         .serialize(), // Remember that you need to have your csrf token included
                     dataType: 'json',
                     success: function(response) {
@@ -205,8 +238,8 @@
                         )
                         $('#content').hide();
                         $('#indexContent').show();
-                        $('#searchTableInvoice').focus()
-                        tableInvoice.ajax.reload()
+                        $('#searchtableSelling').focus()
+                        // tableInvoice.ajax.reload()
                     },
                     error: function(response) {
                         // Handle error
@@ -228,7 +261,7 @@
     });
 
     function addNewItemRow() {
-        $.get("{{ url('/admin/inventory/stock-in-transit/addnewitemrow') }}", function(
+        $.get("{{ url('/admin/selling/selling/addnewitemrow') }}", function(
             data) {
             $('#itemsAddList').append(data.html)
             $('.select-2').select2();
@@ -237,6 +270,62 @@
 
     function removeItemRow(e) {
         $(e).parent().parent().remove();
-        $('#description').focus()
+        $('#credit_balance').focus()
+        $('.select-2').select2();
+    }
+
+    function getDataCustomer() {
+        var id = $('#partner_id').val();
+        $.get("{{ url('/admin/selling/selling/getdatacustomer') }}/" + id, function(
+            data) {
+            $('#address').val(data.address)
+            $('#att').val(data.att)
+            $('#phone').val(data.phone)
+            $('#email').val(data.email)
+            $('#credit_limit').val(data.credit_limit)
+            $('#credit_balance').val(data.credit_balance)
+            $('.select-2').select2();
+        })
+    }
+
+    function getDetailItem(e) {
+        var id = $(e).val()
+        $.get("{{ url('/admin/selling/selling/getdetailitem') }}/" + id, function(
+            data) {
+
+            $(e).parent().parent().find('#qty_per_box').val(data.qty_per_box)
+            $(e).parent().parent().find('#stock').val(data.stock)
+            $(e).parent().parent().find('#detail_box').html(data.desc)
+            $('.select-2').select2();
+        })
+    }
+
+    function countTotalQty(e) {
+        var box = $(e).parent().parent().find('#qty_box').val();
+        var qty_per_box = $(e).parent().parent().find('#qty_per_box').val();
+        var qty = $(e).parent().parent().find('#qty').val();
+        var price = $(e).parent().parent().find('#price').val();
+
+        var stockInBox = $(e).parent().parent().find('#stock').val();
+        var stockInQty = stockInBox * qty_per_box;
+
+        var totalQty = (box * qty_per_box) + parseInt(qty)
+        var totalPrice = parseInt(totalQty) * parseInt(price);
+
+        $(e).parent().parent().find('#total_qty').val(totalQty);
+        $(e).parent().parent().find('#total_price').val(totalPrice);
+        console.log(price);
+
+        if (stockInQty < totalQty) {
+            Swal.fire(
+                'Attention',
+                'Not Enough Stock',
+                'question'
+            )
+            $(e).parent().parent().find('#qty_box').val(0);
+            $(e).parent().parent().find('#qty').val(0);
+            $(e).parent().parent().find('#total_qty').val(0);
+            $(e).parent().parent().find('#total_price').val(0);
+        }
     }
 </script>
