@@ -147,7 +147,7 @@ class MenuController extends Controller
     public function loadmenu(Request $request) {
 
         // dd($request->role_id);
-        $menu = DB::connection('masterdata')->select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $request->parent");
+        $menu = DB::connection('masterdata')->select("select b.id, b.parent, b.name, b.url, b.icon from menu_access a join menus b on a.menu_id = b.id where a.role_id = $request->role_id and status = 1 and b.parent = $request->parent ORDER BY b.sequence ASC");
         // dd($request->parent);
         $html = '';
         foreach ($menu as $mn) {

@@ -178,6 +178,8 @@ Route::middleware(['auth'])->controller(UsersController::class)->group(function 
     Route::get('admin/users/delete/{id}', 'destroy');
     Route::post('admin/users/checkusername', 'checkusername');
     Route::post('admin/users/checkemail', 'checkemail');
+    Route::get('admin/users/export', 'export');
+
 });
 //Users END
 
@@ -332,6 +334,7 @@ Route::middleware('auth')->controller(InvoiceProcurementController::class)->grou
     Route::get('/admin/procurement/invoice/info/{id}', 'info');
     Route::get('/admin/procurement/invoice/delete/{id}', 'destroy');
     Route::get('/admin/procurement/invoice/getdata/{id}', 'getdata');
+    Route::get('/admin/procurement/invoice/exportpdf/{id}', 'exportpdf');
 });
 // End Procurement Invoice
 

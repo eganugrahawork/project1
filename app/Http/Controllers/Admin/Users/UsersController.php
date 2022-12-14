@@ -16,25 +16,26 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UsersController extends Controller
 {
 
     public function __construct()
     {
+        // $this->middleware(function($request, $next){
+        //     $menu_id = Menu::select('id')->where(['url' => '/admin/users'])->first();
+        //     $role_id = auth()->user()->role_id;
 
-        $this->middleware(function($request, $next){
-            $menu_id = Menu::select('id')->where(['url' => '/admin/users'])->first();
-            $role_id = auth()->user()->role_id;
+        //     $check = MenuAccess::where(['role_id' => $role_id, 'menu_id' => $menu_id->id])->first();
 
-            $check = MenuAccess::where(['role_id' => $role_id, 'menu_id' => $menu_id->id])->first();
-
-            if($check){
-                return $next($request);
-            }else{
-                return redirect('/blocked');
-            }
-        });
+        //     if($check){
+        //         return $next($request);
+        //     }else{
+        //         return redirect('/blocked');
+        //     }
+        // });
     }
 
     public function index(){
@@ -226,6 +227,11 @@ class UsersController extends Controller
         }else{
             return response()->json(['success'=>'true']);
         }
+    }
+
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 
 }
