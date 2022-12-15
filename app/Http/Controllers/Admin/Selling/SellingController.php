@@ -11,6 +11,7 @@ use App\Models\Ordering;
 use App\Models\Partners;
 use App\Models\Selling;
 use App\Models\SellingDetail;
+use App\Models\UserActivity;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,44 +33,44 @@ class SellingController extends Controller {
     return view('admin.selling.selling.index', ['month' => $month, 'years' => $years]);
   }
 
-  public function list(Request $request){
+  public function list(Request $request) {
     return Datatables::of(DB::connection('selling')->select('Call sp_list_selling()'))->addIndexColumn()
-    ->addColumn('action', function ($model) {
+      ->addColumn('action', function ($model) {
         // $action = "";
         $action = "<a onclick='info($model->id_penjualan)' class='btn btn-icon btn-sm btn-info btn-hover-rise me-1'><i class='bi bi-info-square'></i></a>";
 
         if ($model->status == 0) {
-            if (Gate::allows('edit', ['/admin/selling/selling'])) {
-                $action .= "<a onclick='edit($model->id_penjualan)' class='btn btn-icon btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
-            }
-            if (Gate::allows('delete', ['/admin/selling/selling'])) {
-                $action .= " <a href='/admin/selling/selling/delete/$model->id_penjualan' class='btn btn-icon btn-sm btn-danger btn-hover-rise me-1' id='deleteselling'><i class='bi bi-trash'></i></a>";
-            }
+          if (Gate::allows('edit', ['/admin/selling/selling'])) {
+            $action .= "<a onclick='edit($model->id_penjualan)' class='btn btn-icon btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
+          }
+          if (Gate::allows('delete', ['/admin/selling/selling'])) {
+            $action .= " <a href='/admin/selling/selling/delete/$model->id_penjualan' class='btn btn-icon btn-sm btn-danger btn-hover-rise me-1' id='deleteselling'><i class='bi bi-trash'></i></a>";
+          }
         } else {
-            $action .= "<a onclick='exportPDF($model->id_penjualan)' class='btn btn-icon btn-sm btn-outline btn-outline-dashed btn-outline-dark btn-active-light-dark btn-hover-rise me-1'><i class='bi bi-file-earmark-pdf'></i></a>";
+          $action .= "<a onclick='exportPDF($model->id_penjualan)' class='btn btn-icon btn-sm btn-outline btn-outline-dashed btn-outline-dark btn-active-light-dark btn-hover-rise me-1'><i class='bi bi-file-earmark-pdf'></i></a>";
         }
         return $action;
-    })->addColumn('status', function ($model) {
+      })->addColumn('status', function ($model) {
         $status = "";
 
         if ($model->status == 0 || $model->status === null) {
 
-            if (Gate::allows('approve', ['/admin/selling/selling'])) {
-                $status .= "<a onclick='approve($model->id_penjualan)' class='btn btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-patch-exclamation'></i></i> Confirm Here</a>";
-            } else {
-                $status .= "<a class='btn btn-sm btn-secondary btn-hover-rise me-1 '><i class='bi bi-question-octagon'></i>Pending</a>";
-            }
+          if (Gate::allows('approve', ['/admin/selling/selling'])) {
+            $status .= "<a onclick='approve($model->id_penjualan)' class='btn btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-patch-exclamation'></i></i> Confirm Here</a>";
+          } else {
+            $status .= "<a class='btn btn-sm btn-secondary btn-hover-rise me-1 '><i class='bi bi-question-octagon'></i>Pending</a>";
+          }
         } elseif ($model->status == 2) {
-            $status .= "<a class='btn btn-sm btn-danger btn-hover-rise me-1'><i class='bi bi-x-octagon'></i></i> Rejected</a>";
+          $status .= "<a class='btn btn-sm btn-danger btn-hover-rise me-1'><i class='bi bi-x-octagon'></i></i> Rejected</a>";
         } else {
-            $status .= "<a class='btn btn-sm btn-primary btn-hover-rise me-1'><i class='bi bi-patch-check'></i> Confirmed</a>";
+          $status .= "<a class='btn btn-sm btn-primary btn-hover-rise me-1'><i class='bi bi-patch-check'></i> Confirmed</a>";
         }
         return $status;
-    })->addColumn('tgl_jual', function ($model) {
+      })->addColumn('tgl_jual', function ($model) {
         return Carbon::parse($model->date_selling)->format('d-M-Y');
-    })->addColumn('due_date', function ($model) {
-      return Carbon::parse($model->due_date)->format('d-M-Y');
-  })->rawColumns(['action', 'status', 'tgl_jual','due_date'])->make(true);
+      })->addColumn('due_date', function ($model) {
+        return Carbon::parse($model->due_date)->format('d-M-Y');
+      })->rawColumns(['action', 'status', 'tgl_jual', 'due_date'])->make(true);
   }
 
   public function create() {
@@ -91,6 +92,7 @@ class SellingController extends Controller {
     $customer = Partners::select('partners.name', 'partners.id', 'partners.code')->join('partner_types', 'partners.partner_type', '=', 'partner_types.id')
       ->where('partner_types.name', '=', 'Customer')->get();
     $item = Items::all();
+
     return view('admin.selling.selling.create', ['code' => $code, 'customer' => $customer, 'item' => $item]);
   }
 
@@ -213,7 +215,6 @@ class SellingController extends Controller {
         DB::connection('selling')->select("call sp_update_items_qty(
           '$sellingdetail->id'
         )");
-
       }
     } else {
       $item_id = $request->item_id[0];
@@ -292,13 +293,26 @@ class SellingController extends Controller {
     }
 
 
-    return response()->json(['success', 'Data Ditambahkan']);
+    UserActivity::create([
+      'id_user' => auth()->user()->id,
+      'menu' => "Penjualan",
+      'aktivitas' => "Tambah Penjualan",
+      'keterangan' => "Tambah Penjualan " . $request->sales_number
+    ]);
+    return response()->json(['success', 'Penjualan Ditambahkan']);
   }
 
-  public function destroy(Request $request){
+  public function destroy(Request $request) {
     DB::connection('selling')->select("call sp_delete_selling($request->id)");
-  $invoice =  InvoiceSelling::where(['selling_id' => $request->id])->first();
+    $invoice =  InvoiceSelling::where(['selling_id' => $request->id])->first();
     DB::connection('selling')->select("call sp_delete_selling_invoice($invoice->id)");
+
+    UserActivity::create([
+      'id_user' => auth()->user()->id,
+      'menu' => "Penjualan",
+      'aktivitas' => "Hapus Penjualan",
+      'keterangan' => "Hapus Penjualan " . $request->id
+  ]);
     return response()->json(['success', 'Data Dihapus']);
   }
 

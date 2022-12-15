@@ -101,8 +101,8 @@ class UoMController extends Controller
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "UOM",
-            'aktivitas' => "Ubah",
-            'keterangan' => "Ubah UOM ". $request->name
+            'aktivitas' => "Update",
+            'keterangan' => "Update UOM ". $request->name
          ]);
 
          NotifEvent::dispatch(auth()->user()->name .' mengedit Uom '. $request->name);

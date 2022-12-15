@@ -87,11 +87,11 @@ class CoaController extends Controller
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "COA",
-            'aktivitas' => "Ubah",
-            'keterangan' => "Ubah COA ". $request->coa
+            'aktivitas' => "Update",
+            'keterangan' => "Update COA ". $request->coa
         ]);
 
-        NotifEvent::dispatch(auth()->user()->name .' mengedit Coa '. $request->coa);
+        NotifEvent::dispatch(auth()->user()->name .' edit Coa '. $request->coa);
         return response()->json(['success'=> 'Coa diubah menjadi '. $request->coa]);
     }
 

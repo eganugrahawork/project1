@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Procurement;
 use App\Events\NotifEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Retur;
+use App\Models\UserActivity;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -73,7 +74,13 @@ class ReturnProcurementController extends Controller
                 $qty_retur
             )");
         }
-        return response()->json(['success' => 'Retur Created']);
+        UserActivity::create([
+          'id_user' => auth()->user()->id,
+          'menu' => "Return PO",
+          'aktivitas' => "Tambah",
+          'keterangan' => "Tambah Return PO " . $request->id_return
+      ]);
+        return response()->json(['success' => 'Retur Ditambahkan']);
     }
 
     public function info(Request $request) {
@@ -96,8 +103,13 @@ class ReturnProcurementController extends Controller
             1,
             '$approvedby'
         )");
-
-        return response()->json(['success' => 'Data Approved']);
+        UserActivity::create([
+          'id_user' => auth()->user()->id,
+          'menu' => "Return PO",
+          'aktivitas' => "Setujui",
+          'keterangan' => "Setujui Return PO " . $request->id_return
+      ]);
+        return response()->json(['success' => 'Data Disetujui']);
     }
 
     public function edit(Request $request) {
@@ -117,14 +129,28 @@ class ReturnProcurementController extends Controller
                 $qty_return
                 )");
         }
-        return response()->json(['success' => 'Retur updated']);
+
+        UserActivity::create([
+          'id_user' => auth()->user()->id,
+          'menu' => "Return PO",
+          'aktivitas' => "Update",
+          'keterangan' => "Update Return PO " . $request->id_return
+      ]);
+        return response()->json(['success' => 'Retur Diperbarui']);
     }
 
     public function destroy(Request $request){
         DB::connection('procurement')->select("call sp_delete_return(
             $request->id
         )");
-        return response()->json(['success' => 'Data Deleted']);
+
+        UserActivity::create([
+          'id_user' => auth()->user()->id,
+          'menu' => "Return PO",
+          'aktivitas' => "Hapus",
+          'keterangan' => "Hapus Return PO " . $request->id
+      ]);
+        return response()->json(['success' => 'Data Dihapus']);
     }
 
     public function getdata(Request $request) {

@@ -104,8 +104,8 @@ class ItemsController extends Controller {
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "Items",
-            'aktivitas' => "Ubah",
-            'keterangan' => "Ubah items " . $request->item_name
+            'aktivitas' => "Update",
+            'keterangan' => "Update items " . $request->item_name
         ]);
         NotifEvent::dispatch(auth()->user()->name . ' mengubah Items menjadi ' . $request->item_name);
         return response()->json(['success' => 'Data Item diUpdate !']);

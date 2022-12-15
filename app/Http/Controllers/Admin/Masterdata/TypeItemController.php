@@ -77,8 +77,8 @@ class TypeItemController extends Controller
             'aktivitas' => "Update",
             'keterangan' => "Update Type items " . $request->name_type
         ]);
-        NotifEvent::dispatch(auth()->user()->name . ' Update Type Items  ' . $request->name_type);
-        return response()->json(['success' =>  'Type Items Updated']);
+        NotifEvent::dispatch(auth()->user()->name . ' Update Tipe Items  ' . $request->name_type);
+        return response()->json(['success' =>  'Tipe Items Diperbarui']);
     }
 
     public function destroy(Request $request) {
@@ -92,7 +92,7 @@ class TypeItemController extends Controller
             'keterangan' => "Hapus Type items dengan id " . $request->id
         ]);
         NotifEvent::dispatch(auth()->user()->name . ' Hapus Type Items dengan id  ' . $request->id);
-        return response()->json(['success' =>  'Type Items Deleted']);
+        return response()->json(['success' =>  'Tipe Items Dihapus']);
     }
 
 }

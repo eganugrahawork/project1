@@ -47,7 +47,7 @@ class TypePartnerController extends Controller
         ]);
 
         NotifEvent::dispatch(auth()->user()->name .' menambahkan Type Partner '. $request->name);
-        return response()->json(['success' => 'Type Partner Added']);
+        return response()->json(['success' => 'Type Partner Ditambahkan']);
     }
 
     public function edit(Request $request){
@@ -64,7 +64,7 @@ class TypePartnerController extends Controller
         ]);
 
         NotifEvent::dispatch(auth()->user()->name .' Update Type Partner '. $request->name);
-        return response()->json(['success', 'Type Partner has Edited']);
+        return response()->json(['success', 'Tipe Partner diPerbarui']);
     }
 
     public function destroy(Request $request){
@@ -78,6 +78,6 @@ class TypePartnerController extends Controller
 
         NotifEvent::dispatch(auth()->user()->name .' Hapus Type Partner Menjadi '. $request->id);
 
-        return response()->json(['success', 'Type Parter Deleted']);
+        return response()->json(['success', 'Tipe Partner Dihapus']);
     }
 }

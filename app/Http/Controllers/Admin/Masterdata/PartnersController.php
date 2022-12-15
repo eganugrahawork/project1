@@ -127,9 +127,9 @@ class PartnersController extends Controller
             'keterangan' => "Update Partners ". $request->name
         ]);
 
-        NotifEvent::dispatch(auth()->user()->name .' merubah Partner menjadi '. $request->name);
+        NotifEvent::dispatch(auth()->user()->name .' edit Partner menjadi '. $request->name);
 
-        return response()->json(['success'=> 'Partner diupdate']);
+        return response()->json(['success'=> 'Partner Diperbarui']);
     }
 
 }

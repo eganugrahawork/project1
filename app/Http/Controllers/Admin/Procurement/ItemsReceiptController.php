@@ -7,6 +7,7 @@ use App\Models\ItemReceipt;
 use App\Models\ItemReceiptDetail;
 use App\Models\Mutation;
 use App\Models\PurchaseOrder;
+use App\Models\UserActivity;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -53,22 +54,8 @@ class ItemsReceiptController extends Controller {
 
     public function getdatapo(Request $request) {
         $po = DB::connection('procurement')->select('Call sp_search_id_item_receipt(' . $request->id . ')');
-        // dd($po);
         $html = '';
         foreach ($po as $item) {
-            // $getBalance = DB::connection('procurement')->select('SELECT * FROM items_receipt_details a WHERE a.`po_item_id` = ' . $item->po_item_id . ' ORDER BY a.`id` DESC LIMIT 1');
-            // if (count($getBalance) > 0) {
-            //     $balance = $getBalance[0]->qty_balance;
-            // } else {
-            //     $balance = $item->qty;
-            // }
-
-            // if ($balance < 1) {
-            //     $disabled = 'disabled';
-            // } else {
-            //     $disabled = '';
-            // }
-
             $html .= "<div class='row'>
             <input type='hidden' name='po_item_id[]' value='$item->po_item_id'/>
             <input type='hidden' name='unit_price[]' value='$item->unit_price'/>
@@ -118,8 +105,7 @@ class ItemsReceiptController extends Controller {
     }
 
     public function store(Request $request) {
-        // dd($request);
-        // dd( Mutation::orderBy('id', 'desc')->first());
+
         $usrid = auth()->user()->id;
         $usrname = auth()->user()->username;
         DB::connection('procurement')->select("call sp_insert_item_receipt(
@@ -201,7 +187,13 @@ class ItemsReceiptController extends Controller {
                     )");
             // 1 diatas berarti status bernilai po
         }
-        return response()->json(['success' => 'Item Receiving']);
+        UserActivity::create([
+          'id_user' => auth()->user()->id,
+          'menu' => "Penerimaan Barang",
+          'aktivitas' => "Tambah",
+          'keterangan' => "Tambah Penerimaan Barang ". $request->do_number
+       ]);
+        return response()->json(['success' => 'Penerimaan Barang Ditambahkan']);
     }
 
     public function update(Request $request){
@@ -213,7 +205,14 @@ class ItemsReceiptController extends Controller {
             '$request->shipment',
             '$request->receipt_date'
         )");
-        return response()->json(['success' => 'Item Receipt Updated']);
+
+        UserActivity::create([
+          'id_user' => auth()->user()->id,
+          'menu' => "Penerimaan Barang",
+          'aktivitas' => "Update",
+          'keterangan' => "Update Penerimaan Barang ". $request->do_number
+       ]);
+        return response()->json(['success' => 'Penerimaan Barang Diperbarui']);
     }
 
     public function destroy(Request $request){
@@ -229,6 +228,13 @@ class ItemsReceiptController extends Controller {
             $request->id
         )");
 
-        return response()->json(['success' => 'Item Receipt Deleted']);
+        UserActivity::create([
+          'id_user' => auth()->user()->id,
+          'menu' => "Penerimaan Barang",
+          'aktivitas' => "Hapus",
+          'keterangan' => "Hapus Penerimaan Barang ". $request->id
+       ]);
+
+        return response()->json(['success' => 'Penerimaan Barang Dihapus']);
     }
 }

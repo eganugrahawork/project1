@@ -59,7 +59,7 @@
                 </div>
                 <div class="row mb-3">
                     <label class=" col-form-label fw-bold fs-6">
-                        <span class="required">Contact Phone</span>
+                        <span class="required">Nomor Telepon</span>
                         <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i>
                     </label>
                     <div class=" fv-row">
@@ -82,21 +82,21 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class=" col-form-label fw-bold fs-6">Place Birth</label>
+                    <label class=" col-form-label fw-bold fs-6">Tempat Lahir</label>
                     <div class=" fv-row">
                         <input type="hidden" name="place_of_birth" class="form-control form-control-lg form-control-solid" value="{{ auth()->user()->place_of_birth }}" />
                         <label class="col-form-label fw-bold fs-6">{{ auth()->user()->place_of_birth }}</label>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class=" col-form-label fw-bold fs-6">Date Birth</label>
+                    <label class=" col-form-label fw-bold fs-6">Tanggal Lahir</label>
                     <div class=" fv-row">
                         <input type="hidden" name="date_of_birth" class="form-control form-control-lg form-control-solid" value="{{ auth()->user()->date_of_birth }}" />
                         <label class="col-form-label fw-bold fs-6">{{ auth()->user()->date_of_birth }}</label>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class=" col-form-label fw-bold fs-6">Region</label>
+                    <label class=" col-form-label fw-bold fs-6">Wilayah</label>
                     <div class=" fv-row">
                         <select class="form-select form-select-solid" name="region" required>
                                 @foreach ( $region as $l )
@@ -108,7 +108,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class=" col-form-label fw-bold fs-6">Religion</label>
+                    <label class=" col-form-label fw-bold fs-6">Agama</label>
                     <div class=" fv-row">
                         <input type="text" name="religion" class="form-control form-control-lg form-control-solid @error('religion')
                         is-invalid
@@ -121,7 +121,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class=" col-form-label fw-bold fs-6">Address</label>
+                    <label class=" col-form-label fw-bold fs-6">Alamat</label>
                     <div class=" fv-row">
                         <input type="text" name="address" class="form-control form-control-lg form-control-solid @error('address')
                         is-invalid
@@ -134,7 +134,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class=" col-form-label fw-bold fs-6">New Password</label>
+                    <label class=" col-form-label fw-bold fs-6">Password Baru</label>
                     <div class="col-lg-12 fv-row">
                         <div class="row">
                             <div class="col-lg-6 fv-row">
@@ -156,7 +156,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class=" col-form-label fw-bold fs-6">Password Verify Changed</label>
+                    <label class=" col-form-label fw-bold fs-6">Password Konfirmasi</label>
                     <div class=" fv-row">
                         <input type="password" name="oldpassword" class="form-control form-control-lg form-control-solid @error('oldpassword')
                         is-invalid
@@ -170,7 +170,7 @@
                 </div>
             </div>
             <div class="card-footer d-flex justify-content-end py-6 px-9">
-                <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Update Changes</button>
+                <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Perbarui Profil</button>
             </div>
         </form>
     </div>

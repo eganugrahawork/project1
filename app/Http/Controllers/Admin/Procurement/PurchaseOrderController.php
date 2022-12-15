@@ -112,12 +112,12 @@ class PurchaseOrderController extends Controller {
         DB::connection('procurement')->select("call sp_approve_po($request->id, '$user_approving', 1)");
         UserActivity::create([
             'id_user' => auth()->user()->id,
-            'menu' => "Approved PO",
-            'aktivitas' => "Approved PO",
-            'keterangan' => "Approved PO " . $info[0]->number_po
+            'menu' => "PO",
+            'aktivitas' => "Setujui",
+            'keterangan' => "Setujui PO " . $info[0]->number_po
         ]);
-        NotifEvent::dispatch(auth()->user()->name . ' Approved PO ' . $info[0]->number_po);
-        return response()->json(['success' => 'Data Approved']);
+        NotifEvent::dispatch(auth()->user()->name . ' Menyetujui PO ' . $info[0]->number_po);
+        return response()->json(['success' => 'Data Menyetujui']);
     }
 
     public function reject(Request $request) {
@@ -127,12 +127,12 @@ class PurchaseOrderController extends Controller {
         DB::connection('procurement')->select("call sp_approve_po($request->id, '$user_approving', 2)");
         UserActivity::create([
             'id_user' => auth()->user()->id,
-            'menu' => "Approved PO",
-            'aktivitas' => "Approved PO",
-            'keterangan' => "Approved PO " . $info[0]->number_po
+            'menu' => "PO",
+            'aktivitas' => "Tolak",
+            'keterangan' => "Tolak PO " . $info[0]->number_po
         ]);
-        NotifEvent::dispatch(auth()->user()->name . ' Rejected PO ' . $info[0]->number_po);
-        return response()->json(['success' => 'Data Rejected']);
+        NotifEvent::dispatch(auth()->user()->name . ' Menolak PO ' . $info[0]->number_po);
+        return response()->json(['success' => 'Data Menolak']);
     }
 
     public function destroy(Request $request) {
@@ -141,12 +141,12 @@ class PurchaseOrderController extends Controller {
 
         UserActivity::create([
             'id_user' => auth()->user()->id,
-            'menu' => "Delete PO",
-            'aktivitas' => "Delete PO",
-            'keterangan' => "Delete PO " . $info[0]->number_po
+            'menu' => "PO",
+            'aktivitas' => "Hapus",
+            'keterangan' => "Hapus PO " . $info[0]->number_po
         ]);
-        NotifEvent::dispatch(auth()->user()->name . ' Delete PO ' . $info[0]->number_po);
-        return response()->json(['success' => 'Data Deleted']);
+        NotifEvent::dispatch(auth()->user()->name . ' Hapus PO ' . $info[0]->number_po);
+        return response()->json(['success' => 'Data DiHapus']);
     }
 
     public function getitem(Request $request) {
@@ -302,13 +302,13 @@ class PurchaseOrderController extends Controller {
 
         UserActivity::create([
             'id_user' => auth()->user()->id,
-            'menu' => "Added PO",
-            'aktivitas' => "Added PO",
-            'keterangan' => "Added PO " . $request->code
+            'menu' => "PO",
+            'aktivitas' => "Tambah",
+            'keterangan' => "Tambah PO " . $request->code
         ]);
-        NotifEvent::dispatch(auth()->user()->name . ' Added PO ' . $request->code);
+        NotifEvent::dispatch(auth()->user()->name . ' Tambah PO ' . $request->code);
 
-        return response()->json(['success', 'Purchase Order Added']);
+        return response()->json(['success', 'Purchase Order Ditambahkan']);
     }
 
     // public function update(Request $request) {
@@ -366,13 +366,13 @@ class PurchaseOrderController extends Controller {
     //     }
     //     UserActivity::create([
     //         'id_user' => auth()->user()->id,
-    //         'menu' => "Edit PO",
-    //         'aktivitas' => "Edit PO",
-    //         'keterangan' => "Edit PO " . $request->code
+    //         'menu' => "PO",
+    //         'aktivitas' => "Update",
+    //         'keterangan' => "Update PO " . $request->code
     //     ]);
-    //     NotifEvent::dispatch(auth()->user()->name . ' Edit PO ' . $request->code);
+    //     NotifEvent::dispatch(auth()->user()->name . ' Update PO ' . $request->code);
 
-    //     return response()->json(['success' =>'Purchase Order Edited']);
+    //     return response()->json(['success' =>'Purchase Order Updateed']);
     // }
 
     public function update(Request $request) {
@@ -405,13 +405,13 @@ class PurchaseOrderController extends Controller {
         }
         UserActivity::create([
             'id_user' => auth()->user()->id,
-            'menu' => "Edit PO",
-            'aktivitas' => "Edit PO",
-            'keterangan' => "Edit PO " . $request->code
+            'menu' => "PO",
+            'aktivitas' => "Update",
+            'keterangan' => "Update PO " . $request->code
         ]);
-        NotifEvent::dispatch(auth()->user()->name . ' Edit PO ' . $request->code);
+        NotifEvent::dispatch(auth()->user()->name . ' Update PO ' . $request->code);
 
-        return response()->json(['success' => 'Purchase Order Edited']);
+        return response()->json(['success' => 'Purchase Order Diperbarui']);
     }
 
     public function exportpdf(Request $request) {
@@ -439,8 +439,8 @@ class PurchaseOrderController extends Controller {
         // INI DOUBLE GATAU KENAPA NOTIFNYA SAMA INSERTNYA
         UserActivity::create([
             'id_user' => auth()->user()->id,
-            'menu' => "Export Detail PO",
-            'aktivitas' => "Export Detail PO",
+            'menu' => "PO",
+            'aktivitas' => "Export",
             'keterangan' => "Export Detail PO " . $po[0]->number_po
         ]);
         NotifEvent::dispatch(auth()->user()->name . ' Export PO ' . $po[0]->number_po);

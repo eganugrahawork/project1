@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Procurement;
 
 use App\Http\Controllers\Controller;
 use App\Models\PurchaseOrderInvoice;
+use App\Models\UserActivity;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -104,7 +105,13 @@ class InvoiceProcurementController extends Controller {
 
             )");
     }
-    return response()->json(['success' => 'Invoices Created']);
+    UserActivity::create([
+      'id_user' => auth()->user()->id,
+      'menu' => "Invoice Procurement",
+      'aktivitas' => "Tambah",
+      'keterangan' => "Tambah Invoice Procurement ". $request->no_invoice
+   ]);
+    return response()->json(['success' => 'Invoices Dibuat']);
   }
 
   public function edit(Request $request) {
@@ -124,7 +131,13 @@ class InvoiceProcurementController extends Controller {
             '$request->tax_invoice'
         )");
 
-    return response()->json(['success' => 'Invoices Updated']);
+        UserActivity::create([
+          'id_user' => auth()->user()->id,
+          'menu' => "Invoice Procurement",
+          'aktivitas' => "Update",
+          'keterangan' => "Update Invoice Procurement ". $request->no_invoice
+       ]);
+    return response()->json(['success' => 'Invoices Diperbarui']);
   }
 
   public function info(Request $request) {
@@ -139,6 +152,12 @@ class InvoiceProcurementController extends Controller {
             $request->id
         )");
 
+        UserActivity::create([
+          'id_user' => auth()->user()->id,
+          'menu' => "Invoice Procurement",
+          'aktivitas' => "Tambah",
+          'keterangan' => "Tambah Invoice Procurement ". $request->id
+       ]);
     return response()->json(['success' => 'Invoices Updated']);
   }
   public function getdata(Request $request) {
@@ -206,7 +225,12 @@ class InvoiceProcurementController extends Controller {
     $order_date = Carbon::parse($data[0]->order_date)->format('d-M-Y');
     $pdf = Pdf::loadView('admin.procurement.invoice.exportpdf', ['data' => $data, 'order_date' =>$order_date]);
     // dd($data);
-
+    UserActivity::create([
+      'id_user' => auth()->user()->id,
+      'menu' => "Invoice Procurement",
+      'aktivitas' => "Export PDF",
+      'keterangan' => "Export PDF Invoice Procurement ". $data[0]->invoice_number
+   ]);
     return $pdf->download("Invoice-" . $data[0]->invoice_number . ".pdf");
   }
 }
