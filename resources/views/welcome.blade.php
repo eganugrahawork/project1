@@ -83,7 +83,7 @@
     </header><!-- End Header -->
 
     <section id="hero-animated" class="hero-animated d-flex align-items-center"
-        style="background-image: url('/herobiz/assets/img/bg-annandhita.jpg')">
+        style="background-image: url('/herobiz/assets/img/bg-annandhita.jpg'); height:720px">
         <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
             data-aos="zoom-out">
             {{-- <img src="/herobiz/assets/img/hero-carousel/hero-carousel-3.svg" class="img-fluid animated"> --}}
