@@ -3,11 +3,19 @@
 namespace App\Http\Controllers\Admin\Selling;
 
 use App\Http\Controllers\Controller;
+use App\Models\InvoiceSelling;
 use App\Models\ItemQty;
 use App\Models\Items;
+use App\Models\Mutation;
 use App\Models\Ordering;
 use App\Models\Partners;
+use App\Models\Selling;
+use App\Models\SellingDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Yajra\DataTables\DataTables;
 
 class SellingController extends Controller {
   public function index() {
@@ -22,6 +30,46 @@ class SellingController extends Controller {
     }
     $month =  array('All', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
     return view('admin.selling.selling.index', ['month' => $month, 'years' => $years]);
+  }
+
+  public function list(Request $request){
+    return Datatables::of(DB::connection('selling')->select('Call sp_list_selling()'))->addIndexColumn()
+    ->addColumn('action', function ($model) {
+        // $action = "";
+        $action = "<a onclick='info($model->id_penjualan)' class='btn btn-icon btn-sm btn-info btn-hover-rise me-1'><i class='bi bi-info-square'></i></a>";
+
+        if ($model->status == 0) {
+            if (Gate::allows('edit', ['/admin/selling/selling'])) {
+                $action .= "<a onclick='edit($model->id_penjualan)' class='btn btn-icon btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
+            }
+            if (Gate::allows('delete', ['/admin/selling/selling'])) {
+                $action .= " <a href='/admin/selling/selling/delete/$model->id_penjualan' class='btn btn-icon btn-sm btn-danger btn-hover-rise me-1' id='deleteselling'><i class='bi bi-trash'></i></a>";
+            }
+        } else {
+            $action .= "<a onclick='exportPDF($model->id_penjualan)' class='btn btn-icon btn-sm btn-outline btn-outline-dashed btn-outline-dark btn-active-light-dark btn-hover-rise me-1'><i class='bi bi-file-earmark-pdf'></i></a>";
+        }
+        return $action;
+    })->addColumn('status', function ($model) {
+        $status = "";
+
+        if ($model->status == 0 || $model->status === null) {
+
+            if (Gate::allows('approve', ['/admin/selling/selling'])) {
+                $status .= "<a onclick='approve($model->id_penjualan)' class='btn btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-patch-exclamation'></i></i> Confirm Here</a>";
+            } else {
+                $status .= "<a class='btn btn-sm btn-secondary btn-hover-rise me-1 '><i class='bi bi-question-octagon'></i>Pending</a>";
+            }
+        } elseif ($model->status == 2) {
+            $status .= "<a class='btn btn-sm btn-danger btn-hover-rise me-1'><i class='bi bi-x-octagon'></i></i> Rejected</a>";
+        } else {
+            $status .= "<a class='btn btn-sm btn-primary btn-hover-rise me-1'><i class='bi bi-patch-check'></i> Confirmed</a>";
+        }
+        return $status;
+    })->addColumn('tgl_jual', function ($model) {
+        return Carbon::parse($model->date_selling)->format('d-M-Y');
+    })->addColumn('due_date', function ($model) {
+      return Carbon::parse($model->due_date)->format('d-M-Y');
+  })->rawColumns(['action', 'status', 'tgl_jual','due_date'])->make(true);
   }
 
   public function create() {
@@ -46,8 +94,212 @@ class SellingController extends Controller {
     return view('admin.selling.selling.create', ['code' => $code, 'customer' => $customer, 'item' => $item]);
   }
 
-  public function store(Request $request){
-    dd($request);
+  public function store(Request $request) {
+    $sales_id = auth()->user()->id;
+    $sign = auth()->user()->username;
+    if ($request->att !== null) {
+      $att = $request->att;
+    } else {
+      $att = '-';
+    }
+    $due_date =  date('Y-m-d', strtotime($request->sales_date . ' + ' . $request->term_of_payment . ' days'));
+
+    DB::connection('selling')->select("call sp_insert_selling(
+      '$sales_id',
+      '$request->sales_number',
+      '$request->sales_date',
+      '$request->delivery_date',
+      '$request->partner_id',
+      '$request->term_of_payment',
+      '$request->total',
+      '1',
+      '1',
+      '1',
+      '1',
+      '11',
+      '0'
+    )");
+
+    $selling = Selling::latest()->first();
+
+
+
+    DB::connection('selling')->select("call sp_insert_selling_invoice(
+      '$selling->id',
+      '$request->sales_number',
+      '$request->sales_date',
+      '$due_date',
+      '$att',
+      '$request->description',
+      '$sign',
+      'Blm tau darimana',
+      '1'
+    )");
+
+    $invoice = InvoiceSelling::latest()->first();
+
+    if (count($request->item_id) > 1) {
+      for ($i = 0; $i < count($request->item_id); $i++) {
+        $item_id = $request->item_id[$i];
+        $unit_price = $request->price[$i];
+        $qty = $request->qty[$i];
+        $qty_box = $request->qty_box[$i];
+        $qty_per_box = $request->qty_per_box[$i];
+        $price = $request->total_price[$i];
+        $total_qty = $request->total_qty[$i];
+        $total_box = $qty_box + ($total_qty / $qty_per_box);
+        $discount = '0';
+        $notes = '0';
+
+
+
+        DB::connection('selling')->select("call sp_insert_mutation(
+          '$item_id',
+          '$request->sales_date',
+          '$price',
+          '3',
+          '$sales_id',
+          '0',
+          '0',
+          '0',
+          'penjualan'
+        )");
+
+        $mutation = Mutation::latest()->first();
+
+        DB::connection('selling')->select("call sp_insert_selling_details(
+          '$selling->id',
+          '$item_id',
+          '$unit_price',
+          '$total_qty',
+          '$qty_box',
+          $qty,
+          '$total_box',
+          '$price',
+          '0',
+          'penjualan',
+          '$mutation->id'
+        )");
+
+        $sellingdetail = SellingDetail::latest()->first();
+
+        DB::connection('selling')->select("call sp_insert_selling_invoice_details(
+          '$invoice->id',
+          '$sellingdetail->id',
+          '$unit_price',
+          '$total_qty',
+          '$qty_box',
+          $qty,
+          '$total_box',
+          '$price',
+          '0',
+          'penjualan'
+        )");
+
+        DB::connection('selling')->select("call sp_insert_selling_history(
+          '$selling->id',
+          '$sales_id',
+          '$item_id',
+          '$unit_price',
+          '$total_qty',
+          '$qty_box',
+          $qty,
+          '$total_box',
+          '$price',
+          'penjualan',
+          '$mutation->id'
+        )");
+
+        DB::connection('selling')->select("call sp_update_items_qty(
+          '$sellingdetail->id'
+        )");
+
+      }
+    } else {
+      $item_id = $request->item_id[0];
+      $unit_price = $request->price[0];
+      $qty = $request->qty[0];
+      $qty_box = $request->qty_box[0];
+      $qty_per_box = $request->qty_per_box[0];
+      $price = $request->total_price[0];
+      $total_qty = $request->total_qty[0];
+      $total_box = $qty_box + ($total_qty / $qty_per_box);
+      $discount = '0';
+      $notes = '0';
+
+
+
+      DB::connection('selling')->select("call sp_insert_mutation(
+          '$item_id',
+          '$request->sales_date',
+          '$price',
+          '3',
+          '$sales_id',
+          '0',
+          '0',
+          '0',
+          'penjualan'
+        )");
+
+      $mutation = Mutation::latest()->first();
+
+      DB::connection('selling')->select("call sp_insert_selling_details(
+          '$selling->id',
+          '$item_id',
+          '$unit_price',
+          '$total_qty',
+          '$qty_box',
+          '$qty',
+          '$total_box',
+          '$price',
+          '0',
+          'penjualan',
+          '$mutation->id'
+        )");
+
+      $sellingdetail = SellingDetail::latest()->first();
+
+      DB::connection('selling')->select("call sp_insert_selling_invoice_details(
+          '$invoice->id',
+          '$sellingdetail->id',
+          '$unit_price',
+          '$total_qty',
+          '$qty_box',
+          $qty,
+          '$total_box',
+          '$price',
+          '0',
+          'penjualan'
+        )");
+
+      DB::connection('selling')->select("call sp_insert_selling_history(
+          '$selling->id',
+          '$sales_id',
+          '$item_id',
+          '$unit_price',
+          '$total_qty',
+          '$qty_box',
+          $qty,
+          '$total_box',
+          '$price',
+          'penjualan',
+          '$mutation->id'
+        )");
+
+      DB::connection('selling')->select("call sp_update_items_qty(
+          '$sellingdetail->id'
+        )");
+    }
+
+
+    return response()->json(['success', 'Data Ditambahkan']);
+  }
+
+  public function destroy(Request $request){
+    DB::connection('selling')->select("call sp_delete_selling($request->id)");
+  $invoice =  InvoiceSelling::where(['selling_id' => $request->id])->first();
+    DB::connection('selling')->select("call sp_delete_selling_invoice($invoice->id)");
+    return response()->json(['success', 'Data Dihapus']);
   }
 
   public function getdatacustomer(Request $request) {
@@ -85,6 +337,7 @@ class SellingController extends Controller {
             <p class='fs-9 fw-bolder' id='detail_box'></p>
             <input type='hidden' name='qty_per_box[]' id='qty_per_box'>
             <input type='hidden' name='stock[]' id='stock'>
+            <input type='hidden' name='vat_item[]' id='vat_item'>
     </div>
     <div class='fv-row mb-3 col-lg-1'>
         <label class=' fw-bold fs-6 mb-2'>Qty</label>
@@ -104,7 +357,7 @@ class SellingController extends Controller {
     <div class='fv-row mb-3 col-lg-2'>
         <label class=' fw-bold fs-6 mb-2'>Total</label>
         <input type='number' name='total_price[]' id='total_price'
-            class='form-control form-control-solid mb-3 mb-lg-0' value='0' readonly required />
+            class='form-control form-control-solid mb-3 mb-lg-0 total_price' value='0' readonly required />
     </div>
     <div class='fv-row mb-3 col-lg-1  '>
         <button class='btn btn-danger btn-sm btn-icon mt-4' type='button'
@@ -118,14 +371,13 @@ class SellingController extends Controller {
 
   public function getdetailitem(Request $request) {
     $item = ItemQty::where('item_id', $request->id)->first();
-
+    $itemnya = Items::where(['id' => $request->id])->first();
     $desc = '1 Box : ' . number_format($item->unit_box, 0, ',', '.') . ' Pcs Stock : ' . number_format($item->base_qty, 0, ',', '.') . ' Box';
 
     return response()->json([
       'desc' => $desc, 'qty_per_box' => $item->unit_box,
-      'stock' => $item->base_qty
+      'stock' => $item->base_qty,
+      'vat_item' => $itemnya->vat
     ]);
   }
-
-
 }

@@ -115,100 +115,102 @@
                 )
             })
         }
-        // function approveModal(id){
-        //     $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-        //     $.get("{{ url('/admin/selling/selling/aprovedmodal') }}/"+id, {}, function(data, status){
-        //         $('#kontennya').html(data)
-        //         $('#mainmodal').modal('toggle')
-        //         $('#loading-add').html('')
-        //         $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
-        //     })
-        // }
+        function approve(id){
+            $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/selling/selling/approveview') }}/"+id, {}, function(data, status){
+                $('#kontennya').html(data)
+                $('#mainmodal').modal('toggle')
+                $('#loading-add').html('')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
+            })
+        }
         function tutupContent() {
             $('#content').hide()
             $('#indexContent').show()
             $('#searchtableSelling').focus()
         }
 
-        // var tablePo =  $('#tablePo').DataTable({
-        //     serverside : true,
-        //     processing : true,
-        //     ajax : {
-        //             url : "{{ url('/admin/selling/selling/list') }}"
-        //             },
-        //             columns:
-        //             [
-        //             {
-        //             data: 'DT_RowIndex',
-        //             searchable: false
-        //         },
-        //             {data: 'po_code', name: 'po_code'},
-        //             {data: 'name', name: 'name'},
-        //             {data: 'order_date', name: 'order_date'},
-        //             {data: 'total_po', name: 'total_po', render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )},
-        //             // {data: 'due_date', name: 'delivery_date'},
-        //             {data: 'statues', name: 'statues'},
-        //             {data: 'action', name: 'action'}
-        //             ],
-        //     "bLengthChange": false,
-        //     "bFilter": true,
-        //     "bInfo": false
-        // });
+        var tableSelling =  $('#tableSelling').DataTable({
+            serverside : true,
+            processing : true,
+            ajax : {
+                    url : "{{ url('/admin/selling/selling/list') }}"
+                    },
+                    columns:
+                    [
+                    {
+                    data: 'DT_RowIndex',
+                    searchable: false
+                },
+                    {data: 'no_selling', name: 'no_selling'},
+                    {data: 'name', name: 'name'},
+                    {data: 'tgl_jual', name: 'tgl_jual'},
+                    {data: 'total_amount', name: 'total_amount', render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )},
+                    // {data: 'due_date', name: 'delivery_date'},
+                    {data: 'due_date', name: 'due_date'},
+                    {data: 'nama_sales', name: 'nama_sales'},
+                    {data: 'status', name: 'status'},
+                    {data: 'action', name: 'action'}
+                    ],
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false
+        });
 
-        // $('#searchTablePo').keyup(function () {
-        //         tablePo.search($(this).val()).draw()
-        // });
+        $('#searchtableSelling').keyup(function () {
+                tableSelling.search($(this).val()).draw()
+        });
 
 
-        // $(document).on('click', '#deletepo', function(e){
-        //     e.preventDefault();
-        //     const href = $(this).attr('href');
+        $(document).on('click', '#deleteselling', function(e){
+            e.preventDefault();
+            const href = $(this).attr('href');
 
-        //     const swalWithBootstrapButtons = Swal.mixin({
-        //         customClass: {
-        //         confirmButton: 'btn btn-success',
-        //         cancelButton: 'btn btn-danger'
-        //         },
-        //         buttonsStyling: false
-        //     })
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
 
-        //     swalWithBootstrapButtons.fire({
-        //         title: 'Hapus data ini ?',
-        //         text: "Data tidak bisa dikembalikan!",
-        //         icon: 'question',
-        //         showCancelButton: true,
-        //         confirmButtonText: 'Yes, hapus!',
-        //         cancelButtonText: 'Tidak, Batalkan!',
-        //         reverseButtons: false
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-        //             $.ajax({
-        //                 type:"GET",
-        //                 url: href,
-        //                 success:function(response){
-        //                     Swal.fire(
-        //                         'Success',
-        //                         response.success,
-        //                         'success'
-        //                     )
-        //                     tablePo.ajax.reload(null, false);
-        //                     $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
-        //                 }
-        //             })
+            swalWithBootstrapButtons.fire({
+                title: 'Hapus data ini ?',
+                text: "Data tidak bisa dikembalikan!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, hapus!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                reverseButtons: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+                    $.ajax({
+                        type:"GET",
+                        url: href,
+                        success:function(response){
+                            Swal.fire(
+                                'Success',
+                                response.success,
+                                'success'
+                            )
+                            tableSelling.ajax.reload(null, false);
+                            $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="create()">Create Seling</button>')
+                        }
+                    })
 
-        //         } else if (
+                } else if (
 
-        //         result.dismiss === Swal.DismissReason.cancel
-        //         ) {
-        //         swalWithBootstrapButtons.fire(
-        //             'Cancelled',
-        //             'Data anda masih aman :)',
-        //             'success'
-        //         )
-        //         }
-        //     })
-        // });
+                result.dismiss === Swal.DismissReason.cancel
+                ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Data anda masih aman :)',
+                    'success'
+                )
+                }
+            })
+        });
 
         // function exportPDF(id){
         //     // e.preventDefault();

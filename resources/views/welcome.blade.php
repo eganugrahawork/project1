@@ -86,7 +86,7 @@
         style="background-image: url('/herobiz/assets/img/bg-annandhita.jpg')">
         <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
             data-aos="zoom-out">
-            <img src="/herobiz/assets/img/hero-carousel/hero-carousel-3.svg" class="img-fluid animated">
+            {{-- <img src="/herobiz/assets/img/hero-carousel/hero-carousel-3.svg" class="img-fluid animated"> --}}
             <h2><span class="text-white fw-bold">Solusi pintar menjalankan bisnis dengan mudah dan sederhana.</span>
             </h2>
             <div class="d-flex">

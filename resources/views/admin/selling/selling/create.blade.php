@@ -97,6 +97,13 @@
                         <label class="fw-bold fs-6 mb-2">Description</label>
                         <textarea type="text" name="description" id="description" class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
                     </div>
+                    <div class="fv-row mb-3">
+                      <label class="required fw-bold fs-6 mb-2">Delivery Date</label>
+                      <div class="">
+                          <input type="text" id="delivery_date" name="delivery_date"
+                              class="form-control form-control-solid mb-3 mb-lg-0" required />
+                      </div>
+                  </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="card card-flush shadow-sm">
@@ -141,6 +148,7 @@
                             <p class='fs-9 fw-bolder' id='detail_box'></p>
                             <input type='hidden' name='qty_per_box[]' id='qty_per_box'>
                             <input type='hidden' name='stock[]' id='stock'>
+                            <input type='hidden' name='vat_item[]' id='vat_item'>
                         </div>
                         <div class='fv-row mb-3 col-lg-1'>
                             <label class=' fw-bold fs-6 mb-2'>Qty</label>
@@ -162,7 +170,7 @@
                         <div class='fv-row mb-3 col-lg-2'>
                             <label class=' fw-bold fs-6 mb-2'>Total</label>
                             <input type='number' name='total_price[]' id='total_price'
-                                class='form-control form-control-solid mb-3 mb-lg-0' readonly required />
+                                class='form-control form-control-solid mb-3 mb-lg-0 total_price' readonly required />
                         </div>
                         <div class='fv-row mb-3 col-lg-1  '>
                             <button class="btn btn-danger btn-sm btn-icon mt-4" type="button"
@@ -179,22 +187,22 @@
                     <div class="d-flex justify-content-end py-2">
                         <div class="row">
                             <div class="col-lg-6">Total</div>
-                            <div class="col-lg-6"><input type="text" readonly name="total"
-                                    id="total" class="form-control form-control-white text-end"></div>
+                            <div class="col-lg-6"><input type="text" readonly name="total" id="total"
+                                    class="form-control form-control-white text-end"></div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-end py-2">
                         <div class="row">
                             <div class="col-lg-6">DPP</div>
-                            <div class="col-lg-6"><input type="text" readonly name="dpp"
-                                    id="dpp" class="form-control form-control-white text-end"></div>
+                            <div class="col-lg-6"><input type="text" readonly name="dpp" id="dpp"
+                                    class="form-control form-control-white text-end"></div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-end py-2">
                         <div class="row">
                             <div class="col-lg-6">Vat/PPN</div>
-                            <div class="col-lg-6"><input type="text" readonly name="vatppn"
-                                    id="vatppn" class="form-control form-control-white text-end"></div>
+                            <div class="col-lg-6"><input type="text" readonly name="vatppn" id="vatppn"
+                                    class="form-control form-control-white text-end"></div>
                         </div>
                     </div>
 
@@ -220,6 +228,10 @@
         $('.select-2').select2();
 
         flatpickr("#sales_date", {
+            static: true,
+            dateFormat: "Y-m-d",
+        });
+        flatpickr("#delivery_date", {
             static: true,
             dateFormat: "Y-m-d",
         });
@@ -322,6 +334,7 @@
 
             $(e).parent().parent().find('#qty_per_box').val(data.qty_per_box)
             $(e).parent().parent().find('#stock').val(data.stock)
+            $(e).parent().parent().find('#vat_item').val(data.vat_item)
             $(e).parent().parent().find('#detail_box').html(data.desc)
             $('.select-2').select2();
         })
@@ -339,6 +352,7 @@
         var totalQty = (box * qty_per_box) + parseInt(qty)
         var totalPrice = parseInt(totalQty) * parseInt(price);
 
+
         $(e).parent().parent().find('#total_qty').val(totalQty);
         $(e).parent().parent().find('#total_price').val(totalPrice);
 
@@ -353,11 +367,29 @@
             $(e).parent().parent().find('#total_qty').val(0);
             $(e).parent().parent().find('#total_price').val(0);
         }
-
         sumAll()
+
+
     }
 
-    function sumAll(){
+    function sumAll() {
+        var total_price = 0;
+        var vatnya = 0;
+        var total = parseInt(0);
+        var vatItem = parseInt(0);
+        var dpp = 0;
+        $('.total_price').each(function() {
+            total += parseInt($(this).val());
+            total_price = parseInt($(this).val());
+            vatnya = parseInt($(this).parent().parent().find('#vat_item').val());
+            vatItem += total_price * (vatnya/100)
+        });
 
+
+        dpp = total - vatItem
+        var totalVat = total - dpp;
+        $('#total').val(total);
+        $('#dpp').val(dpp);
+        $('#vatppn').val(totalVat);
     }
 </script>
