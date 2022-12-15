@@ -56,14 +56,14 @@ class SellingController extends Controller {
         if ($model->status == 0 || $model->status === null) {
 
           if (Gate::allows('approve', ['/admin/selling/selling'])) {
-            $status .= "<a onclick='approve($model->id_penjualan)' class='btn btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-patch-exclamation'></i></i> Confirm Here</a>";
+            $status .= "<a onclick='approve($model->id_penjualan)' class='btn btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-patch-exclamation'></i></i> Konfirmasi</a>";
           } else {
             $status .= "<a class='btn btn-sm btn-secondary btn-hover-rise me-1 '><i class='bi bi-question-octagon'></i>Pending</a>";
           }
         } elseif ($model->status == 2) {
-          $status .= "<a class='btn btn-sm btn-danger btn-hover-rise me-1'><i class='bi bi-x-octagon'></i></i> Rejected</a>";
+          $status .= "<a class='btn btn-sm btn-danger btn-hover-rise me-1'><i class='bi bi-x-octagon'></i></i> Ditolak</a>";
         } else {
-          $status .= "<a class='btn btn-sm btn-primary btn-hover-rise me-1'><i class='bi bi-patch-check'></i> Confirmed</a>";
+          $status .= "<a class='btn btn-sm btn-primary btn-hover-rise me-1'><i class='bi bi-patch-check'></i> Disetujui</a>";
         }
         return $status;
       })->addColumn('tgl_jual', function ($model) {
