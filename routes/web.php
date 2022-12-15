@@ -394,6 +394,7 @@ Route::middleware('auth')->controller(ReportInventoryController::class)->group(f
 Route::middleware('auth')->controller(SellingController::class)->group(function () {
     Route::get('/admin/selling/selling', 'index');
     Route::get('/admin/selling/selling/create', 'create');
+    Route::post('/admin/selling/selling/store', 'store');
     Route::get('/admin/selling/selling/getdatacustomer/{id}', 'getdatacustomer');
     Route::get('/admin/selling/selling/getdetailitem/{id}', 'getdetailitem');
     Route::get('/admin/selling/selling/addnewitemrow', 'addnewitemrow');

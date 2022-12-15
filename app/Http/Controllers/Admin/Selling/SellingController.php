@@ -46,6 +46,10 @@ class SellingController extends Controller {
     return view('admin.selling.selling.create', ['code' => $code, 'customer' => $customer, 'item' => $item]);
   }
 
+  public function store(Request $request){
+    dd($request);
+  }
+
   public function getdatacustomer(Request $request) {
     $customer = Partners::where('id', $request->id)->first();
 
@@ -122,4 +126,6 @@ class SellingController extends Controller {
       'stock' => $item->base_qty
     ]);
   }
+
+
 }

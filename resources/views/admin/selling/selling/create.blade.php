@@ -3,9 +3,9 @@
         <h4>Create Sales</h4>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-lg-4">
-                <form id="createSales" class="form">
+        <form id="createSales" class="form">
+            <div class="row">
+                <div class="col-lg-4">
                     @csrf
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Sales Number</label>
@@ -59,133 +59,160 @@
                         <input type="text" id="credit_balance" name="credit_balance"
                             class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
                     </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="fv-row mb-3">
-                    <label class="fw-bold fs-6 mb-2">Ship From</label>
-                    <textarea type="text" name="ship_from" id="ship_from" class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
                 </div>
-                <div class="fv-row mb-3">
-                    <label class="fw-bold fs-6 mb-2">Email</label>
-                    <input type="email" id="email" name="email"
-                        class="form-control form-control-solid mb-3 mb-lg-0" required />
-                </div>
-                <div class="fv-row mb-3">
-                    <label class="fw-bold fs-6 mb-2">Phone/Fax</label>
-                    <input type="number" id="phone_fax" name="phone_fax"
-                        class="form-control form-control-solid mb-3 mb-lg-0" required />
-                </div>
-                <div class="fv-row mb-3">
-                    <label class="required form-label fw-bold">Term Of Payment</label>
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="term_of_payment"
-                        id="term_of_payment" required>
-                        <option value="Cash">Cash</option>
-                        <option value="15">15 Hari</option>
-                        <option value="30">30 Hari</option>
-                        <option value="45">45 Hari</option>
-                        <option value="60">60 Hari</option>
-                        <option value="90">90 Hari</option>
-                        <option value="other">Lainnya</option>
-                    </select>
-                </div>
-                <div class="fv-row mb-3">
-                    <label class="fw-bold fs-6 mb-2">Another Term Payment</label>
-                    <input type="number" id="phone_fax" name="phone_fax"
-                        class="form-control form-control-solid mb-3 mb-lg-0" required />
-                </div>
-                <div class="fv-row mb-3">
-                    <label class="fw-bold fs-6 mb-2">Description</label>
-                    <textarea type="text" name="description" id="description" class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card card-flush shadow-sm">
-                    <div class="card-header">
-                        <h3 class="card-title fw-bolder text-gray-600">Information </h3>
-                        <div class="card-toolbar">
-                            <i class="bi bi-bookmarks-fill text-primary fs-2x"></i>
-                        </div>
-                        <div class="separator"></div>
+                <div class="col-lg-4">
+                    <div class="fv-row mb-3">
+                        <label class="fw-bold fs-6 mb-2">Ship From</label>
+                        <textarea type="text" name="ship_from" id="ship_from" class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
                     </div>
-                    <div class="card-body  text-gray-400">
-                        Lorem Ipsum is simply dummy text...
+                    <div class="fv-row mb-3">
+                        <label class="fw-bold fs-6 mb-2">Email</label>
+                        <input type="email" id="email" name="email"
+                            class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
-                    <div class="card-footer">
-                        <p class="text-sm">Loccana Team</p>
+                    <div class="fv-row mb-3">
+                        <label class="fw-bold fs-6 mb-2">Phone/Fax</label>
+                        <input type="number" id="phone_fax" name="phone_fax"
+                            class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-10">
-            <hr>
-            <h5 class="fw-bolder">Items</h5>
-            <hr>
-            <div class="col-lg-12" id="itemsAddList">
-                <div class='row'>
-                    <div class='fv-row mb-3 col-lg-3'>
-                        <label class=' form-label fs-6 fw-bold'>Item</label>
-                        <select class='form-select  form-select-solid mb-3 mb-lg-0 select-2'
-                            onchange='getDetailItem(this)' id='item_id' name='item_id[]' required>
-                            <option>Choose Item</option>
-                            @foreach ($item as $itm)
-                                <option value="{{ $itm->id }}">{{ $itm->item_code }}-{{ $itm->item_name }}
-                                </option>
-                            @endforeach
+                    <div class="fv-row mb-3">
+                        <label class="required form-label fw-bold">Term Of Payment</label>
+                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="term_of_payment"
+                            id="term_of_payment" required>
+                            <option value="Cash">Cash</option>
+                            <option value="15">15 Hari</option>
+                            <option value="30">30 Hari</option>
+                            <option value="45">45 Hari</option>
+                            <option value="60">60 Hari</option>
+                            <option value="90">90 Hari</option>
+                            <option value="other">Lainnya</option>
                         </select>
                     </div>
-                    <div class='fv-row mb-3 col-lg-1'>
-                        <label class=' fw-bold fs-6 mb-2'>Q Box</label>
-                        <input type='number' name='qty_box[]' id='qty_box'
-                            class='form-control form-control-solid mb-3 mb-lg-0' value='0'
-                            onkeyup='countTotalQty(this)' required />
-                        <p class='fs-9 fw-bolder' id='detail_box'></p>
-                        <input type='hidden' name='qty_per_box[]' id='qty_per_box'>
-                        <input type='hidden' name='stock[]' id='stock'>
+                    <div class="fv-row mb-3">
+                        <label class="fw-bold fs-6 mb-2">Another Term Payment</label>
+                        <input type="number" id="another_term_of_payment" name="another_term_of_payment"
+                            class="form-control form-control-solid mb-3 mb-lg-0" value="0" readonly required />
                     </div>
-                    <div class='fv-row mb-3 col-lg-1'>
-                        <label class=' fw-bold fs-6 mb-2'>Qty</label>
-                        <input type='number' name='qty[]' id='qty'
-                            class='form-control form-control-solid mb-3 mb-lg-0' value='0'
-                            onkeyup='countTotalQty(this)' required />
+                    <div class="fv-row mb-3">
+                        <label class="fw-bold fs-6 mb-2">Description</label>
+                        <textarea type="text" name="description" id="description" class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
                     </div>
-                    <div class='fv-row mb-3 col-lg-2'>
-                        <label class='required fw-bold fs-6 mb-2'>Total Qty</label>
-                        <input type='number' name='total_qty[]' id='total_qty' readonly
-                            class='form-control form-control-solid mb-3 mb-lg-0 ' required />
-                    </div>
-                    <div class='fv-row mb-3 col-lg-2'>
-                        <label class=' fw-bold fs-6 mb-2'>Price</label>
-                        <input type='number' name='price[]' id='price'
-                            class='form-control form-control-solid mb-3 mb-lg-0' onkeyup='countTotalQty(this)' value='0' required />
-                    </div>
-                    <div class='fv-row mb-3 col-lg-2'>
-                        <label class=' fw-bold fs-6 mb-2'>Total</label>
-                        <input type='number' name='total_price[]' id='total_price'
-                            class='form-control form-control-solid mb-3 mb-lg-0' readonly required />
-                    </div>
-                    <div class='fv-row mb-3 col-lg-1  '>
-                        <button class="btn btn-danger btn-sm btn-icon mt-4" type="button"
-                            onclick="removeItemRow(this)">-</button>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card card-flush shadow-sm">
+                        <div class="card-header">
+                            <h3 class="card-title fw-bolder text-gray-600">Information </h3>
+                            <div class="card-toolbar">
+                                <i class="bi bi-bookmarks-fill text-primary fs-2x"></i>
+                            </div>
+                            <div class="separator"></div>
+                        </div>
+                        <div class="card-body  text-gray-400">
+                            Lorem Ipsum is simply dummy text...
+                        </div>
+                        <div class="card-footer">
+                            <p class="text-sm">Loccana Team</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class='fv-row mb-3 d-flex justify-content-end'>
-                <button class="btn btn-primary btn-sm btn-icon mt-4" type="button"
-                    onclick="addNewItemRow()">+</button>
-            </div>
-            <hr>
+            <div class="col-lg-10">
+                <hr>
+                <h5 class="fw-bolder">Items</h5>
+                <hr>
+                <div class="col-lg-12" id="itemsAddList">
+                    <div class='row'>
+                        <div class='fv-row mb-3 col-lg-3'>
+                            <label class=' form-label fs-6 fw-bold'>Item</label>
+                            <select class='form-select  form-select-solid mb-3 mb-lg-0 select-2'
+                                onchange='getDetailItem(this)' id='item_id' name='item_id[]' required>
+                                <option>Choose Item</option>
+                                @foreach ($item as $itm)
+                                    <option value="{{ $itm->id }}">{{ $itm->item_code }}-{{ $itm->item_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class='fv-row mb-3 col-lg-1'>
+                            <label class=' fw-bold fs-6 mb-2'>Q Box</label>
+                            <input type='number' name='qty_box[]' id='qty_box'
+                                class='form-control form-control-solid mb-3 mb-lg-0' value='0'
+                                onkeyup='countTotalQty(this)' required />
+                            <p class='fs-9 fw-bolder' id='detail_box'></p>
+                            <input type='hidden' name='qty_per_box[]' id='qty_per_box'>
+                            <input type='hidden' name='stock[]' id='stock'>
+                        </div>
+                        <div class='fv-row mb-3 col-lg-1'>
+                            <label class=' fw-bold fs-6 mb-2'>Qty</label>
+                            <input type='number' name='qty[]' id='qty'
+                                class='form-control form-control-solid mb-3 mb-lg-0' value='0'
+                                onkeyup='countTotalQty(this)' required />
+                        </div>
+                        <div class='fv-row mb-3 col-lg-2'>
+                            <label class='required fw-bold fs-6 mb-2'>Total Qty</label>
+                            <input type='number' name='total_qty[]' id='total_qty' readonly
+                                class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                        </div>
+                        <div class='fv-row mb-3 col-lg-2'>
+                            <label class=' fw-bold fs-6 mb-2'>Price</label>
+                            <input type='number' name='price[]' id='price'
+                                class='form-control form-control-solid mb-3 mb-lg-0' onkeyup='countTotalQty(this)'
+                                value='0' required />
+                        </div>
+                        <div class='fv-row mb-3 col-lg-2'>
+                            <label class=' fw-bold fs-6 mb-2'>Total</label>
+                            <input type='number' name='total_price[]' id='total_price'
+                                class='form-control form-control-solid mb-3 mb-lg-0' readonly required />
+                        </div>
+                        <div class='fv-row mb-3 col-lg-1  '>
+                            <button class="btn btn-danger btn-sm btn-icon mt-4" type="button"
+                                onclick="removeItemRow(this)">-</button>
+                        </div>
+                    </div>
+                </div>
+                <div class='fv-row mb-3 d-flex justify-content-end'>
+                    <button class="btn btn-primary btn-sm btn-icon mt-4" type="button"
+                        onclick="addNewItemRow()">+</button>
+                </div>
+                <hr>
+                <div class="col-lg-12">
+                    <div class="d-flex justify-content-end py-2">
+                        <div class="row">
+                            <div class="col-lg-6">Total</div>
+                            <div class="col-lg-6"><input type="text" readonly name="total"
+                                    id="total" class="form-control form-control-white text-end"></div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end py-2">
+                        <div class="row">
+                            <div class="col-lg-6">DPP</div>
+                            <div class="col-lg-6"><input type="text" readonly name="dpp"
+                                    id="dpp" class="form-control form-control-white text-end"></div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end py-2">
+                        <div class="row">
+                            <div class="col-lg-6">Vat/PPN</div>
+                            <div class="col-lg-6"><input type="text" readonly name="vatppn"
+                                    id="vatppn" class="form-control form-control-white text-end"></div>
+                        </div>
+                    </div>
 
-            <div class="d-flex justify-content-center" id="loadingnya">
-                <div class="px-2">
-                    <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Create</button>
                 </div>
-                <div class="px-2">
-                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Cancel</button>
+                <hr>
+                <div class="d-flex justify-content-center" id="loadingnya">
+                    <div class="px-2">
+                        <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Create</button>
+                    </div>
+                    <div class="px-2">
+                        <button class="btn btn-sm btn-secondary" type="button"
+                            onclick="tutupContent()">Cancel</button>
+                    </div>
                 </div>
-            </div>
-            </form>
-        </div>
+
+        </form>
     </div>
+</div>
 </div>
 
 <script>
@@ -314,7 +341,6 @@
 
         $(e).parent().parent().find('#total_qty').val(totalQty);
         $(e).parent().parent().find('#total_price').val(totalPrice);
-        console.log(price);
 
         if (stockInQty < totalQty) {
             Swal.fire(
@@ -327,5 +353,11 @@
             $(e).parent().parent().find('#total_qty').val(0);
             $(e).parent().parent().find('#total_price').val(0);
         }
+
+        sumAll()
+    }
+
+    function sumAll(){
+
     }
 </script>
