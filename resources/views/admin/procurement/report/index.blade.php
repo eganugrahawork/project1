@@ -20,7 +20,7 @@
                             <div class="row">
                                 <div class="col-lg-3">
                                     <select name="partner_id" id="partner_id" class="form-select form-select-md select-2">
-                                        <option value="0">All</option>
+                                        <option value="0">Semua</option>
                                         @foreach ($partner as $p)
                                             <option value="{{ $p->id }}">{{ $p->name }}</option>
                                         @endforeach
@@ -56,23 +56,22 @@
                         <thead>
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Date
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal
                                 </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Item Code
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Kode Item
                                 </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Item
-                                    Name</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Nama Item</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Kemasan</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Qty</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Price</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Total Price
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Harga</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Total Harga
                                 </th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Vat</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Rp.PPN</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No Trans</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No Invoice
                                 </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Due Date</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Jatuh Tempo</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Lama Hari
                                 </th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No Faktur

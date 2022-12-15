@@ -350,7 +350,7 @@ class SellingController extends Controller {
             class='form-control form-control-solid mb-3 mb-lg-0 '  value='0' required />
     </div>
     <div class='fv-row mb-3 col-lg-2'>
-        <label class=' fw-bold fs-6 mb-2'>Price</label>
+        <label class=' fw-bold fs-6 mb-2'>Harga</label>
         <input type='number' name='price[]' id='price'
             class='form-control form-control-solid mb-3 mb-lg-0'  value='0' onkeyup='countTotalQty(this)' required />
     </div>

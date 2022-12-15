@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4>Edit Type {{ $tp->name }}</h4>
+        <h4>Perbarui Tipe {{ $tp->name }}</h4>
     </div>
     <div class="card-body">
         <form id="update-form">
@@ -21,10 +21,10 @@
             </div>
             <div class="d-flex justify-content-end" id="loadingnya">
                 <div class="py-2">
-                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
+                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Kembali</button>
                 </div>
                 <div class="py-2">
-                    <button class="btn btn-sm btn-primary" id="btn-update">Update Type</button>
+                    <button class="btn btn-sm btn-primary" id="btn-update">Perbarui Tipe</button>
                 </div>
             </div>
         </form>

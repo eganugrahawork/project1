@@ -13,7 +13,7 @@
                 </select>
             </div>
             <div class="fv-row mb-7">
-                <label class="required fw-bold fs-6 mb-2">Name</label>
+                <label class="required fw-bold fs-6 mb-2">Nama</label>
                 <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $menu->name }}" required/>
             </div>
             <div class="fv-row mb-7">
@@ -36,7 +36,7 @@
                 </select>
             </div>
             <div class="d-flex justify-content-end">
-                <button class="btn btn-sm btn-primary">Update</button>
+                <button class="btn btn-sm btn-primary">Perbarui</button>
             </div>
 </form>
 

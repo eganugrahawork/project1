@@ -26,7 +26,7 @@
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                         @can('create', ['/admin/masterdata/uom'])
                             <button type="button" class="btn btn-primary me-3" onclick="create()">
-                            Add UOM</button>
+                            Tambah UOM</button>
                         @endcan
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                             <th class="min-w-125px">Nama UoM</th>
                             <th class="min-w-125px">Simbol</th>
                             <th class="min-w-125px">Keterangan</th>
-                            <th class="min-w-70px">Action</th>
+                            <th class="min-w-70px">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600" style="border:none;">
@@ -63,7 +63,7 @@
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3"  onclick="create()">Add UOM</button>')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3"  onclick="create()">Tambah UOM</button>')
             })
         }
         function edit(id){
@@ -72,7 +72,7 @@
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3"  onclick="create()">Add UOM</button>')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3"  onclick="create()">Tambah UOM</button>')
             })
         }
         function tutupContent(){
@@ -143,7 +143,7 @@
                                 'success'
                             )
                             tableUom.ajax.reload(null, false);
-                            $('#loading-add').html('<button type="button" class="btn btn-primary me-3"  onclick="create()">Add UOM</button>')
+                            $('#loading-add').html('<button type="button" class="btn btn-primary me-3"  onclick="create()">Tambah UOM</button>')
                         }
                     })
                 // document.location.href = href;
@@ -154,7 +154,7 @@
                 result.dismiss === Swal.DismissReason.cancel
                 ) {
                 swalWithBootstrapButtons.fire(
-                    'Cancelled',
+                    'Dibatalkan',
                     'Data anda masih aman :)',
                     'success'
                 )

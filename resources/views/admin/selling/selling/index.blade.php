@@ -10,14 +10,14 @@
                 <div class="card-header border-0">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative my-1">
-                            <h2>Selling</h2>
+                            <h2>Penjualan</h2>
                         </div>
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                             @can('create', ['/admin/selling/selling'])
                                 <button type="button" class="btn btn-primary me-3" onclick="create()">
-                                    Add Selling</button>
+                                    Tambah Penjualan</button>
                             @endcan
                         </div>
 
@@ -52,14 +52,14 @@
                         <thead>
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th class="min-w-20px">No</th>
-                                <th class="min-w-70px ">Number</th>
-                                <th class="min-w-70px ">Customer</th>
-                                <th class="min-w-70px ">Date</th>
+                                <th class="min-w-70px ">Nomor</th>
+                                <th class="min-w-70px ">Pelanggan</th>
+                                <th class="min-w-70px ">Tanggal</th>
                                 <th class="min-w-70px ">Total</th>
-                                <th class="min-w-70px ">Due Date</th>
-                                <th class="min-w-70px ">Sales</th>
+                                <th class="min-w-70px ">Jatuh Tempo</th>
+                                <th class="min-w-70px ">Penjual</th>
                                 <th class="min-w-70px ">Status</th>
-                                <th class="min-w-50px">Action</th>
+                                <th class="min-w-50px">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="fw-bold text-gray-600">
@@ -85,7 +85,7 @@
                 $('#indexContent').hide()
                 $('#content').html(data)
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Selling</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Penjualan</button>'
                 )
             })
         }
@@ -98,7 +98,7 @@
                 $('#mainmodal').modal('toggle')
                 $('#loading-add').html('')
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Selling</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Penjualan</button>'
                 )
             })
         }
@@ -204,7 +204,7 @@
                 result.dismiss === Swal.DismissReason.cancel
                 ) {
                 swalWithBootstrapButtons.fire(
-                    'Cancelled',
+                    'Dibatalkan',
                     'Data anda masih aman :)',
                     'success'
                 )

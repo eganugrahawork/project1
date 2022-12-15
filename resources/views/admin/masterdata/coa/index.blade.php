@@ -25,7 +25,7 @@
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                             @can('create', ['/admin/masterdata/coa'])
                                 <button type="button" class="btn btn-primary me-3" onclick="create()">
-                                    Add Coa</button>
+                                    Tambah Coa</button>
                             @endcan
                         </div>
                     </div>
@@ -39,9 +39,9 @@
                                     </th>
                                     <th class="min-w-70px">Parent</th>
                                     <th class="min-w-70px">Coa</th>
-                                    <th class="min-w-70px">Description</th>
-                                    <th class="min-w-70px">Statues</th>
-                                    <th class="min-w-70px">Action</th>
+                                    <th class="min-w-70px">Deskripsi</th>
+                                    <th class="min-w-70px">Status</th>
+                                    <th class="min-w-70px">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="text-md text-secondary mb-0" style="border:none;">
@@ -67,7 +67,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add COA</button>'
+                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Tambah Coa</button>'
                     )
             })
         }
@@ -80,7 +80,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add COA</button>'
+                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Tambah Coa</button>'
                     )
             })
         }
@@ -168,7 +168,7 @@
                             )
                             coaTable.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add COA</button>'
+                                '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Tambah Coa</button>'
                                 )
                         }
                     })

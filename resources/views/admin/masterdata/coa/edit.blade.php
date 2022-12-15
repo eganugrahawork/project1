@@ -36,10 +36,10 @@
             </div>
             <div class="d-flex justify-content-end" id="loadingnya">
                 <div class="py-2">
-                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
+                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Kembali</button>
                 </div>
                 <div class="py-2">
-                    <button class="btn btn-sm btn-primary" id="btn-update">Update Coa</button>
+                    <button class="btn btn-sm btn-primary" id="btn-update">Perbarui Coa</button>
                 </div>
             </div>
         </form>

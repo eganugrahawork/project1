@@ -25,7 +25,7 @@
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                             @can('create', ['/admin/procurement/purchase-order'])
                                 <button type="button" class="btn btn-primary me-3" onclick="create()">
-                                    Add Purchase Order</button>
+                                    Tambah Purchase Order</button>
                             @endcan
                         </div>
 
@@ -36,15 +36,15 @@
                         <thead>
                             <tr class="text-start text-uppercase text-gray-400 fw-bolder fs-7 gs-0">
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">PO Code</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Partner Name
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Kode PO</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Partner
                                 </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Order Date
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Tanggal Order
                                 </th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Total</th>
                                 {{-- <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Due Date</th> --}}
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Status</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Action</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="fw-bold text-gray-600" style="border:none;">
@@ -68,7 +68,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
                 )
             })
         }
@@ -81,7 +81,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
                 )
             })
         }
@@ -94,7 +94,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
                 )
             })
         }
@@ -107,7 +107,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
                 )
             })
         }
@@ -202,7 +202,7 @@
                             )
                             tablePo.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
                             )
                         }
                     })
@@ -234,7 +234,7 @@
             })
 
             swalWithBootstrapButtons.fire({
-                title: 'Export this Data ?',
+                title: 'Export Data Ini ?',
                 text: "Format Pdf",
                 icon: 'question',
                 showCancelButton: true,
@@ -256,7 +256,7 @@
                                 'success'
                             )
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Purchase Order</button>'
+                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
                             )
                         }
                     })
@@ -266,8 +266,8 @@
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
                     swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Cancel Export',
+                        'Dibatalkan',
+                        'Batal Melakukan Export',
                         'success'
                     )
                 }

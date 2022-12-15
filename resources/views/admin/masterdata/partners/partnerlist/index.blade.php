@@ -10,7 +10,7 @@
             <div class="card-header">
                 <div class="card-title align-items-start flex-column">
                     <div class="d-flex align-items-center position-relative my-1">
-                       <h5>Partners</h5>
+                       <h5>Partner</h5>
                     </div>
                     <div class="d-flex align-items-center position-relative my-1">
                         <div class="form-group">
@@ -25,7 +25,7 @@
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                         @can('create', ['/admin/masterdata/partners'])
                             <button type="button" class="btn btn-primary me-3" onclick="create()">
-                            Add partners</button>
+                            Tambah Partner</button>
                         @endcan
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="min-w-20px">No</th>
-                            <th class="min-w-125px">Kode partners</th>
+                            <th class="min-w-125px">Kode Partner</th>
                             <th class="min-w-125px">Nama</th>
                             <th class="min-w-125px">Alamat</th>
                             <th class="min-w-125px">No Telp</th>
@@ -62,7 +62,7 @@
                 $('#indexContent').hide()
                 $('#content').html(data)
                 $('#content').show()
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add partners</button>')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Tambah Partner</button>')
             })
         }
 
@@ -73,7 +73,7 @@
                 $('#content').html(data)
                 $('#content').show()
 
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add partners</button>')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Tambah Partner</button>')
             })
         }
 
@@ -84,7 +84,7 @@
                 $('#content').html(data)
                 $('#content').show()
 
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add partners</button>')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Tambah Partner</button>')
             })
         }
 
@@ -159,7 +159,7 @@
                                 'success'
                             )
                             partnerTable.ajax.reload(null, false);
-                            $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add Partners</button>')
+                            $('#loading-add').html('<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Tambah Partner</button>')
                         }
                     })
 
@@ -168,7 +168,7 @@
                 result.dismiss === Swal.DismissReason.cancel
                 ) {
                 swalWithBootstrapButtons.fire(
-                    'Cancelled',
+                    'Dibatalkan',
                     'Data anda masih aman :)',
                     'success'
                 )

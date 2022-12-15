@@ -20,7 +20,7 @@
                             <div class="row">
                                 <div class="col-lg-3">
                                     <select name="partner_id" id="partner_id" class="form-select form-select-md select-2">
-                                        <option value="0">All</option>
+                                        <option value="0">Semua</option>
                                         @foreach ($partner as $p)
                                             <option value="{{ $p->id }}">{{ $p->name }}</option>
                                         @endforeach
@@ -57,9 +57,9 @@
                             <tr
                                 class="text-center text-gray-800 fw-bolder fs-7 text-uppercase gs-0  border-bottom-2 border-right-2 border-top-2 border-gray-300 ">
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7"
-                                    rowspan="2">Code</th>
+                                    rowspan="2">Kode</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7"
-                                    rowspan="2">Items</th>
+                                    rowspan="2">Item</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7"
                                     rowspan="2">Partner</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7"
@@ -67,13 +67,13 @@
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7"
                                     rowspan="2">Box </th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7"
-                                    colspan="2">Start Stock</th>
+                                    colspan="2">Stok Awal</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7"
-                                    colspan="4">Received</th>
+                                    colspan="4">Diterima</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7"
                                     colspan="4">Delivery Order </th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7"
-                                    colspan="2">End Stock</th>
+                                    colspan="2">Stock Akhir</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7"
                                     rowspan="2">Option</th>
                             </tr>

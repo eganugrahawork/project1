@@ -10,7 +10,7 @@
                 <div class="card-header border-0">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative my-1">
-                            <h5>Type Partners</h5>
+                            <h5>Tipe Partners</h5>
                         </div>
                         <div class="d-flex align-items-center position-relative my-1">
                             <div class="form-group">
@@ -25,7 +25,7 @@
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                             @can('create', ['/admin/masterdata/typeofpartner'])
                                 <button type="button" class="btn btn-primary me-3" onclick="create()">
-                                    Add Type Partners</button>
+                                    Tambah Tipe</button>
                             @endcan
                         </div>
                     </div>
@@ -35,9 +35,9 @@
                         <thead>
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th class="min-w-20px">No</th>
-                                <th class="min-w-70px">Name</th>
+                                <th class="min-w-70px">Nama</th>
                                 <th class="min-w-70px">Status</th>
-                                <th class="min-w-70px">Action</th>
+                                <th class="min-w-70px">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-600" style="border:none;">
@@ -61,7 +61,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button class="btn btn-primary me-3" onclick="create()">Add Type Partners</button>')
+                    '<button class="btn btn-primary me-3" onclick="create()">Tambah Tipe</button>')
             })
         }
 
@@ -73,7 +73,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button class="btn btn-primary me-3" onclick="create()">Add Type Partners</button>')
+                    '<button class="btn btn-primary me-3" onclick="create()">Tambah Tipe</button>')
             })
         }
 
@@ -155,7 +155,7 @@
                             )
                             typeofpartner.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button class="btn btn-primary me-3" onclick="create()">Add Type Partners</button>'
+                                '<button class="btn btn-primary me-3" onclick="create()">Tambah Tipe</button>'
                                 )
                         }
                     })
@@ -165,7 +165,7 @@
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
                     swalWithBootstrapButtons.fire(
-                        'Cancelled',
+                        'Dibatalkan',
                         'Data anda masih aman :)',
                         'success'
                     )

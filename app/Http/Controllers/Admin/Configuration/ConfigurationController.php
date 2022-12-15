@@ -56,7 +56,7 @@ class ConfigurationController extends Controller
     public function read(Request $request){
         SeenActivities::create(['user_id' => auth()->user()->id,'user_activities_id'=>$request->id]);
 
-        return response()->json(['success' => 'Readed']);
+        return response()->json(['success' => 'Dibaca']);
     }
 
     public function readallnotif() {

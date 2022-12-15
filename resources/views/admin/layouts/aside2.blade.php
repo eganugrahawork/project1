@@ -36,11 +36,11 @@
             </div>
         </div>
         <a href="/" target="_blank"
-            class="btn btn-dark btn-sm w-100 mb-3">Home Page</a>
+            class="btn btn-dark btn-sm w-100 mb-3">Beranda</a>
             <form action="{{ route('logout') }}" method="POST" style="background: transparent;">
                 @csrf
                 <button class="btn btn-primary btn-sm mb-0 w-100"
-                href="" type="submit">Sign Out</button>
+                href="" type="submit">Keluar</button>
 
             </form>
     </div>

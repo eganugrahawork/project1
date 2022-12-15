@@ -10,7 +10,7 @@
             <div class="card-header border-0">
                 <div class="card-title align-items-start flex-column">
                     <div class="d-flex align-items-center position-relative my-1">
-                       <h5>Item Price</h5>
+                       <h5>Harga Item</h5>
                     </div>
                     <div class="d-flex align-items-center position-relative my-1">
                         <div class="form-group">
@@ -28,12 +28,12 @@
                     <thead>
                         <tr >
                             <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
-                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Item Code</th>
-                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Item Name</th>
-                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Partner Name</th>
-                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Top Price</th>
-                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Base Price</th>
-                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Bottom Price</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Kode Item</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Nama Item</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Partner</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Price Atas</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Price Dasar</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Price Bawah</th>
                             <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Status</th>
                         </tr>
                     </thead>

@@ -28,7 +28,7 @@
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                             @can('create', ['/admin/procurement/invoice'])
                                 <button type="button" class="btn btn-primary me-3" onclick="create()">
-                                    Create Invoice</button>
+                                    Buat Invoice</button>
                             @endcan
                         </div>
 
@@ -37,7 +37,7 @@
                 <div class="card-body pt-0">
                     <div class="d-flex justify-content-start col-lg-4">
                         <select name="status" id="status" class="form-select form-select-md select-2">
-                            <option value="0">All</option>
+                            <option value="0">Semua</option>
                             <option value="1">Lunas</option>
                             <option value="2">Belum Lunas</option>
                         </select>
@@ -56,15 +56,15 @@
                         <thead>
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Number Invoice
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No Invoice
                                 </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Invoice Date</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Due Date</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal Invoice</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Jatuh Tempo</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Partner</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Total</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Balance</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Sisa</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Status</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Action</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="fw-bold text-md text-gray-600" style="border:none;">
@@ -89,7 +89,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Invoice</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Buat Invoice</button>'
                 )
             })
         }
@@ -102,7 +102,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Invoice</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Buat Invoice</button>'
                 )
             })
         }
@@ -115,7 +115,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Invoice</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Buat Invoice</button>'
                 )
             })
         }
@@ -156,7 +156,7 @@
                                 'success'
                             )
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Invoice</button>'
+                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Buat Invoice</button>'
                             )
                         }
                     })
@@ -229,8 +229,8 @@
                 text: "Data tidak bisa dikembalikan!",
                 icon: 'question',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, hapus!',
-                cancelButtonText: 'Tidak, Batalkan!',
+                confirmButtonText: 'Hapus!',
+                cancelButtonText: 'Batalkan!',
                 reverseButtons: false
             }).then((result) => {
                 if (result.isConfirmed) {

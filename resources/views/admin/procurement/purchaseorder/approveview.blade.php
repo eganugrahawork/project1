@@ -1,17 +1,17 @@
 <div class="card">
     <div class="card-header">
-        <h4>Confirmation PO {{ $info[0]->number_po }}</h4>
+        <h4>Konfirmasi Purchase Order</h4>
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-lg-6">
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="fw-bold fs-6 mb-2">Number Po</label>
+                    <label class="fw-bold fs-6 mb-2">Nomor Purchase Order</label>
                     <input type="text" id="code" name="code" value="{{ $info[0]->number_po }}" readonly
                         class="form-control form-control-white mb-3 mb-lg-0" required />
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="required form-label fw-bold">Partners</label>
+                    <label class="required form-label fw-bold">Partner</label>
                     <select class="form-select  form-select-white mb-3 mb-lg-0 select-2" disabled id="partner_id"
                         name="partner_id" required>
                         <option>{{ $info[0]->partner_name }}</option>
@@ -19,11 +19,11 @@
                     </select>
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="fw-bold fs-6 mb-2">Address</label>
+                    <label class="fw-bold fs-6 mb-2">Alamat</label>
                     <textarea type="text" name="address" id="address" readonly class="form-control form-control-white mb-3 mb-lg-0">{{ $info[0]->address }}</textarea>
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="fw-bold fs-6 mb-2">Phone Number</label>
+                    <label class="fw-bold fs-6 mb-2">Nomor Telepon</label>
                     <input type="text" name="phone" id="phone" value="{{ $info[0]->phone }}" readonly
                         class="form-control form-control-white mb-3 mb-lg-0" required />
                 </div>
@@ -40,7 +40,7 @@
                         class="form-control form-control-white mb-3 mb-lg-0" disabled required />
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="required form-label fw-bold">Currency</label>
+                    <label class="required form-label fw-bold">Mata Uang</label>
                     <select class="form-select  form-select-white mb-3 mb-lg-0" disabled name="currency_id"
                         id="currency_id" required>
                         <option>{{ $info[0]->currency_name }}</option>
@@ -52,19 +52,19 @@
                         class="form-control form-control-white mb-3 mb-lg-0" required />
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="required form-label fw-bold">Term of Payment</label>
+                    <label class="required form-label fw-bold">Jangka Waktu Pembayaran</label>
                     <select class="form-select  form-select-white mb-3 mb-lg-0 select-2" readonly name="term_of_payment"
                         id="term_of_payment" required>
                         <option value="{{ $info[0]->term_of_payment }}">{{ $info[0]->term_of_payment }}</option>
                     </select>
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="required fw-bold fs-6 mb-2">Description</label>
+                    <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
                     <textarea type="text" name="description" id="description" class="form-control form-control-white mb-3 mb-lg-0"
                         readonly required>{{ $info[0]->description }}</textarea>
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="fw-bold fs-6 mb-2">Order Date</label>
+                    <label class="fw-bold fs-6 mb-2">Tanggal Order</label>
                     <input type="datetime-local" name="order_date" id="order_date" readonly
                         value="{{ $info[0]->order_date }}" class="form-control form-control-white mb-3 mb-lg-0"
                         required />
@@ -83,7 +83,7 @@
                             </select>
                         </div>
                         <div class="fv-row mb-3 col-lg-2">
-                            <label class="required fw-bold fs-6 mb-2">Price</label>
+                            <label class="required fw-bold fs-6 mb-2">Harga</label>
                             <input type="text" name="price[]" id="price" value="{{ $item->unit_price }}"
                                 disabled class="form-control form-control-white mb-3 mb-lg-0 qty" required />
                         </div>
@@ -120,7 +120,7 @@
         </div>
         <div class="d-flex justify-content-end py-2">
             <div class="row">
-                <div class="col-lg-6">Discount</div>
+                <div class="col-lg-6">Diskon</div>
                 <div class="col-lg-6 border-gray-300 border-bottom"><input type="text" readonly
                         name="totaldiscount" id="totaldiscount" class="form-control form-control-white text-end">
                 </div>
@@ -154,14 +154,14 @@
         <div class="d-flex justify-content-center" id="loadingnya">
             <div class="px-2">
                 <a class="btn btn-md btn-success"
-                    href="/admin/procurement/purchase-order/approve/{{ $id_po }}" id="btn-confirm">Approve</a>
+                    href="/admin/procurement/purchase-order/approve/{{ $id_po }}" id="btn-confirm">Setujui</a>
             </div>
             <div class="px-2">
                 <a class="btn btn-md btn-danger" href="/admin/procurement/purchase-order/reject/{{ $id_po }}"
-                    id="btn-reject">Reject</a>
+                    id="btn-reject">Tolak</a>
             </div>
             <div class="px-2">
-                <button class="btn btn-md btn-primary" type="button" onclick="tutupContent()">Close</button>
+                <button class="btn btn-md btn-primary" type="button" onclick="tutupContent()">Kembali</button>
             </div>
         </div>
     </div>
@@ -219,12 +219,12 @@
         })
 
         swalWithBootstrapButtons.fire({
-            title: 'Seriously Approve this data ?',
-            text: "The data will be approved if you click yes!",
+            title: 'Setujui Purchase Order ?',
+            text: "Pastikan sudah membaca terlebih dahulu data !",
             icon: 'question',
             showCancelButton: true,
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'Not',
+            confirmButtonText: 'Setujui',
+            cancelButtonText: 'Batal',
             reverseButtons: false
         }).then((result) => {
             if (result.isConfirmed) {
@@ -255,8 +255,8 @@
                 result.dismiss === Swal.DismissReason.cancel
             ) {
                 swalWithBootstrapButtons.fire(
-                    'Cancelled',
-                    'The data not approved !',
+                    'Dibatalkan',
+                    'Data belum disetujui !',
                     'success'
                 )
             }
@@ -276,8 +276,8 @@
         })
 
         swalWithBootstrapButtons.fire({
-            title: 'Seriously Reject this data ?',
-            text: "The data will be rejected if you click yes!",
+            title: 'Tolak Purchase Order ini ?',
+            text: "Pastikan sudah melihat data terlebih dahulu !",
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'Yes',
@@ -312,8 +312,8 @@
                 result.dismiss === Swal.DismissReason.cancel
             ) {
                 swalWithBootstrapButtons.fire(
-                    'Cancelled',
-                    'The data not Rejected !',
+                    'Dibatalkan',
+                    'Data belum ditolak!',
                     'success'
                 )
             }

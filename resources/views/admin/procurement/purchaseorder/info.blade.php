@@ -6,12 +6,12 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="fw-bold fs-6 mb-2">Number Po</label>
+                    <label class="fw-bold fs-6 mb-2">Nomor Purchase Order</label>
                     <input type="text" id="code" name="code" value="{{ $info[0]->number_po }}" readonly
                         class="form-control form-control-white mb-3 mb-lg-0" required />
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="required form-label fw-bold">Partners</label>
+                    <label class="required form-label fw-bold">Partner</label>
                     <select class="form-select  form-select-white mb-3 mb-lg-0 select-2" disabled id="partner_id"
                         name="partner_id" required>
                         <option>{{ $info[0]->partner_name }}</option>
@@ -19,11 +19,11 @@
                     </select>
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="fw-bold fs-6 mb-2">Address</label>
+                    <label class="fw-bold fs-6 mb-2">Alamat</label>
                     <textarea type="text" name="address" id="address" readonly class="form-control form-control-white mb-3 mb-lg-0">{{ $info[0]->address }}</textarea>
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="fw-bold fs-6 mb-2">Phone Number</label>
+                    <label class="fw-bold fs-6 mb-2">Nomor Telepon</label>
                     <input type="text" name="phone" id="phone" value="{{ $info[0]->phone }}" readonly
                         class="form-control form-control-white mb-3 mb-lg-0" required />
                 </div>
@@ -40,7 +40,7 @@
                         class="form-control form-control-white mb-3 mb-lg-0" disabled required />
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="required form-label fw-bold">Currency</label>
+                    <label class="required form-label fw-bold">Mata Uang</label>
                     <select class="form-select  form-select-white mb-3 mb-lg-0" disabled name="currency_id"
                         id="currency_id" required>
                         <option>{{ $info[0]->currency_name }}</option>
@@ -52,19 +52,19 @@
                         class="form-control form-control-white mb-3 mb-lg-0" required />
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="required form-label fw-bold">Term of Payment</label>
+                    <label class="required form-label fw-bold">Jangka Waktu Pembayaran</label>
                     <select class="form-select  form-select-white mb-3 mb-lg-0 select-2" readonly name="term_of_payment"
                         id="term_of_payment" required>
                         <option value="{{ $info[0]->term_of_payment }}">{{ $info[0]->term_of_payment }}</option>
                     </select>
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="required fw-bold fs-6 mb-2">Description</label>
+                    <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
                     <textarea type="text" name="description" id="description" class="form-control form-control-white mb-3 mb-lg-0"
                         readonly required>{{ $info[0]->description }}</textarea>
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="fw-bold fs-6 mb-2">Order Date</label>
+                    <label class="fw-bold fs-6 mb-2">Tanggal Order</label>
                     <input type="datetime-local" name="order_date" id="order_date" readonly
                         value="{{ $info[0]->order_date }}" class="form-control form-control-white mb-3 mb-lg-0"
                         required />
@@ -83,7 +83,7 @@
                             </select>
                         </div>
                         <div class="fv-row mb-3 col-lg-2">
-                            <label class="required fw-bold fs-6 mb-2">Price</label>
+                            <label class="required fw-bold fs-6 mb-2">Harga</label>
                             <input type="text" name="price[]" id="price" value="{{ $item->unit_price }}"
                                 disabled class="form-control form-control-white mb-3 mb-lg-0 qty" required />
                         </div>
@@ -120,7 +120,7 @@
         </div>
         <div class="d-flex justify-content-end py-2">
             <div class="row">
-                <div class="col-lg-6">Discount</div>
+                <div class="col-lg-6">Diskon</div>
                 <div class="col-lg-6"><input type="text" readonly name="totaldiscount" id="totaldiscount"
                         class="form-control form-control-white text-end"></div>
             </div>
@@ -150,7 +150,7 @@
         <hr class="border border-dark border-2 opacity-50">
 
         <div class="d-flex justify-content-center" id="loadingnya">
-            <button class="btn btn-sm btn-info" type="button" id="btn-close">Close</button>
+            <button class="btn btn-sm btn-info" type="button" id="btn-close">Kembali</button>
         </div>
     </div>
 </div>

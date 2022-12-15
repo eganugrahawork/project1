@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4>Update UOM {{ $uom->name }}</h4>
+        <h4>Perbarui UOM {{ $uom->name }}</h4>
     </div>
     <div class="card-body">
         <form id="update-form" class="form">
@@ -31,10 +31,10 @@
 
             <div class="d-flex justify-content-end" id="loadingnya">
                 <div class="py-2">
-                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
+                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Kembali</button>
                 </div>
                 <div class="py-2">
-                    <button class="btn btn-sm btn-primary" id="btn-update">Update UOM</button>
+                    <button class="btn btn-sm btn-primary" id="btn-update">Perbarui UOM</button>
                 </div>
             </div>
         </form>

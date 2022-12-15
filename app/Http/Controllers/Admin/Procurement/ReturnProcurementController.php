@@ -143,17 +143,17 @@ class ReturnProcurementController extends Controller
                 <input type='number' name='qty_retur[]' id='qty_retur'  value='0'  class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
-                <label class=' fw-bold fs-6 mb-2'>Qty Receipt</label>
+                <label class=' fw-bold fs-6 mb-2'>Qty Diterima</label>
                 <input type='number' name='qty_receipt[]' id='qty_receipt' value='$item->qty_receipt' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
             </div>
 
             <div class='fv-row mb-3 col-lg-2'>
-                <label class='required fw-bold fs-6 mb-2'>Unit Price</label>
+                <label class='required fw-bold fs-6 mb-2'>Harga Unit</label>
                 <input type='number' name='unit_price[]' id='unit_price' value='$item->unit_price' readonly  class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
 
             <div class='fv-row mb-3 col-lg-1'>
-                <label class='required fw-bold fs-6 mb-2'>Discount</label>
+                <label class='required fw-bold fs-6 mb-2'>Diskon</label>
                 <input type='number' name='discount[]' id='discount'  value='$item->discount' readonly class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
             <div class='fv-row mb-3 col-lg-2'>

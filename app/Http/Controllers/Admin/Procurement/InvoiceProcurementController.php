@@ -156,16 +156,16 @@ class InvoiceProcurementController extends Controller {
                 </select>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
-                <label class=' fw-bold fs-6 mb-2'>Order Qty</label>
+                <label class=' fw-bold fs-6 mb-2'>Qty Order</label>
                 <input type='number' name='qty_order[]' id='qty_order' value='$item->qty' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
             </div>
             <input type='hidden'  id='nowBalance' value='$item->qty_balance' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
             <div class='fv-row mb-3 col-lg-2'>
-                <label class=' fw-bold fs-6 mb-2'>Balance</label>
+                <label class=' fw-bold fs-6 mb-2'>Sisa</label>
                 <input type='number' name='balance[]' id='balance' value='$item->qty_balances' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
-                <label class='required fw-bold fs-6 mb-2'>Receipt</label>
+                <label class='required fw-bold fs-6 mb-2'>Diterima</label>
                 <input type='number' name='qty[]' id='qty' onkeyup='balanceEdit(this)' value='$item->qty_receipt' readonly  class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
             <div class='fv-row mb-3 col-lg-1'>
@@ -174,7 +174,7 @@ class InvoiceProcurementController extends Controller {
             </div>
 
             <div class='fv-row mb-3 col-lg-1'>
-                <label class='required fw-bold fs-6 mb-2'>Discount</label>
+                <label class='required fw-bold fs-6 mb-2'>Diskon</label>
                 <input type='number' name='qty_discount[]' id='qty_discount'  value='$item->qty_discount' readonly class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
             </div>
             <div class='fv-row mb-3 col-lg-2'>

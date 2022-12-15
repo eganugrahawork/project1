@@ -52,14 +52,14 @@ class PurchaseOrderController extends Controller {
                 if ($model->po_status == 0) {
 
                     if (Gate::allows('approve', ['/admin/procurement/purchase-order'])) {
-                        $statues .= "<a onclick='approve($model->id_ponya)' class='btn btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-patch-exclamation'></i></i> Confirm Here</a>";
+                        $statues .= "<a onclick='approve($model->id_ponya)' class='btn btn-sm btn-warning btn-hover-rise me-1'><i class='bi bi-patch-exclamation'></i></i> Konfirmasi</a>";
                     } else {
                         $statues .= "<a class='btn btn-sm btn-secondary btn-hover-rise me-1 '><i class='bi bi-question-octagon'></i>Pending</a>";
                     }
                 } elseif ($model->po_status == 2) {
-                    $statues .= "<a class='btn btn-sm btn-danger btn-hover-rise me-1'><i class='bi bi-x-octagon'></i></i> Rejected</a>";
+                    $statues .= "<a class='btn btn-sm btn-danger btn-hover-rise me-1'><i class='bi bi-x-octagon'></i></i> Ditolak</a>";
                 } else {
-                    $statues .= "<a class='btn btn-sm btn-primary btn-hover-rise me-1'><i class='bi bi-patch-check'></i> Confirmed</a>";
+                    $statues .= "<a class='btn btn-sm btn-primary btn-hover-rise me-1'><i class='bi bi-patch-check'></i> Disetujui</a>";
                 }
                 return $statues;
             })->addColumn('tgl_order', function ($model) {
@@ -167,7 +167,7 @@ class PurchaseOrderController extends Controller {
     public function getallitem() {
         $items = Items::all();
 
-        $html = '<option>List All Items</option>';
+        $html = '<option>List Item</option>';
 
         foreach ($items as $item) {
             $html .= "<option value='$item->id'>$item->item_code - $item->item_name</option>";
@@ -186,7 +186,7 @@ class PurchaseOrderController extends Controller {
         $itemprice = ItemPrice::where(['item_id' => $request->id])->first();
         $itemqty = ItemQty::where(['item_id' => $request->id])->first();
         $pricing  = " <div class='fv-row mb-3 col-lg-2' id='price_parent'>
-        <label class='required fw-bold fs-6 mb-2'>Price</label>
+        <label class='required fw-bold fs-6 mb-2'>Harga</label>
         <input type='number' name='price[]' id='price' onkeyup='hitungByPrice(this)' class='form-control form-control-solid mb-3 mb-lg-0' placeholder='$itemprice->base_price' required/>
         <p id='notifprice'>Tulis Kembali harga untuk konfirmasi</p>
         </div>";
@@ -202,12 +202,12 @@ class PurchaseOrderController extends Controller {
 
         $items = Items::where(['partner_id' => $request->id])->get();
         if (count($items) > 0) {
-            $html .= '<option>See Available Item</option>';
+            $html .= '<option>Lihat Item</option>';
             foreach ($items as $item) {
                 $html .= "<option value='$item->id'>$item->item_code - $item->item_name</option>";
             }
         } else {
-            $html .= '<option>No Items From This Partner</option>';
+            $html .= '<option>Tidak ada item dari Partner ini</option>';
         }
 
 
@@ -224,7 +224,7 @@ class PurchaseOrderController extends Controller {
                         <input type='number' name='qty[]' id='qty' onkeyup='hitungByQty(this)' value='0' class='form-control form-control-solid mb-3 mb-lg-0'  required/>
                         </div>
                         <div class='fv-row mb-3 col-lg-1' id='discount_parent'>
-                            <label class='required fw-bold fs-6 mb-2'>Discount</label>
+                            <label class='required fw-bold fs-6 mb-2'>Diskon</label>
                             <input type='number' name='discount[]' id='discount'  onkeyup='hitungByDiscount(this)' value='0' class='form-control form-control-solid mb-3 mb-lg-0'  required/>
                         </div>
                         <div class='fv-row mb-3 col-lg-2'>
@@ -233,7 +233,7 @@ class PurchaseOrderController extends Controller {
                         <input type='hidden' name='getdiscountperitem[]' id='getdiscountperitem' readonly class='form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem'  required/>
                         </div>
                         <div class='fv-row mb-3 col-lg-1'>
-                        <label class='fw-bold fs-6 mb-2'>Remove</label>
+                        <label class='fw-bold fs-6 mb-2'>Hapus</label>
                             <button class='btn btn-sm btn-warning' type='button' onclick='removeItemRow(this)'>-</button>
                     </div></div>";
 

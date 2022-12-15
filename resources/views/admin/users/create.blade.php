@@ -7,7 +7,7 @@
             @csrf
             <div class="d-flex flex-column  me-n7 pe-7">
                 <div class="text-center fv-row mb-7">
-                    <label class="d-block fw-bold fs-6 mb-5">Image</label>
+                    <label class="d-block fw-bold fs-6 mb-5">Foto</label>
                     <div class="image-input image-input-outline" data-kt-image-input="true">
                         <div class="image-input-wrapper w-125px h-125px"
                             style="background-image: url({{ url('storage/img-users/default.png') }});"></div>
@@ -25,7 +25,7 @@
                             <i class="bi bi-x fs-2"></i>
                         </span>
                     </div>
-                    <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                    <div class="form-text">Format diizinkan: png, jpg, jpeg.</div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
@@ -139,7 +139,7 @@
 
             </div>
             <div class="text-center pt-15" id="loadingButtonHere">
-                <button class="btn btn-light me-3" onclick="tutupContent()">Discard</button>
+                <button class="btn btn-light me-3" onclick="tutupContent()">Kembali</button>
                 <button type="submit" class="btn btn-primary" id="submitbuttonnya"
                     data-kt-users-modal-action="submit">Submit</button>
 

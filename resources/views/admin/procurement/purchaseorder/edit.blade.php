@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4>Edit Purchase Order</h4>
+        <h4>Perbarui Purchase Order</h4>
     </div>
     <div class="card-body">
         <form id="edit-form" class="form">
@@ -10,24 +10,24 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Number Po</label>
+                        <label class="fw-bold fs-6 mb-2">Nomor Purchase Order</label>
                         <input type="text" id="code" name="code" value="{{ $ponya[0]->number_po }}" readonly
                             class="form-control form-control-white mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Partners</label>
+                        <label class="required form-label fw-bold">Partner</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" disabled id="partner_id"
                             name="partner_id">
                             <option>{{ $ponya[0]->partner_name }}</option>
                         </select>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Address</label>
+                        <label class="fw-bold fs-6 mb-2">Alamat</label>
                         <textarea type="text" name="address" id="address" readonly
                             class="form-control form-control-solid mb-3 mb-lg-0">{{ $ponya[0]->address }}</textarea>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Phone Number</label>
+                        <label class="fw-bold fs-6 mb-2">Nomor Telepon</label>
                         <input type="text" name="phone" id="phone" value="{{ $ponya[0]->phone }}" readonly
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
@@ -45,7 +45,7 @@
                             required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Currency</label>
+                        <label class="required form-label fw-bold">Mata Uang</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2"
                             onchange="getRate(this.value)" name="currency_id" id="currency_id" required>
                             @foreach ($currency as $currency)
@@ -62,7 +62,7 @@
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Term of Payment</label>
+                        <label class="required form-label fw-bold">Jangka Waktu Pembayaran</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="term_of_payment"
                             id="term_of_payment" required>
                             <option value="Cash" {{ $ponya[0]->term_of_payment === 'Cash' ? 'selected' : '' }}>Cash
@@ -83,13 +83,13 @@
                         </select>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Description</label>
+                        <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
                         <textarea type="text" name="description" id="description" class="form-control form-control-solid mb-3 mb-lg-0"
                             required>{{ $ponya[0]->description }}</textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <div>
-                            <label class="fw-bold fs-6 mb-2">Order Date</label>
+                            <label class="fw-bold fs-6 mb-2">Tanggal Order</label>
                         </div>
                         <input type="text" name="order_date" id="order_date" value="{{ $ponya[0]->order_date }}"
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
@@ -117,7 +117,7 @@
                                     </div>
                                     <div class="col-lg-2">
                                         <button onclick="getallitem(this)" type="button"
-                                            class="btn btn-sm btn-primary">All</button>
+                                            class="btn btn-sm btn-primary">Semua</button>
                                     </div>
                                 </div>
                             </div>
@@ -133,13 +133,13 @@
                                     class="form-control form-control-solid mb-3 mb-lg-0 qty" required />
                             </div>
                             <div class="fv-row mb-3 col-lg-1" id="discount_parent">
-                                <label class="required fw-bold fs-6 mb-2">Discount</label>
+                                <label class="required fw-bold fs-6 mb-2">Diskon</label>
                                 <input type="number" name="discount[]" id="discount"
                                     value="{{ $s_item->discount }}" onkeyup="hitungByDiscount(this)"
                                     class="form-control form-control-solid mb-3 mb-lg-0 discount" required />
                             </div>
                             <div class='fv-row mb-3 col-lg-2' id='price_parent'>
-                                <label class='required fw-bold fs-6 mb-2'>Price</label>
+                                <label class='required fw-bold fs-6 mb-2'>Harga</label>
                                 <input type='number' name='price[]' id='price' onkeyup='hitungByPrice(this)'
                                     value="{{ $s_item->unit_price }}"
                                     class='form-control form-control-solid mb-3 mb-lg-0'
@@ -156,7 +156,7 @@
                                     class="form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem" required />
                             </div>
                             <div class="fv-row mb-3 col-lg-1">
-                                <label class='fw-bold fs-6 mb-2'>Remove</label>
+                                <label class='fw-bold fs-6 mb-2'>Hapus</label>
                                 <button class='btn btn-sm btn-warning' type='button'
                                     onclick='removeItemRow(this)'>-</button>
                             </div>
@@ -177,7 +177,7 @@
             </div>
             <div class="d-flex justify-content-end py-2">
                 <div class="row">
-                    <div class="col-lg-6">Discount</div>
+                    <div class="col-lg-6">Diskon</div>
                     <div class="col-lg-6"><input type="text" name="totaldiscount" readonly id="totaldiscount"
                             class="form-control form-control-white text-end"></div>
                 </div>
@@ -208,11 +208,11 @@
 
             <div class="d-flex justify-content-center" id="loadingnya">
                 <div class="px-2">
-                    <button class="btn btn-sm btn-primary" type="submit" id="btn-update">Update Purchase
+                    <button class="btn btn-sm btn-primary" type="submit" id="btn-update">Perbarui Purchase
                         Order</button>
                 </div>
                 <div class="px-2">
-                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
+                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Kembali</button>
                 </div>
             </div>
         </form>
@@ -267,13 +267,13 @@
             $.get("{{ url('/admin/procurement/purchase-order/getitem') }}/" + partnerId, {}, function(data) {
                 $(e).parent().parent().find('#item_id').html(data.html);
                 $(e).parent().html(
-                    "<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-success'>All</button>"
+                    "<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-success'>Semua</button>"
                 );
             })
         } else {
             $(e).parent().parent().find('#item_id').html("<option>Choose Partner First</option>");
             $(e).parent().html(
-                "<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-success'>All</button>");
+                "<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-success'>Semua</button>");
         }
     }
 
@@ -409,11 +409,11 @@
         })
 
         swalWithBootstrapButtons.fire({
-            title: 'Edit this data?',
-            text: "Data cant return back automatically !",
+            title: 'Perbarui data PO?',
+            text: "Pastikan Semua Kolom Diisi dengan benar",
             icon: 'question',
             showCancelButton: true,
-            confirmButtonText: 'Yes!',
+            confirmButtonText: 'Ya!',
             cancelButtonText: 'No!',
             reverseButtons: false
         }).then((result) => {
@@ -457,7 +457,7 @@
                 result.dismiss === Swal.DismissReason.cancel
             ) {
                 swalWithBootstrapButtons.fire(
-                    'Cancelled',
+                    'Dibatalkan',
                     '',
                     'success'
                 )

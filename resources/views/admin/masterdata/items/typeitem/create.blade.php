@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4>Create New Type Item</h4>
+        <h4>Buat Tipe Item Baru</h4>
     </div>
     <div class="card-body">
         <form id="add-form" class="form">
@@ -16,11 +16,11 @@
                 </div>
             </div>
             <div class="fv-row mb-3">
-                <label class="required fw-bold fs-6 mb-2">Name of Type Item</label>
+                <label class="required fw-bold fs-6 mb-2">Nama Tipe</label>
                 <input type="text" name="name_type" class="form-control form-control-solid mb-3 mb-lg-0" required />
             </div>
             <div class="fv-row mb-3">
-                <label class="required fw-bold fs-6 mb-2">Description</label>
+                <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
                 <textarea name="description" class="form-control form-control-solid mb-3 mb-lg-0" required></textarea>
             </div>
             <div class="fv-row mb-3">
@@ -36,10 +36,10 @@
 
             <div class="d-flex justify-content-end" id="loadingnya">
                 <div class="py-2">
-                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
+                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Kembali</button>
                 </div>
                 <div class="py-2">
-                    <button class="btn btn-sm btn-primary" id="btn-add">Add Type Items</button>
+                    <button class="btn btn-sm btn-primary" id="btn-add">Buat Tipe Item</button>
                 </div>
             </div>
         </form>

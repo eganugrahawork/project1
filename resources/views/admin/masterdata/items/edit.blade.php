@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4>Update Item {{ $item->item_name }}</h4>
+        <h4>Perbarui Item {{ $item->item_name }}</h4>
     </div>
     <div class="card-body">
         <form id="update-form" class="form">
@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Units</label>
+                        <label class="required form-label fw-bold">Unit</label>
                         <div class="col-lg-6">
                             <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="uom_id"
                                 required>
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Item Type</label>
+                        <label class="required form-label fw-bold">Item Tipe</label>
                         <div class="col-lg-6">
                             <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="type_id"
                                 required>
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Vat</label>
+                        <label class="required form-label fw-bold">Pajak</label>
                         <div class="col-lg-6">
                             <select class="form-select  form-select-solid mb-3 mb-lg-0" name="vat" required>
                                 <option value="11" @if ($item->vat == 11) selected @endif>11%</option>
@@ -91,10 +91,10 @@
 
             <div class="d-flex justify-content-end" id="loadingnya">
                 <div class="py-2">
-                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
+                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Kembali</button>
                 </div>
                 <div class="py-2">
-                    <button class="btn btn-sm btn-primary" id="btn-update">Update Item</button>
+                    <button class="btn btn-sm btn-primary" id="btn-update">Perbarui</button>
                 </div>
             </div>
         </form>

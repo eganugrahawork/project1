@@ -14,7 +14,7 @@
                 <div class="card-header pb-0">
                     <!--begin::Card title-->
                     <div class="card-title align-items-start flex-column">
-                        <h5 class="mb-3">Users</h5>
+                        <h5 class="mb-3">Pengguna</h5>
                         <div class="d-flex align-items-center position-relative my-1">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                             <div class="form-group">
@@ -33,7 +33,7 @@
                                     <span class="svg-icon svg-icon-2">
                                         <i class="bi bi-menu-button-wide"></i>
                                     </span>
-                                    Configuration</a>
+                                    Konfigurasi</a>
                             @endif
 
                             @can('create', ['/admin/users'])
@@ -41,7 +41,7 @@
                                     <span class="svg-icon svg-icon-2">
                                         <i class="bi bi-plus-square"></i>
                                     </span>
-                                    Add User</button>
+                                    Tambah Pengguna</button>
                             @endcan
                         </div>
                     </div>
@@ -52,15 +52,14 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">No</th>
-                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">User</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pengguna</th>
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Email
                                     </th>
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Role</th>
-                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Region
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Wilayah
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Created
-                                        at</th>
-                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Actions
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Terdaftar</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Aksi
                                     </th>
                                 </tr>
                             </thead>

@@ -12,7 +12,7 @@
             <input type="hidden" name="oldimage" value="{{ auth()->user()->image }}">
             <div class="card-body border-top p-4">
                 <div class="row mb-3">
-                    <label class=" col-form-label fw-bold fs-6">Image</label>
+                    <label class=" col-form-label fw-bold fs-6">Foto</label>
                     <div class="">
                         <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{ url(asset('storage/'. auth()->user()->image)) }})">
                             <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{ url(asset('storage/'. auth()->user()->image)) }})"></div>
@@ -27,7 +27,7 @@
                                 <i class="bi bi-x fs-2"></i>
                             </span>
                         </div>
-                        <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                        <div class="form-text">Format Diizinkan: png, jpg, jpeg.</div>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class=" col-form-label required fw-bold fs-6">Full Name</label>
+                    <label class=" col-form-label required fw-bold fs-6">Nama Lengkap</label>
                     <div class=" fv-row">
                                 <input type="text" name="name" class="form-control form-control-lg form-control-solid @error('name')
                                     is-invalid

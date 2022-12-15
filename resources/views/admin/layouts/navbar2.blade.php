@@ -3,7 +3,7 @@
     <div class="container-fluid py-1 px-3">
       <nav aria-label="breadcrumb">
 
-        <a class="font-weight-bolder text-white mb-0" href="/">Home Page</a>
+        <a class="font-weight-bolder text-white mb-0" href="/">Beranda</a>
       </nav>
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 justify-content-end" id="navbar">
 
@@ -46,23 +46,23 @@
                         </div>
                         <div class="separator my-2"></div>
                         <div class="menu-item px-3">
-                            <a href="/admin/myprofile" class="menu-link px-3">My Profile</a>
+                            <a href="/admin/myprofile" class="menu-link px-3">Profil Saya</a>
                         </div>
 
                         <div class="separator my-2"></div>
                         @if (auth()->user()->userrole->role === 'Super Admin')
                             <div class="menu-item px-3 my-1">
-                                <a href="/admin/useractivity" class="menu-link px-3">User Activity</a>
+                                <a href="/admin/useractivity" class="menu-link px-3">Aktifitas Pengguna</a>
                             </div>
                             <div class="menu-item px-3 my-1">
-                                <a href="/admin/configuration/menu" class="menu-link px-3">Configuration</a>
+                                <a href="/admin/configuration/menu" class="menu-link px-3">Pengaturan</a>
                             </div>
                         @endif
                         <div class="menu-item px-3">
                             <form action="{{ route('logout') }}" method="POST" style="background: transparent;">
                                 @csrf
                                 <button type="submit" class="menu-link px-3"
-                                    style="background: transparent; border:none;">Sign Out</button>
+                                    style="background: transparent; border:none;">Keluar</button>
                             </form>
 
                         </div>

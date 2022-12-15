@@ -111,7 +111,7 @@
                                                 <div class="fs-4 fw-bolder" data-kt-countup="true"
                                                     data-kt-countup-value="75">0</div>
                                             </div>
-                                            <div class="fw-bold fs-6 text-gray-400">Active</div>
+                                            <div class="fw-bold fs-6 text-gray-400">Aktif</div>
                                         </div>
                                         <div
                                             class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-2 me-6">
@@ -155,13 +155,13 @@
                 <div class="card shadow mb-5 mb-xl-5" id="kt_profile_details_view">
                     <div class="card-header cursor-pointer">
                         <div class="card-title m-0">
-                            <h5 class="fw-bolder m-0">Profile Details</h5>
+                            <h5 class="fw-bolder m-0">Profil Detail</h5>
                         </div>
 
                     </div>
                     <div class="card-body p-4">
                         <div class="row mb-2">
-                            <label class="col-lg-4 fw-bold text-muted">Full Name</label>
+                            <label class="col-lg-4 fw-bold text-muted">Nama Lengkap</label>
                             <div class="col-lg-8">
                                 <span class="fw-bolder fs-6 text-gray-800">{{ $user->name }}</span>
                             </div>
@@ -180,16 +180,16 @@
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label class="col-lg-4 fw-bold text-muted">Contact Phone
+                            <label class="col-lg-4 fw-bold text-muted">Nomor Telepon
                                 <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
                                     title="Phone number must be active"></i></label>
                             <div class="col-lg-8 d-flex align-items-center">
                                 <span class="fw-bolder fs-6 text-gray-800 me-2">{{ $user->no_hp }}</span>
-                                <span class="badge badge-success">Verified</span>
+                                <span class="badge badge-success">Verify</span>
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label class="col-lg-4 fw-bold text-muted">Region
+                            <label class="col-lg-4 fw-bold text-muted">Wilayah
                                 <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
                                     title="Country of origination"></i></label>
                             <div class="col-lg-8">
@@ -197,7 +197,7 @@
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label class="col-lg-4 fw-bold text-muted">Address</label>
+                            <label class="col-lg-4 fw-bold text-muted">Alamat</label>
                             <div class="col-lg-8">
                                 <span class="fw-bolder fs-6 text-gray-800">{{ $user->address }}</span>
                             </div>

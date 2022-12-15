@@ -10,7 +10,7 @@
             <div class="card-header border-0">
                 <div class="card-title align-items-start flex-column">
                     <div class="d-flex align-items-center position-relative my-1">
-                       <h5 class="fw-bolder text-gray-600">Items Receipt</h5>
+                       <h5 class="fw-bolder text-gray-600">Penerimaan Barang</h5>
                     </div>
                     <div class="d-flex align-items-center position-relative my-1">
                         <div class="form-group">
@@ -25,7 +25,7 @@
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                         @can('create', ['/admin/procurement/items-receipt'])
                         <button type="button" class="btn btn-primary me-3" onclick="create()">
-                        Add Receipt Items</button>
+                        Tambah Penerimaan Barang</button>
                         @endcan
                     </div>
 
@@ -36,15 +36,15 @@
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
-                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Delivery Number</th>
-                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Receipt Date</th>
-                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">PO Number</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Nomor Pengiriman</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal Diterima</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Nomor PO</th>
                             <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Partner</th>
-                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Order Date</th>
-                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Price</th>
-                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Discount</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal Order</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Harga</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Diskon</th>
                             <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Value</th>
-                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Action</th>
+                            <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-md text-gray-600" style="border:none;">
@@ -68,7 +68,7 @@
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="create()">Add Receipt Items</button>')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Penerimaan Barang</button>')
             })
         }
 
@@ -78,7 +78,7 @@
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="create()">Add Receipt Items</button>')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Penerimaan Barang</button>')
             })
         }
         function edit(id){
@@ -87,7 +87,7 @@
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="create()">Add Receipt Items</button>')
+                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Penerimaan Barang</button>')
             })
         }
         function tutupContent() {
@@ -146,8 +146,8 @@
                 text: "Data tidak bisa dikembalikan!",
                 icon: 'question',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, hapus!',
-                cancelButtonText: 'Tidak, Batalkan!',
+                confirmButtonText: 'Hapus!',
+                cancelButtonText: 'Batalkan!',
                 reverseButtons: false
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -175,7 +175,7 @@
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
                     swalWithBootstrapButtons.fire(
-                        'Cancelled',
+                        'Dibatalkan',
                         'Data anda masih aman :)',
                         'success'
                     )

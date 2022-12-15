@@ -1,8 +1,8 @@
 <div class="text-center py-3 px-2">
-    <h4>Notification</h4>
+    <h4>Notifikasi</h4>
 </div>
 <div class="d-flex justify-content-center py-2 px-2 bg-warna rounded">
-    <a onclick="readAll()" class="text-white" href="#">Read All</a>
+    <a onclick="readAll()" class="text-white" href="#">Tandai Sudah Dibaca Semua</a>
 </div>
 <hr>
 <div class="ms-4">
@@ -34,12 +34,12 @@
             <div class="py-2"></div>
         @else
             <div class="d-flex justify-content-end  ">
-                <a href="#" onclick="read({{ $act->id }})" class="btn btn-sm btn-primary">Read</a>
+                <a href="#" onclick="read({{ $act->id }})" class="btn btn-sm btn-primary">Tandai Baca</a>
             </div>
         @endif
     @endforeach
     <div class="d-flex justify-content-end py-4 mb-6">
-        <a href="/admin/useractivity" class="btn btn-sm btn-warning">Readmore Activity</a>
+        <a href="/admin/useractivity" class="btn btn-sm btn-warning">Lihat Selengkapnya</a>
     </div>
 </div>
 

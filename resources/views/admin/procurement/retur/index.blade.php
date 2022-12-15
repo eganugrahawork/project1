@@ -25,7 +25,7 @@
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                             @can('create', ['/admin/procurement/retur'])
                                 <button type="button" class="btn btn-primary me-3" onclick="create()">
-                                    Create Retur</button>
+                                    Buat Retur</button>
                             @endcan
                         </div>
 
@@ -38,11 +38,11 @@
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Invoice</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Partner</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Retur Date
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Tanggal Retur
                                 </th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Qty Retur</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Status</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Action</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="fw-bold text-gray-600" style="border:none;">
@@ -66,7 +66,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Buat Retur</button>'
                 )
             })
         }
@@ -79,7 +79,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Buat Retur</button>'
                 )
             })
         }
@@ -92,7 +92,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Buat Retur</button>'
                 )
             })
         }
@@ -105,7 +105,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Buat Retur</button>'
                 )
             })
         }
@@ -198,7 +198,7 @@
                             )
                             tableRetur.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
+                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Buat Retur</button>'
                             )
                         }
                     })
@@ -252,7 +252,7 @@
                                 'success'
                             )
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
+                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Buat Retur</button>'
                             )
                         }
                     })

@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4>Create New Item</h4>
+        <h4>Buat Item Baru</h4>
     </div>
     <div class="card-body">
         <form id="add-form" class="form">
@@ -8,21 +8,21 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Code of Item</label>
+                        <label class="required fw-bold fs-6 mb-2">Kode Item</label>
                         <input type="text" name="item_code" class="form-control form-control-solid mb-3 mb-lg-0"
                             required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Name of Item</label>
+                        <label class="required fw-bold fs-6 mb-2">Nama Item</label>
                         <input type="text" name="item_name" class="form-control form-control-solid mb-3 mb-lg-0"
                             required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Item Description</label>
+                        <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
                         <textarea name="item_description" class="form-control form-control-solid mb-3 mb-lg-0" required></textarea>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Units</label>
+                        <label class="required form-label fw-bold">Unit</label>
                         <div class="col-lg-6">
                             <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="uom_id"
                                 required>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Item Type</label>
+                        <label class="required form-label fw-bold">Item Tipe</label>
                         <div class="col-lg-6">
                             <select class="form-select form-select-solid " name="type_id" required>
                                 @foreach ($type as $type)
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Vat</label>
+                        <label class="required form-label fw-bold">Pajak</label>
                         <div class="col-lg-6">
                             <select class="form-select  form-select-solid mb-3 mb-lg-0" name="vat" required>
                                 <option value="11">11%</option>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="form-label fw-bold required">Partners</label>
+                        <label class="form-label fw-bold required">Partner</label>
                         <select class="form-select form-select-solid mb-3 mb-lg-0 select-2" name="partner_id" required>
                             @foreach ($partner as $p)
                                 <option value="{{ $p->id }}">{{ $p->name }}</option>
@@ -74,8 +74,8 @@
                         <label class="required form-label fw-bold">Status</label>
                         <div class="col-lg-6">
                             <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
-                                <option value="1">Sale</option>
-                                <option value="0">Not Sale</option>
+                                <option value="1">Dijual</option>
+                                <option value="0">Tidak Dijual</option>
                             </select>
                         </div>
                     </div>
@@ -84,10 +84,10 @@
 
             <div class="d-flex justify-content-end" id="loadingnya">
                 <div class="py-2">
-                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
+                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Kembali</button>
                 </div>
                 <div class="py-2">
-                    <button class="btn btn-sm btn-primary" id="btn-add">Add Items</button>
+                    <button class="btn btn-sm btn-primary" id="btn-add">Buat Item</button>
                 </div>
             </div>
         </form>

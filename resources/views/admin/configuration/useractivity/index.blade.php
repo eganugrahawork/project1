@@ -30,11 +30,11 @@
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">User</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Pengguna</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Menu</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Activity</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Statues</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Created at</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Aktifitas</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Status</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 text-md fw-bold" style="border:none;">

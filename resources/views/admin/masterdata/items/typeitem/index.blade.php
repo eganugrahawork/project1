@@ -10,7 +10,7 @@
                 <div class="card-header border-0">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative my-1">
-                            <h4>Type Items</h4>
+                            <h4>Tipe Items</h4>
                         </div>
                         <div class="d-flex align-items-center position-relative my-1">
                             <div class="form-group">
@@ -26,7 +26,7 @@
                             @can('create', ['/admin/masterdata/typeitems'])
                                 <button type="button" class="btn btn-primary me-3" id="add-btn"
                                     onclick="create()">
-                                    Add Type Items</button>
+                                    Tambah Tipe Item</button>
                             @endcan
                         </div>
                     </div>
@@ -38,10 +38,10 @@
                                 <th class="min-w-20px">No
                                 </th>
                                 <th class="min-w-125px">Coa</th>
-                                <th class="min-w-125px">Name Type</th>
-                                <th class="min-w-125px">Description</th>
+                                <th class="min-w-125px">Nama</th>
+                                <th class="min-w-125px">Deskripsi</th>
                                 <th class="min-w-70px">Status</th>
-                                <th class="min-w-70px">Action</th>
+                                <th class="min-w-70px">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="fw-bold text-gray-600" style="border:none;">
@@ -54,30 +54,6 @@
         <!--end::Post-->
     </div>
 
-    {{-- Main Modal --}}
-    <div class="modal fade" id="mainmodal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mw-500px">
-            <div class="modal-content">
-                <div class="modal-header" id="mainmodal_header">
-                    <h2 class="fw-bolder">Items</h2>
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" onclick="tutupModal()">
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
-                                    rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1"
-                                    transform="rotate(45 7.41422 6)" fill="black" />
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="kontennya">
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- End Main Modal --}}
 @endsection
 
 @section('js')
@@ -90,7 +66,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add Type Items</button>'
+                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Tambah Tipe Item</button>'
                 )
             });
         }
@@ -100,7 +76,7 @@
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/typeitems/edit') }}/" + id, {}, function(data, status) {
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add Type Items</button>'
+                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Tambah Tipe Item</button>'
                 )
                 $('#indexContent').hide()
                 $('#content').html(data)
@@ -192,7 +168,7 @@
                             )
                             typeItemTable.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add Type</button>'
+                                '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Tambah Tipe Item</button>'
                                 )
                         }
                     })
@@ -202,8 +178,8 @@
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
                     swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Your Data Still Safe :)',
+                        'Dibatalkan',
+                        'Data masih aman :)',
                         'success'
                     )
                 }

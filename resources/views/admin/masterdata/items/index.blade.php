@@ -10,7 +10,7 @@
                 <div class="card-header">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative my-1">
-                            <h5>Items</h5>
+                            <h5>Item</h5>
                         </div>
                         <div class="d-flex align-items-center position-relative my-1">
                             <div class="form-group">
@@ -25,7 +25,7 @@
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                             @can('create', ['/admin/masterdata/items'])
                                 <button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">
-                                    Add Items</button>
+                                    Tambah Item</button>
                             @endcan
                         </div>
                     </div>
@@ -36,12 +36,12 @@
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th class="min-w-20px">No
                                 </th>
-                                <th class="min-w-50px">Items Code</th>
-                                <th class="min-w-50px">Items Name</th>
-                                <th class="min-w-50px">Description</th>
+                                <th class="min-w-50px">Kode Item</th>
+                                <th class="min-w-50px">Nama Item</th>
+                                <th class="min-w-50px">Deskripsi</th>
                                 <th class="min-w-50px">Unit</th>
                                 <th class="min-w-50px">Partner</th>
-                                <th class="min-w-50px">Action</th>
+                                <th class="min-w-50px">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="text-md text-gray-600" style="border:none;">
@@ -62,7 +62,7 @@
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/items/info') }}/" + id, {}, function(data, status) {
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add Items</button>'
+                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Tambah Item</button>'
                 )
                 $('#indexContent').hide()
                 $('#content').html(data)
@@ -78,7 +78,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add Items</button>'
+                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Tambah Item</button>'
                 )
             });
         }
@@ -88,7 +88,7 @@
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/masterdata/items/edit') }}/" + id, {}, function(data, status) {
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add Items</button>'
+                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Tambah Item</button>'
                 )
                 $('#indexContent').hide()
                 $('#content').html(data)
@@ -183,7 +183,7 @@
                             )
                             itemsTable.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Add Items</button>'
+                                '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Tambah Item</button>'
                             )
                         }
                     })
@@ -193,7 +193,7 @@
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
                     swalWithBootstrapButtons.fire(
-                        'Cancelled',
+                        'Dibatalkan',
                         'Data anda masih aman :)',
                         'success'
                     )

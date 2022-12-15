@@ -8,30 +8,30 @@
                 <div class="col-lg-4">
                     @csrf
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Sales Number</label>
+                        <label class="fw-bold fs-6 mb-2">Nomor Penjualan</label>
                         <input type="text" id="sales_number" name="sales_number"
                             class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $code }}" readonly
                             required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Sales Date</label>
+                        <label class="required fw-bold fs-6 mb-2">Tanggal Penjualan</label>
                         <div class="">
                             <input type="text" id="sales_date" name="sales_date"
                                 class="form-control form-control-solid mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Customer</label>
+                        <label class="required fw-bold fs-6 mb-2">Pelanggan</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="partner_id"
                             id="partner_id" onchange="getDataCustomer()" required>
-                            <option>Choose Customer</option>
+                            <option>Pilih Pelanggan</option>
                             @foreach ($customer as $cust)
                                 <option value="{{ $cust->id }}">{{ $cust->code }}-{{ $cust->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Address</label>
+                        <label class="fw-bold fs-6 mb-2">Alamat</label>
                         <textarea type="text" name="address" id="address" readonly class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
                     </div>
                     <div class="fv-row mb-3">
@@ -40,7 +40,7 @@
                             class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Phone</label>
+                        <label class="fw-bold fs-6 mb-2">Nomor Telepon</label>
                         <input type="text" id="phone" name="phone"
                             class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
                     </div>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Ship From</label>
+                        <label class="fw-bold fs-6 mb-2">Dikirim Dari</label>
                         <textarea type="text" name="ship_from" id="ship_from" class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
                     </div>
                     <div class="fv-row mb-3">
@@ -76,7 +76,7 @@
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Term Of Payment</label>
+                        <label class="required form-label fw-bold">Jangka Waktu Pembayaran</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="term_of_payment"
                             id="term_of_payment" required>
                             <option value="Cash">Cash</option>
@@ -89,16 +89,16 @@
                         </select>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Another Term Payment</label>
+                        <label class="fw-bold fs-6 mb-2">Pembayaran Lain</label>
                         <input type="number" id="another_term_of_payment" name="another_term_of_payment"
                             class="form-control form-control-solid mb-3 mb-lg-0" value="0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Description</label>
+                        <label class="fw-bold fs-6 mb-2">Deskripsi</label>
                         <textarea type="text" name="description" id="description" class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
                     </div>
                     <div class="fv-row mb-3">
-                      <label class="required fw-bold fs-6 mb-2">Delivery Date</label>
+                      <label class="required fw-bold fs-6 mb-2">Tanggal Pengiriman</label>
                       <div class="">
                           <input type="text" id="delivery_date" name="delivery_date"
                               class="form-control form-control-solid mb-3 mb-lg-0" required />
@@ -108,7 +108,7 @@
                 <div class="col-lg-4">
                     <div class="card card-flush shadow-sm">
                         <div class="card-header">
-                            <h3 class="card-title fw-bolder text-gray-600">Information </h3>
+                            <h3 class="card-title fw-bolder text-gray-600">Informasi </h3>
                             <div class="card-toolbar">
                                 <i class="bi bi-bookmarks-fill text-primary fs-2x"></i>
                             </div>
@@ -162,7 +162,7 @@
                                 class='form-control form-control-solid mb-3 mb-lg-0 ' required />
                         </div>
                         <div class='fv-row mb-3 col-lg-2'>
-                            <label class=' fw-bold fs-6 mb-2'>Price</label>
+                            <label class=' fw-bold fs-6 mb-2'>Harga</label>
                             <input type='number' name='price[]' id='price'
                                 class='form-control form-control-solid mb-3 mb-lg-0' onkeyup='countTotalQty(this)'
                                 value='0' required />
@@ -210,11 +210,11 @@
                 <hr>
                 <div class="d-flex justify-content-center" id="loadingnya">
                     <div class="px-2">
-                        <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Create</button>
+                        <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Buat</button>
                     </div>
                     <div class="px-2">
                         <button class="btn btn-sm btn-secondary" type="button"
-                            onclick="tutupContent()">Cancel</button>
+                            onclick="tutupContent()">Kembali</button>
                     </div>
                 </div>
 

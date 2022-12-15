@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4>Create New Partner</h4>
+        <h4>Buat Partner Baru</h4>
     </div>
     <div class="card-body">
         <form id="add-form">
@@ -8,12 +8,12 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Code</label>
+                        <label class="required fw-bold fs-6 mb-2">Kode</label>
                         <input type="text" name="code" id="code"
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Name</label>
+                        <label class="required fw-bold fs-6 mb-2">Nama</label>
                         <input type="text" name="name" id="name"
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
@@ -23,7 +23,7 @@
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Partner Type</label>
+                        <label class="required form-label fw-bold">Partner Tipe</label>
                         <div class="col-lg-8">
                             <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="partner_type"
                                 id="partner_type" required>
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Phone Number</label>
+                        <label class="required fw-bold fs-6 mb-2">No Telepon</label>
                         <input type="number" name="phone" id="phone"
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
@@ -46,11 +46,11 @@
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Address</label>
+                        <label class="required fw-bold fs-6 mb-2">Alamat</label>
                         <textarea name="address" id="address" class="form-control form-control-solid mb-3 mb-lg-0" required></textarea>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Ship Address</label>
+                        <label class="required fw-bold fs-6 mb-2">Alamat Pengiriman</label>
                         <textarea name="ship_address" id="ship_address" class="form-control form-control-solid mb-3 mb-lg-0" required></textarea>
                     </div>
                     <div class="fv-row mb-3">
@@ -81,10 +81,10 @@
 
             <div class="d-flex justify-content-end" id="loadingnya">
                 <div class="py-2">
-                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
+                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Kembali</button>
                 </div>
                 <div class="py-2">
-                    <button class="btn btn-sm btn-primary" id="btn-add">Add Partner</button>
+                    <button class="btn btn-sm btn-primary" id="btn-add">Buat Partner</button>
                 </div>
             </div>
         </form>

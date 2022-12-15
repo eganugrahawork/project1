@@ -33,21 +33,21 @@
                                     <a class="nav-link text-gray-600 fs-7 fw-bolder" data-bs-toggle="tab"
                                         href="#kt_general_widget_1_8">
                                         <i class="bi bi-geo"></i>
-                                        <span class="fs-6 fw-bold">Region Data</span>
+                                        <span class="fs-6 fw-bold">Data Wilayah</span>
                                     </a>
                                 </li>
                                 <li class="nav-item col-12 col-lg  mb-lg-0">
                                     <a class="nav-link text-gray-600 fs-7 fw-bolder" data-bs-toggle="tab"
                                         href="#kt_general_widget_1_6">
                                         <i class="bi bi-signpost-split"></i>
-                                        <span class="fs-6 fw-bold">Access Control</span>
+                                        <span class="fs-6 fw-bold">Akses Control</span>
                                     </a>
                                 </li>
                                 <li class="nav-item col-12 col-lg mb-lg-0">
                                     <a class="nav-link text-gray-600 fs-7 fw-bolder" data-bs-toggle="tab"
                                         href="#kt_general_widget_1_9">
                                         <i class="bi bi-signpost-split"></i>
-                                        <span class="fs-6 fw-bold">Permission Control</span>
+                                        <span class="fs-6 fw-bold">Control Aksi</span>
                                     </a>
                                 </li>
                             </ul>
@@ -88,7 +88,7 @@
                                             <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px"
                                                 data-kt-menu="true" id="kt_menu_617b94b52ee36">
                                                 <div class="px-3 ">
-                                                    <div class="fs-5 text-dark fw-bolder">Add Menues</div>
+                                                    <div class="fs-5 text-dark fw-bolder">Buat Menu</div>
                                                 </div>
                                                 <div class="separator border-gray-200"></div>
                                                 <div class="px-3" id="addmenuparent">
@@ -102,7 +102,7 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                        <label class="form-label fw-bold">Name</label>
+                                                        <label class="form-label fw-bold">Nama</label>
                                                         <input type="text" name="name" class="form-control" required>
                                                         <label class="form-label fw-bold">Url</label>
                                                         <input type="text" class="form-control" name="url">
@@ -117,7 +117,7 @@
                                                         </select>
 
                                                         <div class="d-flex justify-content-end mt-2">
-                                                            <button class="btn btn-sm btn-primary">Add</button>
+                                                            <button class="btn btn-sm btn-primary">Buat</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -149,7 +149,7 @@
                                                             Status</th>
                                                         <th
                                                             class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
-                                                            Action</th>
+                                                            Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="text-gray-600 text-md fw-bold" style="border:none;">
@@ -188,7 +188,7 @@
                                 <div class="card px-5 pb-5">
                                     <div class="card-header border-0">
                                         <h3 class="card-title align-items-start flex-column">
-                                            <span class="card-label fw-bolder fs-3 mb-1">Access</span>
+                                            <span class="card-label fw-bolder fs-3 mb-1">Akses</span>
                                         </h3>
                                         <div class="card-toolbar">
                                             <button type="button"
@@ -201,7 +201,7 @@
                                             <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px"
                                                 data-kt-menu="true" id="kt_menu_617b94b537c9a">
                                                 <div class="px-7 py-5">
-                                                    <div class="fs-5 text-dark fw-bolder">Information <i
+                                                    <div class="fs-5 text-dark fw-bolder">Informasi <i
                                                             class="bi bi-info-circle"></i> </div>
                                                 </div>
                                                 <div class="separator border-gray-200"></div>
@@ -227,13 +227,12 @@
                                                         @endphp
 
                                                         <div class="card-body pt-1">
-                                                            <div class="fw-bolder text-gray-600 mb-5">Total users with this
-                                                                role: {{ $jmlUser }}</div>
+                                                            <div class="fw-bolder text-gray-600 mb-5">Total Pengguna : {{ $jmlUser }}</div>
 
                                                         </div>
                                                         <div class="card-footer flex-wrap pt-0">
                                                             <a href="/admin/configuration/userrole/viewrole/{{ $r->id }}"
-                                                                class="btn btn-light btn-active-primary my-1 me-2">View
+                                                                class="btn btn-light btn-active-primary my-1 me-2">Lihat
                                                                 Role</a>
                                                             <button type="button"
                                                                 class="btn btn-light btn-active-light-primary my-1"
@@ -275,7 +274,7 @@
                                             <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px"
                                                 data-kt-menu="true" id="kt_menu_617b94b537c9a">
                                                 <div class="">
-                                                    <div class="fs-5 text-dark fw-bolder">Add Role</div>
+                                                    <div class="fs-5 text-dark fw-bolder">Buat Role</div>
                                                 </div>
                                                 <div class="separator border-gray-200"></div>
                                                 <div class="">
@@ -286,7 +285,7 @@
                                                             required>
 
                                                         <div class="d-flex justify-content-end mt-2">
-                                                            <button class="btn btn-sm btn-primary">Add</button>
+                                                            <button class="btn btn-sm btn-primary">Buat</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -306,7 +305,7 @@
                                                             Role</th>
                                                         <th
                                                             class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
-                                                            Action</th>
+                                                            Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="text-gray-600 text-md fw-bold" style="border:none;">
@@ -335,7 +334,7 @@
                                 <div class="card">
                                     <div class="card-header border-0">
                                         <h3 class="card-title align-items-start flex-column">
-                                            <span class="card-label fw-bolder fs-3 mb-1">Region</span>
+                                            <span class="card-label fw-bolder fs-3 mb-1">Wilayah</span>
                                             <div class="d-flex align-items-center position-relative my-1">
                                                 <div class="form-group">
                                                     <div class="input-group">
@@ -358,17 +357,17 @@
                                             <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px"
                                                 data-kt-menu="true" id="kt_menu_617b94b537c9a">
                                                 <div class="">
-                                                    <div class="fs-5 text-dark fw-bolder">Add Region</div>
+                                                    <div class="fs-5 text-dark fw-bolder">Tambah Wilayah</div>
                                                 </div>
                                                 <div class="separator border-gray-200"></div>
                                                 <div class="">
                                                     <form action="/admin/configuration/location/store" method="post">
                                                         @csrf
-                                                        <label class="form-label fw-bold">Name</label>
+                                                        <label class="form-label fw-bold">nama</label>
                                                         <input type="text" name="name" class="form-control"
                                                             required>
                                                         <div class="d-flex justify-content-end mt-2">
-                                                            <button class="btn btn-sm btn-primary">Add</button>
+                                                            <button class="btn btn-sm btn-primary">Buat</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -385,10 +384,10 @@
                                                             No</th>
                                                         <th
                                                             class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
-                                                            Region</th>
+                                                            Wilayah</th>
                                                         <th
                                                             class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
-                                                            Action</th>
+                                                            Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="text-gray-600 text-md fw-bold" style="border:none;">
@@ -417,7 +416,7 @@
                                 <div class="card">
                                     <div class="card-header border-0">
                                         <h3 class="card-title align-items-start flex-column">
-                                            <span class="card-label fw-bolder fs-3 mb-1">Permission Control</span>
+                                            <span class="card-label fw-bolder fs-3 mb-1">Control Aksi</span>
                                         </h3>
                                         <div class="card-toolbar">
                                             <button type="button"
@@ -430,7 +429,7 @@
                                             <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px"
                                                 data-kt-menu="true" id="kt_menu_617b94b537c9a">
                                                 <div class="px-7 py-5">
-                                                    <div class="fs-5 text-dark fw-bolder">Information <i
+                                                    <div class="fs-5 text-dark fw-bolder">Informasi <i
                                                             class="bi bi-info-circle"></i> </div>
                                                 </div>
                                                 <div class="separator border-gray-200"></div>

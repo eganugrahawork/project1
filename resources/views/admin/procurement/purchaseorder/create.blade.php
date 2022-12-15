@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4>Create New Purchase Order</h4>
+        <h4>Buat Purchase Order</h4>
     </div>
     <div class="card-body">
         <form id="add-form" class="form">
@@ -8,26 +8,26 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Number Po</label>
+                        <label class="fw-bold fs-6 mb-2">Nomor Purchase Order</label>
                         <input type="text" id="code" name="code" value="{{ $code }}" readonly
                             class="form-control form-control-white mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Partners</label>
+                        <label class="required form-label fw-bold">Partner</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" id="partner_id"
                             name="partner_id" required>
-                            <option>Choose The Partner</option>
+                            <option>Pilih Partner</option>
                             @foreach ($partner as $besti)
                                 <option value="{{ $besti->id }}">{{ $besti->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Address</label>
+                        <label class="fw-bold fs-6 mb-2">Alamat</label>
                         <textarea type="text" name="address" id="address" readonly class="form-control form-control-solid mb-3 mb-lg-0"></textarea>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Phone Number</label>
+                        <label class="fw-bold fs-6 mb-2">Nomor Telepon</label>
                         <input type="text" name="phone" id="phone" readonly
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
@@ -44,10 +44,10 @@
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Currency</label>
+                        <label class="required form-label fw-bold">Mata Uang</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0" onchange="getRate(this.value)"
                             name="currency_id" id="currency_id" required>
-                            <option>Choose The Currency</option>
+                            <option>Pilih Mata Uang</option>
                             @foreach ($currency as $currency)
                                 <option value="{{ $currency->id }}" {{ $currency->id == 3 ? 'selected' : '' }}>
                                     {{ $currency->name }}</option>
@@ -60,7 +60,7 @@
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Term of Payment</label>
+                        <label class="required form-label fw-bold">Jangka Waktu Pembayaran</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="term_of_payment"
                             id="term_of_payment" required>
                             <option value="Cash">Cash</option>
@@ -73,13 +73,13 @@
                         </select>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Description</label>
+                        <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
                         <textarea type="text" name="description" id="description" class="form-control form-control-solid mb-3 mb-lg-0"
                             required></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <div class="">
-                            <label class="fw-bold fs-6 mb-2">Order Date</label>
+                            <label class="fw-bold fs-6 mb-2">Tanggal Order</label>
                         </div>
                         <input type="text" name="order_date" id="order_date"
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
@@ -95,12 +95,12 @@
                                 <div class="col-lg-10">
                                     <select class="form-select  form-select-solid mb-3 mb-lg-0 item_id select-2"
                                         id="item_id" name="item_id[]" onchange="getBaseQty(this)" required>
-                                        <option>Choose Partner First</option>
+                                        <option>Pilih Partner Dahulu</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-2">
                                     <button onclick="getallitem(this)" type="button"
-                                        class="btn btn-sm btn-primary">All</button>
+                                        class="btn btn-sm btn-primary">Semua</button>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
             </div>
             <div class="d-flex justify-content-end py-2">
                 <div class="row">
-                    <div class="col-lg-6">Discount</div>
+                    <div class="col-lg-6">Diskon</div>
                     <div class="col-lg-6"><input type="text" readonly name="totaldiscount" id="totaldiscount"
                             class="form-control form-control-white text-end"></div>
                 </div>
@@ -175,10 +175,10 @@
 
             <div class="d-flex justify-content-center" id="loadingnya">
                 <div class="px-2">
-                    <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Save</button>
+                    <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Buat</button>
                 </div>
                 <div class="px-2">
-                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
+                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Batal</button>
                 </div>
 
             </div>
@@ -232,13 +232,13 @@
             $.get("{{ url('/admin/procurement/purchase-order/getitem') }}/" + partnerId, {}, function(data) {
                 $(e).parent().parent().find('#item_id').html(data.html);
                 $(e).parent().html(
-                    "<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-primary'>All</button>"
+                    "<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-primary'>Semua</button>"
                 );
             })
         } else {
             $(e).parent().parent().find('#item_id').html("<option>Choose Partner First</option>");
             $(e).parent().html(
-                "<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-primary'>All</button>");
+                "<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-primary'>Semua</button>");
         }
     }
 
@@ -373,12 +373,12 @@
         })
 
         swalWithBootstrapButtons.fire({
-            title: 'Save This Data ?',
-            text: "Data will be save to the database!",
+            title: 'Buat Data PO?',
+            text: "Pastikan data terisi dengan benar !",
             icon: 'question',
             showCancelButton: true,
-            confirmButtonText: 'Yes, Save!',
-            cancelButtonText: 'Not, Cancel!',
+            confirmButtonText: 'Ya!',
+            cancelButtonText: 'Batal!',
             reverseButtons: false
         }).then((result) => {
             if (result.isConfirmed) {
@@ -411,7 +411,7 @@
                 result.dismiss === Swal.DismissReason.cancel
             ) {
                 swalWithBootstrapButtons.fire(
-                    'Cancelled',
+                    'Dibatalkan',
                     '',
                     'success'
                 )

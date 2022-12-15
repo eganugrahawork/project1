@@ -11,12 +11,12 @@
                         <h3 class="card-title text-white text-center">{{ $item->item_name }}</h3>
                     </div>
                     <div class="card-body">
-                        <p class="text-white">Code : {{ $item->item_code }}</p>
-                        <p>Type : {{ $item->type_id }}</p>
+                        <p class="text-white">Kode Item : {{ $item->item_code }}</p>
+                        <p>Tipe Item : {{ $item->type_id }}</p>
                         <p>{{ $item->item_description }}</p>
                         <p>Unit : {{ $item->uom->name }}</p>
                         <p>Unit Box : {{ $item->itemqty->unit_box }}</p>
-                        <p>Vat : {{ $item->vat }}%</p>
+                        <p>Pajak : {{ $item->vat }}%</p>
                     </div>
                     <div class="card-footer">
                         {{ $item->partner->name }}
@@ -24,7 +24,7 @@
                 </div>
                 <div class="card card-bordered mb-5 bg-primary">
                     <div class="card-header">
-                        <h3 class="card-title text-white text-center">Stock</h3>
+                        <h3 class="card-title text-white text-center">Stok</h3>
                     </div>
                     <div class="card-body">
                         <h5 class="text-white">552</h5>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="card card-bordered mb-5 bg-info">
                     <div class="card-header">
-                        <h3 class="card-title text-white text-center">Total Selling</h3>
+                        <h3 class="card-title text-white text-center">Total Penjualan</h3>
                     </div>
                     <div class="card-body">
                         <h5 class="text-white">Rp. 20.000.000.000</h5>
@@ -63,19 +63,19 @@
                 </div>
             </div>
             <div class="col-lg-8">
-                <h5>Items Receipt History</h5>
+                <h5>Histori Penerimaan Item</h5>
                 <hr>
                 <div class="table-responsive">
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="itemReceiptTable">
                         <thead>
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                 <th class="min-w-50px">No</th>
-                                <th class="min-w-80px">Delivery Number</th>
-                                <th class="min-w-80px">Receipt Date</th>
-                                <th class="min-w-80px">PO Number</th>
-                                <th class="min-w-80px">Order Date</th>
+                                <th class="min-w-80px">No Pengiriman</th>
+                                <th class="min-w-80px">Tanggal Diterima</th>
+                                <th class="min-w-80px">Nomor PO</th>
+                                <th class="min-w-80px">Tanggal Order</th>
                                 <th class="min-w-80px">Qty</th>
-                                <th class="min-w-100px">Price</th>
+                                <th class="min-w-100px">Harga</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 fw-bold">

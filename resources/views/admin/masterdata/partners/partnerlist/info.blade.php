@@ -11,15 +11,15 @@
                         <h5 class="card-title fw-bolder text-white text-center">{{ $partner->name }}</h5>
                     </div>
                     <div class="card-body">
-                        <p class="text-white">Code : {{ $partner->code }}</p>
-                        <p>Type : {{ $partner->partnertype->name }}</p>
-                        <p>Phone :{{ $partner->phone }}</p>
+                        <p class="text-white">Kode : {{ $partner->code }}</p>
+                        <p>Tipe : {{ $partner->partnertype->name }}</p>
+                        <p>No Telp :{{ $partner->phone }}</p>
                         <p>Fax : {{ $partner->fax }}</p>
                         <p>Email : {{ $partner->email }}</p>
-                        <p>Address : {{ $partner->address }}</p>
-                        <p>Ship Address : {{ $partner->ship_address }}</p>
+                        <p>Alamat : {{ $partner->address }}</p>
+                        <p>Alamat Pengiriman : {{ $partner->ship_address }}</p>
                         <p>Bank : {{ $partner->bank_name }}</p>
-                        <p>Account Number : {{ $partner->account_number }}</p>
+                        <p>Nomor Bank : {{ $partner->account_number }}</p>
                     </div>
                     <div class="card-footer">
                         {{ $partner->status }}
@@ -27,7 +27,7 @@
                 </div>
                 <div class="card card-bordered mb-5 bg-info">
                     <div class="card-header">
-                        <h5 class="card-title fw-bolder text-white text-center">Sales</h5>
+                        <h5 class="card-title fw-bolder text-white text-center">Penjualan</h5>
                     </div>
                     <div class="card-body">
                         <h5 class="text-white fw-bolder">Rp. 20.000.000.000</h5>
@@ -65,11 +65,11 @@
                         <thead>
                             <tr class="fw-bolder fs-7 text-gray-600 text-uppercase">
                                 <th>No</th>
-                                <th>Item Code</th>
-                                <th>Item Name</th>
+                                <th>Kode Item</th>
+                                <th>Nama</th>
                                 <th>Unit</th>
-                                <th>Stock</th>
-                                <th>Buy Price</th>
+                                <th>Stok</th>
+                                <th>Harga Beli</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-600">

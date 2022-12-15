@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4>Create New UOM</h4>
+        <h4>Buat UOM Baru</h4>
     </div>
     <div class="card-body">
         <form id="add-form">
@@ -30,10 +30,10 @@
 
             <div class="d-flex justify-content-end" id="loadingnya">
                 <div class="py-2">
-                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Discard</button>
+                    <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Kembali</button>
                 </div>
                 <div class="py-2">
-                    <button class="btn btn-sm btn-primary" id="btn-add">Add UOM</button>
+                    <button class="btn btn-sm btn-primary" id="btn-add">Buat UOM</button>
                 </div>
             </div>
         </form>

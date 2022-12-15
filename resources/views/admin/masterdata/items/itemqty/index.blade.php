@@ -10,7 +10,7 @@
             <div class="card-header border-0">
                 <div class="card-title align-items-start flex-column">
                     <div class="d-flex align-items-center position-relative my-1">
-                       <h5>Item Qty</h5>
+                       <h5>Item Quantity</h5>
                     </div>
                     <div class="d-flex align-items-center position-relative my-1">
                         <div class="form-group">
@@ -22,12 +22,12 @@
                     </div>
                 </div>
                 <div class="card-toolbar">
-                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
+                    {{-- <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                         @can('edit', ['/admin/masterdata/itemqty'])
                         <button type="button" class="btn btn-primary me-3" onclick="addQtyModal()">
                         Add Price</button>
                         @endcan
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>
@@ -36,12 +36,12 @@
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th class="min-w-20px">No</th>
-                            <th class="min-w-70px ">Item Code</th>
-                            <th class="min-w-70px ">Item Name</th>
-                            <th class="min-w-70px ">Partner Name</th>
-                            <th class="min-w-70px ">Base Qty</th>
+                            <th class="min-w-70px ">Kode Item</th>
+                            <th class="min-w-70px ">Nama Item</th>
+                            <th class="min-w-70px ">Partner</th>
+                            <th class="min-w-70px ">Stok</th>
                             <th class="min-w-70px ">Unit Box</th>
-                            <th class="min-w-70px ">Qty Receive</th>
+                            <th class="min-w-70px ">Qty Diterima</th>
                             <th class="min-w-70px ">Qty Discount</th>
                             <th class="min-w-70px ">Qty Bonus</th>
                             <th class="min-w-70px ">Status</th>
