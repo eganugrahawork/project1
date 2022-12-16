@@ -186,7 +186,7 @@
                         $('#notifycountnya').remove();
                     } else {
                         $('#notifycountnya').html(
-                            '<span class="position-absolute top-0 start-100 translate-middle  badge badge-circle badge-primary">' +
+                            '<span class="position-absolute top-0 start-100 translate-middle   badge badge-circle badge-warning">' +
                             data + '</span>');
                     }
                 });

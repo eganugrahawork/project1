@@ -278,7 +278,7 @@
                         $('#content').hide();
                         $('#indexContent').show();
                         $('#searchtableSelling').focus()
-                        // tableInvoice.ajax.reload()
+                        tableSelling.ajax.reload()
                     },
                     error: function(response) {
                         // Handle error

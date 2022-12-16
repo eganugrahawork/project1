@@ -11,7 +11,7 @@
                 <div class="card-header border-0">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative my-1">
-                            <h5 class="fw-bolder text-gray-600">Selling Invoice</h5>
+                            <h5 class="fw-bolder text-gray-600">Invoice Penjualan</h5>
                         </div>
                         <div class="d-flex align-items-center position-relative my-1">
                             <div class="form-group">
@@ -28,7 +28,7 @@
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                             @can('create', ['/admin/selling/invoice'])
                                 <button type="button" class="btn btn-primary me-3" onclick="create()">
-                                    Create Invoice</button>
+                                    Tambah Invoice</button>
                             @endcan
                         </div>
 
@@ -37,7 +37,7 @@
                 <div class="card-body pt-0">
                     <div class="d-flex justify-content-start col-lg-4">
                         <select name="status" id="status" class="form-select form-select-md select-2">
-                            <option value="0">All</option>
+                            <option value="0">Semua</option>
                             <option value="1">Lunas</option>
                             <option value="2">Belum Lunas</option>
                         </select>
@@ -56,7 +56,7 @@
                         <thead>
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Number Invoice
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Nomor Invoice
                                 </th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Invoice Date</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Due Date</th>

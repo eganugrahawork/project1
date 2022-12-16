@@ -10,7 +10,7 @@
                 <div class="card-header border-0">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative my-1">
-                            <h5 class="fw-bolder text-gray-600">Procurement Report</h5>
+                            <h5 class="fw-bolder text-gray-600">Laporan Procurement</h5>
                         </div>
                     </div>
                 </div>
