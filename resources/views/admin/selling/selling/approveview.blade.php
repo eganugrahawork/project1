@@ -384,7 +384,7 @@
                         )
                         tableSelling.ajax.reload(null, false);
                         $('#loading-add').html(
-                            '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Penjualan</button>'
+                            '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">+</button>'
                         )
 
                         $('#searchtableSelling').focus()

@@ -10,7 +10,7 @@
                 <div class="card-header border-0">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative my-1">
-                            <h2>Penjualan</h2>
+                            <h5 class="fw-bolder text-gray-600">Penjualan</h5>
                         </div>
                     </div>
                     <div class="card-toolbar">
@@ -85,7 +85,7 @@
                 $('#indexContent').hide()
                 $('#content').html(data)
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">+</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">+</button>'
                 )
             })
         }
@@ -98,7 +98,7 @@
                 $('#indexContent').hide()
                 $('#content').html(data)
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">+</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">+</button>'
                 )
             })
         }
@@ -111,7 +111,7 @@
                 $('#indexContent').hide()
                 $('#content').html(data)
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">+</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">+</button>'
                 )
             })
         }
@@ -122,7 +122,7 @@
                 $('#indexContent').hide()
                 $('#content').html(data)
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">+</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">+</button>'
                 )
             })
         }
@@ -197,7 +197,7 @@
                                 'success'
                             )
                             tableSelling.ajax.reload(null, false);
-                            $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="create()">Create Seling</button>')
+                            $('#loading-add').html('<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Create Seling</button>')
                         }
                     })
 
