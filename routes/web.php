@@ -396,6 +396,10 @@ Route::middleware('auth')->controller(SellingController::class)->group(function 
     Route::get('/admin/selling/selling/list', 'list');
     Route::get('/admin/selling/selling/create', 'create');
     Route::post('/admin/selling/selling/store', 'store');
+    Route::get('/admin/selling/selling/edit/{id}', 'edit');
+    Route::get('/admin/selling/selling/info/{id}', 'info');
+    Route::get('/admin/selling/selling/approveview/{id}', 'approveview');
+    Route::get('/admin/selling/selling/approve/{id}', 'approve');
     Route::get('/admin/selling/selling/delete/{id}', 'destroy');
     Route::get('/admin/selling/selling/getdatacustomer/{id}', 'getdatacustomer');
     Route::get('/admin/selling/selling/getdetailitem/{id}', 'getdetailitem');

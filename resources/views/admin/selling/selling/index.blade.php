@@ -14,18 +14,18 @@
                         </div>
                     </div>
                     <div class="card-toolbar">
-                        <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
-                            @can('create', ['/admin/selling/selling'])
-                                <button type="button" class="btn btn-primary me-3" onclick="create()">
-                                    Tambah Penjualan</button>
-                            @endcan
-                        </div>
 
                     </div>
                 </div>
                 <div class="card-body pt-0">
                     <div class="row">
                         <div class="col-lg-3 d-flex">
+                            <div class="d-flex" data-kt-customer-table-toolbar="base" id="loading-add">
+                                @can('create', ['/admin/selling/selling'])
+                                    <button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">
+                                        +</button>
+                                @endcan
+                            </div>
                             <select name="month" id="month" class="form-select form-select-md select-2">
                                 @foreach ($month as $m)
                                     <option value="{{ $m }}">{{ $m }}</option>
@@ -36,7 +36,7 @@
                                     <option value="{{ $y }}">{{ $y }}</option>
                                 @endforeach
                             </select>
-                            <a class="btn btn-sm btn-primary input-group-text" onclick=""><i
+                            <a class="btn btn-sm btn-info input-group-text" onclick=""><i
                                     class="lab la-searchengin"></i></a>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                 $('#indexContent').hide()
                 $('#content').html(data)
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Penjualan</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">+</button>'
                 )
             })
         }
@@ -94,11 +94,11 @@
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/selling/selling/edit') }}/" + id, {}, function(data, status) {
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
-                $('#loading-add').html('')
+                $('#content').show()
+                $('#indexContent').hide()
+                $('#content').html(data)
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Penjualan</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">+</button>'
                 )
             })
         }
@@ -107,21 +107,23 @@
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/selling/selling/info') }}/" + id, {}, function(data, status) {
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
-                $('#loading-add').html('')
+                $('#content').show()
+                $('#indexContent').hide()
+                $('#content').html(data)
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">+</button>'
                 )
             })
         }
         function approve(id){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/selling/selling/approveview') }}/"+id, {}, function(data, status){
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
-                $('#loading-add').html('')
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="addPoModal()">Add Purchase Order</button>')
+                $('#content').show()
+                $('#indexContent').hide()
+                $('#content').html(data)
+                $('#loading-add').html(
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">+</button>'
+                )
             })
         }
         function tutupContent() {
