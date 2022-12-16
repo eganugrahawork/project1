@@ -3,9 +3,12 @@
 
 use App\Http\Controllers\Admin\Accounting\AssetController;
 use App\Http\Controllers\Admin\Accounting\BukuBesarPembantuController;
+use App\Http\Controllers\Admin\Accounting\FinanceReportController;
 use App\Http\Controllers\Admin\Accounting\JurnalPenyesuaianController;
 use App\Http\Controllers\Admin\Accounting\LabaRugiController;
 use App\Http\Controllers\Admin\Accounting\NeracaController;
+use App\Http\Controllers\Admin\Accounting\PayableReportController;
+use App\Http\Controllers\Admin\Accounting\ReceivableReportController;
 use App\Http\Controllers\Admin\Cashier\CashierController;
 use App\Http\Controllers\Admin\Configuration\ConfigurationController;
 use App\Http\Controllers\Admin\CustomerController;
@@ -496,6 +499,25 @@ Route::middleware('auth')->controller(NeracaController::class)->group(function()
     Route::get('/admin/accounting/neraca','index');
 });
 // End Neraca
+
+// Finance Report
+Route::middleware('auth')->controller(FinanceReportController::class)->group(function(){
+    Route::get('/admin/accounting/financereport','index');
+});
+// End Finance Report
+
+// Payable Report
+Route::middleware('auth')->controller(PayableReportController::class)->group(function(){
+    Route::get('/admin/accounting/payablereport','index');
+});
+// End Payable Report
+
+// Receivable Report
+Route::middleware('auth')->controller(ReceivableReportController::class)->group(function(){
+    Route::get('/admin/accounting/receivablereport','index');
+});
+// End Receivable Report
+
 
 //Blocked Page Start
 Route::get('/blocked', function () {

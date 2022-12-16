@@ -14,21 +14,48 @@
                             <h5 class="fw-bolder text-gray-600">Asset</h5>
                         </div>
                     </div>
-
-                    <div class="card-toolbar">
-
-                    </div>
                 </div>
                 <div class="card-body pt-0">
-                    <div class="d-flex justify-content-start col-lg-4">
-                        <select name="month" id="month" class="form-select form-select-md select-2">
-                            <option value="0">Desember</option>
-                        </select>
-                        <select name="years" id="years" class="form-select form-select-md select-2">
-                            <option value="0">2020</option>
-                        </select>
-                        <button class="btn btn-sm btn-primary input-group-text" type="button"><i
-                                class="lab la-searchengin"></i></a>
+                    <div class="d-flex justify-content-start col-lg-12">
+                        <div class="col-lg-2">
+                            <select name="month" id="month" class="form-select form-select-md select-2">
+                                <option value="0">Desember</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2">
+                            <select name="years" id="years" class="form-select form-select-md select-2">
+                                <option value="0">2020</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-1">
+                            <button class="btn btn-sm btn-primary input-group-text" type="button"><i
+                                    class="lab la-searchengin"></i></button>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="d-flex justify-content-end">
+                                <div class="card col-lg-6">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <div class="numbers">
+                                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total </p>
+                                                    <h6 class="font-weight-bolder">
+                                                        Rp. 14.000.000.000
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 text-end">
+                                                <div
+                                                    class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                                                    <i class="ni ni-paper-diploma text-lg opacity-10"
+                                                        aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                     <div class="d-flex justify-content-end position-relative my-1">
@@ -40,22 +67,34 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="tableAsset">
+                        <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100"
+                            id="tableAsset">
                             <thead>
                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                     <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
-                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Asset</th>
-                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Keterangan
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Asset
                                     </th>
-                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal Pembelian</th>
-                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tahun</th>
-                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Bulan</th>
-                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal Akhir</th>
-                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Harga</th>
-                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Depresiasi Perbulan</th>
-                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Akumulasi Depresiasi 2021</th>
-                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Total Depresiasi</th>
-                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Book Value</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                        Keterangan
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal
+                                        Pembelian</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tahun
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Bulan
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal
+                                        Akhir</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Harga
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                        Depresiasi Perbulan</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Akumulasi
+                                        Depresiasi 2021</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Total
+                                        Depresiasi</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Book
+                                        Value</th>
                                     <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Aksi</th>
                                 </tr>
                             </thead>
