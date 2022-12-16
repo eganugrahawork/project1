@@ -1,6 +1,11 @@
 <?php
 // Admin
 
+use App\Http\Controllers\Admin\Accounting\AssetController;
+use App\Http\Controllers\Admin\Accounting\BukuBesarPembantuController;
+use App\Http\Controllers\Admin\Accounting\JurnalPenyesuaianController;
+use App\Http\Controllers\Admin\Accounting\LabaRugiController;
+use App\Http\Controllers\Admin\Accounting\NeracaController;
 use App\Http\Controllers\Admin\Cashier\CashierController;
 use App\Http\Controllers\Admin\Configuration\ConfigurationController;
 use App\Http\Controllers\Admin\CustomerController;
@@ -17,6 +22,10 @@ use App\Http\Controllers\Admin\Configuration\UserRoleController;
 
 // Dashboard
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
+use App\Http\Controllers\Admin\Finance\IncomeController;
+use App\Http\Controllers\Admin\Finance\PayableController;
+use App\Http\Controllers\Admin\Finance\ReceivableController;
+use App\Http\Controllers\Admin\Finance\SpendingController;
 use App\Http\Controllers\Admin\Inventory\ReportInventoryController;
 // End Dashboard
 
@@ -434,11 +443,59 @@ Route::middleware('auth')->controller(CashierController::class)->group(function 
 });
 //End Cashier
 
-// Cash Bank
-Route::middleware('auth')->controller()->group(function(){
-
+// Payable
+Route::middleware('auth')->controller(PayableController::class)->group(function(){
+    Route::get('/admin/finance/payable','index');
 });
-// Cash Bank End
+// Payable End
+
+// Receivable
+Route::middleware('auth')->controller(ReceivableController::class)->group(function(){
+    Route::get('/admin/finance/receivable','index');
+});
+// End Receivable
+
+// Income
+Route::middleware('auth')->controller(IncomeController::class)->group(function(){
+    Route::get('/admin/finance/income','index');
+});
+// End Income
+
+// Spending
+Route::middleware('auth')->controller(SpendingController::class)->group(function(){
+    Route::get('/admin/finance/spending','index');
+});
+// End Spending
+
+// Jurnal Penyesuaian
+Route::middleware('auth')->controller(JurnalPenyesuaianController::class)->group(function(){
+    Route::get('/admin/accounting/jurnal-penyesuaian','index');
+});
+// End Jurnal Penyesuaian
+
+// Asset
+Route::middleware('auth')->controller(AssetController::class)->group(function(){
+    Route::get('/admin/accounting/asset','index');
+});
+// End Asset
+
+// Buku Besar Pembantu
+Route::middleware('auth')->controller(BukuBesarPembantuController::class)->group(function(){
+    Route::get('/admin/accounting/buku-besar-pembantu','index');
+});
+// End Buku Besar Pembantu
+
+// Laba Rugi
+Route::middleware('auth')->controller(LabaRugiController::class)->group(function(){
+    Route::get('/admin/accounting/labarugi','index');
+});
+// End Laba Rugi
+
+// Neraca
+Route::middleware('auth')->controller(NeracaController::class)->group(function(){
+    Route::get('/admin/accounting/neraca','index');
+});
+// End Neraca
 
 //Blocked Page Start
 Route::get('/blocked', function () {

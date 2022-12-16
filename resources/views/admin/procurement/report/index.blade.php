@@ -52,38 +52,49 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="tableReport">
-                        <thead>
-                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal
-                                </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Kode Item
-                                </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Nama Item</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Kemasan</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Qty</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Harga</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Total Harga
-                                </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Vat</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Rp.PPN</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No Trans</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No Invoice
-                                </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Jatuh Tempo</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Lama Hari
-                                </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No Faktur
-                                </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal
-                                    Faktur Pajak</th>
-                            </tr>
-                        </thead>
-                        <tbody class="fw-bold text-md text-gray-600" style="border:none;">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100"
+                            id="tableReport">
+                            <thead>
+                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Kode Item
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Nama Item
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Kemasan
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Qty</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Harga
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Total
+                                        Harga
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Vat</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Rp.PPN
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No Trans
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No
+                                        Invoice
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Jatuh
+                                        Tempo</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Lama Hari
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No Faktur
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal
+                                        Faktur Pajak</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fw-bold text-md text-gray-600" style="border:none;">
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,7 +138,7 @@
             if (statusTable == true) {
                 $('#tableReport').DataTable().destroy();
             }
-             tableReport = $('#tableReport').DataTable({
+            tableReport = $('#tableReport').DataTable({
                 serverside: true,
                 processing: true,
                 bDestroy: true,

@@ -11,24 +11,15 @@
                 <div class="card-header border-0">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative my-1">
-                            <h5 class="fw-bolder text-gray-600">Invoice Penjualan</h5>
+                            <h5 class="fw-bolder text-gray-600">Jurnal Penyesuaian</h5>
                         </div>
-                        <div class="d-flex align-items-center position-relative my-1">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                                    <input class="form-control" placeholder="Search" id="searchTableInvoice" type="text">
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
 
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
-                            @can('create', ['/admin/selling/invoice'])
+                            @can('create', ['/admin/finance/income'])
                                 <button type="button" class="btn btn-primary me-3" onclick="create()">
-                                    Tambah Invoice</button>
+                                    Tambah Jurnal</button>
                             @endcan
                         </div>
 
@@ -36,11 +27,6 @@
                 </div>
                 <div class="card-body pt-0">
                     <div class="d-flex justify-content-start col-lg-4">
-                        <select name="status" id="status" class="form-select form-select-md select-2">
-                            <option value="0">Semua</option>
-                            <option value="1">Lunas</option>
-                            <option value="2">Belum Lunas</option>
-                        </select>
                         <select name="month" id="month" class="form-select form-select-md select-2">
                             <option value="0">Desember</option>
                         </select>
@@ -50,27 +36,35 @@
                         <button class="btn btn-sm btn-primary input-group-text" type="button"><i
                                 class="lab la-searchengin"></i></a>
 
-
                     </div>
-                    <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="tableInvoice">
-                        <thead>
-                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Nomor Invoice
-                                </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Invoice Date</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Due Date</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Partner</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Total</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Balance</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Status</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="fw-bold text-md text-gray-600" style="border:none;">
+                    <div class="d-flex justify-content-end position-relative my-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                <input class="form-control" placeholder="Search" id="searchtableJurnalPenyesuaian" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="tableJurnalPenyesuaian">
+                            <thead>
+                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Coa Debit
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Coa Kredit
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Total</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Keterangan</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fw-bold text-md text-gray-600" style="border:none;">
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -84,12 +78,12 @@
         function info(id) {
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/selling/invoice/info') }}/" + id, {}, function(data, status) {
+            $.get("{{ url('/admin/finance/income/info') }}/" + id, {}, function(data, status) {
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Invoice</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Jurnal</button>'
                 )
             })
         }
@@ -97,12 +91,12 @@
         function create() {
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/selling/invoice/create') }}", {}, function(data, status) {
+            $.get("{{ url('/admin/finance/income/create') }}", {}, function(data, status) {
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Invoice</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Jurnal</button>'
                 )
             })
         }
@@ -110,12 +104,12 @@
         function edit(id) {
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/selling/invoice/edit') }}/" + id, {}, function(data, status) {
+            $.get("{{ url('/admin/finance/income/edit') }}/" + id, {}, function(data, status) {
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Invoice</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Jurnal</button>'
                 )
             })
         }
@@ -123,39 +117,62 @@
         function tutupContent() {
             $('#content').hide()
             $('#indexContent').show()
-            $('#searchTableInvoice').focus();
+            $('#searchtableJurnalPenyesuaian').focus();
 
         }
 
-        var tableInvoice =  $('#tableInvoice').DataTable({
-            serverside : true,
-            processing : true,
-            ajax : {
-                    url : "{{ url('/admin/selling/invoice/list') }}"
-                    },
-                    columns:
-                    [
-                    {
+        var tableJurnalPenyesuaian = $('#tableJurnalPenyesuaian').DataTable({
+            serverside: true,
+            processing: true,
+            ajax: {
+                url: "{{ url('/admin/finance/income/list') }}"
+            },
+            columns: [{
                     data: 'DT_RowIndex',
                     searchable: false
                 },
-                    {data: 'invoice_number', name: 'invoice_number'},
-                    {data: 'invoice_date', name: 'invoice_date'},
-                    {data: 'due_date', name: 'due_date'},
-                    {data: 'name', name: 'name'},
-                    {data: 'price', name: 'price',
-                    render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')},
-                    {data: 'balance', name: 'balance', render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')},
-                    {data: 'status', name: 'status'},
-                    {data: 'action', name: 'action'}
-                    ],
+                {
+                    data: 'invoice_number',
+                    name: 'invoice_number'
+                },
+                {
+                    data: 'invoice_date',
+                    name: 'invoice_date'
+                },
+                {
+                    data: 'due_date',
+                    name: 'due_date'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'price',
+                    name: 'price',
+                    render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')
+                },
+                {
+                    data: 'balance',
+                    name: 'balance',
+                    render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'action',
+                    name: 'action'
+                }
+            ],
             "bLengthChange": false,
             "bFilter": true,
             "bInfo": false
         });
 
-        $('#searchTableInvoice').keyup(function () {
-                tableInvoice.search($(this).val()).draw()
+        $('#searchtableJurnalPenyesuaian').keyup(function() {
+            tableJurnalPenyesuaian.search($(this).val()).draw()
         });
 
         $(document).on('click', '#deleteInvoice', function(e) {
@@ -192,9 +209,9 @@
                                 response.success,
                                 'success'
                             )
-                            tableInvoice.ajax.reload(null, false);
+                            tableJurnalPenyesuaian.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Item Receipt</button>'
+                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Jurnal</button>'
                             )
                         }
                     })
@@ -204,7 +221,7 @@
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
                     swalWithBootstrapButtons.fire(
-                        'Cancelled',
+                        'Dibatalkan',
                         'Data anda masih aman :)',
                         'success'
                     )

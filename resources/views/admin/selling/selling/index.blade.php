@@ -50,7 +50,8 @@
                                     <div class="row">
                                         <div class="col-8">
                                             <div class="numbers">
-                                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Penjualan Perbulan</p>
+                                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Penjualan Perbulan
+                                                </p>
                                                 <h5 class="font-weight-bolder">
                                                     Rp. 53.000
                                                 </h5>
@@ -75,24 +76,27 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="tableSelling">
-                        <thead>
-                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="min-w-20px">No</th>
-                                <th class="min-w-70px ">Nomor</th>
-                                <th class="min-w-70px ">Pelanggan</th>
-                                <th class="min-w-70px ">Tanggal</th>
-                                <th class="min-w-70px ">Total</th>
-                                <th class="min-w-70px ">Jatuh Tempo</th>
-                                <th class="min-w-70px ">Penjual</th>
-                                <th class="min-w-70px ">Status</th>
-                                <th class="min-w-50px">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody class="fw-bold text-gray-600">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100"
+                            id="tableSelling">
+                            <thead>
+                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                    <th class="min-w-20px">No</th>
+                                    <th class="min-w-70px ">Nomor</th>
+                                    <th class="min-w-70px ">Pelanggan</th>
+                                    <th class="min-w-70px ">Tanggal</th>
+                                    <th class="min-w-70px ">Total</th>
+                                    <th class="min-w-70px ">Jatuh Tempo</th>
+                                    <th class="min-w-70px ">Penjual</th>
+                                    <th class="min-w-70px ">Status</th>
+                                    <th class="min-w-50px">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fw-bold text-gray-600">
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

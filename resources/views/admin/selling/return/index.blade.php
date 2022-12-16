@@ -10,7 +10,7 @@
                 <div class="card-header border-0">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative my-1">
-                            <h5 class="fw-bolder fs-4 text-gray-600">Selling Return</h5>
+                            <h5 class="fw-bolder fs-4 text-gray-600">Return Penjualan</h5>
                         </div>
                         <div class="d-flex align-items-center position-relative my-1">
                             <div class="form-group">
@@ -25,30 +25,41 @@
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                             @can('create', ['/admin/procurement/retur'])
                                 <button type="button" class="btn btn-primary me-3" onclick="create()">
-                                    Create Retur</button>
+                                    Tambahkan Return</button>
                             @endcan
                         </div>
 
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="tableRetur">
-                        <thead>
-                            <tr class="text-start text-uppercase text-gray-400 fw-bolder fs-7 gs-0">
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Invoice</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Partner</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Retur Date
-                                </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Qty Retur</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Status</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="fw-bold text-gray-600" style="border:none;">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="tableRetur">
+                            <thead>
+                                <tr class="text-start text-uppercase text-gray-400 fw-bolder fs-7 gs-0">
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Nomor
+                                        Penjualan</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Partner
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Tanggal
+                                        Penjualan
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Pengaju
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Jatuh
+                                        Tempo</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal
+                                        Return</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Status
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fw-bold text-gray-600" style="border:none;">
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -66,7 +77,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambahkan Return</button>'
                 )
             })
         }
@@ -79,7 +90,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambahkan Return</button>'
                 )
             })
         }
@@ -92,7 +103,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambahkan Return</button>'
                 )
             })
         }
@@ -105,7 +116,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
+                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambahkan Return</button>'
                 )
             })
         }
@@ -198,7 +209,7 @@
                             )
                             tableRetur.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
+                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambahkan Return</button>'
                             )
                         }
                     })
@@ -252,7 +263,7 @@
                                 'success'
                             )
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Create Retur</button>'
+                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambahkan Return</button>'
                             )
                         }
                     })
