@@ -428,7 +428,9 @@ Route::middleware('auth')->controller(InvoiceSellingController::class)->group(fu
 // Return Selling
 Route::middleware('auth')->controller(ReturnSellingController::class)->group(function () {
     Route::get('/admin/selling/return', 'index');
-    Route::get('/admin/selling/return/list/{partner_id}/{date_range}', 'list');
+    Route::get('/admin/selling/return/create', 'create');
+    Route::get('/admin/selling/return/list/{partner_id}', 'list');
+    Route::get('/admin/selling/return/getdata/{id}', 'getdata');
 });
 // End Return Selling
 
@@ -449,30 +451,37 @@ Route::middleware('auth')->controller(CashierController::class)->group(function 
 // Payable
 Route::middleware('auth')->controller(PayableController::class)->group(function(){
     Route::get('/admin/finance/payable','index');
+    Route::get('/admin/finance/payable/history','history');
+    Route::get('/admin/finance/payable/create','create');
 });
 // Payable End
 
 // Receivable
 Route::middleware('auth')->controller(ReceivableController::class)->group(function(){
     Route::get('/admin/finance/receivable','index');
+    Route::get('/admin/finance/receivable/history','history');
+    Route::get('/admin/finance/receivable/create','create');
 });
 // End Receivable
 
 // Income
 Route::middleware('auth')->controller(IncomeController::class)->group(function(){
     Route::get('/admin/finance/income','index');
+    Route::get('/admin/finance/income/create','create');
 });
 // End Income
 
 // Spending
 Route::middleware('auth')->controller(SpendingController::class)->group(function(){
     Route::get('/admin/finance/spending','index');
+    Route::get('/admin/finance/spending/create','create');
 });
 // End Spending
 
 // Jurnal Penyesuaian
 Route::middleware('auth')->controller(JurnalPenyesuaianController::class)->group(function(){
     Route::get('/admin/accounting/jurnal-penyesuaian','index');
+    Route::get('/admin/accounting/jurnal-penyesuaian/create','create');
 });
 // End Jurnal Penyesuaian
 

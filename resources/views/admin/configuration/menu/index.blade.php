@@ -495,7 +495,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="kontennya">
+                <div class="modal-body scroll-y mx-5 mx-xl-15 my-3" id="kontennya">
                     <!--Content-->
                 </div>
             </div>
@@ -503,7 +503,7 @@
     </div>
 
     <div class="modal fade" id="accessModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mw-1000px">
+        <div class="modal-dialog modal-dialog-centered mw-800px">
             <div class="modal-content">
                 <div class="modal-header" id="accessModal_header">
                     <h2 class="fw-bolder">Config</h2>
@@ -519,7 +519,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="contentAccess">
+                <div class="modal-body scroll-y mx-5 mx-xl-15 my-3" id="contentAccess">
                     <!--Content-->
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4>Create Sales</h4>
+        <h4>Tambah Penjualan</h4>
     </div>
     <div class="card-body">
         <form id="createSales" class="form">

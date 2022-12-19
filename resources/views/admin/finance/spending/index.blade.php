@@ -18,7 +18,7 @@
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                             @can('create', ['/admin/finance/spending'])
-                                <button type="button" class="btn btn-primary me-3" onclick="create()">
+                                <button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">
                                     Tambah Pengeluaran</button>
                             @endcan
                         </div>
@@ -88,7 +88,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Pengeluaran</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Pengeluaran</button>'
                 )
             })
         }
@@ -101,7 +101,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Pengeluaran</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Pengeluaran</button>'
                 )
             })
         }
@@ -114,7 +114,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Pengeluaran</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Pengeluaran</button>'
                 )
             })
         }
@@ -216,7 +216,7 @@
                             )
                             tableSpending.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Pengeluaran</button>'
+                                '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Pengeluaran</button>'
                             )
                         }
                     })

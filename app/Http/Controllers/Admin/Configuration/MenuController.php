@@ -10,7 +10,6 @@ use App\Models\MenuAccess;
 use App\Models\Region;
 use App\Models\UserActivity;
 use App\Models\UserRole;
-use App\Models\UserSubmenu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

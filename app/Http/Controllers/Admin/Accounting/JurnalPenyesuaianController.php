@@ -11,4 +11,7 @@ class JurnalPenyesuaianController extends Controller
     public function index(){
         return view('admin.accounting.jurnal_penyesuaian.index');
     }
+    public function create(){
+        return view('admin.accounting.jurnal_penyesuaian.create');
+    }
 }

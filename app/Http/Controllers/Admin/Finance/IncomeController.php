@@ -11,4 +11,8 @@ class IncomeController extends Controller
     public function index(){
         return view('admin.finance.income.index');
     }
+
+    public function create(){
+        return view('admin.finance.income.create');
+    }
 }

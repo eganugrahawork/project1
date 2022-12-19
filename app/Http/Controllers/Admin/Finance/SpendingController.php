@@ -11,4 +11,7 @@ class SpendingController extends Controller
     public function index(){
         return view('admin.finance.spending.index');
     }
+    public function create(){
+        return view('admin.finance.spending.create');
+    }
 }

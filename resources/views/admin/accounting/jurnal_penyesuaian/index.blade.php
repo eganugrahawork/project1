@@ -17,8 +17,8 @@
 
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
-                            @can('create', ['/admin/finance/income'])
-                                <button type="button" class="btn btn-primary me-3" onclick="create()">
+                            @can('create', ['/admin/accounting/jurnal-penyesuaian'])
+                                <button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">
                                     Tambah Jurnal</button>
                             @endcan
                         </div>
@@ -78,12 +78,12 @@
         function info(id) {
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/finance/income/info') }}/" + id, {}, function(data, status) {
+            $.get("{{ url('/admin/accounting/jurnal-penyesuaian/info') }}/" + id, {}, function(data, status) {
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Jurnal</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Jurnal</button>'
                 )
             })
         }
@@ -91,12 +91,12 @@
         function create() {
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/finance/income/create') }}", {}, function(data, status) {
+            $.get("{{ url('/admin/accounting/jurnal-penyesuaian/create') }}", {}, function(data, status) {
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Jurnal</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Jurnal</button>'
                 )
             })
         }
@@ -104,12 +104,12 @@
         function edit(id) {
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/finance/income/edit') }}/" + id, {}, function(data, status) {
+            $.get("{{ url('/admin/accounting/jurnal-penyesuaian/edit') }}/" + id, {}, function(data, status) {
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Jurnal</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Jurnal</button>'
                 )
             })
         }
@@ -125,7 +125,7 @@
             serverside: true,
             processing: true,
             ajax: {
-                url: "{{ url('/admin/finance/income/list') }}"
+                url: "{{ url('/admin/accounting/jurnal-penyesuaian/list') }}"
             },
             columns: [{
                     data: 'DT_RowIndex',
@@ -211,7 +211,7 @@
                             )
                             tableJurnalPenyesuaian.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Jurnal</button>'
+                                '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Jurnal</button>'
                             )
                         }
                     })

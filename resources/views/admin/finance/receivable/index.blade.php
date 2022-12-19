@@ -18,7 +18,7 @@
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                             @can('create', ['/admin/finance/receivable'])
-                                <button type="button" class="btn btn-primary me-3" onclick="create()">
+                                <button type="button" class="btn btn-sm btn-primary me-3" onclick="paymentHistory()">
                                     Pembayaran</button>
                             @endcan
                         </div>
@@ -90,21 +90,31 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Pembayaran</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="paymentHistory()">Pembayaran</button>'
+                )
+            })
+        }
+
+        function paymentHistory() {
+            $('#loading-add').html(
+                '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/finance/receivable/history') }}", {}, function(data, status) {
+                $('#indexContent').hide();
+                $('#content').html(data)
+                $('#content').show()
+                $('#loading-add').html(
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="paymentHistory()">Pembayaran</button>'
                 )
             })
         }
 
         function create() {
-            $('#loading-add').html(
+            $('#loading-ah').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/finance/receivable/create') }}", {}, function(data, status) {
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
-                $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Pembayaran</button>'
-                )
             })
         }
 
@@ -116,7 +126,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Pembayaran</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="paymentHistory()">Pembayaran</button>'
                 )
             })
         }
@@ -126,6 +136,17 @@
             $('#indexContent').show()
             $('#searchtableReceivable').focus();
 
+        }
+
+        function backHistory(){
+            $('#loadingnya').html(
+                '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/finance/receivable/history') }}", {}, function(data, status) {
+                $('#indexContent').hide();
+                $('#content').html(data)
+                $('#content').show()
+                $('#searchtableHistory').focus()
+            })
         }
 
         var tableReceivable = $('#tableReceivable').DataTable({
@@ -218,7 +239,7 @@
                             )
                             tableReceivable.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Pembayaran</button>'
+                                '<button type="button" class="btn btn-sm btn-primary me-3" onclick="paymentHistory()">Pembayaran</button>'
                             )
                         }
                     })

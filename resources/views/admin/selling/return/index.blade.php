@@ -72,7 +72,7 @@
         function create() {
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/retur/create') }}", {}, function(data, status) {
+            $.get("{{ url('/admin/selling/return/create') }}", {}, function(data, status) {
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
@@ -85,7 +85,7 @@
         function edit(id) {
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/retur/edit') }}/" + id, {}, function(data, status) {
+            $.get("{{ url('/admin/selling/return/edit') }}/" + id, {}, function(data, status) {
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
@@ -98,7 +98,7 @@
         function info(id) {
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/retur/info') }}/" + id, {}, function(data, status) {
+            $.get("{{ url('/admin/selling/return/info') }}/" + id, {}, function(data, status) {
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
@@ -111,7 +111,7 @@
         function approve(id) {
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/procurement/retur/approveview') }}/" + id, {}, function(data, status) {
+            $.get("{{ url('/admin/selling/return/approveview') }}/" + id, {}, function(data, status) {
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
@@ -132,7 +132,7 @@
             serverside: true,
             processing: true,
             ajax: {
-                url: "{{ url('/admin/procurement/retur/list') }}"
+                url: "{{ url('/admin/selling/return/list') }}"
             },
             columns: [{
                     data: 'DT_RowIndex',
@@ -229,7 +229,7 @@
 
         function exportPDF(id) {
             // e.preventDefault();
-            const href = "{{ url('/admin/procurement/purchase-order/exportpdf') }}/" + id
+            const href = "{{ url('/admin/selling/return/exportpdf') }}/" + id
             console.log(href);
 
             const swalWithBootstrapButtons = Swal.mixin({

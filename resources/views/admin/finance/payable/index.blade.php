@@ -7,7 +7,6 @@
         <div class="col-12">
             <div id="content"></div>
             <div class="card" id="indexContent">
-
                 <div class="card-header border-0">
                     <div class="card-title align-items-start flex-column">
                         <div class="d-flex align-items-center position-relative my-1">
@@ -18,7 +17,7 @@
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                             @can('create', ['/admin/finance/payable'])
-                                <button type="button" class="btn btn-primary me-3" onclick="create()">
+                                <button type="button" class="btn btn-sm btn-primary me-3" onclick="paymentHistory()">
                                     Pembayaran</button>
                             @endcan
                         </div>
@@ -51,7 +50,8 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="tablePayable">
+                        <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100"
+                            id="tablePayable">
                             <thead>
                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                     <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
@@ -96,21 +96,31 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Pembayaran</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="paymentHistory()">Pembayaran</button>'
+                )
+            })
+        }
+
+        function paymentHistory() {
+            $('#loading-add').html(
+                '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/finance/payable/history') }}", {}, function(data, status) {
+                $('#indexContent').hide();
+                $('#content').html(data)
+                $('#content').show()
+                $('#loading-add').html(
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="paymentHistory()">Pembayaran</button>'
                 )
             })
         }
 
         function create() {
-            $('#loading-add').html(
+            $('#loading-ah').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/finance/payable/create') }}", {}, function(data, status) {
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
-                $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Pembayaran</button>'
-                )
             })
         }
 
@@ -122,7 +132,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Pembayaran</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="paymentHistory()">Pembayaran</button>'
                 )
             })
         }
@@ -132,6 +142,18 @@
             $('#indexContent').show()
             $('#searchtablePayable').focus();
 
+        }
+
+        function backHistory(){
+            $('#loadingnya').html(
+                '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/finance/payable/history') }}", {}, function(data, status) {
+                $('#indexContent').hide();
+                $('#content').html(data)
+                $('#content').show()
+                $('#searchtableHistory').focus()
+
+            })
         }
 
         var tablePayable = $('#tablePayable').DataTable({
@@ -224,7 +246,7 @@
                             )
                             tablePayable.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Pembayaran</button>'
+                                '<button type="button" class="btn btn-sm btn-primary me-3" onclick="paymentHistory()">Pembayaran</button>'
                             )
                         }
                     })
