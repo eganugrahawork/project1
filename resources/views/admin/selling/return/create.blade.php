@@ -3,11 +3,12 @@
         <h4>Tambah Retur Penjualan</h4>
     </div>
     <div class="card-body">
-        <form id="createSales" class="form">
+        <form id="createReturn" class="form">
             <div class="row">
                 <div class="col-lg-6">
                     @csrf
                     <div class="fv-row mb-3">
+                        <input type="hidden" name="invoice_id" id="invoice_id">
                         <label class="required fw-bold fs-6 mb-2">Nomor Penjualan</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="sales_id"
                             id="sales_id" onchange="getData()" required>
@@ -134,7 +135,7 @@
 </script>
 
 <script>
-    $('#createSales').submit(function(event) {
+    $('#createReturn').submit(function(event) {
         event.preventDefault();
 
         const swalWithBootstrapButtons = Swal.mixin({
@@ -159,9 +160,9 @@
                     '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span>'
                 )
                 $.ajax({
-                    url: "{{ url('/admin/selling/selling/store') }}",
+                    url: "{{ url('/admin/selling/return/store') }}",
                     type: 'post',
-                    data: $('#createSales')
+                    data: $('#createReturn')
                         .serialize(), // Remember that you need to have your csrf token included
                     dataType: 'json',
                     success: function(response) {
@@ -172,8 +173,8 @@
                         )
                         $('#content').hide();
                         $('#indexContent').show();
-                        $('#searchtableSelling').focus()
-                        tableSelling.ajax.reload()
+                        $('#searchtableRetur').focus()
+                        tableRetur.ajax.reload()
                     },
                     error: function(response) {
                         // Handle error
@@ -204,6 +205,7 @@
             $('#att').val(data.att)
             $('#phone').val(data.phone)
             $('#email').val(data.email)
+            $('#invoice_id').val(data.invoice_id)
             $('#term_of_payment').val(data.term_of_payment)
             $('#credit_limit').val(data.credit_limit)
             $('#credit_balance').val(data.credit_balance)

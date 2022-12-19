@@ -17,7 +17,7 @@
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                             @can('create', ['/admin/cashier'])
-                                <button type="button" class="btn btn-sm btn-primary me-3" onclick="cashierModal()">
+                                <button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">
                                     Cashier</button>
                             @endcan
                         </div>
@@ -526,67 +526,47 @@
         <!--end::Post-->
     </div>
 
-    {{-- Main Modal --}}
-    <div class="modal fade" id="mainmodal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mw-650px">
-            <div class="modal-content">
-                <div class="modal-header" id="mainmodal_header">
-                    <h2 class="fw-bolder">COA</h2>
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" onclick="tutupModal()">
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
-                                    rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1"
-                                    transform="rotate(45 7.41422 6)" fill="black" />
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="kontennya">
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- End Main Modal --}}
 @endsection
 
 @section('js')
     <script>
-        function cashierModal() {
+        function create() {
             $('#loading-add').html(
                 '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/masterdata/coa/cashierModal') }}", {}, function(data, status) {
+            $.get("{{ url('/admin/cashier/create') }}", {}, function(data, status) {
+                $('#indexContent').hide();
+                $('#content').html(data)
+                $('#content').show()
+                $('#loading-add').html(
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Jurnal</button>'
+                )
+            })
+        }
+
+        function edit(id) {
+            $('#loading-add').html(
+                '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+            $.get("{{ url('/admin/cashier/edit') }}/" + id, {}, function(data, status) {
                 $('#kontennya').html(data)
                 $('#mainmodal').modal('toggle')
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="cashierModal()">Cashier</button>'
+                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Cashier</button>'
                     )
             })
         }
 
-        function editModal(id) {
-            $('#loading-add').html(
-                '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
-            $.get("{{ url('/admin/masterdata/coa/editmodal') }}/" + id, {}, function(data, status) {
-                $('#kontennya').html(data)
-                $('#mainmodal').modal('toggle')
-                $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="cashierModal()">Cashier</button>'
-                    )
-            })
-        }
+        function tutupContent() {
+            $('#content').hide()
+            $('#indexContent').show()
+            $('#searchtableJurnalPenyesuaian').focus();
 
-        function tutupModal() {
-            $('#mainmodal').modal('toggle')
         }
 
         var coaTable = $('#coaTable').DataTable({
             serverside: true,
             processing: true,
             ajax: {
-                url: "{{ url('/admin/masterdata/coa/list') }}"
+                url: "{{ url('/admin/cashier/list') }}"
             },
             columns: [{
                     data: 'DT_RowIndex',
@@ -660,7 +640,7 @@
                             )
                             coaTable.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="cashierModal()">Cashier</button>'
+                                '<button type="button" class="btn btn-primary me-3" id="add-btn" onclick="create()">Cashier</button>'
                                 )
                         }
                     })
@@ -707,7 +687,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('/admin/masterdata/coa/store') }}",
+                    url: "{{ url('/admin/cashier/store') }}",
                     data: data,
                     dataType: 'json',
                     success: function(response) {
@@ -747,7 +727,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "{{ url('/admin/masterdata/coa/update') }}",
+                url: "{{ url('/admin/cashier/update') }}",
                 data: data,
                 dataType: 'json',
                 success: function(response) {

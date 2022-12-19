@@ -11,4 +11,8 @@ class CashierController extends Controller
     public function index(){
         return view('admin.cashier.index');
     }
+
+    public function create(){
+        return view('admin.cashier.create');
+    }
 }

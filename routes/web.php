@@ -429,7 +429,8 @@ Route::middleware('auth')->controller(InvoiceSellingController::class)->group(fu
 Route::middleware('auth')->controller(ReturnSellingController::class)->group(function () {
     Route::get('/admin/selling/return', 'index');
     Route::get('/admin/selling/return/create', 'create');
-    Route::get('/admin/selling/return/list/{partner_id}', 'list');
+    Route::post('/admin/selling/return/store', 'store');
+    Route::get('/admin/selling/return/list/{id}', 'list');
     Route::get('/admin/selling/return/getdata/{id}', 'getdata');
 });
 // End Return Selling
@@ -445,6 +446,7 @@ Route::middleware('auth')->controller(ReportSellingController::class)->group(fun
 //Cashier
 Route::middleware('auth')->controller(CashierController::class)->group(function () {
     Route::get('/admin/cashier', 'index');
+    Route::get('/admin/cashier/create', 'create');
 });
 //End Cashier
 
