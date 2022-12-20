@@ -23,7 +23,7 @@
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
-                            @can('create', ['/admin/procurement/retur'])
+                            @can('create', ['/admin/selling/return'])
                                 <button type="button" class="btn btn-primary me-3" onclick="create()">
                                     Tambahkan Return</button>
                             @endcan
@@ -139,20 +139,28 @@
                     searchable: false
                 },
                 {
-                    data: 'invoice_number',
-                    name: 'invoice_number'
+                    data: 'no_selling',
+                    name: 'no_selling'
                 },
                 {
                     data: 'name',
                     name: 'name'
                 },
                 {
-                    data: 'retur_date',
-                    name: 'retur_date'
+                    data: 'date_selling',
+                    name: 'date_selling'
                 },
                 {
-                    data: 'qty_return',
-                    name: 'qty_return'
+                    data: 'pengaju',
+                    name: 'pengaju'
+                },
+                {
+                    data: 'due_date',
+                    name: 'due_date'
+                },
+                {
+                    data: 'retur_date',
+                    name: 'retur_date'
                 },
                 {
                     data: 'status',
@@ -173,7 +181,7 @@
         });
 
 
-        $(document).on('click', '#deleteRetur', function(e) {
+        $(document).on('click', '#deleteReturn', function(e) {
             e.preventDefault();
             const href = $(this).attr('href');
 

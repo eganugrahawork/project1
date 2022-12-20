@@ -430,7 +430,13 @@ Route::middleware('auth')->controller(ReturnSellingController::class)->group(fun
     Route::get('/admin/selling/return', 'index');
     Route::get('/admin/selling/return/create', 'create');
     Route::post('/admin/selling/return/store', 'store');
-    Route::get('/admin/selling/return/list/{id}', 'list');
+    Route::get('/admin/selling/return/edit/{id}', 'edit');
+    Route::post('/admin/selling/return/update', 'update');
+    Route::get('/admin/selling/return/info/{id}', 'info');
+    Route::get('/admin/selling/return/approveview/{id}', 'approveview');
+    Route::get('/admin/selling/return/approve/{id}', 'approve');
+    Route::get('/admin/selling/return/delete/{id}', 'destroy');
+    Route::get('/admin/selling/return/list', 'list');
     Route::get('/admin/selling/return/getdata/{id}', 'getdata');
 });
 // End Return Selling
