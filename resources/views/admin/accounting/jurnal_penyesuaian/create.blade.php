@@ -5,13 +5,16 @@
     <div class="card-body">
         <form id="createSales" class="form">
             <div class="d-flex justify-content-center">
-            <div class="col-lg-6">
+                <div class="col-lg-6">
                     @csrf
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Cash Account Debit</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="coa_id"
                             id="coa_id" onchange="getData()" required>
-                            <option>Pilih COA</option>
+                            <option selected disabled>Pilih COA</option>
+                            @foreach ($coa as $c)
+                                <option value="{{ $c->id }}">{{ $c->coa }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="fv-row mb-3">
@@ -31,31 +34,65 @@
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Keterangan</label>
                         <div class="">
-                           <textarea name="description" id="description" cols="10" rows="5" class="form-control form-control-solid"></textarea>
+                            <textarea name="description" id="description" cols="10" rows="5" class="form-control form-control-solid"></textarea>
                         </div>
                     </div>
                 </div>
             </div>
 
+    </div>
+    <div class="col-lg-12 px-2">
+        <hr>
+        <div class="col-lg-12">
+            <table class="table gy-5 gs-7 border rounded w-100">
+                <thead>
+                    <tr class="fw-bolder fs-6 text-gray-800">
+                        <td>Cash Credit</td>
+                        <td>Jumlah</td>
+                        <td>Keterangan</td>
+                        <td>Partner</td>
+                        <td>Aksi</td>
+                    </tr>
+                </thead>
+                <tbody id="cashcreditList">
+                    <tr>
+                        <td><select name="cash_credit" id="cash_credit" class="form-select form-select-solid select-2">
+                                <option selected disabled>Pilih</option>
+                            </select></td>
+                        <td>
+                            <input type="number" name="amount" class="form-control form-control-solid">
+                        </td>
+                        <td>
+                            <input name="description" class="form-control form-control-solid" type="text" />
+                        </td>
+                        <td>
+                            <select name="partner_id" id="partner_id" class="form-select form-select-solid select-2">
+                                <option selected disable>Pilih Partner Disini</option>
+                                @foreach ($partner as $p)
+                                    <option value="{{ $p->id }}">{{ $p->name }}</option>
+                                @endforeach
+
+                            </select>
+                        </td>
+                        <td><button class="btn btn-icon btn-sm btn-danger" onclick="removeRow(this)">-</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-end px-4">
+                <button class="btn btn-icon btn-sm btn-primary" onclick="addNewItemRow()">+</button>
             </div>
-            <div class="col-lg-12 px-2">
-                <hr>
-                <h5 class="fw-bolder">Cash Credit</h5>
-                <hr>
-                <div class="col-lg-12" id="itemsAddList">
+        </div>
 
-                </div>
+        <hr>
 
-                <hr>
-
-                <div class="d-flex justify-content-center" id="loadingnya">
-                    <div class="px-2">
-                        <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Buat</button>
-                    </div>
-                    <div class="px-2">
-                        <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Kembali</button>
-                    </div>
-                </div>
+        <div class="d-flex justify-content-center" id="loadingnya">
+            <div class="px-2">
+                <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Buat</button>
+            </div>
+            <div class="px-2">
+                <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Kembali</button>
+            </div>
+        </div>
 
         </form>
     </div>
@@ -144,48 +181,14 @@
     });
 
 
-    function getData() {
-        var id = $('#sales_id').val();
-        $.get("{{ url('/admin/selling/return/getdata') }}/" + id, function(
-            data) {
-            $('#sales_date').val(data.sales_date)
-            $('#address').val(data.address)
-            $('#att').val(data.att)
-            $('#phone').val(data.phone)
-            $('#email').val(data.email)
-            $('#term_of_payment').val(data.term_of_payment)
-            $('#credit_limit').val(data.credit_limit)
-            $('#credit_balance').val(data.credit_balance)
-            $('#itemsAddList').html(data.item)
-            $('.select-2').select2();
-        })
+    function removeRow(e){
+        $(e).parent().parent().remove()
     }
 
-    function countTotalQty(e) {
-        var box = $(e).parent().parent().find('#return_box').val();
-        var qty_per_box = $(e).parent().parent().find('#qty_per_box').val();
-        var qtyReturn = $(e).parent().parent().find('#return_qty').val();
-        var price = $(e).parent().parent().find('#price').val();
-        var jumlahOrder = $(e).parent().parent().find('#qty_order').val();
-
-        var totalQtyReturn = (box * qty_per_box) + parseInt(qtyReturn)
-        var totalPriceReturn = parseInt(totalQtyReturn) * parseInt(price);
-
-
-        $(e).parent().parent().find('#total_return_qty').val(totalQtyReturn);
-        $(e).parent().parent().find('#total_price_return').val(totalPriceReturn);
-
-        if (jumlahOrder < totalQtyReturn) {
-            Swal.fire(
-                'Peringatan',
-                'Melebihi Jumlah Order',
-                'question'
-            )
-            $(e).parent().parent().find('#return_box').val(0);
-            $(e).parent().parent().find('#return_qty').val(0);
-            $(e).parent().parent().find('#total_return_qty').val(0);
-            $(e).parent().parent().find('#total_price_return').val(0);
-        }
-
+    function addNewItemRow(){
+        $.get("{{ url('/admin/accounting/jurnal-penyesuaian/addnewitemrow') }}", function(data){
+            $('#cashcreditList').append(data.html)
+            $('.select-2').select2()
+        })
     }
 </script>

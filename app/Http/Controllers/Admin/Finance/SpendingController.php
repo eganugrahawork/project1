@@ -7,14 +7,41 @@ use App\Models\Coa;
 use App\Models\Partners;
 use Illuminate\Http\Request;
 
-class SpendingController extends Controller
-{
-    public function index(){
+class SpendingController extends Controller {
+    public function index() {
         return view('admin.finance.spending.index');
     }
-    public function create(){
+    public function create() {
         $coa = Coa::all();
         $partner = Partners::all();
-        return view('admin.finance.spending.create', ['coa' => $coa, 'partner' =>$partner]);
+        return view('admin.finance.spending.create', ['coa' => $coa, 'partner' => $partner]);
+    }
+
+    public function addnewitemrow() {
+        $partner = Partners::all();
+        $html = '<tr>
+        <td><select name="cash_credit" id="cash_credit" class="form-select form-select-solid select-2">
+            <option selected disabled>Pilih</option>
+        </select></td>
+        <td>
+            <input type="number" name="amount" class="form-control form-control-solid">
+        </td>
+        <td>
+            <input name="description" class="form-control form-control-solid" type="text"/>
+        </td>
+        <td>
+            <select name="partner_id" id="partner_id" class="form-select form-select-solid select-2">
+                <option selected disable>Pilih Partner Disini</option>';
+
+        foreach ($partner as $p) {
+            $html .= "<option value='$p->id'>$p->name</option>";
+        }
+
+        $html .= '  </select>
+        </td>
+        <td><button class="btn btn-icon btn-sm btn-danger" onclick="removeRow(this)">-</button></td>
+    </tr>';
+
+        return response()->json(['html' => $html]);
     }
 }

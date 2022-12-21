@@ -10,7 +10,7 @@
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Cash Account Debit</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="coa_id"
-                            id="coa_id" onchange="getData()" required>
+                            id="coa_id"  required>
                             <option selected disabled>Pilih COA</option>
                             @foreach ($coa as $c)
                                 <option value="{{ $c->id }}">{{ $c->coa }}</option>
@@ -76,12 +76,12 @@
 
                                     </select>
                                 </td>
-                                <td><button class="btn btn-icon btn-sm btn-danger">-</button></td>
+                                <td><button class="btn btn-icon btn-sm btn-danger" onclick="removeRow(this)">-</button></td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="d-flex justify-content-end px-4">
-                        <button class="btn btn-icon btn-sm btn-primary ">+</button>
+                        <button class="btn btn-icon btn-sm btn-primary" onclick="addNewItemRow()">+</button>
                     </div>
                 </div>
 
@@ -109,15 +109,6 @@
             static: true,
             dateFormat: "Y-m-d",
         });
-        flatpickr("#publish_date", {
-            static: true,
-            dateFormat: "Y-m-d",
-        });
-        flatpickr("#due_date", {
-            static: true,
-            dateFormat: "Y-m-d",
-        });
-
     });
 </script>
 
@@ -183,48 +174,16 @@
     });
 
 
-    function getData() {
-        var id = $('#sales_id').val();
-        $.get("{{ url('/admin/selling/return/getdata') }}/" + id, function(
-            data) {
-            $('#sales_date').val(data.sales_date)
-            $('#address').val(data.address)
-            $('#att').val(data.att)
-            $('#phone').val(data.phone)
-            $('#email').val(data.email)
-            $('#term_of_payment').val(data.term_of_payment)
-            $('#credit_limit').val(data.credit_limit)
-            $('#credit_balance').val(data.credit_balance)
-            $('#itemsAddList').html(data.item)
-            $('.select-2').select2();
+
+    function removeRow(e){
+        $(e).parent().parent().remove()
+    }
+
+    function addNewItemRow(){
+        $.get("{{ url('/admin/finance/spending/addnewitemrow') }}", function(data){
+            $('#cashcreditList').append(data.html)
+            $('.select-2').select2()
         })
     }
 
-    function countTotalQty(e) {
-        var box = $(e).parent().parent().find('#return_box').val();
-        var qty_per_box = $(e).parent().parent().find('#qty_per_box').val();
-        var qtyReturn = $(e).parent().parent().find('#return_qty').val();
-        var price = $(e).parent().parent().find('#price').val();
-        var jumlahOrder = $(e).parent().parent().find('#qty_order').val();
-
-        var totalQtyReturn = (box * qty_per_box) + parseInt(qtyReturn)
-        var totalPriceReturn = parseInt(totalQtyReturn) * parseInt(price);
-
-
-        $(e).parent().parent().find('#total_return_qty').val(totalQtyReturn);
-        $(e).parent().parent().find('#total_price_return').val(totalPriceReturn);
-
-        if (jumlahOrder < totalQtyReturn) {
-            Swal.fire(
-                'Peringatan',
-                'Melebihi Jumlah Order',
-                'question'
-            )
-            $(e).parent().parent().find('#return_box').val(0);
-            $(e).parent().parent().find('#return_qty').val(0);
-            $(e).parent().parent().find('#total_return_qty').val(0);
-            $(e).parent().parent().find('#total_price_return').val(0);
-        }
-
-    }
 </script>

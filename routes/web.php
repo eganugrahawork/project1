@@ -477,6 +477,7 @@ Route::middleware('auth')->controller(ReceivableController::class)->group(functi
 Route::middleware('auth')->controller(IncomeController::class)->group(function(){
     Route::get('/admin/finance/income','index');
     Route::get('/admin/finance/income/create','create');
+    Route::get('/admin/finance/income/addnewitemrow','addnewitemrow');
 });
 // End Income
 
@@ -484,6 +485,7 @@ Route::middleware('auth')->controller(IncomeController::class)->group(function()
 Route::middleware('auth')->controller(SpendingController::class)->group(function(){
     Route::get('/admin/finance/spending','index');
     Route::get('/admin/finance/spending/create','create');
+    Route::get('/admin/finance/spending/addnewitemrow','addnewitemrow');
 });
 // End Spending
 
@@ -491,6 +493,7 @@ Route::middleware('auth')->controller(SpendingController::class)->group(function
 Route::middleware('auth')->controller(JurnalPenyesuaianController::class)->group(function(){
     Route::get('/admin/accounting/jurnal-penyesuaian','index');
     Route::get('/admin/accounting/jurnal-penyesuaian/create','create');
+    Route::get('/admin/accounting/jurnal-penyesuaian/addnewitemrow','addnewitemrow');
 });
 // End Jurnal Penyesuaian
 
