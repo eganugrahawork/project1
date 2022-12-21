@@ -2,10 +2,10 @@
 
 namespace App\Exports;
 
-use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
-
-class UsersExport implements FromCollection
+use App\Models\User;
+use App\Http\Controllers\Controller;
+class UsersExport extends Controller implements FromCollection
 {
     /**
     * @return \Illuminate\Support\Collection

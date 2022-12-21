@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Procurement;
 
 use App\Events\NotifEvent;
+use App\Exports\PurchaseOrderExportExcel;
 use App\Http\Controllers\Controller;
 use App\Models\Currency;
 use App\Models\CurrencyHistory;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 use PDO;
 
 class PurchaseOrderController extends Controller {
@@ -447,5 +449,9 @@ class PurchaseOrderController extends Controller {
         // SAMAPI SINI
 
         return $pdf->download("PO-" . $po[0]->number_po . ".pdf");
+    }
+
+    public function exportexcel(){
+        return Excel::download(new PurchaseOrderExportExcel, 'purchase-order.xlsx');
     }
 }

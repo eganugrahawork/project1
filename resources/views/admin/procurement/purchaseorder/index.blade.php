@@ -12,19 +12,12 @@
                         <div class="d-flex align-items-center position-relative my-1">
                             <h5 class="fw-bolder fs-4 text-gray-600">Purchase Order</h5>
                         </div>
-                        <div class="d-flex align-items-center position-relative my-1">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                                    <input class="form-control" placeholder="Search" id="searchTablePo" type="text">
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
                             @can('create', ['/admin/procurement/purchase-order'])
-                                <button type="button" class="btn btn-primary me-3" onclick="create()">
+                                <button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">
                                     Tambah Purchase Order</button>
                             @endcan
                         </div>
@@ -32,6 +25,33 @@
                     </div>
                 </div>
                 <div class="card-body pt-0">
+                    <div class="row">
+                        <div class="col-lg-6 justify-content-start align-items-center position-relative my-1">
+                            <button type="button" class="btn btn-sm btn-success" data-kt-menu-trigger="click"
+                                data-kt-menu-placement="top-start">
+                                Export
+                                <span class="svg-icon svg-icon-5 rotate-180 ms-3 me-0"><i
+                                        class="bi bi-arrow-up-circle"></i></span>
+                            </button>
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold fs-8 w-100px py-2"
+                                data-kt-menu="true">
+                                <div class="menu-item px-2">
+                                    <a href="/admin/procurement/purchase-order/exportexcel" target="_blank"
+                                        class="menu-link px-2">
+                                        <span><i class="bi bi-file-earmark-excel"></i></span> Excel
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex justify-content-end">
+                            <div class="form-group col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                    <input class="form-control" placeholder="Search" id="searchTablePo" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="tablePo">
                         <thead>
                             <tr class="text-start text-uppercase text-gray-400 fw-bolder fs-7 gs-0">
@@ -39,7 +59,8 @@
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Kode PO</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Partner
                                 </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Tanggal Order
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Tanggal
+                                    Order
                                 </th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Total</th>
                                 {{-- <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Due Date</th> --}}
@@ -68,7 +89,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
                 )
             })
         }
@@ -81,7 +102,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
                 )
             })
         }
@@ -94,7 +115,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
                 )
             })
         }
@@ -107,7 +128,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
                 )
             })
         }
@@ -202,7 +223,7 @@
                             )
                             tablePo.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
+                                '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
                             )
                         }
                     })
@@ -256,7 +277,7 @@
                                 'success'
                             )
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
+                                '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
                             )
                         }
                     })

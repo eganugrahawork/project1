@@ -10,7 +10,7 @@
 
                         <select name="transactiontype" id="transactiontype"
                             class="form-select form-select-solid select-2">
-                            <option>Pilih Jenis Transaksi</option>
+                            <option selected disabled>Pilih Jenis Transaksi</option>
                             <option value="sales">Penjualan</option>
                             <option value="buying">Pembelian</option>
                         </select>

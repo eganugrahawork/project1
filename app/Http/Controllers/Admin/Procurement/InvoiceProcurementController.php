@@ -221,7 +221,8 @@ class InvoiceProcurementController extends Controller {
   }
 
   public function exportpdf(Request $request) {
-    $data = DB::connection('procurement')->select('Call sp_search_id_invoice(' . $request->id . ')');
+      $data = DB::connection('procurement')->select('Call sp_search_id_invoice(' . $request->id . ')');
+      dd($data);
     $order_date = Carbon::parse($data[0]->order_date)->format('d-M-Y');
     $pdf = Pdf::loadView('admin.procurement.invoice.exportpdf', ['data' => $data, 'order_date' =>$order_date]);
     // dd($data);
