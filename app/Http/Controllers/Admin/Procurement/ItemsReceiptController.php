@@ -60,7 +60,7 @@ class ItemsReceiptController extends Controller {
             <input type='hidden' name='po_item_id[]' value='$item->po_item_id'/>
             <input type='hidden' name='unit_price[]' value='$item->unit_price'/>
             <div class='fv-row mb-3 col-lg-2'>
-                <label class=' form-label fw-bold'>Item</label>
+                <label class=' form-label fw-bold fs-6 mb-2'>Item</label>
                 <select class='form-select  form-select-white mb-3 mb-lg-0' id='item_id' name='item_id[]'   required>
                         <option value='$item->item_id'>$item->item_name</option>
                 </select>

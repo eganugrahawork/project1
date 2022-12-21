@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin\Finance;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\Coa;
+use App\Models\Partners;
 use Illuminate\Http\Request;
 
 class IncomeController extends Controller
@@ -13,6 +14,8 @@ class IncomeController extends Controller
     }
 
     public function create(){
-        return view('admin.finance.income.create');
+        $coa = Coa::all();
+        $partner = Partners::all();
+        return view('admin.finance.income.create',['coa' => $coa, 'partner' => $partner]);
     }
 }

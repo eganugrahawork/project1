@@ -11,7 +11,8 @@
                         <label class="fw-bold fs-6 mb-2">Kode</label>
                         <div class="">
                             <input type="text" id="code" name="code"
-                                class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                                class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $code }}"
+                                readonly required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
@@ -25,21 +26,22 @@
                         <label class="required fw-bold fs-6 mb-2">Partner</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="partner_id"
                             id="partner_id" onchange="getData()" required>
-                            <option>Pilih Partner</option>
+                            <option selected disabled>Pilih Partner</option>
+                            @foreach ($customer as $cust)
+                                <option value="{{ $cust->id }}">{{ $cust->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Tipe Pembayran</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="payment_type"
-                            id="payment_type" onchange="getData()" required>
-                            <option>Pilih Tipe Bayar</option>
-                        </select>
-                    </div>
-                    <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Bonus/Komisi/Invoice</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="bonus"
-                            id="bonus" onchange="getData()" required>
-                            <option>Bonus/komisi/invoice</option>
+                            id="payment_type" required>
+                            <option selected="selected" disabled>-- Pilih Pembayaran --</option>
+                            <option value="0">Cash/Transfer</option>
+                            <option value="1">Giro</option>
+                            <option value="2">Bonus</option>
+                            <option value="3">Komisi</option>
+                            <option value="4">Piutang</option>
                         </select>
                     </div>
 
@@ -48,22 +50,25 @@
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Cash Account</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="cash_account"
-                            id="cash_account" onchange="getData()" required>
-                            <option>Cash Account</option>
+                            id="cash_account" required>
+                            <option selected disabled>Pilih Cash Account</option>
+                            @foreach ($coa as $c)
+                                <option value="{{ $c->id }}">{{ $c->coa }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Tanggal Terbit</label>
                         <div>
                             <input type="text" id="publish_date" name="publish_date"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-solid mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Jatuh Tempo</label>
                         <div>
                             <input type="text" id="due_date" name="due_date"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-solid mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
@@ -77,8 +82,38 @@
                 <hr>
                 <h5 class="fw-bolder">Invoice</h5>
                 <hr>
-                <div class="col-lg-12" id="itemsAddList">
-
+                <div class="col-lg-12">
+                    <table class="table gy-5 gs-7 border rounded w-100">
+                        <thead>
+                            <tr class="fw-bolder fs-6 text-gray-800">
+                                <td>Invoice</td>
+                                <td>Nilai</td>
+                                <td>Sisa</td>
+                                <td>Jatuh Tempo</td>
+                                <td>Terbayar</td>
+                            </tr>
+                        </thead>
+                        <tbody id="invoiceList">
+                            <tr>
+                                <td><select name="invoice_id" id="invoice_id"
+                                        class="form-select form-select-solid select-2">
+                                        <option value="">Pilih Nomor Invoice</option>
+                                    </select></td>
+                                <td>
+                                    <input type="number" name="nilai" class="form-control form-control-solid">
+                                </td>
+                                <td>
+                                    <input type="number" name="sisa" class="form-control form-control-solid">
+                                </td>
+                                <td>
+                                    <input type="text" name="due_date" class="form-control form-control-solid">
+                                </td>
+                                <td>
+                                    <input type="number" name="terbayar" class="form-control form-control-solid">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <hr>
@@ -88,8 +123,7 @@
                         <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Buat</button>
                     </div>
                     <div class="px-2">
-                        <button class="btn btn-sm btn-secondary" type="button"
-                            onclick="backHistory()">Kembali</button>
+                        <button class="btn btn-sm btn-secondary" type="button" onclick="backHistory()">Kembali</button>
                     </div>
                 </div>
 
@@ -181,18 +215,11 @@
 
 
     function getData() {
-        var id = $('#sales_id').val();
-        $.get("{{ url('/admin/selling/return/getdata') }}/" + id, function(
+        var id = $('#partner_id').val();
+        $.get("{{ url('/admin/finance/receivable/getdata') }}/" + id, function(
             data) {
-            $('#sales_date').val(data.sales_date)
-            $('#address').val(data.address)
-            $('#att').val(data.att)
-            $('#phone').val(data.phone)
-            $('#email').val(data.email)
-            $('#term_of_payment').val(data.term_of_payment)
-            $('#credit_limit').val(data.credit_limit)
-            $('#credit_balance').val(data.credit_balance)
-            $('#itemsAddList').html(data.item)
+
+            $('#invoiceList').html(data.item)
             $('.select-2').select2();
         })
     }

@@ -461,6 +461,7 @@ Route::middleware('auth')->controller(PayableController::class)->group(function(
     Route::get('/admin/finance/payable','index');
     Route::get('/admin/finance/payable/history','history');
     Route::get('/admin/finance/payable/create','create');
+    Route::get('/admin/finance/payable/getdata/{id}','getdata');
 });
 // Payable End
 

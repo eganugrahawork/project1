@@ -15,7 +15,7 @@
                             class="form-control form-control-white mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Partner</label>
+                        <label class="required form-label fw-bold fs-6 mb-2">Partner</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" disabled id="partner_id"
                             name="partner_id">
                             <option>{{ $ponya[0]->partner_name }}</option>
@@ -45,7 +45,7 @@
                             required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Mata Uang</label>
+                        <label class="required form-label fw-bold fs-6 mb-2">Mata Uang</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2"
                             onchange="getRate(this.value)" name="currency_id" id="currency_id" required>
                             @foreach ($currency as $currency)
@@ -62,7 +62,7 @@
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Jangka Waktu Pembayaran</label>
+                        <label class="required form-label fw-bold fs-6 mb-2">Jangka Waktu Pembayaran</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="term_of_payment"
                             id="term_of_payment" required>
                             <option value="Cash" {{ $ponya[0]->term_of_payment === 'Cash' ? 'selected' : '' }}>Cash
@@ -102,7 +102,7 @@
                     @foreach ($ponya as $s_item)
                         <div class="row">
                             <div class="fv-row mb-3 col-lg-4">
-                                <label class="required form-label fw-bold">Item </label>
+                                <label class="required form-label fw-bold fs-6 mb-2">Item </label>
                                 <div class="row">
                                     <div class="col-lg-10">
                                         <input type="hidden" name="idonpoitems[]" value="{{ $s_item->po_item_id }}">
@@ -117,7 +117,7 @@
                                     </div>
                                     <div class="col-lg-2">
                                         <button onclick="getallitem(this)" type="button"
-                                            class="btn btn-sm btn-primary">Semua</button>
+                                            class="btn btn-sm btn-primary">All</button>
                                     </div>
                                 </div>
                             </div>
@@ -267,13 +267,13 @@
             $.get("{{ url('/admin/procurement/purchase-order/getitem') }}/" + partnerId, {}, function(data) {
                 $(e).parent().parent().find('#item_id').html(data.html);
                 $(e).parent().html(
-                    "<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-success'>Semua</button>"
+                    "<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-success'>All</button>"
                 );
             })
         } else {
             $(e).parent().parent().find('#item_id').html("<option>Choose Partner First</option>");
             $(e).parent().html(
-                "<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-success'>Semua</button>");
+                "<button onclick='getallitem(this)' type='button' class='btn btn-sm btn-success'>All</button>");
         }
     }
 

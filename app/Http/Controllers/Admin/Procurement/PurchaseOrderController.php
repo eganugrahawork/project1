@@ -195,7 +195,7 @@ class PurchaseOrderController extends Controller {
 
     public function addnewitemrow(Request $request) {
         $html = " <div class='row'> <div class='fv-row mb-3 col-lg-4'>
-        <label class='required form-label fw-bold'>Item </label>
+        <label class='required form-label fw-bold fs-6 mb-2'>Item </label>
                 <div class='row'>
                     <div class='col-lg-10'>
         <select class='form-select form-select-solid mb-3 mb-lg-0 select-2' id='item_id' name='item_id[]' onchange='getBaseQty(this)' required>";

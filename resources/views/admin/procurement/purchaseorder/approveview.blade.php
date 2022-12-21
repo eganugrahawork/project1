@@ -11,7 +11,7 @@
                         class="form-control form-control-white mb-3 mb-lg-0" required />
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="required form-label fw-bold">Partner</label>
+                    <label class="required form-label fw-bold fs-6 mb-2">Partner</label>
                     <select class="form-select  form-select-white mb-3 mb-lg-0 select-2" disabled id="partner_id"
                         name="partner_id" required>
                         <option>{{ $info[0]->partner_name }}</option>
@@ -40,7 +40,7 @@
                         class="form-control form-control-white mb-3 mb-lg-0" disabled required />
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="required form-label fw-bold">Mata Uang</label>
+                    <label class="required form-label fw-bold fs-6 mb-2">Mata Uang</label>
                     <select class="form-select  form-select-white mb-3 mb-lg-0" disabled name="currency_id"
                         id="currency_id" required>
                         <option>{{ $info[0]->currency_name }}</option>
@@ -52,7 +52,7 @@
                         class="form-control form-control-white mb-3 mb-lg-0" required />
                 </div>
                 <div class="fv-row mb-3 border-gray-300 border-bottom">
-                    <label class="required form-label fw-bold">Jangka Waktu Pembayaran</label>
+                    <label class="required form-label fw-bold fs-6 mb-2">Jangka Waktu Pembayaran</label>
                     <select class="form-select  form-select-white mb-3 mb-lg-0 select-2" readonly name="term_of_payment"
                         id="term_of_payment" required>
                         <option value="{{ $info[0]->term_of_payment }}">{{ $info[0]->term_of_payment }}</option>
@@ -76,7 +76,7 @@
                 @foreach ($info as $item)
                     <div class="row">
                         <div class="fv-row mb-3 col-lg-3">
-                            <label class="required form-label fw-bold">Item</label>
+                            <label class="required form-label fw-bold fs-6 mb-2">Item</label>
                             <select class="form-select  form-select-white mb-3 mb-lg-0 item_id select-2" id="item_id"
                                 disabled name="item_id[]" required>
                                 <option>{{ $item->item_name }}</option>

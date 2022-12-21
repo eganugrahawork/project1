@@ -9,7 +9,7 @@
                 <div class="col-lg-6">
                     <input type="hidden" name="id_po" value="{{ $po[0]->id_po }}">
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Nomor Purchase Order</label>
+                        <label class="required form-label fw-bold fs-6 mb-2">Nomor Purchase Order</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" disabled name="purchase_order_id"
                             id="purchase_order_id" required>
                             <option>{{ $po[0]->number_po . '-' . $po[0]->partner_name }}</option>
@@ -87,7 +87,7 @@
                         <div class='row'>
                             <input type='hidden' name='po_item_id[]' value='{{ $item->po_item_id }}' />
                             <div class='fv-row mb-3 col-lg-2'>
-                                <label class=' form-label fw-bold'>Item</label>
+                                <label class=' form-label fw-bold fs-6 mb-2'>Item</label>
                                 <select class='form-select  form-select-white mb-3 mb-lg-0' id='item_id'
                                     name='item_id[]' required>
                                     <option value='$item->item_id'>{{ $item->item_name }}</option>
