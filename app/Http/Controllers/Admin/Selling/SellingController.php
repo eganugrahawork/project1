@@ -68,9 +68,9 @@ class SellingController extends Controller {
                 return $status;
             })->addColumn('tgl_jual', function ($model) {
                 return Carbon::parse($model->date_selling)->format('d-M-Y');
-            })->addColumn('due_date', function ($model) {
-                return Carbon::parse($model->due_date)->format('d-M-Y');
-            })->rawColumns(['action', 'status', 'tgl_jual', 'due_date'])->make(true);
+            })->addColumn('delivery_date', function ($model) {
+                return Carbon::parse($model->delivery_date)->format('d-M-Y');
+            })->rawColumns(['action', 'status', 'tgl_jual', 'delivery_date'])->make(true);
     }
 
     public function create() {
@@ -126,19 +126,19 @@ class SellingController extends Controller {
 
 
 
-        DB::connection('selling')->select("call sp_insert_selling_invoice(
-      '$selling->id',
-      '$request->sales_number',
-      '$request->sales_date',
-      '$due_date',
-      '$att',
-      '$request->description',
-      '$sign',
-      'Blm tau darimana',
-      '1'
-    )");
+        //     DB::connection('selling')->select("call sp_insert_selling_invoice(
+        //   '$selling->id',
+        //   '$request->sales_number',
+        //   '$request->sales_date',
+        //   '$due_date',
+        //   '$att',
+        //   '$request->description',
+        //   '$sign',
+        //   'Blm tau darimana',
+        //   '1'
+        // )");
 
-        $invoice = InvoiceSelling::latest()->first();
+        // $invoice = InvoiceSelling::latest()->first();
 
         if (count($request->item_id) > 1) {
             for ($i = 0; $i < count($request->item_id); $i++) {
@@ -185,32 +185,32 @@ class SellingController extends Controller {
 
                 $sellingdetail = SellingDetail::latest()->first();
 
-                DB::connection('selling')->select("call sp_insert_selling_invoice_details(
-          '$invoice->id',
-          '$sellingdetail->id',
-          '$unit_price',
-          '$total_qty',
-          '$qty_box',
-          $qty,
-          '$total_box',
-          '$price',
-          '0',
-          'penjualan'
-        )");
+                //         DB::connection('selling')->select("call sp_insert_selling_invoice_details(
+                //   '$invoice->id',
+                //   '$sellingdetail->id',
+                //   '$unit_price',
+                //   '$total_qty',
+                //   '$qty_box',
+                //   $qty,
+                //   '$total_box',
+                //   '$price',
+                //   '0',
+                //   'penjualan'
+                // )");
 
-                DB::connection('selling')->select("call sp_insert_selling_history(
-          '$selling->id',
-          '$sales_id',
-          '$item_id',
-          '$unit_price',
-          '$total_qty',
-          '$qty_box',
-          $qty,
-          '$total_box',
-          '$price',
-          'penjualan',
-          '$mutation->id'
-        )");
+        //         DB::connection('selling')->select("call sp_insert_selling_history(
+        //   '$selling->id',
+        //   '$sales_id',
+        //   '$item_id',
+        //   '$unit_price',
+        //   '$total_qty',
+        //   '$qty_box',
+        //   $qty,
+        //   '$total_box',
+        //   '$price',
+        //   'penjualan',
+        //   '$mutation->id'
+        // )");
 
                 DB::connection('selling')->select("call sp_update_items_qty(
           '$sellingdetail->id'
@@ -260,18 +260,18 @@ class SellingController extends Controller {
 
             $sellingdetail = SellingDetail::latest()->first();
 
-            DB::connection('selling')->select("call sp_insert_selling_invoice_details(
-          '$invoice->id',
-          '$sellingdetail->id',
-          '$unit_price',
-          '$total_qty',
-          '$qty_box',
-          $qty,
-          '$total_box',
-          '$price',
-          '0',
-          'penjualan'
-        )");
+            //     DB::connection('selling')->select("call sp_insert_selling_invoice_details(
+            //   '$invoice->id',
+            //   '$sellingdetail->id',
+            //   '$unit_price',
+            //   '$total_qty',
+            //   '$qty_box',
+            //   $qty,
+            //   '$total_box',
+            //   '$price',
+            //   '0',
+            //   'penjualan'
+            // )");
 
             DB::connection('selling')->select("call sp_insert_selling_history(
           '$selling->id',
@@ -287,12 +287,14 @@ class SellingController extends Controller {
           '$mutation->id'
         )");
 
-            DB::connection('selling')->select("call sp_update_items_qty(
-          '$sellingdetail->id'
-        )");
+        //     DB::connection('selling')->select("call sp_update_items_qty(
+        //   '$sellingdetail->id'
+        // )");
         }
 
-
+        $ordering = Ordering::where('name_menu', 'selling')->first();
+        $newOrdering = $ordering->seq_max + 1;
+        Ordering::where(['name_menu' => 'selling'])->update(['seq_max' => $newOrdering]);
         UserActivity::create([
             'id_user' => auth()->user()->id,
             'menu' => "Penjualan",
@@ -311,9 +313,43 @@ class SellingController extends Controller {
         return view('admin.selling.selling.edit', ['data' => $data, 'customer' => $customer, 'item' => $item]);
     }
 
+    public function update(Request $request){
+        for($i =0; $i < count($request->item_id); $i++){
+            $item_id = $request->item_id[$i];
+            $unit_price = $request->price[$i];
+            $total_qty = $request->total_qty[$i];
+            $qty_box = $request->qty_box[$i];
+            $qty = $request->qty[$i];
+            $qty_per_box = $request->qty_per_box[0];
+            $total_box = $qty_box + ($total_qty / $qty_per_box);
+            $discount = '0';
+            $notes = '0';
+            $price = $request->total_price[$i];
+            DB::connection('selling')->select("call sp_update_selling(
+                $request->selling_id,
+                '$request->sales_date',
+                '$request->term_of_payment',
+                '$request->delivery_date',
+                '$request->total',
+                '$unit_price',
+                '$item_id',
+                '$total_qty',
+                '$qty_box',
+                '$qty',
+                '$total_box',
+                '$price',
+                '$discount',
+                '$notes',
+                '$request->sales_date',
+                '$price'
+            )");
+        }
+        return response()->json(['success', 'Penjualan Diperbarui']);
+    }
+
     public function info(Request $request) {
         $data = DB::connection('selling')->select("call sp_search_id($request->id)");
-
+        // dd($data);
         $item = Items::all();
         return view('admin.selling.selling.info', ['data' => $data, 'item' => $item]);
     }
@@ -321,11 +357,12 @@ class SellingController extends Controller {
     public function approveview(Request $request) {
         $data = DB::connection('selling')->select("call sp_search_id($request->id)");
 
+
         $item = Items::all();
         return view('admin.selling.selling.approveview', ['data' => $data, 'item' => $item]);
     }
 
-    public function approve(Request $request){
+    public function approve(Request $request) {
         $approveBy = auth()->user()->username;
         DB::connection('selling')->select("call sp_approve_selling(
             '$request->id',
@@ -333,14 +370,13 @@ class SellingController extends Controller {
             1
         )");
 
-        return response()->json(['success'=> 'Berhasil disetujui']);
+        return response()->json(['success' => 'Berhasil disetujui']);
     }
 
 
     public function destroy(Request $request) {
         DB::connection('selling')->select("call sp_delete_selling($request->id)");
-        $invoice =  InvoiceSelling::where(['selling_id' => $request->id])->first();
-        DB::connection('selling')->select("call sp_delete_selling_invoice($invoice->id)");
+
 
         UserActivity::create([
             'id_user' => auth()->user()->id,
