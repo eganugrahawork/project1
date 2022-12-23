@@ -58,8 +58,8 @@
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Nomor Invoice
                                 </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Invoice Date</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Due Date</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal Invoice</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Jatuh Tempo</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Partner</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Total</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Balance</th>
@@ -140,12 +140,12 @@
                     searchable: false
                 },
                     {data: 'invoice_number', name: 'invoice_number'},
-                    {data: 'invoice_date', name: 'invoice_date'},
+                    {data: 'date_invoice', name: 'date_invoice'},
                     {data: 'due_date', name: 'due_date'},
                     {data: 'name', name: 'name'},
                     {data: 'price', name: 'price',
                     render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')},
-                    {data: 'balance', name: 'balance', render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')},
+                    {data: 'price', name: 'price', render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')},
                     {data: 'status', name: 'status'},
                     {data: 'action', name: 'action'}
                     ],
@@ -194,7 +194,7 @@
                             )
                             tableInvoice.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Item Receipt</button>'
+                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Invoice</button>'
                             )
                         }
                     })

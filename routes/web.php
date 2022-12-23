@@ -196,7 +196,6 @@ Route::middleware(['auth'])->controller(UsersController::class)->group(function 
     Route::post('admin/users/checkusername', 'checkusername');
     Route::post('admin/users/checkemail', 'checkemail');
     Route::get('admin/users/export', 'export');
-
 });
 //Users END
 
@@ -213,10 +212,10 @@ Route::middleware(['auth'])->controller(ItemsController::class)->group(function 
     Route::get('admin/masterdata/items/getinfoitemreceipt/{id}', 'getinfoitemreceipt');
     Route::get('admin/masterdata/items/delete/{id}', 'destroy');
 
-// Another
+    // Another
     Route::get('/admin/masterdata/itemqty', 'itemqty');
     Route::get('/admin/masterdata/itemprice', 'itemprice');
-// End Another
+    // End Another
 });
 
 
@@ -413,7 +412,7 @@ Route::middleware('auth')->controller(SellingController::class)->group(function 
     Route::post('/admin/selling/selling/update', 'update');
     Route::get('/admin/selling/selling/info/{id}', 'info');
     Route::get('/admin/selling/selling/approveview/{id}', 'approveview');
-    Route::get('/admin/selling/selling/approve/{id}', 'approve');
+    Route::post('/admin/selling/selling/approve', 'approve');
     Route::get('/admin/selling/selling/delete/{id}', 'destroy');
     Route::get('/admin/selling/selling/getdatacustomer/{id}', 'getdatacustomer');
     Route::get('/admin/selling/selling/getdetailitem/{id}', 'getdetailitem');
@@ -424,6 +423,13 @@ Route::middleware('auth')->controller(SellingController::class)->group(function 
 // Invoice Selling
 Route::middleware('auth')->controller(InvoiceSellingController::class)->group(function () {
     Route::get('/admin/selling/invoice', 'index');
+    Route::get('/admin/selling/invoice/list', 'list');
+    Route::get('/admin/selling/invoice/create', 'create');
+    Route::post('/admin/selling/invoice/store', 'store');
+    Route::get('/admin/selling/invoice/getdataselling/{id}', 'getdataselling');
+    Route::get('/admin/selling/invoice/edit/{id}', 'edit');
+    Route::get('/admin/selling/invoice/delete/{id}', 'destroy');
+    Route::post('/admin/selling/invoice/update', 'update');
 });
 // End Invoice Selling
 
@@ -459,85 +465,85 @@ Route::middleware('auth')->controller(CashierController::class)->group(function 
 //End Cashier
 
 // Payable
-Route::middleware('auth')->controller(PayableController::class)->group(function(){
-    Route::get('/admin/finance/payable','index');
-    Route::get('/admin/finance/payable/history','history');
-    Route::get('/admin/finance/payable/create','create');
-    Route::get('/admin/finance/payable/getdata/{id}','getdata');
+Route::middleware('auth')->controller(PayableController::class)->group(function () {
+    Route::get('/admin/finance/payable', 'index');
+    Route::get('/admin/finance/payable/history', 'history');
+    Route::get('/admin/finance/payable/create', 'create');
+    Route::get('/admin/finance/payable/getdata/{id}', 'getdata');
 });
 // Payable End
 
 // Receivable
-Route::middleware('auth')->controller(ReceivableController::class)->group(function(){
-    Route::get('/admin/finance/receivable','index');
-    Route::get('/admin/finance/receivable/history','history');
-    Route::get('/admin/finance/receivable/create','create');
+Route::middleware('auth')->controller(ReceivableController::class)->group(function () {
+    Route::get('/admin/finance/receivable', 'index');
+    Route::get('/admin/finance/receivable/history', 'history');
+    Route::get('/admin/finance/receivable/create', 'create');
 });
 // End Receivable
 
 // Income
-Route::middleware('auth')->controller(IncomeController::class)->group(function(){
-    Route::get('/admin/finance/income','index');
-    Route::get('/admin/finance/income/create','create');
-    Route::get('/admin/finance/income/addnewitemrow','addnewitemrow');
+Route::middleware('auth')->controller(IncomeController::class)->group(function () {
+    Route::get('/admin/finance/income', 'index');
+    Route::get('/admin/finance/income/create', 'create');
+    Route::get('/admin/finance/income/addnewitemrow', 'addnewitemrow');
 });
 // End Income
 
 // Spending
-Route::middleware('auth')->controller(SpendingController::class)->group(function(){
-    Route::get('/admin/finance/spending','index');
-    Route::get('/admin/finance/spending/create','create');
-    Route::get('/admin/finance/spending/addnewitemrow','addnewitemrow');
+Route::middleware('auth')->controller(SpendingController::class)->group(function () {
+    Route::get('/admin/finance/spending', 'index');
+    Route::get('/admin/finance/spending/create', 'create');
+    Route::get('/admin/finance/spending/addnewitemrow', 'addnewitemrow');
 });
 // End Spending
 
 // Jurnal Penyesuaian
-Route::middleware('auth')->controller(JurnalPenyesuaianController::class)->group(function(){
-    Route::get('/admin/accounting/jurnal-penyesuaian','index');
-    Route::get('/admin/accounting/jurnal-penyesuaian/create','create');
-    Route::get('/admin/accounting/jurnal-penyesuaian/addnewitemrow','addnewitemrow');
+Route::middleware('auth')->controller(JurnalPenyesuaianController::class)->group(function () {
+    Route::get('/admin/accounting/jurnal-penyesuaian', 'index');
+    Route::get('/admin/accounting/jurnal-penyesuaian/create', 'create');
+    Route::get('/admin/accounting/jurnal-penyesuaian/addnewitemrow', 'addnewitemrow');
 });
 // End Jurnal Penyesuaian
 
 // Asset
-Route::middleware('auth')->controller(AssetController::class)->group(function(){
-    Route::get('/admin/accounting/asset','index');
+Route::middleware('auth')->controller(AssetController::class)->group(function () {
+    Route::get('/admin/accounting/asset', 'index');
 });
 // End Asset
 
 // Buku Besar Pembantu
-Route::middleware('auth')->controller(BukuBesarPembantuController::class)->group(function(){
-    Route::get('/admin/accounting/buku-besar-pembantu','index');
+Route::middleware('auth')->controller(BukuBesarPembantuController::class)->group(function () {
+    Route::get('/admin/accounting/buku-besar-pembantu', 'index');
 });
 // End Buku Besar Pembantu
 
 // Laba Rugi
-Route::middleware('auth')->controller(LabaRugiController::class)->group(function(){
-    Route::get('/admin/accounting/labarugi','index');
+Route::middleware('auth')->controller(LabaRugiController::class)->group(function () {
+    Route::get('/admin/accounting/labarugi', 'index');
 });
 // End Laba Rugi
 
 // Neraca
-Route::middleware('auth')->controller(NeracaController::class)->group(function(){
-    Route::get('/admin/accounting/neraca','index');
+Route::middleware('auth')->controller(NeracaController::class)->group(function () {
+    Route::get('/admin/accounting/neraca', 'index');
 });
 // End Neraca
 
 // Finance Report
-Route::middleware('auth')->controller(FinanceReportController::class)->group(function(){
-    Route::get('/admin/accounting/financereport','index');
+Route::middleware('auth')->controller(FinanceReportController::class)->group(function () {
+    Route::get('/admin/accounting/financereport', 'index');
 });
 // End Finance Report
 
 // Payable Report
-Route::middleware('auth')->controller(PayableReportController::class)->group(function(){
-    Route::get('/admin/accounting/payablereport','index');
+Route::middleware('auth')->controller(PayableReportController::class)->group(function () {
+    Route::get('/admin/accounting/payablereport', 'index');
 });
 // End Payable Report
 
 // Receivable Report
-Route::middleware('auth')->controller(ReceivableReportController::class)->group(function(){
-    Route::get('/admin/accounting/receivablereport','index');
+Route::middleware('auth')->controller(ReceivableReportController::class)->group(function () {
+    Route::get('/admin/accounting/receivablereport', 'index');
 });
 // End Receivable Report
 

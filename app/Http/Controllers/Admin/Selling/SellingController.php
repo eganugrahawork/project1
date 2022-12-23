@@ -125,21 +125,6 @@ class SellingController extends Controller {
         $selling = Selling::latest()->first();
 
 
-
-        //     DB::connection('selling')->select("call sp_insert_selling_invoice(
-        //   '$selling->id',
-        //   '$request->sales_number',
-        //   '$request->sales_date',
-        //   '$due_date',
-        //   '$att',
-        //   '$request->description',
-        //   '$sign',
-        //   'Blm tau darimana',
-        //   '1'
-        // )");
-
-        // $invoice = InvoiceSelling::latest()->first();
-
         if (count($request->item_id) > 1) {
             for ($i = 0; $i < count($request->item_id); $i++) {
                 $item_id = $request->item_id[$i];
@@ -181,39 +166,6 @@ class SellingController extends Controller {
           '0',
           'penjualan',
           '$mutation->id'
-        )");
-
-                $sellingdetail = SellingDetail::latest()->first();
-
-                //         DB::connection('selling')->select("call sp_insert_selling_invoice_details(
-                //   '$invoice->id',
-                //   '$sellingdetail->id',
-                //   '$unit_price',
-                //   '$total_qty',
-                //   '$qty_box',
-                //   $qty,
-                //   '$total_box',
-                //   '$price',
-                //   '0',
-                //   'penjualan'
-                // )");
-
-        //         DB::connection('selling')->select("call sp_insert_selling_history(
-        //   '$selling->id',
-        //   '$sales_id',
-        //   '$item_id',
-        //   '$unit_price',
-        //   '$total_qty',
-        //   '$qty_box',
-        //   $qty,
-        //   '$total_box',
-        //   '$price',
-        //   'penjualan',
-        //   '$mutation->id'
-        // )");
-
-                DB::connection('selling')->select("call sp_update_items_qty(
-          '$sellingdetail->id'
         )");
             }
         } else {
@@ -257,39 +209,6 @@ class SellingController extends Controller {
           'penjualan',
           '$mutation->id'
         )");
-
-            $sellingdetail = SellingDetail::latest()->first();
-
-            //     DB::connection('selling')->select("call sp_insert_selling_invoice_details(
-            //   '$invoice->id',
-            //   '$sellingdetail->id',
-            //   '$unit_price',
-            //   '$total_qty',
-            //   '$qty_box',
-            //   $qty,
-            //   '$total_box',
-            //   '$price',
-            //   '0',
-            //   'penjualan'
-            // )");
-
-            DB::connection('selling')->select("call sp_insert_selling_history(
-          '$selling->id',
-          '$sales_id',
-          '$item_id',
-          '$unit_price',
-          '$total_qty',
-          '$qty_box',
-          $qty,
-          '$total_box',
-          '$price',
-          'penjualan',
-          '$mutation->id'
-        )");
-
-        //     DB::connection('selling')->select("call sp_update_items_qty(
-        //   '$sellingdetail->id'
-        // )");
         }
 
         $ordering = Ordering::where('name_menu', 'selling')->first();
@@ -313,8 +232,8 @@ class SellingController extends Controller {
         return view('admin.selling.selling.edit', ['data' => $data, 'customer' => $customer, 'item' => $item]);
     }
 
-    public function update(Request $request){
-        for($i =0; $i < count($request->item_id); $i++){
+    public function update(Request $request) {
+        for ($i = 0; $i < count($request->item_id); $i++) {
             $item_id = $request->item_id[$i];
             $unit_price = $request->price[$i];
             $total_qty = $request->total_qty[$i];
@@ -356,16 +275,51 @@ class SellingController extends Controller {
 
     public function approveview(Request $request) {
         $data = DB::connection('selling')->select("call sp_search_id($request->id)");
-
-
         $item = Items::all();
         return view('admin.selling.selling.approveview', ['data' => $data, 'item' => $item]);
     }
 
     public function approve(Request $request) {
         $approveBy = auth()->user()->username;
+
+        for ($i = 0; $i < count($request->item_id); $i++) {
+            $item_id = $request->item_id[$i];
+            $unit_price = $request->price[$i];
+            $total_qty = $request->total_qty[$i];
+            $qty_box = $request->qty_box[$i];
+            $qty = $request->qty[$i];
+            $qty_per_box = $request->qty_per_box[0];
+            $total_box = $qty_box + ($total_qty / $qty_per_box);
+            $discount = '0';
+            $notes = '0';
+            $price = $request->total_price[$i];
+            $sales_id =  auth()->user()->id;
+            $selling_detail_id = $request->selling_detail_id[$i];
+            $mutation_id = $request->mutation_id[$i];
+
+            DB::connection('selling')->select("call sp_insert_selling_history(
+          '$request->selling_id',
+          '$sales_id',
+          '$item_id',
+          '$unit_price',
+          '$total_qty',
+          '$qty_box',
+          $qty,
+          '$total_box',
+          '$price',
+          'penjualan',
+          '$mutation_id',
+          '$approveBy'
+        )");
+
+            DB::connection('selling')->select("call sp_update_items_qty(
+            '$selling_detail_id'
+          )");
+        }
+
+
         DB::connection('selling')->select("call sp_approve_selling(
-            '$request->id',
+            '$request->selling_id',
             '$approveBy',
             1
         )");
