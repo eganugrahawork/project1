@@ -5,7 +5,7 @@
     <div class="card-body">
         <form id="info-form" class="form">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     @csrf
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Nomor Penjualan</label>
@@ -60,7 +60,7 @@
                             class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Dikirim Dari</label>
                         <textarea type="text" name="ship_from" id="ship_from" class=" form-control form-control-solid mb-3 mb-lg-0">{{ $data[0]->ship_address }}</textarea>
@@ -116,25 +116,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="card card-flush shadow-sm">
-                        <div class="card-header">
-                            <h3 class="card-title fw-bolder text-gray-600">Informasi </h3>
-                            <div class="card-toolbar">
-                                <i class="bi bi-bookmarks-fill text-primary fs-2x"></i>
-                            </div>
-                            <div class="separator"></div>
-                        </div>
-                        <div class="card-body  text-gray-400">
-                            Lorem Ipsum is simply dummy text...
-                        </div>
-                        <div class="card-footer">
-                            <p class="text-sm">Loccana Team</p>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <hr>
                 <h5 class="fw-bolder">Items</h5>
                 <hr>
@@ -158,10 +141,10 @@
                                 <input type='number' name='qty_box[]' readonly id='qty_box'
                                     class='form-control form-control-solid mb-3 mb-lg-0' value='{{ $d->qty_box }}'
                                     onkeyup='countTotalQty(this)' required />
-                                <p class='fs-9 fw-bolder' id='detail_box'></p>
+                                <p class='fs-9 fw-bolder' id='detail_box'>1 Box : {{ $d->qty_per_box }} Stock : {{ $d->stock }} Box</p>
                                 {{-- BELUM DITAMBAH DISP KARENA BELUM MAU DIJALANKAN --}}
-                                {{-- <input type='hidden' name='qty_per_box[]' id='qty_per_box' value="{{ $d->qty_per_box }}">
-                                <input type='hidden' name='stock[]' id='stock' value="{{ $d->stock }}"> --}}
+                                <input type='hidden' name='qty_per_box[]' id='qty_per_box' value="{{ $d->qty_per_box }}">
+                                <input type='hidden' name='stock[]' id='stock' value="{{ $d->stock }}">
                                 <input type='hidden' name='vat_item[]' id='vat_item' value="{{ $d->vat }}">
                             </div>
                             <div class='fv-row mb-3 col-lg-1'>

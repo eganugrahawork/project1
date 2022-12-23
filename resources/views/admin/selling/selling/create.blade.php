@@ -5,7 +5,7 @@
     <div class="card-body">
         <form id="createSales" class="form">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     @csrf
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Nomor Penjualan</label>
@@ -60,7 +60,7 @@
                             class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Dikirim Dari</label>
                         <textarea type="text" name="ship_from" id="ship_from" class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
@@ -76,7 +76,7 @@
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Jangka Waktu Pembayaran</label>
+                        <label class="required form-label fw-bold fs-6 mb-2">Jangka Waktu Pembayaran</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="term_of_payment"
                             id="term_of_payment" required>
                             <option value="Cash">Cash</option>
@@ -89,7 +89,7 @@
                         </select>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Pembayaran Lain</label>
+                        <label class="fw-bold fs-6 mb-2">Jangka Pembayaran Lain</label>
                         <input type="number" id="another_term_of_payment" name="another_term_of_payment"
                             class="form-control form-control-solid mb-3 mb-lg-0" value="0" readonly required />
                     </div>
@@ -98,32 +98,16 @@
                         <textarea type="text" name="description" id="description" class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
                     </div>
                     <div class="fv-row mb-3">
-                      <label class="required fw-bold fs-6 mb-2">Tanggal Pengiriman</label>
-                      <div class="">
-                          <input type="text" id="delivery_date" name="delivery_date"
-                              class="form-control form-control-solid mb-3 mb-lg-0" required />
-                      </div>
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card card-flush shadow-sm">
-                        <div class="card-header">
-                            <h3 class="card-title fw-bolder text-gray-600">Informasi </h3>
-                            <div class="card-toolbar">
-                                <i class="bi bi-bookmarks-fill text-primary fs-2x"></i>
-                            </div>
-                            <div class="separator"></div>
-                        </div>
-                        <div class="card-body  text-gray-400">
-                            Lorem Ipsum is simply dummy text...
-                        </div>
-                        <div class="card-footer">
-                            <p class="text-sm">Loccana Team</p>
+                        <label class="required fw-bold fs-6 mb-2">Tanggal Pengiriman</label>
+                        <div class="">
+                            <input type="text" id="delivery_date" name="delivery_date"
+                                class="form-control form-control-solid mb-3 mb-lg-0" required />
                         </div>
                     </div>
                 </div>
+
             </div>
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <hr>
                 <h5 class="fw-bolder">Items</h5>
                 <hr>
@@ -382,7 +366,7 @@
             total += parseInt($(this).val());
             total_price = parseInt($(this).val());
             vatnya = parseInt($(this).parent().parent().find('#vat_item').val());
-            vatItem += total_price * (vatnya/100)
+            vatItem += total_price * (vatnya / 100)
         });
 
 

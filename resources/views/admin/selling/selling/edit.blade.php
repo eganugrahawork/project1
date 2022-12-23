@@ -5,9 +5,10 @@
     <div class="card-body">
         <form id="update-form" class="form">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     @csrf
                     <div class="fv-row mb-3">
+                        <input type="hidden" name="selling_id" value="{{ $data[0]->id_penjualan }}">
                         <label class="fw-bold fs-6 mb-2">Nomor Penjualan</label>
                         <input type="text" id="sales_number" name="sales_number"
                             class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $data[0]->no_selling }}"
@@ -64,7 +65,7 @@
                             class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Dikirim Dari</label>
                         <textarea type="text" name="ship_from" id="ship_from" class=" form-control form-control-solid mb-3 mb-lg-0">{{ $data[0]->ship_address }}</textarea>
@@ -80,7 +81,7 @@
                             class="form-control form-control-solid mb-3 mb-lg-0" {{ $data[0]->fax }} required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Jangka Waktu Pembayaran</label>
+                        <label class="required form-label fw-bold fs-6 mb-2">Jangka Waktu Pembayaran</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="term_of_payment"
                             id="term_of_payment" required>
                             <option value="Cash" {{ $data[0]->term_of_payment === 'Cash' ? 'selected' : '' }}>Cash
@@ -100,7 +101,7 @@
                         </select>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Pembayaran Lain</label>
+                        <label class="fw-bold fs-6 mb-2">Jangka Waktu Pembayaran Lain</label>
                         <input type="number" id="another_term_of_payment" name="another_term_of_payment"
                             class="form-control form-control-solid mb-3 mb-lg-0" value="0" readonly required />
                     </div>
@@ -117,25 +118,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="card card-flush shadow-sm">
-                        <div class="card-header">
-                            <h3 class="card-title fw-bolder text-gray-600">Informasi </h3>
-                            <div class="card-toolbar">
-                                <i class="bi bi-bookmarks-fill text-primary fs-2x"></i>
-                            </div>
-                            <div class="separator"></div>
-                        </div>
-                        <div class="card-body  text-gray-400">
-                            Lorem Ipsum is simply dummy text...
-                        </div>
-                        <div class="card-footer">
-                            <p class="text-sm">Loccana Team</p>
-                        </div>
-                    </div>
-                </div>
+
             </div>
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <hr>
                 <h5 class="fw-bolder">Items</h5>
                 <hr>
@@ -158,10 +143,10 @@
                                 <input type='number' name='qty_box[]' id='qty_box'
                                     class='form-control form-control-solid mb-3 mb-lg-0' value='{{ $d->qty_box }}'
                                     onkeyup='countTotalQty(this)' required />
-                                <p class='fs-9 fw-bolder' id='detail_box'></p>
+                                <p class='fs-9 fw-bolder' id='detail_box'>1 Box : {{ $d->qty_per_box }} Stock : {{ $d->stock }} Box</p>
                                 {{-- BELUM DITAMBAH DISP KARENA BELUM MAU DIJALANKAN --}}
-                                {{-- <input type='hidden' name='qty_per_box[]' id='qty_per_box' value="{{ $d->qty_per_box }}">
-                                <input type='hidden' name='stock[]' id='stock' value="{{ $d->stock }}"> --}}
+                                <input type='hidden' name='qty_per_box[]' id='qty_per_box' value="{{ $d->qty_per_box }}">
+                                <input type='hidden' name='stock[]' id='stock' value="{{ $d->stock }}">
                                 <input type='hidden' name='vat_item[]' id='vat_item' value="{{ $d->vat }}">
                             </div>
                             <div class='fv-row mb-3 col-lg-1'>
@@ -187,17 +172,11 @@
                                     class='form-control form-control-solid mb-3 mb-lg-0 total_price' value="{{ $d->price }}" readonly
                                     required />
                             </div>
-                            <div class='fv-row mb-3 col-lg-1  '>
-                                <button class="btn btn-danger btn-sm btn-icon mt-4" type="button"
-                                    onclick="removeItemRow(this)">-</button>
-                            </div>
+
                         @endforeach
                     </div>
                 </div>
-                <div class='fv-row mb-3 d-flex justify-content-end'>
-                    <button class="btn btn-primary btn-sm btn-icon mt-4" type="button"
-                        onclick="addNewItemRow()">+</button>
-                </div>
+
                 <hr>
                 <div class="col-lg-12">
                     <div class="d-flex justify-content-end py-2">
@@ -281,7 +260,7 @@
                     '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span>'
                 )
                 $.ajax({
-                    url: "{{ url('/admin/selling/selling/store') }}",
+                    url: "{{ url('/admin/selling/selling/update') }}",
                     type: 'post',
                     data: $('#update-form')
                         .serialize(), // Remember that you need to have your csrf token included
@@ -316,19 +295,6 @@
 
     });
 
-    function addNewItemRow() {
-        $.get("{{ url('/admin/selling/selling/addnewitemrow') }}", function(
-            data) {
-            $('#itemsAddList').append(data.html)
-            $('.select-2').select2();
-        })
-    }
-
-    function removeItemRow(e) {
-        $(e).parent().parent().remove();
-        $('#credit_balance').focus()
-        $('.select-2').select2();
-    }
 
     function getDataCustomer() {
         var id = $('#partner_id').val();

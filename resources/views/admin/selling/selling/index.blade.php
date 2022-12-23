@@ -86,7 +86,7 @@
                                     <th class="min-w-70px ">Pelanggan</th>
                                     <th class="min-w-70px ">Tanggal</th>
                                     <th class="min-w-70px ">Total</th>
-                                    <th class="min-w-70px ">Jatuh Tempo</th>
+                                    <th class="min-w-70px ">Tanggal Kirim</th>
                                     <th class="min-w-70px ">Penjual</th>
                                     <th class="min-w-70px ">Status</th>
                                     <th class="min-w-50px">Aksi</th>
@@ -195,8 +195,8 @@
                 },
                 // {data: 'due_date', name: 'delivery_date'},
                 {
-                    data: 'due_date',
-                    name: 'due_date'
+                    data: 'delivery_date',
+                    name: 'delivery_date'
                 },
                 {
                     data: 'nama_sales',

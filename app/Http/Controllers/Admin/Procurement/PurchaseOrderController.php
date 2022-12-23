@@ -26,8 +26,17 @@ use PDO;
 
 class PurchaseOrderController extends Controller {
     public function index() {
+        $year_count = date('Y') - 2019;
+        $years = ['All'];
 
-        return view('admin.procurement.purchaseorder.index');
+        for ($i = $year_count; $i >= 0; $i--) {
+
+            $y = 2019 + $i;
+
+            array_push($years, $y);
+        }
+        $month =  array('All', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+        return view('admin.procurement.purchaseorder.index', ['month' => $month, 'years' => $years]);
     }
 
     public function list() {

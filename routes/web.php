@@ -410,6 +410,7 @@ Route::middleware('auth')->controller(SellingController::class)->group(function 
     Route::get('/admin/selling/selling/create', 'create');
     Route::post('/admin/selling/selling/store', 'store');
     Route::get('/admin/selling/selling/edit/{id}', 'edit');
+    Route::post('/admin/selling/selling/update', 'update');
     Route::get('/admin/selling/selling/info/{id}', 'info');
     Route::get('/admin/selling/selling/approveview/{id}', 'approveview');
     Route::get('/admin/selling/selling/approve/{id}', 'approve');

@@ -155,16 +155,8 @@
                                     value="{{ $s_item->total_discount }}" id="getdiscountperitem" readonly
                                     class="form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem" required />
                             </div>
-                            <div class="fv-row mb-3 col-lg-1">
-                                <label class='fw-bold fs-6 mb-2'>Hapus</label>
-                                <button class='btn btn-sm btn-warning' type='button'
-                                    onclick='removeItemRow(this)'>-</button>
-                            </div>
                         </div>
                     @endforeach
-                </div>
-                <div class="d-flex justify-content-end py-2">
-                    <button class="btn btn-sm btn-primary" type="button" onclick="addNewItemRow()">+</button>
                 </div>
             </div>
             <hr class="border border-dark border-2 opacity-50">
@@ -294,18 +286,6 @@
         })
     }
 
-    function addNewItemRow() {
-        $.get("{{ url('/admin/procurement/purchase-order/addnewitemrow') }}/" + $('#partner_id').val(), {}, function(
-            data) {
-            $('#itemsAddList').append(data.html)
-            $('.select-2').select2();
-        })
-    }
-
-    function removeItemRow(e) {
-        $(e).parent().parent().remove()
-        sumAll()
-    }
 
     function hitungByDiscount(e) {
         let qty = $(e).parent().parent().find('#qty').val();
