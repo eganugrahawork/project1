@@ -109,18 +109,18 @@
                             <div class='fv-row mb-3 col-lg-2'>
                                 <label class='required fw-bold fs-6 mb-2'>Diterima</label>
                                 <input type='number' name='qty[]' id='qty' onkeyup='balanceEdit(this)'
-                                    value='{{ $item->qty_receipt }}' class='form-control form-control-solid mb-3 mb-lg-0 ' disabled required />
+                                    value='{{ $item->qty_receipt }}' class='form-control form-control-solid mb-3 mb-lg-0 ' required />
                             </div>
                             <div class='fv-row mb-3 col-lg-1'>
                                 <label class='required fw-bold fs-6 mb-2'>Bonus</label>
                                 <input type='number' name='qty_bonus[]' id='qty_bonus' value='{{ $item->qty_bonus }}'
-                                    class='form-control form-control-solid mb-3 mb-lg-0 ' disabled required />
+                                    class='form-control form-control-solid mb-3 mb-lg-0 ' required />
                             </div>
 
                             <div class='fv-row mb-3 col-lg-1'>
                                 <label class='required fw-bold fs-6 mb-2'>Diskon</label>
                                 <input type='number' name='qty_discount[]' id='qty_discount' value='{{ $item->qty_discount }}'
-                                    class='form-control form-control-solid mb-3 mb-lg-0 ' disabled required />
+                                    class='form-control form-control-solid mb-3 mb-lg-0 ' required />
                             </div>
                             <div class='fv-row mb-3 col-lg-2'>
                                 <label class='required fw-bold fs-6 mb-2'>Note</label>

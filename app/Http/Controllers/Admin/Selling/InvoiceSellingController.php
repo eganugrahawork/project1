@@ -55,6 +55,11 @@ class InvoiceSellingController extends Controller {
         return view('admin.selling.invoice.edit', ['data' => $data ]);
     }
 
+    public function info(Request $request) {
+        $data = DB::connection('selling')->select("call sp_search_id_invoice($request->id)");
+        return view('admin.selling.invoice.info', ['data' => $data ]);
+    }
+
     public function update(Request $request){
 
         for($i= 0; $i < count($request->selling_invoice_detail_id); $i++){

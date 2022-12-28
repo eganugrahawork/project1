@@ -15,19 +15,41 @@
 
                     </div>
                     <div class="card-toolbar">
-                        <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
-                            @can('create', ['/admin/procurement/purchase-order'])
-                                <button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">
-                                    Tambah Purchase Order</button>
-                            @endcan
+                        <div class="card">
+                            <div class="card-body p-3">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <div class="numbers">
+                                            <p class="text-sm mb-0 text-uppercase font-weight-bold">Pembelian Perbulan
+                                            </p>
+                                            <h5 class="font-weight-bolder" id="total_pembelian">
+                                                -
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 text-end">
+                                        <div
+                                            class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                            <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <div id="loading-add">
 
+                        </div>
                     </div>
                 </div>
                 <div class="card-body pt-0">
                     <div class="row">
-                        <div class="col-lg-7 row ">
-                            <div class="col-lg-2 ">
+                        <div class="col-lg-8 row ">
+                            <div class="col-lg-2 d-flex">
+
+                                @can('create', ['/admin/procurement/purchase-order'])
+                                    <button type="button" class="btn btn-sm btn-primary" onclick="create()">
+                                        +</button>
+                                @endcan
                                 <button type="button" class="btn btn-sm btn-success" data-kt-menu-trigger="click"
                                     data-kt-menu-placement="top-start">
                                     Export
@@ -57,7 +79,7 @@
                                         class="lab la-searchengin"></i></a>
                             </div>
                         </div>
-                        <div class="col-lg-5 d-flex justify-content-end">
+                        <div class="col-lg-4 d-flex justify-content-end">
                             <div class="form-group col-lg-4">
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
@@ -105,7 +127,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
+                    ''
                 )
             })
         }
@@ -118,7 +140,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
+                    ''
                 )
             })
         }
@@ -131,7 +153,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
+                    ''
                 )
             })
         }
@@ -144,7 +166,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
+                    ''
                 )
             })
         }
@@ -195,7 +217,10 @@
             ],
             "bLengthChange": false,
             "bFilter": true,
-            "bInfo": false
+            "bInfo": false,
+            "initComplete": function(){
+                $('#total_pembelian').html('Ada')
+            }
         });
 
         $('#searchTablePo').keyup(function() {
@@ -239,7 +264,7 @@
                             )
                             tablePo.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
+                                ''
                             )
                         }
                     })
@@ -293,7 +318,7 @@
                                 'success'
                             )
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Tambah Purchase Order</button>'
+                                ''
                             )
                         }
                     })

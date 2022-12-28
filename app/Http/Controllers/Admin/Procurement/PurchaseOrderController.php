@@ -40,7 +40,6 @@ class PurchaseOrderController extends Controller {
     }
 
     public function list() {
-        // dd(DB::connection('procurement')->select('Call sp_list_po()'));
         return Datatables::of(DB::connection('procurement')->select('Call sp_list_po()'))->addIndexColumn()
             ->addColumn('action', function ($model) {
                 // $action = "";

@@ -26,11 +26,11 @@ class ItemsReceiptController extends Controller {
         return  Datatables::of(DB::connection('procurement')->select('Call sp_list_item_receipt()'))->addIndexColumn()
             ->addColumn('action', function ($model) {
                 $action = "<a onclick='info($model->id_po)' class='btn btn-icon btn-sm btn-info me-1 btn-hover-rise'><i class='bi bi-info-square'></i></a>";
-                if (Gate::allows('edit', ['/admin/procurement/invoice'])) {
+                if (Gate::allows('edit', ['/admin/procurement/items-receipt'])) {
                     $action .= "<a onclick='edit($model->id_po)' class='btn btn-icon btn-sm btn-warning me-1 btn-hover-rise'><i class='bi bi-pencil-square'></i></a>";
                 }
-                if (Gate::allows('delete', ['/admin/procurement/invoice'])) {
-                    $action .= " <a href='/admin/procurement/invoice/delete/$model->id_receipt' class='btn btn-icon btn-sm btn-danger me-1 btn-hover-rise' id='deleteItemReceipt'><i class='bi bi-trash'></i></a>";
+                if (Gate::allows('delete', ['/admin/procurement/items-receipt'])) {
+                    $action .= " <a href='/admin/procurement/items-receipt/delete/$model->id_receipt' class='btn btn-icon btn-sm btn-danger me-1 btn-hover-rise' id='deleteItemReceipt'><i class='bi bi-trash'></i></a>";
                 }
                 return $action;
             })->addColumn('order_datenya', function ($model) {

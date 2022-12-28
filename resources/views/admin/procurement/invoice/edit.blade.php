@@ -127,8 +127,8 @@
                 <h5 class="fw-bolder">Items</h5>
                 <hr>
                 <div class="col-lg-12"id="itemsList">
+                    @foreach ($data as $item)
                     <div class='row'>
-                        @foreach ($data as $item)
                         <div class='fv-row mb-3 col-lg-2'>
                             <label class=' form-label fw-bold'>Item</label>
                             <select class='form-select  form-select-white mb-3 mb-lg-0' id='item_id'
@@ -161,8 +161,8 @@
                                 class='form-control form-control-solid mb-3 mb-lg-0 ' required />
                         </div>
 
-                        @endforeach
                     </div>
+                    @endforeach
                 </div>
             </div>
             <hr>

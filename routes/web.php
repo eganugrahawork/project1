@@ -428,6 +428,7 @@ Route::middleware('auth')->controller(InvoiceSellingController::class)->group(fu
     Route::post('/admin/selling/invoice/store', 'store');
     Route::get('/admin/selling/invoice/getdataselling/{id}', 'getdataselling');
     Route::get('/admin/selling/invoice/edit/{id}', 'edit');
+    Route::get('/admin/selling/invoice/info/{id}', 'info');
     Route::get('/admin/selling/invoice/delete/{id}', 'destroy');
     Route::post('/admin/selling/invoice/update', 'update');
 });
