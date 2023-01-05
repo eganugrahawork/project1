@@ -15,6 +15,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class InvoiceProcurementController extends Controller {
     public function index() {
         return view('admin.procurement.invoice.index');
+        
     }
 
     public function list() {
@@ -137,7 +138,7 @@ class InvoiceProcurementController extends Controller {
             'aktivitas' => "Update",
             'keterangan' => "Update Invoice Procurement " . $request->no_invoice
         ]);
-        return response()->json(['success' => 'Invoices Diperbarui']);
+        return response()->json(['success' => 'Invoice Diperbarui']);
     }
 
     public function info(Request $request) {
