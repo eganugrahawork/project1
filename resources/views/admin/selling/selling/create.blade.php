@@ -63,17 +63,17 @@
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Dikirim Dari</label>
-                        <textarea type="text" name="ship_from" id="ship_from" class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
+                        <textarea type="text" name="ship_from" id="ship_from" class=" form-control form-control-solid mb-3 mb-lg-0">Cikutra, Bandung</textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Email</label>
                         <input type="email" id="email" name="email"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-solid mb-3 mb-lg-0" value="swamedia@gmail.com" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Phone/Fax</label>
                         <input type="number" id="phone_fax" name="phone_fax"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-solid mb-3 mb-lg-0" value="08299182922" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required form-label fw-bold fs-6 mb-2">Jangka Waktu Pembayaran</label>
@@ -94,8 +94,8 @@
                             class="form-control form-control-solid mb-3 mb-lg-0" value="0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Deskripsi</label>
-                        <textarea type="text" name="description" id="description" class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
+                        <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
+                        <textarea type="text" name="description" id="description"  class=" form-control form-control-solid mb-3 mb-lg-0" required></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Tanggal Pengiriman</label>
@@ -125,7 +125,7 @@
                             </select>
                         </div>
                         <div class='fv-row mb-3 col-lg-1'>
-                            <label class=' fw-bold fs-6 mb-2'>Q Box</label>
+                            <label class='required fw-bold fs-6 mb-2'>Q Box</label>
                             <input type='number' name='qty_box[]' id='qty_box'
                                 class='form-control form-control-solid mb-3 mb-lg-0' value='0'
                                 onkeyup='countTotalQty(this)' required />
@@ -214,10 +214,12 @@
         flatpickr("#sales_date", {
             static: true,
             dateFormat: "Y-m-d",
+            allowInput:true
         });
         flatpickr("#delivery_date", {
             static: true,
             dateFormat: "Y-m-d",
+            allowInput:true
         });
     });
 </script>

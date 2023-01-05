@@ -190,10 +190,12 @@
         flatpickr("#date_invoice", {
             static: true,
             dateFormat: "Y-m-d",
+            allowInput:true
         });
         flatpickr("#due_date", {
             static: true,
             dateFormat: "Y-m-d",
+            allowInput:true
         });
     });
 </script>

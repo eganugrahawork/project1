@@ -220,7 +220,8 @@
             static: true,
             enableTime: true,
             dateFormat: "Y-m-d H:i:s",
-            time_24hr: true
+            time_24hr: true,
+            allowInput:true
         });
 
     });

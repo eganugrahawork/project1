@@ -124,6 +124,7 @@
         flatpickr("#retur_date", {
             static: true,
             dateFormat: "Y-m-d",
+            allowInput:true
         });
 
     });
