@@ -346,6 +346,7 @@ Route::middleware('auth')->controller(InvoiceProcurementController::class)->grou
     Route::get('/admin/procurement/invoice/list', 'list');
     Route::get('/admin/procurement/invoice/create', 'create');
     Route::post('/admin/procurement/invoice/store', 'store');
+    Route::post('/admin/procurement/invoice/checknoinvoice', 'checknoinvoice');
     Route::get('/admin/procurement/invoice/edit/{id}', 'edit');
     Route::post('/admin/procurement/invoice/update', 'update');
     Route::get('/admin/procurement/invoice/info/{id}', 'info');

@@ -43,10 +43,10 @@
                         <input type="text" name="phone" id="phone" readonly
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
-                  
+
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Fax</label>
-                        <input type="text"  id="fax" readonly
+                        <input type="text" id="fax" readonly
                             class="form-control form-control-solid mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
@@ -56,7 +56,7 @@
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
-                        <textarea  id="description" name="description" class="form-control form-control-solid mb-3 mb-lg-0" readonly required></textarea>
+                        <textarea id="description" name="description" class="form-control form-control-solid mb-3 mb-lg-0" readonly required></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -68,37 +68,41 @@
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Vat/PPN</label>
-                        <input type="text"  id="vat" name="ppn"
+                        <input type="text" id="vat" name="ppn"
                             class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
                     </div>
 
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Email</label>
-                        <input type="text"  id="email"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="-" readonly required />
+                        <input type="text" id="email" class="form-control form-control-solid mb-3 mb-lg-0"
+                            value="-" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Telp/Fax</label>
-                        <input type="text"  id="telp/fax"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="0837263723" readonly required />
+                        <input type="text" id="telp/fax" class="form-control form-control-solid mb-3 mb-lg-0"
+                            value="0837263723" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">No Invoice</label>
                         <input type="text" name="no_invoice" id="no_invoice"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-solid mb-3 mb-lg-0" onchange="checkNoInvoice(this)"
+                            required />
+                            <span class="text-danger fs-8" id="notif-exists"><i class="bi bi-exclamation-circle text-danger"></i> No Invoice sudah ada !</span>
+                            <span class="text-success fs-8" id="notif-not-exists"><i class="bi bi-check-circle  text-success"></i> Bisa Digunakan</span>
+                            <span class="text-primary fs-8" id="notif-on-check"><i class="bi bi-arrow-clockwise  text-primary"></i>Mengecek</span>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Tanggal Invoice</label>
                         <div class="">
                             <input type="text" name="date_invoice" id="date_invoice"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-solid mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Jatuh Tempo</label>
                         <div class="">
                             <input type="text" name="due_date" id="due_date"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-solid mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
@@ -108,8 +112,8 @@
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Deskripsi Invoice</label>
-                        <textarea  name="description_invoice" id="description_invoice"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required > </textarea>
+                        <textarea name="description_invoice" id="description_invoice" class="form-control form-control-solid mb-3 mb-lg-0"
+                            required> </textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Tax Invoice</label>
@@ -150,14 +154,19 @@
         flatpickr("#date_invoice", {
             static: true,
             dateFormat: "Y-m-d",
-            allowInput:true
+            allowInput: true
         });
         flatpickr("#due_date", {
             static: true,
             dateFormat: "Y-m-d",
-            allowInput:true
+            allowInput: true
         });
     });
+
+    
+    $('#notif-exists').hide()
+        $('#notif-not-exists').hide()
+        $('#notif-on-check').hide()
 </script>
 
 <script>
@@ -211,7 +220,7 @@
             if (result.isConfirmed) {
                 $('#loadingnya').html(
                     '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span>'
-                    )
+                )
                 $.ajax({
                     url: "{{ url('/admin/procurement/invoice/store') }}",
                     type: 'post',
@@ -254,5 +263,40 @@
 
         $(e).parent().parent().find('#balance').val(order_qty - qty);
 
+    }
+
+    function checkNoInvoice(e) {
+        var theValue = {
+            value: $(e).val(),
+            _token: "{{ csrf_token() }}"
+        }
+
+        $('#notif-exists').hide()
+        $('#notif-not-exists').hide()
+        $('#notif-on-check').show()
+        $('#btn-add').attr('disabled', true)
+        $.ajax({
+            url: "{{ url('/admin/procurement/invoice/checknoinvoice') }}",
+            type: 'post',
+            data: theValue, // Remember that you need to have your csrf token included
+            dataType: 'json',
+            success: function(response) {
+                if(response.success){
+                    $('#notif-exists').hide()
+                    $('#notif-not-exists').show()
+                    $('#notif-on-check').hide()
+                    $('#btn-add').attr('disabled', false)
+                }else{
+                    $('#notif-exists').show()
+                    $('#notif-not-exists').hide()
+                    $('#notif-on-check').hide()
+                    $('#btn-add').attr('disabled', true)
+               }
+               
+            },
+            error: function(response) {
+                // Handle error
+            }
+        });
     }
 </script>

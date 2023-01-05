@@ -227,10 +227,12 @@
         flatpickr("#sales_date", {
             static: true,
             dateFormat: "Y-m-d",
+            allowInput:true
         });
         flatpickr("#delivery_date", {
             static: true,
             dateFormat: "Y-m-d",
+            allowInput:true
         });
     });
 </script>

@@ -242,4 +242,13 @@ class InvoiceProcurementController extends Controller {
         ]);
         return $pdf->download("Invoice-" . $data[0]->invoice_number . ".pdf");
     }
+
+    public function checknoinvoice(Request $request) {
+        $invoice = DB::connection('procurement')->select("select invoice_number from purchase_order_invoices where invoice_number = '$request->value'");
+        if(isset($invoice[0])){
+            return response()->json(['error' => 'error']);
+        }else{
+            return response()->json(['success' => 'success']);
+        }
+    }
 }
