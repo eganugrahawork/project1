@@ -23,7 +23,6 @@ class UoMController extends Controller
     }
 
     public function list(){
-        // $uom= DB::connection('masterdata')->select('Call sp_list_uom()');
         return  Datatables::of(DB::connection('masterdata')->select('Call sp_list_uom()'))->addIndexColumn()
         ->addColumn('action', function($model){
             $action = "";

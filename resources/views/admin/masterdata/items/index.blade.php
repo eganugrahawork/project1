@@ -99,6 +99,7 @@
         function tutupContent(){
             $('#content').hide()
             $('#indexContent').show()
+            $('#searchItemsTable').focus()
         }
 
         var itemsTable = $('#itemsTable').DataTable({

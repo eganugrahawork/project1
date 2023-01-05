@@ -88,6 +88,7 @@
         function tutupContent() {
             $('#content').hide()
             $('#indexContent').show()
+            $('#searchCoaTable').focus()
         }
 
         var coaTable = $('#coaTable').DataTable({

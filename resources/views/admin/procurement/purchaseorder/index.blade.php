@@ -43,13 +43,14 @@
                 </div>
                 <div class="card-body pt-0">
                     <div class="row">
-                        <div class="col-lg-8 row ">
-                            <div class="col-lg-2 d-flex">
-
-                                @can('create', ['/admin/procurement/purchase-order'])
+                        <div class="col-lg-8 d-flex ">
+                            @can('create', ['/admin/procurement/purchase-order'])
+                                <div class="px-2">
                                     <button type="button" class="btn btn-sm btn-primary" onclick="create()">
                                         +</button>
-                                @endcan
+                                </div>
+                            @endcan
+                            <div class="px-2">
                                 <button type="button" class="btn btn-sm btn-success" data-kt-menu-trigger="click"
                                     data-kt-menu-placement="top-start">
                                     Export
@@ -64,19 +65,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-5 d-flex">
-                                <select name="month" id="month" class="form-select form-select-md select-2">
-                                    @foreach ($month as $m)
-                                        <option value="{{ $m }}">{{ $m }}</option>
-                                    @endforeach
-                                </select>
-                                <select name="years" id="years" class="form-select form-select-md select-2">
-                                    @foreach ($years as $y)
-                                        <option value="{{ $y }}">{{ $y }}</option>
-                                    @endforeach
-                                </select>
-                                <a class="btn btn-sm btn-info input-group-text" onclick=""><i
-                                        class="lab la-searchengin"></i></a>
+                            <select name="month" id="month" class="form-select form-select-md select-2">
+                                @foreach ($month as $m)
+                                    <option value="{{ $m }}">{{ $m }}</option>
+                                @endforeach
+                            </select>
+                            <select name="years" id="years" class="form-select form-select-md select-2">
+                                @foreach ($years as $y)
+                                    <option value="{{ $y }}">{{ $y }}</option>
+                                @endforeach
+                            </select>
+                            <div class="px-2">
+
+                                <button class="btn btn-sm btn-info input-group-text" onclick=""><i
+                                        class="lab la-searchengin"></i></button>
                             </div>
                         </div>
                         <div class="col-lg-4 d-flex justify-content-end">
@@ -92,15 +94,18 @@
                         <thead>
                             <tr class="text-start text-uppercase text-gray-400 fw-bolder fs-7 gs-0">
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Kode PO</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Kode PO
+                                </th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Partner
                                 </th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Tanggal
                                     Order
                                 </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Total</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Total
+                                </th>
                                 {{-- <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Due Date</th> --}}
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Status</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ">Status
+                                </th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Aksi</th>
                             </tr>
                         </thead>
@@ -218,7 +223,7 @@
             "bLengthChange": false,
             "bFilter": true,
             "bInfo": false,
-            "initComplete": function(){
+            "initComplete": function() {
                 $('#total_pembelian').html('Ada')
             }
         });

@@ -19,11 +19,11 @@
                     <option value="0" {{ $tp->status == 0 ? 'selected' : '' }}>Tidak</option>
                 </select>
             </div>
-            <div class="d-flex justify-content-end" id="loadingnya">
-                <div class="py-2">
+            <div class="d-flex justify-content-center" id="loadingnya">
+                <div class="p-2">
                     <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Kembali</button>
                 </div>
-                <div class="py-2">
+                <div class="p-2">
                     <button class="btn btn-sm btn-primary" id="btn-update">Perbarui Tipe</button>
                 </div>
             </div>
@@ -32,30 +32,31 @@
 </div>
 <script>
     $('#update-form').on('submit', function(e) {
-            e.preventDefault();
+        e.preventDefault();
 
 
-            $('#btn-update').hide()
-            $('#loadingnya').html(
-                '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
+        $('#btn-update').hide()
+        $('#loadingnya').html(
+            '<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
 
 
-            $.ajax({
-                type: "POST",
-                url: "{{ url('/admin/masterdata/typepartners/update') }}",
-                data: $('#update-form').serialize(),
-                dataType: 'json',
-                success: function(response) {
-                    Swal.fire(
-                        'Success',
-                        response.success,
-                        'success'
-                    )
-                    $('#content').hide();
+        $.ajax({
+            type: "POST",
+            url: "{{ url('/admin/masterdata/typepartners/update') }}",
+            data: $('#update-form').serialize(),
+            dataType: 'json',
+            success: function(response) {
+                Swal.fire(
+                    'Success',
+                    response.success,
+                    'success'
+                )
+                $('#content').hide();
                 $('#indexContent').show();
-                    typeofpartner.ajax.reload(null, false);
+                $('#searchTypeOfPartner').focus();
+                typeofpartner.ajax.reload(null, false);
 
-                }
-            })
+            }
         })
+    })
 </script>

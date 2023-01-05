@@ -12,8 +12,77 @@
                     <div class="d-flex align-items-center position-relative my-1">
                        <h5 class="fw-bolder text-gray-600">Penerimaan Barang</h5>
                     </div>
-                    <div class="d-flex align-items-center position-relative my-1">
-                        <div class="form-group">
+                   
+                </div>
+                <div class="card-toolbar">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-10">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Penerimaan Perbulan
+                                        </p>
+                                        <h5 class="font-weight-bolder" id="total_penerimaan">
+                                            -
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="col-2 text-end">
+                                    <div
+                                        class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="loading-add">
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-body pt-0">
+                <div class="row">
+                    <div class="col-lg-8 d-flex ">
+                        @can('create', ['/admin/procurement/items-receipt'])
+                            <div class="px-2">
+                                <button type="button" class="btn btn-sm btn-primary" onclick="create()">
+                                    +</button>
+                            </div>
+                        @endcan
+                        <div class="px-2">
+                            <button type="button" class="btn btn-sm btn-success" data-kt-menu-trigger="click"
+                                data-kt-menu-placement="top-start">
+                                Export
+                            </button>
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold fs-8 w-100px py-2"
+                                data-kt-menu="true">
+                                <div class="menu-item px-2">
+                                    <a href="/admin/procurement/items-receipt/exportexcel" target="_blank"
+                                        class="menu-link px-2">
+                                        <span><i class="bi bi-file-earmark-excel"></i></span> Excel
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <select name="month" id="month" class="form-select form-select-md select-2">
+                            @foreach ($month as $m)
+                                <option value="{{ $m }}">{{ $m }}</option>
+                            @endforeach
+                        </select>
+                        <select name="years" id="years" class="form-select form-select-md select-2">
+                            @foreach ($years as $y)
+                                <option value="{{ $y }}">{{ $y }}</option>
+                            @endforeach
+                        </select>
+                        <div class="px-2">
+
+                            <button class="btn btn-sm btn-info input-group-text" onclick=""><i
+                                    class="lab la-searchengin"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-flex justify-content-end">
+                        <div class="form-group col-lg-4">
                             <div class="input-group">
                                 <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                                 <input class="form-control" placeholder="Search" id="searchTableItemsReceipt" type="text">
@@ -21,17 +90,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-toolbar">
-                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
-                        @can('create', ['/admin/procurement/items-receipt'])
-                        <button type="button" class="btn btn-primary me-3" onclick="create()">
-                        Tambah Penerimaan Barang</button>
-                        @endcan
-                    </div>
-
-                </div>
-            </div>
-            <div class="card-body pt-0">
                 <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="tableItemsReceipt">
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
@@ -62,13 +120,14 @@
 @section('js')
 
 <script>
+    $('.select-2').select2();
         function info(id){
             $('#loading-add').html('<div class="spinner-grow text-success" role="status"><span class="sr-only"></span></div>')
             $.get("{{ url('/admin/procurement/items-receipt/info') }}/"+id, {}, function(data, status){
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Penerimaan Barang</button>')
+                $('#loading-add').html('')
             })
         }
 
@@ -78,7 +137,7 @@
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Penerimaan Barang</button>')
+                $('#loading-add').html('')
             })
         }
         function edit(id){
@@ -87,7 +146,7 @@
                 $('#indexContent').hide();
                 $('#content').html(data)
                 $('#content').show()
-                $('#loading-add').html('<button type="button" class="btn btn-primary me-3" onclick="create()">Tambah Penerimaan Barang</button>')
+                $('#loading-add').html('')
             })
         }
         function tutupContent() {

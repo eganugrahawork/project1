@@ -87,6 +87,7 @@
         function tutupContent(){
             $('#content').hide()
             $('#indexContent').show()
+            $('#searchItemsTable').focus()
         }
 
 

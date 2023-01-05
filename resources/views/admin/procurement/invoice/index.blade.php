@@ -13,25 +13,36 @@
                         <div class="d-flex align-items-center position-relative my-1">
                             <h5 class="fw-bolder text-gray-600">Procurement Invoice</h5>
                         </div>
-                        <div class="d-flex align-items-center position-relative my-1">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                                    <input class="form-control" placeholder="Search" id="searchTableInvoice" type="text">
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="card-toolbar">
-                        <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" id="loading-add">
+                        <div class="d-flex align-items-center position-relative my-1" id="loading-add">
                             @can('create', ['/admin/procurement/invoice'])
-                                <button type="button" class="btn btn-primary me-3" onclick="create()">
+                                <button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">
                                     Buat Invoice</button>
                             @endcan
                         </div>
+                    </div>
 
+                    <div class="card-toolbar">
+                        <div class="card">
+                            <div class="card-body p-3">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <div class="numbers">
+                                            <p class="text-sm mb-0 text-uppercase font-weight-bold">Invoice Perbulan
+                                            </p>
+                                            <h5 class="font-weight-bolder" id="total_penerimaan">
+                                                -
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 text-end">
+                                        <div
+                                            class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                            <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body pt-0">
@@ -49,8 +60,14 @@
                         </select>
                         <button class="btn btn-sm btn-primary input-group-text" type="button"><i
                                 class="lab la-searchengin"></i></a>
-
-
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                <input class="form-control" placeholder="Search" id="searchTableInvoice" type="text">
+                            </div>
+                        </div>
                     </div>
                     <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100" id="tableInvoice">
                         <thead>
@@ -58,8 +75,10 @@
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">No Invoice
                                 </th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal Invoice</th>
-                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Jatuh Tempo</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Tanggal
+                                    Invoice</th>
+                                <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Jatuh Tempo
+                                </th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Partner</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Total</th>
                                 <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Sisa</th>
@@ -89,7 +108,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Buat Invoice</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Buat Invoice</button>'
                 )
             })
         }
@@ -102,7 +121,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Buat Invoice</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Buat Invoice</button>'
                 )
             })
         }
@@ -115,7 +134,7 @@
                 $('#content').html(data)
                 $('#content').show()
                 $('#loading-add').html(
-                    '<button type="button" class="btn btn-primary me-3" onclick="create()">Buat Invoice</button>'
+                    '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Buat Invoice</button>'
                 )
             })
         }
@@ -156,7 +175,7 @@
                                 'success'
                             )
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Buat Invoice</button>'
+                                '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Buat Invoice</button>'
                             )
                         }
                     })
@@ -181,35 +200,58 @@
 
         }
 
-        var tableInvoice =  $('#tableInvoice').DataTable({
-            serverside : true,
-            processing : true,
-            ajax : {
-                    url : "{{ url('/admin/procurement/invoice/list') }}"
-                    },
-                    columns:
-                    [
-                    {
+        var tableInvoice = $('#tableInvoice').DataTable({
+            serverside: true,
+            processing: true,
+            ajax: {
+                url: "{{ url('/admin/procurement/invoice/list') }}"
+            },
+            columns: [{
                     data: 'DT_RowIndex',
                     searchable: false
                 },
-                    {data: 'invoice_number', name: 'invoice_number'},
-                    {data: 'invoice_date', name: 'invoice_date'},
-                    {data: 'due_date', name: 'due_date'},
-                    {data: 'name', name: 'name'},
-                    {data: 'price', name: 'price',
-                    render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')},
-                    {data: 'balance', name: 'balance', render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')},
-                    {data: 'status', name: 'status'},
-                    {data: 'action', name: 'action'}
-                    ],
+                {
+                    data: 'invoice_number',
+                    name: 'invoice_number'
+                },
+                {
+                    data: 'invoice_date',
+                    name: 'invoice_date'
+                },
+                {
+                    data: 'due_date',
+                    name: 'due_date'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'price',
+                    name: 'price',
+                    render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')
+                },
+                {
+                    data: 'balance',
+                    name: 'balance',
+                    render: $.fn.dataTable.render.number('.', ',', 0, 'Rp ')
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'action',
+                    name: 'action'
+                }
+            ],
             "bLengthChange": false,
             "bFilter": true,
             "bInfo": false
         });
 
-        $('#searchTableInvoice').keyup(function () {
-                tableInvoice.search($(this).val()).draw()
+        $('#searchTableInvoice').keyup(function() {
+            tableInvoice.search($(this).val()).draw()
         });
 
         $(document).on('click', '#deleteInvoice', function(e) {
@@ -248,7 +290,7 @@
                             )
                             tableInvoice.ajax.reload(null, false);
                             $('#loading-add').html(
-                                '<button type="button" class="btn btn-primary me-3" onclick="create()">Add Item Receipt</button>'
+                                '<button type="button" class="btn btn-sm btn-primary me-3" onclick="create()">Add Item Receipt</button>'
                             )
                         }
                     })

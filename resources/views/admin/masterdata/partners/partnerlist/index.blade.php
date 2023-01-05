@@ -92,6 +92,7 @@
         function tutupContent(){
             $('#content').hide()
             $('#indexContent').show()
+            $('#searchPartnerTable').focus()
         }
 
 

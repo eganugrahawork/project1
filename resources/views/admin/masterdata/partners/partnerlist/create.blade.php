@@ -79,11 +79,11 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-end" id="loadingnya">
-                <div class="py-2">
+            <div class="d-flex justify-content-center" id="loadingnya">
+                <div class="p-2">
                     <button class="btn btn-sm btn-secondary" type="button" onclick="tutupContent()">Kembali</button>
                 </div>
-                <div class="py-2">
+                <div class="p-2">
                     <button class="btn btn-sm btn-primary" id="btn-add">Buat Partner</button>
                 </div>
             </div>
@@ -116,6 +116,7 @@ $('.select-2').select2()
                 )
                 $('#content').hide();
                 $('#indexContent').show();
+                $('#searchPartnerTable').focus();
                 partnerTable.ajax.reload(null, false);
             }
         })
