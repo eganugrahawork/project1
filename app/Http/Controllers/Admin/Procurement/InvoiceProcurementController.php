@@ -207,6 +207,7 @@ class InvoiceProcurementController extends Controller {
                                 value='' class='form-control form-control-solid mb-3 mb-lg-0 ' required />
                         </div>
         </div>";
+        
             }
         }
         return response()->json([
