@@ -64,7 +64,7 @@ class InvoiceProcurementController extends Controller {
             $id_item_receipt_detail = $request->id_item_receipt_detail[$i];
             $getCoa = DB::connection('procurement')->select("Call sp_search_coa_id($id_item_receipt_detail)");
             $po_item_id = $request->po_item_id[$i];
-            $qty_receipt = $request->qty[$i];
+            $qty_receipt = $request->qty_receipt[$i];
             $unit_price = $request->unit_price[$i];
             $price = $qty_receipt * $unit_price + (($qty_receipt * $unit_price) * $request->ppn);
             $description = $request->notes[$i];
@@ -86,7 +86,7 @@ class InvoiceProcurementController extends Controller {
             $type_cash = 0;
             $notes =  $description;
             $rate =  $request->rate;
-            $descriptioncoa = $request->description;
+            $descriptioncoa = $request->description_invoice;
             $invoice_number = $invoiceLast->invoice_number;
             $assets_id = 0;
             DB::connection('procurement')->select("Call sp_insert_coa_value(
@@ -158,16 +158,17 @@ class InvoiceProcurementController extends Controller {
             'aktivitas' => "Tambah",
             'keterangan' => "Tambah Invoice Procurement " . $request->id
         ]);
-        return response()->json(['success' => 'Invoices Updated']);
+        return response()->json(['success' => 'Invoices Dihapus']);
     }
     public function getdata(Request $request) {
         $data = DB::connection('procurement')->select('Call sp_search_id_item_receipt(' . $request->id . ')');
         $html = '';
+        
         foreach ($data as $item) {
             if ($item->qty_receipt) {
+                $price = (($item->unit_price * $item->qty_receipt) + (($item->unit_price * $item->qty_receipt) * $item->ppn / 100)) - (($item->unit_price * $item->qty_receipt) * $item->discount/ 100) ;
                 $html .= "<div class='row'>
             <input type='hidden' name='po_item_id[]' value='$item->po_item_id'/>
-            <input type='hidden' name='unit_price[]' value='$item->unit_price'/>
             <input type='hidden' name='id_item_receipt_detail[]' value='$item->id_item_receipt_detail'/>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class=' form-label fw-bold'>Item</label>
@@ -176,31 +177,34 @@ class InvoiceProcurementController extends Controller {
                 </select>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
-                <label class=' fw-bold fs-6 mb-2'>Qty Order</label>
-                <input type='number' name='qty_order[]' id='qty_order' value='$item->qty' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
-            </div>
-            <input type='hidden'  id='nowBalance' value='$item->qty_balance' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
-            <div class='fv-row mb-3 col-lg-2'>
-                <label class=' fw-bold fs-6 mb-2'>Sisa</label>
-                <input type='number' name='balance[]' id='balance' value='$item->qty_balances' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
-            </div>
-            <div class='fv-row mb-3 col-lg-2'>
-                <label class='required fw-bold fs-6 mb-2'>Diterima</label>
-                <input type='number' name='qty[]' id='qty' onkeyup='balanceEdit(this)' value='$item->qty_receipt' readonly  class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
-            </div>
-            <div class='fv-row mb-3 col-lg-1'>
-                <label class='required fw-bold fs-6 mb-2'>Bonus</label>
-                <input type='number' name='qty_bonus[]' id='qty_bonus' value='$item->qty_bonus' readonly  class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
-            </div>
+                            <label class=' fw-bold fs-6 mb-2'>Qty Diterima</label>
+                            <input type='number' name='qty_receipt[]' id='qty_receipt' value='$item->qty_receipt' readonly
+                                class='form-control form-control-white mb-3 mb-lg-0 ' required />
+                        </div>
 
-            <div class='fv-row mb-3 col-lg-1'>
-                <label class='required fw-bold fs-6 mb-2'>Diskon</label>
-                <input type='number' name='qty_discount[]' id='qty_discount'  value='$item->qty_discount' readonly class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
-            </div>
-            <div class='fv-row mb-3 col-lg-2'>
-                <label class='required fw-bold fs-6 mb-2'>Note</label>
-                <input type='text' name='notes[]' id='notes' readonly  class='form-control form-control-solid mb-3 mb-lg-0 descriptionnya'  value='$item->deskripsi_items'/>
-            </div>
+                        <div class='fv-row mb-3 col-lg-2'>
+                            <label class='required fw-bold fs-6 mb-2'>Harga Unit</label>
+                            <input type='number' name='unit_price[]' id='unit_price'
+                                value='$item->unit_price' readonly
+                                class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                        </div>
+                        <div class='fv-row mb-3 col-lg-2'>
+                            <label class='required fw-bold fs-6 mb-2'>Diskon</label>
+                            <input type='number' name='qty_discount[]' id='qty_discount'
+                                value='$item->discount' readonly
+                                class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                        </div>
+                        <div class='fv-row mb-3 col-lg-2'>
+                            <label class='required fw-bold fs-6 mb-2'>Total Harga</label>
+                            <input type='number' name='price[]' id='price'
+                                value='$price' readonly
+                                class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                        </div>
+                        <div class='fv-row mb-3 col-lg-2'>
+                            <label class='required fw-bold fs-6 mb-2'>Notes</label>
+                            <input type='text' name='notes[]' id='notes'
+                                value='' class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                        </div>
         </div>";
             }
         }

@@ -160,6 +160,12 @@
                                 value='{{ $item->price }}' readonly
                                 class='form-control form-control-solid mb-3 mb-lg-0 ' required />
                         </div>
+                        <div class='fv-row mb-3 col-lg-2'>
+                            <label class='required fw-bold fs-6 mb-2'>Notes</label>
+                            <input type='text' name='notes[]' id='notes'
+                                value='{{ $item->notes }}' readonly
+                                class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                        </div>
 
                     </div>
                     @endforeach
