@@ -7,35 +7,37 @@
             @csrf
             <div class="d-flex justify-content-center">
                 <div class="col-lg-6">
-            <div class="fv-row mb-3">
-                <label class="required form-label fw-bold">Coa</label>
-                <div class="col-lg-6">
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="coa_id" required>
-                        @foreach ($coa as $c)
-                            <option value="{{ $c->id }}">{{ $c->coa }}</option>
-                        @endforeach
-                    </select>
+                    <div class="fv-row mb-3">
+                        <label class="required form-label fw-bold fs-6 mb-2">Coa</label>
+                        <div class="col-lg-6">
+                            <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" name="coa_id"
+                                required>
+                                @foreach ($coa as $c)
+                                    <option value="{{ $c->id }}">{{ $c->coa }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Nama Tipe</label>
+                        <input type="text" name="name_type"
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
+                    </div>
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
+                        <textarea name="description" class="form-control form-control-transparent mb-3 mb-lg-0" required></textarea>
+                    </div>
+                    <div class="fv-row mb-3">
+                        <label class="required form-label fw-bold fs-6 mb-2">Status</label>
+                        <div class="col-lg-6">
+                            <select class="form-select  form-select-transparent mb-3 mb-lg-0" name="status" required>
+                                <option value="1">Ya</option>
+                                <option value="0">Tidak</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="fv-row mb-3">
-                <label class="required fw-bold fs-6 mb-2">Nama Tipe</label>
-                <input type="text" name="name_type" class="form-control form-control-solid mb-3 mb-lg-0" required />
-            </div>
-            <div class="fv-row mb-3">
-                <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
-                <textarea name="description" class="form-control form-control-solid mb-3 mb-lg-0" required></textarea>
-            </div>
-            <div class="fv-row mb-3">
-                <label class="required form-label fw-bold">Status</label>
-                <div class="col-lg-6">
-                    <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
-                        <option value="1">Ya</option>
-                        <option value="0">Tidak</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
 
             <div class="d-flex justify-content-center" id="loadingnya">
                 <div class="p-2">

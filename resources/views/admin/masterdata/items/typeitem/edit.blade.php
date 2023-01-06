@@ -10,9 +10,9 @@
                 <div class="col-lg-6">
                     <input type="hidden" name="id" value="{{ $typeitems->id }}">
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Coa</label>
+                        <label class="required form-label fw-bold fs-6 mb-2">Coa</label>
                         <div class="col-lg-6">
-                            <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="coa_id"
+                            <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" name="coa_id"
                                 required>
                                 @foreach ($coa as $c)
                                     <option value="{{ $c->id }}"
@@ -24,17 +24,18 @@
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Nama Tipe</label>
-                        <input type="text" name="name_type" class="form-control form-control-solid mb-3 mb-lg-0"
+                        <input type="text" name="name_type"
+                            class="form-control form-control-transparent mb-3 mb-lg-0"
                             value="{{ $typeitems->name_type }}" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
-                        <textarea name="description" class="form-control form-control-solid mb-3 mb-lg-0" required>{{ $typeitems->description }}</textarea>
+                        <textarea name="description" class="form-control form-control-transparent mb-3 mb-lg-0" required>{{ $typeitems->description }}</textarea>
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Status</label>
+                        <label class="required form-label fw-bold fs-6 mb-2">Status</label>
                         <div class="col-lg-6">
-                            <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
+                            <select class="form-select  form-select-transparent mb-3 mb-lg-0" name="status" required>
                                 <option value="1" {{ $typeitems->status == 1 ? 'selected' : '' }}>Ya</option>
                                 <option value="0" {{ $typeitems->status == 0 ? 'selected' : '' }}>Tidak</option>
                             </select>

@@ -1,23 +1,28 @@
 <div class="card">
-    <div class="card-header">
-        <h4>Perbarui Tipe {{ $tp->name }}</h4>
+    <div class="card-header justify-content-center">
+        <h4 class="fw-bolder">Perbarui Tipe {{ $tp->name }}</h4>
     </div>
     <div class="card-body">
         <form id="update-form">
             @csrf
-
-            <input type="hidden" name="id" id="id" value="{{ $tp->id }}">
-            <div class="fv-row mb-3">
-                <label class="required fw-bold fs-6 mb-2">Nama</label>
-                <input type="text" name="name" id="name" class="form-control form-control-solid mb-3 mb-lg-0"
-                    value="{{ $tp->name }}" required />
-            </div>
-            <div class="fv-row mb-3">
-                <label class="required form-label fw-bold">Status</label>
-                <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" id="status" required>
-                    <option value="1" {{ $tp->status == 1 ? 'selected' : '' }}>Ya</option>
-                    <option value="0" {{ $tp->status == 0 ? 'selected' : '' }}>Tidak</option>
-                </select>
+            <div class="d-flex justify-content-center">
+                <div class="col-lg-6">
+                    <input type="hidden" name="id" id="id" value="{{ $tp->id }}">
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Nama</label>
+                        <input type="text" name="name" id="name"
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="{{ $tp->name }}"
+                            required />
+                    </div>
+                    <div class="fv-row mb-3">
+                        <label class="required form-label fw-bold">Status</label>
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0" name="status" id="status"
+                            required>
+                            <option value="1" {{ $tp->status == 1 ? 'selected' : '' }}>Ya</option>
+                            <option value="0" {{ $tp->status == 0 ? 'selected' : '' }}>Tidak</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="d-flex justify-content-center" id="loadingnya">
                 <div class="p-2">

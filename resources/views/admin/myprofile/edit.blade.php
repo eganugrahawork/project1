@@ -40,7 +40,7 @@
                 <div class="row mb-3">
                     <label class=" col-form-label required fw-bold fs-6">Nama Lengkap</label>
                     <div class=" fv-row">
-                                <input type="text" name="name" class="form-control form-control-lg form-control-solid @error('name')
+                                <input type="text" name="name" class="form-control form-control-lg form-control-transparent @error('name')
                                     is-invalid
                                 @enderror" value="{{ old('name', auth()->user()->name) }}" />
                                 @error('name')
@@ -53,7 +53,7 @@
                 <div class="row mb-3">
                     <label class=" col-form-label required fw-bold fs-6">Username</label>
                     <div class=" fv-row">
-                        <input type="hidden" name="username" class="form-control form-control-lg form-control-solid " placeholder="Username" value="{{ old('username', auth()->user()->username) }}" />
+                        <input type="hidden" name="username" class="form-control form-control-lg form-control-transparent " placeholder="Username" value="{{ old('username', auth()->user()->username) }}" />
                         <label class="col-form-label fw-bold fs-6">{{ auth()->user()->username }}</label>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                         <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i>
                     </label>
                     <div class=" fv-row">
-                        <input type="number" name="no_hp" class="form-control form-control-lg form-control-solid @error('no_hp')
+                        <input type="number" name="no_hp" class="form-control form-control-lg form-control-transparent @error('no_hp')
                         is-invalid
                     @enderror" placeholder="Phone number" value="{{  old('no_hp', auth()->user()->no_hp)  }}" />
                     @error('no_hp')
@@ -77,28 +77,28 @@
                 <div class="row mb-3">
                     <label class=" col-form-label fw-bold fs-6">Email</label>
                     <div class=" fv-row">
-                        <input type="hidden" name="email" class="form-control form-control-lg form-control-solid" value="{{ auth()->user()->email }}" />
+                        <input type="hidden" name="email" class="form-control form-control-lg form-control-transparent" value="{{ auth()->user()->email }}" />
                         <label class="col-form-label fw-bold fs-6">{{ auth()->user()->email }}</label>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class=" col-form-label fw-bold fs-6">Tempat Lahir</label>
                     <div class=" fv-row">
-                        <input type="hidden" name="place_of_birth" class="form-control form-control-lg form-control-solid" value="{{ auth()->user()->place_of_birth }}" />
+                        <input type="hidden" name="place_of_birth" class="form-control form-control-lg form-control-transparent" value="{{ auth()->user()->place_of_birth }}" />
                         <label class="col-form-label fw-bold fs-6">{{ auth()->user()->place_of_birth }}</label>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class=" col-form-label fw-bold fs-6">Tanggal Lahir</label>
                     <div class=" fv-row">
-                        <input type="hidden" name="date_of_birth" class="form-control form-control-lg form-control-solid" value="{{ auth()->user()->date_of_birth }}" />
+                        <input type="hidden" name="date_of_birth" class="form-control form-control-lg form-control-transparent" value="{{ auth()->user()->date_of_birth }}" />
                         <label class="col-form-label fw-bold fs-6">{{ auth()->user()->date_of_birth }}</label>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class=" col-form-label fw-bold fs-6">Wilayah</label>
                     <div class=" fv-row">
-                        <select class="form-select form-select-solid" name="region" required>
+                        <select class="form-select form-select-transparent" name="region" required>
                                 @foreach ( $region as $l )
                                 <option value="{{ $l->id }}" @if (auth()->user()->id === $l->region)
                                     selected
@@ -110,7 +110,7 @@
                 <div class="row mb-3">
                     <label class=" col-form-label fw-bold fs-6">Agama</label>
                     <div class=" fv-row">
-                        <input type="text" name="religion" class="form-control form-control-lg form-control-solid @error('religion')
+                        <input type="text" name="religion" class="form-control form-control-lg form-control-transparent @error('religion')
                         is-invalid
                     @enderror" value="{{ old('religion', auth()->user()->religion) }}" />
                         @error('religion')
@@ -123,7 +123,7 @@
                 <div class="row mb-3">
                     <label class=" col-form-label fw-bold fs-6">Alamat</label>
                     <div class=" fv-row">
-                        <input type="text" name="address" class="form-control form-control-lg form-control-solid @error('address')
+                        <input type="text" name="address" class="form-control form-control-lg form-control-transparent @error('address')
                         is-invalid
                     @enderror" value="{{ old('address', auth()->user()->address) }}" />
                         @error('address')
@@ -138,7 +138,7 @@
                     <div class="col-lg-12 fv-row">
                         <div class="row">
                             <div class="col-lg-6 fv-row">
-                                <input type="password" name="password" class="form-control form-control-lg form-control-solid @error('password')
+                                <input type="password" name="password" class="form-control form-control-lg form-control-transparent @error('password')
                                 is-invalid
                                 @enderror" placeholder="New Password"/>
                                 @error('password')
@@ -148,7 +148,7 @@
                                 @enderror
                             </div>
                             <div class="col-lg-6 fv-row">
-                                <input type="password" id="password-confirm" name="password_confirmation" placeholder="Confirm new Password" class="form-control form-control-lg form-control-solid @error('password')
+                                <input type="password" id="password-confirm" name="password_confirmation" placeholder="Confirm new Password" class="form-control form-control-lg form-control-transparent @error('password')
                                 is-invalid
                                 @enderror" />
                             </div>
@@ -158,7 +158,7 @@
                 <div class="row mb-3">
                     <label class=" col-form-label fw-bold fs-6">Password Konfirmasi</label>
                     <div class=" fv-row">
-                        <input type="password" name="oldpassword" class="form-control form-control-lg form-control-solid @error('oldpassword')
+                        <input type="password" name="oldpassword" class="form-control form-control-lg form-control-transparent @error('oldpassword')
                         is-invalid
                     @enderror"  required/>
                         @error('oldpassword')

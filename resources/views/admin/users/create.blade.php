@@ -31,13 +31,13 @@
                     <div class="col-lg-6">
                         <div class="fv-row mb-3">
                             <label class="required fw-bold fs-6 mb-2">Nama</label>
-                            <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0"
+                            <input type="text" name="name" class="form-control form-control-transparent mb-3 mb-lg-0"
                                 placeholder="Nama Lengkap" required />
                         </div>
                         <div class="fv-row mb-3">
                             <label class="required fw-bold fs-6 mb-2">Email</label>
                             <input type="email" name="email" onchange="checkEmail(this)"
-                                class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com"
+                                class="form-control form-control-transparent mb-3 mb-lg-0" placeholder="example@domain.com"
                                 required />
                             <div class="form-text" style="color: red" id="demailmin"><i class="bi bi-x-circle-fill"></i>
                                 Harus
@@ -53,14 +53,14 @@
                         <div class="fv-row mb-3">
                             <label class="required fw-bold fs-6 mb-2">Tempat Lahir</label>
                             <input type="text" name="place_of_birth"
-                                class="form-control form-control-solid mb-3 mb-lg-0" placeholder="xxx" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" placeholder="xxx" required />
                         </div>
                         <div class="fv-row mb-3">
                             <div>
                                 <label class="required fw-bold fs-6 mb-2">Tanggal Lahir</label>
                             </div>
                             <input type="text" id="date_of_birth" name="date_of_birth"
-                                class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" required />
                         </div>
                         <div class="fv-row mb-3">
                             <label class="required fw-bold fs-6 mb-2">Agama</label>
@@ -79,19 +79,19 @@
                         </div>
                         <div class="fv-row mb-3">
                             <label class="required fw-bold fs-6 mb-2">No. Telp</label>
-                            <input type="number" name="no_hp" class="form-control form-control-solid mb-3 mb-lg-0"
+                            <input type="number" name="no_hp" class="form-control form-control-transparent mb-3 mb-lg-0"
                                 placeholder="08xxxx" required />
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="fv-row mb-3">
                             <label class="required fw-bold fs-6 mb-2">Alamat</label>
-                            <input type="text" name="address" class="form-control form-control-solid mb-3 mb-lg-0"
+                            <input type="text" name="address" class="form-control form-control-transparent mb-3 mb-lg-0"
                                 required />
                         </div>
                         <div class="fv-row mb-3">
                             <label class="required fw-bold fs-6 mb-2">Wilayah</label>
-                            <select class="form-select form-select-solid select-2-first" name="region" required>
+                            <select class="form-select form-select-transparent select-2-first" name="region" required>
                                 @foreach ($region as $l)
                                     <option value="{{ $l->id }}">{{ $l->name }}</option>
                                 @endforeach
@@ -100,7 +100,7 @@
                         <div class="fv-row mb-3">
                             <label class="required fw-bold fs-6 mb-2">Username</label>
                             <input type="text" name="username" onchange="checkUsername(this)"
-                                class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" required />
                             <div class="form-text" style="color: red" id="dusrmin"><i
                                     class="bi bi-x-circle-fill"></i>
                                 Minimal 4 Karakter</div>
@@ -115,13 +115,13 @@
                         <div class="fv-row mb-3">
                             <label class="required fw-bold fs-6 mb-2">Password</label>
                             <input type="password" name="password"
-                                class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" required />
                         </div>
                         <div class="mb-3">
                             <label class="required fw-bold fs-6 mb-5">Role</label>
                             @foreach ($role as $r)
                                 <div class="d-flex fv-row">
-                                    <div class="form-check form-check-custom form-check-solid">
+                                    <div class="form-check form-check-custom form-check-transparent">
                                         <input class="form-check-input me-3" name="role_id" type="radio"
                                             value="{{ $r->id }}" id="kt_modal_update_role_option_0"
                                             checked='checked' />
@@ -153,6 +153,7 @@
 
         flatpickr("#date_of_birth", {
             dateFormat: "Y-m-d",
+            allowInput: true
         });
 
     });

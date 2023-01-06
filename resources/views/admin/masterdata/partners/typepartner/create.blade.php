@@ -1,21 +1,26 @@
 <div class="card">
-    <div class="card-header">
-        <h4>Tambah Tipe Partner</h4>
+    <div class="card-header justify-content-center">
+        <h4 class="fw-bolder">Tambah Tipe Partner</h4>
     </div>
     <div class="card-body">
         <form id="add-form">
             @csrf
-            <div class="fv-row mb-3">
-                <label class="required fw-bold fs-6 mb-2">Nama</label>
-                <input type="text" name="name" id="name" class="form-control form-control-solid mb-3 mb-lg-0"
-                    required />
-            </div>
-            <div class="fv-row mb-3">
-                <label class="required form-label fw-bold">Status</label>
-                <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" id="status" required>
-                    <option value="1">Ya</option>
-                    <option value="0">Tidak</option>
-                </select>
+            <div class="d-flex justify-content-center">
+                <div class="col-lg-6">
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Nama</label>
+                        <input type="text" name="name" id="name"
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
+                    </div>
+                    <div class="fv-row mb-3">
+                        <label class="required form-label fw-bold">Status</label>
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0" name="status" id="status"
+                            required>
+                            <option value="1">Ya</option>
+                            <option value="0">Tidak</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="d-flex justify-content-center" id="loadingnya">
                 <div class="p-2">

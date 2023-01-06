@@ -9,22 +9,22 @@
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Kode Item</label>
-                        <input type="text" name="item_code" class="form-control form-control-solid mb-3 mb-lg-0"
+                        <input type="text" name="item_code" class="form-control form-control-transparent mb-3 mb-lg-0"
                             required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Nama Item</label>
-                        <input type="text" name="item_name" class="form-control form-control-solid mb-3 mb-lg-0"
+                        <input type="text" name="item_name" class="form-control form-control-transparent mb-3 mb-lg-0"
                             required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
-                        <textarea name="item_description" class="form-control form-control-solid mb-3 mb-lg-0" required></textarea>
+                        <textarea name="item_description" class="form-control form-control-transparent mb-3 mb-lg-0" required></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required form-label fw-bold">Unit</label>
                         <div class="col-lg-6">
-                            <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="uom_id"
+                            <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" name="uom_id"
                                 required>
                                 @foreach ($uom as $uom)
                                     <option value="{{ $uom->id }}">{{ $uom->name }}</option>
@@ -38,14 +38,14 @@
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Unit Box</label>
                         <div class="col-lg-6">
-                            <input type="number" name="unit_box" class="form-control form-control-solid mb-3 mb-lg-0"
+                            <input type="number" name="unit_box" class="form-control form-control-transparent mb-3 mb-lg-0"
                                 required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required form-label fw-bold">Item Tipe</label>
                         <div class="col-lg-6">
-                            <select class="form-select form-select-solid " name="type_id" required>
+                            <select class="form-select form-select-transparent " name="type_id" required>
                                 @foreach ($type as $type)
                                     <option value="{{ $type->id }}">{{ $type->name_type }}</option>
                                 @endforeach
@@ -55,7 +55,7 @@
                     <div class="fv-row mb-3">
                         <label class="required form-label fw-bold">Pajak</label>
                         <div class="col-lg-6">
-                            <select class="form-select  form-select-solid mb-3 mb-lg-0" name="vat" required>
+                            <select class="form-select  form-select-transparent mb-3 mb-lg-0" name="vat" required>
                                 <option value="11">11%</option>
                                 <option value="10">10%</option>
                                 <option value="0">0%</option>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="fv-row mb-3">
                         <label class="form-label fw-bold required">Partner</label>
-                        <select class="form-select form-select-solid mb-3 mb-lg-0 select-2" name="partner_id" required>
+                        <select class="form-select form-select-transparent mb-3 mb-lg-0 select-2" name="partner_id" required>
                             @foreach ($partner as $p)
                                 <option value="{{ $p->id }}">{{ $p->name }}</option>
                             @endforeach
@@ -73,7 +73,7 @@
                     <div class="fv-row mb-3">
                         <label class="required form-label fw-bold">Status</label>
                         <div class="col-lg-6">
-                            <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
+                            <select class="form-select  form-select-transparent mb-3 mb-lg-0" name="status" required>
                                 <option value="1">Dijual</option>
                                 <option value="0">Tidak Dijual</option>
                             </select>
