@@ -472,6 +472,7 @@ Route::middleware('auth')->controller(PayableController::class)->group(function 
     Route::get('/admin/finance/payable/history', 'history');
     Route::get('/admin/finance/payable/create', 'create');
     Route::get('/admin/finance/payable/getdata/{id}', 'getdata');
+    Route::post('/admin/finance/payable/addnewrow', 'addnewrow');
 });
 // Payable End
 
@@ -480,6 +481,7 @@ Route::middleware('auth')->controller(ReceivableController::class)->group(functi
     Route::get('/admin/finance/receivable', 'index');
     Route::get('/admin/finance/receivable/history', 'history');
     Route::get('/admin/finance/receivable/create', 'create');
+    Route::post('/admin/finance/receivable/addnewrow', 'addnewrow');
 });
 // End Receivable
 

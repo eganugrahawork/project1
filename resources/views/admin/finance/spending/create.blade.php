@@ -9,7 +9,7 @@
                     @csrf
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Cash Account Debit</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="coa_id"
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" name="coa_id"
                             id="coa_id"  required>
                             <option selected disabled>Pilih COA</option>
                             @foreach ($coa as $c)
@@ -21,20 +21,20 @@
                         <label class="fw-bold fs-6 mb-2">Tanggal</label>
                         <div class="">
                             <input type="text" id="payment_date" name="payment_date"
-                                class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Jumlah</label>
                         <div class="">
                             <input type="number" id="amount" name="amount"
-                                class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Keterangan</label>
                         <div class="">
-                           <textarea name="description" id="description" cols="10" rows="5" class="form-control form-control-solid"></textarea>
+                           <textarea name="description" id="description" cols="10" rows="5" class="form-control form-control-transparent"></textarea>
                         </div>
                     </div>
                 </div>
@@ -58,17 +58,17 @@
                         </thead>
                         <tbody id="cashcreditList">
                             <tr>
-                                <td><select name="cash_credit" id="cash_credit" class="form-select form-select-solid select-2">
+                                <td><select name="cash_credit" id="cash_credit" class="form-select form-select-transparent select-2">
                                     <option selected disabled>Pilih</option>
                                 </select></td>
                                 <td>
-                                    <input type="number" name="amount" class="form-control form-control-solid">
+                                    <input type="number" name="amount" class="form-control form-control-transparent">
                                 </td>
                                 <td>
-                                    <input name="description" class="form-control form-control-solid" type="text"/>
+                                    <input name="description" class="form-control form-control-transparent" type="text"/>
                                 </td>
                                 <td>
-                                    <select name="partner_id" id="partner_id" class="form-select form-select-solid select-2">
+                                    <select name="partner_id" id="partner_id" class="form-select form-select-transparent select-2">
                                         <option selected disable>Pilih Partner Disini</option>
                                         @foreach ($partner as $p)
                                         <option value="{{ $p->id }}">{{ $p->name }}</option>
@@ -108,6 +108,7 @@
         flatpickr("#payment_date", {
             static: true,
             dateFormat: "Y-m-d",
+            allowInput:true
         });
     });
 </script>

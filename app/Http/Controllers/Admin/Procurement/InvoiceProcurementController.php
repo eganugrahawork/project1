@@ -127,6 +127,7 @@ class InvoiceProcurementController extends Controller {
             '$request->no_invoice',
             '$request->date_invoice',
             '$request->due_date',
+            '$request->att',
             '$request->description_invoice',
             '$request->sign',
             '$request->tax_invoice'

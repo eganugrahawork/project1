@@ -197,7 +197,7 @@ class PurchaseOrderController extends Controller {
         $itemqty = ItemQty::where(['item_id' => $request->id])->first();
         $pricing  = " <div class='fv-row mb-3 col-lg-2' id='price_parent'>
         <label class='required fw-bold fs-6 mb-2'>Harga</label>
-        <input type='number' name='price[]' id='price' onkeyup='hitungByPrice(this)' class='form-control form-control-solid mb-3 mb-lg-0' placeholder='$itemprice->base_price' required/>
+        <input type='number' name='price[]' id='price' onkeyup='hitungByPrice(this)' class='form-control form-control-transparent mb-3 mb-lg-0' placeholder='$itemprice->base_price' required/>
         <p id='notifprice'>Tulis Kembali harga untuk konfirmasi</p>
         </div>";
         return response()->json(['base_qty' => $itemqty->base_qty, 'pricing' => $pricing]);
@@ -208,7 +208,7 @@ class PurchaseOrderController extends Controller {
         <label class='required form-label fw-bold fs-6 mb-2'>Item </label>
                 <div class='row'>
                     <div class='col-lg-10'>
-        <select class='form-select form-select-solid mb-3 mb-lg-0 select-2' id='item_id' name='item_id[]' onchange='getBaseQty(this)' required>";
+        <select class='form-select form-select-transparent mb-3 mb-lg-0 select-2' id='item_id' name='item_id[]' onchange='getBaseQty(this)' required>";
 
         $items = Items::where(['partner_id' => $request->id])->get();
         if (count($items) > 0) {
@@ -231,16 +231,16 @@ class PurchaseOrderController extends Controller {
 
                         <div class='fv-row mb-3 col-lg-1'>
                         <label class='required fw-bold fs-6 mb-2'>Qty</label>
-                        <input type='number' name='qty[]' id='qty' onkeyup='hitungByQty(this)' value='0' class='form-control form-control-solid mb-3 mb-lg-0'  required/>
+                        <input type='number' name='qty[]' id='qty' onkeyup='hitungByQty(this)' value='0' class='form-control form-control-transparent mb-3 mb-lg-0'  required/>
                         </div>
                         <div class='fv-row mb-3 col-lg-1' id='discount_parent'>
                             <label class='required fw-bold fs-6 mb-2'>Diskon</label>
-                            <input type='number' name='discount[]' id='discount'  onkeyup='hitungByDiscount(this)' value='0' class='form-control form-control-solid mb-3 mb-lg-0'  required/>
+                            <input type='number' name='discount[]' id='discount'  onkeyup='hitungByDiscount(this)' value='0' class='form-control form-control-transparent mb-3 mb-lg-0'  required/>
                         </div>
                         <div class='fv-row mb-3 col-lg-2'>
                         <label class='required fw-bold fs-6 mb-2'>Total</label>
-                        <input type='number' name='total[]' id='total' readonly class='form-control form-control-solid mb-3 mb-lg-0 totalnya'  required/>
-                        <input type='hidden' name='getdiscountperitem[]' id='getdiscountperitem' readonly class='form-control form-control-solid mb-3 mb-lg-0 getdiscountperitem'  required/>
+                        <input type='number' name='total[]' id='total' readonly class='form-control form-control-transparent mb-3 mb-lg-0 totalnya'  required/>
+                        <input type='hidden' name='getdiscountperitem[]' id='getdiscountperitem' readonly class='form-control form-control-transparent mb-3 mb-lg-0 getdiscountperitem'  required/>
                         </div>
                         <div class='fv-row mb-3 col-lg-1'>
                         <label class='fw-bold fs-6 mb-2'>Hapus</label>

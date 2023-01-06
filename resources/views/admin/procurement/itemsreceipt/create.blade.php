@@ -9,7 +9,7 @@
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
                         <label class="required form-label fw-bold fs-6 mb-2">Nomor Purchase Order</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="purchase_order_id"
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" name="purchase_order_id"
                             id="purchase_order_id" required>
                             <option>Pilih No PO</option>
                             @foreach ($purchase_orders as $po)
@@ -21,58 +21,58 @@
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Kode Purchase Order</label>
                         <input type="text" id="code" name="code" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Tanggal Order</label>
                         <input type="text" name="order_date" id="order_date" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class=" form-label fw-bold">Partner</label>
                         <input type="text" name="partner" id="partner" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Alamat</label>
-                        <textarea type="text" name="address" id="address" readonly class="form-control form-control-white mb-3 mb-lg-0"></textarea>
+                        <textarea type="text" name="address" id="address" readonly class="form-control form-control-transparent mb-3 mb-lg-0"></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Nomor Telepon</label>
                         <input type="text" name="phone" id="phone" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Fax</label>
                         <input type="text" name="fax" id="fax" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Nomor Pengiriman Barang</label>
                         <input type="text" name="do_number" id="do_number"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Shipment</label>
-                        <textarea name="shipment" id="shipment" class="form-control form-control-solid mb-3 mb-lg-0" required></textarea>
+                        <textarea name="shipment" id="shipment" class="form-control form-control-transparent mb-3 mb-lg-0" required></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <div>
                             <label class="required fw-bold fs-6 mb-2">Tanggal Diterima</label>
                         </div>
                         <input type="text" name="receipt_date" id="receipt_date"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Plat Nomor</label>
                         <input type="text" name="plate_number" id="plate_number"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required form-label fw-bold">Status</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0" name="status" required>
                             <option value="1">Ya</option>
                             <option value="0">Tidak</option>
                         </select>

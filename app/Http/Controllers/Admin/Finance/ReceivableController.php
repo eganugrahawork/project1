@@ -40,4 +40,28 @@ class ReceivableController extends Controller
         $coa = Coa::all();
         return view('admin.finance.receivable.create', ['code' => $code, 'customer' => $customer, 'coa' => $coa]);
     }
+
+    public function addnewrow(Request $request){
+
+        $html = ' <tr>
+        <td><select name="invoice_id" id="invoice_id"
+                class="form-select form-select-transparent select-2">
+                <option selected disabled>Pilih Nomor Invoice</option>
+            </select></td>
+        <td>
+            <input type="number" name="nilai" class="form-control form-control-transparent">
+        </td>
+        <td>
+            <input type="number" name="sisa" class="form-control form-control-transparent">
+        </td>
+        <td>
+            <input type="number" name="terbayar" class="form-control form-control-transparent">
+        </td>
+        <td>
+        <button class="btn btn-sm btn-danger" onclick="deleteRow(this)" type="button">-</button>
+        </td>
+    </tr>';
+
+    return response()->json(['data' => $html]);
+    }
 }

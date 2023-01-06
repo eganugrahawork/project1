@@ -71,35 +71,35 @@ class ItemsReceiptController extends Controller {
             <input type='hidden' name='unit_price[]' value='$item->unit_price'/>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class=' form-label fw-bold fs-6 mb-2'>Item</label>
-                <select class='form-select  form-select-white mb-3 mb-lg-0' id='item_id' name='item_id[]'   required>
+                <select class='form-select  form-select-transparent mb-3 mb-lg-0' id='item_id' name='item_id[]'   required>
                         <option value='$item->item_id'>$item->item_name</option>
                 </select>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class=' fw-bold fs-6 mb-2'>Qty Order</label>
-                <input type='number' name='qty_order[]' id='qty_order' value='$item->qty' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
+                <input type='number' name='qty_order[]' id='qty_order' value='$item->qty' readonly class='form-control form-control-transparent mb-3 mb-lg-0 '  required/>
             </div>
-            <input type='hidden'  id='nowBalance' value='$item->qty_balance' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
+            <input type='hidden'  id='nowBalance' value='$item->qty_balance' readonly class='form-control form-control-transparent mb-3 mb-lg-0 '  required/>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class=' fw-bold fs-6 mb-2'>Sisa</label>
-                <input type='number' name='balance[]' id='balance' value='$item->qty_balance' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
+                <input type='number' name='balance[]' id='balance' value='$item->qty_balance' readonly class='form-control form-control-transparent mb-3 mb-lg-0 '  required/>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Diterima</label>
-                <input type='number' name='qty[]' id='qty' onkeyup='balanceEdit(this)' value='0'  class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
+                <input type='number' name='qty[]' id='qty' onkeyup='balanceEdit(this)' value='0'  class='form-control form-control-transparent mb-3 mb-lg-0 ' required/>
             </div>
             <div class='fv-row mb-3 col-lg-1'>
                 <label class='required fw-bold fs-6 mb-2'>Bonus</label>
-                <input type='number' name='qty_bonus[]' id='qty_bonus' value='0'  class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
+                <input type='number' name='qty_bonus[]' id='qty_bonus' value='0'  class='form-control form-control-transparent mb-3 mb-lg-0 ' required/>
             </div>
 
             <div class='fv-row mb-3 col-lg-1'>
                 <label class='required fw-bold fs-6 mb-2'>Diskon</label>
-                <input type='number' name='qty_discount[]' id='qty_discount'  value='0' class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
+                <input type='number' name='qty_discount[]' id='qty_discount'  value='0' class='form-control form-control-transparent mb-3 mb-lg-0 ' required/>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Note</label>
-                <input type='text' name='notes[]' id='notes'  class='form-control form-control-solid mb-3 mb-lg-0 descriptionnya'  value='-'/>
+                <input type='text' name='notes[]' id='notes'  class='form-control form-control-transparent mb-3 mb-lg-0 descriptionnya'  value='-'/>
             </div>
         </div>";
         }

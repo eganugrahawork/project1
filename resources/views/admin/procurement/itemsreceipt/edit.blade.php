@@ -10,7 +10,7 @@
                     <input type="hidden" name="id_po" value="{{ $po[0]->id_po }}">
                     <div class="fv-row mb-3">
                         <label class="required form-label fw-bold fs-6 mb-2">Nomor Purchase Order</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" disabled name="purchase_order_id"
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" disabled name="purchase_order_id"
                             id="purchase_order_id" required>
                             <option>{{ $po[0]->number_po . '-' . $po[0]->partner_name }}</option>
 
@@ -19,61 +19,61 @@
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Kode Purchase Order</label>
                         <input type="text" id="code" name="code" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" value="{{ $po[0]->number_po }}"
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="{{ $po[0]->number_po }}"
                             required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Tanggal Order</label>
                         <input type="text" name="order_date" id="order_date" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" value="{{ $po[0]->order_date }}"
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="{{ $po[0]->order_date }}"
                             required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class=" form-label fw-bold">Partner</label>
                         <input type="text" name="partner" id="partner" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" value="{{ $po[0]->partner_name }}"
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="{{ $po[0]->partner_name }}"
                             required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Alamat</label>
-                        <textarea type="text" name="address" id="address" readonly class="form-control form-control-white mb-3 mb-lg-0">{{ $po[0]->address }}</textarea>
+                        <textarea type="text" name="address" id="address" readonly class="form-control form-control-transparent mb-3 mb-lg-0">{{ $po[0]->address }}</textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Nomor Telepon</label>
                         <input type="text" name="phone" id="phone" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" value="{{ $po[0]->phone }}" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="{{ $po[0]->phone }}" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Fax</label>
                         <input type="text" name="fax" id="fax" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" value="{{ $po[0]->fax }}" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="{{ $po[0]->fax }}" required />
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Nomor Pengiriman Barang</label>
                         <input type="text" name="do_number" id="do_number"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $po[0]->do_number }}" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="{{ $po[0]->do_number }}" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Shipment</label>
-                        <textarea name="shipment" id="shipment" class="form-control form-control-solid mb-3 mb-lg-0" required>{{ $po[0]->shipment }}</textarea>
+                        <textarea name="shipment" id="shipment" class="form-control form-control-transparent mb-3 mb-lg-0" required>{{ $po[0]->shipment }}</textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Tanggal Diterima</label>
                         <div class="">
                             <input type="datetime-local" name="receipt_date" id="receipt_date"
-                                class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $po[0]->receipt_date }}" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" value="{{ $po[0]->receipt_date }}" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Plat Nomor</label>
                         <input type="text" name="plate_number" id="plate_number"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $po[0]->plate_number }}" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="{{ $po[0]->plate_number }}" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required form-label fw-bold">Status</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0" name="status" required>
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0" name="status" required>
                             <option value="1">Ya</option>
                             <option value="0">Tidak</option>
                         </select>
@@ -88,7 +88,7 @@
                             <input type='hidden' name='po_item_id[]' value='{{ $item->po_item_id }}' />
                             <div class='fv-row mb-3 col-lg-2'>
                                 <label class=' form-label fw-bold fs-6 mb-2'>Item</label>
-                                <select class='form-select  form-select-white mb-3 mb-lg-0' id='item_id'
+                                <select class='form-select  form-select-transparent mb-3 mb-lg-0' id='item_id'
                                     name='item_id[]' required>
                                     <option value='$item->item_id'>{{ $item->item_name }}</option>
                                 </select>
@@ -96,36 +96,36 @@
                             <div class='fv-row mb-3 col-lg-2'>
                                 <label class=' fw-bold fs-6 mb-2'>Qty Order</label>
                                 <input type='number' name='qty_order[]' id='qty_order' value='{{ $item->qty }}'
-                                    readonly class='form-control form-control-white mb-3 mb-lg-0 '  disabled required />
+                                    readonly class='form-control form-control-transparent mb-3 mb-lg-0 '  disabled required />
                             </div>
                             <input type='hidden' id='nowBalance' value='{{ $item->qty_balance }}' readonly
-                                class='form-control form-control-white mb-3 mb-lg-0 ' required />
+                                class='form-control form-control-transparent mb-3 mb-lg-0 ' required />
                             <div class='fv-row mb-3 col-lg-2'>
                                 <label class=' fw-bold fs-6 mb-2'>Sisa</label>
                                 <input type='number' name='balance[]' id='balance'
                                     value='{{ $item->qty_balances }}' readonly
-                                    class='form-control form-control-white mb-3 mb-lg-0 ' disabled required />
+                                    class='form-control form-control-transparent mb-3 mb-lg-0 ' disabled required />
                             </div>
                             <div class='fv-row mb-3 col-lg-2'>
                                 <label class='required fw-bold fs-6 mb-2'>Diterima</label>
                                 <input type='number' name='qty[]' id='qty' onkeyup='balanceEdit(this)'
-                                    value='{{ $item->qty_receipt }}' class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                                    value='{{ $item->qty_receipt }}' class='form-control form-control-transparent mb-3 mb-lg-0 ' required />
                             </div>
                             <div class='fv-row mb-3 col-lg-1'>
                                 <label class='required fw-bold fs-6 mb-2'>Bonus</label>
                                 <input type='number' name='qty_bonus[]' id='qty_bonus' value='{{ $item->qty_bonus }}'
-                                    class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                                    class='form-control form-control-transparent mb-3 mb-lg-0 ' required />
                             </div>
 
                             <div class='fv-row mb-3 col-lg-1'>
                                 <label class='required fw-bold fs-6 mb-2'>Diskon</label>
                                 <input type='number' name='qty_discount[]' id='qty_discount' value='{{ $item->qty_discount }}'
-                                    class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                                    class='form-control form-control-transparent mb-3 mb-lg-0 ' required />
                             </div>
                             <div class='fv-row mb-3 col-lg-2'>
                                 <label class='required fw-bold fs-6 mb-2'>Note</label>
                                 <input type='text' name='notes[]' id='notes'
-                                    class='form-control form-control-solid mb-3 mb-lg-0 descriptionnya'
+                                    class='form-control form-control-transparent mb-3 mb-lg-0 descriptionnya'
                                     value='{{ $item->deskripsi_items }}' disabled />
                             </div>
                         </div>

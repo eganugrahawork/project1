@@ -9,7 +9,7 @@
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
                         <input type="hidden" name="id_invoice" value="{{ $data[0]->id_invoice }}">
-                        <label class="required form-label fw-bold">Nomor Delivery Order</label>
+                        <label class="required form-label fw-bold fs-6 mb-2">Nomor Delivery Order</label>
                         <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="purchase_order_id"
                             id="purchase_order_id">
                             <option value="" selected>{{ $data[0]->do_number }}-{{ $data[0]->name }}</option>
@@ -26,7 +26,7 @@
                             class="form-control form-control-white mb-3 mb-lg-0" value="{{ $data[0]->order_date }}" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class=" form-label fw-bold">Partner</label>
+                        <label class="fw-bold fs-6 mb-2">Partner</label>
                         <input type="text" name="partner" id="partner" readonly
                             class="form-control form-control-white mb-3 mb-lg-0" value="{{ $data[0]->name }}" required />
                     </div>
@@ -40,14 +40,18 @@
                             class="form-control form-control-white mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="fw-bold fs-6 mb-2">Att</label>
-                        <input type="text" name="att" id="att" value="{{ $data[0]->attention }}" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" />
-                    </div>
-                    <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Fax</label>
                         <input type="text" id="fax" value="{{ $data[0]->fax }}" readonly
                             class="form-control form-control-white mb-3 mb-lg-0" required />
+                    </div>
+                    <div class="fv-row mb-3">
+                        <label class=" fw-bold fs-6 mb-2">Jangka Waktu Pembayaran</label>
+                        <input type="text" id="term_of_payment" name="term_of_payment"
+                            class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $data[0]->term_of_payment }}" readonly required />
+                    </div>
+                    <div class="fv-row mb-3">
+                        <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
+                        <textarea id="description" name="description" class="form-control form-control-solid mb-3 mb-lg-0" readonly required>{{ $data[0]->description }}</textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -73,18 +77,8 @@
                             value="0837263723" readonly required />
                     </div>
                     <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Jangka Waktu Pembayaran</label>
-                        <input type="text" id="term_of_payment" name="term_of_payment"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $data[0]->term_of_payment }}" readonly required />
-                    </div>
-                    <div class="fv-row mb-3">
-                        <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
-                        <textarea id="description" name="description" class="form-control form-control-solid mb-3 mb-lg-0" readonly required>{{ $data[0]->description }}</textarea>
-
-                    </div>
-                    <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">No Invoice</label>
-                        <input type="text" name="no_invoice" id="no_invoice"
+                        <input type="text" name="no_invoice" id="no_invoice" readonly
                             class="form-control form-control-solid mb-3 mb-lg-0"
                             value="{{ $data[0]->invoice_number }}"  required />
                     </div>
@@ -105,6 +99,11 @@
                         </div>
                     </div>
                     <div class="fv-row mb-3">
+                        <label class="fw-bold fs-6 mb-2">Att</label>
+                        <input type="text" name="att" id="att" value="{{ $data[0]->attention }}"
+                            class="form-control form-control-solid mb-3 mb-lg-0" />
+                    </div>
+                    <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Deskripsi Invoice</label>
                         <textarea name="description_invoice" id="description_invoice" class="form-control form-control-solid mb-3 mb-lg-0"
                              required>{{ $data[0]->description }}</textarea>
@@ -121,7 +120,6 @@
                             class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $data[0]->sign }}"
                             required />
                     </div>
-
                 </div>
                 <hr>
                 <h5 class="fw-bolder">Items</h5>

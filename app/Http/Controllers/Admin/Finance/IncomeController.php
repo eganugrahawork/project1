@@ -21,17 +21,17 @@ class IncomeController extends Controller {
     public function addnewitemrow() {
         $partner = Partners::all();
         $html = '<tr>
-        <td><select name="cash_credit" id="cash_credit" class="form-select form-select-solid select-2">
+        <td><select name="cash_credit" id="cash_credit" class="form-select form-select-transparent select-2">
             <option selected disabled>Pilih</option>
         </select></td>
         <td>
-            <input type="number" name="amount" class="form-control form-control-solid">
+            <input type="number" name="amount" class="form-control form-control-transparent">
         </td>
         <td>
-            <input name="description" class="form-control form-control-solid" type="text"/>
+            <input name="description" class="form-control form-control-transparent" type="text"/>
         </td>
         <td>
-            <select name="partner_id" id="partner_id" class="form-select form-select-solid select-2">
+            <select name="partner_id" id="partner_id" class="form-select form-select-transparent select-2">
                 <option selected disable>Pilih Partner Disini</option>';
 
         foreach ($partner as $p) {

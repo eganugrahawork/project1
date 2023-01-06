@@ -3,7 +3,7 @@
         <h4>Pembayaran Piutang</h4>
     </div>
     <div class="card-body">
-        <form id="createSales" class="form">
+        <form id="createPayment" class="form">
             <div class="row">
                 <div class="col-lg-6">
                     @csrf
@@ -11,7 +11,7 @@
                         <label class="fw-bold fs-6 mb-2">Kode</label>
                         <div class="">
                             <input type="text" id="code" name="code"
-                                class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $code }}"
+                                class="form-control form-control-transparent mb-3 mb-lg-0" value="{{ $code }}"
                                 readonly required />
                         </div>
                     </div>
@@ -19,12 +19,12 @@
                         <label class="fw-bold fs-6 mb-2">Tanggal</label>
                         <div class="">
                             <input type="text" id="payment_date" name="payment_date"
-                                class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Partner</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="partner_id"
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" name="partner_id"
                             id="partner_id" onchange="getData()" required>
                             <option selected disabled>Pilih Partner</option>
                             @foreach ($customer as $cust)
@@ -34,7 +34,7 @@
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Tipe Pembayran</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="payment_type"
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" name="payment_type"
                             id="payment_type" required>
                             <option selected="selected" disabled>-- Pilih Pembayaran --</option>
                             <option value="0">Cash/Transfer</option>
@@ -49,7 +49,7 @@
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Cash Account</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="cash_account"
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" name="cash_account"
                             id="cash_account" required>
                             <option selected disabled>Pilih Cash Account</option>
                             @foreach ($coa as $c)
@@ -61,19 +61,20 @@
                         <label class="fw-bold fs-6 mb-2">Tanggal Terbit</label>
                         <div>
                             <input type="text" id="publish_date" name="publish_date"
-                                class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Jatuh Tempo</label>
                         <div>
                             <input type="text" id="due_date" name="due_date"
-                                class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Keterangan</label>
-                        <textarea type="text" name="description" id="description" class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
+                        <textarea type="text" name="description" id="description"
+                            class=" form-control form-control-transparent mb-3 mb-lg-0"></textarea>
                     </div>
                 </div>
 
@@ -83,37 +84,50 @@
                 <h5 class="fw-bolder">Invoice</h5>
                 <hr>
                 <div class="col-lg-12">
-                    <table class="table gy-5 gs-7 border rounded w-100">
-                        <thead>
-                            <tr class="fw-bolder fs-6 text-gray-800">
-                                <td>Invoice</td>
-                                <td>Nilai</td>
-                                <td>Sisa</td>
-                                <td>Jatuh Tempo</td>
-                                <td>Terbayar</td>
-                            </tr>
-                        </thead>
-                        <tbody id="invoiceList">
-                            <tr>
-                                <td><select name="invoice_id" id="invoice_id"
-                                        class="form-select form-select-solid select-2">
-                                        <option value="">Pilih Nomor Invoice</option>
-                                    </select></td>
-                                <td>
-                                    <input type="number" name="nilai" class="form-control form-control-solid">
-                                </td>
-                                <td>
-                                    <input type="number" name="sisa" class="form-control form-control-solid">
-                                </td>
-                                <td>
-                                    <input type="text" name="due_date" class="form-control form-control-solid">
-                                </td>
-                                <td>
-                                    <input type="number" name="terbayar" class="form-control form-control-solid">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table gs-7 gy-7 gx-7">
+                            <thead>
+                                <tr class="fw-bolder fs-6 text-gray-800">
+                                    <td>Invoice</td>
+                                    <td>Nilai</td>
+                                    <td>Sisa</td>
+                                    <td>Terbayar</td>
+                                    <td>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody id="invoiceList">
+                                <tr>
+                                    <td><select name="invoice_id" id="invoice_id"
+                                            class="form-select form-select-transparent select-2">
+                                            <option value="">Pilih Nomor Invoice</option>
+                                        </select></td>
+                                    <td>
+                                        <input type="number" name="nilai"
+                                            class="form-control form-control-transparent">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="sisa"
+                                            class="form-control form-control-transparent">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="terbayar"
+                                            class="form-control form-control-transparent">
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger" onclick="deleteRow(this)"
+                                            type="button">-</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4" class="text-end fw-bolder fs-6 text-gray-800">Tambah Baris</td>
+                                    <td class="d-flex align-items-end "><button class="btn btn-sm btn-primary"
+                                            type="button" onclick="addnewrow()">+</button></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
 
                 <hr>
@@ -123,10 +137,11 @@
                         <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Buat</button>
                     </div>
                     <div class="px-2">
-                        <button class="btn btn-sm btn-secondary" type="button" onclick="backHistory()">Kembali</button>
+                        <button class="btn btn-sm btn-secondary" type="button"
+                            onclick="backHistory()">Kembali</button>
                     </div>
                 </div>
-
+            </div>
         </form>
     </div>
 </div>
@@ -139,21 +154,24 @@
         flatpickr("#payment_date", {
             static: true,
             dateFormat: "Y-m-d",
+            allowInput: true
         });
         flatpickr("#publish_date", {
             static: true,
             dateFormat: "Y-m-d",
+            allowInput: true
         });
         flatpickr("#due_date", {
             static: true,
             dateFormat: "Y-m-d",
+            allowInput: true
         });
 
     });
 </script>
 
 <script>
-    $('#createSales').submit(function(event) {
+    $('#createPayment').submit(function(event) {
         event.preventDefault();
 
         const swalWithBootstrapButtons = Swal.mixin({
@@ -180,7 +198,7 @@
                 $.ajax({
                     url: "{{ url('/admin/selling/selling/store') }}",
                     type: 'post',
-                    data: $('#createSales')
+                    data: $('#createPayment')
                         .serialize(), // Remember that you need to have your csrf token included
                     dataType: 'json',
                     success: function(response) {
@@ -249,6 +267,27 @@
             $(e).parent().parent().find('#total_return_qty').val(0);
             $(e).parent().parent().find('#total_price_return').val(0);
         }
-
     }
+
+    function addnewrow() {
+        $.ajax({
+            url: "{{ url('/admin/finance/receivable/addnewrow') }}",
+            type: 'post',
+            data: $('#createPayment')
+                .serialize(), // Remember that you need to have your csrf token included
+            dataType: 'json',
+            success: function(response) {
+                $('#invoiceList').append(response.data)
+                $('.select-2').select2()
+            },
+            error: function(response) {
+                // Handle error
+            }
+        });
+    }
+
+    function deleteRow(e) {
+        $(e).parent().parent().remove()
+    }
+
 </script>
