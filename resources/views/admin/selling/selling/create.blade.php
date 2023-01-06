@@ -10,19 +10,19 @@
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Nomor Penjualan</label>
                         <input type="text" id="sales_number" name="sales_number"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $code }}" readonly
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="{{ $code }}" readonly
                             required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Tanggal Penjualan</label>
                         <div class="">
                             <input type="text" id="sales_date" name="sales_date"
-                                class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Pelanggan</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="partner_id"
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" name="partner_id"
                             id="partner_id" onchange="getDataCustomer()" required>
                             <option>Pilih Pelanggan</option>
                             @foreach ($customer as $cust)
@@ -32,52 +32,52 @@
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Alamat</label>
-                        <textarea type="text" name="address" id="address" readonly class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
+                        <textarea type="text" name="address" id="address" readonly class=" form-control form-control-transparent mb-3 mb-lg-0"></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Att</label>
                         <input type="text" id="att" name="att"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Nomor Telepon</label>
                         <input type="text" id="phone" name="phone"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Email</label>
                         <input type="text" id="email" name="email"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Credit Limit</label>
                         <input type="text" id="credit_limit" name="credit_limit"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Credit Balance</label>
                         <input type="text" id="credit_balance" name="credit_balance"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Dikirim Dari</label>
-                        <textarea type="text" name="ship_from" id="ship_from" class=" form-control form-control-solid mb-3 mb-lg-0">Cikutra, Bandung</textarea>
+                        <textarea type="text" name="ship_from" id="ship_from" class=" form-control form-control-transparent mb-3 mb-lg-0">Cikutra, Bandung</textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Email</label>
                         <input type="email" id="email" name="email"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="swamedia@gmail.com" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="swamedia@gmail.com" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Phone/Fax</label>
                         <input type="number" id="phone_fax" name="phone_fax"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="08299182922" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="08299182922" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required form-label fw-bold fs-6 mb-2">Jangka Waktu Pembayaran</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="term_of_payment"
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" name="term_of_payment"
                             id="term_of_payment" required>
                             <option value="Cash">Cash</option>
                             <option value="15">15 Hari</option>
@@ -91,17 +91,17 @@
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Jangka Pembayaran Lain</label>
                         <input type="number" id="another_term_of_payment" name="another_term_of_payment"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
-                        <textarea type="text" name="description" id="description"  class=" form-control form-control-solid mb-3 mb-lg-0" required></textarea>
+                        <textarea type="text" name="description" id="description"  class=" form-control form-control-transparent mb-3 mb-lg-0" required></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Tanggal Pengiriman</label>
                         <div class="">
                             <input type="text" id="delivery_date" name="delivery_date"
-                                class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" required />
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                     <div class='row'>
                         <div class='fv-row mb-3 col-lg-3'>
                             <label class=' form-label fs-6 fw-bold'>Item</label>
-                            <select class='form-select  form-select-solid mb-3 mb-lg-0 select-2'
+                            <select class='form-select  form-select-transparent mb-3 mb-lg-0 select-2'
                                 onchange='getDetailItem(this)' id='item_id' name='item_id[]' required>
                                 <option>Choose Item</option>
                                 @foreach ($item as $itm)
@@ -127,7 +127,7 @@
                         <div class='fv-row mb-3 col-lg-1'>
                             <label class='required fw-bold fs-6 mb-2'>Q Box</label>
                             <input type='number' name='qty_box[]' id='qty_box'
-                                class='form-control form-control-solid mb-3 mb-lg-0' value='0'
+                                class='form-control form-control-transparent mb-3 mb-lg-0' value='0'
                                 onkeyup='countTotalQty(this)' required />
                             <p class='fs-9 fw-bolder' id='detail_box'></p>
                             <input type='hidden' name='qty_per_box[]' id='qty_per_box'>
@@ -137,24 +137,24 @@
                         <div class='fv-row mb-3 col-lg-1'>
                             <label class=' fw-bold fs-6 mb-2'>Qty</label>
                             <input type='number' name='qty[]' id='qty'
-                                class='form-control form-control-solid mb-3 mb-lg-0' value='0'
+                                class='form-control form-control-transparent mb-3 mb-lg-0' value='0'
                                 onkeyup='countTotalQty(this)' required />
                         </div>
                         <div class='fv-row mb-3 col-lg-2'>
                             <label class='required fw-bold fs-6 mb-2'>Total Qty</label>
                             <input type='number' name='total_qty[]' id='total_qty' readonly
-                                class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                                class='form-control form-control-transparent mb-3 mb-lg-0 ' required />
                         </div>
                         <div class='fv-row mb-3 col-lg-2'>
                             <label class=' fw-bold fs-6 mb-2'>Harga</label>
                             <input type='number' name='price[]' id='price'
-                                class='form-control form-control-solid mb-3 mb-lg-0' onkeyup='countTotalQty(this)'
+                                class='form-control form-control-transparent mb-3 mb-lg-0' onkeyup='countTotalQty(this)'
                                 value='0' required />
                         </div>
                         <div class='fv-row mb-3 col-lg-2'>
                             <label class=' fw-bold fs-6 mb-2'>Total</label>
                             <input type='number' name='total_price[]' id='total_price'
-                                class='form-control form-control-solid mb-3 mb-lg-0 total_price' readonly required />
+                                class='form-control form-control-transparent mb-3 mb-lg-0 total_price' readonly required />
                         </div>
                         <div class='fv-row mb-3 col-lg-1  '>
                             <button class="btn btn-danger btn-sm btn-icon mt-4" type="button"
@@ -172,21 +172,21 @@
                         <div class="row">
                             <div class="col-lg-6">Total</div>
                             <div class="col-lg-6"><input type="text" readonly name="total" id="total"
-                                    class="form-control form-control-white text-end"></div>
+                                    class="form-control form-control-transparent text-end"></div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-end py-2">
                         <div class="row">
                             <div class="col-lg-6">DPP</div>
                             <div class="col-lg-6"><input type="text" readonly name="dpp" id="dpp"
-                                    class="form-control form-control-white text-end"></div>
+                                    class="form-control form-control-transparent text-end"></div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-end py-2">
                         <div class="row">
                             <div class="col-lg-6">Vat/PPN</div>
                             <div class="col-lg-6"><input type="text" readonly name="vatppn" id="vatppn"
-                                    class="form-control form-control-white text-end"></div>
+                                    class="form-control form-control-transparent text-end"></div>
                         </div>
                     </div>
 

@@ -10,7 +10,7 @@
                     <div class="fv-row mb-3">
                         <input type="hidden" name="invoice_id" id="invoice_id">
                         <label class="required fw-bold fs-6 mb-2">Nomor Penjualan</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="sales_id"
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" name="sales_id"
                             id="sales_id" onchange="getData()" required>
                             <option>Pilih Nomor Penjualan</option>
                             @foreach ($selling as $sales)
@@ -23,76 +23,76 @@
                         <label class="fw-bold fs-6 mb-2">Tanggal</label>
                         <div class="">
                             <input type="text" id="sales_date" name="sales_date"
-                                class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                         </div>
                     </div>
 
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Alamat</label>
-                        <textarea type="text" name="address" id="address" readonly class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
+                        <textarea type="text" name="address" id="address" readonly class=" form-control form-control-transparent mb-3 mb-lg-0"></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Att</label>
                         <input type="text" id="att" name="att"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Nomor Telepon</label>
                         <input type="text" id="phone" name="phone"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Email</label>
                         <input type="text" id="email" name="email"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Credit Limit</label>
                         <input type="text" id="credit_limit" name="credit_limit"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Credit Balance</label>
                         <input type="text" id="credit_balance" name="credit_balance"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Dikirim Dari</label>
-                        <textarea type="text" name="ship_from" id="ship_from" class="form-control form-control-solid mb-3 mb-lg-0" readonly></textarea>
+                        <textarea type="text" name="ship_from" id="ship_from" class="form-control form-control-transparent mb-3 mb-lg-0" readonly></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Email</label>
                         <input type="email" id="email" name="email"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Phone/Fax</label>
                         <input type="number" id="phone_fax" name="phone_fax"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Jangka Waktu Pembayaran</label>
                         <input type="text" id="term_of_payment" name="term_of_payment"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Keterangan Beli</label>
-                        <textarea type="text" name="description" id="description" class=" form-control form-control-solid mb-3 mb-lg-0"
+                        <textarea type="text" name="description" id="description" class=" form-control form-control-transparent mb-3 mb-lg-0"
                             readonly></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Tanggal Retur</label>
                         <div class="">
                             <input type="text" id="return_date" name="return_date"
-                                class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2 required">Keterangan Return</label>
                         <textarea type="text" name="return_description" id="return_description"
-                            class=" form-control form-control-solid mb-3 mb-lg-0"></textarea>
+                            class=" form-control form-control-transparent mb-3 mb-lg-0"></textarea>
                     </div>
                 </div>
 
@@ -129,6 +129,7 @@
         flatpickr("#return_date", {
             static: true,
             dateFormat: "Y-m-d",
+            allowInput:true
         });
 
     });

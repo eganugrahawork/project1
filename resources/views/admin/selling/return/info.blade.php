@@ -11,7 +11,7 @@
                         <input type="hidden" name="return_id" id="return_id" value="{{ $data[0]->id_return }}">
                         <input type="hidden" name="invoice_id" id="invoice_id">
                         <label class="required fw-bold fs-6 mb-2">Nomor Penjualan</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2"
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2"
                             id="sales_id" required>
                             <option>{{ $data[0]->no_selling }}-{{ $data[0]->name }}</option>
                         </select>
@@ -20,76 +20,76 @@
                         <label class="fw-bold fs-6 mb-2">Tanggal</label>
                         <div class="">
                             <input type="text" id="sales_date" name="sales_date"
-                                class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $data[0]->sales_date }}" readonly required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" value="{{ $data[0]->sales_date }}" readonly required />
                         </div>
                     </div>
 
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Alamat</label>
-                        <textarea type="text" name="address" id="address" readonly class=" form-control form-control-solid mb-3 mb-lg-0">{{ $data[0]->address }}</textarea>
+                        <textarea type="text" name="address" id="address" readonly class=" form-control form-control-transparent mb-3 mb-lg-0">{{ $data[0]->address }}</textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Att</label>
                         <input type="text" id="att" name="att"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="-" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="-" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Nomor Telepon</label>
                         <input type="text" id="phone" name="phone"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $data[0]->phone }}" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="{{ $data[0]->phone }}" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Email</label>
                         <input type="text" id="email" name="email"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $data[0]->email }}" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="{{ $data[0]->email }}" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Credit Limit</label>
                         <input type="text" id="credit_limit" name="credit_limit"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Credit Balance</label>
                         <input type="text" id="credit_balance" name="credit_balance"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Dikirim Dari</label>
-                        <textarea type="text" name="ship_from" id="ship_from" class="form-control form-control-solid mb-3 mb-lg-0" readonly></textarea>
+                        <textarea type="text" name="ship_from" id="ship_from" class="form-control form-control-transparent mb-3 mb-lg-0" readonly></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Email</label>
                         <input type="email" id="email" name="email"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Phone/Fax</label>
                         <input type="number" id="phone_fax" name="phone_fax"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Jangka Waktu Pembayaran</label>
                         <input type="text" id="term_of_payment" name="term_of_payment"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $data[0]->term_of_payment }}" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="{{ $data[0]->term_of_payment }}" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Keterangan Beli</label>
-                        <textarea type="text" name="description" id="description" class=" form-control form-control-solid mb-3 mb-lg-0"
+                        <textarea type="text" name="description" id="description" class=" form-control form-control-transparent mb-3 mb-lg-0"
                             readonly>{{ $data[0]->keterangan_beli }}</textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Tanggal Retur</label>
                         <div class="">
                             <input type="text" id="return_date" name="return_date"
-                                class="form-control form-control-solid mb-3 mb-lg-0" readonly value="{{ $data[0]->retur_date }}" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" readonly value="{{ $data[0]->retur_date }}" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2 required">Keterangan Return</label>
                         <textarea type="text" name="return_description" id="return_description" readonly
-                            class=" form-control form-control-solid mb-3 mb-lg-0">{{ $data[0]->notes }}</textarea>
+                            class=" form-control form-control-transparent mb-3 mb-lg-0">{{ $data[0]->notes }}</textarea>
                     </div>
                 </div>
 
@@ -105,41 +105,41 @@
                             <label class='form-label fs-8 fw-bold'>Item</label>
                             <input type='hidden' name='selling_return_detail_id[]' value='{{ $d->selling_return_detail_id }}' />
                             <input type='hidden' name='item_id[]' value='{{ $d->item_id }}' />
-                            <input type='text'  class='form-control form-control-solid mb-3 mb-lg-0 countaja' value='{{ $d->item_name }}' readonly/>
+                            <input type='text'  class='form-control form-control-transparent mb-3 mb-lg-0 countaja' value='{{ $d->item_name }}' readonly/>
                         </div>
                         <div class='fv-row mb-3 col-lg-1'>
                             <label class='required fw-bold fs-8 mb-2'>R Box</label>
                             <input type='number' name='return_box[]' id='return_box'
-                                class='form-control form-control-solid mb-3 mb-lg-0' value='0' readonly onkeyup='countTotalQty(this)' required />
+                                class='form-control form-control-transparent mb-3 mb-lg-0' value='0' readonly onkeyup='countTotalQty(this)' required />
                             <p class='fs-9 fw-bolder' id='detail_box'>@ {{ $d->unit_box }}/box</p>
                             <input type='hidden' id='qty_per_box' value='{{ $d->unit_box }}' />
                         </div>
                         <div class='fv-row mb-3 col-lg-1'>
                             <label class='required fw-bold fs-8 mb-2'>R Satuan</label>
                             <input type='number' name='return_qty[]' id='return_qty'
-                                class='form-control form-control-solid mb-3 mb-lg-0' value='{{ $d->qty_return }}' readonly onkeyup='countTotalQty(this)'
+                                class='form-control form-control-transparent mb-3 mb-lg-0' value='{{ $d->qty_return }}' readonly onkeyup='countTotalQty(this)'
                                 required />
                         </div>
                         <div class='fv-row mb-3 col-lg-1'>
                             <label class=' fw-bold fs-8 mb-2'>Qty Return</label>
                             <input type='number' name='total_return_qty[]' id='total_return_qty' readonly
-                                class='form-control form-control-solid mb-3 mb-lg-0' value='{{ $d->qty_return }}' required />
+                                class='form-control form-control-transparent mb-3 mb-lg-0' value='{{ $d->qty_return }}' required />
                         </div>
                         <div class='fv-row mb-3 col-lg-1'>
                             <label class=' fw-bold fs-8 mb-2'>Qty Order</label>
                             <input type='number' name='qty_order[]' value='{{ $d->qty_order }}' id='qty_order'
-                                class='form-control form-control-solid mb-3 mb-lg-0'
+                                class='form-control form-control-transparent mb-3 mb-lg-0'
                                 readonly required />
                         </div>
                         <div class='fv-row mb-3 col-lg-2'>
                             <label class=' fw-bold fs-8 mb-2'>Harga</label>
                             <input type='number' name='price[]' value='{{ $d->unit_price }}' id='price'
-                                class='form-control form-control-solid mb-3 mb-lg-0' readonly required />
+                                class='form-control form-control-transparent mb-3 mb-lg-0' readonly required />
                         </div>
                         <div class='fv-row mb-3 col-lg-2'>
                             <label class=' fw-bold fs-8 mb-2'>Total</label>
                             <input type='number' name='total_price_return[]' id='total_price_return'
-                                class='form-control form-control-solid mb-3 mb-lg-0' value='0' readonly required />
+                                class='form-control form-control-transparent mb-3 mb-lg-0' value='0' readonly required />
 
                         </div>
                     </div>

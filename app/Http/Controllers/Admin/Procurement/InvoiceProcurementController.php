@@ -174,38 +174,38 @@ class InvoiceProcurementController extends Controller {
             <input type='hidden' name='id_item_receipt_detail[]' value='$item->id_item_receipt_detail'/>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class=' form-label fw-bold'>Item</label>
-                <select class='form-select  form-select-white mb-3 mb-lg-0' id='item_id' name='item_id[]'   required>
+                <select class='form-select  form-select-transparent mb-3 mb-lg-0' id='item_id' name='item_id[]'   required>
                         <option value='$item->item_id'>$item->item_name</option>
                 </select>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
                             <label class=' fw-bold fs-6 mb-2'>Qty Diterima</label>
                             <input type='number' name='qty_receipt[]' id='qty_receipt' value='$item->qty_receipt' readonly
-                                class='form-control form-control-white mb-3 mb-lg-0 ' required />
+                                class='form-control form-control-transparent mb-3 mb-lg-0 ' required />
                         </div>
 
                         <div class='fv-row mb-3 col-lg-2'>
                             <label class='required fw-bold fs-6 mb-2'>Harga Unit</label>
                             <input type='number' name='unit_price[]' id='unit_price'
                                 value='$item->unit_price' readonly
-                                class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                                class='form-control form-control-transparent mb-3 mb-lg-0 ' required />
                         </div>
                         <div class='fv-row mb-3 col-lg-2'>
                             <label class='required fw-bold fs-6 mb-2'>Diskon</label>
                             <input type='number' name='qty_discount[]' id='qty_discount'
                                 value='$item->discount' readonly
-                                class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                                class='form-control form-control-transparent mb-3 mb-lg-0 ' required />
                         </div>
                         <div class='fv-row mb-3 col-lg-2'>
                             <label class='required fw-bold fs-6 mb-2'>Total Harga</label>
                             <input type='number' name='price[]' id='price'
                                 value='$price' readonly
-                                class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                                class='form-control form-control-transparent mb-3 mb-lg-0 ' required />
                         </div>
                         <div class='fv-row mb-3 col-lg-2'>
                             <label class='required fw-bold fs-6 mb-2'>Notes</label>
                             <input type='text' name='notes[]' id='notes'
-                                value='' class='form-control form-control-solid mb-3 mb-lg-0 ' required />
+                                value='' class='form-control form-control-transparent mb-3 mb-lg-0 ' required />
                         </div>
         </div>";
         

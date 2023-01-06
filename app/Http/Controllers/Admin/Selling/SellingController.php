@@ -360,7 +360,7 @@ class SellingController extends Controller {
         $html = "<div class='row'>
     <div class='fv-row mb-3 col-lg-3'>
         <label class=' form-label fs-6 fw-bold'>Item</label>
-        <select class='form-select  form-select-solid mb-3 mb-lg-0 select-2' onchange='getDetailItem(this)' id='item_id' name='item_id[]'
+        <select class='form-select  form-select-transparent mb-3 mb-lg-0 select-2' onchange='getDetailItem(this)' id='item_id' name='item_id[]'
             required>
             <option>Choose Item</option>";
 
@@ -372,7 +372,7 @@ class SellingController extends Controller {
     <div class='fv-row mb-3 col-lg-1'>
         <label class=' fw-bold fs-6 mb-2'>Q Box</label>
         <input type='number' name='qty_box[]' id='qty_box' onkeyup='countTotalQty(this)'
-            class='form-control form-control-solid mb-3 mb-lg-0 '  value='0' required />
+            class='form-control form-control-transparent mb-3 mb-lg-0 '  value='0' required />
             <p class='fs-9 fw-bolder' id='detail_box'></p>
             <input type='hidden' name='qty_per_box[]' id='qty_per_box'>
             <input type='hidden' name='stock[]' id='stock'>
@@ -381,22 +381,22 @@ class SellingController extends Controller {
     <div class='fv-row mb-3 col-lg-1'>
         <label class=' fw-bold fs-6 mb-2'>Qty</label>
         <input type='number' name='qty[]' id='qty'
-            class='form-control form-control-solid mb-3 mb-lg-0'  value='0' onkeyup='countTotalQty(this)'  required />
+            class='form-control form-control-transparent mb-3 mb-lg-0'  value='0' onkeyup='countTotalQty(this)'  required />
     </div>
     <div class='fv-row mb-3 col-lg-2'>
         <label class='required fw-bold fs-6 mb-2'>Total Qty</label>
         <input type='number' name='total_qty[]' id='total_qty' readonly
-            class='form-control form-control-solid mb-3 mb-lg-0 '  value='0' required />
+            class='form-control form-control-transparent mb-3 mb-lg-0 '  value='0' required />
     </div>
     <div class='fv-row mb-3 col-lg-2'>
         <label class=' fw-bold fs-6 mb-2'>Harga</label>
         <input type='number' name='price[]' id='price'
-            class='form-control form-control-solid mb-3 mb-lg-0'  value='0' onkeyup='countTotalQty(this)' required />
+            class='form-control form-control-transparent mb-3 mb-lg-0'  value='0' onkeyup='countTotalQty(this)' required />
     </div>
     <div class='fv-row mb-3 col-lg-2'>
         <label class=' fw-bold fs-6 mb-2'>Total</label>
         <input type='number' name='total_price[]' id='total_price'
-            class='form-control form-control-solid mb-3 mb-lg-0 total_price' value='0' readonly required />
+            class='form-control form-control-transparent mb-3 mb-lg-0 total_price' value='0' readonly required />
     </div>
     <div class='fv-row mb-3 col-lg-1  '>
         <button class='btn btn-danger btn-sm btn-icon mt-4' type='button'

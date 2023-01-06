@@ -160,31 +160,31 @@ class ReturnProcurementController extends Controller
             $html .= "<div class='row'>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class=' form-label fw-bold'>Item</label>
-                <select class='form-select  form-select-white mb-3 mb-lg-0' id='item_id' name='item_id[]'   required>
+                <select class='form-select  form-select-transparent mb-3 mb-lg-0' id='item_id' name='item_id[]'   required>
                         <option value='$item->item_id'>$item->item_name</option>
                 </select>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Retur</label>
-                <input type='number' name='qty_retur[]' id='qty_retur'  value='0'  class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
+                <input type='number' name='qty_retur[]' id='qty_retur'  value='0'  class='form-control form-control-transparent mb-3 mb-lg-0 ' required/>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class=' fw-bold fs-6 mb-2'>Qty Diterima</label>
-                <input type='number' name='qty_receipt[]' id='qty_receipt' value='$item->qty_receipt' readonly class='form-control form-control-white mb-3 mb-lg-0 '  required/>
+                <input type='number' name='qty_receipt[]' id='qty_receipt' value='$item->qty_receipt' readonly class='form-control form-control-transparent mb-3 mb-lg-0 '  required/>
             </div>
 
             <div class='fv-row mb-3 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Harga Unit</label>
-                <input type='number' name='unit_price[]' id='unit_price' value='$item->unit_price' readonly  class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
+                <input type='number' name='unit_price[]' id='unit_price' value='$item->unit_price' readonly  class='form-control form-control-transparent mb-3 mb-lg-0 ' required/>
             </div>
 
             <div class='fv-row mb-3 col-lg-1'>
                 <label class='required fw-bold fs-6 mb-2'>Diskon</label>
-                <input type='number' name='discount[]' id='discount'  value='$item->discount' readonly class='form-control form-control-solid mb-3 mb-lg-0 ' required/>
+                <input type='number' name='discount[]' id='discount'  value='$item->discount' readonly class='form-control form-control-transparent mb-3 mb-lg-0 ' required/>
             </div>
             <div class='fv-row mb-3 col-lg-2'>
                 <label class='required fw-bold fs-6 mb-2'>Total</label>
-                <input type='text' name='total[]' id='total' readonly  class='form-control form-control-solid mb-3 mb-lg-0 descriptionnya'  value='$item->price'/>
+                <input type='text' name='total[]' id='total' readonly  class='form-control form-control-transparent mb-3 mb-lg-0 descriptionnya'  value='$item->price'/>
             </div>
         </div>";
         }

@@ -10,7 +10,7 @@
                     <div class="fv-row mb-3">
                         <input type="hidden" name="id_receipt" id="id_receipt">
                         <label class="required fw-bold fs-6 mb-2">Nomor Delivery Order</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="purchase_order_id"
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" name="purchase_order_id"
                             id="purchase_order_id" required>
                             <option>Pilih Nomor DO</option>
                             @foreach ($list as $l)
@@ -22,41 +22,41 @@
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">No Purchase Order</label>
                         <input type="text" id="code" name="code" readonly
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Tanggal Purchase Order</label>
                         <input type="text" name="order_date" id="order_date" readonly
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Partner</label>
                         <input type="text" name="partner" id="partner" readonly
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Alamat</label>
-                        <textarea type="text" name="address" id="address" readonly class="form-control form-control-solid mb-3 mb-lg-0"></textarea>
+                        <textarea type="text" name="address" id="address" readonly class="form-control form-control-transparent mb-3 mb-lg-0"></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Nomor Telepon</label>
                         <input type="text" name="phone" id="phone" readonly
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
 
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Fax</label>
                         <input type="text" id="fax" readonly
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Jangka Waktu Pembayaran</label>
                         <input type="text" id="term_of_payment" name="term_of_payment"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
-                        <textarea id="description" name="description" class="form-control form-control-solid mb-3 mb-lg-0" readonly required></textarea>
+                        <textarea id="description" name="description" class="form-control form-control-transparent mb-3 mb-lg-0" readonly required></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -64,28 +64,28 @@
                     <input type="hidden" id="total_po" name="total_po" value="">
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Kirim Ke</label>
-                        <textarea id="shipment" class="form-control form-control-solid mb-3 mb-lg-0" readonly required></textarea>
+                        <textarea id="shipment" class="form-control form-control-transparent mb-3 mb-lg-0" readonly required></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Vat/PPN</label>
                         <input type="text" id="vat" name="ppn"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
 
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Email</label>
-                        <input type="text" id="email" class="form-control form-control-solid mb-3 mb-lg-0"
+                        <input type="text" id="email" class="form-control form-control-transparent mb-3 mb-lg-0"
                             value="-" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Telp/Fax</label>
-                        <input type="text" id="telp/fax" class="form-control form-control-solid mb-3 mb-lg-0"
+                        <input type="text" id="telp/fax" class="form-control form-control-transparent mb-3 mb-lg-0"
                             value="0837263723" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">No Invoice</label>
                         <input type="text" name="no_invoice" id="no_invoice"
-                            class="form-control form-control-solid mb-3 mb-lg-0" onchange="checkNoInvoice(this)"
+                            class="form-control form-control-transparent mb-3 mb-lg-0" onchange="checkNoInvoice(this)"
                             required />
                             <span class="text-danger fs-8" id="notif-exists"><i class="bi bi-exclamation-circle text-danger"></i> No Invoice sudah ada !</span>
                             <span class="text-success fs-8" id="notif-not-exists"><i class="bi bi-check-circle  text-success"></i> Bisa Digunakan</span>
@@ -95,35 +95,35 @@
                         <label class="required fw-bold fs-6 mb-2">Tanggal Invoice</label>
                         <div class="">
                             <input type="text" name="date_invoice" id="date_invoice"
-                                class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Jatuh Tempo</label>
                         <div class="">
                             <input type="text" name="due_date" id="due_date"
-                                class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                class="form-control form-control-transparent mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Att</label>
                         <input type="text" name="att" id="att" value="" required
-                            class="form-control form-control-solid mb-3 mb-lg-0" />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Deskripsi Invoice</label>
-                        <textarea name="description_invoice" id="description_invoice" class="form-control form-control-solid mb-3 mb-lg-0"
+                        <textarea name="description_invoice" id="description_invoice" class="form-control form-control-transparent mb-3 mb-lg-0"
                             required> </textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Tax Invoice</label>
                         <input type="text" name="tax_invoice" id="tax_invoice"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Sign</label>
                         <input type="text" name="sign" id="sign"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
 
                 </div>

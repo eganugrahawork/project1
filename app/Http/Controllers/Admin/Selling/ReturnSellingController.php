@@ -173,41 +173,41 @@ class ReturnSellingController extends Controller {
             <label class='form-label fs-8 fw-bold'>Item</label>
             <input type='hidden' name='selling_detail_id[]' value='$d->selling_detail_id' />
             <input type='hidden' name='item_id[]' value='$d->item_id' />
-            <input type='text'  class='form-control form-control-solid mb-3 mb-lg-0' value='$d->item_name' readonly/>
+            <input type='text'  class='form-control form-control-transparent mb-3 mb-lg-0' value='$d->item_name' readonly/>
         </div>
         <div class='fv-row mb-3 col-lg-1'>
             <label class='required fw-bold fs-8 mb-2'>R Box</label>
             <input type='number' name='return_box[]' id='return_box'
-                class='form-control form-control-solid mb-3 mb-lg-0' value='0' onkeyup='countTotalQty(this)' required />
+                class='form-control form-control-transparent mb-3 mb-lg-0' value='0' onkeyup='countTotalQty(this)' required />
             <p class='fs-9 fw-bolder' id='detail_box'>@$d->qty_per_box/box</p>
             <input type='hidden' id='qty_per_box' value='$d->qty_per_box' />
         </div>
         <div class='fv-row mb-3 col-lg-1'>
             <label class='required fw-bold fs-8 mb-2'>R Satuan</label>
             <input type='number' name='return_qty[]' id='return_qty'
-                class='form-control form-control-solid mb-3 mb-lg-0' value='0' onkeyup='countTotalQty(this)'
+                class='form-control form-control-transparent mb-3 mb-lg-0' value='0' onkeyup='countTotalQty(this)'
                 required />
         </div>
         <div class='fv-row mb-3 col-lg-1'>
             <label class=' fw-bold fs-8 mb-2'>Qty Return</label>
             <input type='number' name='total_return_qty[]' id='total_return_qty' readonly
-                class='form-control form-control-solid mb-3 mb-lg-0' value='0' required />
+                class='form-control form-control-transparent mb-3 mb-lg-0' value='0' required />
         </div>
         <div class='fv-row mb-3 col-lg-1'>
             <label class=' fw-bold fs-8 mb-2'>Qty Order</label>
             <input type='number' name='qty_order[]' value='$d->qty' id='qty_order'
-                class='form-control form-control-solid mb-3 mb-lg-0'
+                class='form-control form-control-transparent mb-3 mb-lg-0'
                 readonly required />
         </div>
         <div class='fv-row mb-3 col-lg-2'>
             <label class=' fw-bold fs-8 mb-2'>Harga</label>
             <input type='number' name='price[]' value='$d->unit_price' id='price'
-                class='form-control form-control-solid mb-3 mb-lg-0' readonly required />
+                class='form-control form-control-transparent mb-3 mb-lg-0' readonly required />
         </div>
         <div class='fv-row mb-3 col-lg-2'>
             <label class=' fw-bold fs-8 mb-2'>Total</label>
             <input type='number' name='total_price_return[]' id='total_price_return'
-                class='form-control form-control-solid mb-3 mb-lg-0' value='0' readonly required />
+                class='form-control form-control-transparent mb-3 mb-lg-0' value='0' readonly required />
 
         </div>
     </div>";

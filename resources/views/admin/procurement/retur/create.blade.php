@@ -8,8 +8,8 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
-                        <label class="required form-label fw-bold">Nomor Invoice</label>
-                        <select class="form-select  form-select-solid mb-3 mb-lg-0 select-2" name="id_invoice"
+                        <label class="required form-label fw-bold fs-6 mb-2">Nomor Invoice</label>
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" name="id_invoice"
                             id="id_invoice" required>
                             <option>Pilih Disini</option>
                             @foreach ($list as $l)
@@ -21,64 +21,64 @@
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Tanggal Purchase Order</label>
                         <input type="text" name="order_date" id="order_date" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <input type="hidden" name="po_id" id="po_id">
-                        <label class=" form-label fw-bold">Partner</label>
+                        <label class=" form-label fw-bold fs-6 mb-2">Partner</label>
                         <input type="text" name="partner" id="partner" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Alamat</label>
-                        <textarea type="text" name="address" id="address" readonly class="form-control form-control-white mb-3 mb-lg-0"></textarea>
+                        <textarea type="text" name="address" id="address" readonly class="form-control form-control-transparent mb-3 mb-lg-0"></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Nomor Telepon</label>
                         <input type="text" name="phone" id="phone" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Att</label>
                         <input type="text" name="att" id="att" value="-" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Fax</label>
                         <input type="text"  id="fax" readonly
-                            class="form-control form-control-white mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                     </div>
                 </div>
                 <div class="col-lg-6">
 
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Kirim Dari</label>
-                        <textarea id="shipment" class="form-control form-control-solid mb-3 mb-lg-0" readonly required></textarea>
+                        <textarea id="shipment" class="form-control form-control-transparent mb-3 mb-lg-0" readonly required></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Vat/PPN</label>
                         <input type="text"  id="vat"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
 
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Email</label>
                         <input type="text"  id="email"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="-" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="-" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Telp/Fax</label>
                         <input type="text"  id="telp/fax"
-                            class="form-control form-control-solid mb-3 mb-lg-0" value="0837263723" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="0837263723" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Jangka Waktu Pembayaran</label>
                         <input type="text" id="term_of_payment" name="term_of_payment"
-                            class="form-control form-control-solid mb-3 mb-lg-0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" readonly required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Deskripsi</label>
-                        <textarea  id="description" name="description" class="form-control form-control-solid mb-3 mb-lg-0" readonly required></textarea>
+                        <textarea  id="description" name="description" class="form-control form-control-transparent mb-3 mb-lg-0" readonly required></textarea>
 
                     </div>
 
@@ -86,13 +86,13 @@
                         <label class="required fw-bold fs-6 mb-2">Tanggal Retur</label>
                         <div class="">
                             <input type="text" name="retur_date" id="retur_date"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required />
                         </div>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="required fw-bold fs-6 mb-2">Deskripsi Retur</label>
                         <textarea  name="description_retur" id="description_retur"
-                            class="form-control form-control-solid mb-3 mb-lg-0" required > </textarea>
+                            class="form-control form-control-transparent mb-3 mb-lg-0" required > </textarea>
                     </div>
 
 
