@@ -17,8 +17,29 @@ class CoaController extends Controller
     public function index(){
         return view('admin.masterdata.coa.index');
     }
-    public function list(){
-        return  Datatables::of(DB::connection('masterdata')->select('Call sp_list_coa()'))->addIndexColumn()
+    public function list(Request $request){
+        $limit = $request->input('length');
+        $offset = $request->input('start');
+        $search = $request->input('search.value');
+
+        if ($search) {
+            $search = $request->input('search.value');
+        } else {
+            $search = '';
+        }
+
+        $data['data'] = DB::connection('masterdata')->select('Call sp_list_coa(?, ?, ?, @recordsFiltered, @recordsTotal)', [$limit, $offset, $search]);
+
+        $recordsFiltered = DB::connection('masterdata')->select('select @recordsFiltered as recordsFiltered');
+        $recordsTotal = DB::connection('masterdata')->select('select @recordsTotal as recordsTotal');
+
+        $data['recordsFiltered'] = $recordsFiltered[0]->recordsFiltered;
+        $data['recordsTotal'] = $recordsTotal[0]->recordsTotal;
+
+        // dd($data);
+
+        return  Datatables::of($data['data'])
+        ->addIndexColumn()
         ->addColumn('action', function($model){
             $action = "";
             if(Gate::allows('edit', ['/admin/masterdata/coa'])){
@@ -28,7 +49,8 @@ class CoaController extends Controller
                 $action .= " <a href='/admin/masterdata/coa/delete/$model->id' class='btn btn-sm btn-icon btn-danger btn-hover-rise me-1' id='deletecoa'><i class='bi bi-trash'></i></a>";
             }
             return $action;
-        })->addColumn('parent', function($model){
+        })
+        ->addColumn('parent', function($model){
             if($model->id_parent == 0){
                 $parent = 'Main Parent';
             }else{
@@ -41,8 +63,11 @@ class CoaController extends Controller
                 }
             }
             return $parent;
+        })
+        ->with('recordsTotal', $data['recordsTotal'])
+        ->with('recordsFiltered', $data['recordsFiltered'])
+        ->make(true);
 
-        })->make(true);
     }
 
     public function create(){

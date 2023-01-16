@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
-
+use App\Models\UserActivity;
 class ReturnSellingController extends Controller {
     public function index() {
         return view('admin.selling.return.index');
@@ -61,12 +61,13 @@ class ReturnSellingController extends Controller {
 
     public function create() {
 
-        $selling = DB::connection('selling')->select('call sp_list_selling()');
+        $invoice = DB::connection('selling')->select('call sp_list_selling_invoice()');
 
-        return view('admin.selling.return.create', ['selling' => $selling]);
+        return view('admin.selling.return.create', ['invoice' => $invoice]);
     }
 
     public function store(Request $request){
+        // dd($request);
        $returnId = ReturnSelling::create([
             'selling_invoice_id'=>$request->invoice_id,
             'selling_id'=>$request->sales_id,
@@ -83,7 +84,12 @@ class ReturnSellingController extends Controller {
                 'qty_return' => $request->total_return_qty[$i]
             ]);
         }
-
+        UserActivity::create([
+            'id_user' => auth()->user()->id,
+            'menu' => "Retur Penjualan",
+            'aktivitas' => "Tambah Retur",
+            'keterangan' => "Tambah Retur " . $request->return_description
+        ]);
 
         return response()->json(['success' => 'Data Retur Ditambahkan']);
     }
@@ -162,65 +168,59 @@ class ReturnSellingController extends Controller {
     }
 
     public function getdata(Request $request) {
-        $data = DB::connection('selling')->select("call sp_search_id(
+        $data = DB::connection('selling')->select("call sp_search_id_invoice(
             $request->id
         )");
         $sales_date = Carbon::parse($data[0]->date_selling)->format('d-M-Y');
         $item = '';
         foreach ($data as $d) {
-            $item .= "<div class='row'>
-        <div class='fv-row mb-3 col-lg-3'>
-            <label class='form-label fs-8 fw-bold'>Item</label>
+            $item .= "<tr>
+            <td>
             <input type='hidden' name='selling_detail_id[]' value='$d->selling_detail_id' />
+            <input type='hidden' name='selling_invoice_detail_id[]' value='$d->selling_invoice_detail_id' />
             <input type='hidden' name='item_id[]' value='$d->item_id' />
             <input type='text'  class='form-control form-control-transparent mb-3 mb-lg-0' value='$d->item_name' readonly/>
-        </div>
-        <div class='fv-row mb-3 col-lg-1'>
-            <label class='required fw-bold fs-8 mb-2'>R Box</label>
+        </td>
+        <td>
             <input type='number' name='return_box[]' id='return_box'
                 class='form-control form-control-transparent mb-3 mb-lg-0' value='0' onkeyup='countTotalQty(this)' required />
             <p class='fs-9 fw-bolder' id='detail_box'>@$d->qty_per_box/box</p>
             <input type='hidden' id='qty_per_box' value='$d->qty_per_box' />
-        </div>
-        <div class='fv-row mb-3 col-lg-1'>
-            <label class='required fw-bold fs-8 mb-2'>R Satuan</label>
+        </td>
+        <td>
             <input type='number' name='return_qty[]' id='return_qty'
                 class='form-control form-control-transparent mb-3 mb-lg-0' value='0' onkeyup='countTotalQty(this)'
                 required />
-        </div>
-        <div class='fv-row mb-3 col-lg-1'>
-            <label class=' fw-bold fs-8 mb-2'>Qty Return</label>
-            <input type='number' name='total_return_qty[]' id='total_return_qty' readonly
+        </td>
+        <td>    
+        <input type='number' name='total_return_qty[]' id='total_return_qty' readonly
                 class='form-control form-control-transparent mb-3 mb-lg-0' value='0' required />
-        </div>
-        <div class='fv-row mb-3 col-lg-1'>
-            <label class=' fw-bold fs-8 mb-2'>Qty Order</label>
-            <input type='number' name='qty_order[]' value='$d->qty' id='qty_order'
+        </td>
+        <td>    
+        <input type='number' name='qty_order[]' value='$d->qty' id='qty_order'
                 class='form-control form-control-transparent mb-3 mb-lg-0'
                 readonly required />
-        </div>
-        <div class='fv-row mb-3 col-lg-2'>
-            <label class=' fw-bold fs-8 mb-2'>Harga</label>
-            <input type='number' name='price[]' value='$d->unit_price' id='price'
+        </td>
+        <td>    
+        <input type='number' name='price[]' value='$d->unit_price' id='price'
                 class='form-control form-control-transparent mb-3 mb-lg-0' readonly required />
-        </div>
-        <div class='fv-row mb-3 col-lg-2'>
-            <label class=' fw-bold fs-8 mb-2'>Total</label>
+        </td>
+        <td>
             <input type='number' name='total_price_return[]' id='total_price_return'
-                class='form-control form-control-transparent mb-3 mb-lg-0' value='0' readonly required />
-
-        </div>
-    </div>";
+                class='form-control form-control-transparent mb-3 mb-lg-0 total_price_return' value='0' readonly required />
+        </td>
+    </tr>";
         }
         return response()->json(
             [
+                'sales_id' => $data[0]->selling_id,
                 'sales_date' => $sales_date,
                 'address' => $data[0]->address,
                 'att' => '-',
                 'phone' => $data[0]->phone,
                 'email' => $data[0]->email,
                 'fax' => $data[0]->fax,
-                'invoice_id' => $data[0]->invoice_id,
+                'invoice_id' => $data[0]->id_invoice,
                 'ship_address' => $data[0]->ship_address,
                 'term_of_payment' => $data[0]->term_of_payment,
                 'description' => $data[0]->description,

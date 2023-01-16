@@ -8,13 +8,13 @@
                 <div class="col-lg-6">
                     @csrf
                     <div class="fv-row mb-3">
-                        <input type="hidden" name="invoice_id" id="invoice_id">
-                        <label class="required fw-bold fs-6 mb-2">Nomor Penjualan</label>
-                        <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" name="sales_id"
-                            id="sales_id" onchange="getData()" required>
-                            <option>Pilih Nomor Penjualan</option>
-                            @foreach ($selling as $sales)
-                                <option value="{{ $sales->id_penjualan }}">{{ $sales->no_selling }}-{{ $sales->name }}
+                        <input type="hidden" id="sales_id" name="sales_id">
+                        <label class="required fw-bold fs-6 mb-2">Nomor Invoice</label>
+                        <select class="form-select  form-select-transparent mb-3 mb-lg-0 select-2" name="invoice_id"
+                            id="invoice_id" onchange="getData()" required>
+                            <option>Pilih Nomor Invoice</option>
+                            @foreach ($invoice as $inv)
+                                <option value="{{ $inv->id_invoice }}">{{ $inv->no_selling }}-{{ $inv->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -29,7 +29,8 @@
 
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Alamat</label>
-                        <textarea type="text" name="address" id="address" readonly class=" form-control form-control-transparent mb-3 mb-lg-0"></textarea>
+                        <textarea type="text" name="address" id="address" readonly
+                            class=" form-control form-control-transparent mb-3 mb-lg-0"></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Att</label>
@@ -60,7 +61,8 @@
                 <div class="col-lg-6">
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Dikirim Dari</label>
-                        <textarea type="text" name="ship_from" id="ship_from" class="form-control form-control-transparent mb-3 mb-lg-0" readonly></textarea>
+                        <textarea type="text" name="ship_from" id="ship_from" class="form-control form-control-transparent mb-3 mb-lg-0"
+                            readonly></textarea>
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Email</label>
@@ -75,7 +77,8 @@
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Jangka Waktu Pembayaran</label>
                         <input type="text" id="term_of_payment" name="term_of_payment"
-                            class="form-control form-control-transparent mb-3 mb-lg-0" value="0" readonly required />
+                            class="form-control form-control-transparent mb-3 mb-lg-0" value="0" readonly
+                            required />
                     </div>
                     <div class="fv-row mb-3">
                         <label class="fw-bold fs-6 mb-2">Keterangan Beli</label>
@@ -98,24 +101,40 @@
 
             </div>
             <div class="col-lg-12">
-                <hr>
-                <h5 class="fw-bolder">Items</h5>
-                <hr>
-                <div class="col-lg-12" id="itemsAddList">
+                <div class="table-responsive">
+                    <table class="table gy-5 gs-7 border rounded w-100">
+                        <thead>
+                            <tr class="fw-bold fs-6">
+                                <td>Kode</td>
+                                <td>Return Box</td>
+                                <td>Return Satuan</td>
+                                <td>Qty Retur</td>
+                                <td>Qty Order</td>
+                                <td>Harga</td>
+                                <td>Total</td>
+                            </tr>
+                        </thead>
+                        <tbody id="itemsAddList">
 
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <input type="hidden" id="total_price_all_return" name="total_price_all_return">
+                                <td colspan="6" class="text-end fw-bold">Total Retur</td>
+                                <td id="total_price_all_return_tampil" class="fw-bold text-end"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
-
-                <hr>
-
-                <div class="d-flex justify-content-center" id="loadingnya">
-                    <div class="px-2">
-                        <button class="btn btn-sm btn-primary" type="submit" id="btn-add">Buat</button>
-                    </div>
-                    <div class="px-2">
-                        <button class="btn btn-sm btn-secondary" type="button"
-                            onclick="tutupContent()">Kembali</button>
-                    </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="p-2" id="loadingnya">
+                    <button type="submit" class="btn btn-sm btn-primary">Tambahkan</button>
                 </div>
+                <div class="p-2">
+                    <button type="button" onclick="tutupContent()" class="btn btn-sm btn-secondary">Kembali</button>
+                </div>
+            </div>
 
         </form>
     </div>
@@ -129,7 +148,7 @@
         flatpickr("#return_date", {
             static: true,
             dateFormat: "Y-m-d",
-            allowInput:true
+            allowInput: true
         });
 
     });
@@ -198,7 +217,7 @@
 
 
     function getData() {
-        var id = $('#sales_id').val();
+        var id = $('#invoice_id').val();
         $.get("{{ url('/admin/selling/return/getdata') }}/" + id, function(
             data) {
             $('#sales_date').val(data.sales_date)
@@ -206,7 +225,7 @@
             $('#att').val(data.att)
             $('#phone').val(data.phone)
             $('#email').val(data.email)
-            $('#invoice_id').val(data.invoice_id)
+            $('#sales_id').val(data.sales_id)
             $('#term_of_payment').val(data.term_of_payment)
             $('#credit_limit').val(data.credit_limit)
             $('#credit_balance').val(data.credit_balance)
@@ -225,9 +244,18 @@
         var totalQtyReturn = (box * qty_per_box) + parseInt(qtyReturn)
         var totalPriceReturn = parseInt(totalQtyReturn) * parseInt(price);
 
-
         $(e).parent().parent().find('#total_return_qty').val(totalQtyReturn);
         $(e).parent().parent().find('#total_price_return').val(totalPriceReturn);
+        
+        var total_price_all_return = 0;
+        $('.total_price_return').each(function(){
+            total_price_all_return += parseFloat($(this).val())
+        })
+
+        $('#total_price_all_return').val(total_price_all_return);
+        total_price_all_return = parseInt(total_price_all_return).toLocaleString();
+        $('#total_price_all_return_tampil').html('Rp. '+total_price_all_return);
+
 
         if (jumlahOrder < totalQtyReturn) {
             Swal.fire(
@@ -239,7 +267,10 @@
             $(e).parent().parent().find('#return_qty').val(0);
             $(e).parent().parent().find('#total_return_qty').val(0);
             $(e).parent().parent().find('#total_price_return').val(0);
+         
         }
 
     }
+
+  
 </script>

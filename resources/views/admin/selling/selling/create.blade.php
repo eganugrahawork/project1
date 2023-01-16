@@ -334,7 +334,7 @@
 
         var stockInBox = $(e).parent().parent().find('#stock').val();
         var stockInQty = stockInBox * qty_per_box;
-
+console.log(stockInQty);
         var totalQty = (box * qty_per_box) + parseInt(qty)
         var totalPrice = parseInt(totalQty) * parseInt(price);
 

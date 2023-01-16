@@ -92,8 +92,8 @@
         }
 
         var coaTable = $('#coaTable').DataTable({
-            serverside: true,
             processing: true,
+            serverside: true,
             ajax: {
                 url: "{{ url('/admin/masterdata/coa/list') }}"
             },
@@ -122,7 +122,7 @@
                     name: 'action'
                 }
             ],
-            "bLengthChange": false,
+            "bLengthChange": true,
             "bFilter": true,
             "bInfo": false
         });
