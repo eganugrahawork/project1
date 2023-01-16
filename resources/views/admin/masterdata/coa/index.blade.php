@@ -41,7 +41,7 @@
                                     <th class="min-w-70px">Coa</th>
                                     <th class="min-w-70px">Deskripsi</th>
                                     <th class="min-w-70px">Status</th>
-                                    <th class="min-w-70px">Aksi</th>
+                                    {{-- <th class="min-w-70px">Aksi</th> --}}
                                 </tr>
                             </thead>
                             <tbody class="text-md text-secondary mb-0" style="border:none;">
@@ -92,40 +92,18 @@
         }
 
         var coaTable = $('#coaTable').DataTable({
-            processing: true,
-            serverside: true,
-            ajax: {
-                url: "{{ url('/admin/masterdata/coa/list') }}"
-            },
-            columns: [{
-                    data: 'DT_RowIndex',
-                    searchable: false
-                },
-                {
-                    data: 'parent',
-                    name: 'parent'
-                },
-                {
-                    data: 'coa',
-                    name: 'coa'
-                },
-                {
-                    data: 'description',
-                    name: 'description'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'action',
-                    name: 'action'
-                }
-            ],
-            "bLengthChange": true,
-            "bFilter": true,
-            "bInfo": false
-        });
+        processing: true,
+        serverSide: true,
+        "searching": true,
+        ajax: "{{ url('/admin/masterdata/coa/list') }}",
+        columns: [
+            { data: 'id', name: 'id' },
+            { data: 'id_parent', name: 'id_parent' },
+            { data: 'coa', name: 'coa' },
+            { data: 'description', name: 'description' },
+            { data: 'status', name: 'status', orderable: false, searchable: false}
+        ],
+    });
 
         $('#searchCoaTable').keyup(function() {
             coaTable.search($(this).val()).draw()

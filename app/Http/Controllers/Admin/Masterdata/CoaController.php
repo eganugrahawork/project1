@@ -20,52 +20,29 @@ class CoaController extends Controller
     public function list(Request $request){
         $limit = $request->input('length');
         $offset = $request->input('start');
+        // dd($limit);
+        // $order_by = $request->input('order.0.column');
+        // $sort_by = $request->input('order.0.dir');
         $search = $request->input('search.value');
-
-        if ($search) {
+        if ($search !== '') {
             $search = $request->input('search.value');
         } else {
-            $search = '';
+            $search = null;
         }
-
-        $data['data'] = DB::connection('masterdata')->select('Call sp_list_coa(?, ?, ?, @recordsFiltered, @recordsTotal)', [$limit, $offset, $search]);
-
-        $recordsFiltered = DB::connection('masterdata')->select('select @recordsFiltered as recordsFiltered');
-        $recordsTotal = DB::connection('masterdata')->select('select @recordsTotal as recordsTotal');
-
-        $data['recordsFiltered'] = $recordsFiltered[0]->recordsFiltered;
-        $data['recordsTotal'] = $recordsTotal[0]->recordsTotal;
-
+        $data['data'] = DB::connection('masterdata')->select('Call sp_list_coa(?, ?,?, @total_filtered, @total )', [$limit, $offset, $search]);
         // dd($data);
 
-        return  Datatables::of($data['data'])
-        ->addIndexColumn()
-        ->addColumn('action', function($model){
-            $action = "";
-            if(Gate::allows('edit', ['/admin/masterdata/coa'])){
-                $action .= "<a onclick='edit($model->id)' class='btn btn-sm btn-icon btn-warning btn-hover-rise me-1'><i class='bi bi-pencil-square'></i></a>";
-            }
-            if(Gate::allows('delete', ['/admin/masterdata/coa'])){
-                $action .= " <a href='/admin/masterdata/coa/delete/$model->id' class='btn btn-sm btn-icon btn-danger btn-hover-rise me-1' id='deletecoa'><i class='bi bi-trash'></i></a>";
-            }
-            return $action;
-        })
-        ->addColumn('parent', function($model){
-            if($model->id_parent == 0){
-                $parent = 'Main Parent';
-            }else{
-                $coa = Coa::where(['id' => $model->id_parent])->first();
-                if($coa){
+        $recordsFiltered = DB::connection('masterdata')->select('select @total_filtered as total_filtered');
+        $recordsTotal = DB::connection('masterdata')->select('select @total as total');
+        // dd($recordsFiltered, '-', $recordsTotal);
 
-                    $parent =  $coa->coa.'-'.$coa->description;
-                }else{
-                    $parent = 'Undefined / Deleted';
-                }
-            }
-            return $parent;
-        })
+        $data['recordsFiltered'] = $recordsFiltered[0]->total_filtered;
+        $data['recordsTotal'] = $recordsTotal[0]->total;
+        
+        return DataTables::of($data['data'])
         ->with('recordsTotal', $data['recordsTotal'])
         ->with('recordsFiltered', $data['recordsFiltered'])
+        ->setOffset($offset)
         ->make(true);
 
     }
